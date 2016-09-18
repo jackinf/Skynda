@@ -1,29 +1,12 @@
 # README #
+## SOFTWARE ##
+1) https://spring.io/tools/sts
+2) jdk8
+3) maven latest
 
-This README would normally document whatever steps are necessary to get your application up and running.
+## BUILD ##
+1) mvn clean package
 
-### What is this repository for? ###
-
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
-
-### How do I get set up? ###
-
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
-
-### Contribution guidelines ###
-
-* Writing tests
-* Code review
-* Other guidelines
-
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
+## RUN ##
+1) Run As -> Spring Boot App
+2) API available here: http://localhost:8080/car
