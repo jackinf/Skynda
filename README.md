@@ -5,7 +5,9 @@
 3. maven latest
 
 ## BUILD ##
-1. mvn clean package
+~~~~
+mvn clean package
+~~~~
 
 ## RUN ##
 1. Run As -> Spring Boot App
