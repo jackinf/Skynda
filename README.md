@@ -14,8 +14,9 @@ mvn clean package
 2. API available here: http://localhost:8080/car
 
 ## DATABASE MIGRATION ##
-1. put database scripts under resource/db/migration
-V1_1_1_201412031225__initial schema_ddl.sql
+1. All database scripts put under resource/db/migration  
+Follow syntax: version_timestamp_name_ddl/dml.sql  
+example: V1_1_1_201412031225__initial schema_ddl.sql
 
 ## EA model location ##
 1. https://mruskin@bitbucket.org/mruskin/skyndaea.git
