@@ -43,7 +43,7 @@ class CarDetails extends React.Component {
   render() {
     return (
       <div>
-        <div className="container" style={{height: "550px"}}>
+        <div className="container">
           <Slideshow />
         </div>
 
