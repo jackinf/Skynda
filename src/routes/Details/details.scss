@@ -1,11 +1,11 @@
 
-@import '../../components/variables.css';
+@import '../../variables.scss';
 
 .blue_header {
-  color: #019BFF
+  color: $color-primary
 }
 .orange_header {
-  color: #FBBB68;
+  color: $oolor-secondary;
 }
 
 

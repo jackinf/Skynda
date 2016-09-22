@@ -19,6 +19,7 @@ import Hero from './components/Home.hero';
 import Keypoints from './components/Home.keypoints';
 
 // List of rows
+// TODO: redux
 const cars = {
   searchResults: [],
   recentlyAdded: [[
@@ -38,10 +39,13 @@ class Home extends React.Component {
     this.executeSearch = this.executeSearch.bind(this);
     this.updateSearchText = this.updateSearchText.bind(this);
 
+    // TODO: redux
     this.state = {searchText: '', isSearching: false};
   }
 
   executeSearch() {
+
+    // TODO: redux
     this.setState({isSearching: true});
     setTimeout(() => {
       cars.searchResults.length = 0;
@@ -97,11 +101,6 @@ class Home extends React.Component {
 
           <br />
 
-          {/*<h2 ng-show="cars.found.length > 0">*/}
-          {/*Total found: {{cars.found.length}}*/}
-          {/*</h2>*/}
-          {/*<image-grid ng-if="cars.found.length > 0" values="cars.found"></image-grid>*/}
-
           {
             /**
              * SEARCH RESULTS
@@ -121,11 +120,6 @@ class Home extends React.Component {
                   </div>
                 </div>
               </div>) : (<div className="row"></div>)}
-
-
-          {/*<div className="row" ng-show="cars.found.length > 0">*/}
-          {/*<button className="btn btn-white pull-right" ng-click="showAdvancedSearch()">Show advanced search</button>*/}
-          {/*</div>*/}
 
           <br />
 

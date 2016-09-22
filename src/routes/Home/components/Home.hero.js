@@ -7,7 +7,6 @@ import './Home.hero.scss';
 
 import {Button} from 'reactstrap';
 import {browserHistory} from 'react-router';
-// import RaisedButton from 'material-ui/RaisedButton';
 
 import heroImageUrl from './../../../static/images/standard/hero-01-2.jpg';
 
@@ -15,6 +14,16 @@ import heroImageUrl from './../../../static/images/standard/hero-01-2.jpg';
  * Main jumbotron for a primary marketing message or call to action
  */
 class Hero extends React.Component {
+  constructor() {
+    super();
+
+    this.gotoDetails = this.gotoDetails.bind(this);
+  }
+
+  gotoDetails() {
+    browserHistory.push('details');
+  }
+
   render() {
     return (<div className="sk_hero">
       <img className="sk_hero__image" src={heroImageUrl} alt="image"/>
@@ -25,8 +34,7 @@ class Hero extends React.Component {
               <h2>Buying a pre-used car has never been so fun, easy and secure</h2>
             </div>
             <div className="col-md-3">
-              <Button className="primary-button">Read more</Button>
-              {/*<RaisedButton label="Read more" href="details" backgroundColor="#019BFF" labelColor="whitesmoke"  />*/}
+              <Button className="primary-button" onClick={this.gotoDetails}>Read more</Button>
             </div>
           </div>
         </div>

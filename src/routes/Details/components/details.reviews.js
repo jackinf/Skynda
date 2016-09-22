@@ -1,12 +1,13 @@
 import React from 'react';
 
 import Skblock from './details.skblock';
-import s from '../details.scss';
+import '../details.scss';
 
-import image_star from './../../../public/images/standard/star.png';
-import image_unstar from './../../../public/images/standard/star-1.png';
+import image_star from './../../../static/images/standard/star.png';
+import image_unstar from './../../../static/images/standard/star-1.png';
 
-import RaisedButton from 'material-ui/RaisedButton';
+// import RaisedButton from 'material-ui/RaisedButton';
+import {Button as RaisedButton} from 'react-bootstrap';
 
 class Overview extends React.Component {
   render() {
@@ -19,11 +20,11 @@ class Overview extends React.Component {
             </div>
             <div className="col col-md-6">
               <div> {/*style="float: right"*/}
-                <img className={s.sk_details__star} src={image_star}/>
-                <img className={s.sk_details__star} src={image_star}/>
-                <img className={s.sk_details__star} src={image_star}/>
-                <img className={s.sk_details__star} src={image_star}/>
-                <img className={s.sk_details__star} src={image_unstar}/>
+                <img className="sk_details__star" src={image_star}/>
+                <img className="sk_details__star" src={image_star}/>
+                <img className="sk_details__star" src={image_star}/>
+                <img className="sk_details__star" src={image_star}/>
+                <img className="sk_details__star" src={image_unstar}/>
               </div>
             </div>
           </div>

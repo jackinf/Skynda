@@ -3,14 +3,13 @@
  */
 
 import React from 'react';
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import s from './details.scss';
+import './details.scss';
 
 // Images
-import image_ok from './../../public/images/standard/ok.png';
-import image_diploma_1 from './../../public/images/standard/diploma_1.png';
-import image_star_2x from './../../public/images/standard/star@2x.png';
-import image_4_2x from './../../public/images/standard/image-4@2x.png';
+import image_ok from './../../static/images/standard/ok.png';
+import image_diploma_1 from './../../static/images/standard/diploma_1.png';
+import image_star_2x from './../../static/images/standard/star@2x.png';
+import image_4_2x from './../../static/images/standard/image-4@2x.png';
 
 // Local components
 import Skblock from './components/details.skblock';
@@ -26,7 +25,7 @@ import Checkout from './components/details.checkout';
 import ImageGrid from './../../components/ImageGrid/ImageGrid';
 
 // List of rows
-import image_testcar from '../../public/images/cars/accord/accord.jpg';
+import image_testcar from '../../static/images/cars/accord/accord.jpg';
 
 const cars = [[
   {src: image_testcar, href: '/details', title: 'one', description: 'awesome car'},
@@ -44,7 +43,7 @@ class CarDetails extends React.Component {
   render() {
     return (
       <div>
-        <div className="container">
+        <div className="container" style={{height: "550px"}}>
           <Slideshow />
         </div>
 
@@ -62,23 +61,23 @@ class CarDetails extends React.Component {
 
                 <Skblock header={'Nice features'}>
                   <div className="col col-md-4"> {/*style="padding: 5px 0;"*/}
-                    <img src={image_ok} width="24" className={s.sk_details__icon_list_image}/>
+                    <img src={image_ok} width="24" className="sk_details__icon_list_image"/>
                     Steering Wheel Controls
                   </div>
                   <div className="col col-md-4"> {/*style="padding: 5px 0;"*/}
-                    <img src={image_ok} width="24" className={s.sk_details__icon_list_image}/>
+                    <img src={image_ok} width="24" className="sk_details__icon_list_image"/>
                     Paddle Shifters
                   </div>
                   <div className="col col-md-4"> {/*style="padding: 5px 0;"*/}
-                    <img src={image_ok} width="24" className={s.sk_details__icon_list_image}/>
+                    <img src={image_ok} width="24" className="sk_details__icon_list_image"/>
                     Premium Lights
                   </div>
                   <div className="col col-md-4"> {/*style="padding: 5px 0;"*/}
-                    <img src={image_ok} width="24" className={s.sk_details__icon_list_image}/>
+                    <img src={image_ok} width="24" className="sk_details__icon_list_image"/>
                     Turbocharger
                   </div>
                   <div className="col col-md-4"> {/*style="padding: 5px 0;"*/}
-                    <img src={image_ok} width="24" className={s.sk_details__icon_list_image}/>
+                    <img src={image_ok} width="24" className="sk_details__icon_list_image"/>
                     Parking Sensors
                   </div>
                 </Skblock>
@@ -86,7 +85,7 @@ class CarDetails extends React.Component {
 
                 <Skblock header={'Car History'}>
                   <div className="col col-md-4">  {/*style="padding: 5px 0;"*/}
-                    <img src={image_diploma_1} width="24" className={s.sk_details__icon_list_image}/>
+                    <img src={image_diploma_1} width="24" className="sk_details__icon_list_image"/>
                     No Problems Found
                   </div>
                   <div className="col col-md-4">  {/*style="padding: 5px 0;"*/}
@@ -99,15 +98,15 @@ class CarDetails extends React.Component {
                 <Performance />
 
                 <Skblock header={'Safety'}>
-                  <div className={s.sk_details__stars_outer_container}>
-                    <div className={s.sk_details__stars_inner_container}>
-                      <img className={s.sk_details__star} src={image_star_2x}/>
-                      <img className={s.sk_details__star} src={image_star_2x}/>
-                      <img className={s.sk_details__star} src={image_star_2x}/>
-                      <img className={s.sk_details__star} src={image_star_2x}/>
-                      <img className={s.sk_details__star} src={image_star_2x}/>
+                  <div className="sk_details__stars_outer_container">
+                    <div className="sk_details__stars_inner_container">
+                      <img className="sk_details__star" src={image_star_2x}/>
+                      <img className="sk_details__star" src={image_star_2x}/>
+                      <img className="sk_details__star" src={image_star_2x}/>
+                      <img className="sk_details__star" src={image_star_2x}/>
+                      <img className="sk_details__star" src={image_star_2x}/>
 
-                      <img className={s.sk_details__stars_euroncap} src={image_4_2x}/>
+                      <img className="sk_details__stars_euroncap" src={image_4_2x}/>
                     </div>
                   </div>
                 </Skblock>
@@ -138,4 +137,4 @@ class CarDetails extends React.Component {
   }
 }
 
-export default withStyles(s)(CarDetails);
+export default CarDetails;

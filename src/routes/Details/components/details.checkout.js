@@ -3,55 +3,58 @@
  */
 
 import React from 'react';
-import s from '../details.scss';
+import '../details.scss';
 
 // Material-UI
-import Dialog from 'material-ui/Dialog';
-import FlatButton from 'material-ui/FlatButton';
-import RaisedButton from 'material-ui/RaisedButton';
-import {List, ListItem} from 'material-ui/List';
-import Subheader from 'material-ui/Subheader';
-import Checkbox from 'material-ui/Checkbox';
-import TextField from 'material-ui/TextField';
-import {Tabs, Tab} from 'material-ui/Tabs';
+// import Dialog from 'material-ui/Dialog';
+// import FlatButton from 'material-ui/FlatButton';
+// import RaisedButton from 'material-ui/RaisedButton';
+// import {List, ListItem} from 'material-ui/List';
+// import Subheader from 'material-ui/Subheader';
+// import Checkbox from 'material-ui/Checkbox';
+// import TextField from 'material-ui/TextField';
+// import {Tabs, Tab} from 'material-ui/Tabs';
+import {Tabs, Tab, ListGroup, ListGroupItem, Modal, Button, FormControl } from 'react-bootstrap';
+
+function TextField({id, ...props}) {
+  return (<FormControl
+    id="formControlsText"
+    type="text"
+    label={props.floatingLabelText}
+  />);
+}
 
 class ListItemText extends React.Component {
   render() {
-    return (<div>{this.props.text} <p className={s.sk_details__checkout_price}>{this.props.price}</p></div>);
+    return (<div>{this.props.text} <p className="sk_details__checkout_price">{this.props.price}</p></div>);
   }
 }
 
 const tab1 = (<li className="tab-pane fade active in" id="htab1">
   <div className="row">
     <div className="col-md-12">
-
-      <List>
-        <Subheader>Buying a car</Subheader>
-        <ListItem primaryText={<ListItemText text="Car price" price="5600 €"/>} leftCheckbox={<Checkbox />}/>
-        <ListItem primaryText={<ListItemText text="Insurance by Salva" price="20  €"/>} leftCheckbox={<Checkbox />}/>
-        <ListItem primaryText={<ListItemText text="Kasko by Salva" price="40 €"/>} leftCheckbox={<Checkbox />}/>
-        <ListItem primaryText={<ListItemText text="Full Tank on Delivery" price="70 €"/>} leftCheckbox={<Checkbox />}/>
-        <ListItem primaryText={<ListItemText text="Other" price="18 €"/>} leftCheckbox={<Checkbox />}/>
-        <ListItem primaryText={<ListItemText text="Service" price="109 €"/>} leftCheckbox={<Checkbox />}/>
-        {/*<ListItem primaryText="Service"             secondaryText="109 €"   leftCheckbox={<Checkbox />} />*/}
-      </List>
-
+      <ListGroup>
+        <ListGroupItem header="Car price" bsStyle="info">5600 €</ListGroupItem>
+        <ListGroupItem header="Insurance by Salva">20 €</ListGroupItem>
+        <ListGroupItem header="Kasko by Salva">40 €</ListGroupItem>
+        <ListGroupItem header="Full Tank on Delivery">70 €</ListGroupItem>
+        <ListGroupItem header="Other">18 €</ListGroupItem>
+        <ListGroupItem header="Service">109 €</ListGroupItem>
+      </ListGroup>
     </div>
   </div>
 </li>);
 const tab2 = (<li className="tab-pane fade active in" id="htab2">
   <div className="row">
     <div className="col-md-12">
-
-      <List>
-        <Subheader>Leasing a car</Subheader>
-        <ListItem primaryText={<ListItemText text="Car price" price="5600 €"/>}/>
-        <ListItem primaryText={<ListItemText text="Insurance by Salva" price="0  €"/>}/>
-        <ListItem primaryText={<ListItemText text="Kasko by Salva" price="0 €"/>}/>
-        <ListItem primaryText={<ListItemText text="Full Tank on Delivery" price="0 €"/>}/>
-        <ListItem primaryText={<ListItemText text="Other" price="0 €"/>}/>
-        <ListItem primaryText={<ListItemText text="Service" price="0 €"/>}/>
-      </List>
+      <ListGroup>
+        <ListGroupItem header="Car price">5600 €</ListGroupItem>
+        <ListGroupItem header="Insurance by Salva">0 €</ListGroupItem>
+        <ListGroupItem header="Kasko by Salva">0 €</ListGroupItem>
+        <ListGroupItem header="Full Tank on Delivery">0 €</ListGroupItem>
+        <ListGroupItem header="Other">0 €</ListGroupItem>
+        <ListGroupItem header="Service">0 €</ListGroupItem>
+      </ListGroup>
     </div>
 
     <div className="col-md-12">
@@ -117,10 +120,6 @@ class Checkout extends React.Component {
     this.state = {tab: 1, open: false};
   }
 
-  setTab = (e, tab) => {
-    this.setState({tab: tab});
-  };
-
   handleOpen = () => {
     this.setState({open: true});
   };
@@ -130,46 +129,34 @@ class Checkout extends React.Component {
   };
 
   render() {
-    const actions = [
-      <FlatButton
-        label="Cancel"
-        primary={true}
-        onTouchTap={this.handleClose}
-      />,
-      <FlatButton
-        label="Submit"
-        primary={true}
-        keyboardFocused={true}
-        onTouchTap={this.handleClose}
-      />,
-    ];
+    return (<div className="sk_details__checkout_container">
 
-    return (<div className={s.sk_details__checkout_container}>
+      <Modal show={this.state.open} onHide={this.handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>One More Step</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <CheckoutDialogContent />*
+        </Modal.Body>
+        <Modal.Footer>
+          <Button onClick={this.handleClose}>Buy</Button>
+          <Button onClick={this.handleClose}>Cancel</Button>
+        </Modal.Footer>
+      </Modal>
 
-      <Dialog
-        title="One More Step"
-        actions={actions}
-        modal={false}
-        open={this.state.open}
-        onRequestClose={this.handleClose}
-      >
-        <CheckoutDialogContent />
-      </Dialog>
 
-      <Tabs>
-        <Tab label={`Buying car`} className={s.sk_details__checkout_tab}>
-          <div className={s.sk_details__checkout_tab_inner}>
+      <Tabs defaultActiveKey={1} id="uncontrolled-tab-example">
+        <Tab eventKey={1} title={`Buying car`}>
+          <div className="sk_details__checkout_tab_inner">
             {tab1}
-            <RaisedButton label="Checkout" onTouchTap={this.handleOpen}
-                          className={s.sk_details__checkout_tab_action_button}/>
+            <Button className="sk_details__checkout_tab_action_button" onClick={this.handleOpen}>Checkout</Button>
           </div>
         </Tab>
 
-        <Tab label="Leasing car" className={s.sk_details__checkout_tab}>
-          <div className={s.sk_details__checkout_tab_inner}>
+        <Tab eventKey={2} title="Leasing car">
+          <div className="sk_details__checkout_tab_inner">
             {tab2}
-            <RaisedButton label="Lease" onTouchTap={this.handleOpen}
-                          className={s.sk_details__checkout_tab_action_button}/>
+            <Button className="sk_details__checkout_tab_action_button" onClick={this.handleOpen}>Lease</Button>
           </div>
         </Tab>
       </Tabs>

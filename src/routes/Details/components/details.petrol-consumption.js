@@ -3,10 +3,9 @@
  */
 
 import React from 'react';
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import s from '../details.scss';
+import '../details.scss';
 
-import image_gas_station_2x from './../../../public/images/standard/gas_station@2x.png';
+import image_gas_station_2x from './../../../static/images/standard/gas_station@2x.png';
 
 import Skblock from './details.skblock';
 
@@ -14,7 +13,7 @@ class PetrolConsumption extends React.Component {
   render() {
     return (<Skblock header={'Petrol Consumption'}>
       <div className="col col-md-4">  {/*style="padding: 5px 0;"*/}
-        <img src={image_gas_station_2x} className={s.sk_details__icon_list_image}/>
+        <img src={image_gas_station_2x} className="sk_details__icon_list_image"/>
       </div>
       <div className="col col-md-4">  {/*style="padding: 5px 0;"*/}
         <div className="row">
@@ -35,4 +34,4 @@ class PetrolConsumption extends React.Component {
 
 }
 
-export default withStyles(s)(PetrolConsumption);
+export default PetrolConsumption;
