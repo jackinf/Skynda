@@ -1,0 +1,109 @@
+
+@import '../../components/variables.css';
+
+.blue_header {
+  color: #019BFF
+}
+.orange_header {
+  color: #FBBB68;
+}
+
+
+
+.sk_details__icon {
+  margin: 0 auto;
+}
+.sk_text_centralizer {
+  text-align: center;
+}
+
+.sk_block__text {
+  margin-left: 0 !important;
+  margin-right: 5px !important;
+  /*text_align: justify;*/
+}
+
+.sk_details__icon_list_image {
+  float: left;
+  margin-right: 10px;
+}
+
+.sk_details__stars_outer_container {
+  border: 1px solid #efefef;
+  border-radius: 5px;
+  padding: 5px;
+  height: 60px;
+  width: 410px;
+}
+.sk_details__stars_inner_container {
+  padding: 0 10px 0 0;
+}
+.sk_details__star {
+  float:left;
+}
+.sk_details__stars_euroncap {
+  float:left;
+  margin-left: 50px;
+  height: 50px;
+}
+
+.sk_details__certified_developer {
+  padding-top: 50px;
+  font-size: 18px;
+}
+.sk_details__certified_have_a_question {
+  margin-top: 50px;
+}
+
+.carousel_caption {
+  bottom: 20px;
+}
+
+.carousel .item {
+  width: 100%; /*slider width*/
+  max-height: 250px; /*slider height*/
+}
+
+.carousel .item img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 40%; /*img width*/
+  height: 250px;
+}
+
+
+.sk_car_details__popular_image_title {
+  font-size: 1em;
+  font-weight: bolder;
+  color: whitesmoke
+}
+
+.sk_details__checkout_price {
+  font-size: 26px;
+  float: right;
+}
+
+.sk_details__checkout_container {
+  margin-top: 25px;
+  border: 2px solid #019bff;
+  border-radius: 5px;
+}
+.sk_details__skblock {
+  margin: 20px 0;
+  padding: 10px 10px;
+}
+
+.sk_details__checkout_tab {
+  background: #019bff !important;
+  color: whitesmoke !important;
+}
+
+.sk_details__checkout_tab_inner {
+  padding: 10px;
+}
+
+.sk_details__checkout_tab_action_button {
+  margin: 0 auto;
+  padding: 10px;
+}

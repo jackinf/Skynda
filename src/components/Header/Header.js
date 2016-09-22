@@ -8,13 +8,13 @@
  */
 
 import React from 'react';
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import s from './Header.css';
-import Link from '../Link';
-import Navigation from '../Navigation';
+// import withStyles from 'isomorphic-style-loader/lib/withStyles';
+import './Header.scss';
+// import Link from '../Link';
+// import Navigation from '../Navigation';
 
-import image_1 from './../../public/images/standard/skynda logo 4-mask-4@2x.png';
-import image_2 from './../../public/images/standard/SKYNDA@2x.png';
+import image_1 from './../../static/images/standard/skynda logo 4-mask-4@2x.png';
+import image_2 from './../../static/images/standard/SKYNDA@2x.png';
 
 class Header extends React.Component {
 
@@ -25,19 +25,18 @@ class Header extends React.Component {
   render() {
     return (
       <div>
-        {/*<nav className="sk_navbar navbar navbar_default">*/}
-        <nav className={`${s.sk_navbar} ${s.navbar} ${s.navbar_default}`}>
-          <div className="container">
-            <div className={s.navbar_header}>
-              <a className={`${s.sk_logo} navbar_brand`} href="/">
+        <nav className="sk_navbar navbar navbar_default">
+          <div className="container" style={{padding: 0}}>
+            <div className="navbar_header pull-left">
+              <a className="sk_logo navbar_brand" href="/">
                 <img className="pull-left" src={image_1} />
                 <img src={image_2} />
               </a>
             </div>
             <div id="navbar" className="navbar_collapse collapse">
               <ul className="nav navbar-nav pull-right">
-                <li className={s.sk_menu__sell}><a href="#" onClick={e => this.sellCar(e)} className="orange_header">Sell Your Car</a></li>
-                <li className={s.sk_menu__buy}><a href="/search" className="blue_header">Buy Your Car</a></li>
+                <li className="sk_menu__sell"><a href="#" onClick={e => this.sellCar(e)} className="orange_header">Sell Your Car</a></li>
+                <li className="sk_menu__buy"><a href="/search" className="blue_header">Buy Your Car</a></li>
               </ul>
             </div>
           </div>
@@ -49,4 +48,4 @@ class Header extends React.Component {
   }
 }
 
-export default withStyles(s)(Header);
+export default Header;

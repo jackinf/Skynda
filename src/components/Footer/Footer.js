@@ -8,30 +8,26 @@
  */
 
 import React from 'react';
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import s from './Footer.css';
-import Link from '../Link';
+// import withStyles from 'isomorphic-style-loader/lib/withStyles';
+import './Footer.scss';
+// import Link from '../Link';
+import {Link} from 'react-router';
 
 function Footer() {
 
-  // {/*<footer>*/}
-  // {/*<p className="text-center">Skynda AS Valge 16, Tallinn 19095 Estonia <a href="mailto:hello@skynda.me">hello@skynda.me</a></p>*/}
-  // {/*<div className="fb-like" data-href="https://www.facebook.com/Skynda-1197076750314307/?fref=ts" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>*/}
-  // {/*</footer>*/}
-
   return (
-    <div className={s.root}>
-      <div className={s.container}>
-        <span className={s.text}>© Your Company</span>
-        <span className={s.spacer}>·</span>
-        <Link className={s.link} to="/">Home</Link>
-        <span className={s.spacer}>·</span>
-        <Link className={s.link} to="/privacy">Privacy</Link>
-        <span className={s.spacer}>·</span>
-        <Link className={s.link} to="/not-found">Not Found</Link>
+    <div className="root">
+      <div className="container">
+        <span className="text">© Your Company</span>
+        <span className="spacer">·</span>
+        <Link className="link" to="/">Home</Link>
+        <span className="spacer">·</span>
+        <Link className="link" to="/privacy">Privacy</Link>
+        <span className="spacer">·</span>
+        <Link className="link" to="/not-found">Not Found</Link>
       </div>
     </div>
   );
 }
 
-export default withStyles(s)(Footer);
+export default Footer;
