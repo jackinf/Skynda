@@ -42,37 +42,37 @@ DROP TABLE IF EXISTS "cars_for_sale" CASCADE
 
 CREATE TABLE "insurance_companies"
 (
-	"insurance_company_id" varchar(50)	 NOT NULL,
+	"insurance_company_id" uuid NOT NULL,
 	"insurance_company_name" varchar(100)	
 )
 ;
 
 CREATE TABLE "finance_companies"
 (
-	"finance_company_id" varchar(50)	 NOT NULL,
+	"finance_company_id" uuid NOT NULL,
 	"finance_company_name" varchar(100)	
 )
 ;
 
 CREATE TABLE "insurance_policies"
 (
-	"policy_id" varchar(50)	 NOT NULL,
-	"car_sold_id" varchar,
+	"policy_id" uuid NOT NULL,
+	"car_sold_id" uuid,
 	"policy_start_date" timestamp,
 	"policy_renewal_date" timestamp,
 	"monthly_payments" decimal(10,2),
-	"insurance_company_id" varchar
+	"insurance_company_id" uuid
 )
 ;
 
 CREATE TABLE "car_loans"
 (
-	"loan_id" varchar(50)	 NOT NULL,
-	"car_sold_id" varchar,
+	"loan_id" uuid NOT NULL,
+	"car_sold_id" uuid,
 	"repayment_start_date" timestamp,
 	"repayment_end_date" timestamp,
 	"monthly_repayments" decimal(10,2),
-	"finance_company_id" varchar
+	"finance_company_id" uuid
 )
 ;
 
@@ -85,10 +85,10 @@ CREATE TABLE "payment_status"
 
 CREATE TABLE "cars_sold"
 (
-	"car_sold_id" varchar(50)	 NOT NULL,
-	"cars_for_sale_id" serial DEFAULT nextval(('"cars_sold_cars_for_sale_id_seq"'::text)::regclass),
+	"car_sold_id" uuid NOT NULL,
+	"cars_for_sale_id" uuid,
 	"agreed_price" decimal(10,2),
-	"customer_id" varchar,
+	"customer_id" uuid,
 	"date_sold" timestamp,
 	"monthly_payment_amount" decimal(10,2),
 	"monthly_payment_date" timestamp
@@ -97,10 +97,10 @@ CREATE TABLE "cars_sold"
 
 CREATE TABLE "customer_payments"
 (
-	"customer_payment_id" varchar(50)	 NOT NULL,
-	"customer_id" varchar,
+	"customer_payment_id" uuid NOT NULL,
+	"customer_id" uuid,
 	"payment_status_code" varchar,
-	"car_sold_id" varchar,
+	"car_sold_id" uuid,
 	"customer_payment_date_due" timestamp,
 	"customer_payment_date_made" timestamp,
 	"actual_payment_amount" decimal(10,2) NOT NULL
@@ -109,7 +109,7 @@ CREATE TABLE "customer_payments"
 
 CREATE TABLE "addresses"
 (
-	"address_id" varchar(100)	 NOT NULL,
+	"address_id" uuid NOT NULL,
 	"linn" varchar(100)	 NOT NULL,
 	"maakond" varchar(100)	,
 	"vald" varchar(100)	,
@@ -122,12 +122,12 @@ CREATE TABLE "addresses"
 
 CREATE TABLE "customer"
 (
-	"customer_id" varchar(50)	 NOT NULL,
+	"customer_id" uuid NOT NULL,
 	"phone" varchar(50)	,
 	"firstname" varchar(100)	 NOT NULL,
 	"lastname" varchar(100)	 NOT NULL,
 	"email" varchar(100)	,
-	"address_id" varchar(100)	
+	"address_id" uuid	
 )
 ;
 
@@ -155,25 +155,19 @@ CREATE TABLE "car_models"
 
 CREATE TABLE "cars_for_sale"
 (
-	"id" serial NOT NULL DEFAULT nextval(('"cars_for_sale_id_seq"'::text)::regclass),
+	"id" uuid,
 	"model_code" varchar(100)	 NOT NULL,
 	"manufacturer_code" varchar(100)	 NOT NULL,
 	"vin_code" varchar(100)	 NOT NULL,
 	"price" decimal(10,2) NOT NULL,
 	"created" timestamp NOT NULL,
-	"customer_id" varchar(50)	,
+	"customer_id" uuid,
 	"registration_number" varchar(100)	 NOT NULL,
 	"mileage" varchar(100)	 NOT NULL,
 	"color" varchar(100)	 NOT NULL,
 	"images" text NOT NULL,
 	"is_sold" boolean
 )
-;
-
-CREATE SEQUENCE "cars_sold_cars_for_sale_id_seq" INCREMENT 1 START 1
-;
-
-CREATE SEQUENCE "cars_for_sale_id_seq" INCREMENT 1 START 1
 ;
 
 ALTER TABLE "insurance_companies" ADD CONSTRAINT "PK_insurance_companies"
