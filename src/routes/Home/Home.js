@@ -13,12 +13,14 @@ import './Home.scss';
 import {InputGroup, InputGroupButton, Input, Button} from 'reactstrap';
 
 import ImageGrid from '../../components/ImageGrid/ImageGrid';
+import CarPreview from './../../components/CarPreview';
+
+// Images
 import image_testcar from '../../static/images/cars/accord/accord.jpg';
 
+// Inner components
 import Hero from './components/Home.hero';
 import Keypoints from './components/Home.keypoints';
-
-import RaisedButton from 'material-ui/RaisedButton';
 
 
 // List of rows
@@ -32,7 +34,11 @@ const cars = {
     {src: image_testcar, href: '/details', title: 'four', description: 'awesome car'},
     {src: image_testcar, href: '/details', title: 'five', description: 'awesome car'},
     {src: image_testcar, href: '/details', title: 'six', description: 'awesome car'}
-  ]]
+  ]],
+  recentlyAdded1: [
+    {src: image_testcar, href: '/details', mileage: 85000, engine: '3.0', power: '225 kW', doors: 4, seats: 5, comment: 'Comes with winter tires'},
+    {src: image_testcar, href: '/details', mileage: 85000, engine: '3.0', power: '225 kW', doors: 4, seats: 5, comment: 'Comes with winter tires'}
+  ]
 };
 
 class Home extends React.Component {
@@ -139,7 +145,9 @@ class Home extends React.Component {
               <br />
               <div className="row">
                 <div className="col-md-12">
-                  <ImageGrid rows={cars.recentlyAdded}/>
+                  {/*<ImageGrid rows={cars.recentlyAdded}/>*/}
+                  <CarPreview.Grid cars={cars.recentlyAdded1} />
+                  {/*<CarPreviewGrid rows={cars.recentlyAdded1} />*/}
                 </div>
               </div>
             </div>
