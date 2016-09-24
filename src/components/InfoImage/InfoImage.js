@@ -15,7 +15,7 @@ class InfoImage extends React.Component {
       <div className={'info_image__info_panel_bg'}>
       </div>
 
-      <div className={'info_image__info_panel'}>
+      <div className='info_image__info_panel'>
         {this.props.children}
       </div>
     </div>);
