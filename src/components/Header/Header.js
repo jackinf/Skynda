@@ -24,10 +24,10 @@ class Header extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="container header-container">
+
         <nav className="sk_navbar navbar navbar_default">
-          <div className="container" style={{padding: 0}}>
-            <div className="navbar_header pull-left">
+            <div className="navbar_header">
               <a className="sk_logo navbar_brand" href="/">
                 <img className="pull-left" src={image_1} />
                 <img src={image_2} />
@@ -39,7 +39,6 @@ class Header extends React.Component {
                 <li className="sk_menu__buy"><a href="/search" className="blue_header">Buy Your Car</a></li>
               </ul>
             </div>
-          </div>
         </nav>
 
       </div>

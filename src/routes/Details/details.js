@@ -45,6 +45,7 @@ class CarDetails extends React.Component {
       <div>
         <div className="container">
           <Slideshow />
+
         </div>
 
         <br />

@@ -17,7 +17,7 @@ function Footer() {
 
   return (
     <div className="root">
-      <div className="container">
+      <div className="container footer-container">
         <span className="text">© Your Company</span>
         <span className="spacer">·</span>
         <Link className="link" to="/">Home</Link>
