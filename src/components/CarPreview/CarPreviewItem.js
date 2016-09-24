@@ -3,7 +3,7 @@
  */
 
 import React from 'react';
-import './Item.scss';
+import './CarPreviewItem.scss';
 
 import {Row, Col} from 'react-bootstrap';
 
@@ -11,18 +11,26 @@ class CarPreview extends React.Component {
   render() {
     const { mileage, engine, power, doors, seats, comment} = this.props.car;
 
-    return (<div className='info_image'>
+    return (<div className='car-preview'>
       <a href={this.props.car.href}>
-        <img src={this.props.car.src} className='info_image__image' />
+        <img src={this.props.car.src} className='car-preview__image' />
       </a>
 
-      <div className='info_image__info_panel_bg'>
+      <div className='car-preview__info-panel-bg'>
       </div>
 
-      <div className='info_image__info_panel'>
+      <div className='car-preview__info-panel'>
+        <Row className="car-preview__info-panel-primary-row ">
+          <Col sm={8}>2012 Brand and model</Col>
+          <Col sm={4}>12 100 EUR</Col>
+        </Row>
         <Row>
-          <Col sm={7} >{mileage} km {engine} ({power})</Col>
-          <Col sm={5} >{doors} doors {seats} seats</Col>
+          <Col sm={12} >
+            <span style={{margin: "0 25px 0 0"}}>{mileage} km</span>
+            <span style={{margin: "0 25px 0 0"}}>{engine} ({power})</span>
+            <span style={{margin: "0 25px 0 0"}}>{doors} doors</span>
+            <span>{seats} seats</span>
+          </Col>
         </Row>
         <Row>
           <Col sm={12} >{comment}</Col>
