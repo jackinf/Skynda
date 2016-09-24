@@ -9,6 +9,18 @@ import {Button, Row, Col} from 'react-bootstrap';
 import Slider from 'rc-slider';
 import moment from 'moment';
 
+// import a from 'react-icons/md/done.js';
+let IconBase = require('react-icon-base');
+class MdDone extends React.Component {
+  render() {
+    return (
+      <IconBase viewBox="0 0 40 40" {...this.props}>
+        <g><path d="m15 27l17.7-17.7 2.3 2.3-20 20-9.3-9.3 2.3-2.3z"/></g>
+      </IconBase>
+    );
+  }
+}
+
 const brands = [
   {id: -1, name: 'All'},
   {id: 0, name: 'BMW'},
@@ -34,22 +46,22 @@ const brands = [
 
 const colors = [
   {id: -1, name: 'All', toggled: true},
-  {id: 0, name: 'red', style: {'background-color': '#EF1717'}, toggled: true, hideName: true},
-  {id: 1, name: 'orange', style: {'background-color': '#E87846'}, toggled: true, hideName: true},
-  {id: 2, name: 'yellow', style: {'background-color': '#DECC44'}, toggled: true, hideName: true},
-  {id: 3, name: 'green', style: {'background-color': '#91DD59'}, toggled: true, hideName: true},
-  {id: 4, name: 'green', style: {'background-color': '#3AC99D'}, toggled: true, hideName: true},
-  {id: 5, name: 'green', style: {'background-color': '#44DE62'}, toggled: true, hideName: true},
-  {id: 6, name: 'blue', style: {'background-color': '#15A6DB'}, toggled: true, hideName: true},
+  {id: 0, name: 'red', style: {'backgroundColor': '#EF1717'}, toggled: true, hideName: true},
+  {id: 1, name: 'orange', style: {'backgroundColor': '#E87846'}, toggled: true, hideName: true},
+  {id: 2, name: 'yellow', style: {'backgroundColor': '#DECC44'}, toggled: true, hideName: true},
+  {id: 3, name: 'green', style: {'backgroundColor': '#91DD59'}, toggled: true, hideName: true},
+  {id: 4, name: 'green', style: {'backgroundColor': '#3AC99D'}, toggled: true, hideName: true},
+  {id: 5, name: 'green', style: {'backgroundColor': '#44DE62'}, toggled: true, hideName: true},
+  {id: 6, name: 'blue', style: {'backgroundColor': '#15A6DB'}, toggled: true, hideName: true},
   {
     id: 7,
     name: 'white',
-    style: {'background-color': '#FFFFFF'},
+    style: {'backgroundColor': '#FFFFFF'},
     toggled: true,
     hideName: true,
     extraClass: 'btn-inverse'
   },
-  {id: 8, name: 'black', style: {'background-color': '#000000'}, toggled: true, hideName: true}
+  {id: 8, name: 'black', style: {'backgroundColor': '#000000'}, toggled: true, hideName: true}
 ];
 
 const features = [
@@ -110,11 +122,11 @@ class ButtonGroup extends React.Component {
 
     return (<div className="btn-group list-inline">
       {this.props.options.map((option, key) => (<Col md={mdCol} sm={smCol} key={key} className="btn-group__element">
-        <Button style={this.props.shape==='circle' ? {} : {width: "100%"}}
+        <Button style={option.style ? option.style : this.props.shape==='circle' ? {} : {width: "100%"}}
                 className={this.props.shape==='circle' ? 'btn-group__circle': ""}
                 bsStyle={(!option.toggled ? "default": "primary")}
                 onClick={e => this.toggle(option)}>
-          {option.name}
+          {option.hideName ? <MdDone /> : option.name}
         </Button>
       </Col>))}
     </div>);
@@ -145,8 +157,6 @@ class AdvancedSearch extends React.Component {
           <ButtonGroup options={brands}/>
         </Row>
 
-        {/*<btn-group options="$ctrl.brands" model="$ctrl.selectedBrands"></btn-group>*/}
-
         <Row>
           <Col md={4}>
             <div className="range-slider-wrapper">
@@ -163,8 +173,7 @@ class AdvancedSearch extends React.Component {
           <Col md={4}>
             <div className="range-slider-wrapper">
               <label>Year</label>
-              <Slider range allowCross={false} defaultValue={[0, moment().year()]} min={1970} max={moment().year()}
-                      step={1}/>
+              <Slider range allowCross={false} defaultValue={[0, moment().year()]} min={1970} max={moment().year()} step={1}/>
             </div>
           </Col>
         </Row>
