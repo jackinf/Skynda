@@ -7,7 +7,7 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-@import '../../variables.scss';
+@import '../../styles/variables';
 
 .sk_navbar{
   height: 70px;
@@ -15,7 +15,6 @@
 .sk_logo{
   padding: 0;
 }
-
 
 .navbar_default .navbar_nav > .sk_menu__sell >a,
 .navbar_default .navbar_nav > .sk_menu__buy > a{
@@ -35,10 +34,13 @@
 }
 
 .sk_logo img{
-  height:60px;
-  margin_right: 20px;
+  height:56px;
+  margin-right: 15px;
+  &:first-child{
+    margin-left: 15px
+  }
 }
 .sk_logo img + img{
   height: 48px;
-  padding_top: 10px;
+
 }

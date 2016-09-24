@@ -1,5 +1,5 @@
 
-@import "../node_modules/react-image-gallery/styles/scss/image-gallery.scss";
+@import "../../node_modules/react-image-gallery/styles/scss/image-gallery";
 /**
  * React Starter Kit (https://www.reactstarterkit.com/)
  *
@@ -22,7 +22,7 @@ $font-family-base: 'Segoe UI', 'HelveticaNeue-Light', sans-serif;
  * Layout
  * ======================================================================== */
 
-$max-content-width: 1000px;
+$max-content-width: 1024px;
 
 /*
  * Media queries breakpoints
