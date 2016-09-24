@@ -21,14 +21,7 @@ class CarPreviewGrid extends React.Component {
 }
 
 CarPreviewGrid.propTypes = {
-  cars: React.PropTypes.arrayOf(React.PropTypes.shape({
-    mileage: React.PropTypes.number.isRequired,
-    engine: React.PropTypes.string,
-    power: React.PropTypes.string,
-    doors: React.PropTypes.number,
-    seats: React.PropTypes.number,
-    comment: React.PropTypes.string
-  })).isRequired,
+  cars: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
 };
 
 export default CarPreviewGrid;

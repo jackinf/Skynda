@@ -9,7 +9,7 @@ import {Row, Col} from 'react-bootstrap';
 
 class CarPreview extends React.Component {
   render() {
-    const { mileage, engine, power, doors, seats, comment} = this.props.car;
+    const { year, brand, price, mileage, engine, power, doors, seats, comment} = this.props.car;
 
     return (<div className='car-preview'>
       <a href={this.props.car.href}>
@@ -21,8 +21,8 @@ class CarPreview extends React.Component {
 
       <div className='car-preview__info-panel'>
         <Row className="car-preview__info-panel-primary-row ">
-          <Col sm={8}>2012 Brand and model</Col>
-          <Col sm={4}>12 100 EUR</Col>
+          <Col sm={8}>{year} {brand}</Col>
+          <Col sm={4}>{price} EUR</Col>
         </Row>
         <Row>
           <Col sm={12} >
@@ -43,6 +43,9 @@ class CarPreview extends React.Component {
 
 CarPreview.propTypes = {
   car : React.PropTypes.shape({
+    year: React.PropTypes.number.isRequired,
+    brand: React.PropTypes.string,
+    price: React.PropTypes.number.isRequired,
     mileage: React.PropTypes.number.isRequired,
     engine: React.PropTypes.string,
     power: React.PropTypes.string,

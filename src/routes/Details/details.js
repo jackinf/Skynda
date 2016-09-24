@@ -22,19 +22,19 @@ import SkyndaCare from './components/details.skynda-care';
 import Reviews from './components/details.reviews';
 import Checkout from './components/details.checkout';
 
-import ImageGrid from './../../components/ImageGrid/ImageGrid';
+import CarPreview from './../../components/CarPreview';
 
 // List of rows
 import image_testcar from '../../static/images/cars/accord/accord.jpg';
 
-const cars = [[
-  {src: image_testcar, href: '/details', title: 'one', description: 'awesome car'},
-  {src: image_testcar, href: '/details', title: 'two', description: 'awesome car'},
-  {src: image_testcar, href: '/details', title: 'three', description: 'awesome car'},
-  {src: image_testcar, href: '/details', title: 'four', description: 'awesome car'},
-  {src: image_testcar, href: '/details', title: 'five', description: 'awesome car'},
-  {src: image_testcar, href: '/details', title: 'six', description: 'awesome car'}
-]];
+const cars = {
+  other: [
+    {src: image_testcar, href: '/details', year: 2012, brand: 'Audi', price: 12100, mileage: 85000, engine: '3.0',
+      power: '225 kW', doors: 4, seats: 5, comment: 'Comes with winter tires'},
+    {src: image_testcar, href: '/details', year: 2012, brand: 'Audi', price: 12100, mileage: 85000, engine: '3.0',
+      power: '225 kW', doors: 4, seats: 5, comment: 'Comes with winter tires'}
+  ]
+};
 
 
 import {StickyContainer, Sticky} from 'react-sticky';
@@ -129,7 +129,7 @@ class CarDetails extends React.Component {
 
           <div className="row">
             <Skblock header={'Other cars that you might like'}>
-              <ImageGrid rows={cars}/>
+              <CarPreview.Grid cars={cars.other}/>
             </Skblock>
           </div>
         </div>
