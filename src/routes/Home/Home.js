@@ -18,6 +18,9 @@ import image_testcar from '../../static/images/cars/accord/accord.jpg';
 import Hero from './components/Home.hero';
 import Keypoints from './components/Home.keypoints';
 
+import RaisedButton from 'material-ui/RaisedButton';
+
+
 // List of rows
 // TODO: redux
 const cars = {
