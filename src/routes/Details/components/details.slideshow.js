@@ -13,31 +13,31 @@ import OwlCarousel from 'react-owl-carousel';
 // import 'imports?jQuery=jquery!owl.carousel';
 
 // Nuka carousel
-var nukaCarousel = (images) => {
-  let imageElements = images.map((image, i) => (<img key={i} src={image} />));
-  // react-router breaks the nuka-slider, temp fix is this: style={{height:'300px'}} frameOverflow='inherit'
-  return (<NukaCarousel autoplay={true} wrapAround={true}>
-    {imageElements}
-  </NukaCarousel>);
-};
-
-// Bootstrap carousel
-var bootstrapCarousel = (images) => {
-  return (<Carousel style={{height: '300px'}}>
-    {images.map((image, i) => (<Carousel.Item key={i} style={{height: '300px'}}>
-      <img alt="900x500" src={image}/>
-    </Carousel.Item>))}
-  </Carousel>);
-};
-
-// Owl carousel
-var owlCarousel = (images) => {
-  return (<OwlCarousel slideSpeed={300} navigation singleItem autoPlay >
-    <div><img src={images[0]} alt="The Last of us"/></div>
-    <div><img src={images[1]} alt="GTA V"/></div>
-    <div><img src={images[2]} alt="Mirror Edge"/></div>
-  </OwlCarousel>)
-};
+// var nukaCarousel = (images) => {
+//   let imageElements = images.map((image, i) => (<img key={i} src={image} />));
+//   // react-router breaks the nuka-slider, temp fix is this: style={{height:'300px'}} frameOverflow='inherit'
+//   return (<NukaCarousel autoplay={true} wrapAround={true}>
+//     {imageElements}
+//   </NukaCarousel>);
+// };
+//
+// // Bootstrap carousel
+// var bootstrapCarousel = (images) => {
+//   return (<Carousel style={{height: '300px'}}>
+//     {images.map((image, i) => (<Carousel.Item key={i} style={{height: '300px'}}>
+//       <img alt="900x500" src={image}/>
+//     </Carousel.Item>))}
+//   </Carousel>);
+// };
+//
+// // Owl carousel
+// var owlCarousel = (images) => {
+//   return (<OwlCarousel slideSpeed={300} navigation singleItem autoPlay >
+//     <div><img src={images[0]} alt="The Last of us"/></div>
+//     <div><img src={images[1]} alt="GTA V"/></div>
+//     <div><img src={images[2]} alt="Mirror Edge"/></div>
+//   </OwlCarousel>)
+// };
 
 // Images
 import image1 from './../../../static/images/cars/accord/accord.jpg';
@@ -51,10 +51,10 @@ import image4 from './../../../static/images/cars/accord/accord4.jpg';
 import ImageGallery from 'react-image-gallery';
 
 class MyComponent extends React.Component {
-constructor() {
-  super();
-  this._renderItem = this._renderItem.bind(this);
-}
+  constructor() {
+    super();
+    this._renderItem = this._renderItem.bind(this);
+  }
 
   handleImageLoad(event) {
     // console.log('Image loaded ', event.target)
