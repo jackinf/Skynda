@@ -10,9 +10,10 @@
 import React, {PropTypes} from 'react';
 import './Home.scss';
 
-import {InputGroup, InputGroupButton, Input, Button} from 'reactstrap';
+import {Row, Col} from 'react-bootstrap';
 
 import CarPreview from './../../components/CarPreview';
+import CarSearch from './../../components/CarSearch';
 
 // Images
 import image_testcar from '../../static/images/cars/accord/accord.jpg';
@@ -51,10 +52,7 @@ class Home extends React.Component {
     this.setState({isSearching: true});
     setTimeout(() => {
       cars.searchResults.length = 0;
-      cars.searchResults.push([
-        {src: image_testcar, href: '/details', title: 'one', description: 'awesome car'},
-        {src: image_testcar, href: '/details', title: 'two', description: 'awesome car'}
-      ]);
+      cars.searchResults.push(cars.recentlyAdded);
       this.setState({isSearching: false});
      }, 2000);
   }
@@ -81,25 +79,38 @@ class Home extends React.Component {
              * SEARCH
              */
           }
-          <div className="row">
-            <div className="col-sx-12">
-              <h2 className="primary-header-2 text-center">Search</h2>
-            </div>
+          <Row>
+            <Row>
+              <Col xs={12}>
+                Search
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <CarSearch />
+              </Col>
+            </Row>
+          </Row>
 
-            <div className="row">
-              <div className="col-md-6 col-md-offset-3 offset-md-3">
-                <div className="input-group sk_search">
-                  <InputGroup>
-                    <Input placeholder="Enter a car name" style={{padding: "17px"}}
-                           onChange={e => this.updateSearchText(e.target.value)}/>
-                    <InputGroupButton>
-                      <Button className="primary-button" onClick={this.executeSearch}>Search</Button>
-                    </InputGroupButton>
-                  </InputGroup>
-                </div>
-              </div>
-            </div>
-          </div>
+          {/*<div className="row">*/}
+            {/*<div className="col-sx-12">*/}
+              {/*<h2 className="primary-header-2 text-center">Search</h2>*/}
+            {/*</div>*/}
+
+            {/*<div className="row">*/}
+              {/*<div className="col-md-6 col-md-offset-3 offset-md-3">*/}
+                {/*<div className="input-group sk_search">*/}
+                  {/*<InputGroup>*/}
+                    {/*<Input placeholder="Enter a car name" style={{padding: "17px"}}*/}
+                           {/*onChange={e => this.updateSearchText(e.target.value)}/>*/}
+                    {/*<InputGroupButton>*/}
+                      {/*<Button className="primary-button" onClick={this.executeSearch}>Search</Button>*/}
+                    {/*</InputGroupButton>*/}
+                  {/*</InputGroup>*/}
+                {/*</div>*/}
+              {/*</div>*/}
+            {/*</div>*/}
+          {/*</div>*/}
 
           <br />
 
