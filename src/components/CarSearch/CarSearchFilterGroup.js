@@ -3,23 +3,13 @@
  */
 
 import React from 'react';
-import './CarSearch.scss';
+import './CarSearchFilterGroup.scss';
+import ButtonGroup from './CarSearchButtonGroup';
 
 import {Button, Row, Col} from 'react-bootstrap';
 import Slider from 'rc-slider';
 import moment from 'moment';
 
-// import a from 'react-icons/md/done.js';
-let IconBase = require('react-icon-base');
-class MdDone extends React.Component {
-  render() {
-    return (
-      <IconBase viewBox="0 0 40 40" {...this.props}>
-        <g><path d="m15 27l17.7-17.7 2.3 2.3-20 20-9.3-9.3 2.3-2.3z"/></g>
-      </IconBase>
-    );
-  }
-}
 
 const brands = [
   {id: -1, name: 'All'},
@@ -95,48 +85,11 @@ const seats = [
 ];
 // const options = [brands, colors, features, transmissions, doors, seats];
 
-class ButtonGroup extends React.Component {
+
+class CarSearch extends React.Component {
   constructor() {
     super();
-    this.toggle = this.toggle.bind(this);
-    this.toggleAll = this.toggleAll.bind(this);
-  }
-
-  toggle(option) {
-    option.toggled = !option.toggled;
-    if (option.id === -1 && option.toggled)
-      this.toggleAll(option.toggled);
-    this.forceUpdate();
-  };
-
-  toggleAll(value) {
-    for (var i = 0; i < this.props.options.length; i++) {
-      var option = this.props.options[i];
-      option.toggled = value;
-    }
-  }
-
-  render() {
-    var mdCol = this.props.md ? this.props.md : 2;
-    var smCol = this.props.sm ? this.props.sm : 3;
-
-    return (<div className="btn-group list-inline">
-      {this.props.options.map((option, key) => (<Col md={mdCol} sm={smCol} key={key} className="btn-group__element">
-        <Button style={option.style ? option.style : this.props.shape==='circle' ? {} : {width: "100%"}}
-                className={this.props.shape==='circle' ? 'btn-group__circle': ""}
-                bsStyle={(!option.toggled ? "default": "primary")}
-                onClick={e => this.toggle(option)}>
-          {option.hideName ? <MdDone /> : option.name}
-        </Button>
-      </Col>))}
-    </div>);
-  }
-}
-
-class AdvancedSearch extends React.Component {
-  constructor() {
-    super();
-    this.state = {showAdvancedSearch: true};
+    this.state = {showAdvancedSearch: false};
     this.search = this.search.bind(this);
   }
 
@@ -173,63 +126,66 @@ class AdvancedSearch extends React.Component {
           <Col md={4}>
             <div className="range-slider-wrapper">
               <label>Year</label>
-              <Slider range allowCross={false} defaultValue={[0, moment().year()]} min={1970} max={moment().year()} step={1}/>
+              <Slider range allowCross={false} defaultValue={[0, moment().year()]} min={1970} max={moment().year()}
+                      step={1}/>
             </div>
           </Col>
         </Row>
 
         {this.state.showAdvancedSearch ? (<Row id="advanceSearch" aria-expanded="false">
-            <Row>
-              <Col md={8}>
-                <Row>
-                  <label>Colors</label>
-                  <ButtonGroup md={1} options={colors} shape="circle"/>
-                </Row>
-              </Col>
-              <Col md={4}>
-                <div className="range-slider-wrapper">
-                  <label>Petrol consumption</label>
-                  <Slider range allowCross={false} defaultValue={[0, 20]} min={0} max={20} step={0.1}/>
-                </div>
-              </Col>
-            </Row>
+          <Row>
+            <Col md={8}>
+              <Row>
+                <label>Colors</label>
+                <ButtonGroup md={1} options={colors} shape="circle"/>
+              </Row>
+            </Col>
+            <Col md={4}>
+              <div className="range-slider-wrapper">
+                <label>Petrol consumption</label>
+                <Slider range allowCross={false} defaultValue={[0, 20]} min={0} max={20} step={0.1}/>
+              </div>
+            </Col>
+          </Row>
 
-            <Row>
-              <Col md={8}>
-                <Row>
+          <Row>
+            <Col md={8}>
+              <Row>
+                <div className="range-slider-wrapper">
                   <label>Features</label>
                   <ButtonGroup md={3} options={features}/>
-                </Row>
-              </Col>
-              <Col md={4}>
-                <div className="range-slider-wrapper">
-                  <label>Horse power</label>
-                  <Slider range allowCross={false} defaultValue={[0, 500]} min={0} max={500} step={1}/>
                 </div>
-              </Col>
-            </Row>
+              </Row>
+            </Col>
+            <Col md={4}>
+              <div className="range-slider-wrapper">
+                <label>Horse power</label>
+                <Slider range allowCross={false} defaultValue={[0, 500]} min={0} max={500} step={1}/>
+              </div>
+            </Col>
+          </Row>
 
-            <Row>
-              <Col md={4}>
-                <Row>
-                  <label>Doors</label>
-                  <ButtonGroup md={2} options={doors}  shape="circle"/>
-                </Row>
-              </Col>
-              <Col md={4}>
-                <Row>
-                  <label>Seats</label>
-                  <ButtonGroup md={2} options={seats}  shape="circle"/>
-                </Row>
-              </Col>
-              <Col md={4}>
-                <Row>
-                  <label>Transmission</label>
-                  <ButtonGroup md={6} options={transmissions} />
-                </Row>
-              </Col>
-            </Row>
-          </Row>) : ""}
+          <Row>
+            <Col md={4}>
+              <Row>
+                <label>Doors</label>
+                <ButtonGroup md={2} options={doors} shape="circle"/>
+              </Row>
+            </Col>
+            <Col md={4}>
+              <Row>
+                <label>Seats</label>
+                <ButtonGroup md={2} options={seats} shape="circle"/>
+              </Row>
+            </Col>
+            <Col md={4}>
+              <Row>
+                <label>Transmission</label>
+                <ButtonGroup md={6} options={transmissions}/>
+              </Row>
+            </Col>
+          </Row>
+        </Row>) : ""}
 
         <div className="row">
           <div className="col-md-12">
@@ -237,8 +193,8 @@ class AdvancedSearch extends React.Component {
               <button className="btn btn-link fk-filter-advance" role="button" data-toggle="collapse"
                       data-target="#advanceSearch" aria-expanded="false" aria-controls="collapseExample"
                       onClick={e => this.toggleAdvanced(!this.state.showAdvancedSearch)}>
-                  <span className="more glyphicon glyphicon-plus"></span>
-                  <span className="less glyphicon glyphicon-minus"></span>
+                <span className="more glyphicon glyphicon-plus"></span>
+                <span className="less glyphicon glyphicon-minus"></span>
                 ADVANCED FILTERS
               </button>
 
@@ -260,4 +216,4 @@ class AdvancedSearch extends React.Component {
   }
 }
 
-export default AdvancedSearch;
+export default CarSearch;

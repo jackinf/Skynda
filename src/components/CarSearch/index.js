@@ -1,4 +1,4 @@
 import React from 'react';
-import CarSearch from './CarSearch';
+import CarSearch from './CarSearchFilterGroup';
 
 export default CarSearch;
