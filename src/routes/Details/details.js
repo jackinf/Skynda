@@ -13,7 +13,6 @@ import image_4_2x from './../../static/images/standard/image-4@2x.png';
 
 // Local components
 import Skblock from './components/details.skblock';
-import Slideshow from './components/details.slideshow';
 import Overview from './components/details.overview';
 import PetrolConsumption from './components/details.petrol-consumption';
 import Performance from './components/details.performance';
@@ -21,6 +20,7 @@ import InspectorsReport from './components/details.inspectors-report';
 import SkyndaCare from './components/details.skynda-care';
 import Reviews from './components/details.reviews';
 import Checkout from './components/details.checkout';
+import CarDetailsMainImage from './components/details.mainimage';
 
 import CarPreview from './../../components/CarPreview';
 
@@ -42,10 +42,9 @@ import {StickyContainer, Sticky} from 'react-sticky';
 class CarDetails extends React.Component {
   render() {
     return (
-      <div>
+      <div className="car-details">
         <div className="container">
-          <Slideshow />
-
+          <CarDetailsMainImage/>
         </div>
 
         <br />

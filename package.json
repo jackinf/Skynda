@@ -108,6 +108,7 @@
     "react-owl-carousel": "^0.14.0",
     "react-redux": "^4.4.5",
     "react-router": "^2.8.0",
+    "react-slick": "^0.14.4",
     "react-sticky": "^5.0.5",
     "react-tap-event-plugin": "^1.0.0",
     "reactstrap": "^3.2.2",
