@@ -10,6 +10,9 @@ import image_ok from './../../static/images/standard/ok.png';
 import image_diploma_1 from './../../static/images/standard/diploma_1.png';
 import image_star_2x from './../../static/images/standard/star@2x.png';
 import image_4_2x from './../../static/images/standard/image-4@2x.png';
+import dummy_image1 from './../../static/images/cars/accord/accord.jpg';
+import dummy_image2 from './../../static/images/cars/accord/accord2.jpg';
+import dummy_image3 from './../../static/images/cars/accord/accord3.jpg';
 
 // Local components
 import Skblock from './components/details.skblock';
@@ -21,6 +24,8 @@ import SkyndaCare from './components/details.skynda-care';
 import Reviews from './components/details.reviews';
 import Checkout from './components/details.checkout';
 import CarDetailsMainImage from './components/details.mainimage';
+
+
 
 import CarPreview from './../../components/CarPreview';
 
@@ -39,12 +44,38 @@ const cars = {
 
 import {StickyContainer, Sticky} from 'react-sticky';
 
+
 class CarDetails extends React.Component {
   render() {
+
+
+    const car = {//TODO: REPLACE with api data
+      src: dummy_image1,
+      year: 2012,
+      brand: 'Honda',
+      model: 'Accord',
+      engine: '3.0',
+      horsepower: '225 kW',
+      images: [
+        {
+          original: dummy_image1,
+          thumbnail: dummy_image1
+        },
+        {
+          original: dummy_image2,
+          thumbnail: dummy_image2
+        },
+        {
+          original: dummy_image3,
+          thumbnail: dummy_image3
+        }
+      ]
+    };
+
     return (
       <div className="car-details">
         <div className="container">
-          <CarDetailsMainImage/>
+          <CarDetailsMainImage car={car}/>
         </div>
 
         <br />
