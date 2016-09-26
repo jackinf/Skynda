@@ -5,7 +5,7 @@
 import React from 'react';
 import './Home.hero.scss';
 
-import {Button} from 'reactstrap';
+import {Button} from 'react-bootstrap';
 import {browserHistory} from 'react-router';
 
 import heroImageUrl from './../../../static/images/standard/hero-01-2.jpg';

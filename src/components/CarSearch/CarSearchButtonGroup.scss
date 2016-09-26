@@ -1,0 +1,17 @@
+
+.btn-group {
+  .btn-group__circle {
+    border-radius: 50%;
+
+    /* Such bad hard-coded sizes */
+    padding: 0;
+    width: 34px;
+    height: 34px;
+  }
+
+  .btn-group__element {
+    margin-bottom: 5px;
+    margin-top: 5px;
+  }
+
+}
