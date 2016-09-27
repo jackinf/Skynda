@@ -1,5 +1,8 @@
 package me.skynda.model;
 
+import java.math.BigDecimal;
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,10 +18,18 @@ public class Car {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	private String vin;
-	private String price;
-
-
-
+	private String modelCode;
+	private String manufacturerCode;
+	private String vinCode;
+	private BigDecimal price;
+	private Date created;
+	//FK customerId
+	private String registrationNumber;
+	private String mileage;
+	private String color;
+	private String images;
+	private Boolean isSold;
+	private String fuelCity;
+	private String fuelHigway;
 
 }

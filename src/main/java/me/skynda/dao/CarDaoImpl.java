@@ -1,5 +1,8 @@
 package me.skynda.dao;
 
-public class CarDaoImpl implements CarDao{
+import me.skynda.common.db.SkyndaBaseEntityDaoImpl;
+import me.skynda.model.Car;
+
+public class CarDaoImpl extends SkyndaBaseEntityDaoImpl<Car> implements CarDao{
 
 }

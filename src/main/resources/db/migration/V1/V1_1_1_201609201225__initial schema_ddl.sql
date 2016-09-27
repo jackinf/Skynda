@@ -1,8 +1,65 @@
-DROP SEQUENCE IF EXISTS "cars_sold_cars_for_sale_id_seq"
-;
-
-DROP SEQUENCE IF EXISTS "cars_for_sale_id_seq"
-;
+--DROP SEQUENCE IF EXISTS "insurance_companies_insurance_company_id_seq"
+--;
+--
+--DROP SEQUENCE IF EXISTS "finance_companies_finance_company_id_seq"
+--;
+--
+--DROP SEQUENCE IF EXISTS "insurance_policies_policy_id_seq"
+--;
+--
+--DROP SEQUENCE IF EXISTS "insurance_policies_car_sold_id_seq"
+--;
+--
+--DROP SEQUENCE IF EXISTS "insurance_policies_insurance_company_id_seq"
+--;
+--
+--DROP SEQUENCE IF EXISTS "car_loans_loan_id_seq"
+--;
+--
+--DROP SEQUENCE IF EXISTS "car_loans_car_sold_id_seq"
+--;
+--
+--DROP SEQUENCE IF EXISTS "car_loans_finance_company_id_seq"
+--;
+--
+--DROP SEQUENCE IF EXISTS "payment_status_payment_status_code_seq"
+--;
+--
+--DROP SEQUENCE IF EXISTS "cars_sold_car_sold_id_seq"
+--;
+--
+--DROP SEQUENCE IF EXISTS "cars_sold_cars_for_sale_id_seq"
+--;
+--
+--DROP SEQUENCE IF EXISTS "cars_sold_customer_id_seq"
+--;
+--
+--DROP SEQUENCE IF EXISTS "customer_payments_customer_payment_id_seq"
+--;
+--
+--DROP SEQUENCE IF EXISTS "customer_payments_customer_id_seq"
+--;
+--
+--DROP SEQUENCE IF EXISTS "customer_payments_payment_status_code_seq"
+--;
+--
+--DROP SEQUENCE IF EXISTS "customer_payments_car_sold_id_seq"
+--;
+--
+--DROP SEQUENCE IF EXISTS "addresses_address_id_seq"
+--;
+--
+--DROP SEQUENCE IF EXISTS "customer_customer_id_seq"
+--;
+--
+--DROP SEQUENCE IF EXISTS "customer_address_id_seq"
+--;
+--
+--DROP SEQUENCE IF EXISTS "cars_for_sale_id_seq"
+--;
+--
+--DROP SEQUENCE IF EXISTS "cars_for_sale_customer_id_seq"
+--;
 
 DROP TABLE IF EXISTS "insurance_companies" CASCADE
 ;
@@ -42,53 +99,53 @@ DROP TABLE IF EXISTS "cars_for_sale" CASCADE
 
 CREATE TABLE "insurance_companies"
 (
-	"insurance_company_id" varchar(50)	 NOT NULL,
+	"insurance_company_id" serial NOT NULL,
 	"insurance_company_name" varchar(100)	
 )
 ;
 
 CREATE TABLE "finance_companies"
 (
-	"finance_company_id" varchar(50)	 NOT NULL,
+	"finance_company_id" serial NOT NULL,
 	"finance_company_name" varchar(100)	
 )
 ;
 
 CREATE TABLE "insurance_policies"
 (
-	"policy_id" varchar(50)	 NOT NULL,
-	"car_sold_id" varchar,
+	"policy_id" serial NOT NULL DEFAULT nextval(('"insurance_policies_policy_id_seq"'::text)::regclass),
+	"car_sold_id" serial DEFAULT nextval(('"insurance_policies_car_sold_id_seq"'::text)::regclass),
 	"policy_start_date" timestamp,
 	"policy_renewal_date" timestamp,
 	"monthly_payments" decimal(10,2),
-	"insurance_company_id" varchar
+	"insurance_company_id" serial
 )
 ;
 
 CREATE TABLE "car_loans"
 (
-	"loan_id" varchar(50)	 NOT NULL,
-	"car_sold_id" varchar,
+	"loan_id" serial NOT NULL DEFAULT nextval(('"car_loans_loan_id_seq"'::text)::regclass),
+	"car_sold_id" serial DEFAULT nextval(('"car_loans_car_sold_id_seq"'::text)::regclass),
 	"repayment_start_date" timestamp,
 	"repayment_end_date" timestamp,
 	"monthly_repayments" decimal(10,2),
-	"finance_company_id" varchar
+	"finance_company_id" serial
 )
 ;
 
 CREATE TABLE "payment_status"
 (
-	"payment_status_code" varchar(50)	 NOT NULL,
+	"payment_status_code" serial NOT NULL DEFAULT nextval(('"payment_status_payment_status_code_seq"'::text)::regclass),
 	"payment_status_description" varchar(500)	
 )
 ;
 
 CREATE TABLE "cars_sold"
 (
-	"car_sold_id" varchar(50)	 NOT NULL,
+	"car_sold_id" serial NOT NULL DEFAULT nextval(('"cars_sold_car_sold_id_seq"'::text)::regclass),
 	"cars_for_sale_id" serial DEFAULT nextval(('"cars_sold_cars_for_sale_id_seq"'::text)::regclass),
 	"agreed_price" decimal(10,2),
-	"customer_id" varchar,
+	"customer_id" serial DEFAULT nextval(('"cars_sold_customer_id_seq"'::text)::regclass),
 	"date_sold" timestamp,
 	"monthly_payment_amount" decimal(10,2),
 	"monthly_payment_date" timestamp
@@ -97,10 +154,10 @@ CREATE TABLE "cars_sold"
 
 CREATE TABLE "customer_payments"
 (
-	"customer_payment_id" varchar(50)	 NOT NULL,
-	"customer_id" varchar,
-	"payment_status_code" varchar,
-	"car_sold_id" varchar,
+	"customer_payment_id" serial NOT NULL DEFAULT nextval(('"customer_payments_customer_payment_id_seq"'::text)::regclass),
+	"customer_id" serial DEFAULT nextval(('"customer_payments_customer_id_seq"'::text)::regclass),
+	"payment_status_code" serial DEFAULT nextval(('"customer_payments_payment_status_code_seq"'::text)::regclass),
+	"car_sold_id" serial DEFAULT nextval(('"customer_payments_car_sold_id_seq"'::text)::regclass),
 	"customer_payment_date_due" timestamp,
 	"customer_payment_date_made" timestamp,
 	"actual_payment_amount" decimal(10,2) NOT NULL
@@ -109,7 +166,7 @@ CREATE TABLE "customer_payments"
 
 CREATE TABLE "addresses"
 (
-	"address_id" varchar(100)	 NOT NULL,
+	"address_id" serial NOT NULL DEFAULT nextval(('"addresses_address_id_seq"'::text)::regclass),
 	"linn" varchar(100)	 NOT NULL,
 	"maakond" varchar(100)	,
 	"vald" varchar(100)	,
@@ -122,12 +179,12 @@ CREATE TABLE "addresses"
 
 CREATE TABLE "customer"
 (
-	"customer_id" varchar(50)	 NOT NULL,
+	"customer_id" serial NOT NULL DEFAULT nextval(('"customer_customer_id_seq"'::text)::regclass),
 	"phone" varchar(50)	,
 	"firstname" varchar(100)	 NOT NULL,
 	"lastname" varchar(100)	 NOT NULL,
 	"email" varchar(100)	,
-	"address_id" varchar(100)	
+	"address_id" serial DEFAULT nextval(('"customer_address_id_seq"'::text)::regclass)
 )
 ;
 
@@ -161,20 +218,79 @@ CREATE TABLE "cars_for_sale"
 	"vin_code" varchar(100)	 NOT NULL,
 	"price" decimal(10,2) NOT NULL,
 	"created" timestamp NOT NULL,
-	"customer_id" varchar(50)	,
+	"customer_id" serial DEFAULT nextval(('"cars_for_sale_customer_id_seq"'::text)::regclass),
 	"registration_number" varchar(100)	 NOT NULL,
 	"mileage" varchar(100)	 NOT NULL,
 	"color" varchar(100)	 NOT NULL,
 	"images" text NOT NULL,
-	"is_sold" boolean
+	"is_sold" boolean,
+	"fuel_city" varchar(100)	,
+	"fuel_highway" varchar(100)	
 )
 ;
-
-CREATE SEQUENCE "cars_sold_cars_for_sale_id_seq" INCREMENT 1 START 1
-;
-
-CREATE SEQUENCE "cars_for_sale_id_seq" INCREMENT 1 START 1
-;
+--
+--CREATE SEQUENCE "insurance_companies_insurance_company_id_seq" INCREMENT 1 START 1
+--;
+--
+--CREATE SEQUENCE "finance_companies_finance_company_id_seq" INCREMENT 1 START 1
+--;
+--
+--CREATE SEQUENCE "insurance_policies_policy_id_seq" INCREMENT 1 START 1
+--;
+--
+--CREATE SEQUENCE "insurance_policies_car_sold_id_seq" INCREMENT 1 START 1
+--;
+--
+--CREATE SEQUENCE "insurance_policies_insurance_company_id_seq" INCREMENT 1 START 1
+--;
+--
+--CREATE SEQUENCE "car_loans_loan_id_seq" INCREMENT 1 START 1
+--;
+--
+--CREATE SEQUENCE "car_loans_car_sold_id_seq" INCREMENT 1 START 1
+--;
+--
+--CREATE SEQUENCE "car_loans_finance_company_id_seq" INCREMENT 1 START 1
+--;
+--
+--CREATE SEQUENCE "payment_status_payment_status_code_seq" INCREMENT 1 START 1
+--;
+--
+--CREATE SEQUENCE "cars_sold_car_sold_id_seq" INCREMENT 1 START 1
+--;
+--
+--CREATE SEQUENCE "cars_sold_cars_for_sale_id_seq" INCREMENT 1 START 1
+--;
+--
+--CREATE SEQUENCE "cars_sold_customer_id_seq" INCREMENT 1 START 1
+--;
+--
+--CREATE SEQUENCE "customer_payments_customer_payment_id_seq" INCREMENT 1 START 1
+--;
+--
+--CREATE SEQUENCE "customer_payments_customer_id_seq" INCREMENT 1 START 1
+--;
+--
+--CREATE SEQUENCE "customer_payments_payment_status_code_seq" INCREMENT 1 START 1
+--;
+--
+--CREATE SEQUENCE "customer_payments_car_sold_id_seq" INCREMENT 1 START 1
+--;
+--
+--CREATE SEQUENCE "addresses_address_id_seq" INCREMENT 1 START 1
+--;
+--
+--CREATE SEQUENCE "customer_customer_id_seq" INCREMENT 1 START 1
+--;
+--
+--CREATE SEQUENCE "customer_address_id_seq" INCREMENT 1 START 1
+--;
+--
+--CREATE SEQUENCE "cars_for_sale_id_seq" INCREMENT 1 START 1
+--;
+--
+--CREATE SEQUENCE "cars_for_sale_customer_id_seq" INCREMENT 1 START 1
+--;
 
 ALTER TABLE "insurance_companies" ADD CONSTRAINT "PK_insurance_companies"
 	PRIMARY KEY ("insurance_company_id")
