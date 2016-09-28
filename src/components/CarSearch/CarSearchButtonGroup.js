@@ -28,8 +28,14 @@ class ButtonGroup extends React.Component {
 
   toggle(option) {
     option.toggled = !option.toggled;
-    if (option.id === -1 && option.toggled)
+    if (option.id === -1)
       this.toggleAll(option.toggled);
+    else {
+      var all = this.props.options.find((item) => item.id === -1);
+      if (all)
+        all.toggled = false;
+    }
+
     this.forceUpdate();
   };
 
