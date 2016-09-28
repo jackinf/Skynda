@@ -6,8 +6,8 @@ import React from 'react';
 import './details.mainimage.scss';
 import image_cam from './../../../static/images/standard/camera@2x.png';
 import image_360 from './../../../static/apple-touch-icon.png';
-import {Row, Col, Button, Carousel} from 'react-bootstrap';
-import ImageGallery from 'react-image-gallery';
+import {Row, Col, Button, Carousel, Modal} from 'react-bootstrap';
+ import ImageGallery from 'react-image-gallery';
 
 
 class CarouselComponent extends React.Component {
@@ -66,12 +66,83 @@ class CarouselComponent extends React.Component {
   }
 }
 
+const carouselInstance = (
+  <Carousel>
+    <Carousel.Item>
+      <img width={900} height={500} alt="900x500" src="/assets/carousel.png"/>
+      <Carousel.Caption>
+        <h3>First slide label</h3>
+        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+      </Carousel.Caption>
+    </Carousel.Item>
+    <Carousel.Item>
+      <img width={900} height={500} alt="900x500" src="/assets/carousel.png"/>
+      <Carousel.Caption>
+        <h3>Second slide label</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+      </Carousel.Caption>
+    </Carousel.Item>
+    <Carousel.Item>
+      <img width={900} height={500} alt="900x500" src="/assets/carousel.png"/>
+      <Carousel.Caption>
+        <h3>Third slide label</h3>
+        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+      </Carousel.Caption>
+    </Carousel.Item>
+  </Carousel>
+);
 
+class CarouselModalBtn extends React.Component {
+  constructor(){
+    super();
+    this.state = {isShowModal: false};
+  }
+  onShowModal = () => {
+    this.setState({isShowModal: true})
+  };
+
+  onHideModal = () => {
+    this.setState({isShowModal: false})
+  };
+
+  render() {
+
+    return (<span>
+      <Button onClick={this.onShowModal}>
+        <div className="image-btn-content-wrapper">
+          <img src={image_cam}></img>
+          <span>View Photos</span>
+        </div>
+      </Button>
+
+      <Modal
+        show={this.state.isShowModal}
+        onHide={this.onHideModal}
+        bsSize="lg">
+        <Modal.Header closeButton>
+        </Modal.Header>
+        <Modal.Body>
+          <Carousel>
+            {this.props.images.map(function(row, i) {
+              return (
+                <Carousel.Item key={i}>
+                  <img width={900} height={500} alt="900x500" src={row.original}/>
+                  <Carousel.Caption>
+                  </Carousel.Caption>
+                </Carousel.Item>
+              );
+            })}
+          </Carousel>
+        </Modal.Body>
+      </Modal>
+    </span>)
+  }
+}
 
 class CarDetailsMainImage extends React.Component {
   constructor() {
     super();
-    // this.renderCarousel = this.renderCarousel.bind(this);
+    this.state = {isShowModal: false}
   }
 
   render() {
@@ -83,7 +154,7 @@ class CarDetailsMainImage extends React.Component {
         {/*<CarouselComponent images={images}/>*/}
         <div className='image-preview'>
           <a>
-            <img src={src} className='main-image' />
+            <img src={src} className='main-image'/>
           </a>
 
           <div className='info-panel-bg'>
@@ -100,14 +171,9 @@ class CarDetailsMainImage extends React.Component {
               </Col>
             </Row>
             <Row className="image-buttons">
-              <Col sm={12} >
+              <Col sm={12}>
                 <span style={{margin: "0 25px 0 0"}}>
-                  <Button>
-                    <div className="image-btn-content-wrapper">
-                      <img src={image_cam}></img>
-                      <span>View Photos</span>
-                    </div>
-                  </Button>
+                  <CarouselModalBtn images={images}/>
                 </span>
                 <span style={{margin: "0 25px 0 0"}}>
                   <Button>
@@ -117,12 +183,13 @@ class CarDetailsMainImage extends React.Component {
                     </div>
                   </Button>
                 </span>
+
+
               </Col>
             </Row>
           </div>
 
         </div>
-
       </div>
 
     )
@@ -130,7 +197,7 @@ class CarDetailsMainImage extends React.Component {
 }
 
 CarDetailsMainImage.propTypes = {
-  car : React.PropTypes.shape({
+  car: React.PropTypes.shape({
     src: React.PropTypes.string.isRequired,
     year: React.PropTypes.number.isRequired,
     brand: React.PropTypes.string,
