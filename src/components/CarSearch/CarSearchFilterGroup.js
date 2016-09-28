@@ -106,85 +106,109 @@ class CarSearch extends React.Component {
       <section className="search">
 
         <Row>
-          <label>Brand</label>
-          <ButtonGroup options={brands}/>
+          <Col md={12}>
+            <label>Brand</label>
+            <ButtonGroup options={brands}/>
+          </Col>
         </Row>
 
         <Row>
           <Col md={4}>
-            <div className="range-slider-wrapper">
-              <label>Mileage</label>
-              <Slider range allowCross={false} defaultValue={[0, 500000]} min={0} max={500000} step={100}/>
-            </div>
+            <Row>
+              <Col md={12} className="range-slider-wrapper">
+                <label>Mileage</label>
+                <Slider range allowCross={false} defaultValue={[0, 500000]} min={0} max={500000} step={100}/>
+              </Col>
+            </Row>
           </Col>
           <Col md={4}>
-            <div className="range-slider-wrapper">
-              <label>Price</label>
-              <Slider range allowCross={false} defaultValue={[0, 500000]} min={0} max={500000} step={100}/>
-            </div>
+            <Row>
+              <Col md={12}  className="range-slider-wrapper">
+                <label>Price</label>
+                <Slider range allowCross={false} defaultValue={[0, 500000]} min={0} max={500000} step={100}/>
+              </Col>
+            </Row>
           </Col>
           <Col md={4}>
-            <div className="range-slider-wrapper">
-              <label>Year</label>
-              <Slider range allowCross={false} defaultValue={[0, moment().year()]} min={1970} max={moment().year()}
-                      step={1}/>
-            </div>
+            <Row>
+              <Col md={12} className="range-slider-wrapper">
+                <label>Year</label>
+                <Slider range allowCross={false} defaultValue={[0, moment().year()]} min={1970} max={moment().year()}
+                        step={1}/>
+              </Col>
+            </Row>
           </Col>
         </Row>
 
         {this.state.showAdvancedSearch ? (<Row id="advanceSearch" aria-expanded="false">
-          <Row>
-            <Col md={8}>
-              <Row>
-                <label>Colors</label>
-                <ButtonGroup md={1} options={colors} shape="circle"/>
-              </Row>
-            </Col>
-            <Col md={4}>
-              <div className="range-slider-wrapper">
-                <label>Petrol consumption</label>
-                <Slider range allowCross={false} defaultValue={[0, 20]} min={0} max={20} step={0.1}/>
-              </div>
-            </Col>
-          </Row>
+          <Col md={12}>
 
-          <Row>
-            <Col md={8}>
-              <Row>
-                <div className="range-slider-wrapper">
-                  <label>Features</label>
-                  <ButtonGroup md={3} options={features}/>
-                </div>
-              </Row>
-            </Col>
-            <Col md={4}>
-              <div className="range-slider-wrapper">
-                <label>Horse power</label>
-                <Slider range allowCross={false} defaultValue={[0, 500]} min={0} max={500} step={1}/>
-              </div>
-            </Col>
-          </Row>
+            <Row>
+              <Col md={8}>
+                <Row>
+                  <Col md={12} className="range-slider-wrapper">
+                    <label>Colors</label><br />
+                    <ButtonGroup md={1} options={colors} shape="circle"/>
+                  </Col>
+                </Row>
+              </Col>
+              <Col md={4}>
+                <Row>
+                  <Col md={12} className="range-slider-wrapper">
+                    <label>Petrol consumption</label><br />
+                    <Slider range allowCross={false} defaultValue={[0, 20]} min={0} max={20} step={0.1}/>
+                  </Col>
+                </Row>
+              </Col>
+            </Row>
 
-          <Row>
-            <Col md={4}>
-              <Row>
-                <label>Doors</label>
-                <ButtonGroup md={2} options={doors} shape="circle"/>
-              </Row>
-            </Col>
-            <Col md={4}>
-              <Row>
-                <label>Seats</label>
-                <ButtonGroup md={2} options={seats} shape="circle"/>
-              </Row>
-            </Col>
-            <Col md={4}>
-              <Row>
-                <label>Transmission</label>
-                <ButtonGroup md={6} options={transmissions}/>
-              </Row>
-            </Col>
-          </Row>
+            <Row>
+              <Col md={8}>
+                <Row>
+                  <Col md={12} className="range-slider-wrapper">
+                    <label>Features</label>
+                    <ButtonGroup md={3} options={features}/>
+                  </Col>
+                </Row>
+              </Col>
+              <Col md={4}>
+                <Row>
+                  <Col md={12} className="range-slider-wrapper">
+                    <label>Horse power</label>
+                    <Slider range allowCross={false} defaultValue={[0, 500]} min={0} max={500} step={1}/>
+                  </Col>
+                </Row>
+              </Col>
+            </Row>
+
+            <Row>
+              <Col md={4}>
+                <Row>
+                  <Col md={12}  className="range-slider-wrapper">
+                    <label>Doors</label><br />
+                    <ButtonGroup md={2} options={doors} shape="circle"/>
+                  </Col>
+                </Row>
+              </Col>
+              <Col md={4}>
+                <Row>
+                  <Col md={12}  className="range-slider-wrapper">
+                    <label>Seats</label><br />
+                    <ButtonGroup md={2} options={seats} shape="circle"/>
+                  </Col>
+                </Row>
+              </Col>
+              <Col md={4}>
+                <Row>
+                  <Col md={12}  className="range-slider-wrapper">
+                    <label>Transmission</label><br />
+                    <ButtonGroup md={8} options={transmissions}/>
+                  </Col>
+                </Row>
+              </Col>
+            </Row>
+
+          </Col>
         </Row>) : ""}
 
         <div className="row">
