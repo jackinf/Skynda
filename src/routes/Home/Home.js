@@ -80,16 +80,14 @@ class Home extends React.Component {
              */
           }
           <Row>
-            <Row>
-              <Col xs={12}>
-                <h2 className="primary-header-2 text-center">Search</h2>
-              </Col>
-            </Row>
-            <Row>
-              <Col>
-                <CarSearch />
-              </Col>
-            </Row>
+            <Col xs={12}>
+              <h2 className="primary-header-2 text-center">Search</h2>
+            </Col>
+          </Row>
+          <Row>
+            <Col md={12}>
+              <CarSearch />
+            </Col>
           </Row>
 
           <br />
