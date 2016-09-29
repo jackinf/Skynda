@@ -29,21 +29,6 @@ class Overview extends React.Component {
           <h5>Vehicle Protection</h5>
           <section>Award-winning repair coverage</section>
         </div>
-        <div className="col col-md-4">
-          <img className="sk_details__icon" src={image_group_127}/>
-          <h5>Vehicle Protection</h5>
-          <section>Award-winning repair coverage</section>
-        </div>
-        <div className="col col-md-4">
-          <img className="sk_details__icon" src={image_group_128}/>
-          <h5>Vehicle Protection</h5>
-          <section>Award-winning repair coverage</section>
-        </div>
-        <div className="col col-md-4">
-          <img className="sk_details__icon" src={image_group_129}/>
-          <h5>Vehicle Protection</h5>
-          <section>Award-winning repair coverage</section>
-        </div>
       </div>
     </Skblock>);
   }

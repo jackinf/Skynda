@@ -10,6 +10,7 @@ import {Row, Col} from 'react-bootstrap';
 import image_ok from './../../static/images/standard/ok.png';
 import image_diploma_1 from './../../static/images/standard/diploma_1.png';
 import image_star_2x from './../../static/images/standard/star@2x.png';
+import image_unstar_2x from './../../static/images/standard/star-1@2x.png';
 import image_4_2x from './../../static/images/standard/image-4@2x.png';
 import dummy_image1 from './../../static/images/cars/accord/accord.jpg';
 import dummy_image2 from './../../static/images/cars/accord/accord2.jpg';
@@ -45,7 +46,7 @@ import {StickyContainer, Sticky} from 'react-sticky';
 class CarDetails extends React.Component {
   render() {
 
-
+    const max_safety_stars = 5;
     const car_data = {//TODO: REPLACE with api data
       general: {
         src: dummy_image1,
@@ -199,17 +200,13 @@ sale`
 
                 <PetrolConsumption petrol_consumption={car_data.petrol_consumption} />
 
-                <Performance />
+                <Performance performance={car_data.performance} />
 
                 <Skblock header={'Safety'}>
                   <div className="sk_details__stars_outer_container">
                     <div className="sk_details__stars_inner_container">
-                      <img className="sk_details__star" src={image_star_2x}/>
-                      <img className="sk_details__star" src={image_star_2x}/>
-                      <img className="sk_details__star" src={image_star_2x}/>
-                      <img className="sk_details__star" src={image_star_2x}/>
-                      <img className="sk_details__star" src={image_star_2x}/>
-
+                      {Array.from({ length: car_data.safety_stars}).map((_, idx) => <img key={idx} className="sk_details__star" src={image_star_2x}/>)}
+                      {Array.from({ length: max_safety_stars - car_data.safety_stars}).map((_, idx) => <img key={idx} className="sk_details__star" src={image_unstar_2x}/>)}
                       <img className="sk_details__stars_euroncap" src={image_4_2x}/>
                     </div>
                   </div>
