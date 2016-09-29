@@ -113,39 +113,39 @@ CREATE TABLE "finance_companies"
 
 CREATE TABLE "insurance_policies"
 (
-	"policy_id" serial NOT NULL DEFAULT nextval(('"insurance_policies_policy_id_seq"'::text)::regclass),
-	"car_sold_id" serial DEFAULT nextval(('"insurance_policies_car_sold_id_seq"'::text)::regclass),
+	"policy_id" serial,
+	"car_sold_id" integer,
 	"policy_start_date" timestamp,
 	"policy_renewal_date" timestamp,
 	"monthly_payments" decimal(10,2),
-	"insurance_company_id" serial
+	"insurance_company_id" integer
 )
 ;
 
 CREATE TABLE "car_loans"
 (
-	"loan_id" serial NOT NULL DEFAULT nextval(('"car_loans_loan_id_seq"'::text)::regclass),
-	"car_sold_id" serial DEFAULT nextval(('"car_loans_car_sold_id_seq"'::text)::regclass),
+	"loan_id" serial,
+	"car_sold_id" integer,
 	"repayment_start_date" timestamp,
 	"repayment_end_date" timestamp,
 	"monthly_repayments" decimal(10,2),
-	"finance_company_id" serial
+	"finance_company_id" integer
 )
 ;
 
 CREATE TABLE "payment_status"
 (
-	"payment_status_code" serial NOT NULL DEFAULT nextval(('"payment_status_payment_status_code_seq"'::text)::regclass),
+	"payment_status_code" serial,
 	"payment_status_description" varchar(500)	
 )
 ;
 
 CREATE TABLE "cars_sold"
 (
-	"car_sold_id" serial NOT NULL DEFAULT nextval(('"cars_sold_car_sold_id_seq"'::text)::regclass),
-	"cars_for_sale_id" serial DEFAULT nextval(('"cars_sold_cars_for_sale_id_seq"'::text)::regclass),
+	"car_sold_id" serial,
+	"cars_for_sale_id" integer,
 	"agreed_price" decimal(10,2),
-	"customer_id" serial DEFAULT nextval(('"cars_sold_customer_id_seq"'::text)::regclass),
+	"customer_id" integer,
 	"date_sold" timestamp,
 	"monthly_payment_amount" decimal(10,2),
 	"monthly_payment_date" timestamp
@@ -154,10 +154,10 @@ CREATE TABLE "cars_sold"
 
 CREATE TABLE "customer_payments"
 (
-	"customer_payment_id" serial NOT NULL DEFAULT nextval(('"customer_payments_customer_payment_id_seq"'::text)::regclass),
-	"customer_id" serial DEFAULT nextval(('"customer_payments_customer_id_seq"'::text)::regclass),
-	"payment_status_code" serial DEFAULT nextval(('"customer_payments_payment_status_code_seq"'::text)::regclass),
-	"car_sold_id" serial DEFAULT nextval(('"customer_payments_car_sold_id_seq"'::text)::regclass),
+	"customer_payment_id" serial,
+	"customer_id" integer,
+	"payment_status_code" integer,
+	"car_sold_id" integer,
 	"customer_payment_date_due" timestamp,
 	"customer_payment_date_made" timestamp,
 	"actual_payment_amount" decimal(10,2) NOT NULL
@@ -166,7 +166,7 @@ CREATE TABLE "customer_payments"
 
 CREATE TABLE "addresses"
 (
-	"address_id" serial NOT NULL DEFAULT nextval(('"addresses_address_id_seq"'::text)::regclass),
+	"address_id" serial,
 	"linn" varchar(100)	 NOT NULL,
 	"maakond" varchar(100)	,
 	"vald" varchar(100)	,
@@ -179,12 +179,12 @@ CREATE TABLE "addresses"
 
 CREATE TABLE "customer"
 (
-	"customer_id" serial NOT NULL DEFAULT nextval(('"customer_customer_id_seq"'::text)::regclass),
+	"customer_id" serial,
 	"phone" varchar(50)	,
 	"firstname" varchar(100)	 NOT NULL,
 	"lastname" varchar(100)	 NOT NULL,
 	"email" varchar(100)	,
-	"address_id" serial DEFAULT nextval(('"customer_address_id_seq"'::text)::regclass)
+	"address_id" integer
 )
 ;
 
@@ -212,13 +212,13 @@ CREATE TABLE "car_models"
 
 CREATE TABLE "cars_for_sale"
 (
-	"id" serial NOT NULL DEFAULT nextval(('"cars_for_sale_id_seq"'::text)::regclass),
+	"id" serial,
 	"model_code" varchar(100)	 NOT NULL,
 	"manufacturer_code" varchar(100)	 NOT NULL,
 	"vin_code" varchar(100)	 NOT NULL,
 	"price" decimal(10,2) NOT NULL,
 	"created" timestamp NOT NULL,
-	"customer_id" serial DEFAULT nextval(('"cars_for_sale_customer_id_seq"'::text)::regclass),
+	"customer_id" integer,
 	"registration_number" varchar(100)	 NOT NULL,
 	"mileage" varchar(100)	 NOT NULL,
 	"color" varchar(100)	 NOT NULL,
