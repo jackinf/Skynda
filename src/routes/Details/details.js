@@ -213,7 +213,7 @@ sale`
                 </Skblock>
                 <br />
 
-                <InspectorsReport />
+                <InspectorsReport report={car_data.report} />
 
                 <SkyndaCare />
 
