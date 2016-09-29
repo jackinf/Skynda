@@ -78,7 +78,8 @@ class CarDetailsMainImage extends React.Component {
 
   render() {
 
-    const {src, year, brand, model, engine, horsepower, images} = this.props.car;
+    const {src, year, brand, model, engine, horsepower} = this.props.car.general;
+    const images = this.props.car.images;
 
     return (
       <div classID="car_detail_image" className="car-details-main-image">
@@ -129,12 +130,14 @@ class CarDetailsMainImage extends React.Component {
 
 CarDetailsMainImage.propTypes = {
   car: React.PropTypes.shape({
-    src: React.PropTypes.string.isRequired,
-    year: React.PropTypes.number.isRequired,
-    brand: React.PropTypes.string,
-    model: React.PropTypes.string,
-    engine: React.PropTypes.string,
-    horsepower: React.PropTypes.string,
+    general: React.PropTypes.shape({
+      src: React.PropTypes.string.isRequired,
+      year: React.PropTypes.number.isRequired,
+      brand: React.PropTypes.string,
+      model: React.PropTypes.string,
+      engine: React.PropTypes.string,
+      horsepower: React.PropTypes.string,
+    }),
     images: React.PropTypes.array
   }).isRequired
 };
