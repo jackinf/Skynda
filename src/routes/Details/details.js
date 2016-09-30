@@ -121,34 +121,39 @@ sale`
         power_train: 'Gas'
       },
       safety_stars: 5,
-      report: {
-        categories: [{
-          title: 'Category 1',
-          points: [
-            {text: 'Automatic transmission flawless in cold temperature', pass: true},
-            {text: 'Steering wheel centered', pass: true},
-            {text: 'Steering wheel centered', pass: true},
-            {text: 'Automatic transmission flawless in cold temperature', pass: false},
-            {text: 'Automatic transmission flawless in cold temperature', pass: true},
-            {text: 'Steering wheel centered', pass: true}
+      report: [
+        {
+          categories: [
+            {
+              title: 'Category 1',
+              points: [
+                {text: 'Automatic transmission flawless in cold temperature', pass: true},
+                {text: 'Steering wheel centered', pass: true},
+                {text: 'Steering wheel centered', pass: true},
+                {text: 'Automatic transmission flawless in cold temperature', pass: false},
+                {text: 'Automatic transmission flawless in cold temperature', pass: true},
+                {text: 'Steering wheel centered', pass: true}
+              ]
+            },
+            {
+              title: 'Category 2',
+                points: [
+                  {text: 'Automatic transmission flawless in cold temperature', pass: true},
+                  {text: 'Steering wheel centered', pass: true},
+                  {text: 'Steering wheel centered', pass: true},
+                  {text: 'Automatic transmission flawless in cold temperature', pass: false},
+                  {text: 'Automatic transmission flawless in cold temperature', pass: true},
+                  {text: 'Steering wheel centered', pass: true}
+                ]
+            }
+          ],
+          faults: [
+            {text: 'Scratches near the ignition', img: 'TODO'},
+            {text: 'Scratches on the glovebox', img: 'TODO'},
+            {text: 'Scratches on the back door', img: 'TODO'}
           ]
-        }, {
-          title: 'Category 2',
-          points: [
-            {text: 'Automatic transmission flawless in cold temperature', pass: true},
-            {text: 'Steering wheel centered', pass: true},
-            {text: 'Steering wheel centered', pass: true},
-            {text: 'Automatic transmission flawless in cold temperature', pass: false},
-            {text: 'Automatic transmission flawless in cold temperature', pass: true},
-            {text: 'Steering wheel centered', pass: true}
-          ]
-        }],
-        faults: [
-          {text: 'Scratches near the ignition', img: 'TODO'},
-          {text: 'Scratches on the glovebox', img: 'TODO'},
-          {text: 'Scratches on the back door', img: 'TODO'}
-        ]
-      },
+        }
+      ],
       reviews: [
         {
           logoUrl: 'TODO',

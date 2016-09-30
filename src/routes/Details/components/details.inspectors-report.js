@@ -14,9 +14,10 @@ const getImageByPass = (isPass) => isPass ?
 
 class Report extends React.Component {
   render() {
-    const {categories, faults} = this.props.report;
+    const {categories, faults} = this.props.report[0];
 
-    return ( <Skblock header={'Our Certified Inspector\'s Report'}>
+    return (
+      <Skblock header={'Our Certified Inspector\'s Report'}>
       <div > {/*style="margin-left: 30px"*/  }
         <div className="row">
           <div className="col col-md-4"><label className="sk_details__certified_developer">Mr. Happy</label></div>
@@ -26,15 +27,17 @@ class Report extends React.Component {
           </div>
         </div>
 
-        {categories.map((category) => (<div className="row">
+        {categories.map((category,i) => (
+          <div className="row" key={i}>
             <h4>{category.title}</h4>
 
             <div className="row">
-              {category.points.map((point) => (<div>
-                <div className="col col-md-6"> {/*style="padding: 5px 0;"*/}
-                  {getImageByPass(point.pass)}
-                  {point.text}
-                </div>
+              {category.points.map((point, i) => (
+                <div key={i}>
+                  <div className="col col-md-6"> {/*style="padding: 5px 0;"*/}
+                    {getImageByPass(point.pass)}
+                    {point.text}
+                  </div>
               </div>))}
             </div>
 

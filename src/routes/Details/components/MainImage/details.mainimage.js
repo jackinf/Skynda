@@ -84,7 +84,6 @@ class ModalBtn360 extends React.Component {
   };
 
   render() {
-
     return (<span>
       <Button onClick={this.onShowModal}>
         <div className="image-btn-content-wrapper">
