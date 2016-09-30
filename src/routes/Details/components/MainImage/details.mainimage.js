@@ -109,8 +109,8 @@ class ModalBtn360 extends React.Component {
         >
           <div className="modal-2-minimal-item-height">
             <iframe src={this.props.src}
-                    width="560"
-                    height="315"
+                    width="900"
+                    height="506"
                     frameBorder="0"
                     scrolling="no"
                     allowFullScreen="true"
