@@ -10,7 +10,7 @@ import image_cam from './../../../../static/images/standard/camera@2x.png';
 import image_360 from './../../../../static/apple-touch-icon.png';
 import {Row, Col, Button, Carousel, Modal} from 'react-bootstrap';
 
-class CarouselModalBtn extends React.Component {
+class ModalBtnCarousel extends React.Component {
   constructor(){
     super();
     this.state = {isShowModal: false};
@@ -51,7 +51,7 @@ class CarouselModalBtn extends React.Component {
             <Carousel>
               {this.props.images.map(function(row, i) {
                 return (
-                  <Carousel.Item className="modal-2-minimal-img-item-height" key={i}>
+                  <Carousel.Item className="modal-2-minimal-item-height" key={i}>
                     <img width={900} height={500} alt="900x500" src={row.original}/>
                     <Carousel.Caption>
                     </Carousel.Caption>
@@ -59,6 +59,62 @@ class CarouselModalBtn extends React.Component {
                 );
               })}
             </Carousel>
+          </div>
+        </Modal.Body>
+        <Modal.Footer
+          bsClass="modal2-footer"
+        >
+        </Modal.Footer>
+      </Modal>
+    </span>)
+  }
+}
+
+class ModalBtn360 extends React.Component {
+  constructor(){
+    super();
+    this.state = {isShowModal: false};
+  }
+  onShowModal = () => {
+    this.setState({isShowModal: true})
+  };
+
+  onHideModal = () => {
+    this.setState({isShowModal: false})
+  };
+
+  render() {
+
+    return (<span>
+      <Button onClick={this.onShowModal}>
+        <div className="image-btn-content-wrapper">
+          <img src={image_360}></img>
+          <span>360 View</span>
+        </div>
+      </Button>
+
+      <Modal
+        bsClass="modal2"
+        show={this.state.isShowModal}
+        onHide={this.onHideModal}
+        bsSize="lg"
+      >
+        <Modal.Header
+          closeButton
+          bsClass="modal2-header"
+        >
+        </Modal.Header>
+        <Modal.Body
+          bsClass="modal2-body"
+        >
+          <div className="modal-2-minimal-item-height">
+            <iframe src={this.props.src}
+                    width="560"
+                    height="315"
+                    frameBorder="0"
+                    scrolling="no"
+                    allowFullScreen="true"
+            ></iframe>
           </div>
         </Modal.Body>
         <Modal.Footer
@@ -79,6 +135,7 @@ class CarDetailsMainImage extends React.Component {
   render() {
 
     const {src, year, brand, model, engine, horsepower, images} = this.props.car;
+    const source360 = "https://www.panono.com/p/jmr7n52eIbDn/embed?autorotate=false";
 
     return (
       <div classID="car_detail_image" className="car-details-main-image">
@@ -104,18 +161,11 @@ class CarDetailsMainImage extends React.Component {
             <Row className="image-buttons">
               <Col sm={12}>
                 <span style={{margin: "0 25px 0 0"}}>
-                  <CarouselModalBtn images={images}/>
+                  <ModalBtnCarousel images={images}/>
                 </span>
                 <span style={{margin: "0 25px 0 0"}}>
-                  <Button>
-                    <div className="image-btn-content-wrapper">
-                      <img src={image_360}></img>
-                      <span>360 View</span>
-                    </div>
-                  </Button>
+                  <ModalBtn360 src={source360}/>
                 </span>
-
-
               </Col>
             </Row>
           </div>

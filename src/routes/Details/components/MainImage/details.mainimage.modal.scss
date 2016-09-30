@@ -94,6 +94,7 @@ $border-radius-large:       6px !default;
   background-clip: padding-box;
   // Remove focus outline from opened modal
   outline: 0;
+  min-height: inherit;
 }
 
 // Modal background
@@ -136,11 +137,24 @@ $border-radius-large:       6px !default;
 .modal2-body {
   position: relative;
   padding: $modal2-inner-padding;
-  width: $modal2-lg-body;
+  //width: $modal2-lg-body;
   margin: auto;
-  .modal-2-minimal-img-item-height{
-    min-height: 508px;
+  text-align: center;
+  //min-height: calc(100vh - 200px);
+  overflow:auto;
+  .modal-2-minimal-item-height{
+    img{
+      margin: auto;
+    }
+    padding: inherit;
   }
+  .carousel-control, .carousel-indicators{
+    position:fixed;
+  }
+  .carousel-inner{
+    margin: auto;
+  }
+
 }
 
 // Footer (for actions)
@@ -192,7 +206,7 @@ $border-radius-large:       6px !default;
 @media (min-width: $screen-md-min) {
   .modal2-lg {
     width: $modal2-lg;
-    height: 100%;
+    min-height: 715px;
 
   }
   .modal2:before {
