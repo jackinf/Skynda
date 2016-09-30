@@ -134,7 +134,8 @@ class CarDetailsMainImage extends React.Component {
 
   render() {
 
-    const {src, year, brand, model, engine, horsepower, images} = this.props.car;
+    const {src, year, brand, model, engine, horsepower} = this.props.car.general;
+    const images = this.props.car.images;
     const source360 = "https://www.panono.com/p/jmr7n52eIbDn/embed?autorotate=false";
 
     return (
@@ -166,6 +167,8 @@ class CarDetailsMainImage extends React.Component {
                 <span style={{margin: "0 25px 0 0"}}>
                   <ModalBtn360 src={source360}/>
                 </span>
+
+
               </Col>
             </Row>
           </div>
@@ -179,12 +182,14 @@ class CarDetailsMainImage extends React.Component {
 
 CarDetailsMainImage.propTypes = {
   car: React.PropTypes.shape({
-    src: React.PropTypes.string.isRequired,
-    year: React.PropTypes.number.isRequired,
-    brand: React.PropTypes.string,
-    model: React.PropTypes.string,
-    engine: React.PropTypes.string,
-    horsepower: React.PropTypes.string,
+    general: React.PropTypes.shape({
+      src: React.PropTypes.string.isRequired,
+      year: React.PropTypes.number.isRequired,
+      brand: React.PropTypes.string,
+      model: React.PropTypes.string,
+      engine: React.PropTypes.string,
+      horsepower: React.PropTypes.string,
+    }),
     images: React.PropTypes.array
   }).isRequired
 };

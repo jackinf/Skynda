@@ -4,11 +4,13 @@
 
 import React from 'react';
 import './details.scss';
+import {Row, Col} from 'react-bootstrap';
 
 // Images
 import image_ok from './../../static/images/standard/ok.png';
 import image_diploma_1 from './../../static/images/standard/diploma_1.png';
 import image_star_2x from './../../static/images/standard/star@2x.png';
+import image_unstar_2x from './../../static/images/standard/star-1@2x.png';
 import image_4_2x from './../../static/images/standard/image-4@2x.png';
 import dummy_image1 from './../../static/images/cars/accord/accord.jpg';
 import dummy_image2 from './../../static/images/cars/accord/accord2.jpg';
@@ -24,7 +26,6 @@ import SkyndaCare from './components/details.skynda-care';
 import Reviews from './components/details.reviews';
 import Checkout from './components/details.checkout';
 import CarDetailsMainImage from './components/MainImage/details.mainimage';
-
 import CarPreview from './../../components/CarPreview';
 
 // List of rows
@@ -39,21 +40,29 @@ const cars = {
   ]
 };
 
-
 import {StickyContainer, Sticky} from 'react-sticky';
 
 
 class CarDetails extends React.Component {
   render() {
 
-
-    const car = {//TODO: REPLACE with api data
-      src: dummy_image1,
-      year: 2012,
-      brand: 'Honda',
-      model: 'Accord',
-      engine: '3.0',
-      horsepower: '225 kW',
+    const max_safety_stars = 5;
+    const car_data = {//TODO: REPLACE with api data
+      general: {
+        src: dummy_image1,
+        year: 2012,
+        brand: 'Honda',
+        model: 'Accord',
+        engine: '3.0',
+        horsepower: '225 kW',
+        mileage: '75 000 km',
+        transmission: 'automatic',
+        drive: 'Front Wheel Drive',
+        color_outside: 'Dark Blue',
+        color_inside: 'Black',
+        doors: '2',
+        seats: '5',
+      },
       images: [
         {
           original: dummy_image1,
@@ -67,13 +76,99 @@ class CarDetails extends React.Component {
           original: dummy_image3,
           thumbnail: dummy_image3
         }
+      ],
+      descriptions: [{
+        title: "What's This Model About?",
+        text: `The BMW 3 Series offers the a combination of luxury and performance that is unmatched
+by its competitors. With refined driving dynamics and drop-dead gorgeous looks to
+match, this elegant sports coupe is truly an amazing driving machine`
+      }, {
+        title: "We Have It In Excellent Condition",
+        text: `Skynda seller Aju is switching things up with a new ride! Skynda Inspector Nicolas thought this
+car was in excellent condition. We would love to drop off this great BMW right in your
+driveway! Skynda bought this car from private seller Aju, and now Skyda is offering this car for
+sale`
+      }],
+      features: [
+        "Steering Wheel Controls",
+        "Paddle Shifters",
+        "Premium Lights",
+        "Turbocharger",
+        "Parking Sensors"
+      ],
+      history: {
+        problems: [],
+        vin_code: 'WVWHV71K68W164858'
+      },
+      petrol_consumption: {
+        city: '7.5 l / 100 km',
+        highway: '6.5 l / 100 km',
+        average: '7.0 l / 100 km'
+      },
+      performance: {
+        driven_wheels: 'Rear wheel drive',
+        doors: 4,
+        compression_ratio: 10,
+        compressor_type: 'Turbocharger',
+        configuration: 'Inline',
+        cylinders: 4,
+        displacement: 1997,
+        fuel_type: 'Premium unlead',
+        horsepower: 240,
+        size: 2,
+        torque: 255,
+        total_valves: 16,
+        power_train: 'Gas'
+      },
+      safety_stars: 5,
+      report: {
+        categories: [{
+          title: 'Category 1',
+          points: [
+            {text: 'Automatic transmission flawless in cold temperature', pass: true},
+            {text: 'Steering wheel centered', pass: true},
+            {text: 'Steering wheel centered', pass: true},
+            {text: 'Automatic transmission flawless in cold temperature', pass: false},
+            {text: 'Automatic transmission flawless in cold temperature', pass: true},
+            {text: 'Steering wheel centered', pass: true}
+          ]
+        }, {
+          title: 'Category 2',
+          points: [
+            {text: 'Automatic transmission flawless in cold temperature', pass: true},
+            {text: 'Steering wheel centered', pass: true},
+            {text: 'Steering wheel centered', pass: true},
+            {text: 'Automatic transmission flawless in cold temperature', pass: false},
+            {text: 'Automatic transmission flawless in cold temperature', pass: true},
+            {text: 'Steering wheel centered', pass: true}
+          ]
+        }],
+        faults: [
+          {text: 'Scratches near the ignition', img: 'TODO'},
+          {text: 'Scratches on the glovebox', img: 'TODO'},
+          {text: 'Scratches on the back door', img: 'TODO'}
+        ]
+      },
+      reviews: [
+        {
+          logoUrl: 'TODO',
+          videoUrl: null,
+          text: 'The Dacia Sandero demands compromises, but it’s likeable and offers more practicality than anything in this price range',
+          rating: 4
+        },
+        {
+          logoUrl: 'TODO',
+          videoUrl: null,
+          text: 'The Jeep Renegade stands out from the crowd with its chunky looks and excellent off-road performance.',
+          rating: 3
+        }
       ]
     };
 
     return (
       <div className="car-details">
         <div className="container">
-          <CarDetailsMainImage car={car}/>
+          <CarDetailsMainImage car={car_data}/>
         </div>
 
         <br />
@@ -84,64 +179,41 @@ class CarDetails extends React.Component {
               <div className="col col-md-7">
                 <Overview />
 
-                <Skblock header={'What\'s this model about?'}>...</Skblock>
-
-                <Skblock header={'We have it in excellent condition'}>...</Skblock>
+                {car_data.descriptions.map((description, i) => <Skblock key={i} header={description.title}>{description.text}</Skblock>)}
 
                 <Skblock header={'Nice features'}>
-                  <div className="col col-md-4"> {/*style="padding: 5px 0;"*/}
+                  {car_data.features.map((feature, i) => (<Col key={i} md={4}>
                     <img src={image_ok} width="24" className="sk_details__icon_list_image"/>
-                    Steering Wheel Controls
-                  </div>
-                  <div className="col col-md-4"> {/*style="padding: 5px 0;"*/}
-                    <img src={image_ok} width="24" className="sk_details__icon_list_image"/>
-                    Paddle Shifters
-                  </div>
-                  <div className="col col-md-4"> {/*style="padding: 5px 0;"*/}
-                    <img src={image_ok} width="24" className="sk_details__icon_list_image"/>
-                    Premium Lights
-                  </div>
-                  <div className="col col-md-4"> {/*style="padding: 5px 0;"*/}
-                    <img src={image_ok} width="24" className="sk_details__icon_list_image"/>
-                    Turbocharger
-                  </div>
-                  <div className="col col-md-4"> {/*style="padding: 5px 0;"*/}
-                    <img src={image_ok} width="24" className="sk_details__icon_list_image"/>
-                    Parking Sensors
-                  </div>
+                    {feature}
+                  </Col>))}
                 </Skblock>
-                <br />
 
                 <Skblock header={'Car History'}>
-                  <div className="col col-md-4">  {/*style="padding: 5px 0;"*/}
+                  <Col md={6}>
                     <img src={image_diploma_1} width="24" className="sk_details__icon_list_image"/>
-                    No Problems Found
-                  </div>
-                  <div className="col col-md-4">  {/*style="padding: 5px 0;"*/}
-                    <label>VIN code: </label> WVW7454WBVNVHD
-                  </div>
+                    {car_data.history.problems > 0 ? `Problems found: ${car_data.history.problems.join(', ')}` : 'No Problems Found'}
+                  </Col>
+                  <Col md={6}>
+                    <label>VIN code: </label> {car_data.history.vin_code}
+                  </Col>
                 </Skblock>
 
-                <PetrolConsumption/>
+                <PetrolConsumption petrol_consumption={car_data.petrol_consumption} />
 
-                <Performance />
+                <Performance performance={car_data.performance} />
 
                 <Skblock header={'Safety'}>
                   <div className="sk_details__stars_outer_container">
                     <div className="sk_details__stars_inner_container">
-                      <img className="sk_details__star" src={image_star_2x}/>
-                      <img className="sk_details__star" src={image_star_2x}/>
-                      <img className="sk_details__star" src={image_star_2x}/>
-                      <img className="sk_details__star" src={image_star_2x}/>
-                      <img className="sk_details__star" src={image_star_2x}/>
-
+                      {Array.from({ length: car_data.safety_stars}).map((_, idx) => <img key={idx} className="sk_details__star" src={image_star_2x}/>)}
+                      {Array.from({ length: max_safety_stars - car_data.safety_stars}).map((_, idx) => <img key={idx} className="sk_details__star" src={image_unstar_2x}/>)}
                       <img className="sk_details__stars_euroncap" src={image_4_2x}/>
                     </div>
                   </div>
                 </Skblock>
                 <br />
 
-                <InspectorsReport />
+                <InspectorsReport report={car_data.report} />
 
                 <SkyndaCare />
 
