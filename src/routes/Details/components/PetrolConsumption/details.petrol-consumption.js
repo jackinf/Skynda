@@ -5,7 +5,7 @@
 import React from 'react';
 import '../Details.scss';
 import {Row, Col} from 'react-bootstrap';
-import translations from '../../../../store/locales/en';
+import translations from '../../../../store/locales/et';
 
 // Images
 import image_gas_station_2x from './../../../../static/images/standard/gas_station@2x.png';
@@ -23,15 +23,15 @@ class PetrolConsumption extends React.Component {
       </Col>
       <Col md={6}>  {/*style="padding: 5px 0;"*/}
         <Row>
-          <Col md={6}><label>{translations.routes.details.components.city}: </label></Col>
+          <Col md={6}><label>{translations.routes.details.components.petrol.city}: </label></Col>
           <Col md={6}>{city}</Col>
         </Row>
         <Row>
-          <Col md={6}><label>{translations.routes.details.components.highway}: </label></Col>
+          <Col md={6}><label>{translations.routes.details.components.petrol.highway}: </label></Col>
           <Col md={6}>{highway}</Col>
         </Row>
         <Row>
-          <Col md={6}><label>{translations.routes.details.components.average}: </label></Col>
+          <Col md={6}><label>{translations.routes.details.components.petrol.average}: </label></Col>
           <Col md={6}>{average}</Col>
         </Row>
       </Col>

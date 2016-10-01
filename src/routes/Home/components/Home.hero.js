@@ -7,7 +7,7 @@ import './Home.hero.scss';
 import {Button} from 'react-bootstrap';
 import {browserHistory} from 'react-router';
 import heroImageUrl from '../../../static/images/standard/hero-01-2.jpg';
-import translations from '../../../store/locales/en';
+import translations from '../../../store/locales/et';
 
 /**
  * Main jumbotron for a primary marketing message or call to action

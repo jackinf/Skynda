@@ -10,7 +10,7 @@ import {Button, Row, Col} from 'react-bootstrap';
 import Slider from 'rc-slider';
 import moment from 'moment';
 //translation
-import translations from '../../store/locales/en';
+import translations from '../../store/locales/et';
 
 const brands = [
   {id: -1, name: 'Kõik'},
@@ -66,8 +66,8 @@ const features = [
 ];
 
 const transmissions = [
-  {id: 0, name: 'Automatic', toggled: true},
-  {id: 1, name: 'Manual', toggled: true}
+  {id: 0, name: translations.components.car_search.automatic, toggled: true},
+  {id: 1, name: translations.components.car_search.manual, toggled: true}
 ];
 
 const doors = [
@@ -220,12 +220,12 @@ class CarSearch extends React.Component {
                       onClick={e => this.toggleAdvanced(!this.state.showAdvancedSearch)}>
                 <span className="more glyphicon glyphicon-plus"></span>
                 <span className="less glyphicon glyphicon-minus"></span>
-                ADVANCED FILTERS
+                {translations.components.car_search.advanced_txt}
               </button>
 
               <Button className="btn btn-info sk-btn--search" onClick={this.search}>
                 <span className="glyphicon glyphicon-search"></span>
-                Search
+                {translations.components.car_search.btn_search}
               </Button>
             </div>
           </div>

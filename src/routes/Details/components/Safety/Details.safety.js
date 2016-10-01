@@ -4,7 +4,7 @@
 
 import React from 'react';
 import './Details.safety.scss';
-import translations from '../../../../store/locales/en';
+import translations from '../../../../store/locales/et';
 
 // Images
 import image_star_2x from './../../../../static/images/standard/star@2x.png';

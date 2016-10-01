@@ -7,7 +7,7 @@ import {Col} from 'react-bootstrap';
 import './Details.history.scss';
 
 import Skblock from '../details.skblock';
-import translations from '../../../../store/locales/en';
+import translations from '../../../../store/locales/et';
 
 // Images
 import image_diploma_1 from './../../../../static/images/standard/diploma_1.png';
