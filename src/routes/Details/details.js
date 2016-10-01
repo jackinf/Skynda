@@ -18,6 +18,7 @@ import dummy_image1 from './assets/accord/accord.jpg';
 import dummy_image2 from './assets/accord/accord2.jpg';
 import dummy_image3 from './assets/accord/accord3.jpg';
 
+
 // Local components
 import Skblock from './components/details.skblock';
 import Overview from './components/Overview';
@@ -27,11 +28,10 @@ import PetrolConsumption from './components/PetrolConsumption';
 import Performance from './components/Performance';
 import Safety from './components/Safety';
 import InspectorsReport from './components/InspectorsReport/Details.inspectors-report';
-import SkyndaCare from './components/details.skynda-care';
-import Reviews from './components/details.reviews';
+import Reviews from './components/Reviews';
 import Checkout from './components/CheckoutPanel/details.checkout';
+import CarPreview from '../../components/CarPreview';
 import MainImage from './components/MainImage/details.mainimage';
-import CarPreview from './../../components/CarPreview';
 
 // List of rows
 import image_testcar from './assets/accord/accord.jpg';
@@ -171,13 +171,13 @@ sale`
       },
       reviews: [
         {
-          logoUrl: 'TODO',
+          logoUrl: image_overview_1,
           videoUrl: null,
           text: 'The Dacia Sandero demands compromises, but it’s likeable and offers more practicality than anything in this price range',
           rating: 4
         },
         {
-          logoUrl: 'TODO',
+          logoUrl: image_overview_2,
           videoUrl: null,
           text: 'The Jeep Renegade stands out from the crowd with its chunky looks and excellent off-road performance.',
           rating: 3
@@ -191,8 +191,6 @@ sale`
           <MainImage car={car_data}/>
         </div>
 
-        <br />
-
         <div className="container">
           <StickyContainer>
             <div className="row">
@@ -200,26 +198,17 @@ sale`
 
                 <Overview overview={car_data.overview}/>
 
-                {car_data.descriptions.map((description, i) => <Skblock key={i}
-                                                                        header={description.title}>{description.text}</Skblock>)}
+                {car_data.descriptions.map((description, i) =>
+                  <Skblock key={i} header={description.title}>{description.text}</Skblock>)}
 
                 <Fetaures features={car_data.features}/>
-
                 <History history={car_data.history}/>
-
                 <PetrolConsumption petrol_consumption={car_data.petrol_consumption}/>
-
                 <Performance performance={car_data.performance}/>
-
                 <Safety stars={car_data.safety_stars}/>
-
-                <br />
-
                 <InspectorsReport report={car_data.report}/>
+                <Reviews reviews={car_data.reviews} />
 
-                <SkyndaCare />
-
-                <Reviews />
               </div>
               <div className="col col-md-5">
                 <Sticky>
