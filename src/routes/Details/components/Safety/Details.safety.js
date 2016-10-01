@@ -11,7 +11,7 @@ import image_star_2x from './../../../../static/images/standard/star@2x.png';
 import image_unstar_2x from './../../../../static/images/standard/star-1@2x.png';
 import image_4_2x from './../../../../static/images/standard/image-4@2x.png';
 
-import Skblock from './../details.skblock';
+import Skblock from '../Details.skblock';
 
 const max_safety_stars = 5;
 

@@ -1,0 +1,27 @@
+@import "./../../../styles/variables";
+
+.about__our-contacts {
+  text-align: center;
+}
+
+.about__our-contacts-header {
+  color: $color-primary;
+}
+
+.about__person-block {
+  text-align: center;
+}
+
+.about__person-image {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.about__person-name {
+  font-weight: 600;
+}
+
+.about__person-position {
+  font-weight: 600;
+  color: #aaaaaa;
+}
