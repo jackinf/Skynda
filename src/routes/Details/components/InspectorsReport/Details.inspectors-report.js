@@ -9,7 +9,7 @@ import './Details.inspectors-report.scss';
 import image_ok from './../../../../static/images/standard/ok.png';
 import image_cancel from './../../../../static/images/standard/cancel.png';
 import image_car_inspector from './assets/carinspector.png';
-import translations from '../../../../store/locales/en';
+import translations from '../../../../store/locales/et';
 
 /**
  * Draws a single icon (tick if pass or cross if not pass) and a description.

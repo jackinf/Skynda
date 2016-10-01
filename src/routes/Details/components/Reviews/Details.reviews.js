@@ -4,7 +4,7 @@ import Skblock from '../DetailsSkBlock/Details.skblock';
 import '../Details.scss';
 import './Details.reviews.scss';
 import {Row, Col, Button} from 'react-bootstrap';
-import translations from '../../../../store/locales/en';
+import translations from '../../../../store/locales/et';
 import image_star from './../../../../static/images/standard/star@2x.png';
 import image_unstar from './../../../../static/images/standard/star-1@2x.png';
 

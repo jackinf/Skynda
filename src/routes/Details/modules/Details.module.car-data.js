@@ -33,21 +33,21 @@ export const getDataAsync = () => {
             engine: '3.0',
             horsepower: '225 kW',
             mileage: '75 000 km',
-            transmission: 'automatic',
-            drive: 'Front Wheel Drive',
-            color_outside: 'Dark Blue',
-            color_inside: 'Black',
+            transmission: 'automaatne',
+            drive: 'Esivedu',
+            color_outside: 'Tumesinine',
+            color_inside: 'Must',
             doors: '2',
             seats: '5',
           },
           overview: [
             {label: '75 000 km', iconUrl: image_overview_1},
-            {label: 'Automatic', iconUrl: image_overview_2},
+            {label: 'Automaatne', iconUrl: image_overview_2},
             {label: '3.0 (225 kW)', iconUrl: image_overview_3},
-            {label: 'Front Wheel Drive', iconUrl: image_overview_4},
-            {label: '2 doors 5 seats', iconUrl: image_overview_5},
-            {label: 'Dark Blue', iconUrl: image_overview_6},
-            {label: 'Black', iconUrl: image_overview_7},
+            {label: 'Esivedu', iconUrl: image_overview_4},
+            {label: '2 ust 5 istekohta', iconUrl: image_overview_5},
+            {label: 'Tumesinine', iconUrl: image_overview_6}, 
+            {label: 'Must', iconUrl: image_overview_7},
           ],
           images: [
             {
@@ -64,12 +64,12 @@ export const getDataAsync = () => {
             }
           ],
           descriptions: [{
-            title: "What's This Model About?",
+            title: "Mis on mudeli eripära?",
             text: `The BMW 3 Series offers the a combination of luxury and performance that is unmatched
 by its competitors. With refined driving dynamics and drop-dead gorgeous looks to
 match, this elegant sports coupe is truly an amazing driving machine`
           }, {
-            title: "We Have It In Excellent Condition",
+            title: "Meil on see suurepärases seisukorras!",
             text: `Skynda seller Aju is switching things up with a new ride! Skynda Inspector Nicolas thought this
 car was in excellent condition. We would love to drop off this great BMW right in your
 driveway! Skynda bought this car from private seller Aju, and now Skyda is offering this car for
@@ -92,10 +92,10 @@ sale`
             average: '7.0 l / 100 km'
           },
           performance: {
-            driven_wheels: 'Rear wheel drive',
+            driven_wheels: 'Tagavedu',
             doors: 4,
             compression_ratio: 10,
-            compressor_type: 'Turbocharger',
+            compressor_type: 'Turbo',
             configuration: 'Inline',
             cylinders: 4,
             displacement: 1997,
@@ -110,7 +110,7 @@ sale`
           report: {
             categories: [
               {
-                title: 'Category 1',
+                title: 'Kategooria 1',
                 points: [
                   {text: 'Automatic transmission flawless in cold temperature', pass: true},
                   {text: 'Steering wheel centered', pass: true},
@@ -121,7 +121,7 @@ sale`
                 ]
               },
               {
-                title: 'Category 2',
+                title: 'Kategooria 2',
                 points: [
                   {text: 'Automatic transmission flawless in cold temperature', pass: true},
                   {text: 'Steering wheel centered', pass: true},

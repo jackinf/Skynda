@@ -12,7 +12,7 @@ import TextField from 'material-ui/TextField';
 import {Tabs, Tab} from 'material-ui/Tabs';
 import {Row, Col} from 'react-bootstrap';
 import {orange500} from 'material-ui/styles/colors';
-import translations from '../../../../store/locales/en';
+import translations from '../../../../store/locales/et';
 
 
 const styles = {

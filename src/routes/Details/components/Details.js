@@ -19,6 +19,7 @@ import Reviews from './Reviews';
 import CarDetailsMainImage from './MainImage';
 import Checkout from './CheckoutPanel/details.checkout';
 import CarPreview from './../../../components/CarPreview';
+import translations from '../../../store/locales/et';
 
 // List of rows
 import image_testcar from '../../../static/images/cars/accord/accord.jpg';
@@ -83,7 +84,7 @@ class CarDetails extends React.Component {
           </StickyContainer>
 
           <div className="row">
-            <Skblock header={'Other cars that you might like'}>
+            <Skblock header={translations.routes.details.other_txt}>
               <CarPreview.Grid cars={cars.other}/>
             </Skblock>
           </div>

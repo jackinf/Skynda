@@ -5,7 +5,7 @@
 import React from 'react';
 import {Row, Col} from 'react-bootstrap';
 import './Details.overview.scss';
-import translations from '../../../../store/locales/en';
+import translations from '../../../../store/locales/et';
 
 import Skblock from '../DetailsSkBlock/Details.skblock';
 

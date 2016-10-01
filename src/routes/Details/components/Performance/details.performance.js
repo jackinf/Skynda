@@ -1,6 +1,6 @@
 import React from "react";
 import {Row, Col} from 'react-bootstrap';
-import translations from '../../../../store/locales/en';
+import translations from '../../../../store/locales/et';
 
 import Skblock from '../DetailsSkBlock/Details.skblock';
 
@@ -29,7 +29,7 @@ class Performance extends React.Component {
       </Row>
     </Col>);
 
-    return (<Skblock header={'Performance'}>
+    return (<Skblock header={translations.routes.details.components.performance.header}>
       {parameterBlockFn(translations.routes.details.components.performance.wheel_drive, driven_wheels)}
       {parameterBlockFn(translations.routes.details.components.performance.fuel_type, fuel_type)}
       {parameterBlockFn(translations.routes.details.components.performance.horsepower, horsepower)}

@@ -9,7 +9,7 @@ import './details.mainimage.modal.scss';
 import image_cam from './assets/camera@2x.png';
 import image_360 from './assets/group-78@2x.png';
 import {Row, Col, Button, Carousel, Modal} from 'react-bootstrap';
-import translations from '../../../../store/locales/en';
+import translations from '../../../../store/locales/et';
 
 
 class ModalBtnCarousel extends React.Component {
