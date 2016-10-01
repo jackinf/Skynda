@@ -7,7 +7,7 @@ import './details.mainimage.scss';
 import './details.mainimage.modal.scss';
 
 import image_cam from './../../../../static/images/standard/camera@2x.png';
-import image_360 from './../../../../static/apple-touch-icon.png';
+import image_360 from './../../../../static/images/standard/group-78@2x.png';
 import {Row, Col, Button, Carousel, Modal} from 'react-bootstrap';
 
 class ModalBtnCarousel extends React.Component {
