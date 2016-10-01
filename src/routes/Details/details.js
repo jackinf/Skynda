@@ -24,7 +24,7 @@ import Performance from './components/details.performance';
 import InspectorsReport from './components/details.inspectors-report';
 import SkyndaCare from './components/details.skynda-care';
 import Reviews from './components/details.reviews';
-import Checkout from './components/details.checkout';
+import Checkout from './components/CheckoutPanel/details.checkout';
 import CarDetailsMainImage from './components/MainImage/details.mainimage';
 import CarPreview from './../../components/CarPreview';
 
