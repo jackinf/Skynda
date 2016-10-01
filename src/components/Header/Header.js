@@ -14,19 +14,25 @@ import {Link} from 'react-router';
 
 import image_1 from './../../static/images/standard/skynda logo 4-mask-4@2x.png';
 import image_2 from './../../static/images/standard/SKYNDA@2x.png';
+import translations from '../../store/locales/en';
 
 class Header extends React.Component {
   render() {
     return (
       <div className="container header-container">
         <nav className="sk_navbar navbar navbar_default">
-          <div className="navbar_header">
-            <a className="sk_logo navbar_brand" href="/">
-              <img className="pull-left" src={image_1}/>
-              <img src={image_2}/>
-            </a>
-            <Link className="sk_logo navbar_brand pull-right" href="/about">Meist</Link>
-          </div>
+            <div className="navbar_header">
+              <a className="sk_logo navbar_brand" href="/">
+                <img className="pull-left" src={image_1} />
+                <img src={image_2} />
+              </a>
+            </div>
+            <div id="navbar" className="navbar_collapse collapse">
+              <ul className="nav navbar-nav pull-right">
+                <li className="sk_menu__sell"><a href="#" onClick={e => this.sellCar(e)} className="orange_header">{translations.components.header.sell_car_txt}</a></li>
+                <li className="sk_menu__buy"><a href="/search" className="blue_header">{translations.components.header.buy_car_txt}</a></li>
+              </ul>
+            </div>
         </nav>
       </div>
     );

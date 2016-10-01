@@ -5,6 +5,7 @@
 import React from 'react';
 import {Row, Col} from 'react-bootstrap';
 import './Details.overview.scss';
+import translations from '../../../../store/locales/en';
 
 import Skblock from '../details.skblock';
 
@@ -12,7 +13,7 @@ class Overview extends React.Component {
   render() {
     const overview = this.props.overview;
 
-    return (<Skblock header={'Overview'}>
+    return (<Skblock header={translations.routes.details.components.overview.header}>
       {overview.map((item, i) => (<Col key={i} md={3} className="overview__overview-block">
         <Row className="overview__overview-icon-row">
           <Col md={12} className="overview__overview-icon-col">

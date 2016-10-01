@@ -1,9 +1,0 @@
-{
-  "skynda":{
-    "greeting_text": "hello",
-    "main_page_translations":{
-      "sign_up": "Sign Up!",
-      "log_in": "Log In"
-    }
-  }
-}

@@ -9,6 +9,7 @@ import './Details.inspectors-report.scss';
 import image_ok from './../../../../static/images/standard/ok.png';
 import image_cancel from './../../../../static/images/standard/cancel.png';
 import image_car_inspector from './assets/carinspector.png';
+import translations from '../../../../store/locales/en';
 
 /**
  * Draws a single icon (tick if pass or cross if not pass) and a description.
@@ -29,12 +30,12 @@ class Report extends React.Component {
     const {categories, faults} = this.props.report;
 
     return (
-      <Skblock header={'Our Certified Inspector\'s Report'}>
+      <Skblock header={translations.routes.details.components.inspector_report.header}>
         <Row>
           <Col md={3}><label className="sk_details__certified_developer">Artur P.</label></Col>
           <Col md={4}><img src={image_car_inspector} width="130" alt="happy"/></Col>
           <Col md={5} className="sk_details__certified_developer">
-            <Button className="sk_details__report__button-have-questions">Have a question?</Button>
+            <Button className="sk_details__report__button-have-questions">{translations.routes.details.components.inspector_report.question}</Button>
           </Col>
         </Row>
 
@@ -50,7 +51,7 @@ class Report extends React.Component {
 
             <Row>
               <Col md={11}>
-                <Button className="pull-right sk_details__report__button-show-all">Show all</Button>
+                <Button className="pull-right sk_details__report__button-show-all">{translations.routes.details.components.inspector_report.show_all}</Button>
               </Col>
             </Row>
 

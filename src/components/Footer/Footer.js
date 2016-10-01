@@ -12,19 +12,20 @@ import React from 'react';
 import './Footer.scss';
 // import Link from '../Link';
 import {Link} from 'react-router';
+import translations from '../../store/locales/en';
 
 function Footer() {
 
   return (
     <div className="root">
       <div className="container footer-container">
-        <span className="text">© Your Company</span>
+        <span className="text">{translations.components.footer.your_company}</span>
         <span className="spacer">·</span>
-        <Link className="link" to="/">Home</Link>
+        <Link className="link" to="/">{translations.components.footer.home}</Link>
         <span className="spacer">·</span>
-        <Link className="link" to="/privacy">Privacy</Link>
+        <Link className="link" to="/privacy">{translations.components.footer.privacy}</Link>
         <span className="spacer">·</span>
-        <Link className="link" to="/not-found">Not Found</Link>
+        <Link className="link" to="/not-found">{translations.components.footer.not_found}</Link>
       </div>
     </div>
   );

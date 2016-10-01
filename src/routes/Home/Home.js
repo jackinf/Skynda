@@ -17,10 +17,11 @@ import CarSearch from './../../components/CarSearch';
 
 // Images
 import image_testcar from '../../static/images/cars/accord/accord.jpg';
-
 // Inner components
 import Hero from './components/Home.hero';
 import Keypoints from './components/Home.keypoints';
+//translation
+import translations from '../../store/locales/en';
 
 
 // List of rows
@@ -81,7 +82,7 @@ class Home extends React.Component {
           }
           <Row>
             <Col xs={12}>
-              <h2 className="primary-header-2 text-center">Search</h2>
+              <h2 className="primary-header-2 text-center">{translations.home_page.search}</h2>
             </Col>
           </Row>
           <Row>
@@ -99,10 +100,10 @@ class Home extends React.Component {
           }
 
           {this.state.isSearching
-            ? (<Row>Searching</Row>) : cars.searchResults.length > 0
+            ? (<Row>{translations.home_page.searching}</Row>) : cars.searchResults.length > 0
             ? (<Row>
                 <Col sm={12}>
-                  <h2 className="primary-header-2 text-center">Found: {cars.searchResults[0].length}</h2>
+                  <h2 className="primary-header-2 text-center">{translations.home_page.found}: {cars.searchResults[0].length}</h2>
                 </Col>
                 <br />
                 <Row>
@@ -122,7 +123,7 @@ class Home extends React.Component {
           <Row>
             <Row>
               <Col sm={12}>
-                <h2 className="primary-header-2 text-center">Recently Added</h2>
+                <h2 className="primary-header-2 text-center">{translations.home_page.recently_added}</h2>
               </Col>
               <br />
               <Row>

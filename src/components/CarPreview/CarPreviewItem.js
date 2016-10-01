@@ -4,6 +4,7 @@
 
 import React from 'react';
 import './CarPreviewItem.scss';
+import translations from './../../store/locales/en'
 
 import {Row, Col} from 'react-bootstrap';
 
@@ -28,8 +29,8 @@ class CarPreview extends React.Component {
           <Col sm={12} >
             <span style={{margin: "0 25px 0 0"}}>{mileage} km</span>
             <span style={{margin: "0 25px 0 0"}}>{engine} ({power})</span>
-            <span style={{margin: "0 25px 0 0"}}>{doors} doors</span>
-            <span>{seats} seats</span>
+            <span style={{margin: "0 25px 0 0"}}>{doors} {translations.components.car_preview.doors}</span>
+            <span>{seats} {translations.components.car_preview.seats}</span>
           </Col>
         </Row>
         <Row>
