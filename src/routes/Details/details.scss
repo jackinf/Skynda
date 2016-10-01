@@ -60,15 +60,24 @@
   .sk_details__checkout_tab {
     background: #019bff !important;
     color: whitesmoke !important;
+
   }
 
   .sk_details__checkout_tab_inner {
     padding: 10px;
+    list-style: none;
   }
 
   .sk_details__checkout_tab_action_button {
     margin: 0 auto;
-    padding: 10px;
+  }
+
+  .customInkBar{
+    background-color: blue;
+  }
+
+  .dialog-btn-footer{
+    margin-top: 15px;
   }
 
   .details-main-image{

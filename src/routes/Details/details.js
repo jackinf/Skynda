@@ -28,8 +28,8 @@ import Performance from './components/Performance';
 import Safety from './components/Safety';
 import InspectorsReport from './components/InspectorsReport/Details.inspectors-report';
 import Reviews from './components/Reviews';
-import Checkout from './components/details.checkout';
 import CarDetailsMainImage from './components/MainImage';
+import Checkout from './components/CheckoutPanel/details.checkout';
 import CarPreview from './../../components/CarPreview';
 
 // List of rows
