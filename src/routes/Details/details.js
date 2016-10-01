@@ -11,9 +11,9 @@ import image_overview_1 from './../../static/images/standard/group-114@2x.png';
 import image_overview_2 from './../../static/images/standard/group-115@2x.png';
 import image_overview_3 from './../../static/images/standard/group-116@2x.png';
 import image_overview_4 from './../../static/images/standard/group-117@2x.png';
-import image_overview_5 from './../../static/images/standard/group-118@2x.png';
-import image_overview_6 from './../../static/images/standard/group-119@2x.png';
-import image_overview_7 from './../../static/images/standard/group-120@2x.png';
+import image_overview_5 from './../../static/images/standard/group-119@2x.png';
+import image_overview_6 from './../../static/images/standard/group-120@2x.png';
+import image_overview_7 from './../../static/images/standard/group-121@2x.png';
 import dummy_image1 from './../../static/images/cars/accord/accord.jpg';
 import dummy_image2 from './../../static/images/cars/accord/accord2.jpg';
 import dummy_image3 from './../../static/images/cars/accord/accord3.jpg';
@@ -27,10 +27,9 @@ import PetrolConsumption from './components/PetrolConsumption';
 import Performance from './components/Performance';
 import Safety from './components/Safety';
 import InspectorsReport from './components/InspectorsReport/Details.inspectors-report';
-import SkyndaCare from './components/details.skynda-care';
-import Reviews from './components/details.reviews';
+import Reviews from './components/Reviews';
 import Checkout from './components/details.checkout';
-import CarDetailsMainImage from './components/MainImage/details.mainimage';
+import CarDetailsMainImage from './components/MainImage';
 import CarPreview from './../../components/CarPreview';
 
 // List of rows
@@ -171,13 +170,13 @@ sale`
       },
       reviews: [
         {
-          logoUrl: 'TODO',
+          logoUrl: image_overview_1,
           videoUrl: null,
           text: 'The Dacia Sandero demands compromises, but it’s likeable and offers more practicality than anything in this price range',
           rating: 4
         },
         {
-          logoUrl: 'TODO',
+          logoUrl: image_overview_2,
           videoUrl: null,
           text: 'The Jeep Renegade stands out from the crowd with its chunky looks and excellent off-road performance.',
           rating: 3
@@ -191,8 +190,6 @@ sale`
           <CarDetailsMainImage car={car_data}/>
         </div>
 
-        <br />
-
         <div className="container">
           <StickyContainer>
             <div className="row">
@@ -200,26 +197,17 @@ sale`
 
                 <Overview overview={car_data.overview}/>
 
-                {car_data.descriptions.map((description, i) => <Skblock key={i}
-                                                                        header={description.title}>{description.text}</Skblock>)}
+                {car_data.descriptions.map((description, i) =>
+                  <Skblock key={i} header={description.title}>{description.text}</Skblock>)}
 
                 <Fetaures features={car_data.features}/>
-
                 <History history={car_data.history}/>
-
                 <PetrolConsumption petrol_consumption={car_data.petrol_consumption}/>
-
                 <Performance performance={car_data.performance}/>
-
                 <Safety stars={car_data.safety_stars}/>
-
-                <br />
-
                 <InspectorsReport report={car_data.report}/>
+                <Reviews reviews={car_data.reviews} />
 
-                <SkyndaCare />
-
-                <Reviews />
               </div>
               <div className="col col-md-5">
                 <Sticky>
