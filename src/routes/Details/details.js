@@ -14,11 +14,6 @@ import image_overview_4 from './../../static/images/standard/group-117@2x.png';
 import image_overview_5 from './../../static/images/standard/group-118@2x.png';
 import image_overview_6 from './../../static/images/standard/group-119@2x.png';
 import image_overview_7 from './../../static/images/standard/group-120@2x.png';
-import image_ok from './../../static/images/standard/ok.png';
-import image_diploma_1 from './../../static/images/standard/diploma_1.png';
-import image_star_2x from './../../static/images/standard/star@2x.png';
-import image_unstar_2x from './../../static/images/standard/star-1@2x.png';
-import image_4_2x from './../../static/images/standard/image-4@2x.png';
 import dummy_image1 from './../../static/images/cars/accord/accord.jpg';
 import dummy_image2 from './../../static/images/cars/accord/accord2.jpg';
 import dummy_image3 from './../../static/images/cars/accord/accord3.jpg';
@@ -27,8 +22,10 @@ import dummy_image3 from './../../static/images/cars/accord/accord3.jpg';
 import Skblock from './components/details.skblock';
 import Overview from './components/Overview';
 import Fetaures from './components/Features';
+import History from './components/History';
 import PetrolConsumption from './components/details.petrol-consumption';
 import Performance from './components/details.performance';
+import Safety from './components/Safety';
 import InspectorsReport from './components/details.inspectors-report';
 import SkyndaCare from './components/details.skynda-care';
 import Reviews from './components/details.reviews';
@@ -54,7 +51,6 @@ import {StickyContainer, Sticky} from 'react-sticky';
 class CarDetails extends React.Component {
   render() {
 
-    const max_safety_stars = 5;
     const car_data = {//TODO: REPLACE with api data
       general: {
         src: dummy_image1,
@@ -206,29 +202,14 @@ sale`
 
                 <Fetaures features={car_data.features} />
 
-                <Skblock header={'Car History'}>
-                  <Col md={6}>
-                    <img src={image_diploma_1} width="24" className="sk_details__icon_list_image"/>
-                    {car_data.history.problems > 0 ? `Problems found: ${car_data.history.problems.join(', ')}` : 'No Problems Found'}
-                  </Col>
-                  <Col md={6}>
-                    <label>VIN code: </label> {car_data.history.vin_code}
-                  </Col>
-                </Skblock>
+                <History history={car_data.history} />
 
                 <PetrolConsumption petrol_consumption={car_data.petrol_consumption} />
 
                 <Performance performance={car_data.performance} />
 
-                <Skblock header={'Safety'}>
-                  <div className="sk_details__stars_outer_container">
-                    <div className="sk_details__stars_inner_container">
-                      {Array.from({ length: car_data.safety_stars}).map((_, idx) => <img key={idx} className="sk_details__star" src={image_star_2x}/>)}
-                      {Array.from({ length: max_safety_stars - car_data.safety_stars}).map((_, idx) => <img key={idx} className="sk_details__star" src={image_unstar_2x}/>)}
-                      <img className="sk_details__stars_euroncap" src={image_4_2x}/>
-                    </div>
-                  </div>
-                </Skblock>
+                <Safety stars={car_data.safety_stars} />
+
                 <br />
 
                 <InspectorsReport report={car_data.report} />
