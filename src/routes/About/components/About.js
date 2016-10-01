@@ -3,7 +3,7 @@ import './About.scss';
 
 import {Row, Col} from 'react-bootstrap';
 
-import Skblock from './Skblock';
+import AboutSkblock from './AboutSkblock';
 
 export class About extends React.Component {
   componentWillMount() {
@@ -30,23 +30,41 @@ export class About extends React.Component {
     return (<div className="container">
       <Row>
         <Col md={8}>
-          <Skblock header="Skynda muudab auto ostmise ja müümise kogemust">
+          <AboutSkblock header="Skynda muudab auto ostmise ja müümise kogemust">
             <Col md={12}>
               {this.props.description}
             </Col>
-          </Skblock>
+          </AboutSkblock>
 
           {this.props.people.length > 0 ?
-            (<Skblock header="Skynda Tiim">
+            (<AboutSkblock header="Skynda Tiim">
               <Row>
                 {this.props.people.map((person, i) => personBlockFn(person, i))}
               </Row>
-            </Skblock>)
+            </AboutSkblock>)
             : "Is loading"}
         </Col>
 
         <Col md={4}>
           <div className="well about__our-contacts">
+            <h4 className="about__our-contacts-header">Meie kontaktid</h4>
+
+            <Row>
+              Skynda AS
+            </Row>
+
+            <Row>
+              Valge tn 16<br />19095 Tallinn<br />Eesti Vabariik
+            </Row>
+
+            <Row>
+              hello@skynda.me
+            </Row>
+
+            <Row>
+              +372 5144 750
+            </Row>
+
             <h4 className="about__our-contacts-header">Meie kontaktid</h4>
           </div>
         </Col>

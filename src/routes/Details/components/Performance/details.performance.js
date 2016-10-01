@@ -2,7 +2,7 @@ import React from "react";
 import {Row, Col} from 'react-bootstrap';
 import translations from '../../../../store/locales/en';
 
-import Skblock from '../Details.skblock';
+import Skblock from '../DetailsSkBlock/Details.skblock';
 
 class Performance extends React.Component {
   render() {

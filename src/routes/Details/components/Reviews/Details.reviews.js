@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Skblock from '../Details.skblock';
+import Skblock from '../DetailsSkBlock/Details.skblock';
 import '../Details.scss';
 import './Details.reviews.scss';
 import {Row, Col, Button} from 'react-bootstrap';

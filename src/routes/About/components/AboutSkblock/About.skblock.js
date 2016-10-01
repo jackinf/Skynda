@@ -3,7 +3,7 @@ import './About.skblock.scss';
 
 import {Row} from 'react-bootstrap';
 
-class Skblock extends React.Component {
+class AboutSkblock extends React.Component {
   render() {
     return (<Row className="about-skblock sk_details__skblock">
       <h4 className="blue_header">{this.props.header}</h4>
@@ -12,4 +12,4 @@ class Skblock extends React.Component {
   }
 }
 
-export default Skblock;
+export default AboutSkblock;

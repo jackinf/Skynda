@@ -6,7 +6,7 @@ import React from 'react';
 import {Col} from 'react-bootstrap';
 import './Details.features.scss';
 
-import Skblock from '../details.skblock';
+import Skblock from '../DetailsSkBlock/Details.skblock';
 import translations from '../../../../store/locales/en';
 
 // Images

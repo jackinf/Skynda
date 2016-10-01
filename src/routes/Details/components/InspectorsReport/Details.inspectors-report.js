@@ -1,7 +1,7 @@
 import React from 'react';
 import {Button, Row, Col} from 'react-bootstrap';
 
-import Skblock from '../Details.skblock';
+import Skblock from '../DetailsSkBlock';
 import '../Details.scss';  // todo: remove?
 import './Details.inspectors-report.scss';
 

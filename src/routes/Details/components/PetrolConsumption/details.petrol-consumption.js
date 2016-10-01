@@ -11,7 +11,7 @@ import translations from '../../../../store/locales/en';
 import image_gas_station_2x from './../../../../static/images/standard/gas_station@2x.png';
 
 // Components
-import Skblock from '../Details.skblock';
+import Skblock from '../DetailsSkBlock/Details.skblock';
 
 class PetrolConsumption extends React.Component {
   render() {

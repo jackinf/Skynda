@@ -6,7 +6,8 @@ import React from 'react';
 import './Details.scss';
 
 // Local components
-import Skblock from './Details.skblock';
+import Skblock from './DetailsSkBlock';
+
 import Overview from './Overview';
 import Fetaures from './Features';
 import History from './History';

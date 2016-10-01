@@ -7,7 +7,7 @@ import {Row, Col} from 'react-bootstrap';
 import './Details.overview.scss';
 import translations from '../../../../store/locales/en';
 
-import Skblock from '../Details.skblock';
+import Skblock from '../DetailsSkBlock/Details.skblock';
 
 class Overview extends React.Component {
   render() {
