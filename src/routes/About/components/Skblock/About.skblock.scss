@@ -1,0 +1,14 @@
+@import '../../../../styles/variables';
+
+.about-skblock {
+  margin-bottom: 20px;
+
+  .blue_header {
+    color: $color-primary
+  }
+
+  .sk_details__skblock {
+    margin: 20px 0;
+    padding: 10px 10px;
+  }
+}

@@ -1,7 +1,7 @@
 import React from "react";
 import {Row, Col} from 'react-bootstrap';
 
-import Skblock from '../details.skblock';
+import Skblock from '../Details.skblock';
 
 class Performance extends React.Component {
   render() {

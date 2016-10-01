@@ -6,7 +6,7 @@ import React from 'react';
 import {Col} from 'react-bootstrap';
 import './Details.history.scss';
 
-import Skblock from '../details.skblock';
+import Skblock from '../Details.skblock';
 
 // Images
 import image_diploma_1 from './../../../../static/images/standard/diploma_1.png';
