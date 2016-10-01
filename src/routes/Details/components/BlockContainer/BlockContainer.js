@@ -1,7 +1,7 @@
 import React from "react";
 import "../Details.scss";
 
-class Skblock extends React.Component {
+class BlockContainer extends React.Component {
   render () {
     return (<div className='row sk_details__skblock'>
       <h4 className='blue_header'>{this.props.header}</h4>
@@ -10,4 +10,4 @@ class Skblock extends React.Component {
   }
 }
 
-export default Skblock;
+export default BlockContainer;

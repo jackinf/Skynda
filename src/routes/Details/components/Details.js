@@ -6,7 +6,7 @@ import React from "react";
 import "./Details.scss";
 
 // Local components
-import Skblock from "./DetailsSkBlock";
+import Skblock from "./BlockContainer";
 
 import Overview from "./Overview";
 import Fetaures from "./Features";
@@ -17,7 +17,7 @@ import Safety from "./Safety";
 import InspectorsReport from "./InspectorsReport/Details.inspectors-report";
 import Reviews from "./Reviews";
 import CarDetailsMainImage from "./MainImage";
-import Checkout from "./CheckoutPanel/details.checkout";
+import Checkout from "./CheckoutPanel/Details.checkout";
 import CarPreview from "./../../../components/CarPreview";
 import translations from "../../../store/locales/et";
 

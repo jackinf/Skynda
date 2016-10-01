@@ -3,8 +3,8 @@
  */
 import React from "react";
 
-import "./details.mainimage.scss";
-import "./details.mainimage.modal.scss";
+import "./Details.mainimage.scss";
+import "./Details.mainimage.modal.scss";
 
 import image_cam from "./assets/camera@2x.png";
 import image_360 from "./assets/group-78@2x.png";

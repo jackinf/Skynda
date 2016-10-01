@@ -3,7 +3,7 @@
  */
 
 import React from "react";
-import "./details.checkout.scss";
+import "./Details.checkout.scss";
 
 // Material-UI
 import Dialog from "material-ui/Dialog";

@@ -6,13 +6,13 @@ import React from "react";
 import { Col } from "react-bootstrap";
 import "./Details.history.scss";
 
-import Skblock from "../DetailsSkblock";
+import Skblock from "../BlockContainer";
 import translations from "../../../../store/locales/en";
 
 // Images
 import image_diploma_1 from "./../../../../static/images/standard/diploma_1.png";
 
-class Features extends React.Component {
+class History extends React.Component {
   render () {
     const { problems, vin_code } = this.props.history;
 
@@ -29,11 +29,11 @@ class Features extends React.Component {
   }
 }
 
-Features.propTypes = {
+History.propTypes = {
   history: React.PropTypes.shape({
     problems: React.PropTypes.array,
     vin_code: React.PropTypes.string
   })
 };
 
-export default Features;
+export default History;
