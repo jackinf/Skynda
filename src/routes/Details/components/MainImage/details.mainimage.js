@@ -6,9 +6,11 @@ import React from 'react';
 import './details.mainimage.scss';
 import './details.mainimage.modal.scss';
 
-import image_cam from './../../../../static/images/standard/camera@2x.png';
-import image_360 from './../../../../static/images/standard/group-78@2x.png';
+import image_cam from './assets/camera@2x.png';
+import image_360 from './assets/group-78@2x.png';
 import {Row, Col, Button, Carousel, Modal} from 'react-bootstrap';
+import translations from '../../../../store/locales/en';
+
 
 class ModalBtnCarousel extends React.Component {
   constructor(){
@@ -29,7 +31,7 @@ class ModalBtnCarousel extends React.Component {
       <Button onClick={this.onShowModal}>
         <div className="image-btn-content-wrapper">
           <img src={image_cam}></img>
-          <span>View Photos</span>
+          <span>{translations.routes.details.components.main_image.btn_txt_view_photos}</span>
         </div>
       </Button>
 
@@ -88,7 +90,7 @@ class ModalBtn360 extends React.Component {
       <Button onClick={this.onShowModal}>
         <div className="image-btn-content-wrapper">
           <img src={image_360}></img>
-          <span>360 View</span>
+          <span>{translations.routes.details.components.main_image.btn_txt_360}</span>
         </div>
       </Button>
 
@@ -125,7 +127,7 @@ class ModalBtn360 extends React.Component {
   }
 }
 
-class CarDetailsMainImage extends React.Component {
+class MainImage extends React.Component {
   constructor() {
     super();
     this.state = {isShowModal: false}
@@ -179,7 +181,7 @@ class CarDetailsMainImage extends React.Component {
   }
 }
 
-CarDetailsMainImage.propTypes = {
+MainImage.propTypes = {
   car: React.PropTypes.shape({
     general: React.PropTypes.shape({
       src: React.PropTypes.string.isRequired,
@@ -193,4 +195,4 @@ CarDetailsMainImage.propTypes = {
   }).isRequired
 };
 
-export default CarDetailsMainImage
+export default MainImage

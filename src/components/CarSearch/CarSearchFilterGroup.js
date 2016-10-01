@@ -9,10 +9,11 @@ import ButtonGroup from './CarSearchButtonGroup';
 import {Button, Row, Col} from 'react-bootstrap';
 import Slider from 'rc-slider';
 import moment from 'moment';
-
+//translation
+import translations from '../../store/locales/en';
 
 const brands = [
-  {id: -1, name: 'All'},
+  {id: -1, name: 'Kõik'},
   {id: 0, name: 'BMW'},
   {id: 1, name: 'Chrysler'},
   {id: 2, name: 'Citroen'},
@@ -35,7 +36,7 @@ const brands = [
 ];
 
 const colors = [
-  {id: -1, name: 'All', toggled: true},
+  {id: -1, name: 'Kõik', toggled: true},
   {id: 0, name: 'red', style: {'backgroundColor': '#EF1717'}, toggled: true, hideName: true},
   {id: 1, name: 'orange', style: {'backgroundColor': '#E87846'}, toggled: true, hideName: true},
   {id: 2, name: 'yellow', style: {'backgroundColor': '#DECC44'}, toggled: true, hideName: true},
@@ -55,7 +56,7 @@ const colors = [
 ];
 
 const features = [
-  {id: -1, name: 'All', toggled: true},
+  {id: -1, name: 'Kõik', toggled: true},
   {id: 0, name: 'Parking Sensors'},
   {id: 1, name: 'Bluetooth'},
   {id: 2, name: 'Sunroof'},
@@ -70,14 +71,14 @@ const transmissions = [
 ];
 
 const doors = [
-  {id: -1, name: 'All', toggled: true},
+  {id: -1, name: 'Kõik', toggled: true},
   {id: 0, name: '2'},
   {id: 1, name: '3'},
   {id: 2, name: '4+'}
 ];
 
 const seats = [
-  {id: -1, name: 'All', toggled: true},
+  {id: -1, name: 'Kõik', toggled: true},
   {id: 0, name: '2'},
   {id: 1, name: '3'},
   {id: 2, name: '5'},
@@ -107,7 +108,7 @@ class CarSearch extends React.Component {
 
         <Row>
           <Col md={12}>
-            <label>Brand</label>
+            <label>{translations.components.car_search.brand}</label>
             <ButtonGroup options={brands}/>
           </Col>
         </Row>
@@ -116,7 +117,7 @@ class CarSearch extends React.Component {
           <Col md={4}>
             <Row>
               <Col md={12} className="range-slider-wrapper">
-                <label>Mileage</label>
+                <label>{translations.components.car_search.mileage}</label>
                 <Slider range allowCross={false} defaultValue={[0, 500000]} min={0} max={500000} step={100}/>
               </Col>
             </Row>
@@ -124,7 +125,7 @@ class CarSearch extends React.Component {
           <Col md={4}>
             <Row>
               <Col md={12}  className="range-slider-wrapper">
-                <label>Price</label>
+                <label>{translations.components.car_search.price}</label>
                 <Slider range allowCross={false} defaultValue={[0, 500000]} min={0} max={500000} step={100}/>
               </Col>
             </Row>
@@ -132,7 +133,7 @@ class CarSearch extends React.Component {
           <Col md={4}>
             <Row>
               <Col md={12} className="range-slider-wrapper">
-                <label>Year</label>
+                <label>{translations.components.car_search.year}</label>
                 <Slider range allowCross={false} defaultValue={[0, moment().year()]} min={1970} max={moment().year()}
                         step={1}/>
               </Col>
@@ -147,7 +148,7 @@ class CarSearch extends React.Component {
               <Col md={8}>
                 <Row>
                   <Col md={12} className="range-slider-wrapper">
-                    <label>Colors</label><br />
+                    <label>{translations.components.car_search.colors}</label><br />
                     <ButtonGroup md={1} options={colors} shape="circle"/>
                   </Col>
                 </Row>
@@ -155,7 +156,7 @@ class CarSearch extends React.Component {
               <Col md={4}>
                 <Row>
                   <Col md={12} className="range-slider-wrapper">
-                    <label>Petrol consumption</label><br />
+                    <label>{translations.components.car_search.petrol_consumption}</label><br />
                     <Slider range allowCross={false} defaultValue={[0, 20]} min={0} max={20} step={0.1}/>
                   </Col>
                 </Row>
@@ -166,7 +167,7 @@ class CarSearch extends React.Component {
               <Col md={8}>
                 <Row>
                   <Col md={12} className="range-slider-wrapper">
-                    <label>Features</label>
+                    <label>{translations.components.car_search.features}</label>
                     <ButtonGroup md={3} options={features}/>
                   </Col>
                 </Row>
@@ -174,7 +175,7 @@ class CarSearch extends React.Component {
               <Col md={4}>
                 <Row>
                   <Col md={12} className="range-slider-wrapper">
-                    <label>Horse power</label>
+                    <label>{translations.components.car_search.power}</label>
                     <Slider range allowCross={false} defaultValue={[0, 500]} min={0} max={500} step={1}/>
                   </Col>
                 </Row>
@@ -185,7 +186,7 @@ class CarSearch extends React.Component {
               <Col md={4}>
                 <Row>
                   <Col md={12}  className="range-slider-wrapper">
-                    <label>Doors</label><br />
+                    <label>{translations.components.car_search.doors}</label><br />
                     <ButtonGroup md={2} options={doors} shape="circle"/>
                   </Col>
                 </Row>
@@ -193,7 +194,7 @@ class CarSearch extends React.Component {
               <Col md={4}>
                 <Row>
                   <Col md={12}  className="range-slider-wrapper">
-                    <label>Seats</label><br />
+                    <label>{translations.components.car_search.seats}</label><br />
                     <ButtonGroup md={2} options={seats} shape="circle"/>
                   </Col>
                 </Row>
@@ -201,7 +202,7 @@ class CarSearch extends React.Component {
               <Col md={4}>
                 <Row>
                   <Col md={12}  className="range-slider-wrapper">
-                    <label>Transmission</label><br />
+                    <label>{translations.components.car_search.transmission}</label><br />
                     <ButtonGroup md={8} options={transmissions}/>
                   </Col>
                 </Row>

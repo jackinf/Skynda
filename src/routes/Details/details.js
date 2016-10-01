@@ -7,16 +7,16 @@ import './details.scss';
 import {Row, Col} from 'react-bootstrap';
 
 // Images
-import image_overview_1 from './../../static/images/standard/group-114@2x.png';
-import image_overview_2 from './../../static/images/standard/group-115@2x.png';
-import image_overview_3 from './../../static/images/standard/group-116@2x.png';
-import image_overview_4 from './../../static/images/standard/group-117@2x.png';
-import image_overview_5 from './../../static/images/standard/group-118@2x.png';
-import image_overview_6 from './../../static/images/standard/group-119@2x.png';
-import image_overview_7 from './../../static/images/standard/group-120@2x.png';
-import dummy_image1 from './../../static/images/cars/accord/accord.jpg';
-import dummy_image2 from './../../static/images/cars/accord/accord2.jpg';
-import dummy_image3 from './../../static/images/cars/accord/accord3.jpg';
+import image_overview_1 from './assets/group-114@2x.png';
+import image_overview_2 from './assets/group-115@2x.png';
+import image_overview_3 from './assets/group-116@2x.png';
+import image_overview_4 from './assets/group-117@2x.png';
+import image_overview_5 from './assets/group-118@2x.png';
+import image_overview_6 from './assets/group-119@2x.png';
+import image_overview_7 from './assets/group-120@2x.png';
+import dummy_image1 from './assets/accord/accord.jpg';
+import dummy_image2 from './assets/accord/accord2.jpg';
+import dummy_image3 from './assets/accord/accord3.jpg';
 
 // Local components
 import Skblock from './components/details.skblock';
@@ -30,11 +30,11 @@ import InspectorsReport from './components/InspectorsReport/Details.inspectors-r
 import SkyndaCare from './components/details.skynda-care';
 import Reviews from './components/details.reviews';
 import Checkout from './components/CheckoutPanel/details.checkout';
-import CarDetailsMainImage from './components/MainImage/details.mainimage';
+import MainImage from './components/MainImage/details.mainimage';
 import CarPreview from './../../components/CarPreview';
 
 // List of rows
-import image_testcar from '../../static/images/cars/accord/accord.jpg';
+import image_testcar from './assets/accord/accord.jpg';
 
 const cars = {
   other: [
@@ -188,7 +188,7 @@ sale`
     return (
       <div className="car-details">
         <div className="container">
-          <CarDetailsMainImage car={car_data}/>
+          <MainImage car={car_data}/>
         </div>
 
         <br />

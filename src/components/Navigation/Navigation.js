@@ -12,16 +12,17 @@ import cx from 'classnames';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './Navigation.scss';
 import Link from '../Link';
+import translations from '../../store/locales/en';
 
 function Navigation({ className }) {
   return (
     <div className={cx(s.root, className)} role="navigation">
-      <Link className={s.link} to="/about">About</Link>
-      <Link className={s.link} to="/contact">Contact</Link>
+      <Link className={s.link} to="/about">{translations.components.navigation.about}</Link>
+      <Link className={s.link} to="/contact">{translations.components.navigation.contact}</Link>
       <span className={s.spacer}> | </span>
-      <Link className={s.link} to="/login">Log in</Link>
+      <Link className={s.link} to="/login">{translations.components.navigation.log_in}</Link>
       <span className={s.spacer}>or</span>
-      <Link className={cx(s.link, s.highlight)} to="/register">Sign up</Link>
+      <Link className={cx(s.link, s.highlight)} to="/register">{translations.components.navigation.sign_up}</Link>
     </div>
   );
 }
