@@ -1,66 +1,3 @@
---DROP SEQUENCE IF EXISTS "insurance_companies_insurance_company_id_seq"
---;
---
---DROP SEQUENCE IF EXISTS "finance_companies_finance_company_id_seq"
---;
---
---DROP SEQUENCE IF EXISTS "insurance_policies_policy_id_seq"
---;
---
---DROP SEQUENCE IF EXISTS "insurance_policies_car_sold_id_seq"
---;
---
---DROP SEQUENCE IF EXISTS "insurance_policies_insurance_company_id_seq"
---;
---
---DROP SEQUENCE IF EXISTS "car_loans_loan_id_seq"
---;
---
---DROP SEQUENCE IF EXISTS "car_loans_car_sold_id_seq"
---;
---
---DROP SEQUENCE IF EXISTS "car_loans_finance_company_id_seq"
---;
---
---DROP SEQUENCE IF EXISTS "payment_status_payment_status_code_seq"
---;
---
---DROP SEQUENCE IF EXISTS "cars_sold_car_sold_id_seq"
---;
---
---DROP SEQUENCE IF EXISTS "cars_sold_cars_for_sale_id_seq"
---;
---
---DROP SEQUENCE IF EXISTS "cars_sold_customer_id_seq"
---;
---
---DROP SEQUENCE IF EXISTS "customer_payments_customer_payment_id_seq"
---;
---
---DROP SEQUENCE IF EXISTS "customer_payments_customer_id_seq"
---;
---
---DROP SEQUENCE IF EXISTS "customer_payments_payment_status_code_seq"
---;
---
---DROP SEQUENCE IF EXISTS "customer_payments_car_sold_id_seq"
---;
---
---DROP SEQUENCE IF EXISTS "addresses_address_id_seq"
---;
---
---DROP SEQUENCE IF EXISTS "customer_customer_id_seq"
---;
---
---DROP SEQUENCE IF EXISTS "customer_address_id_seq"
---;
---
---DROP SEQUENCE IF EXISTS "cars_for_sale_id_seq"
---;
---
---DROP SEQUENCE IF EXISTS "cars_for_sale_customer_id_seq"
---;
-
 DROP TABLE IF EXISTS "insurance_companies" CASCADE
 ;
 
@@ -95,6 +32,12 @@ DROP TABLE IF EXISTS "car_models" CASCADE
 ;
 
 DROP TABLE IF EXISTS "cars_for_sale" CASCADE
+;
+
+DROP TABLE IF EXISTS "car_review" CASCADE
+;
+
+DROP TABLE IF EXISTS "car_report" CASCADE
 ;
 
 CREATE TABLE "insurance_companies"
@@ -206,6 +149,7 @@ CREATE TABLE "car_models"
 	"drive" varchar(255)	 NOT NULL,
 	"doors" varchar(50)	 NOT NULL,
 	"seats" varchar(50)	 NOT NULL,
+	"year" timestamp NOT NULL,
 	"body_type" varchar(100)	 NOT NULL
 )
 ;
@@ -221,76 +165,50 @@ CREATE TABLE "cars_for_sale"
 	"customer_id" integer,
 	"registration_number" varchar(100)	 NOT NULL,
 	"mileage" varchar(100)	 NOT NULL,
-	"color" varchar(100)	 NOT NULL,
+	"color_outside" varchar(100)	 NOT NULL,
+	"color_inside" varchar(100)	 NOT NULL,
 	"images" text NOT NULL,
 	"is_sold" boolean,
 	"fuel_city" varchar(100)	,
-	"fuel_highway" varchar(100)	
+	"fuel_highway" varchar(100)	,
+	"features" text,
+	"problems" varchar(255),
+	"compression_ratio" varchar(50),
+	"compression_type" varchar(50),
+	"configuration" varchar(50),
+	"cylinders" varchar(50),
+	"displacement" varchar(50),
+	"fuel_type" varchar(50),
+	"size" varchar(50), --WTF is size???
+	"torque" varchar(50),
+	"total_valves" varchar(50),
+	"power_train" varchar(50),
+	"safety_stars" varchar(50),
 )
 ;
---
---CREATE SEQUENCE "insurance_companies_insurance_company_id_seq" INCREMENT 1 START 1
---;
---
---CREATE SEQUENCE "finance_companies_finance_company_id_seq" INCREMENT 1 START 1
---;
---
---CREATE SEQUENCE "insurance_policies_policy_id_seq" INCREMENT 1 START 1
---;
---
---CREATE SEQUENCE "insurance_policies_car_sold_id_seq" INCREMENT 1 START 1
---;
---
---CREATE SEQUENCE "insurance_policies_insurance_company_id_seq" INCREMENT 1 START 1
---;
---
---CREATE SEQUENCE "car_loans_loan_id_seq" INCREMENT 1 START 1
---;
---
---CREATE SEQUENCE "car_loans_car_sold_id_seq" INCREMENT 1 START 1
---;
---
---CREATE SEQUENCE "car_loans_finance_company_id_seq" INCREMENT 1 START 1
---;
---
---CREATE SEQUENCE "payment_status_payment_status_code_seq" INCREMENT 1 START 1
---;
---
---CREATE SEQUENCE "cars_sold_car_sold_id_seq" INCREMENT 1 START 1
---;
---
---CREATE SEQUENCE "cars_sold_cars_for_sale_id_seq" INCREMENT 1 START 1
---;
---
---CREATE SEQUENCE "cars_sold_customer_id_seq" INCREMENT 1 START 1
---;
---
---CREATE SEQUENCE "customer_payments_customer_payment_id_seq" INCREMENT 1 START 1
---;
---
---CREATE SEQUENCE "customer_payments_customer_id_seq" INCREMENT 1 START 1
---;
---
---CREATE SEQUENCE "customer_payments_payment_status_code_seq" INCREMENT 1 START 1
---;
---
---CREATE SEQUENCE "customer_payments_car_sold_id_seq" INCREMENT 1 START 1
---;
---
---CREATE SEQUENCE "addresses_address_id_seq" INCREMENT 1 START 1
---;
---
---CREATE SEQUENCE "customer_customer_id_seq" INCREMENT 1 START 1
---;
---
---CREATE SEQUENCE "customer_address_id_seq" INCREMENT 1 START 1
---;
---
---CREATE SEQUENCE "cars_for_sale_id_seq" INCREMENT 1 START 1
---;
---
---CREATE SEQUENCE "cars_for_sale_customer_id_seq" INCREMENT 1 START 1
---;
+
+CREATE TABLE "car_report"
+(
+	"report_id" serial,
+	"cars_for_sale_id" integer,
+	"title" varchar(50),
+	"is_pass" boolean,
+	"points_text" text,
+	"faults_text" text,
+	"fauls_img" text
+)
+;
+
+CREATE TABLE "car_review"
+(
+	"review_id" serial,
+	"cars_for_sale_id" integer,
+	"logo_url" varchar(255),
+	"video_url" varchar(255),
+	"text" text,
+	"rating" varchar(50)
+)
+;
 
 ALTER TABLE "insurance_companies" ADD CONSTRAINT "PK_insurance_companies"
 	PRIMARY KEY ("insurance_company_id")
@@ -429,4 +347,12 @@ ALTER TABLE "cars_for_sale" ADD CONSTRAINT "FK_cars_for_sale_car_models"
 
 ALTER TABLE "cars_for_sale" ADD CONSTRAINT "FK_cars_for_sale_customer"
 	FOREIGN KEY ("customer_id") REFERENCES "customer" ("customer_id") ON DELETE No Action ON UPDATE No Action
+;
+
+ALTER TABLE "car_report" ADD CONSTRAINT "FK_car_report_cars_for_sale"
+	FOREIGN KEY ("cars_for_sale_id") REFERENCES "cars_for_sale" ("id") ON DELETE No Action ON UPDATE No Action
+;
+
+ALTER TABLE "car_review" ADD CONSTRAINT "FK_car_review_cars_for_sale"
+	FOREIGN KEY ("cars_for_sale_id") REFERENCES "cars_for_sale" ("id") ON DELETE No Action ON UPDATE No Action
 ;

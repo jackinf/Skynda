@@ -17,7 +17,7 @@ public class CarController {
 	@Autowired
 	private CarService carService;
 	
-    @RequestMapping(value = "/cars", method = RequestMethod.GET)
+    @RequestMapping(value = "/cars", method = RequestMethod.GET, produces = "application/json")
     public List<Car> getCars() {
         return carService.getCars();
     }
