@@ -6,21 +6,21 @@ import React from 'react';
 import './Details.scss';
 
 // Local components
-import Skblock from './components/details.skblock';
-import Overview from './components/Overview';
-import Fetaures from './components/Features';
-import History from './components/History';
-import PetrolConsumption from './components/PetrolConsumption';
-import Performance from './components/Performance';
-import Safety from './components/Safety';
-import InspectorsReport from './components/InspectorsReport/Details.inspectors-report';
-import Reviews from './components/Reviews';
-import CarDetailsMainImage from './components/MainImage';
-import Checkout from './components/CheckoutPanel/details.checkout';
-import CarPreview from './../../components/CarPreview';
+import Skblock from './details.skblock';
+import Overview from './Overview';
+import Fetaures from './Features';
+import History from './History';
+import PetrolConsumption from './PetrolConsumption';
+import Performance from './Performance';
+import Safety from './Safety';
+import InspectorsReport from './InspectorsReport/Details.inspectors-report';
+import Reviews from './Reviews';
+import CarDetailsMainImage from './MainImage';
+import Checkout from './CheckoutPanel/details.checkout';
+import CarPreview from './../../../components/CarPreview';
 
 // List of rows
-import image_testcar from '../../static/images/cars/accord/accord.jpg';
+import image_testcar from '../../../static/images/cars/accord/accord.jpg';
 
 const cars = {
   other: [
@@ -40,9 +40,7 @@ import {StickyContainer, Sticky} from 'react-sticky';
 class CarDetails extends React.Component {
 
   async componentWillMount() {
-    console.log(this.props);
     await this.props.getDataAsync();
-    console.log(this.props);
   }
 
   render() {

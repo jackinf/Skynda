@@ -1,5 +1,5 @@
 import React from "react";
-import '../Details.scss';
+import './Details.scss';
 
 class Skblock extends React.Component {
   render() {

@@ -5,7 +5,7 @@
 import { connect } from 'react-redux'
 import { toggleLoading, setCarData, getDataAsync } from '../modules'
 
-import About from '../Details'
+import About from '../components/Details'
 
 /*  Object of action creators (can also be function that returns object).
  Keys will be passed as props to presentational components. Here we are

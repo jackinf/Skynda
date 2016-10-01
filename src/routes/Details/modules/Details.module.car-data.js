@@ -23,6 +23,7 @@ export const getDataAsync = () => {
     dispatch(toggleLoading(true));
     return new Promise((resolve) => {
       setTimeout(() => {
+        // TODO: temporary data. Use API data.
         const car_data = {//TODO: REPLACE with api data
           general: {
             src: dummy_image1,
@@ -152,10 +153,11 @@ sale`
             }
           ]
         };
+
         dispatch(setCarData(car_data));
         dispatch(toggleLoading(false));
         resolve();
-      }, 2000)
+      }, 1000)
     })
   }
 };
