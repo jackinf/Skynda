@@ -25,7 +25,7 @@ import dummy_image3 from './../../static/images/cars/accord/accord3.jpg';
 
 // Local components
 import Skblock from './components/details.skblock';
-import Overview from './components/Overview/Details.overview';
+import Overview from './components/Overview';
 import PetrolConsumption from './components/details.petrol-consumption';
 import Performance from './components/details.performance';
 import InspectorsReport from './components/details.inspectors-report';
