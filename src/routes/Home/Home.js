@@ -82,7 +82,7 @@ class Home extends React.Component {
           }
           <Row>
             <Col xs={12}>
-              <h2 className="primary-header-2 text-center">{translations.home_page.search}</h2>
+              <h2 className="primary-header-2 text-center">{translations.routes.home_page.search}</h2>
             </Col>
           </Row>
           <Row>
@@ -103,7 +103,7 @@ class Home extends React.Component {
             ? (<Row>{translations.home_page.searching}</Row>) : cars.searchResults.length > 0
             ? (<Row>
                 <Col sm={12}>
-                  <h2 className="primary-header-2 text-center">{translations.home_page.found}: {cars.searchResults[0].length}</h2>
+                  <h2 className="primary-header-2 text-center">{translations.routes.home_page.found}: {cars.searchResults[0].length}</h2>
                 </Col>
                 <br />
                 <Row>
@@ -123,7 +123,7 @@ class Home extends React.Component {
           <Row>
             <Row>
               <Col sm={12}>
-                <h2 className="primary-header-2 text-center">{translations.home_page.recently_added}</h2>
+                <h2 className="primary-header-2 text-center">{translations.routes.home_page.recently_added}</h2>
               </Col>
               <br />
               <Row>

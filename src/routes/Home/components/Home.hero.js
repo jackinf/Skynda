@@ -30,10 +30,10 @@ class Hero extends React.Component {
         <div className="container">
           <div className="grid">
             <div className="col-md-9">
-              <h2>{translations.home_page.hero.main_text}</h2>
+              <h2>{translations.routes.home_page.hero.main_text}</h2>
             </div>
             <div className="col-md-3">
-              <Button className="primary-button" onClick={this.gotoDetails}>{translations.home_page.hero.read_more}</Button>
+              <Button className="primary-button" onClick={this.gotoDetails}>{translations.routes.home_page.hero.read_more}</Button>
             </div>
           </div>
         </div>
