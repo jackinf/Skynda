@@ -3,14 +3,14 @@
  */
 
 import React from 'react';
-import '../details.scss';
+import '../../details.scss';
 import {Row, Col} from 'react-bootstrap';
 
 // Images
-import image_gas_station_2x from './../../../static/images/standard/gas_station@2x.png';
+import image_gas_station_2x from './../../../../static/images/standard/gas_station@2x.png';
 
 // Components
-import Skblock from './details.skblock';
+import Skblock from './../details.skblock';
 
 class PetrolConsumption extends React.Component {
   render() {

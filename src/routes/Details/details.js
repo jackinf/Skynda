@@ -23,10 +23,10 @@ import Skblock from './components/details.skblock';
 import Overview from './components/Overview';
 import Fetaures from './components/Features';
 import History from './components/History';
-import PetrolConsumption from './components/details.petrol-consumption';
-import Performance from './components/details.performance';
+import PetrolConsumption from './components/PetrolConsumption';
+import Performance from './components/Performance';
 import Safety from './components/Safety';
-import InspectorsReport from './components/details.inspectors-report';
+import InspectorsReport from './components/InspectorsReport/Details.inspectors-report';
 import SkyndaCare from './components/details.skynda-care';
 import Reviews from './components/details.reviews';
 import Checkout from './components/details.checkout';
@@ -38,10 +38,14 @@ import image_testcar from '../../static/images/cars/accord/accord.jpg';
 
 const cars = {
   other: [
-    {src: image_testcar, href: '/details', year: 2012, brand: 'Audi', price: 12100, mileage: 85000, engine: '3.0',
-      power: '225 kW', doors: 4, seats: 5, comment: 'Comes with winter tires'},
-    {src: image_testcar, href: '/details', year: 2012, brand: 'Audi', price: 12100, mileage: 85000, engine: '3.0',
-      power: '225 kW', doors: 4, seats: 5, comment: 'Comes with winter tires'}
+    {
+      src: image_testcar, href: '/details', year: 2012, brand: 'Audi', price: 12100, mileage: 85000, engine: '3.0',
+      power: '225 kW', doors: 4, seats: 5, comment: 'Comes with winter tires'
+    },
+    {
+      src: image_testcar, href: '/details', year: 2012, brand: 'Audi', price: 12100, mileage: 85000, engine: '3.0',
+      power: '225 kW', doors: 4, seats: 5, comment: 'Comes with winter tires'
+    }
   ]
 };
 
@@ -68,13 +72,13 @@ class CarDetails extends React.Component {
         seats: '5',
       },
       overview: [
-        { label: '75 000 km', iconUrl: image_overview_1 },
-        { label: 'Automatic', iconUrl: image_overview_2 },
-        { label: '3.0 (225 kW)', iconUrl: image_overview_3 },
-        { label: 'Front Wheel Drive', iconUrl: image_overview_4 },
-        { label: '2 doors 5 seats', iconUrl: image_overview_5 },
-        { label: 'Dark Blue', iconUrl: image_overview_6 },
-        { label: 'Black', iconUrl: image_overview_7 },
+        {label: '75 000 km', iconUrl: image_overview_1},
+        {label: 'Automatic', iconUrl: image_overview_2},
+        {label: '3.0 (225 kW)', iconUrl: image_overview_3},
+        {label: 'Front Wheel Drive', iconUrl: image_overview_4},
+        {label: '2 doors 5 seats', iconUrl: image_overview_5},
+        {label: 'Dark Blue', iconUrl: image_overview_6},
+        {label: 'Black', iconUrl: image_overview_7},
       ],
       images: [
         {
@@ -134,39 +138,37 @@ sale`
         power_train: 'Gas'
       },
       safety_stars: 5,
-      report: [
-        {
-          categories: [
-            {
-              title: 'Category 1',
-              points: [
-                {text: 'Automatic transmission flawless in cold temperature', pass: true},
-                {text: 'Steering wheel centered', pass: true},
-                {text: 'Steering wheel centered', pass: true},
-                {text: 'Automatic transmission flawless in cold temperature', pass: false},
-                {text: 'Automatic transmission flawless in cold temperature', pass: true},
-                {text: 'Steering wheel centered', pass: true}
-              ]
-            },
-            {
-              title: 'Category 2',
-                points: [
-                  {text: 'Automatic transmission flawless in cold temperature', pass: true},
-                  {text: 'Steering wheel centered', pass: true},
-                  {text: 'Steering wheel centered', pass: true},
-                  {text: 'Automatic transmission flawless in cold temperature', pass: false},
-                  {text: 'Automatic transmission flawless in cold temperature', pass: true},
-                  {text: 'Steering wheel centered', pass: true}
-                ]
-            }
-          ],
-          faults: [
-            {text: 'Scratches near the ignition', img: 'TODO'},
-            {text: 'Scratches on the glovebox', img: 'TODO'},
-            {text: 'Scratches on the back door', img: 'TODO'}
-          ]
-        }
-      ],
+      report: {
+        categories: [
+          {
+            title: 'Category 1',
+            points: [
+              {text: 'Automatic transmission flawless in cold temperature', pass: true},
+              {text: 'Steering wheel centered', pass: true},
+              {text: 'Steering wheel centered', pass: true},
+              {text: 'Automatic transmission flawless in cold temperature', pass: false},
+              {text: 'Automatic transmission flawless in cold temperature', pass: true},
+              {text: 'Steering wheel centered', pass: true}
+            ]
+          },
+          {
+            title: 'Category 2',
+            points: [
+              {text: 'Automatic transmission flawless in cold temperature', pass: true},
+              {text: 'Steering wheel centered', pass: true},
+              {text: 'Steering wheel centered', pass: true},
+              {text: 'Automatic transmission flawless in cold temperature', pass: false},
+              {text: 'Automatic transmission flawless in cold temperature', pass: true},
+              {text: 'Steering wheel centered', pass: true}
+            ]
+          }
+        ],
+        faults: [
+          {text: 'Scratches near the ignition', img: 'TODO'},
+          {text: 'Scratches on the glovebox', img: 'TODO'},
+          {text: 'Scratches on the back door', img: 'TODO'}
+        ]
+      },
       reviews: [
         {
           logoUrl: 'TODO',
@@ -196,23 +198,24 @@ sale`
             <div className="row">
               <div className="col col-md-7">
 
-                <Overview overview={car_data.overview} />
+                <Overview overview={car_data.overview}/>
 
-                {car_data.descriptions.map((description, i) => <Skblock key={i} header={description.title}>{description.text}</Skblock>)}
+                {car_data.descriptions.map((description, i) => <Skblock key={i}
+                                                                        header={description.title}>{description.text}</Skblock>)}
 
-                <Fetaures features={car_data.features} />
+                <Fetaures features={car_data.features}/>
 
-                <History history={car_data.history} />
+                <History history={car_data.history}/>
 
-                <PetrolConsumption petrol_consumption={car_data.petrol_consumption} />
+                <PetrolConsumption petrol_consumption={car_data.petrol_consumption}/>
 
-                <Performance performance={car_data.performance} />
+                <Performance performance={car_data.performance}/>
 
-                <Safety stars={car_data.safety_stars} />
+                <Safety stars={car_data.safety_stars}/>
 
                 <br />
 
-                <InspectorsReport report={car_data.report} />
+                <InspectorsReport report={car_data.report}/>
 
                 <SkyndaCare />
 
