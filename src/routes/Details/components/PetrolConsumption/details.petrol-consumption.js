@@ -17,7 +17,7 @@ class PetrolConsumption extends React.Component {
   render() {
     const {city, highway, average} = this.props.petrol_consumption;
 
-    return (<Skblock header={'Petrol Consumption'}>
+    return (<Skblock header={translations.routes.details.components.petrol.header}>
       <Col md={6}>
         <img src={image_gas_station_2x} className="sk_details__icon_list_image"/>
       </Col>

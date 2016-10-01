@@ -103,6 +103,7 @@ const translationsEt = {
           displacement:'Aasta'
         },
         petrol:{
+          header:'Kütusekulu',
           city:'Linn',
           highway:'Maantee',
           average:'Keskmine',
