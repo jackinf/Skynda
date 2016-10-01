@@ -2,27 +2,27 @@
  * Created by zekar on 9/15/2016.
  */
 
-import React from 'react';
-import {Row, Col} from 'react-bootstrap';
-import './Details.overview.scss';
-import translations from '../../../../store/locales/et';
+import React from "react";
+import { Row, Col } from "react-bootstrap";
+import "./Details.overview.scss";
+import translations from "../../../../store/locales/et";
 
-import Skblock from '../DetailsSkBlock/Details.skblock';
+import Skblock from "../DetailsSkBlock/block";
 
 class Overview extends React.Component {
-  render() {
+  render () {
     const overview = this.props.overview;
 
     return (<Skblock header={translations.routes.details.components.overview.header}>
-      {overview.map((item, i) => (<Col key={i} md={3} className="overview__overview-block">
-        <Row className="overview__overview-icon-row">
-          <Col md={12} className="overview__overview-icon-col">
-            <img src={item.iconUrl} alt="" className="overview__overview-icon"/>
+      {overview.map((item, i) => (<Col key={i} md={3} className='overview__overview-block'>
+        <Row className='overview__overview-icon-row'>
+          <Col md={12} className='overview__overview-icon-col'>
+            <img src={item.iconUrl} alt='' className='overview__overview-icon' />
           </Col>
         </Row>
-        <Row className="overview__overview-label-row">
-          <Col md={12} className="overview__overview-label-col">
-            <span className="overview__overview-label">{item.label}</span>
+        <Row className='overview__overview-label-row'>
+          <Col md={12} className='overview__overview-label-col'>
+            <span className='overview__overview-label'>{item.label}</span>
           </Col>
         </Row>
       </Col>))}

@@ -2,13 +2,13 @@
  * Created by jevgenir on 24/09/2016.
  */
 
-import React from 'react';
-import CarPreviewItem from './CarPreviewItem';
+import React from "react";
+import CarPreviewItem from "./CarPreviewItem";
 
-import {Row, Col} from 'react-bootstrap';
+import { Row, Col } from "react-bootstrap";
 
 class CarPreviewGrid extends React.Component {
-  render() {
+  render () {
     return (<section>
       <Row>
         {this.props.cars.map((car, i) =>
@@ -21,7 +21,7 @@ class CarPreviewGrid extends React.Component {
 }
 
 CarPreviewGrid.propTypes = {
-  cars: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
+  cars: React.PropTypes.arrayOf(React.PropTypes.object).isRequired
 };
 
 export default CarPreviewGrid;

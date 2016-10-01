@@ -2,31 +2,31 @@
  * Created by jevgenir on 24/09/2016.
  */
 
-import React from 'react';
-import './CarSearchButtonGroup.scss';
-import {Button, Row, Col} from 'react-bootstrap';
+import React from "react";
+import "./CarSearchButtonGroup.scss";
+import { Button, Row, Col } from "react-bootstrap";
 
 // TODO: fix icon import
 // import a from 'react-icons/md/done.js';
-let IconBase = require('react-icon-base');
+let IconBase = require("react-icon-base");
 class MdDone extends React.Component {
-  render() {
+  render () {
     return (
-      <IconBase viewBox="0 0 40 40" {...this.props}>
-        <g><path d="m15 27l17.7-17.7 2.3 2.3-20 20-9.3-9.3 2.3-2.3z"/></g>
+      <IconBase viewBox='0 0 40 40' {...this.props}>
+        <g><path d='m15 27l17.7-17.7 2.3 2.3-20 20-9.3-9.3 2.3-2.3z' /></g>
       </IconBase>
     );
   }
 }
 
 class ButtonGroup extends React.Component {
-  constructor() {
+  constructor () {
     super();
     this.toggle = this.toggle.bind(this);
     this.toggleAll = this.toggleAll.bind(this);
   }
 
-  toggle(option) {
+  toggle (option) {
     option.toggled = !option.toggled;
     if (option.id === -1)
       this.toggleAll(option.toggled);
@@ -39,23 +39,23 @@ class ButtonGroup extends React.Component {
     this.forceUpdate();
   };
 
-  toggleAll(value) {
+  toggleAll (value) {
     for (var i = 0; i < this.props.options.length; i++) {
       var option = this.props.options[i];
       option.toggled = value;
     }
   }
 
-  render() {
+  render () {
     var mdCol = this.props.md ? this.props.md : 2;
     var smCol = this.props.sm ? this.props.sm : 3;
 
-    return (<div className="btn-group list-inline">
-      {this.props.options.map((option, key) => (<Col md={mdCol} sm={smCol} key={key} className="btn-group__element">
-        <Button style={option.style ? option.style : this.props.shape==='circle' ? {} : {width: "100%"}}
-                className={this.props.shape==='circle' ? 'btn-group__circle': ""}
-                bsStyle={(!option.toggled ? "default": "primary")}
-                onClick={e => this.toggle(option)}>
+    return (<div className='btn-group list-inline'>
+      {this.props.options.map((option, key) => (<Col md={mdCol} sm={smCol} key={key} className='btn-group__element'>
+        <Button style={option.style ? option.style : this.props.shape === "circle" ? {} : { width: "100%" }}
+          className={this.props.shape === "circle" ? "btn-group__circle" : ""}
+          bsStyle={(!option.toggled ? "default" : "primary")}
+          onClick={e => this.toggle(option)}>
           {option.hideName ? <MdDone /> : option.name}
         </Button>
       </Col>))}

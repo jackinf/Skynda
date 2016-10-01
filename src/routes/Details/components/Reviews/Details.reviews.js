@@ -1,49 +1,49 @@
-import React from 'react';
+import React from "react";
 
-import Skblock from '../DetailsSkBlock/Details.skblock';
-import '../Details.scss';
-import './Details.reviews.scss';
-import {Row, Col, Button} from 'react-bootstrap';
-import translations from '../../../../store/locales/et';
-import image_star from './../../../../static/images/standard/star@2x.png';
-import image_unstar from './../../../../static/images/standard/star-1@2x.png';
+import Skblock from "../DetailsSkBlock/block";
+import "../Details.scss";
+import "./Details.reviews.scss";
+import { Row, Col, Button } from "react-bootstrap";
+import translations from "../../../../store/locales/et";
+import image_star from "./../../../../static/images/standard/star@2x.png";
+import image_unstar from "./../../../../static/images/standard/star-1@2x.png";
 
 const max_stars = 5;
-const Star = (props) => (<img className="sk_safety__details__star pull-right"
-                              width="24" src={props.src}/>);
+const Star = (props) => (<img className='sk_safety__details__star pull-right'
+  width='24' src={props.src} />);
 
 class Reviews extends React.Component {
-  render() {
+  render () {
     const reviews = this.props.reviews;
 
     return (<Skblock header={translations.routes.details.components.reviews.header}>
-      {reviews.map((review, i) => (<div key={i} className="panel panel-default">
-          <div className="panel-body">
-            <Row className="sk_details__reviews__header">
+      {reviews.map((review, i) => (<div key={i} className='panel panel-default'>
+          <div className='panel-body'>
+            <Row className='sk_details__reviews__header'>
               <Col md={6}>
-                <img src={review.logoUrl} alt="LOGO"/>
+                <img src={review.logoUrl} alt='LOGO' />
               </Col>
               <Col md={6}>
-                {Array.from({ length: max_stars - review.rating})
+                {Array.from({ length: max_stars - review.rating })
                   .map((_, idx) => <div key={idx}><Star src={image_unstar} /></div>)}
 
-                {Array.from({ length: review.rating})
+                {Array.from({ length: review.rating })
                   .map((_, idx) => <div key={idx}><Star src={image_star} /></div>)}
               </Col>
             </Row>
-            <Row className="sk_details__reviews__body">
+            <Row className='sk_details__reviews__body'>
               <Col md={12}>
                 {review.text}
               </Col>
             </Row>
-            {review.videoUrl ? (<Row className="sk_details__reviews__body">
+            {review.videoUrl ? (<Row className='sk_details__reviews__body'>
               <Col md={12}>
                 {/* Youtube video? Yes. */}
               </Col>
             </Row>) : ""}
-            <Row className="sk_details__reviews__footer">
+            <Row className='sk_details__reviews__footer'>
               <Col md={12}>
-                <Button className="pull-right sk_details__reviews__button-read-more">{translations.routes.details.components.reviews.btn_read_more}</Button>
+                <Button className='pull-right sk_details__reviews__button-read-more'>{translations.routes.details.components.reviews.btn_read_more}</Button>
               </Col>
             </Row>
           </div>

@@ -1,12 +1,12 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import createStore from './store/createStore'
-import AppContainer from './containers/AppContainer'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import injectTapEventPlugin from 'react-tap-event-plugin';
+import React from "react";
+import ReactDOM from "react-dom";
+import createStore from "./store/createStore";
+import AppContainer from "./containers/AppContainer";
+import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+import injectTapEventPlugin from "react-tap-event-plugin";
 injectTapEventPlugin();
 
-require('rc-slider/assets/index.css');
+require("rc-slider/assets/index.css");
 
 // ========================================================
 // Store Instantiation
@@ -17,17 +17,17 @@ const store = createStore(initialState);
 // ========================================================
 // Render Setup
 // ========================================================
-const MOUNT_NODE = document.getElementById('root');
+const MOUNT_NODE = document.getElementById("root");
 
 let render = () => {
-  const routes = require('./routes/index').default(store);
+  const routes = require("./routes/index").default(store);
 
   ReactDOM.render(
     (<MuiThemeProvider>
       <AppContainer store={store} routes={routes} />
     </MuiThemeProvider>),
     MOUNT_NODE
-  )
+  );
 };
 
 // ========================================================
@@ -35,7 +35,7 @@ let render = () => {
 // ========================================================
 if (__DEV__) {
   if (window.devToolsExtension) {
-    window.devToolsExtension.open()
+    window.devToolsExtension.open();
   }
 }
 
@@ -45,27 +45,27 @@ if (__DEV__) {
     // Development render functions
     const renderApp = render;
     const renderError = (error) => {
-      const RedBox = require('redbox-react').default;
+      const RedBox = require("redbox-react").default;
 
-      ReactDOM.render(<RedBox error={error} />, MOUNT_NODE)
+      ReactDOM.render(<RedBox error={error} />, MOUNT_NODE);
     };
 
     // Wrap render in try/catch
     render = () => {
       try {
-        renderApp()
+        renderApp();
       } catch (error) {
-        renderError(error)
+        renderError(error);
       }
     };
 
     // Setup hot module replacement
-    module.hot.accept('./routes/index', () =>
+    module.hot.accept("./routes/index", () =>
       setImmediate(() => {
         ReactDOM.unmountComponentAtNode(MOUNT_NODE);
-        render()
+        render();
       })
-    )
+    );
   }
 }
 

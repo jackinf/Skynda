@@ -2,10 +2,10 @@
  * Created by jevgenir on 10/1/2016.
  */
 
-import { connect } from 'react-redux'
-import { toggleLoading, setCarData, getDataAsync } from '../modules'
+import { connect } from "react-redux";
+import { toggleLoading, setCarData, getDataAsync } from "../modules";
 
-import About from '../components/Details'
+import About from "../components/Details";
 
 /*  Object of action creators (can also be function that returns object).
  Keys will be passed as props to presentational components. Here we are
@@ -36,4 +36,4 @@ const mapStateToProps = (state) => ({
  Selectors are composable. They can be used as input to other selectors.
  https://github.com/reactjs/reselect    */
 
-export default connect(mapStateToProps, mapDispatchToProps)(About)
+export default connect(mapStateToProps, mapDispatchToProps)(About);

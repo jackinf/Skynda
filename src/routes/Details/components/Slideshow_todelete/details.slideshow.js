@@ -1,4 +1,4 @@
-//REPLACED with MainImage
+// REPLACED with MainImage
 
 // /**
 //  * Created by zekar on 9/15/2016.

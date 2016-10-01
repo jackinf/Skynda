@@ -7,69 +7,67 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-import React, {PropTypes} from 'react';
-import './Home.scss';
+import React, { PropTypes } from "react";
+import "./Home.scss";
 
-import {Row, Col} from 'react-bootstrap';
+import { Row, Col } from "react-bootstrap";
 
-import CarPreview from './../../components/CarPreview';
-import CarSearch from './../../components/CarSearch';
+import CarPreview from "./../../components/CarPreview";
+import CarSearch from "./../../components/CarSearch";
 
 // Images
-import image_testcar from '../../static/images/cars/accord/accord.jpg';
+import image_testcar from "../../static/images/cars/accord/accord.jpg";
 // Inner components
-import Hero from './components/Home.hero';
-import Keypoints from './components/Home.keypoints';
-//translation
-import translations from '../../store/locales/et';
-
+import Hero from "./components/Home.hero";
+import Keypoints from "./components/Home.keypoints";
+// translation
+import translations from "../../store/locales/et";
 
 // List of rows
 // TODO: redux
 const cars = {
   searchResults: [],
   recentlyAdded: [
-    {src: image_testcar, href: '/details', year: 2012, brand: 'Audi', price: 12100, mileage: 85000, engine: '3.0',
-      power: '225 kW', doors: 4, seats: 5, comment: 'Comes with winter tires'},
-    {src: image_testcar, href: '/details', year: 2012, brand: 'Audi', price: 12100, mileage: 85000, engine: '3.0',
-      power: '225 kW', doors: 4, seats: 5, comment: 'Comes with winter tires'}
+    { src: image_testcar, href: "/details", year: 2012, brand: "Audi", price: 12100, mileage: 85000, engine: "3.0",
+      power: "225 kW", doors: 4, seats: 5, comment: "Comes with winter tires" },
+    { src: image_testcar, href: "/details", year: 2012, brand: "Audi", price: 12100, mileage: 85000, engine: "3.0",
+      power: "225 kW", doors: 4, seats: 5, comment: "Comes with winter tires" }
   ]
 };
 
 class Home extends React.Component {
 
-  constructor(){
+  constructor () {
     super();
     this.executeSearch = this.executeSearch.bind(this);
     this.updateSearchText = this.updateSearchText.bind(this);
 
     // TODO: redux
-    this.state = {searchText: '', isSearching: false};
+    this.state = { searchText: "", isSearching: false };
   }
 
-  executeSearch() {
-
+  executeSearch () {
     // TODO: redux
-    this.setState({isSearching: true});
+    this.setState({ isSearching: true });
     setTimeout(() => {
       cars.searchResults.length = 0;
       cars.searchResults.push(cars.recentlyAdded);
-      this.setState({isSearching: false});
-     }, 2000);
+      this.setState({ isSearching: false });
+    }, 2000);
   }
 
-  updateSearchText(text) {
-    this.setState({searchText: text});
+  updateSearchText (text) {
+    this.setState({ searchText: text });
   }
 
-  render() {
+  render () {
     return (
       <div>
 
         <Hero />
         <br />
 
-        <div className="container">
+        <div className='container'>
 
           <Keypoints />
           <br />
@@ -82,7 +80,7 @@ class Home extends React.Component {
           }
           <Row>
             <Col xs={12}>
-              <h2 className="primary-header-2 text-center">{translations.routes.home_page.search}</h2>
+              <h2 className='primary-header-2 text-center'>{translations.routes.home_page.search}</h2>
             </Col>
           </Row>
           <Row>
@@ -103,15 +101,15 @@ class Home extends React.Component {
             ? (<Row>{translations.home_page.searching}</Row>) : cars.searchResults.length > 0
             ? (<Row>
                 <Col sm={12}>
-                  <h2 className="primary-header-2 text-center">{translations.routes.home_page.found}: {cars.searchResults[0].length}</h2>
+                  <h2 className='primary-header-2 text-center'>{translations.routes.home_page.found}: {cars.searchResults[0].length}</h2>
                 </Col>
                 <br />
                 <Row>
                   <Col md={12}>
-                    <ImageGrid rows={cars.searchResults}/>
+                    <ImageGrid rows={cars.searchResults} />
                   </Col>
                 </Row>
-              </Row>) : (<Row></Row>)}
+              </Row>) : (<Row />)}
 
           <br />
 
@@ -123,7 +121,7 @@ class Home extends React.Component {
           <Row>
             <Row>
               <Col sm={12}>
-                <h2 className="primary-header-2 text-center">{translations.routes.home_page.recently_added}</h2>
+                <h2 className='primary-header-2 text-center'>{translations.routes.home_page.recently_added}</h2>
               </Col>
               <br />
               <Row>

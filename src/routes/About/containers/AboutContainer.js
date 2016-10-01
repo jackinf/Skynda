@@ -1,8 +1,8 @@
-import { connect } from 'react-redux'
-import { loadPeople } from '../modules/About.people'
-import { loadDescription } from '../modules/About.description';
+import { connect } from "react-redux";
+import { loadPeople } from "../modules/About.people";
+import { loadDescription } from "../modules/About.description";
 
-import About from '../components/About'
+import About from "../components/About";
 
 const mapDispatchToProps = {
   loadPeople,
@@ -14,4 +14,4 @@ const mapStateToProps = (state) => ({
   description : state.description
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(About)
+export default connect(mapStateToProps, mapDispatchToProps)(About);

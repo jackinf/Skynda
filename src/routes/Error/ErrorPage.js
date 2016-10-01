@@ -7,12 +7,12 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-import React, { PropTypes } from 'react';
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import s from './ErrorPage.scss';
+import React, { PropTypes } from "react";
+import withStyles from "isomorphic-style-loader/lib/withStyles";
+import s from "./ErrorPage.scss";
 
-function ErrorPage({ error }) {
-  if (process.env.NODE_ENV === 'production') {
+function ErrorPage ({ error }) {
+  if (process.env.NODE_ENV === "production") {
     return (
       <div>
         <h1>Error</h1>

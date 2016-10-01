@@ -7,25 +7,24 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React from "react";
 // import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import './Footer.scss';
+import "./Footer.scss";
 // import Link from '../Link';
-import {Link} from 'react-router';
-import translations from '../../store/locales/en';
+import { Link } from "react-router";
+import translations from "../../store/locales/en";
 
-function Footer() {
-
+function Footer () {
   return (
-    <div className="root">
-      <div className="container footer-container">
-        <span className="text">{translations.components.footer.your_company}</span>
-        <span className="spacer">·</span>
-        <Link className="link" to="/">{translations.components.footer.home}</Link>
-        <span className="spacer">·</span>
-        <Link className="link" to="/privacy">{translations.components.footer.privacy}</Link>
-        <span className="spacer">·</span>
-        <Link className="link" to="/not-found">{translations.components.footer.not_found}</Link>
+    <div className='root'>
+      <div className='container footer-container'>
+        <span className='text'>{translations.components.footer.your_company}</span>
+        <span className='spacer'>·</span>
+        <Link className='link' to='/'>{translations.components.footer.home}</Link>
+        <span className='spacer'>·</span>
+        <Link className='link' to='/privacy'>{translations.components.footer.privacy}</Link>
+        <span className='spacer'>·</span>
+        <Link className='link' to='/not-found'>{translations.components.footer.not_found}</Link>
       </div>
     </div>
   );

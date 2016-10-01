@@ -1,11 +1,11 @@
 import React from "react";
-import {Row, Col} from 'react-bootstrap';
-import translations from '../../../../store/locales/et';
+import { Row, Col } from "react-bootstrap";
+import translations from "../../../../store/locales/et";
 
-import Skblock from '../DetailsSkBlock/Details.skblock';
+import Skblock from "../DetailsSkBlock/block";
 
 class Performance extends React.Component {
-  render() {
+  render () {
     const {
       driven_wheels,
       doors,
@@ -36,13 +36,13 @@ class Performance extends React.Component {
       {parameterBlockFn(translations.routes.details.components.performance.compression, compression_ratio)}
       {parameterBlockFn(translations.routes.details.components.performance.engine_size, size)}
       {parameterBlockFn(translations.routes.details.components.performance.compressor_type, compressor_type)}
-      {parameterBlockFn(translations.routes.details.components.performance.torque , torque)}
+      {parameterBlockFn(translations.routes.details.components.performance.torque, torque)}
       {parameterBlockFn(translations.routes.details.components.performance.config, configuration)}
       {parameterBlockFn(translations.routes.details.components.performance.valves, total_valves)}
       {parameterBlockFn(translations.routes.details.components.performance.cylinders, cylinders)}
       {parameterBlockFn(translations.routes.details.components.performance.powertrain, power_train)}
       {parameterBlockFn(translations.routes.details.components.performance.displacement, displacement)}
-    </Skblock>)
+    </Skblock>);
   }
 }
 
