@@ -12,7 +12,7 @@ const translationsEn = {
       colors: 'Colors',
       petrol_consumption: 'Petrol consumption',
       features: 'Features',
-      power: 'Horse power',
+      power: 'Horsepower',
       doors: 'Doors',
       seats:'Seats',
       transmission:'Transmission'
@@ -64,6 +64,52 @@ const translationsEn = {
           header:'Our Certified Inspector\'s Report',
           question:'Have a question?',
           show_all:'Show all',
+        },
+        checkout_panel:{
+          first_name:'First Name',
+          last_name:'Last Name',
+          email:'E-Mail',
+          phone:'Phone Number',
+          btn_send: 'Send',
+          contact_24h_txt:'We will contact you in 24h.',
+          contact_us_txt:'Contact Us'
+
+
+        },
+        features:{
+          header:'Nice features'
+        },
+        history:{
+          header:'Car History',
+          problems_found: 'Problems found',
+          no_problems_found: 'No problems found',
+          vin:'VIN code'
+        },
+        performance:{
+          wheel_drive:'Wheels Driven',
+          fuel_type:'Fuel Type',
+          horsepower:'Horsepower',
+          compression:'Compression Ratio',
+          engine_size:'Engine Size',
+          compressor_type:'Compressor Type',
+          torque:'Torque',
+          config:'Configuration',
+          valves:'Total valves',
+          cylinders:'Cylinders',
+          powertrain:'Powertrain',
+          displacement:'Displacement'
+        },
+        petrol:{
+          city:'City',
+          highway:'Highway',
+          average:'Average',
+        },
+        reviews:{
+          header:'Reviews',
+          btn_read_more:'Read More'
+        },
+        safety:{
+          header:'Safety'
         }
 
       }

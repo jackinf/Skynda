@@ -16,6 +16,7 @@ import TextField from 'material-ui/TextField';
 import {Tabs, Tab} from 'material-ui/Tabs';
 import {Row, Col} from 'react-bootstrap';
 import {orange500} from 'material-ui/styles/colors';
+import translations from '../../../../store/locales/en';
 
 class ListItemText extends React.Component {
   render() {
@@ -133,7 +134,7 @@ const tempTab = (props) => (<li className="tab-pane fade active in" id="htab1">
       <Row>
         <Col md={6}>
           <TextField
-            floatingLabelText="Eesnimi"
+            floatingLabelText={translations.routes.details.components.checkout_panel.first_name}
             fullWidth={true}
             floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
             underlineFocusStyle={styles.underlineFocusStyle}
@@ -142,7 +143,7 @@ const tempTab = (props) => (<li className="tab-pane fade active in" id="htab1">
         </Col>
         <Col md={6}>
           <TextField
-            floatingLabelText="Perekonna nimi"
+            floatingLabelText={translations.routes.details.components.checkout_panel.last_name}
             fullWidth={true}
             floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
             underlineFocusStyle={styles.underlineFocusStyle}
@@ -154,7 +155,7 @@ const tempTab = (props) => (<li className="tab-pane fade active in" id="htab1">
         <Col md={6}>
           <TextField
             type="email"
-            floatingLabelText="E-posti aadress"
+            floatingLabelText={translations.routes.details.components.checkout_panel.email}
             fullWidth={true}
             floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
             underlineFocusStyle={styles.underlineFocusStyle}
@@ -163,7 +164,7 @@ const tempTab = (props) => (<li className="tab-pane fade active in" id="htab1">
         </Col>
         <Col md={6}>
           <TextField
-            floatingLabelText="Telefoni number"
+            floatingLabelText={translations.routes.details.components.checkout_panel.phone}
             fullWidth={true}
             floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
             underlineFocusStyle={styles.underlineFocusStyle}
@@ -174,7 +175,7 @@ const tempTab = (props) => (<li className="tab-pane fade active in" id="htab1">
       <Row className="dialog-btn-footer">
         <Col md={12}>
           <RaisedButton
-            label="Saada"
+            label={translations.routes.details.components.checkout_panel.btn_send}
             className="sk_details__checkout_tab_action_button pull-right"
             backgroundColor={styles.backgroundDefault}
             labelStyle={{color:"white", weight: 600}}
@@ -251,7 +252,7 @@ class Checkout extends React.Component {
         open={this.state.openSentMsg}
         onRequestClose={this.handleClose}
       >
-        Võtame sinuga ühendust 24h jooksul.
+        {translations.routes.details.components.checkout_panel.contact_24h_txt}
       </Dialog>
 
       <Tabs
@@ -273,7 +274,7 @@ class Checkout extends React.Component {
           {/*</div>*/}
         {/*</Tab>*/}
 
-        <Tab label="Võta ühendust" className="sk_details__checkout_tab">
+        <Tab label={translations.routes.details.components.checkout_panel.contact_us_txt} className="sk_details__checkout_tab">
            <div className="sk_details__checkout_tab_inner">
             {tempTab( {
               displaySuccessPopup: this.displaySuccessPopup,

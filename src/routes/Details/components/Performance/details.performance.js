@@ -1,5 +1,6 @@
 import React from "react";
 import {Row, Col} from 'react-bootstrap';
+import translations from '../../../../store/locales/en';
 
 import Skblock from '../details.skblock';
 
@@ -29,18 +30,18 @@ class Performance extends React.Component {
     </Col>);
 
     return (<Skblock header={'Performance'}>
-      {parameterBlockFn('Driven wheels', driven_wheels)}
-      {parameterBlockFn('Fuel type', fuel_type)}
-      {parameterBlockFn('Horsepower', horsepower)}
-      {parameterBlockFn('Compression ratio', compression_ratio)}
-      {parameterBlockFn('Size', size)}
-      {parameterBlockFn('Compressor type', compressor_type)}
-      {parameterBlockFn('Torque', torque)}
-      {parameterBlockFn('Configuration', configuration)}
-      {parameterBlockFn('Total valves', total_valves)}
-      {parameterBlockFn('Cylinders', cylinders)}
-      {parameterBlockFn('Power train', power_train)}
-      {parameterBlockFn('Displacement', displacement)}
+      {parameterBlockFn(translations.routes.details.components.performance.wheel_drive, driven_wheels)}
+      {parameterBlockFn(translations.routes.details.components.performance.fuel_type, fuel_type)}
+      {parameterBlockFn(translations.routes.details.components.performance.horsepower, horsepower)}
+      {parameterBlockFn(translations.routes.details.components.performance.compression, compression_ratio)}
+      {parameterBlockFn(translations.routes.details.components.performance.engine_size, size)}
+      {parameterBlockFn(translations.routes.details.components.performance.compressor_type, compressor_type)}
+      {parameterBlockFn(translations.routes.details.components.performance.torque , torque)}
+      {parameterBlockFn(translations.routes.details.components.performance.config, configuration)}
+      {parameterBlockFn(translations.routes.details.components.performance.valves, total_valves)}
+      {parameterBlockFn(translations.routes.details.components.performance.cylinders, cylinders)}
+      {parameterBlockFn(translations.routes.details.components.performance.powertrain, power_train)}
+      {parameterBlockFn(translations.routes.details.components.performance.displacement, displacement)}
     </Skblock>)
   }
 }
