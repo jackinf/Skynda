@@ -3,6 +3,15 @@
 1. https://spring.io/tools/sts
 2. jdk8
 3. maven latest
+4. lombok fix. Add following code to your ".ini" file. Also you need to start lombok.jar and your IDE location. (for STS users)
+
+```
+-Xmx1200m
+-javaagent:lombok.jar
+-javaagent:C:\Users\mihha\Desktop\sts-bundle\sts-3.8.1.RELEASE\lombok.jar
+-Xbootclasspath/a:C:\Users\mihha\Desktop\sts-bundle\sts-3.8.1.RELEASE\lombok.jar
+```
+
 
 ## BUILD ##
 ~~~~
