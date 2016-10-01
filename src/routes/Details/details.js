@@ -7,6 +7,13 @@ import './details.scss';
 import {Row, Col} from 'react-bootstrap';
 
 // Images
+import image_overview_1 from './../../static/images/standard/group-114@2x.png';
+import image_overview_2 from './../../static/images/standard/group-115@2x.png';
+import image_overview_3 from './../../static/images/standard/group-116@2x.png';
+import image_overview_4 from './../../static/images/standard/group-117@2x.png';
+import image_overview_5 from './../../static/images/standard/group-118@2x.png';
+import image_overview_6 from './../../static/images/standard/group-119@2x.png';
+import image_overview_7 from './../../static/images/standard/group-120@2x.png';
 import image_ok from './../../static/images/standard/ok.png';
 import image_diploma_1 from './../../static/images/standard/diploma_1.png';
 import image_star_2x from './../../static/images/standard/star@2x.png';
@@ -18,7 +25,7 @@ import dummy_image3 from './../../static/images/cars/accord/accord3.jpg';
 
 // Local components
 import Skblock from './components/details.skblock';
-import Overview from './components/details.overview';
+import Overview from './components/Overview/Details.overview';
 import PetrolConsumption from './components/details.petrol-consumption';
 import Performance from './components/details.performance';
 import InspectorsReport from './components/details.inspectors-report';
@@ -63,6 +70,15 @@ class CarDetails extends React.Component {
         doors: '2',
         seats: '5',
       },
+      overview: [
+        { label: '75 000 km', iconUrl: image_overview_1 },
+        { label: 'Automatic', iconUrl: image_overview_2 },
+        { label: '3.0 (225 kW)', iconUrl: image_overview_3 },
+        { label: 'Front Wheel Drive', iconUrl: image_overview_4 },
+        { label: '2 doors 5 seats', iconUrl: image_overview_5 },
+        { label: 'Dark Blue', iconUrl: image_overview_6 },
+        { label: 'Black', iconUrl: image_overview_7 },
+      ],
       images: [
         {
           original: dummy_image1,
@@ -182,7 +198,8 @@ sale`
           <StickyContainer>
             <div className="row">
               <div className="col col-md-7">
-                <Overview />
+
+                <Overview overview={car_data.overview} />
 
                 {car_data.descriptions.map((description, i) => <Skblock key={i} header={description.title}>{description.text}</Skblock>)}
 
