@@ -2,7 +2,7 @@ import React from 'react';
 import {Button, Row, Col} from 'react-bootstrap';
 
 import Skblock from '../details.skblock';
-import '../../details.scss';  // todo: remove?
+import '../../Details.scss';  // todo: remove?
 import './Details.inspectors-report.scss';
 
 // Images

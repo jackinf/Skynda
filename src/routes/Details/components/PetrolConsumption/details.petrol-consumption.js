@@ -3,7 +3,7 @@
  */
 
 import React from 'react';
-import '../../details.scss';
+import '../../Details.scss';
 import {Row, Col} from 'react-bootstrap';
 
 // Images
