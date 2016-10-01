@@ -29,11 +29,11 @@ class Performance extends React.Component {
     </Col>);
 
     return (<Skblock header={'Performance'}>
-      {parameterBlockFn('Driven wheels:', driven_wheels)}
-      {parameterBlockFn('Fuel type:', fuel_type)}
+      {parameterBlockFn('Driven wheels', driven_wheels)}
+      {parameterBlockFn('Fuel type', fuel_type)}
       {parameterBlockFn('Horsepower', horsepower)}
       {parameterBlockFn('Compression ratio', compression_ratio)}
-      {parameterBlockFn('Size:', size)}
+      {parameterBlockFn('Size', size)}
       {parameterBlockFn('Compressor type', compressor_type)}
       {parameterBlockFn('Torque', torque)}
       {parameterBlockFn('Configuration', configuration)}

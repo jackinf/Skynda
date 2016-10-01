@@ -10,24 +10,26 @@ import image_star from './../../../../static/images/standard/star@2x.png';
 import image_unstar from './../../../../static/images/standard/star-1@2x.png';
 
 const max_stars = 5;
-const Star = (props) => (<img key={props.idx} className="sk_safety__details__star pull-right"
+const Star = (props) => (<img className="sk_safety__details__star pull-right"
                               width="24" src={props.src}/>);
 
 class Reviews extends React.Component {
   render() {
-    const stars = this.props.stars || 3;
     const reviews = this.props.reviews;
 
     return (<Skblock header={'Reviews'}>
-      {reviews.map((review) => (<div className="panel panel-default">
+      {reviews.map((review, i) => (<div key={i} className="panel panel-default">
           <div className="panel-body">
             <Row className="sk_details__reviews__header">
               <Col md={6}>
                 <img src={review.logoUrl} alt="LOGO"/>
               </Col>
               <Col md={6}>
-                {Array.from({ length: max_stars - review.rating}).map((_, idx) => <Star idx={idx} src={image_unstar} />)}
-                {Array.from({ length: review.rating}).map((_, idx) => <Star idx={idx} src={image_star} />)}
+                {Array.from({ length: max_stars - review.rating})
+                  .map((_, idx) => <div key={idx}><Star src={image_unstar} /></div>)}
+
+                {Array.from({ length: review.rating})
+                  .map((_, idx) => <div key={idx}><Star src={image_star} /></div>)}
               </Col>
             </Row>
             <Row className="sk_details__reviews__body">

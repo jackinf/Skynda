@@ -40,12 +40,12 @@ class Report extends React.Component {
 
         {categories.map((category, i) => (
           <Row key={i} className="sk_details__report__category-block">
-            <h4>{category.title}</h4>
+            <h4 className="sk_details__report__category-title">{category.title}</h4>
 
             <Row className="sk_details__report__category-row">
               {category.points.map((point, i) => i % 2 == 0
-                ? (<div>{pointBlockFn(point, i)}</div>)
-                : (<Row>{pointBlockFn(point, i)}</Row>))}
+                ? (<div key={i}>{pointBlockFn(point, i)}</div>)
+                : (<Row key={i}>{pointBlockFn(point, i)}</Row>))}
             </Row>
 
             <Row>
