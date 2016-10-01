@@ -1,0 +1,20 @@
+.overview__overview-block {
+  align-content: center;
+  margin: 0 auto;
+}
+
+.overview__overview-icon-row {}
+
+.overview__overview-label-col,
+.overview__overview-icon-col {
+  text-align: center
+}
+.overview__overview-icon {
+  width: 40px;
+  height: 40px; // todo: fix
+}
+
+.overview__overview-label-row {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}

@@ -17,28 +17,7 @@ class Keypoint extends React.Component {
 
 class Keypoints extends React.Component {
   render() {
-    return (<div className="row">
-      <div className="col-md-4">
-        <Keypoint
-          title="Certified Inspections"
-          content="All our cars have been certified by our inspectors. Every car comes with a detailed report."
-          src={image_ok}>
-        </Keypoint>
-      </div>
-      <div className="col-md-4">
-        <Keypoint
-          title="Fast Delivery"
-          content="We deliver your car in 3 days to which every location you choose."
-          src={image_clock}>
-        </Keypoint>
-      </div>
-      <div className="col-md-4">
-        <Keypoint
-          title="7 Day Returns"
-          content="If you do not find the car suitable you can return in 7 days, no questions asked."
-          src={image_happy}>
-        </Keypoint>
-      </div>
+    return (<div>
     </div>);
 
   }
