@@ -4,8 +4,7 @@ import Skblock from '../Details.skblock';
 import '../Details.scss';
 import './Details.reviews.scss';
 import {Row, Col, Button} from 'react-bootstrap';
-
-// Images
+import translations from '../../../../store/locales/en';
 import image_star from './../../../../static/images/standard/star@2x.png';
 import image_unstar from './../../../../static/images/standard/star-1@2x.png';
 
@@ -17,7 +16,7 @@ class Reviews extends React.Component {
   render() {
     const reviews = this.props.reviews;
 
-    return (<Skblock header={'Reviews'}>
+    return (<Skblock header={translations.routes.details.components.reviews.header}>
       {reviews.map((review, i) => (<div key={i} className="panel panel-default">
           <div className="panel-body">
             <Row className="sk_details__reviews__header">
@@ -39,12 +38,12 @@ class Reviews extends React.Component {
             </Row>
             {review.videoUrl ? (<Row className="sk_details__reviews__body">
               <Col md={12}>
-                {/* Youtube video? */}
+                {/* Youtube video? Yes. */}
               </Col>
             </Row>) : ""}
             <Row className="sk_details__reviews__footer">
               <Col md={12}>
-                <Button className="pull-right sk_details__reviews__button-read-more">Read More</Button>
+                <Button className="pull-right sk_details__reviews__button-read-more">{translations.routes.details.components.reviews.btn_read_more}</Button>
               </Col>
             </Row>
           </div>
