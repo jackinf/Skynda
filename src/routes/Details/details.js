@@ -26,6 +26,7 @@ import dummy_image3 from './../../static/images/cars/accord/accord3.jpg';
 // Local components
 import Skblock from './components/details.skblock';
 import Overview from './components/Overview';
+import Fetaures from './components/Features';
 import PetrolConsumption from './components/details.petrol-consumption';
 import Performance from './components/details.performance';
 import InspectorsReport from './components/details.inspectors-report';
@@ -203,12 +204,7 @@ sale`
 
                 {car_data.descriptions.map((description, i) => <Skblock key={i} header={description.title}>{description.text}</Skblock>)}
 
-                <Skblock header={'Nice features'}>
-                  {car_data.features.map((feature, i) => (<Col key={i} md={4}>
-                    <img src={image_ok} width="24" className="sk_details__icon_list_image"/>
-                    {feature}
-                  </Col>))}
-                </Skblock>
+                <Fetaures features={car_data.features} />
 
                 <Skblock header={'Car History'}>
                   <Col md={6}>
