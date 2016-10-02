@@ -183,7 +183,7 @@ CREATE TABLE "cars_for_sale"
 	"torque" varchar(50),
 	"total_valves" varchar(50),
 	"power_train" varchar(50),
-	"safety_stars" varchar(50),
+	"safety_stars" varchar(50)
 )
 ;
 
