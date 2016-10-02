@@ -157,7 +157,7 @@ sale`
         dispatch(setCarData(car_data));
         dispatch(toggleLoading(false));
         resolve();
-      }, 1000);
+      }, 200);
     });
   };
 };

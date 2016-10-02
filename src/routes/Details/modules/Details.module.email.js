@@ -5,24 +5,42 @@
 import fetch from 'isomorphic-fetch';
 import remoteConfig from '../../../store/remoteConfig';
 
+/**
+ * Sends email for subscription for newsletter
+ * @param data
+ * @returns {function()}
+ */
 export const sendEmailAsync = (data) => {
-  return (dispatch, getState) => {
+  return () => {
     var form_data = new FormData();
     for (let key in data)
       form_data.append(key, data[key]);
 
-    return fetch(remoteConfig.remote + '/api/email', {
+    return fetch(remoteConfig.remote + '/api/email/person', {
       method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
+      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
     });
   };
 };
 
-export const actions = {
-  sendEmailAsync
+/**
+ * If person has a question, he asks by sending an email.
+ * @param data
+ * @returns {function()}
+ */
+export const sendQuestionByEmailAsync = (data) => {
+  return () => {
+    return fetch(remoteConfig.remote + '/api/email/question', {
+      method: 'POST',
+      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+  };
+
 };
-// jbr91@mail.ru
+
+export const actions = {
+  sendEmailAsync,
+  sendQuestionByEmailAsync
+};
