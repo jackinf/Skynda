@@ -3,7 +3,7 @@
  */
 
 import { connect } from "react-redux";
-import { toggleLoading, setCarData, getDataAsync } from "../modules";
+import { toggleLoading, setCarData, getDataAsync, sendEmailAsync } from "../modules";
 
 import About from "../components/Details";
 
@@ -14,7 +14,8 @@ import About from "../components/Details";
 const mapDispatchToProps = {
   toggleLoading,
   setCarData,
-  getDataAsync
+  getDataAsync,
+  sendEmailAsync
 };
 
 const mapStateToProps = (state) => ({

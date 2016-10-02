@@ -4,9 +4,11 @@
 
 import { getDataAsync, setCarData } from "./Details.module.car-data";
 import { toggleLoading } from "./Details.module.toggle-loading";
+import { sendEmailAsync } from "./Details.module.email";
 
 export {
   getDataAsync,
   setCarData,
-  toggleLoading
+  toggleLoading,
+  sendEmailAsync
 };

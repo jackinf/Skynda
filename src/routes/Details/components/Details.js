@@ -77,7 +77,7 @@ class CarDetails extends React.Component {
               </div>
               <div className='col col-md-5'>
                 <Sticky>
-                  <Checkout />
+                  <Checkout sendEmailAsync={this.props.sendEmailAsync} />
                 </Sticky>
               </div>
             </div>

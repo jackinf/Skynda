@@ -94,21 +94,22 @@ class Checkout extends React.Component {
 
   constructor (props) {
     super(props);
-    this.state = { tab: 1, open: false, openSentMsg: false,
+    this.state = { tab: 1, openSentMsg: false,
       personDetails: {
         firstName: "",
         lastName: "",
         email: "",
         mobilePhone: ""
-      } };
+      }
+    };
   }
 
   handleClose = () => {
-    this.setState({ open: false });
     this.setState({ openSentMsg: false });
   };
 
-  displaySuccessPopup = () => {
+  displaySuccessPopup = async () => {
+    await this.props.sendEmailAsync(this.state.personDetails);
     this.setState({ openSentMsg: true });
   };
 
@@ -138,5 +139,9 @@ class Checkout extends React.Component {
     </div>);
   }
 }
+
+Checkout.propTypes = {
+  sendEmailAsync: React.PropTypes.func.isRequired
+};
 
 export default Checkout;
