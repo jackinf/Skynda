@@ -19,7 +19,6 @@ import CarSearch from "./../../components/CarSearch";
 import image_testcar from "../../static/images/cars/accord/accord.jpg";
 // Inner components
 import Hero from "./components/Home.hero";
-import Keypoints from "./components/Home.keypoints";
 // translation
 import translations from "../../store/locales/et";
 
@@ -68,10 +67,6 @@ class Home extends React.Component {
         <br />
 
         <div className='container'>
-
-          <Keypoints />
-          <br />
-          <br />
 
           {
             /**
