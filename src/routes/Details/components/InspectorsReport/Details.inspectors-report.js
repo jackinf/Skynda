@@ -6,13 +6,16 @@ import "./Details.inspectors-report.scss";
 
 // 3rd party
 import {RaisedButton, Dialog, TextField} from 'material-ui';
-import { Button, Row, Col } from "react-bootstrap";
+import {Button, Row, Col} from "react-bootstrap";
 
 // Images
 import image_ok from "./../../../../static/images/standard/ok.png";
 import image_cancel from "./../../../../static/images/standard/cancel.png";
 import image_car_inspector from "./assets/carinspector.png";
+import images_close from './assets/cancel@2x.png';
+
 import translations from "../../../../store/locales/et";
+
 
 /**
  * Draws a single icon (tick if pass or cross if not pass) and a description.
@@ -20,8 +23,8 @@ import translations from "../../../../store/locales/et";
 const pointBlockFn = (point, i) => (
   <Col className='sk_details__report__category-col' key={i} md={6}>
     {(point.pass) ?
-      (<img src={image_ok} width='24' className='sk_details__icon_list_image' />) :
-      (<img src={image_cancel} width='24' className='sk_details__icon_list_image' />)}
+      (<img src={image_ok} width='24' className='sk_details__icon_list_image'/>) :
+      (<img src={image_cancel} width='24' className='sk_details__icon_list_image'/>)}
     {point.text}
   </Col>);
 
@@ -31,26 +34,26 @@ const pointBlockFn = (point, i) => (
 class Report extends React.Component {
   constructor() {
     super();
-    this.state = { open: false, question: { howCanWeHelp: "", name: "", email: "" } };
+    this.state = {open: false, question: {howCanWeHelp: "", name: "", email: ""}};
   }
 
   openQuestionModal = () => {
-    this.setState({ open: true, question: { howCanWeHelp: "", name: "", email: "" } });
+    this.setState({open: true, question: {howCanWeHelp: "", name: "", email: ""}});
   };
-  closeQuestionModal = () => (this.setState({ open: false }));
-  submitQuestion = async () => {
+  closeQuestionModal = () => (this.setState({open: false}));
+  submitQuestion = async() => {
     await this.props.sendQuestionByEmailAsync(this.state.question);
     this.closeQuestionModal();
   };
 
-  render () {
-    const { categories } = this.props.report;
+  render() {
+    const {categories} = this.props.report;
 
     return (
       <Skblock header={translations.routes.details.components.inspector_report.header}>
         <Row>
           <Col md={3}><label className='sk_details__certified_developer'>Artur P.</label></Col>
-          <Col md={4}><img src={image_car_inspector} width='130' alt='happy' /></Col>
+          <Col md={4}><img src={image_car_inspector} width='130' alt='happy'/></Col>
           <Col md={5} className='sk_details__certified_developer'>
             <Button className='sk_details__report__button-have-questions' onClick={this.openQuestionModal}>
               {translations.routes.details.components.inspector_report.question}
@@ -80,8 +83,11 @@ class Report extends React.Component {
         ))}
 
         <Dialog
-          title="Kas teil on küsimusi?"
-          actions={[<RaisedButton label="Saada" primary={true} keyboardFocused={true} onTouchTap={this.submitQuestion} />]}
+          title={(<div><h4 className="sk_details__report__question-title">Kas teil on küsimusi?</h4>
+            <img className="sk_details__report__question-close-button" onClick={this.closeQuestionModal} src={images_close}/></div>)}
+          actions={[(<Button className='sk_details__report__button-send-question' onClick={this.submitQuestion}>
+            {translations.routes.details.components.inspector_report.send_question}
+          </Button>)]}
           modal={false}
           open={this.state.open}
           onRequestClose={this.closeQuestionModal}
@@ -95,11 +101,11 @@ class Report extends React.Component {
           <Row>
             <Col md={6}>
               <TextField hintText="Teie Nimi*" fullWidth={true}
-                         onChange={e => this.state.question.name = e.target.value } />
+                         onChange={e => this.state.question.name = e.target.value }/>
             </Col>
             <Col md={6}>
               <TextField hintText="Teie E-mail*" fullWidth={true}
-                         onChange={e => this.state.question.email = e.target.value } />
+                         onChange={e => this.state.question.email = e.target.value }/>
             </Col>
           </Row>
         </Dialog>

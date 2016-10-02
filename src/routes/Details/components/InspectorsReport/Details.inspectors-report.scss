@@ -29,3 +29,21 @@
   color: whitesmoke;
   border-radius: 10px;
 }
+
+.sk_details__report__button-send-question{
+  background: $color-primary;
+  color: whitesmoke;
+}
+
+.sk_details__report__question-title {
+  color: $color-primary !important;
+  text-align: center;
+}
+
+.sk_details__report__question-close-button {
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin: 20px;
+  cursor: pointer;
+}
