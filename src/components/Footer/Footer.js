@@ -8,23 +8,21 @@
  */
 
 import React from "react";
-// import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import "./Footer.scss";
-// import Link from '../Link';
 import { Link } from "react-router";
 import translations from "../../store/locales/en";
 
 function Footer () {
   return (
-    <div className='root'>
+    <div className='footer-root'>
       <div className='container footer-container'>
         <span className='text'>{translations.components.footer.your_company}</span>
         <span className='spacer'>·</span>
-        <Link className='link' to='/'>{translations.components.footer.home}</Link>
+        <span>{translations.components.footer.address}</span>
         <span className='spacer'>·</span>
-        <Link className='link' to='/privacy'>{translations.components.footer.privacy}</Link>
+        <Link className='link' to='/privacy'>{translations.components.footer.email}</Link>
         <span className='spacer'>·</span>
-        <Link className='link' to='/not-found'>{translations.components.footer.not_found}</Link>
+        <span className="text">{translations.components.footer.phone}</span>
       </div>
     </div>
   );
