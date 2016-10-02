@@ -1,8 +1,8 @@
 package me.skynda.service;
 
-import me.skynda.dto.EmailPersonDetailsDto;
+import me.skynda.dto.IEmailBaseDto;
 
 public interface EmailService {
 
-    boolean sendEmail(EmailPersonDetailsDto dto);
+    boolean sendEmail(IEmailBaseDto dto);
 }

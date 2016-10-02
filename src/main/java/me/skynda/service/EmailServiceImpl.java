@@ -1,6 +1,6 @@
 package me.skynda.service;
 
-import me.skynda.dto.EmailPersonDetailsDto;
+import me.skynda.dto.IEmailBaseDto;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
@@ -15,14 +15,14 @@ public class EmailServiceImpl implements EmailService {
     private final String MAIL_TO = "zeka.rum@gmail.com";    // use hello@skynda.com
 
     /**
-     * Sends email.
+     * Sends email using GMAIL settings.
      * http://stackoverflow.com/questions/19493904/javax-mail-messagingexception-could-not-connect-to-smtp-host-localhost-port
      *
      * @param dto - person's info and car id.
      * @return Successfully sent or not
      */
     @Override
-    public boolean sendEmail(EmailPersonDetailsDto dto) {
+    public boolean sendEmail(IEmailBaseDto dto) {
 
         // Get a Properties object
         Properties props = System.getProperties();
@@ -49,13 +49,10 @@ public class EmailServiceImpl implements EmailService {
             Message msg = new MimeMessage(session);
 
             // -- Set the FROM and TO fields --
-            msg.setFrom(new InternetAddress(dto.getEmail()));
+            msg.setFrom(new InternetAddress(dto.getSender()));
             msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(MAIL_TO, false));
             msg.setSubject("Message from skynda app");
-            msg.setText("Client is interested in buying a car. " +
-                    "First name: " + dto.getFirstName() +
-                    ", Last name: " + dto.getLastName() +
-                    ", Car he/she is interested in: " + dto.getCarPk());
+            msg.setText(dto.getContent());
             msg.setSentDate(new Date());
             Transport.send(msg);
             System.out.println("Message sent.");

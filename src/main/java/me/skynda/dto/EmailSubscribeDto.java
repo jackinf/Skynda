@@ -3,7 +3,7 @@ package me.skynda.dto;
 import lombok.Data;
 
 @Data
-public class EmailPersonDetailsDto {
+public class EmailSubscribeDto implements IEmailBaseDto {
 
     /**
      * Person's first name
@@ -31,4 +31,16 @@ public class EmailPersonDetailsDto {
      */
     private String carPk;
 
+    @Override
+    public String getSender() {
+        return this.getEmail();
+    }
+
+    @Override
+    public String getContent() {
+        return "Client is interested in buying a car. " +
+                "First name: " + this.getFirstName() +
+                ", Last name: " + this.getLastName() +
+                ", Car he/she is interested in: " + this.getCarPk();
+    }
 }
