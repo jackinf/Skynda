@@ -1,10 +1,10 @@
-import image_face_1 from "../assets/face1.png";
-import image_face_2 from "../assets/face2.png";
-import image_face_3 from "../assets/face3.png";
-import image_face_4 from "../assets/face4.png";
-import image_face_5 from "../assets/face5.png";
-import image_face_6 from "../assets/face6.png";
-import image_face_7 from "../assets/face7.png";
+import image_face_1 from "../assets/group-124@2x.png.png";
+import image_face_2 from "../assets/group-1@2x.png.png";
+import image_face_3 from "../assets/group-2@2x.png.png";
+import image_face_4 from "../assets/group-3@2x.png.png";
+import image_face_5 from "../assets/group-4@2x.png.png";
+import image_face_6 from "../assets/group-5@2x.png.png";
+import image_face_7 from "../assets/group-6@2x.png.png";
 import image_face_8 from "../assets/face8.png";
 
 // ------------------------------------

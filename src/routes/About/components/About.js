@@ -1,8 +1,16 @@
 import React from "react";
 import "./About.scss";
 
+// 3rd party
 import { Row, Col } from "react-bootstrap";
 
+// Images
+import image_logo from './../assets/skynda logo 4-mask-8@2x.png.png';
+import image_google from './../assets/Google Maps@2x.png.png';
+import image_telia from './../assets/image-mask-6@2x.png.png';
+import image_vunk from './../assets/group@2x.png.png';
+
+// Components
 import AboutSkblock from "./AboutSkblock";
 
 export class About extends React.Component {
@@ -50,22 +58,47 @@ export class About extends React.Component {
             <h4 className='about__our-contacts-header'>Meie kontaktid</h4>
 
             <Row>
+              <img src={image_logo} alt="logo"/>
+            </Row>
+
+            <br />
+
+            <Row>
               Skynda AS
             </Row>
+
+            <br />
+
+            <Row>
+              <img src={image_google} alt="google"/>
+            </Row>
+
+            <br />
 
             <Row>
               Valge tn 16<br />19095 Tallinn<br />Eesti Vabariik
             </Row>
 
             <Row>
-              hello@skynda.me
+              <span className="about__email">hello@skynda.me</span>
+              <br />
             </Row>
 
             <Row>
               +372 5144 750
             </Row>
 
-            <h4 className='about__our-contacts-header'>Meie kontaktid</h4>
+            <h4 className='about__our-contacts-header'>Partnerid</h4>
+
+            <Row>
+              <img src={image_telia} alt=""/>
+            </Row>
+
+            <br />
+
+            <Row>
+              <img src={image_vunk} alt=""/>
+            </Row>
           </div>
         </Col>
       </Row>

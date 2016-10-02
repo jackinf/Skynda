@@ -15,6 +15,7 @@
 .about__person-image {
   margin-top: 20px;
   margin-bottom: 20px;
+  width: 70px;
 }
 
 .about__person-name {
@@ -24,4 +25,8 @@
 .about__person-position {
   font-weight: 600;
   color: #aaaaaa;
+}
+
+.about__email {
+  color: $color-primary;
 }
