@@ -1,50 +1,66 @@
 package me.skynda.service;
 
-
 import me.skynda.dto.EmailPersonDetailsDto;
 
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Session;
-import javax.mail.Transport;
+import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.util.Date;
 import java.util.Properties;
 
 @org.springframework.stereotype.Service
 public class EmailServiceImpl implements EmailService {
 
-    private final String MAIL_TO = "zeka.rum@gmail.com";    // Recipient's email ID needs to be mentioned.
-    private final String MAIL_SERVER = "mail.smtp.host";
-    private final String HOST = "localhost";                // Assuming you are sending email from localhost
+    private final String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
+    private final String MAIL_TO = "zeka.rum@gmail.com";    // use hello@skynda.com
 
+    /**
+     * Sends email.
+     * http://stackoverflow.com/questions/19493904/javax-mail-messagingexception-could-not-connect-to-smtp-host-localhost-port
+     *
+     * @param dto - person's info and car id.
+     * @return Successfully sent or not
+     */
     @Override
     public boolean sendEmail(EmailPersonDetailsDto dto) {
 
-        String from = dto.getEmail();    // Sender's email ID needs to be mentioned
-        Properties properties = System.getProperties(); // Get system properties
-        properties.setProperty(MAIL_SERVER, HOST); // Setup mail server
-
-        // Get the default Session object.
-        Session session = Session.getDefaultInstance(properties);
-
+        // Get a Properties object
+        Properties props = System.getProperties();
+        props.setProperty("mail.smtp.host", "smtp.gmail.com");
+        props.setProperty("mail.smtp.socketFactory.class", SSL_FACTORY);
+        props.setProperty("mail.smtp.socketFactory.fallback", "false");
+        props.setProperty("mail.smtp.port", "465");
+        props.setProperty("mail.smtp.socketFactory.port", "465");
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.debug", "true");
+        props.put("mail.store.protocol", "pop3");
+        props.put("mail.transport.protocol", "smtp");
+        final String username = "zeka.rum@gmail.com";   // real email used as a server to send emails
+        final String password = "krmp dehy lixe ihwq";  // real password (generated app password)
         try {
-            MimeMessage message = new MimeMessage(session);     // Create a default MimeMessage object.
-            message.setFrom(new InternetAddress(from));         // Set From: header field of the header.
-            message.addRecipient(Message.RecipientType.TO, new InternetAddress(MAIL_TO));   // Set To: header field of the header.
-            message.setSubject("Skynda test page");             // Set Subject: header field
+            Session session = Session.getDefaultInstance(props,
+                    new Authenticator() {
+                        protected PasswordAuthentication getPasswordAuthentication() {
+                            return new PasswordAuthentication(username, password);
+                        }
+                    });
 
-            // Now set the actual message
-            message.setText("Message contains: " +
+            // -- Create a new message --
+            Message msg = new MimeMessage(session);
+
+            // -- Set the FROM and TO fields --
+            msg.setFrom(new InternetAddress(dto.getEmail()));
+            msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(MAIL_TO, false));
+            msg.setSubject("Message from skynda app");
+            msg.setText("Client is interested in buying a car. " +
                     "First name: " + dto.getFirstName() +
                     ", Last name: " + dto.getLastName() +
-                    ", Car interested in: " + dto.getCarPk());
-
-            // Send message
-            Transport.send(message);
-            System.out.println("Sent message successfully....");
-        }catch (MessagingException mex) {
-            mex.printStackTrace();
+                    ", Car he/she is interested in: " + dto.getCarPk());
+            msg.setSentDate(new Date());
+            Transport.send(msg);
+            System.out.println("Message sent.");
+        } catch (MessagingException e) {
+            e.printStackTrace();
             return false;
         }
 
