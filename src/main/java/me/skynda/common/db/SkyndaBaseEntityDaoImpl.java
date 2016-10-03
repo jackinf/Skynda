@@ -2,6 +2,8 @@ package me.skynda.common.db;
 
 //import com.nortal.spl.orm.hibernate4.qst.api.HibernateQuerySyntaxTest;
 import lombok.SneakyThrows;
+import me.skynda.model.Car;
+
 import org.hibernate.Hibernate;
 import org.hibernate.LockOptions;
 import org.hibernate.proxy.HibernateProxy;
