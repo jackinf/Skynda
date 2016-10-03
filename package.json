@@ -109,6 +109,7 @@
     "normalize.css": "^4.1.1",
     "nuka-carousel": "^2.0.3",
     "owl.carousel": "^2.1.4",
+    "path": "^0.12.7",
     "postcss-loader": "^0.13.0",
     "rc-slider": "^5.1.1",
     "react": "^15.0.0",
