@@ -149,7 +149,7 @@ CREATE TABLE "car_models"
 	"drive" varchar(255)	 NOT NULL,
 	"doors" varchar(50)	 NOT NULL,
 	"seats" varchar(50)	 NOT NULL,
-	"year" timestamp NOT NULL,
+	"year"  varchar(50) NOT NULL,
 	"body_type" varchar(100)	 NOT NULL
 )
 ;
@@ -158,7 +158,9 @@ CREATE TABLE "cars_for_sale"
 (
 	"id" serial,
 	"model_code" varchar(100)	 NOT NULL,
-	"manufacturer_code" varchar(100)	 NOT NULL,
+	"report_id" integer,
+	"review_id" integer,
+	--"manufacturer_code" varchar(100)	 NOT NULL, --SHOULD IT BE HERE...I THINK NO!!!
 	"vin_code" varchar(100)	 NOT NULL,
 	"price" decimal(10,2) NOT NULL,
 	"created" timestamp NOT NULL,
@@ -190,7 +192,6 @@ CREATE TABLE "cars_for_sale"
 CREATE TABLE "car_report"
 (
 	"report_id" serial,
-	"cars_for_sale_id" integer,
 	"title" varchar(50),
 	"is_pass" boolean,
 	"points_text" text,
@@ -202,7 +203,6 @@ CREATE TABLE "car_report"
 CREATE TABLE "car_review"
 (
 	"review_id" serial,
-	"cars_for_sale_id" integer,
 	"logo_url" varchar(255),
 	"video_url" varchar(255),
 	"text" text,
@@ -349,10 +349,10 @@ ALTER TABLE "cars_for_sale" ADD CONSTRAINT "FK_cars_for_sale_customer"
 	FOREIGN KEY ("customer_id") REFERENCES "customer" ("customer_id") ON DELETE No Action ON UPDATE No Action
 ;
 
-ALTER TABLE "car_report" ADD CONSTRAINT "FK_car_report_cars_for_sale"
-	FOREIGN KEY ("cars_for_sale_id") REFERENCES "cars_for_sale" ("id") ON DELETE No Action ON UPDATE No Action
+ALTER TABLE "cars_for_sale" ADD CONSTRAINT "FK_cars_for_sale_car_report"
+	FOREIGN KEY ("report_id") REFERENCES "car_report" ("report_id") ON DELETE No Action ON UPDATE No Action
 ;
 
-ALTER TABLE "car_review" ADD CONSTRAINT "FK_car_review_cars_for_sale"
-	FOREIGN KEY ("cars_for_sale_id") REFERENCES "cars_for_sale" ("id") ON DELETE No Action ON UPDATE No Action
+ALTER TABLE "cars_for_sale" ADD CONSTRAINT "FK_cars_for_sale_car_review"
+	FOREIGN KEY ("review_id") REFERENCES "car_review" ("review_id") ON DELETE No Action ON UPDATE No Action
 ;
