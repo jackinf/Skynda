@@ -134,6 +134,7 @@ CREATE TABLE "customer"
 CREATE TABLE "car_manufacturer"
 (
 	"manufacturer_code" varchar(100)	 NOT NULL,
+	"title" varchar(255),
 	"description" text
 )
 ;
@@ -143,6 +144,7 @@ CREATE TABLE "car_models"
 	"model_code" varchar(100)	 NOT NULL,
 	"manufacturer_code" varchar(100)	 NOT NULL,
 	"description" text,
+	"title" varchar(255),
 	"transmission" varchar(50)	 NOT NULL,
 	"engine" varchar(100)	 NOT NULL,
 	"horse_power" varchar(100)	,

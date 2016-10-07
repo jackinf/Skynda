@@ -20,6 +20,7 @@ public class CarModels {
 	private CarManufacturer carManufacturer;
 
 	private String description;
+	private String title;
 	private String transmission;
 	private String engine;
 	private String horsePower;

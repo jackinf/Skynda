@@ -9,16 +9,16 @@ import lombok.ToString;
 @ToString(callSuper = false)
 public class SingleCarDataDto {
 	
-	private String CarGeneralDto;
+	private CarGeneralDto carGeneralDto;
 	private List<ImagesDto> images;
-	private OverviewDto overview;
+	private List<OverviewDto> overview;
 	private List<DescriptionsDto> descriptions;
 	private List<String> features;
 	private HistoryDto history;
 	private PetrolConsumptionDto petrolConsumption;
 	private PerformanceDto performance;
 	private String safetyStars;
-	private ReportDto report;
+	private List<ReportDto> report;
 	private List<ReviewDto> review;
 
 }

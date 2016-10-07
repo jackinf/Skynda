@@ -2,6 +2,7 @@ package me.skynda.model;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import lombok.Data;
 
@@ -28,13 +30,11 @@ public class Car {
     @JoinColumn(name = "model_code", nullable = false)
     private CarModels carModels;
 	
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "report_id", nullable = false)
-    private CarReport carReport;
+	@OneToMany(mappedBy = "id", fetch = FetchType.LAZY)
+    private List<CarReport> carReport;
 	
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "review_id", nullable = false)
-    private CarReview carReview;
+	@OneToMany(mappedBy = "id", fetch = FetchType.LAZY)
+    private List<CarReview> carReview;
 	
 	private String vinCode;
 	private BigDecimal price;
