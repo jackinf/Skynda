@@ -4,6 +4,7 @@
 // app.listen(3000, function() { console.log('listening'); });
 
 const express = require('express');
+const exec = require('child_process').exec;
 const path = require('path');
 const port = process.env.PORT || 3000;
 const app = express();
@@ -19,6 +20,16 @@ var pmx = require('pmx').init({
 
 pmx.action('hello:world', function(reply) {
   reply({success : true});
+});
+
+pmx.action('deploy:prod', function(reply) {
+  exec('deploy-skynda.sh', (error, stdout, stderr) => {
+    if (error) {
+      reply({success: false, error: error});
+    } else {
+      reply({success : true});
+    }
+  });
 });
 
 // serve static assets normally
