@@ -10,6 +10,8 @@ import { Button, Row, Col } from "react-bootstrap";
 import Slider from "rc-slider";
 import moment from "moment";
 
+import SliderWrapper from './CarSearchSliderWrapper';
+
 // translation
 import translations from "../../store/locales/et";
 
@@ -87,6 +89,9 @@ const seats = [
 ];
 // const options = [brands, colors, features, transmissions, doors, seats];
 
+
+
+
 class CarSearch extends React.Component {
   constructor () {
     super();
@@ -95,17 +100,20 @@ class CarSearch extends React.Component {
 
       // NB! Do not change property names.
       sliderValues: {
-        mileage: { min: 0, max: 0 },
-        price: { min: 0, max: 0 },
-        year: { min: 0, max: 0 },
-        petrol_consumption: { min: 0, max: 0},
-        power: { min: 0, max: 0 }
+        mileage: { min: 0, max: 0, units: 'KM' },
+        price: { min: 0, max: 0, units: 'EUR' },
+        year: { min: 0, max: 0, units: '' },
+        petrol_consumption: { min: 0, max: 0, units: ''},
+        power: { min: 0, max: 0, units: 'kWh' }
       }
     };
+
     this.search = this.search.bind(this);
+    this.toggleAdvanced = this.toggleAdvanced.bind(this);
+    this.onSliderChange = this.onSliderChange.bind(this);
   }
 
-  search() {
+  search () {
     console.log("search is not implemented");
   }
 
@@ -113,8 +121,9 @@ class CarSearch extends React.Component {
     this.setState({ showAdvancedSearch: value });
   }
 
-  onSliderChange(value, name) {
-    const range = { min: value[0], max: value[1] };
+  onSliderChange (value, name) {
+    // value 0 is rcslider's min value and value 1 is max value.
+    const range = { min: value[0], max: value[1], units: this.state.sliderValues[name].units };
     this.setState({ sliderValues: { [name]: range } });
   }
 
@@ -132,26 +141,16 @@ class CarSearch extends React.Component {
         <Row>
           <Col md={4}>
             <Row>
-              <Col md={12} className='range-slider-wrapper'>
-                <label>{translations.components.car_search.mileage}</label>
+              <Col md={12}>
 
-                <Row className="range-slider-wrapper__labels">
-                  <Col md={6}>
-                    {this.state.sliderValues.mileage.min}
-                  </Col>
-                  <Col md={6}>
-                    <span className="pull-right">
-                      {this.state.sliderValues.mileage.max}
-                    </span>
-                  </Col>
-                </Row>
-
-                <Row>
-                  <Col sm={12}>
-                    <Slider range allowCross={false} defaultValue={[0, 500000]} min={0} max={500000} step={100}
-                            onChange={e => this.onSliderChange(e, "mileage")} />
-                  </Col>
-                </Row>
+                <SliderWrapper
+                  title={translations.components.car_search.mileage}
+                  propertyName="mileage"
+                  min={this.state.sliderValues.mileage.min}
+                  max={this.state.sliderValues.mileage.max}
+                  units={this.state.sliderValues.mileage.units}
+                  onSliderChange={e => this.onSliderChange(e, "mileage")}
+                />
 
               </Col>
             </Row>
@@ -274,5 +273,6 @@ class CarSearch extends React.Component {
     </div>);
   }
 }
+
 
 export default CarSearch;
