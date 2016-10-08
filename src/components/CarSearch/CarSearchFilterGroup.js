@@ -7,7 +7,6 @@ import "./CarSearchFilterGroup.scss";
 import ButtonGroup from "./CarSearchButtonGroup";
 
 import { Button, Row, Col } from "react-bootstrap";
-import Slider from "rc-slider";
 import moment from "moment";
 
 import SliderWrapper from './CarSearchSliderWrapper';
@@ -87,24 +86,20 @@ const seats = [
   { id: 2, name: "5" },
   { id: 3, name: "6+" }
 ];
-// const options = [brands, colors, features, transmissions, doors, seats];
-
-
-
 
 class CarSearch extends React.Component {
   constructor () {
     super();
     this.state = {
-      showAdvancedSearch: false,
+      showAdvancedSearch: true,
 
       // NB! Do not change property names.
       sliderValues: {
         mileage: { min: 0, max: 500000, units: 'KM' },
         price: { min: 0, max: 500000, units: 'EUR' },
         year: { min: 1970, max: moment().year(), units: '' },
-        petrol_consumption: { min: 0, max: 20, units: ''},
-        power: { min: 0, max: 500, units: 'kWh' }
+        petrol_consumption: { min: 0, max: 20, units: 'L'},
+        power: { min: 0, max: 500, units: 'KW' }
       }
     };
 
@@ -169,9 +164,6 @@ class CarSearch extends React.Component {
                   units={this.state.sliderValues.price.units}
                   onSliderChange={e => this.onSliderChange(e, "price")}
                 />
-
-                {/*<label>{translations.components.car_search.price}</label>*/}
-                {/*<Slider range allowCross={false} defaultValue={[0, 500000]} min={0} max={500000} step={100} />*/}
               </Col>
             </Row>
           </Col>
@@ -186,10 +178,6 @@ class CarSearch extends React.Component {
                   units={this.state.sliderValues.year.units}
                   onSliderChange={e => this.onSliderChange(e, "year")}
                 />
-
-                {/*<label>{translations.components.car_search.year}</label>*/}
-                {/*<Slider range allowCross={false} defaultValue={[0, moment().year()]} min={1970} max={moment().year()}*/}
-                  {/*step={1} />*/}
               </Col>
             </Row>
           </Col>
@@ -218,10 +206,6 @@ class CarSearch extends React.Component {
                       units={this.state.sliderValues.petrol_consumption.units}
                       onSliderChange={e => this.onSliderChange(e, "petrol_consumption")}
                     />
-
-
-                    {/*<label>{translations.components.car_search.petrol_consumption}</label><br />*/}
-                    {/*<Slider range allowCross={false} defaultValue={[0, 20]} min={0} max={20} step={0.1} />*/}
                   </Col>
                 </Row>
               </Col>
@@ -247,10 +231,6 @@ class CarSearch extends React.Component {
                       units={this.state.sliderValues.power.units}
                       onSliderChange={e => this.onSliderChange(e, "power")}
                     />
-
-
-                    {/*<label>{translations.components.car_search.power}</label>*/}
-                    {/*<Slider range allowCross={false} defaultValue={[0, 500]} min={0} max={500} step={1} />*/}
                   </Col>
                 </Row>
               </Col>
@@ -289,13 +269,13 @@ class CarSearch extends React.Component {
         <div className='row'>
           <div className='col-md-12'>
             <div className='text-right'>
-              <button className='btn btn-link fk-filter-advance' role='button' data-toggle='collapse'
-                data-target='#advanceSearch' aria-expanded='false' aria-controls='collapseExample'
-                onClick={e => this.toggleAdvanced(!this.state.showAdvancedSearch)}>
+              <Button className='btn btn-link fk-filter-advance'
+                      role='button'
+                      onClick={e => this.toggleAdvanced(!this.state.showAdvancedSearch)}>
                 <span className='more glyphicon glyphicon-plus' />
-                <span className='less glyphicon glyphicon-minus' />
+                {/*<span className='less glyphicon glyphicon-minus' />*/}
                 {translations.components.car_search.advanced_txt}
-              </button>
+              </Button>
 
               <Button className='btn btn-info sk-btn--search' onClick={this.search}>
                 <span className='glyphicon glyphicon-search' />

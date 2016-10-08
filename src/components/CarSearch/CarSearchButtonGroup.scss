@@ -9,8 +9,8 @@ $default-border-color: #E8E5E5;
 
     /* Such bad hard-coded sizes */
     padding: 0;
-    width: 34px;
-    height: 34px;
+    width: 40px;
+    height: 40px;
   }
 
   .btn-group__element {
@@ -35,4 +35,9 @@ $default-border-color: #E8E5E5;
   width: 20px !important;
   height: 20px !important;
   margin-top: -7px;
+  border-color: $default-color;
+}
+
+.rc-slider-track {
+  background-color: $default-color;
 }

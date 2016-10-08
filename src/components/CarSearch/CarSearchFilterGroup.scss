@@ -1,3 +1,5 @@
+$default-color: #019BFF;
+
 .car-search {
   .search {
     background-color: #F8F8F8;
@@ -66,4 +68,18 @@
     display: none;
   }
 
+  .sk-btn--search {
+    background: transparent;
+    color: $default-color;
+    border-color: $default-color;
+
+    span {
+      margin-right: 10px;
+    }
+  }
+
+  .fk-filter-advance {
+    border: transparent !important;
+    color: $default-color;
+  }
 }
