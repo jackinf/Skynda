@@ -1,7 +1,11 @@
 
+$default-color: #019BFF;
+$default-border-color: #E8E5E5;
+
 .btn-group {
   .btn-group__circle {
     border-radius: 50%;
+    border-color: $default-border-color;
 
     /* Such bad hard-coded sizes */
     padding: 0;
@@ -12,6 +16,23 @@
   .btn-group__element {
     margin-bottom: 5px;
     margin-top: 5px;
+
+    .btn-group__element-button {
+      border-color: $default-border-color;
+      color: #5A5B5C;
+    }
+
+    .btn-group__element-button-toggled {
+      background-color: $default-color;
+      color:whitesmoke;
+    }
   }
 
+}
+
+// React slider override. TODO: Wrap react slider into own component?.. and override styles there?
+.rc-slider-handle {
+  width: 20px !important;
+  height: 20px !important;
+  margin-top: -7px;
 }

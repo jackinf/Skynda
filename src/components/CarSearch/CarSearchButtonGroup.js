@@ -51,14 +51,24 @@ class ButtonGroup extends React.Component {
     var smCol = this.props.sm ? this.props.sm : 3;
 
     return (<div className='btn-group list-inline'>
-      {this.props.options.map((option, key) => (<Col md={mdCol} sm={smCol} key={key} className='btn-group__element'>
-        <Button style={option.style ? option.style : this.props.shape === "circle" ? {} : { width: "100%" }}
-          className={this.props.shape === "circle" ? "btn-group__circle" : ""}
-          bsStyle={(!option.toggled ? "default" : "primary")}
-          onClick={e => this.toggle(option)}>
-          {option.hideName ? <MdDone /> : option.name}
-        </Button>
-      </Col>))}
+      {this.props.options.map((option, key) => {
+        const style = option.style ? option.style : this.props.shape === "circle" ? {} : { width: "100%" };
+        let classNames = (this.props.shape === "circle" ? "btn-group__circle" : "btn-group__element-button");
+
+        if (option.toggled) {
+          classNames += " btn-group__element-button-toggled";
+        }
+
+        return (<Col md={mdCol} sm={smCol} key={key} className='btn-group__element'>
+          <Button
+            style={style}
+            className={classNames}
+            bsStyle={(!option.toggled ? "default" : "primary")}
+            onClick={e => this.toggle(option)}>
+            {option.hideName ? <MdDone /> : option.name}
+          </Button>
+        </Col>);
+      })}
     </div>);
   }
 }

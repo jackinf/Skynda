@@ -9,6 +9,7 @@ import ButtonGroup from "./CarSearchButtonGroup";
 import { Button, Row, Col } from "react-bootstrap";
 import Slider from "rc-slider";
 import moment from "moment";
+
 // translation
 import translations from "../../store/locales/et";
 
@@ -89,11 +90,22 @@ const seats = [
 class CarSearch extends React.Component {
   constructor () {
     super();
-    this.state = { showAdvancedSearch: false };
+    this.state = {
+      showAdvancedSearch: false,
+
+      // NB! Do not change property names.
+      sliderValues: {
+        mileage: { min: 0, max: 0 },
+        price: { min: 0, max: 0 },
+        year: { min: 0, max: 0 },
+        petrol_consumption: { min: 0, max: 0},
+        power: { min: 0, max: 0 }
+      }
+    };
     this.search = this.search.bind(this);
   }
 
-  search () {
+  search() {
     console.log("search is not implemented");
   }
 
@@ -101,12 +113,17 @@ class CarSearch extends React.Component {
     this.setState({ showAdvancedSearch: value });
   }
 
+  onSliderChange(value, name) {
+    const range = { min: value[0], max: value[1] };
+    this.setState({ sliderValues: { [name]: range } });
+  }
+
   render () {
     return (<div className='car-search'>
       <section className='search'>
 
         <Row>
-          <Col md={12}>
+          <Col md={12} className='range-slider-wrapper'>
             <label>{translations.components.car_search.brand}</label>
             <ButtonGroup options={brands} />
           </Col>
@@ -117,7 +134,25 @@ class CarSearch extends React.Component {
             <Row>
               <Col md={12} className='range-slider-wrapper'>
                 <label>{translations.components.car_search.mileage}</label>
-                <Slider range allowCross={false} defaultValue={[0, 500000]} min={0} max={500000} step={100} />
+
+                <Row className="range-slider-wrapper__labels">
+                  <Col md={6}>
+                    {this.state.sliderValues.mileage.min}
+                  </Col>
+                  <Col md={6}>
+                    <span className="pull-right">
+                      {this.state.sliderValues.mileage.max}
+                    </span>
+                  </Col>
+                </Row>
+
+                <Row>
+                  <Col sm={12}>
+                    <Slider range allowCross={false} defaultValue={[0, 500000]} min={0} max={500000} step={100}
+                            onChange={e => this.onSliderChange(e, "mileage")} />
+                  </Col>
+                </Row>
+
               </Col>
             </Row>
           </Col>
