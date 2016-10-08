@@ -8,20 +8,34 @@ import settimeoutMixin from '../../mixins/settimeout';
 
 class SliderWrapper extends React.Component {
 
-  onSliderChange = (value, name) => {
+  title = "";
+  step = null;
+  minValue = null;
+  maxValue = null;
+
+  constructor(props) {
+    super(props);
+
+    this.title = props.title;
+    this.step = props.step;
+    this.minValue = props.min;
+    this.maxValue = props.max;
+  }
+
+  onSliderChange = (value) => {
 
     // settimeout mixin. Optimization, which reduces number on render calls.
     this.clearTimeouts();
     this.setTimeout(() => {
-      this.props.onSliderChange(value, name);
+      this.props.onSliderChange(value);
     }, 100);
   };
 
   render() {
-    const { title, propertyName, min, max, units } = this.props;
+    const { min, max, units } = this.props;
 
     return (<div className='range-slider-wrapper'>
-      <label>{title}</label>
+      <label>{this.title}</label>
 
       <Row className="range-slider-wrapper__labels">
         <Col md={6}>
@@ -36,13 +50,27 @@ class SliderWrapper extends React.Component {
 
       <Row>
         <Col sm={12}>
-          <Slider range allowCross={false} defaultValue={[0, 500000]} min={0} max={500000} step={100}
-                  onChange={e => this.onSliderChange(e, propertyName)} />
+          <Slider range
+                  allowCross={false}
+                  defaultValue={[this.minValue, this.maxValue]}
+                  min={this.minValue}
+                  max={this.maxValue}
+                  step={this.step}
+                  onChange={this.onSliderChange} />
         </Col>
       </Row>
     </div>);
   }
 }
+
+SliderWrapper.propTypes = {
+  title: React.PropTypes.string.isRequired,
+  min: React.PropTypes.number.isRequired,
+  max: React.PropTypes.number.isRequired,
+  units: React.PropTypes.string,
+  onSliderChange: React.PropTypes.func.isRequired,
+  step: React.PropTypes.number.isRequired
+};
 
 reactMixin(SliderWrapper.prototype, settimeoutMixin);
 

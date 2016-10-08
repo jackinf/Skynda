@@ -100,11 +100,11 @@ class CarSearch extends React.Component {
 
       // NB! Do not change property names.
       sliderValues: {
-        mileage: { min: 0, max: 0, units: 'KM' },
-        price: { min: 0, max: 0, units: 'EUR' },
-        year: { min: 0, max: 0, units: '' },
-        petrol_consumption: { min: 0, max: 0, units: ''},
-        power: { min: 0, max: 0, units: 'kWh' }
+        mileage: { min: 0, max: 500000, units: 'KM' },
+        price: { min: 0, max: 500000, units: 'EUR' },
+        year: { min: 1970, max: moment().year(), units: '' },
+        petrol_consumption: { min: 0, max: 20, units: ''},
+        power: { min: 0, max: 500, units: 'kWh' }
       }
     };
 
@@ -124,7 +124,9 @@ class CarSearch extends React.Component {
   onSliderChange (value, name) {
     // value 0 is rcslider's min value and value 1 is max value.
     const range = { min: value[0], max: value[1], units: this.state.sliderValues[name].units };
-    this.setState({ sliderValues: { [name]: range } });
+    let sliderValues = this.state.sliderValues;
+    sliderValues[name] = range;
+    this.setState({ sliderValues });
   }
 
   render () {
@@ -145,7 +147,7 @@ class CarSearch extends React.Component {
 
                 <SliderWrapper
                   title={translations.components.car_search.mileage}
-                  propertyName="mileage"
+                  step={100}
                   min={this.state.sliderValues.mileage.min}
                   max={this.state.sliderValues.mileage.max}
                   units={this.state.sliderValues.mileage.units}
@@ -158,17 +160,36 @@ class CarSearch extends React.Component {
           <Col md={4}>
             <Row>
               <Col md={12} className='range-slider-wrapper'>
-                <label>{translations.components.car_search.price}</label>
-                <Slider range allowCross={false} defaultValue={[0, 500000]} min={0} max={500000} step={100} />
+
+                <SliderWrapper
+                  title={translations.components.car_search.price}
+                  step={100}
+                  min={this.state.sliderValues.price.min}
+                  max={this.state.sliderValues.price.max}
+                  units={this.state.sliderValues.price.units}
+                  onSliderChange={e => this.onSliderChange(e, "price")}
+                />
+
+                {/*<label>{translations.components.car_search.price}</label>*/}
+                {/*<Slider range allowCross={false} defaultValue={[0, 500000]} min={0} max={500000} step={100} />*/}
               </Col>
             </Row>
           </Col>
           <Col md={4}>
             <Row>
               <Col md={12} className='range-slider-wrapper'>
-                <label>{translations.components.car_search.year}</label>
-                <Slider range allowCross={false} defaultValue={[0, moment().year()]} min={1970} max={moment().year()}
-                  step={1} />
+                <SliderWrapper
+                  title={translations.components.car_search.year}
+                  step={1}
+                  min={this.state.sliderValues.year.min}
+                  max={this.state.sliderValues.year.max}
+                  units={this.state.sliderValues.year.units}
+                  onSliderChange={e => this.onSliderChange(e, "year")}
+                />
+
+                {/*<label>{translations.components.car_search.year}</label>*/}
+                {/*<Slider range allowCross={false} defaultValue={[0, moment().year()]} min={1970} max={moment().year()}*/}
+                  {/*step={1} />*/}
               </Col>
             </Row>
           </Col>
@@ -189,8 +210,18 @@ class CarSearch extends React.Component {
               <Col md={4}>
                 <Row>
                   <Col md={12} className='range-slider-wrapper'>
-                    <label>{translations.components.car_search.petrol_consumption}</label><br />
-                    <Slider range allowCross={false} defaultValue={[0, 20]} min={0} max={20} step={0.1} />
+                    <SliderWrapper
+                      title={translations.components.car_search.petrol_consumption}
+                      step={0.1}
+                      min={this.state.sliderValues.petrol_consumption.min}
+                      max={this.state.sliderValues.petrol_consumption.max}
+                      units={this.state.sliderValues.petrol_consumption.units}
+                      onSliderChange={e => this.onSliderChange(e, "petrol_consumption")}
+                    />
+
+
+                    {/*<label>{translations.components.car_search.petrol_consumption}</label><br />*/}
+                    {/*<Slider range allowCross={false} defaultValue={[0, 20]} min={0} max={20} step={0.1} />*/}
                   </Col>
                 </Row>
               </Col>
@@ -208,8 +239,18 @@ class CarSearch extends React.Component {
               <Col md={4}>
                 <Row>
                   <Col md={12} className='range-slider-wrapper'>
-                    <label>{translations.components.car_search.power}</label>
-                    <Slider range allowCross={false} defaultValue={[0, 500]} min={0} max={500} step={1} />
+                    <SliderWrapper
+                      title={translations.components.car_search.power}
+                      step={1}
+                      min={this.state.sliderValues.power.min}
+                      max={this.state.sliderValues.power.max}
+                      units={this.state.sliderValues.power.units}
+                      onSliderChange={e => this.onSliderChange(e, "power")}
+                    />
+
+
+                    {/*<label>{translations.components.car_search.power}</label>*/}
+                    {/*<Slider range allowCross={false} defaultValue={[0, 500]} min={0} max={500} step={1} />*/}
                   </Col>
                 </Row>
               </Col>
