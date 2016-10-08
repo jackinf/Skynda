@@ -30,10 +30,10 @@ public class Car {
     @JoinColumn(name = "model_code", nullable = false)
     private CarModels carModels;
 	
-	@OneToMany(mappedBy = "id", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "car", fetch = FetchType.LAZY)
     private List<CarReport> carReport;
 	
-	@OneToMany(mappedBy = "id", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "car", fetch = FetchType.LAZY)
     private List<CarReview> carReview;
 	
 	private String vinCode;
@@ -47,7 +47,7 @@ public class Car {
 	private String images;
 	private Boolean isSold;
 	private String fuelCity;
-	private String fuelHigway;
+	private String fuelHighway;
 	private String features;
 	private String problems;
 	private String compressionRatio;

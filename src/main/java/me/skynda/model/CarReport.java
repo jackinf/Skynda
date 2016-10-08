@@ -20,8 +20,8 @@ public class CarReport {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String reportId; //PK
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "id", nullable = false)
-	private String carsForSaleId;//FK
+    @JoinColumn(name = "cars_for_sale_id", nullable = false)
+	private Car car;//FK
 	private String title;
 	private Boolean isPass;
 	private String pointsText;

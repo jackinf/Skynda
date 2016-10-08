@@ -10,7 +10,7 @@ public class ReportDto {
 //	private List<CategoriesDto> categories;
 //	private List<FaultsDto> faults;
 	private String reportId; //PK
-	private String carsForSaleId;//FK
+	private Integer carsForSaleId;//FK
 	private String title;
 	private Boolean isPass;
 	private String pointsText;

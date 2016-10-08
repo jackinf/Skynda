@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 import me.skynda.dto.CarGeneralDto;
 import me.skynda.dto.DescriptionsDto;
 import me.skynda.dto.HistoryDto;
@@ -18,6 +20,7 @@ import me.skynda.model.Car;
 import me.skynda.model.CarReport;
 import me.skynda.model.CarReview;
 
+@Component
 public class CarConverter {
 	
 	public SingleCarDataDto transform(Car car) {
@@ -66,7 +69,7 @@ public class CarConverter {
 		List<ReportDto> reportDtoList = new ArrayList<ReportDto>();
 		for (CarReport carReport : car.getCarReport()) {
 			ReportDto reportDto = new ReportDto();
-			reportDto.setCarsForSaleId(carReport.getCarsForSaleId());
+			reportDto.setCarsForSaleId(carReport.getCar().getId());
 			reportDto.setFaultsImg(carReport.getFaultsImg());
 			reportDto.setFaultsText(carReport.getFaultsText());
 			reportDto.setIsPass(carReport.getIsPass());
@@ -99,8 +102,8 @@ public class CarConverter {
 	private void convertPetrolData(Car car, SingleCarDataDto singleCarDataDto) {
 		PetrolConsumptionDto petrolConsumptionDto = new PetrolConsumptionDto();
 		petrolConsumptionDto.setCity(car.getFuelCity());
-		petrolConsumptionDto.setHighWay(car.getFuelHigway());
-		petrolConsumptionDto.setAverage(car.getFuelCity(), car.getFuelHigway());
+		petrolConsumptionDto.setHighWay(car.getFuelHighway());
+		petrolConsumptionDto.setAverage(car.getFuelCity(), car.getFuelHighway());
 		singleCarDataDto.setPetrolConsumption(petrolConsumptionDto);
 	}
 
