@@ -16,14 +16,14 @@ import Skblock from "../BlockContainer";
 const max_safety_stars = 5;
 
 class Safety extends React.Component {
-  render () {
+  render() {
     const stars = this.props.stars;
 
     return (<Skblock header={translations.routes.details.components.safety.header}>
       <div className='sk_details__safety__stars_outer_container'>
         <div className='sk_details__safety__stars_inner_container'>
-          {Array.from({ length: stars }).map((_, idx) => <img key={idx} className='sk_safety__details__star' src={image_star_2x} />)}
-          {Array.from({ length: max_safety_stars - stars }).map((_, idx) => <img key={idx} className='sk_safety__details__star' src={image_unstar_2x} />)}
+          {Array.from({length: stars}).map((_, idx) => <img key={idx} className='sk_safety__details__star' src={image_star_2x} />)}
+          {Array.from({length: max_safety_stars - stars}).map((_, idx) => <img key={idx} className='sk_safety__details__star' src={image_unstar_2x} />)}
           <img className='sk_details__safety__stars_euroncap' src={image_4_2x} />
         </div>
       </div>

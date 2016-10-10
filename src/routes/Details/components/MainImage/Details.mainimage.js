@@ -8,23 +8,23 @@ import "./Details.mainimage.modal.scss";
 
 import image_cam from "./assets/camera@2x.png";
 import image_360 from "./assets/group-78@2x.png";
-import { Row, Col, Button, Carousel, Modal } from "react-bootstrap";
+import {Row, Col, Button, Carousel, Modal} from "react-bootstrap";
 import translations from "../../../../store/locales/et";
 
 class ModalBtnCarousel extends React.Component {
-  constructor () {
+  constructor() {
     super();
-    this.state = { isShowModal: false };
+    this.state = {isShowModal: false};
   }
   onShowModal = () => {
-    this.setState({ isShowModal: true });
+    this.setState({isShowModal: true});
   };
 
   onHideModal = () => {
-    this.setState({ isShowModal: false });
+    this.setState({isShowModal: false});
   };
 
-  render () {
+  render() {
     return (<span>
       <Button onClick={this.onShowModal}>
         <div className='image-btn-content-wrapper'>
@@ -48,7 +48,7 @@ class ModalBtnCarousel extends React.Component {
         >
           <div>
             <Carousel>
-              {this.props.images.map(function (row, i) {
+              {this.props.images.map(function(row, i) {
                 return (
                   <Carousel.Item className='modal-2-minimal-item-height' key={i}>
                     <img width={900} height={500} alt='900x500' src={row.original} />
@@ -68,19 +68,19 @@ class ModalBtnCarousel extends React.Component {
 }
 
 class ModalBtn360 extends React.Component {
-  constructor () {
+  constructor() {
     super();
-    this.state = { isShowModal: false };
+    this.state = {isShowModal: false};
   }
   onShowModal = () => {
-    this.setState({ isShowModal: true });
+    this.setState({isShowModal: true});
   };
 
   onHideModal = () => {
-    this.setState({ isShowModal: false });
+    this.setState({isShowModal: false});
   };
 
-  render () {
+  render() {
     return (<span>
       <Button onClick={this.onShowModal}>
         <div className='image-btn-content-wrapper'>
@@ -121,13 +121,13 @@ class ModalBtn360 extends React.Component {
 }
 
 class MainImage extends React.Component {
-  constructor () {
+  constructor() {
     super();
-    this.state = { isShowModal: false };
+    this.state = {isShowModal: false};
   }
 
-  render () {
-    const { src, year, brand, model, engine, horsepower } = this.props.car.general;
+  render() {
+    const {src, year, brand, model, engine, horsepower} = this.props.car.general;
     const images = this.props.car.images;
     const source360 = "https://www.panono.com/p/jmr7n52eIbDn/embed?autorotate=false";
 
@@ -144,19 +144,19 @@ class MainImage extends React.Component {
           <div className='info-panel'>
             <Row className='info-panel-primary-row '>
               <Col sm={12}>
-                <span style={{ margin: "0 15px 0 0" }}>{year}</span>
-                <span style={{ margin: "0 15px 0 0" }}>{brand}</span>
-                <span style={{ margin: "0 15px 0 0" }}>{model}</span>
-                <span style={{ margin: "0 15px 0 0" }}>{engine}</span>
-                <span style={{ margin: "0 15px 0 0" }}>({horsepower})</span>
+                <span style={{margin: "0 15px 0 0"}}>{year}</span>
+                <span style={{margin: "0 15px 0 0"}}>{brand}</span>
+                <span style={{margin: "0 15px 0 0"}}>{model}</span>
+                <span style={{margin: "0 15px 0 0"}}>{engine}</span>
+                <span style={{margin: "0 15px 0 0"}}>({horsepower})</span>
               </Col>
             </Row>
             <Row className='image-buttons'>
               <Col sm={12}>
-                <span style={{ margin: "0 25px 0 0" }}>
+                <span style={{margin: "0 25px 0 0"}}>
                   <ModalBtnCarousel images={images} />
                 </span>
-                <span style={{ margin: "0 25px 0 0" }}>
+                <span style={{margin: "0 25px 0 0"}}>
                   <ModalBtn360 src={source360} />
                 </span>
 

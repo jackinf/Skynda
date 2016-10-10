@@ -6,100 +6,100 @@ import React from "react";
 import "./CarSearchFilterGroup.scss";
 import ButtonGroup from "./CarSearchButtonGroup";
 
-import { Button, Row, Col } from "react-bootstrap";
+import {Button, Row, Col} from "react-bootstrap";
 import moment from "moment";
 
-import SliderWrapper from './CarSearchSliderWrapper';
+import SliderWrapper from "./CarSearchSliderWrapper";
 
 // translation
 import translations from "../../store/locales/et";
 
 const brands = [
-  { id: -1, name: "Kõik" },
-  { id: 0, name: "BMW" },
-  { id: 1, name: "Chrysler" },
-  { id: 2, name: "Citroen" },
-  { id: 3, name: "Fiat" },
-  { id: 4, name: "Ford" },
-  { id: 5, name: "Honda" },
-  { id: 6, name: "Hyundai" },
-  { id: 7, name: "Kia" },
-  { id: 8, name: "Lexus" },
-  { id: 9, name: "Mazda" },
-  { id: 10, name: "Nissan" },
-  { id: 11, name: "Opel" },
-  { id: 12, name: "Peugeot" },
-  { id: 13, name: "Renault" },
-  { id: 14, name: "Seat" },
-  { id: 15, name: "Skoda" },
-  { id: 16, name: "Subaru" },
-  { id: 17, name: "Volkswagen" },
-  { id: 18, name: "Volvo" }
+  {id: -1, name: "Kõik"},
+  {id: 0, name: "BMW"},
+  {id: 1, name: "Chrysler"},
+  {id: 2, name: "Citroen"},
+  {id: 3, name: "Fiat"},
+  {id: 4, name: "Ford"},
+  {id: 5, name: "Honda"},
+  {id: 6, name: "Hyundai"},
+  {id: 7, name: "Kia"},
+  {id: 8, name: "Lexus"},
+  {id: 9, name: "Mazda"},
+  {id: 10, name: "Nissan"},
+  {id: 11, name: "Opel"},
+  {id: 12, name: "Peugeot"},
+  {id: 13, name: "Renault"},
+  {id: 14, name: "Seat"},
+  {id: 15, name: "Skoda"},
+  {id: 16, name: "Subaru"},
+  {id: 17, name: "Volkswagen"},
+  {id: 18, name: "Volvo"}
 ];
 
 const colors = [
-  { id: -1, name: "Kõik", toggled: true },
-  { id: 0, name: "red", style: { "backgroundColor": "#EF1717" }, toggled: true, hideName: true },
-  { id: 1, name: "orange", style: { "backgroundColor": "#E87846" }, toggled: true, hideName: true },
-  { id: 2, name: "yellow", style: { "backgroundColor": "#DECC44" }, toggled: true, hideName: true },
-  { id: 3, name: "green", style: { "backgroundColor": "#91DD59" }, toggled: true, hideName: true },
-  { id: 4, name: "green", style: { "backgroundColor": "#3AC99D" }, toggled: true, hideName: true },
-  { id: 5, name: "green", style: { "backgroundColor": "#44DE62" }, toggled: true, hideName: true },
-  { id: 6, name: "blue", style: { "backgroundColor": "#15A6DB" }, toggled: true, hideName: true },
+  {id: -1, name: "Kõik", toggled: true},
+  {id: 0, name: "red", style: {"backgroundColor": "#EF1717"}, toggled: true, hideName: true},
+  {id: 1, name: "orange", style: {"backgroundColor": "#E87846"}, toggled: true, hideName: true},
+  {id: 2, name: "yellow", style: {"backgroundColor": "#DECC44"}, toggled: true, hideName: true},
+  {id: 3, name: "green", style: {"backgroundColor": "#91DD59"}, toggled: true, hideName: true},
+  {id: 4, name: "green", style: {"backgroundColor": "#3AC99D"}, toggled: true, hideName: true},
+  {id: 5, name: "green", style: {"backgroundColor": "#44DE62"}, toggled: true, hideName: true},
+  {id: 6, name: "blue", style: {"backgroundColor": "#15A6DB"}, toggled: true, hideName: true},
   {
     id: 7,
     name: "white",
-    style: { "backgroundColor": "#FFFFFF" },
+    style: {"backgroundColor": "#FFFFFF"},
     toggled: true,
     hideName: true,
     extraClass: "btn-inverse"
   },
-  { id: 8, name: "black", style: { "backgroundColor": "#000000" }, toggled: true, hideName: true }
+  {id: 8, name: "black", style: {"backgroundColor": "#000000"}, toggled: true, hideName: true}
 ];
 
 const features = [
-  { id: -1, name: "Kõik", toggled: true },
-  { id: 0, name: "Parking Sensors" },
-  { id: 1, name: "Bluetooth" },
-  { id: 2, name: "Sunroof" },
-  { id: 3, name: "Navigation" },
-  { id: 4, name: "leather" },
-  { id: 5, name: "Premium Lights" }
+  {id: -1, name: "Kõik", toggled: true},
+  {id: 0, name: "Parking Sensors"},
+  {id: 1, name: "Bluetooth"},
+  {id: 2, name: "Sunroof"},
+  {id: 3, name: "Navigation"},
+  {id: 4, name: "leather"},
+  {id: 5, name: "Premium Lights"}
 ];
 
 const transmissions = [
-  { id: 0, name: translations.components.car_search.automatic, toggled: true },
-  { id: 1, name: translations.components.car_search.manual, toggled: true }
+  {id: 0, name: translations.components.car_search.automatic, toggled: true},
+  {id: 1, name: translations.components.car_search.manual, toggled: true}
 ];
 
 const doors = [
-  { id: -1, name: "Kõik", toggled: true },
-  { id: 0, name: "2" },
-  { id: 1, name: "3" },
-  { id: 2, name: "4+" }
+  {id: -1, name: "Kõik", toggled: true},
+  {id: 0, name: "2"},
+  {id: 1, name: "3"},
+  {id: 2, name: "4+"}
 ];
 
 const seats = [
-  { id: -1, name: "Kõik", toggled: true },
-  { id: 0, name: "2" },
-  { id: 1, name: "3" },
-  { id: 2, name: "5" },
-  { id: 3, name: "6+" }
+  {id: -1, name: "Kõik", toggled: true},
+  {id: 0, name: "2"},
+  {id: 1, name: "3"},
+  {id: 2, name: "5"},
+  {id: 3, name: "6+"}
 ];
 
 class CarSearch extends React.Component {
-  constructor () {
+  constructor() {
     super();
     this.state = {
       showAdvancedSearch: true,
 
       // NB! Do not change property names.
       sliderValues: {
-        mileage: { min: 0, max: 500000, units: 'KM' },
-        price: { min: 0, max: 500000, units: 'EUR' },
-        year: { min: 1970, max: moment().year(), units: '' },
-        petrol_consumption: { min: 0, max: 20, units: 'L'},
-        power: { min: 0, max: 500, units: 'KW' }
+        mileage: {min: 0, max: 500000, units: "KM"},
+        price: {min: 0, max: 500000, units: "EUR"},
+        year: {min: 1970, max: moment().year(), units: ""},
+        petrol_consumption: {min: 0, max: 20, units: "L"},
+        power: {min: 0, max: 500, units: "KW"}
       }
     };
 
@@ -108,23 +108,23 @@ class CarSearch extends React.Component {
     this.onSliderChange = this.onSliderChange.bind(this);
   }
 
-  search () {
+  search() {
     console.log("search is not implemented");
   }
 
-  toggleAdvanced (value) {
-    this.setState({ showAdvancedSearch: value });
+  toggleAdvanced(value) {
+    this.setState({showAdvancedSearch: value});
   }
 
-  onSliderChange (value, name) {
+  onSliderChange(value, name) {
     // value 0 is rcslider's min value and value 1 is max value.
-    const range = { min: value[0], max: value[1], units: this.state.sliderValues[name].units };
+    const range = {min: value[0], max: value[1], units: this.state.sliderValues[name].units};
     let sliderValues = this.state.sliderValues;
     sliderValues[name] = range;
-    this.setState({ sliderValues });
+    this.setState({sliderValues});
   }
 
-  render () {
+  render() {
     return (<div className='car-search'>
       <section className='search'>
 
@@ -270,10 +270,10 @@ class CarSearch extends React.Component {
           <div className='col-md-12'>
             <div className='text-right'>
               <Button className='btn btn-link fk-filter-advance'
-                      role='button'
-                      onClick={e => this.toggleAdvanced(!this.state.showAdvancedSearch)}>
+                role='button'
+                onClick={e => this.toggleAdvanced(!this.state.showAdvancedSearch)}>
                 <span className='more glyphicon glyphicon-plus' />
-                {/*<span className='less glyphicon glyphicon-minus' />*/}
+                {/* <span className='less glyphicon glyphicon-minus' /> */}
                 {translations.components.car_search.advanced_txt}
               </Button>
 
@@ -294,6 +294,5 @@ class CarSearch extends React.Component {
     </div>);
   }
 }
-
 
 export default CarSearch;

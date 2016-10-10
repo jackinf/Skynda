@@ -4,7 +4,7 @@ import Footer from "../../components/Footer";
 import "./CoreLayout.scss";
 import "../../styles/core.scss";
 
-export const CoreLayout = ({ children }) => (
+export const CoreLayout = ({children}) => (
   <div>
     <Header />
     {children}

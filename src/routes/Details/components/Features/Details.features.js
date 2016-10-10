@@ -3,7 +3,7 @@
  */
 
 import React from "react";
-import { Col } from "react-bootstrap";
+import {Col} from "react-bootstrap";
 import "./Details.features.scss";
 
 import Skblock from "../BlockContainer";
@@ -13,7 +13,7 @@ import translations from "../../../../store/locales/en";
 import image_ok from "./../../../../static/images/standard/ok.png";
 
 class Features extends React.Component {
-  render () {
+  render() {
     const features = this.props.features;
 
     return (<Skblock header={translations.routes.details.components.features.header}>

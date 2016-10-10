@@ -2,8 +2,8 @@
  * Created by jevgenir on 10/1/2016.
  */
 
-import { connect } from "react-redux";
-import { toggleLoading, setCarData, getDataAsync, sendEmailAsync, sendQuestionByEmailAsync } from "../modules";
+import {connect} from "react-redux";
+import {toggleLoading, setCarData, getDataAsync, sendEmailAsync, sendQuestionByEmailAsync} from "../modules";
 
 import About from "../components/Details";
 

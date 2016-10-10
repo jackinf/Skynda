@@ -1,6 +1,6 @@
-import { connect } from "react-redux";
-import { loadPeople } from "../modules/About.people";
-import { loadDescription } from "../modules/About.description";
+import {connect} from "react-redux";
+import {loadPeople} from "../modules/About.people";
+import {loadDescription} from "../modules/About.description";
 
 import About from "../components/About";
 

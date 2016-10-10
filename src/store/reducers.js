@@ -1,4 +1,4 @@
-import { combineReducers } from "redux";
+import {combineReducers} from "redux";
 import locationReducer from "./location";
 
 export const makeRootReducer = (asyncReducers) => {
@@ -8,7 +8,7 @@ export const makeRootReducer = (asyncReducers) => {
   });
 };
 
-export const injectReducer = (store, { key, reducer }) => {
+export const injectReducer = (store, {key, reducer}) => {
   store.asyncReducers[key] = reducer;
   store.replaceReducer(makeRootReducer(store.asyncReducers));
 };

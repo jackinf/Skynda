@@ -3,7 +3,7 @@
  */
 
 import React from "react";
-import { Col } from "react-bootstrap";
+import {Col} from "react-bootstrap";
 import "./Details.history.scss";
 
 import Skblock from "../BlockContainer";
@@ -13,8 +13,8 @@ import translations from "../../../../store/locales/en";
 import image_diploma_1 from "./../../../../static/images/standard/diploma_1.png";
 
 class History extends React.Component {
-  render () {
-    const { problems, vin_code } = this.props.history;
+  render() {
+    const {problems, vin_code} = this.props.history;
 
     return (<Skblock header={translations.routes.details.components.history.header}>
       <Col md={6}>

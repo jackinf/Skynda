@@ -4,7 +4,7 @@
 
 import React from "react";
 import "../Details.scss";
-import { Row, Col } from "react-bootstrap";
+import {Row, Col} from "react-bootstrap";
 import translations from "../../../../store/locales/et";
 
 // Images
@@ -14,14 +14,14 @@ import image_gas_station_2x from "./../../../../static/images/standard/gas_stati
 import Skblock from "../BlockContainer";
 
 class PetrolConsumption extends React.Component {
-  render () {
-    const { city, highway, average } = this.props.petrol_consumption;
+  render() {
+    const {city, highway, average} = this.props.petrol_consumption;
 
     return (<Skblock header={translations.routes.details.components.petrol.header}>
       <Col md={6}>
         <img src={image_gas_station_2x} className='sk_details__icon_list_image' />
       </Col>
-      <Col md={6}>                                          {/* style="padding: 5px 0;" */}
+      <Col md={6}>                                                    {/* style="padding: 5px 0;" */}
         <Row>
           <Col md={6}><label>{translations.routes.details.components.petrol.city}: </label></Col>
           <Col md={6}>{city}</Col>

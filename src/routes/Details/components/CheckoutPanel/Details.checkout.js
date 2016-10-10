@@ -9,9 +9,9 @@ import "./Details.checkout.scss";
 import Dialog from "material-ui/Dialog";
 import RaisedButton from "material-ui/RaisedButton";
 import TextField from "material-ui/TextField";
-import { Tabs, Tab } from "material-ui/Tabs";
-import { Row, Col } from "react-bootstrap";
-import { orange500 } from "material-ui/styles/colors";
+import {Tabs, Tab} from "material-ui/Tabs";
+import {Row, Col} from "react-bootstrap";
+import {orange500} from "material-ui/styles/colors";
 import translations from "../../../../store/locales/et";
 
 const styles = {
@@ -80,7 +80,7 @@ const tempTab = (props) => (<li className='tab-pane fade active in' id='htab1'>
             label={translations.routes.details.components.checkout_panel.btn_send}
             className='sk_details__checkout_tab_action_button pull-right'
             backgroundColor={styles.backgroundDefault}
-            labelStyle={{ color:"white", weight: 600 }}
+            labelStyle={{color:"white", weight: 600}}
             onTouchTap={props.displaySuccessPopup}
           />
         </Col>
@@ -92,9 +92,9 @@ const tempTab = (props) => (<li className='tab-pane fade active in' id='htab1'>
 
 class Checkout extends React.Component {
 
-  constructor (props) {
+  constructor(props) {
     super(props);
-    this.state = { tab: 1, openSentMsg: false,
+    this.state = {tab: 1, openSentMsg: false,
       personDetails: {
         firstName: "",
         lastName: "",
@@ -105,15 +105,15 @@ class Checkout extends React.Component {
   }
 
   handleClose = () => {
-    this.setState({ openSentMsg: false });
+    this.setState({openSentMsg: false});
   };
 
   displaySuccessPopup = async () => {
     await this.props.sendEmailAsync(this.state.personDetails);
-    this.setState({ openSentMsg: true });
+    this.setState({openSentMsg: true});
   };
 
-  render () {
+  render() {
     return (<div className='sk_details__checkout_container'>
 
       <Dialog

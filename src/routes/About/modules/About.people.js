@@ -15,7 +15,7 @@ export const LOAD_PEOPLE = "LOAD_PEOPLE";
 // ------------------------------------
 // Actions
 // ------------------------------------
-export function loadPeople (value) {
+export function loadPeople(value) {
   return {
     type    : LOAD_PEOPLE,
     payload : value
@@ -84,7 +84,7 @@ const ACTION_HANDLERS = {
 // Reducer
 // ------------------------------------
 const initialState = [];
-export default function reducer (state = initialState, action) {
+export default function reducer(state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type];
   return handler ? handler(state, action) : state;
 }

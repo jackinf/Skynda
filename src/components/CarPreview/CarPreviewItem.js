@@ -6,11 +6,11 @@ import React from "react";
 import "./CarPreviewItem.scss";
 import translations from "./../../store/locales/en";
 
-import { Row, Col } from "react-bootstrap";
+import {Row, Col} from "react-bootstrap";
 
 class CarPreview extends React.Component {
-  render () {
-    const { year, brand, price, mileage, engine, power, doors, seats, comment } = this.props.car;
+  render() {
+    const {year, brand, price, mileage, engine, power, doors, seats, comment} = this.props.car;
 
     return (<div className='car-preview'>
       <a href={this.props.car.href}>
@@ -26,9 +26,9 @@ class CarPreview extends React.Component {
         </Row>
         <Row>
           <Col sm={12} >
-            <span style={{ margin: "0 25px 0 0" }}>{mileage} km</span>
-            <span style={{ margin: "0 25px 0 0" }}>{engine} ({power})</span>
-            <span style={{ margin: "0 25px 0 0" }}>{doors} {translations.components.car_preview.doors}</span>
+            <span style={{margin: "0 25px 0 0"}}>{mileage} km</span>
+            <span style={{margin: "0 25px 0 0"}}>{engine} ({power})</span>
+            <span style={{margin: "0 25px 0 0"}}>{doors} {translations.components.car_preview.doors}</span>
             <span>{seats} {translations.components.car_preview.seats}</span>
           </Col>
         </Row>
@@ -43,6 +43,8 @@ class CarPreview extends React.Component {
 
 CarPreview.propTypes = {
   car : React.PropTypes.shape({
+    src: React.PropTypes.string,
+    href: React.PropTypes.string,
     year: React.PropTypes.number.isRequired,
     brand: React.PropTypes.string,
     price: React.PropTypes.number.isRequired,

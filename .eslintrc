@@ -22,10 +22,11 @@
     "key-spacing"          : 0,
     "jsx-quotes"           : [2, "prefer-single"],
     "max-len"              : [2, 120, 2],
-    "object-curly-spacing" : [2, "always"],
+    "object-curly-spacing" : [2, "never"],
     "indent": ["error", 2],
     "quotes": ["error", "double"],
     "semi": ["error", "always"],
-    "no-console": "off"
+    "no-console": "off",
+    "space-before-function-paren": [2, "never"]
   }
 }

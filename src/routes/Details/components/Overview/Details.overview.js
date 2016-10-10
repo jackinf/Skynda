@@ -3,14 +3,14 @@
  */
 
 import React from "react";
-import { Row, Col } from "react-bootstrap";
+import {Row, Col} from "react-bootstrap";
 import "./Details.overview.scss";
 import translations from "../../../../store/locales/et";
 
 import Skblock from "../BlockContainer";
 
 class Overview extends React.Component {
-  render () {
+  render() {
     const overview = this.props.overview;
 
     return (<Skblock header={translations.routes.details.components.overview.header}>

@@ -1,11 +1,11 @@
 import React from "react";
-import { Row, Col } from "react-bootstrap";
+import {Row, Col} from "react-bootstrap";
 import translations from "../../../../store/locales/et";
 
 import Skblock from "../BlockContainer";
 
 class Performance extends React.Component {
-  render () {
+  render() {
     const {
       driven_wheels,
       doors,

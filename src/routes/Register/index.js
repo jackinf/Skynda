@@ -16,7 +16,7 @@ export default {
 
   path: "/register",
 
-  action () {
+  action() {
     return {
       title,
       component: <Register title={title} />

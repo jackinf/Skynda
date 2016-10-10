@@ -9,15 +9,15 @@
 
 import React from "react";
 import "./Header.scss";
-import { Navbar, NavItem, Nav } from "react-bootstrap";
-import { Link } from "react-router";
+import {Navbar, NavItem, Nav} from "react-bootstrap";
+import {Link} from "react-router";
 
 import image_1 from "./../../static/images/standard/skynda logo 4-mask-4@2x.png";
 import image_2 from "./../../static/images/standard/SKYNDA@2x.png";
 import translations from "../../store/locales/en";
 
 class Header extends React.Component {
-  render () {
+  render() {
     return (
       <div className='container header-container'>
         <nav className='sk_navbar navbar navbar_default'>
@@ -39,7 +39,7 @@ class Header extends React.Component {
   }
 }
 class Header1 extends React.Component {
-  render () {
+  render() {
     return (
       <div className='container header-container'>
         <Navbar className='sk_navbar navbar navbar_default'>

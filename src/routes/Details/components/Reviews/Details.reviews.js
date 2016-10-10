@@ -3,7 +3,7 @@ import React from "react";
 import Skblock from "../BlockContainer";
 import "../Details.scss";
 import "./Details.reviews.scss";
-import { Row, Col, Button } from "react-bootstrap";
+import {Row, Col, Button} from "react-bootstrap";
 import translations from "../../../../store/locales/et";
 import image_star from "./../../../../static/images/standard/star@2x.png";
 import image_unstar from "./../../../../static/images/standard/star-1@2x.png";
@@ -13,7 +13,7 @@ const Star = (props) => (<img className='sk_safety__details__star pull-right'
   width='24' src={props.src} />);
 
 class Reviews extends React.Component {
-  render () {
+  render() {
     const reviews = this.props.reviews;
 
     return (<Skblock header={translations.routes.details.components.reviews.header}>
@@ -24,10 +24,10 @@ class Reviews extends React.Component {
                 <img src={review.logoUrl} alt='LOGO' />
               </Col>
               <Col md={6}>
-                {Array.from({ length: max_stars - review.rating })
+                {Array.from({length: max_stars - review.rating})
                   .map((_, idx) => <div key={idx}><Star src={image_unstar} /></div>)}
 
-                {Array.from({ length: review.rating })
+                {Array.from({length: review.rating})
                   .map((_, idx) => <div key={idx}><Star src={image_star} /></div>)}
               </Col>
             </Row>

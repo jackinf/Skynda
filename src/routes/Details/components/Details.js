@@ -37,15 +37,15 @@ const cars = {
   ]
 };
 
-import { StickyContainer, Sticky } from "react-sticky";
+import {StickyContainer, Sticky} from "react-sticky";
 
 class CarDetails extends React.Component {
 
-  async componentWillMount () {
+  async componentWillMount() {
     await this.props.getDataAsync();
   }
 
-  render () {
+  render() {
     const car_data = this.props.car_data;
     if (this.props.isLoading)
       return <div>Loading...</div>;

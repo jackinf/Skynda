@@ -16,7 +16,7 @@ export default {
 
   path: "*",
 
-  action () {
+  action() {
     return {
       title,
       component: <NotFound title={title} />,

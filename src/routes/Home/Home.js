@@ -7,10 +7,10 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-import React, { PropTypes } from "react";
+import React, {PropTypes} from "react";
 import "./Home.scss";
 
-import { Row, Col } from "react-bootstrap";
+import {Row, Col} from "react-bootstrap";
 
 import CarPreview from "./../../components/CarPreview";
 import CarSearch from "./../../components/CarSearch";
@@ -27,39 +27,39 @@ import translations from "../../store/locales/et";
 const cars = {
   searchResults: [],
   recentlyAdded: [
-    { src: image_testcar, href: "/details", year: 2012, brand: "Audi", price: 12100, mileage: 85000, engine: "3.0",
-      power: "225 kW", doors: 4, seats: 5, comment: "Comes with winter tires" },
-    { src: image_testcar, href: "/details", year: 2012, brand: "Audi", price: 12100, mileage: 85000, engine: "3.0",
-      power: "225 kW", doors: 4, seats: 5, comment: "Comes with winter tires" }
+    {src: image_testcar, href: "/details", year: 2012, brand: "Audi", price: 12100, mileage: 85000, engine: "3.0",
+      power: "225 kW", doors: 4, seats: 5, comment: "Comes with winter tires"},
+    {src: image_testcar, href: "/details", year: 2012, brand: "Audi", price: 12100, mileage: 85000, engine: "3.0",
+      power: "225 kW", doors: 4, seats: 5, comment: "Comes with winter tires"}
   ]
 };
 
 class Home extends React.Component {
 
-  constructor () {
+  constructor() {
     super();
     this.executeSearch = this.executeSearch.bind(this);
     this.updateSearchText = this.updateSearchText.bind(this);
 
     // TODO: redux
-    this.state = { searchText: "", isSearching: false };
+    this.state = {searchText: "", isSearching: false};
   }
 
-  executeSearch () {
+  executeSearch() {
     // TODO: redux
-    this.setState({ isSearching: true });
+    this.setState({isSearching: true});
     setTimeout(() => {
       cars.searchResults.length = 0;
       cars.searchResults.push(cars.recentlyAdded);
-      this.setState({ isSearching: false });
+      this.setState({isSearching: false});
     }, 2000);
   }
 
-  updateSearchText (text) {
-    this.setState({ searchText: text });
+  updateSearchText(text) {
+    this.setState({searchText: text});
   }
 
-  render () {
+  render() {
     return (
       <div>
 

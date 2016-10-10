@@ -2,7 +2,7 @@
  * Created by jevgenir on 10/1/2016.
  */
 
-import { toggleLoading } from "./Details.module.toggle-loading";
+import {toggleLoading} from "./Details.module.toggle-loading";
 
 // Images
 import image_overview_1 from "./../../../static/images/standard/group-114@2x.png";
@@ -41,13 +41,13 @@ export const getDataAsync = () => {
             seats: "5"
           },
           overview: [
-            { label: "75 000 km", iconUrl: image_overview_1 },
-            { label: "Automaatne", iconUrl: image_overview_2 },
-            { label: "3.0 (225 kW)", iconUrl: image_overview_3 },
-            { label: "Esivedu", iconUrl: image_overview_4 },
-            { label: "2 ust 5 istekohta", iconUrl: image_overview_5 },
-            { label: "Tumesinine", iconUrl: image_overview_6 },
-            { label: "Must", iconUrl: image_overview_7 }
+            {label: "75 000 km", iconUrl: image_overview_1},
+            {label: "Automaatne", iconUrl: image_overview_2},
+            {label: "3.0 (225 kW)", iconUrl: image_overview_3},
+            {label: "Esivedu", iconUrl: image_overview_4},
+            {label: "2 ust 5 istekohta", iconUrl: image_overview_5},
+            {label: "Tumesinine", iconUrl: image_overview_6},
+            {label: "Must", iconUrl: image_overview_7}
           ],
           images: [
             {
@@ -112,30 +112,30 @@ sale`
               {
                 title: "Kategooria 1",
                 points: [
-                  { text: "Automatic transmission flawless in cold temperature", pass: true },
-                  { text: "Steering wheel centered", pass: true },
-                  { text: "Steering wheel centered", pass: true },
-                  { text: "Automatic transmission flawless in cold temperature", pass: false },
-                  { text: "Automatic transmission flawless in cold temperature", pass: true },
-                  { text: "Steering wheel centered", pass: true }
+                  {text: "Automatic transmission flawless in cold temperature", pass: true},
+                  {text: "Steering wheel centered", pass: true},
+                  {text: "Steering wheel centered", pass: true},
+                  {text: "Automatic transmission flawless in cold temperature", pass: false},
+                  {text: "Automatic transmission flawless in cold temperature", pass: true},
+                  {text: "Steering wheel centered", pass: true}
                 ]
               },
               {
                 title: "Kategooria 2",
                 points: [
-                  { text: "Automatic transmission flawless in cold temperature", pass: true },
-                  { text: "Steering wheel centered", pass: true },
-                  { text: "Steering wheel centered", pass: true },
-                  { text: "Automatic transmission flawless in cold temperature", pass: false },
-                  { text: "Automatic transmission flawless in cold temperature", pass: true },
-                  { text: "Steering wheel centered", pass: true }
+                  {text: "Automatic transmission flawless in cold temperature", pass: true},
+                  {text: "Steering wheel centered", pass: true},
+                  {text: "Steering wheel centered", pass: true},
+                  {text: "Automatic transmission flawless in cold temperature", pass: false},
+                  {text: "Automatic transmission flawless in cold temperature", pass: true},
+                  {text: "Steering wheel centered", pass: true}
                 ]
               }
             ],
             faults: [
-              { text: "Scratches near the ignition", img: "TODO" },
-              { text: "Scratches on the glovebox", img: "TODO" },
-              { text: "Scratches on the back door", img: "TODO" }
+              {text: "Scratches near the ignition", img: "TODO"},
+              {text: "Scratches on the glovebox", img: "TODO"},
+              {text: "Scratches on the back door", img: "TODO"}
             ]
           },
           reviews: [
@@ -162,7 +162,7 @@ sale`
   };
 };
 
-export function setCarData (value) {
+export function setCarData(value) {
   return {
     type    : SET_CAR_DATA,
     payload : value
@@ -184,7 +184,7 @@ const ACTION_HANDLERS = {
 // Reducer
 // ------------------------------------
 const initialState = {};
-export default function reducer (state = initialState, action) {
+export default function reducer(state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type];
   return handler ? handler(state, action) : state;
 }

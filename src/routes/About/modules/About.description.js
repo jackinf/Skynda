@@ -6,7 +6,7 @@ export const LOAD_DESCRIPTION = "LOAD_DESCRIPTION";
 // ------------------------------------
 // Actions
 // ------------------------------------
-export function loadDescription (value) {
+export function loadDescription(value) {
   return {
     type    : LOAD_DESCRIPTION,
     payload : value
@@ -31,7 +31,7 @@ const ACTION_HANDLERS = {
 // Reducer
 // ------------------------------------
 const initialState = "";
-export default function reducer (state = initialState, action) {
+export default function reducer(state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type];
   return handler ? handler(state, action) : state;
 }

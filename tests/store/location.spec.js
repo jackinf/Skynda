@@ -22,13 +22,13 @@ describe("(Internal Module) Location", () => {
     it("Should return the previous state if an action was not matched.", () => {
       let state = locationReducer(undefined, {});
       expect(state).to.equal(null);
-      state = locationReducer(state, { type: "@@@@@@@" });
+      state = locationReducer(state, {type: "@@@@@@@"});
       expect(state).to.equal(null);
 
-      const locationState = { pathname: "/yup" };
+      const locationState = {pathname: "/yup"};
       state = locationReducer(state, locationChange(locationState));
       expect(state).to.equal(locationState);
-      state = locationReducer(state, { type: "@@@@@@@" });
+      state = locationReducer(state, {type: "@@@@@@@"});
       expect(state).to.equal(locationState);
     });
   });
@@ -43,7 +43,7 @@ describe("(Internal Module) Location", () => {
     });
 
     it("Should assign the first argument to the \"payload\" property.", () => {
-      const locationState = { pathname: "/yup" };
+      const locationState = {pathname: "/yup"};
       expect(locationChange(locationState)).to.have.property("payload", locationState);
     });
 
@@ -73,11 +73,11 @@ describe("(Internal Module) Location", () => {
     });
 
     it("Should return a function (is a thunk).", () => {
-      expect(updateLocation({ dispatch: _dispatchSpy })).to.be.a("function");
+      expect(updateLocation({dispatch: _dispatchSpy})).to.be.a("function");
     });
 
     it("Should call dispatch exactly once.", () => {
-      updateLocation({ dispatch: _dispatchSpy })("/");
+      updateLocation({dispatch: _dispatchSpy})("/");
       expect(_dispatchSpy.should.have.been.calledOnce);
     });
   });

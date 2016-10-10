@@ -6,7 +6,7 @@ import React from "react";
 import "./InfoImage.scss";
 
 class InfoImage extends React.Component {
-  render () {
+  render() {
     return (<div className={'info_image'}>
       <a href={this.props.href}>
         <img src={this.props.src} className={'info_image__image'} />
