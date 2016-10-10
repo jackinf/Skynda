@@ -19,7 +19,7 @@ export default {
   action() {
     return {
       title,
-      component: <Login title={title} />
+      component: <Login title={title}/>
     };
   }
 

@@ -5,14 +5,14 @@ import "../Details.scss";  // todo: remove?
 import "./Details.inspectors-report.scss";
 
 // 3rd party
-import {RaisedButton, Dialog, TextField} from "material-ui";
+import {Dialog, TextField} from "material-ui";
 import {Button, Row, Col} from "react-bootstrap";
 
 // Images
-import image_ok from "./../../../../static/images/standard/ok.png";
-import image_cancel from "./../../../../static/images/standard/cancel.png";
-import image_car_inspector from "./assets/carinspector.png";
-import images_close from "./assets/cancel@2x.png";
+import imageOk from "./../../../../static/images/standard/ok.png";
+import imageCancel from "./../../../../static/images/standard/cancel.png";
+import imageCarInspector from "./assets/carinspector.png";
+import imagesClose from "./assets/cancel@2x.png";
 
 import translations from "../../../../store/locales/et";
 
@@ -21,9 +21,9 @@ import translations from "../../../../store/locales/et";
  */
 const pointBlockFn = (point, i) => (
   <Col className='sk_details__report__category-col' key={i} md={6}>
-    {(point.pass) ?
-      (<img src={image_ok} width='24' className='sk_details__icon_list_image' />) :
-      (<img src={image_cancel} width='24' className='sk_details__icon_list_image' />)}
+    {(point.pass)
+      ? (<img src={imageOk} width='24' className='sk_details__icon_list_image'/>)
+      : (<img src={imageCancel} width='24' className='sk_details__icon_list_image'/>)}
     {point.text}
   </Col>);
 
@@ -52,7 +52,7 @@ class Report extends React.Component {
       <Skblock header={translations.routes.details.components.inspector_report.header}>
         <Row>
           <Col md={3}><label className='sk_details__certified_developer'>Artur P.</label></Col>
-          <Col md={4}><img src={image_car_inspector} width='130' alt='happy' /></Col>
+          <Col md={4}><img src={imageCarInspector} width='130' alt='happy'/></Col>
           <Col md={5} className='sk_details__certified_developer'>
             <Button className='sk_details__report__button-have-questions' onClick={this.openQuestionModal}>
               {translations.routes.details.components.inspector_report.question}
@@ -65,7 +65,7 @@ class Report extends React.Component {
             <h4 className='sk_details__report__category-title'>{category.title}</h4>
 
             <Row className='sk_details__report__category-row'>
-              {category.points.map((point, i) => i % 2 == 0
+              {category.points.map((point, i) => i % 2 === 0
                 ? (<div key={i}>{pointBlockFn(point, i)}</div>)
                 : (<Row key={i}>{pointBlockFn(point, i)}</Row>))}
             </Row>
@@ -83,7 +83,8 @@ class Report extends React.Component {
 
         <Dialog
           title={(<div><h4 className='sk_details__report__question-title'>Kas teil on küsimusi?</h4>
-            <img className='sk_details__report__question-close-button' onClick={this.closeQuestionModal} src={images_close} /></div>)}
+            <img className='sk_details__report__question-close-button' onClick={this.closeQuestionModal}
+                 src={imagesClose}/></div>)}
           actions={[(<Button className='sk_details__report__button-send-question' onClick={this.submitQuestion}>
             {translations.routes.details.components.inspector_report.send_question}
           </Button>)]}
@@ -94,17 +95,23 @@ class Report extends React.Component {
           <Row>
             <Col md={12}>
               <TextField hintText='Kuidas me saame aidata?*' fullWidth multiLine rows={2}
-                onChange={e => this.state.question.howCanWeHelp = e.target.value} />
+                         onChange={e => {
+                           this.state.question.howCanWeHelp = e.target.value;
+                         }}/>
             </Col>
           </Row>
           <Row>
             <Col md={6}>
               <TextField hintText='Teie Nimi*' fullWidth
-                onChange={e => this.state.question.name = e.target.value} />
+                         onChange={e => {
+                           this.state.question.name = e.target.value;
+                         }}/>
             </Col>
             <Col md={6}>
               <TextField hintText='Teie E-mail*' fullWidth
-                onChange={e => this.state.question.email = e.target.value} />
+                         onChange={e => {
+                           this.state.question.email = e.target.value;
+                         }}/>
             </Col>
           </Row>
         </Dialog>

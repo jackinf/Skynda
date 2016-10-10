@@ -5,16 +5,16 @@
 import {toggleLoading} from "./Details.module.toggle-loading";
 
 // Images
-import image_overview_1 from "./../../../static/images/standard/group-114@2x.png";
-import image_overview_2 from "./../../../static/images/standard/group-115@2x.png";
-import image_overview_3 from "./../../../static/images/standard/group-116@2x.png";
-import image_overview_4 from "./../../../static/images/standard/group-117@2x.png";
-import image_overview_5 from "./../../../static/images/standard/group-119@2x.png";
-import image_overview_6 from "./../../../static/images/standard/group-120@2x.png";
-import image_overview_7 from "./../../../static/images/standard/group-121@2x.png";
-import dummy_image1 from "./../../../static/images/cars/accord/accord.jpg";
-import dummy_image2 from "./../../../static/images/cars/accord/accord2.jpg";
-import dummy_image3 from "./../../../static/images/cars/accord/accord3.jpg";
+import imageOverview1 from "./../../../static/images/standard/group-114@2x.png";
+import imageOverview2 from "./../../../static/images/standard/group-115@2x.png";
+import imageOverview3 from "./../../../static/images/standard/group-116@2x.png";
+import imageOverview4 from "./../../../static/images/standard/group-117@2x.png";
+import imageOverview5 from "./../../../static/images/standard/group-119@2x.png";
+import imageOverview6 from "./../../../static/images/standard/group-120@2x.png";
+import imageOverview7 from "./../../../static/images/standard/group-121@2x.png";
+import dummyImage1 from "./../../../static/images/cars/accord/accord.jpg";
+import dummyImage2 from "./../../../static/images/cars/accord/accord2.jpg";
+import dummyImage3 from "./../../../static/images/cars/accord/accord3.jpg";
 
 export const SET_CAR_DATA = "SET_CAR_DATA";
 
@@ -24,9 +24,9 @@ export const getDataAsync = () => {
     return new Promise((resolve) => {
       setTimeout(() => {
         // TODO: temporary data. Use API data.
-        const car_data = {// TODO: REPLACE with api data
+        const carData = {// TODO: REPLACE with api data
           general: {
-            src: dummy_image1,
+            src: dummyImage1,
             year: 2012,
             brand: "Honda",
             model: "Accord",
@@ -41,26 +41,26 @@ export const getDataAsync = () => {
             seats: "5"
           },
           overview: [
-            {label: "75 000 km", iconUrl: image_overview_1},
-            {label: "Automaatne", iconUrl: image_overview_2},
-            {label: "3.0 (225 kW)", iconUrl: image_overview_3},
-            {label: "Esivedu", iconUrl: image_overview_4},
-            {label: "2 ust 5 istekohta", iconUrl: image_overview_5},
-            {label: "Tumesinine", iconUrl: image_overview_6},
-            {label: "Must", iconUrl: image_overview_7}
+            {label: "75 000 km", iconUrl: imageOverview1},
+            {label: "Automaatne", iconUrl: imageOverview2},
+            {label: "3.0 (225 kW)", iconUrl: imageOverview3},
+            {label: "Esivedu", iconUrl: imageOverview4},
+            {label: "2 ust 5 istekohta", iconUrl: imageOverview5},
+            {label: "Tumesinine", iconUrl: imageOverview6},
+            {label: "Must", iconUrl: imageOverview7}
           ],
           images: [
             {
-              original: dummy_image1,
-              thumbnail: dummy_image1
+              original: dummyImage1,
+              thumbnail: dummyImage1
             },
             {
-              original: dummy_image2,
-              thumbnail: dummy_image2
+              original: dummyImage2,
+              thumbnail: dummyImage2
             },
             {
-              original: dummy_image3,
-              thumbnail: dummy_image3
+              original: dummyImage3,
+              thumbnail: dummyImage3
             }
           ],
           descriptions: [{
@@ -140,21 +140,23 @@ sale`
           },
           reviews: [
             {
-              logoUrl: image_overview_1,
+              logoUrl: imageOverview1,
               videoUrl: null,
-              text: "The Dacia Sandero demands compromises, but it’s likeable and offers more practicality than anything in this price range",
+              text: "The Dacia Sandero demands compromises, but it’s likeable and offers more practicality than " +
+                "anything in this price range",
               rating: 4
             },
             {
-              logoUrl: image_overview_2,
+              logoUrl: imageOverview2,
               videoUrl: null,
-              text: "The Jeep Renegade stands out from the crowd with its chunky looks and excellent off-road performance.",
+              text: "The Jeep Renegade stands out from the crowd with its chunky looks and excellent off-road " +
+                "performance.",
               rating: 3
             }
           ]
         };
 
-        dispatch(setCarData(car_data));
+        dispatch(setCarData(carData));
         dispatch(toggleLoading(false));
         resolve();
       }, 200);
@@ -164,8 +166,8 @@ sale`
 
 export function setCarData(value) {
   return {
-    type    : SET_CAR_DATA,
-    payload : value
+    type: SET_CAR_DATA,
+    payload: value
   };
 }
 
@@ -177,7 +179,7 @@ export const actions = {
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
-  [SET_CAR_DATA] : (state, action) => action.payload
+  [SET_CAR_DATA]: (state, action) => action.payload
 };
 
 // ------------------------------------

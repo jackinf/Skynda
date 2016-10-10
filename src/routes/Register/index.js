@@ -19,7 +19,7 @@ export default {
   action() {
     return {
       title,
-      component: <Register title={title} />
+      component: <Register title={title}/>
     };
   }
 

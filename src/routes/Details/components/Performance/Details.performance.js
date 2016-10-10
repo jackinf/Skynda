@@ -8,7 +8,6 @@ class Performance extends React.Component {
   render() {
     const {
       driven_wheels,
-      doors,
       compression_ratio,
       compressor_type,
       configuration,

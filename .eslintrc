@@ -27,6 +27,9 @@
     "quotes": ["error", "double"],
     "semi": ["error", "always"],
     "no-console": "off",
-    "space-before-function-paren": [2, "never"]
+    "space-before-function-paren": [2, "never"],
+    "react/jsx-space-before-closing": [0, "never"],
+    "react/jsx-indent": [0],
+    "react/jsx-indent-props": [0]
   }
 }

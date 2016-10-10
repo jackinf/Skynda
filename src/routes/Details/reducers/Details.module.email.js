@@ -12,9 +12,10 @@ import remoteConfig from "../../../store/remoteConfig";
  */
 export const sendEmailAsync = (data) => {
   return () => {
-    var form_data = new FormData();
-    for (let key in data)
-      form_data.append(key, data[key]);
+    var formData = new FormData();
+    for (let key in data) {
+      formData.append(key, data[key]);
+    }
 
     return fetch(remoteConfig.remote + "/api/email/person", {
       method: "POST",

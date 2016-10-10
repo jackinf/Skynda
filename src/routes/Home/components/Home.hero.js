@@ -25,7 +25,7 @@ class Hero extends React.Component {
 
   render() {
     return (<div className='sk_hero'>
-      <img className='sk_hero__image' src={heroImageUrl} alt='image' />
+      <img className='sk_hero__image' src={heroImageUrl} alt='image'/>
       <div className='sk_hero__text'>
         <div className='container'>
           <div className='grid'>
@@ -33,7 +33,9 @@ class Hero extends React.Component {
               <h2>{translations.routes.home_page.hero.main_text}</h2>
             </div>
             <div className='col-md-3'>
-              <Button className='primary-button' onClick={this.gotoDetails}>{translations.routes.home_page.hero.read_more}</Button>
+              <Button className='primary-button' onClick={this.gotoDetails}>
+                {translations.routes.home_page.hero.read_more}
+              </Button>
             </div>
           </div>
         </div>
