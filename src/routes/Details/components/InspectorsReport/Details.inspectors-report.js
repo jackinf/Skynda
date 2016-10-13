@@ -27,6 +27,18 @@ const pointBlockFn = (point, i) => (
     {point.text}
   </Col>);
 
+const pointBlockXsFn = (point, i) => (<div key={i}>
+    <Col className='sk_details__report__category-col' xs={1} xsOffset={1} >
+      {(point.pass)
+        ? (<img src={imageOk} width='24' className='sk_details__icon_list_image'/>)
+        : (<img src={imageCancel} width='24' className='sk_details__icon_list_image'/>)}
+    </Col>
+    <Col xs={10}>
+      {point.text}
+    </Col>
+  </div>
+);
+
 /**
  * Inspector's report
  */
@@ -62,22 +74,29 @@ class Report extends React.Component {
 
         {categories.map((category, i) => (
           <Row key={i} className='sk_details__report__category-block'>
-            <h4 className='sk_details__report__category-title'>{category.title}</h4>
+            <Col md={12}>
+              <h4 className='sk_details__report__category-title'>{category.title}</h4>
 
-            <Row className='sk_details__report__category-row'>
-              {category.points.map((point, i) => i % 2 === 0
-                ? (<div key={i}>{pointBlockFn(point, i)}</div>)
-                : (<Row key={i}>{pointBlockFn(point, i)}</Row>))}
-            </Row>
+              <Row className='hidden-xs sk_details__report__category-row'>
+                {category.points.map((point, i) => i % 2 === 0
+                  ? (<div key={i}>{pointBlockFn(point, i)}</div>)
+                  : (<Row key={i}>{pointBlockFn(point, i)}</Row>))}
+              </Row>
 
-            <Row>
-              <Col md={11}>
-                <Button className='pull-right sk_details__report__button-show-all'>
-                  {translations.routes.details.components.inspector_report.show_all}
-                </Button>
-              </Col>
-            </Row>
+              <Row className='visible-xs sk_details__report__category-row'>
+                <Col xs={12}>
+                  {category.points.map((point, i) => (<Row key={i}>{pointBlockXsFn(point, i)}</Row>))}
+                </Col>
+              </Row>
 
+              <Row>
+                <Col md={11}>
+                  <Button className='pull-right sk_details__report__button-show-all'>
+                    {translations.routes.details.components.inspector_report.show_all}
+                  </Button>
+                </Col>
+              </Row>
+            </Col>
           </Row>
         ))}
 

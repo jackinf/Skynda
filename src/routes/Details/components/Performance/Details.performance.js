@@ -23,8 +23,8 @@ class Performance extends React.Component {
 
     const parameterBlockFn = (label, value) => (<Col md={6}>
       <Row>
-        <Col md={6}><label>{label}</label></Col>
-        <Col md={6}>{value}</Col>
+        <Col md={6} xs={4}><label>{label}</label></Col>
+        <Col md={6} xs={8}>{value}</Col>
       </Row>
     </Col>);
 

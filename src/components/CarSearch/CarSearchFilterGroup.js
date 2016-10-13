@@ -191,7 +191,7 @@ class CarSearch extends React.Component {
                 <Row>
                   <Col md={12} className='range-slider-wrapper'>
                     <label>{translations.components.car_search.colors}</label><br />
-                    <ButtonGroup md={1} options={colors} shape='circle'/>
+                    <ButtonGroup md={1} xs={2} options={colors} shape='circle'/>
                   </Col>
                 </Row>
               </Col>
@@ -241,7 +241,7 @@ class CarSearch extends React.Component {
                 <Row>
                   <Col md={12} className='range-slider-wrapper'>
                     <label>{translations.components.car_search.doors}</label><br />
-                    <ButtonGroup md={2} options={doors} shape='circle'/>
+                    <ButtonGroup md={2} xs={2} options={doors} shape='circle'/>
                   </Col>
                 </Row>
               </Col>
@@ -249,7 +249,7 @@ class CarSearch extends React.Component {
                 <Row>
                   <Col md={12} className='range-slider-wrapper'>
                     <label>{translations.components.car_search.seats}</label><br />
-                    <ButtonGroup md={2} options={seats} shape='circle'/>
+                    <ButtonGroup md={2} xs={2} options={seats} shape='circle'/>
                   </Col>
                 </Row>
               </Col>
@@ -257,7 +257,7 @@ class CarSearch extends React.Component {
                 <Row>
                   <Col md={12} className='range-slider-wrapper'>
                     <label>{translations.components.car_search.transmission}</label><br />
-                    <ButtonGroup md={8} options={transmissions}/>
+                    <ButtonGroup md={8} xs={6} options={transmissions}/>
                   </Col>
                 </Row>
               </Col>
