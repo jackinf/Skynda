@@ -1,7 +1,7 @@
 import React from "react";
 
-import "./Details.mainimage.scss";
-import "./Details.mainimage.modal.scss";
+import "./../../Details.mainimage.scss";
+import "./../../Details.mainimage.modal.scss";
 
 import image360 from "./assets/group-78@2x.png";
 import {Button, Modal} from "react-bootstrap";

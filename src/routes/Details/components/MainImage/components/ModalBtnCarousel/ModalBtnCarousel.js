@@ -4,8 +4,8 @@
 
 import React from "react";
 import imageCam from "./assets/camera@2x.png";
-import "./Details.mainimage.scss";
-import "./Details.mainimage.modal.scss";
+import "./../../Details.mainimage.scss";
+import "./../../Details.mainimage.modal.scss";
 
 import {Button, Carousel, Modal} from "react-bootstrap";
 import translations from "../../../../../../store/locales/et";
