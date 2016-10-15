@@ -8,7 +8,10 @@ import org.springframework.boot.autoconfigure.*;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
 @SpringBootApplication
+@EnableSwagger2
 @EntityScan(basePackages = { "me.skynda" })
 public class SkyndaApplication {
 
