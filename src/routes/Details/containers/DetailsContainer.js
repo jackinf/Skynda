@@ -3,7 +3,7 @@
  */
 
 import { connect } from "react-redux";
-import { toggleLoading, setCarData, getDataAsync, sendEmailAsync, sendQuestionByEmailAsync } from "../modules";
+import { toggleLoading, setCarData, getDataAsync, sendEmailAsync, sendQuestionByEmailAsync } from "../reducers";
 
 import About from "../components/Details";
 
