@@ -10,7 +10,7 @@ class Button extends React.Component {
               }}
               onClick={e => {
                 e.preventDefault();
-                this.props.onClick(this.props.actionMethod)
+                this.props.onClick()
               }}
       >
         {this.props.children}

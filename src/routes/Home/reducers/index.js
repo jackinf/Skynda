@@ -1,5 +1,9 @@
-import { searchBtnReducers } from "./searchBtnReducers";
+import { searchBtn, toggleBtn } from "./searchBtnReducers";
+import { setValues, loadBaseData } from "./searchReducer";
 
 export {
-  searchBtnReducers
+  searchBtn,
+  toggleBtn,
+  setValues,
+  loadBaseData
 };
