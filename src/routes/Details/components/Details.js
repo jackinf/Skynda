@@ -87,9 +87,9 @@ class CarDetails extends React.Component {
 
                 <Fetaures features={carData.features}/>
                 <History history={carData.history}/>
-                <PetrolConsumption petrol_consumption={carData.petrol_consumption}/>
+                <PetrolConsumption petrolConsumption={carData.petrolConsumption}/>
                 <Performance performance={carData.performance}/>
-                <Safety stars={carData.safety_stars}/>
+                <Safety stars={carData.safetyStars}/>
                 <InspectorsReport report={carData.report}
                                   sendQuestionByEmailAsync={this.props.sendQuestionByEmailAsync}/>
                 <Reviews reviews={carData.reviews}/>

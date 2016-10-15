@@ -15,7 +15,7 @@ import Skblock from "../BlockContainer";
 
 class PetrolConsumption extends React.Component {
   render() {
-    const {city, highway, average} = this.props.petrol_consumption;
+    const {city, highway, average} = this.props.petrolConsumption;
 
     return (<Skblock header={translations.routes.details.components.petrol.header}>
       <Col md={6}>
@@ -40,10 +40,10 @@ class PetrolConsumption extends React.Component {
 }
 
 PetrolConsumption.propTypes = {
-  petrol_consumption: React.PropTypes.shape({
+  petrolConsumption: React.PropTypes.shape({
     city: React.PropTypes.string.isRequired,
-    highway: React.PropTypes.string.isRequired,
-    average: React.PropTypes.string.isRequired
+    highway: React.PropTypes.string,  // isRequired
+    average: React.PropTypes.string   // isRequired
   })
 };
 

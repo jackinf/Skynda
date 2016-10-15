@@ -63,7 +63,7 @@ Reviews.propTypes = {
   reviews: React.PropTypes.arrayOf(React.PropTypes.shape({
     logoUrl: React.PropTypes.string,
     rating: React.PropTypes.number.isRequired,
-    text: React.PropTypes.string.isRequired,
+    text: React.PropTypes.string, // isRequired
     videoUrl: React.PropTypes.string
   })).isRequired
 };
