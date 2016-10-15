@@ -17,22 +17,13 @@ export const sendEmailAsync = (data) => {
       formData.append(key, data[key]);
     }
 
-<<<<<<< HEAD:src/routes/Details/reducers/Details.module.email.js
-    var promise = fetch(remoteConfig.remote + '/api/email/person', {
-      method: 'POST',
-      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-=======
+
+
     return fetch(remoteConfig.remote + "/api/email/person", {
       method: "POST",
       headers: {"Accept": "application/json", "Content-Type": "application/json"},
->>>>>>> 57f113de15547cac67368c94072cf6508e8943ff:src/routes/Details/reducers/Details.module.email.js
       body: JSON.stringify(data)
     });
-    return promise.then({
-
-    }).then({
-
-    })
   };
 };
 
