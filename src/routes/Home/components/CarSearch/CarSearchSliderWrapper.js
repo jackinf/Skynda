@@ -4,7 +4,7 @@ import {Row, Col} from "react-bootstrap";
 import reactMixin from "react-mixin";
 
 // mixins
-import settimeoutMixin from "../../mixins/settimeout";
+import settimeoutMixin from "../../../../mixins/settimeout";
 
 class SliderWrapper extends React.Component {
 

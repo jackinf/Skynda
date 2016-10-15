@@ -7,12 +7,13 @@ import "./CarSearchFilterGroup.scss";
 import ButtonGroup from "./CarSearchButtonGroup";
 
 import {Button, Row, Col} from "react-bootstrap";
+import SearchButton from "../../containers/SearchButton";
 import moment from "moment";
 
 import SliderWrapper from "./CarSearchSliderWrapper";
 
 // translation
-import translations from "../../store/locales/et";
+import translations from "../../../../store/locales/et";
 
 const brands = [
   {id: -1, name: "Kõik"},
@@ -276,11 +277,19 @@ class CarSearch extends React.Component {
                 {/* <span className='less glyphicon glyphicon-minus' /> */}
                 {translations.components.car_search.advanced_txt}
               </Button>
+              {this.props.isSearching ? "true" : "false"}
 
-              <Button className='btn btn-info sk-btn--search' onClick={this.search}>
+              <SearchButton className='btn btn-info sk-btn--search' >
                 <span className='glyphicon glyphicon-search'/>
                 {translations.components.car_search.btn_search}
-              </Button>
+              </SearchButton>
+
+
+              <SearchButton className='' >
+                <span className='glyphicon glyphicon-search'/>
+                {translations.components.car_search.btn_search}
+              </SearchButton>
+
             </div>
           </div>
         </div>
@@ -294,5 +303,8 @@ class CarSearch extends React.Component {
     </div>);
   }
 }
+
+
+
 
 export default CarSearch;

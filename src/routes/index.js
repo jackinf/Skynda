@@ -11,7 +11,7 @@ import CounterRoute from './Counter_todelete'
 export const createRoutes = (store) => ({
   path        : "/",
   component   : CoreLayout,
-  indexRoute  : Home,
+  indexRoute  : Home(store),
   childRoutes : [
     Details(store),
     About(store),
