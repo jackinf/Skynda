@@ -16,10 +16,10 @@ export default {
 
   path: "*",
 
-  action () {
+  action() {
     return {
       title,
-      component: <NotFound title={title} />,
+      component: <NotFound title={title}/>,
       status: 404
     };
   }

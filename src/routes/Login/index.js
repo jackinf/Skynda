@@ -16,10 +16,10 @@ export default {
 
   path: "/login",
 
-  action () {
+  action() {
     return {
       title,
-      component: <Login title={title} />
+      component: <Login title={title}/>
     };
   }
 

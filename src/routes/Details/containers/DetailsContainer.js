@@ -2,8 +2,13 @@
  * Created by jevgenir on 10/1/2016.
  */
 
+<<<<<<< HEAD
 import { connect } from "react-redux";
 import { toggleLoading, setCarData, getDataAsync, sendEmailAsync, sendQuestionByEmailAsync } from "../reducers";
+=======
+import {connect} from "react-redux";
+import {toggleLoading, setCarData, getDataAsync, sendEmailAsync, sendQuestionByEmailAsync} from "../reducers";
+>>>>>>> 57f113de15547cac67368c94072cf6508e8943ff
 
 import About from "../components/Details";
 

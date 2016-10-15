@@ -4,8 +4,8 @@
 
 import React from "react";
 import "./Home.hero.scss";
-import { Button } from "react-bootstrap";
-import { browserHistory } from "react-router";
+import {Button} from "react-bootstrap";
+import {browserHistory} from "react-router";
 import heroImageUrl from "../../../static/images/standard/hero-01-2.jpg";
 import translations from "../../../store/locales/et";
 
@@ -13,19 +13,19 @@ import translations from "../../../store/locales/et";
  * Main jumbotron for a primary marketing message or call to action
  */
 class Hero extends React.Component {
-  constructor () {
+  constructor() {
     super();
 
     this.gotoDetails = this.gotoDetails.bind(this);
   }
 
-  gotoDetails () {
+  gotoDetails() {
     browserHistory.push("details");
   }
 
-  render () {
+  render() {
     return (<div className='sk_hero'>
-      <img className='sk_hero__image' src={heroImageUrl} alt='image' />
+      <img className='sk_hero__image' src={heroImageUrl} alt='image'/>
       <div className='sk_hero__text'>
         <div className='container'>
           <div className='grid'>
@@ -33,7 +33,9 @@ class Hero extends React.Component {
               <h2>{translations.routes.home_page.hero.main_text}</h2>
             </div>
             <div className='col-md-3'>
-              <Button className='primary-button' onClick={this.gotoDetails}>{translations.routes.home_page.hero.read_more}</Button>
+              <Button className='primary-button' onClick={this.gotoDetails}>
+                {translations.routes.home_page.hero.read_more}
+              </Button>
             </div>
           </div>
         </div>

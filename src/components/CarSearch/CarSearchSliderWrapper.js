@@ -1,10 +1,10 @@
-import React from 'react';
+import React from "react";
 import Slider from "rc-slider";
-import {Row, Col} from 'react-bootstrap';
-import reactMixin from 'react-mixin';
+import {Row, Col} from "react-bootstrap";
+import reactMixin from "react-mixin";
 
 // mixins
-import settimeoutMixin from '../../mixins/settimeout';
+import settimeoutMixin from "../../mixins/settimeout";
 
 class SliderWrapper extends React.Component {
 
@@ -23,7 +23,6 @@ class SliderWrapper extends React.Component {
   }
 
   onSliderChange = (value) => {
-
     // settimeout mixin. Optimization, which reduces number on render calls.
     this.clearTimeouts();
     this.setTimeout(() => {
@@ -32,17 +31,17 @@ class SliderWrapper extends React.Component {
   };
 
   render() {
-    const { min, max, units } = this.props;
+    const {min, max, units} = this.props;
 
     return (<div className='range-slider-wrapper'>
       <label>{this.title}</label>
 
-      <Row className="range-slider-wrapper__labels">
+      <Row className='range-slider-wrapper__labels'>
         <Col md={6}>
           {min} {units}
         </Col>
         <Col md={6}>
-          <span className="pull-right">
+          <span className='pull-right'>
             {max} {units}
           </span>
         </Col>
@@ -51,12 +50,12 @@ class SliderWrapper extends React.Component {
       <Row>
         <Col sm={12}>
           <Slider range
-                  allowCross={false}
-                  defaultValue={[this.minValue, this.maxValue]}
-                  min={this.minValue}
-                  max={this.maxValue}
-                  step={this.step}
-                  onChange={this.onSliderChange} />
+            allowCross={false}
+            defaultValue={[this.minValue, this.maxValue]}
+            min={this.minValue}
+            max={this.maxValue}
+            step={this.step}
+            onChange={this.onSliderChange} />
         </Col>
       </Row>
     </div>);

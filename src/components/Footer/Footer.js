@@ -9,10 +9,10 @@
 
 import React from "react";
 import "./Footer.scss";
-import { Link } from "react-router";
+import {Link} from "react-router";
 import translations from "../../store/locales/en";
 
-function Footer () {
+function Footer() {
   return (
     <div className='footer-root'>
       <div className='container footer-container'>
@@ -22,7 +22,7 @@ function Footer () {
         <span className='spacer'>·</span>
         <Link className='link' to='/privacy'>{translations.components.footer.email}</Link>
         <span className='spacer'>·</span>
-        <span className="text">{translations.components.footer.phone}</span>
+        <span className='text'>{translations.components.footer.phone}</span>
       </div>
     </div>
   );

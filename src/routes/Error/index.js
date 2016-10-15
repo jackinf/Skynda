@@ -14,7 +14,7 @@ export default {
 
   path: "/error",
 
-  action ({ error }) {
+  action({error}) {
     return {
       title: error.name,
       description: error.message,

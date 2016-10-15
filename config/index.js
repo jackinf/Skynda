@@ -55,8 +55,8 @@ const config = {
   // Test Configuration
   // ----------------------------------
   coverage_reporters : [
-    { type : "text-summary" },
-    { type : "lcov", dir : "coverage" }
+    {type : "text-summary"},
+    {type : "lcov", dir : "coverage"}
   ]
 };
 
@@ -104,7 +104,7 @@ config.compiler_vendors = config.compiler_vendors
 // ------------------------------------
 // Utilities
 // ------------------------------------
-function base () {
+function base() {
   const args = [config.path_base].concat([].slice.call(arguments));
   return path.resolve.apply(path, args);
 }

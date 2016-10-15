@@ -1,7 +1,7 @@
 import React from "react";
-import { bindActionCreators } from "redux";
-import { Counter } from "routes/Counter/components/Counter";
-import { shallow } from "enzyme";
+import {bindActionCreators} from "redux";
+import {Counter} from "routes/Counter/components/Counter";
+import {shallow} from "enzyme";
 
 describe("(Component) Counter", () => {
   let _props, _spies, _wrapper;
@@ -28,7 +28,7 @@ describe("(Component) Counter", () => {
 
   it("Should render props.counter at the end of the sample counter <h2>.", () => {
     expect(_wrapper.find("h2").text()).to.match(/5$/);
-    _wrapper.setProps({ counter: 8 });
+    _wrapper.setProps({counter: 8});
     expect(_wrapper.find("h2").text()).to.match(/8$/);
   });
 

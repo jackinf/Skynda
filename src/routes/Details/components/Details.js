@@ -22,38 +22,57 @@ import CarPreview from "./../../../components/CarPreview";
 import translations from "../../../store/locales/et";
 
 // List of rows
-import image_testcar from "../../../static/images/cars/accord/accord.jpg";
+import imageTestcar from "../../../static/images/cars/accord/accord.jpg";
 
 const cars = {
   other: [
     {
-      src: image_testcar, href: "/details", year: 2012, brand: "Audi", price: 12100, mileage: 85000, engine: "3.0",
-      power: "225 kW", doors: 4, seats: 5, comment: "Comes with winter tires"
+      src: imageTestcar,
+      href: "/details",
+      year: 2012,
+      brand: "Audi",
+      price: 12100,
+      mileage: 85000,
+      engine: "3.0",
+      power: "225 kW",
+      doors: 4,
+      seats: 5,
+      comment: "Comes with winter tires"
     },
     {
-      src: image_testcar, href: "/details", year: 2012, brand: "Audi", price: 12100, mileage: 85000, engine: "3.0",
-      power: "225 kW", doors: 4, seats: 5, comment: "Comes with winter tires"
+      src: imageTestcar,
+      href: "/details",
+      year: 2012,
+      brand: "Audi",
+      price: 12100,
+      mileage: 85000,
+      engine: "3.0",
+      power: "225 kW",
+      doors: 4,
+      seats: 5,
+      comment: "Comes with winter tires"
     }
   ]
 };
 
-import { StickyContainer, Sticky } from "react-sticky";
+import {StickyContainer, Sticky} from "react-sticky";
 
 class CarDetails extends React.Component {
 
-  async componentWillMount () {
+  async componentWillMount() {
     await this.props.getDataAsync();
   }
 
-  render () {
-    const car_data = this.props.car_data;
-    if (this.props.isLoading)
+  render() {
+    const carData = this.props.car_data;
+    if (this.props.isLoading) {
       return <div>Loading...</div>;
+    }
 
     return (
       <div className='car-details'>
         <div className='container'>
-          <CarDetailsMainImage car={car_data} />
+          <CarDetailsMainImage car={carData}/>
         </div>
 
         <div className='container'>
@@ -61,23 +80,24 @@ class CarDetails extends React.Component {
             <div className='row'>
               <div className='col col-md-7'>
 
-                <Overview overview={car_data.overview} />
+                <Overview overview={carData.overview}/>
 
-                {car_data.descriptions.map((description, i) =>
+                {carData.descriptions.map((description, i) =>
                   <Skblock key={i} header={description.title}>{description.text}</Skblock>)}
 
-                <Fetaures features={car_data.features} />
-                <History history={car_data.history} />
-                <PetrolConsumption petrol_consumption={car_data.petrol_consumption} />
-                <Performance performance={car_data.performance} />
-                <Safety stars={car_data.safety_stars} />
-                <InspectorsReport report={car_data.report} sendQuestionByEmailAsync={this.props.sendQuestionByEmailAsync} />
-                <Reviews reviews={car_data.reviews} />
+                <Fetaures features={carData.features}/>
+                <History history={carData.history}/>
+                <PetrolConsumption petrol_consumption={carData.petrol_consumption}/>
+                <Performance performance={carData.performance}/>
+                <Safety stars={carData.safety_stars}/>
+                <InspectorsReport report={carData.report}
+                                  sendQuestionByEmailAsync={this.props.sendQuestionByEmailAsync}/>
+                <Reviews reviews={carData.reviews}/>
 
               </div>
               <div className='col col-md-5'>
                 <Sticky>
-                  <Checkout sendEmailAsync={this.props.sendEmailAsync} />
+                  <Checkout sendEmailAsync={this.props.sendEmailAsync}/>
                 </Sticky>
               </div>
             </div>
@@ -85,7 +105,7 @@ class CarDetails extends React.Component {
 
           <div className='row'>
             <Skblock header={translations.routes.details.other_txt}>
-              <CarPreview.Grid cars={cars.other} />
+              <CarPreview.Grid cars={cars.other}/>
             </Skblock>
           </div>
         </div>
@@ -93,5 +113,13 @@ class CarDetails extends React.Component {
     );
   }
 }
+
+CarDetails.propTypes = {
+  getDataAsync: React.PropTypes.func.isRequired,
+  isLoading: React.PropTypes.bool.isRequired,
+  sendEmailAsync: React.PropTypes.func.isRequired,
+  sendQuestionByEmailAsync: React.PropTypes.func.isRequired,
+  car_data: React.PropTypes.object.isRequired
+};
 
 export default CarDetails;

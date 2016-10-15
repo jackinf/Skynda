@@ -1,14 +1,13 @@
 import React from "react";
-import { Row, Col } from "react-bootstrap";
+import {Row, Col} from "react-bootstrap";
 import translations from "../../../../store/locales/et";
 
 import Skblock from "../BlockContainer";
 
 class Performance extends React.Component {
-  render () {
+  render() {
     const {
       driven_wheels,
-      doors,
       compression_ratio,
       compressor_type,
       configuration,
@@ -24,8 +23,8 @@ class Performance extends React.Component {
 
     const parameterBlockFn = (label, value) => (<Col md={6}>
       <Row>
-        <Col md={6}><label>{label}</label></Col>
-        <Col md={6}>{value}</Col>
+        <Col md={6} xs={4}><label>{label}</label></Col>
+        <Col md={6} xs={8}>{value}</Col>
       </Row>
     </Col>);
 

@@ -22,10 +22,14 @@
     "key-spacing"          : 0,
     "jsx-quotes"           : [2, "prefer-single"],
     "max-len"              : [2, 120, 2],
-    "object-curly-spacing" : [2, "always"],
+    "object-curly-spacing" : [2, "never"],
     "indent": ["error", 2],
     "quotes": ["error", "double"],
     "semi": ["error", "always"],
-    "no-console": "off"
+    "no-console": "off",
+    "space-before-function-paren": [2, "never"],
+    "react/jsx-space-before-closing": [0, "never"],
+    "react/jsx-indent": [0],
+    "react/jsx-indent-props": [0]
   }
 }

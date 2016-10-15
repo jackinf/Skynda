@@ -2,26 +2,26 @@ import React from "react";
 import "./About.scss";
 
 // 3rd party
-import { Row, Col } from "react-bootstrap";
+import {Row, Col} from "react-bootstrap";
 
 // Images
-import image_logo from './../assets/skynda logo 4-mask-8@2x.png.png';
-import image_google from './../assets/Google Maps@2x.png.png';
-import image_telia from './../assets/image-mask-6@2x.png.png';
-import image_vunk from './../assets/group@2x.png.png';
+import imageLogo from "./../assets/skynda logo 4-mask-8@2x.png.png";
+import imageGoogle from "./../assets/Google Maps@2x.png.png";
+import imageTelia from "./../assets/image-mask-6@2x.png.png";
+import imageVunk from "./../assets/group@2x.png.png";
 
 // Components
 import AboutSkblock from "./AboutSkblock";
 
 export class About extends React.Component {
-  componentWillMount () {
+  componentWillMount() {
     this.props.loadDescription();
     this.props.loadPeople();
   }
 
-  render () {
+  render() {
     const personBlockFn = (person, i) => (<Col key={i} md={3} className='about__person-block'>
-        <img className='about__person-image' src={person.imageUrl} alt='' />
+        <img className='about__person-image' src={person.imageUrl} alt=''/>
         <Row>
           <Col md={12}>
             <span className='about__person-name'>{person.name}</span>
@@ -44,12 +44,12 @@ export class About extends React.Component {
             </Col>
           </AboutSkblock>
 
-          {this.props.people.length > 0 ?
-            (<AboutSkblock header='Skynda Tiim'>
-              <Row>
-                {this.props.people.map((person, i) => personBlockFn(person, i))}
-              </Row>
-            </AboutSkblock>)
+          {this.props.people.length > 0
+            ? (<AboutSkblock header='Skynda Tiim'>
+                  <Row>
+                    {this.props.people.map((person, i) => personBlockFn(person, i))}
+                  </Row>
+                </AboutSkblock>)
             : "Is loading"}
         </Col>
 
@@ -58,7 +58,7 @@ export class About extends React.Component {
             <h4 className='about__our-contacts-header'>Meie kontaktid</h4>
 
             <Row>
-              <img src={image_logo} alt="logo"/>
+              <img src={imageLogo} alt='logo'/>
             </Row>
 
             <br />
@@ -70,7 +70,7 @@ export class About extends React.Component {
             <br />
 
             <Row>
-              <img src={image_google} alt="google"/>
+              <img src={imageGoogle} alt='google'/>
             </Row>
 
             <br />
@@ -80,7 +80,7 @@ export class About extends React.Component {
             </Row>
 
             <Row>
-              <span className="about__email">hello@skynda.me</span>
+              <span className='about__email'>hello@skynda.me</span>
               <br />
             </Row>
 
@@ -91,13 +91,13 @@ export class About extends React.Component {
             <h4 className='about__our-contacts-header'>Partnerid</h4>
 
             <Row>
-              <img src={image_telia} alt=""/>
+              <img src={imageTelia} alt=''/>
             </Row>
 
             <br />
 
             <Row>
-              <img src={image_vunk} alt=""/>
+              <img src={imageVunk} alt=''/>
             </Row>
           </div>
         </Col>
@@ -108,7 +108,9 @@ export class About extends React.Component {
 
 About.propTypes = {
   people: React.PropTypes.array,
-  description: React.PropTypes.string.isRequired
+  description: React.PropTypes.string.isRequired,
+  loadDescription: React.PropTypes.func.isRequired,
+  loadPeople: React.PropTypes.func.isRequired
 };
 
 export default About;

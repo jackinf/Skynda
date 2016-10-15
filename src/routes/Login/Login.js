@@ -7,11 +7,11 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-import React, { PropTypes } from "react";
+import React, {PropTypes} from "react";
 import withStyles from "isomorphic-style-loader/lib/withStyles";
 import s from "./Login.scss";
 
-function Login ({ title }) {
+function Login({title}) {
   return (
     <div className={s.root}>
       <div className={s.container}>
@@ -114,6 +114,6 @@ function Login ({ title }) {
   );
 }
 
-Login.propTypes = { title: PropTypes.string.isRequired };
+Login.propTypes = {title: PropTypes.string.isRequired};
 
 export default withStyles(s)(Login);

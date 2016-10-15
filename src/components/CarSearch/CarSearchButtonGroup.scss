@@ -41,3 +41,7 @@ $default-border-color: #E8E5E5;
 .rc-slider-track {
   background-color: $default-color;
 }
+
+.btn-group__element-button {
+  margin-bottom: 10px !important;
+}
