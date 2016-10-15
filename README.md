@@ -29,3 +29,7 @@ example: V1_1_1_201412031225__initial schema_ddl.sql
 
 ## EA model location ##
 1. https://mruskin@bitbucket.org/mruskin/skyndaea.git
+  
+## DATA Generation ##  
+Scripts can be found under resources/generated/skynda_test_data.sql  
+For data generation was used: Datanamic Data Generator (.dtp file at the same directory)
