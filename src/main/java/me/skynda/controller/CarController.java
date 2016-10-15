@@ -21,5 +21,10 @@ public class CarController {
     public List<SingleCarDataDto> getCars() {
         return carService.getCars();
     }
+    
+	@RequestMapping(value = "/car", method = RequestMethod.POST, consumes = "application/json")
+    public List<SingleCarDataDto> insertCars() {
+        return carService.getCars();
+    }
 
 }
