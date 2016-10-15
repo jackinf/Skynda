@@ -1,5 +1,5 @@
-import { isSearching } from "./isSearching";
+import { searchBtnReducers } from "./searchBtnReducers";
 
 export {
-  isSearching
+  searchBtnReducers
 };

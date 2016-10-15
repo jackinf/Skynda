@@ -1,14 +1,16 @@
 import Home from "../Home";
 import { connect } from "react-redux";
-import {isSearching} from "../reducers";
+import {searchBtnReducers} from "../reducers";
 
+//Object of action creators
 const mapDispatchToProps = {
-  isSearching
+  searchBtnReducers
 };
 
+//STATE PROPS
 const mapStateToProps = (state) => ({
   isSearching: state.isSearching,
-  temp: state.temp
+  toggleAdvancedSearch: state.toggleAdvancedSearch
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

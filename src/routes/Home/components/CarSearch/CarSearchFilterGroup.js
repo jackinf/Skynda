@@ -7,7 +7,7 @@ import "./CarSearchFilterGroup.scss";
 import ButtonGroup from "./CarSearchButtonGroup";
 
 import {Button, Row, Col} from "react-bootstrap";
-import SearchButton from "../../containers/SearchButton";
+import SearchButton from "../../containers/SearchButtonContainer";
 import moment from "moment";
 
 import SliderWrapper from "./CarSearchSliderWrapper";
@@ -270,22 +270,20 @@ class CarSearch extends React.Component {
         <div className='row'>
           <div className='col-md-12'>
             <div className='text-right'>
-              <Button className='btn btn-link fk-filter-advance'
-                      role='button'
-                      onClick={e => this.toggleAdvanced(!this.state.showAdvancedSearch)}>
+              {/*<Button className='btn btn-link fk-filter-advance'*/}
+                      {/*role='button'*/}
+                      {/*onClick={e => this.toggleAdvanced(!this.state.showAdvancedSearch)}>*/}
+                {/*<span className='more glyphicon glyphicon-plus'/>*/}
+                {/*/!* <span className='less glyphicon glyphicon-minus' /> *!/*/}
+                {/*{translations.components.car_search.advanced_txt}*/}
+              {/*</Button>*/}
+              <SearchButton className='btn btn-link fk-filter-advance' actionMethod={() => this.props.toggleAdvancedSearch()}>
                 <span className='more glyphicon glyphicon-plus'/>
                 {/* <span className='less glyphicon glyphicon-minus' /> */}
                 {translations.components.car_search.advanced_txt}
-              </Button>
-              {this.props.isSearching ? "true" : "false"}
-
-              <SearchButton className='btn btn-info sk-btn--search' >
-                <span className='glyphicon glyphicon-search'/>
-                {translations.components.car_search.btn_search}
               </SearchButton>
 
-
-              <SearchButton className='' >
+              <SearchButton className='btn btn-info sk-btn--search' actionMethod={() => this.props.setIsSearching(true)}>
                 <span className='glyphicon glyphicon-search'/>
                 {translations.components.car_search.btn_search}
               </SearchButton>

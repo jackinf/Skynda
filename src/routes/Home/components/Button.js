@@ -2,8 +2,6 @@ import React, { PropTypes } from 'react'
 
 class Button extends React.Component {
   render() {
-    console.log("Button props mother fucker", this.props);
-
     return (
       <button className={this.props.classes}
               onSubmit={e => {
@@ -12,10 +10,9 @@ class Button extends React.Component {
               }}
               onClick={e => {
                 e.preventDefault();
-                this.props.onClick()
+                this.props.onClick(this.props.actionMethod)
               }}
       >
-        {this.props.isSearching ? "true" : "false"}
         {this.props.children}
       </button>
     );
