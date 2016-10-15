@@ -26,6 +26,6 @@ public class CarReport {
 	private Boolean isPass;
 	private String pointsText;
 	private String faultsText;
-	private String faultsImg;
+	private String faulsImg;
 	
 }

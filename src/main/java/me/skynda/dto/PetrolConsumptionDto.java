@@ -12,8 +12,12 @@ public class PetrolConsumptionDto {
 	private String average;
 	
 	public void setAverage(String fuelCity, String fuelHigway) {
-		Double result = (Double.parseDouble(fuelCity) + Double.parseDouble(fuelHigway)) / 2;
-		this.average = result.toString();
+		if (fuelCity == null || fuelHigway == null) {
+			this.average = null;
+		} else {
+			double result = (Double.parseDouble(fuelCity) + Double.parseDouble(fuelHigway)) / 2;
+			this.average = String.valueOf(result);
+		}
 	}
 
 }

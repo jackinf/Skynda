@@ -70,7 +70,7 @@ public class CarConverter {
 		for (CarReport carReport : car.getCarReport()) {
 			ReportDto reportDto = new ReportDto();
 			reportDto.setCarsForSaleId(carReport.getCar().getId());
-			reportDto.setFaultsImg(carReport.getFaultsImg());
+			reportDto.setFaultsImg(carReport.getFaulsImg());
 			reportDto.setFaultsText(carReport.getFaultsText());
 			reportDto.setIsPass(carReport.getIsPass());
 			reportDto.setPointsText(carReport.getPointsText());
