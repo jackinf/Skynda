@@ -62,22 +62,22 @@ public class CarConverter {
 			reviewDto.setVideoUrl(carReview.getVideoUrl());
 			reviewDtoList.add(reviewDto);
 		}
-		singleCarDataDto.setReview(reviewDtoList);
+		singleCarDataDto.setReviews(reviewDtoList);
 	}
 
 	private void convertReportData(Car car, SingleCarDataDto singleCarDataDto) {
 		List<ReportDto> reportDtoList = new ArrayList<ReportDto>();
-		for (CarReport carReport : car.getCarReport()) {
-			ReportDto reportDto = new ReportDto();
-			reportDto.setCarsForSaleId(carReport.getCar().getId());
-			reportDto.setFaultsImg(carReport.getFaulsImg());
-			reportDto.setFaultsText(carReport.getFaultsText());
-			reportDto.setIsPass(carReport.getIsPass());
-			reportDto.setPointsText(carReport.getPointsText());
-			reportDto.setReportId(carReport.getReportId());
-			reportDto.setTitle(carReport.getTitle());
-			reportDtoList.add(reportDto);
-		}
+//		for (CarReport carReport : car.getCarReport()) {
+//			ReportDto reportDto = new ReportDto();
+//			reportDto.setCarsForSaleId(carReport.getCar().getId());
+//			reportDto.setFaultsImg(carReport.getFaulsImg());
+//			reportDto.setFaultsText(carReport.getFaultsText());
+//			reportDto.setIsPass(carReport.getIsPass());
+//			reportDto.setPointsText(carReport.getPointsText());
+//			reportDto.setReportId(carReport.getReportId());
+//			reportDto.setTitle(carReport.getTitle());
+//			reportDtoList.add(reportDto);
+//		}
 		singleCarDataDto.setReport(reportDtoList);
 	}
 

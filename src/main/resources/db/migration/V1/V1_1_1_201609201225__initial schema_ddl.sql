@@ -147,11 +147,11 @@ CREATE TABLE "car_models"
 	"title" varchar(255),
 	"transmission" varchar(50)	 NOT NULL,
 	"engine" varchar(100)	 NOT NULL,
-	"horse_power" varchar(100)	,
+	"horse_power" integer	,
 	"drive" varchar(255)	 NOT NULL,
-	"doors" varchar(50)	 NOT NULL,
+	"doors" integer	 NOT NULL,
 	"seats" varchar(50)	 NOT NULL,
-	"year"  varchar(50) NOT NULL,
+	"year"  integer NOT NULL,
 	"body_type" varchar(100)	 NOT NULL
 )
 ;
@@ -177,17 +177,17 @@ CREATE TABLE "cars_for_sale"
 	"fuel_highway" varchar(100)	,
 	"features" text,
 	"problems" varchar(255),
-	"compression_ratio" varchar(50),
+	"compression_ratio" integer,
 	"compression_type" varchar(50),
 	"configuration" varchar(50),
 	"cylinders" varchar(50),
 	"displacement" varchar(50),
 	"fuel_type" varchar(50),
-	"size" varchar(50), --WTF is size???
-	"torque" varchar(50),
-	"total_valves" varchar(50),
+	"size" integer, --WTF is size???
+	"torque" integer,
+	"total_valves" integer,
 	"power_train" varchar(50),
-	"safety_stars" varchar(50)
+	"safety_stars" integer
 )
 ;
 
@@ -210,7 +210,7 @@ CREATE TABLE "car_review"
 	"logo_url" varchar(255),
 	"video_url" varchar(255),
 	"text" text,
-	"rating" varchar(50)
+	"rating" integer
 )
 ;
 

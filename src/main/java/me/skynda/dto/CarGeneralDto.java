@@ -8,16 +8,16 @@ import lombok.ToString;
 public class CarGeneralDto {
 
 	private String src;
-	private String year;
+	private Integer year;
 	private String manufacturer;
 	private String model;
 	private String engine;
-	private String horsePower;
+	private Integer horsePower;
 	private String mileage;
 	private String transmission;
 	private String drive;
 	private String colorOutside;
 	private String colorInside;
-	private String doors;
+	private Integer doors;
 	private String seats;
 }

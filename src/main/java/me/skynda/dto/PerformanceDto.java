@@ -8,17 +8,17 @@ import lombok.ToString;
 public class PerformanceDto {
 
 	private String drivenWheels;
-	private String doors;
-	private String compressionRatio;
+	private Integer doors;
+	private Integer compressionRatio;
 	private String compressorType;
 	private String configuration;
 	private String cylinders;
 	private String displacement;
 	private String fuelType;
-	private String horsePower;
-	private String size;
-	private String torque;
-	private String totalValves;
+	private Integer horsePower;
+	private Integer size;
+	private Integer torque;
+	private Integer totalValves;
 	private String powerTrain;
 	
 }

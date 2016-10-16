@@ -25,6 +25,6 @@ public class CarReview {
 	private String logoUrl;
 	private String videoUrl;
 	private String text;
-	private String rating;
+	private Integer rating;
 
 }

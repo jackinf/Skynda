@@ -51,15 +51,15 @@ public class Car {
 	private String fuelHighway;
 	private String features;
 	private String problems;
-	private String compressionRatio;
+	private Integer compressionRatio;
 	private String compressionType;
 	private String configuration;
 	private String cylinders;
 	private String displacement;
 	private String fuelType;
-	private String size;
-	private String torque;
-	private String totalValves;
+	private Integer size;
+	private Integer torque;
+	private Integer totalValves;
 	private String powerTrain;
-	private String safetyStars;
+	private Integer safetyStars;
 }
