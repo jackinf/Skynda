@@ -17,14 +17,33 @@ public interface CarService {
 	 * @return all cars
 	 */
 	List<SingleCarDataDto> getCars();
+
+	/**
+	 * Adds new or updates an existing car manufacturer
+	 * @param carManufacturerDto Added manufacturer's dto
+	 * @return Added manufacturer's db model
+	 */
 	CarManufacturer saveCarManufacturer(CarManufacturerDto carManufacturerDto);
+
+	/**
+	 * Adds new or updates an existing car model
+	 * E.g. BMW
+	 * @param carModelsDto Added car model's dto
+	 * @return Added car model's db model
+	 */
 	CarModels saveCarModel(CarModelsDto carModelsDto);
+
+	/**
+	 * Adds new or updates an existing car for sale
+	 * @param carDto Added car's dto
+	 * @return Added car's db model
+	 */
 	Car saveCarForSale(CarDto carDto);
 
 	/**
 	 * Gets a single car
 	 * @param id car's id
-	 * @return single car
+	 * @return single car's dto
 	 */
 	SingleCarDataDto getCar(int id);
 
