@@ -19,6 +19,11 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EntityScan(basePackages = { "me.skynda" })
 public class SkyndaApplication {
 
+	/**
+	 * Swagger.io library's configuration. It creates an UI for all existing API-s.
+	 * Address: /swagger-ui.html.
+	 * @return Setting's file for Swagger library.
+	 */
 	@Bean
     public Docket api() { 
         return new Docket(DocumentationType.SWAGGER_2)  
@@ -27,7 +32,12 @@ public class SkyndaApplication {
           .paths(PathSelectors.any())                          
           .build();                                           
     }
-	
+
+	/**
+	 * Hibernate's session creator function.
+	 * @param emf
+	 * @return Hibernate's session factory
+	 */
 	@Bean
 	public SessionFactory sessionFactory(EntityManagerFactory emf) {
 		if (emf.unwrap(SessionFactory.class) == null) {
@@ -36,6 +46,11 @@ public class SkyndaApplication {
 		return emf.unwrap(SessionFactory.class);
 	}
 
+	/**
+	 * Application's entry point
+	 * @param args
+	 * @throws Exception
+	 */
 	public static void main(String[] args) throws Exception {
 		SpringApplication.run(SkyndaApplication.class, args);
 	}
