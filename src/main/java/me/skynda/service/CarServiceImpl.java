@@ -70,7 +70,7 @@ public class CarServiceImpl implements CarService {
 		Car car = mapper.map(carDto, Car.class);
 		CarModels cm = carModelsDao.getByModelCode(carDto.getCarModelsCode());
 		car.setCarModels(cm);
-		return carDao.saveOrUpdate(car);
+		return carDao.save(car);
 	}
 	
 }

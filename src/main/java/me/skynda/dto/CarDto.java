@@ -10,6 +10,7 @@ import lombok.ToString;
 @ToString(callSuper = false)
 public class CarDto {
 
+	private Long id;
     private String carModelsCode;
 	private String vinCode;
 	private BigDecimal price;
