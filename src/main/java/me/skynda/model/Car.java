@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.Table;
 
@@ -23,7 +24,7 @@ import javax.persistence.Table;
 public class Car {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -50,15 +51,15 @@ public class Car {
 	private String fuelHighway;
 	private String features;
 	private String problems;
-	private String compressionRatio;
+	private Integer compressionRatio;
 	private String compressionType;
 	private String configuration;
 	private String cylinders;
 	private String displacement;
 	private String fuelType;
-	private String size;
-	private String torque;
-	private String totalValves;
+	private Integer size;
+	private Integer torque;
+	private Integer totalValves;
 	private String powerTrain;
-	private String safetyStars;
+	private Integer safetyStars;
 }

@@ -25,10 +25,10 @@ public class CarModels {
 	private String title;
 	private String transmission;
 	private String engine;
-	private String horsePower;
+	private Integer horsePower;
 	private String drive;
-	private String doors;
+	private Integer doors;
 	private String seats;
-	private String year;
+	private Integer year;
 	private String bodyType;
 }
