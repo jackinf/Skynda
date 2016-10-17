@@ -53,7 +53,7 @@ public class CarServiceImpl implements CarService {
 
 
 	@Override
-	public CarManufacturer saveCarManufacturer(CarManufacturerDto carManufacturerDto) {
+	public CarManufacturer saveOrUpdateCarManufacturer(CarManufacturerDto carManufacturerDto) {
 		CarManufacturer carManufacturer;
 		Mapper mapper = new DozerBeanMapper();
 		carManufacturer = mapper.map(carManufacturerDto, CarManufacturer.class);
@@ -61,7 +61,7 @@ public class CarServiceImpl implements CarService {
 	}
 
 	@Override
-	public CarModels saveCarModel(CarModelsDto carModelsDto) {
+	public CarModels saveOrUpdateCarModel(CarModelsDto carModelsDto) {
 		CarModels carModels;
 		Mapper mapper = new DozerBeanMapper();
 		carModels = mapper.map(carModelsDto, CarModels.class);
@@ -76,7 +76,12 @@ public class CarServiceImpl implements CarService {
 		Car car = mapper.map(carDto, Car.class);
 		CarModels cm = carModelsDao.getByModelCode(carDto.getCarModelsCode());
 		car.setCarModels(cm);
-		return carDao.save(car);
+		return carDao.saveOrUpdate(car);
+	}
+
+	@Override
+	public void deleteCar(Integer id) {
+		carDao.delete(id);
 	}
 
 }

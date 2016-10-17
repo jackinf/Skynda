@@ -23,7 +23,7 @@ public interface CarService {
 	 * @param carManufacturerDto Added manufacturer's dto
 	 * @return Added manufacturer's db model
 	 */
-	CarManufacturer saveCarManufacturer(CarManufacturerDto carManufacturerDto);
+	CarManufacturer saveOrUpdateCarManufacturer(CarManufacturerDto carManufacturerDto);
 
 	/**
 	 * Adds new or updates an existing car model
@@ -31,7 +31,7 @@ public interface CarService {
 	 * @param carModelsDto Added car model's dto
 	 * @return Added car model's db model
 	 */
-	CarModels saveCarModel(CarModelsDto carModelsDto);
+	CarModels saveOrUpdateCarModel(CarModelsDto carModelsDto);
 
 	/**
 	 * Adds new or updates an existing car for sale
@@ -46,5 +46,12 @@ public interface CarService {
 	 * @return single car's dto
 	 */
 	SingleCarDataDto getCar(int id);
+	
+	/**
+	 * Delets a single car
+	 * @param id car's id
+	 * @return void
+	 */
+	void deleteCar(Integer id);
 
 }
