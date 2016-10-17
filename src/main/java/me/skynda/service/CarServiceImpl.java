@@ -2,6 +2,7 @@ package me.skynda.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.skynda.model.Car;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,5 +29,12 @@ public class CarServiceImpl implements CarService {
         });
 		return singleCarDataDto;
 	}
-	
+
+	@Override
+	public SingleCarDataDto getCar(int id) {
+		Car model = carDao.get(id);
+		SingleCarDataDto dto = carConverter.transform(model);
+		return dto;
+	}
+
 }

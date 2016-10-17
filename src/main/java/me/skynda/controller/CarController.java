@@ -3,13 +3,15 @@ package me.skynda.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.*;
 
 import me.skynda.dto.SingleCarDataDto;
 import me.skynda.service.CarService;
 
+import javax.ws.rs.Path;
+
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api")
 public class CarController {
@@ -20,6 +22,11 @@ public class CarController {
     @RequestMapping(value = "/cars", method = RequestMethod.GET, produces = "application/json")
     public List<SingleCarDataDto> getCars() {
         return carService.getCars();
+    }
+
+    @RequestMapping(value = "/car/{id}", method = RequestMethod.GET, produces = "application/json")
+    public SingleCarDataDto getCar(@PathVariable("id") Integer id) {
+        return carService.getCar(id);
     }
     
 	@RequestMapping(value = "/car", method = RequestMethod.POST, consumes = "application/json")

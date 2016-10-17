@@ -27,3 +27,4 @@ target/
 *.rar
 *.tar
 *.zip
+lib/
