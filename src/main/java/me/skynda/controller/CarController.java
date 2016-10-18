@@ -21,6 +21,9 @@ import me.skynda.service.CarService;
 
 import javax.ws.rs.Path;
 
+@CrossOrigin(origins = "*")
+@RestController
+@RequestMapping("/api")
 public class CarController extends BaseController {
 	
 	@Autowired

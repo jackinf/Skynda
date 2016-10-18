@@ -3,6 +3,8 @@ package me.skynda.service;
 import com.microsoft.azure.storage.CloudStorageAccount;
 import com.microsoft.azure.storage.blob.*;
 import me.skynda.dto.blobStorage.request.*;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -13,12 +15,13 @@ import java.util.List;
 /**
  * Tutorial: https://azure.microsoft.com/en-us/documentation/articles/storage-java-how-to-use-blob-storage/
  */
+@Service
+@Transactional
 public class BlobStorageServiceImpl implements BlobStorageService {
 
-    private final String STORAGE_CONNECTION_STRING =
-        "DefaultEndpointsProtocol=http;"
-        + "AccountName=your_account_name;"
-        + "AccountKey=your_account_key";
+    private final String STORAGE_CONNECTION_STRING = "DefaultEndpointsProtocol=https;" +
+            "AccountName=portalvhds37rpqq8py1thh;" +
+            "AccountKey=Fmwz4WFjCFQYxQesEQ6PVye/m+4OAIJiF6KARMzH3h7GfBUZDTG0U8U33J4kaQR4vP+OwLsZ8+WHN2D9KbX9UA==";
 
     public boolean createContainer(CreateContainerDto dto) {
         try
