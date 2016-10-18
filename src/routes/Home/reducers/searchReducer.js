@@ -1,7 +1,7 @@
 // translation
 import translations from "../../../store/locales/et";
 import moment from "moment";
-import {setStateValues} from './../actions/index';
+import {setStateValues, onSliderChange} from './../actions/index';
 
 export const loadBaseData = () => {
   return (dispatch, getState) => {
@@ -65,7 +65,7 @@ export const loadBaseData = () => {
         const sliderValues = {
           mileage: {min: 0, max: 500000, units: "KM"},
           price: {min: 0, max: 500000, units: "EUR"},
-          year: {min: 1970, max: moment().year(), units: ""},
+          year: {min: 2006, max: moment().year(), units: ""},
           petrol_consumption: {min: 0, max: 20, units: "L"},
           power: {min: 0, max: 500, units: "KW"}
         };

@@ -5,7 +5,7 @@ import {setStateValues, loadBaseData} from '../reducers'
 
 const mapStateToProps = (state) => {
   return {
-    showAdvancedSearch: state.base.showAdvancedSearch,
+    showAdvancedSearch: state.showAdvancedSearch,
     sliderValues: state.base.sliderValues,
     seats: state.base.seats,
     doors: state.base.doors,

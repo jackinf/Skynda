@@ -8,33 +8,22 @@ import settimeoutMixin from "../../../../mixins/settimeout";
 
 class SliderWrapper extends React.Component {
 
-  title = "";
-  step = null;
-  minValue = null;
-  maxValue = null;
-
-  constructor(props) {
-    super(props);
-
-    this.title = props.title;
-    this.step = props.step;
-    this.minValue = props.min;
-    this.maxValue = props.max;
-  }
-
   onSliderChange = (value) => {
-    // settimeout mixin. Optimization, which reduces number on render calls.
     this.clearTimeouts();
     this.setTimeout(() => {
-      this.props.onSliderChange(value);
+      this.props.onSliderChange({
+        value: value,
+        type: this.props.type,
+        units: this.props.units
+      });
     }, 100);
   };
 
   render() {
-    const {min, max, units} = this.props;
+    const {min, max, units, step} = this.props;
 
     return (<div className='range-slider-wrapper'>
-      <label>{this.title}</label>
+      <label>{this.props.title}</label>
 
       <Row className='range-slider-wrapper__labels'>
         <Col md={6}>
@@ -51,10 +40,10 @@ class SliderWrapper extends React.Component {
         <Col sm={12}>
           <Slider range
             allowCross={false}
-            defaultValue={[this.minValue, this.maxValue]}
-            min={this.minValue}
-            max={this.maxValue}
-            step={this.step}
+            defaultValue={[min, max]}
+            min={min}
+            max={max}
+            step={step}
             onChange={this.onSliderChange} />
         </Col>
       </Row>

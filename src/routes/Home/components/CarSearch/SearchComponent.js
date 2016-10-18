@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 import {Button, Row, Col} from "react-bootstrap";
 import ButtonGroup from "./CarSearchButtonGroup";
-import SliderWrapper from "./CarSearchSliderWrapper";
+import SliderContainer from "../../containers/SliderContainer";
 import ToggleButton from "../../containers/ToggleAdvancedSearchContainer";
 import SearchButton from "../../containers/SearchButtonContainer";
 
@@ -31,19 +31,11 @@ const colors = [
 
 class SearchComponent extends React.Component {
 
-  // onSliderChange = (value, name) => {
-  //   // value 0 is rcslider's min value and value 1 is max value.
-  //   const range = {min: value[0], max: value[1], units: this.state.sliderValues[name].units};
-  //   let sliderValues = this.state.sliderValues;
-  //   sliderValues[name] = range;
-  //   this.setState({sliderValues});
-  // }
   async componentWillMount() {
     await this.props.loadBaseData();
   }
 
   render() {
-    console.log("SEARCH COMPONENT" , this.props.sliderValues)
     const data = this.props.seats;
     if (data === undefined) {
       return <div>Loading...</div>;
@@ -63,13 +55,13 @@ class SearchComponent extends React.Component {
           <Row>
             <Col md={12}>
 
-              <SliderWrapper
+              <SliderContainer
                 title={translations.components.car_search.mileage}
                 step={100}
                 min={this.props.sliderValues.mileage.min}
                 max={this.props.sliderValues.mileage.max}
                 units={this.props.sliderValues.mileage.units}
-                onSliderChange={e => this.onSliderChange(e, "mileage")}
+                type={"mileage"}
               />
 
             </Col>
@@ -79,28 +71,31 @@ class SearchComponent extends React.Component {
           <Row>
             <Col md={12} className='range-slider-wrapper'>
 
-              <SliderWrapper
+              <SliderContainer
                 title={translations.components.car_search.price}
                 step={100}
                 min={this.props.sliderValues.price.min}
                 max={this.props.sliderValues.price.max}
                 units={this.props.sliderValues.price.units}
-                onSliderChange={e => this.onSliderChange(e, "price")}
+                type={"price"}
               />
+
             </Col>
           </Row>
         </Col>
         <Col md={4}>
           <Row>
             <Col md={12} className='range-slider-wrapper'>
-              <SliderWrapper
+
+              <SliderContainer
                 title={translations.components.car_search.year}
                 step={1}
                 min={this.props.sliderValues.year.min}
                 max={this.props.sliderValues.year.max}
                 units={this.props.sliderValues.year.units}
-                onSliderChange={e => this.onSliderChange(e, "year")}
+                type={"year"}
               />
+
             </Col>
           </Row>
         </Col>
@@ -143,13 +138,13 @@ class SearchComponent extends React.Component {
             <Col md={4}>
               <Row>
                 <Col md={12} className='range-slider-wrapper'>
-                  <SliderWrapper
+                  <SliderContainer
                     title={translations.components.car_search.petrol_consumption}
                     step={0.1}
                     min={this.props.sliderValues.petrol_consumption.min}
                     max={this.props.sliderValues.petrol_consumption.max}
                     units={this.props.sliderValues.petrol_consumption.units}
-                    onSliderChange={e => this.onSliderChange(e, "petrol_consumption")}
+                    type={"petrol_consumption"}
                   />
                 </Col>
               </Row>
@@ -161,20 +156,20 @@ class SearchComponent extends React.Component {
               <Row>
                 <Col md={12} className='range-slider-wrapper'>
                   <label>{translations.components.car_search.features}</label>
-                  <ButtonGroup md={3} options={features}/>
+                  <ButtonGroup md={3} options={this.props.features}/>
                 </Col>
               </Row>
             </Col>
             <Col md={4}>
               <Row>
                 <Col md={12} className='range-slider-wrapper'>
-                  <SliderWrapper
+                  <SliderContainer
                     title={translations.components.car_search.power}
                     step={1}
                     min={this.props.sliderValues.power.min}
                     max={this.props.sliderValues.power.max}
                     units={this.props.sliderValues.power.units}
-                    onSliderChange={e => this.onSliderChange(e, "power")}
+                    type={"power"}
                   />
                 </Col>
               </Row>
@@ -186,7 +181,7 @@ class SearchComponent extends React.Component {
               <Row>
                 <Col md={12} className='range-slider-wrapper'>
                   <label>{translations.components.car_search.doors}</label><br />
-                  <ButtonGroup md={2} xs={2} options={doors} shape='circle'/>
+                  <ButtonGroup md={2} xs={2} options={this.props.doors} shape='circle'/>
                 </Col>
               </Row>
             </Col>
@@ -194,7 +189,7 @@ class SearchComponent extends React.Component {
               <Row>
                 <Col md={12} className='range-slider-wrapper'>
                   <label>{translations.components.car_search.seats}</label><br />
-                  <ButtonGroup md={2} xs={2} options={seats} shape='circle'/>
+                  <ButtonGroup md={2} xs={2} options={this.props.seats} shape='circle'/>
                 </Col>
               </Row>
             </Col>
@@ -202,7 +197,7 @@ class SearchComponent extends React.Component {
               <Row>
                 <Col md={12} className='range-slider-wrapper'>
                   <label>{translations.components.car_search.transmission}</label><br />
-                  <ButtonGroup md={8} xs={6} options={transmissions}/>
+                  <ButtonGroup md={8} xs={6} options={this.props.transmissions}/>
                 </Col>
               </Row>
             </Col>

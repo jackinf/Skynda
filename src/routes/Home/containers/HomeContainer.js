@@ -1,13 +1,14 @@
 import Home from "../Home";
 import { connect } from "react-redux";
-import {searchBtn, toggleBtn, setValues, loadBaseData} from "../reducers";
+import {searchBtn, toggleBtn, setValues, loadBaseData, onSliderChange} from "../reducers";
 
 //Object of action creators
 const mapDispatchToProps = {
   searchBtn,
   toggleBtn,
   setValues,
-  loadBaseData
+  loadBaseData,
+  onSliderChange
 };
 
 //STATE PROPS
@@ -19,7 +20,7 @@ const mapStateToProps = (state) => ({
   doors: state.doors,
   transmissions: state.transmissions,
   features: state.features,
-  brands: state.brands
+  brands: state.brands,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

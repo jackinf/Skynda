@@ -12,3 +12,8 @@ export const setStateValues = (value) => ({
   type: "SET_STATE_VALUES",
   payload: value
 })
+
+export const onSliderChange = (value) => ({
+  type: "SET_SLIDER_VALUE",
+  payload: value
+})
