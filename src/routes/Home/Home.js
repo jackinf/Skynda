@@ -13,7 +13,7 @@ import "./Home.scss";
 import {Row, Col} from "react-bootstrap";
 
 import CarPreview from "./../../components/CarPreview";
-import CarSearch from "./../../components/CarSearch";
+import SearchBlock from "./components/SearchBlock";
 
 // Images
 import imageTestcar from "../../static/images/cars/accord/accord.jpg";
@@ -95,16 +95,8 @@ class Home extends React.Component {
              * SEARCH
              */
           }
-          <Row>
-            <Col xs={12}>
-              <h2 className='primary-header-2 text-center'>{translations.routes.home_page.search}</h2>
-            </Col>
-          </Row>
-          <Row>
-            <Col md={12}>
-              <CarSearch />
-            </Col>
-          </Row>
+
+          <SearchBlock />
 
           <br/>
 
