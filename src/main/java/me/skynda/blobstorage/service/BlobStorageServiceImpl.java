@@ -3,8 +3,8 @@ package me.skynda.blobstorage.service;
 import com.microsoft.azure.storage.CloudStorageAccount;
 import com.microsoft.azure.storage.blob.*;
 
+import lombok.SneakyThrows;
 import me.skynda.blobstorage.dto.*;
-import me.skynda.helper.FileHelper;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,6 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.net.URISyntaxException;
+import java.security.InvalidKeyException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,12 +28,33 @@ public class BlobStorageServiceImpl implements BlobStorageService {
             "AccountName=portalvhds37rpqq8py1thh;" +
             "AccountKey=Fmwz4WFjCFQYxQesEQ6PVye/m+4OAIJiF6KARMzH3h7GfBUZDTG0U8U33J4kaQR4vP+OwLsZ8+WHN2D9KbX9UA==";
 
+    private CloudStorageAccount storageAccount;
+
+    public BlobStorageServiceImpl() {
+        this(false);
+    }
+
+    public BlobStorageServiceImpl(boolean isDevelopment) {
+        if (!isDevelopment) {
+            try {
+                // Retrieve storage account from connection-string.
+                storageAccount = CloudStorageAccount.parse(STORAGE_CONNECTION_STRING);
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            } catch (InvalidKeyException e) {
+                e.printStackTrace();
+            }
+        }
+        else {
+            // For using this, install and run Azure Storage Emulator
+            // Download Link: https://go.microsoft.com/fwlink/?linkid=717179&clcid=0x409
+            storageAccount = CloudStorageAccount.getDevelopmentStorageAccount();
+        }
+    }
+
     public boolean createContainer(CreateContainerDto dto) {
         try
         {
-            // Retrieve storage account from connection-string.
-            CloudStorageAccount storageAccount = CloudStorageAccount.parse(STORAGE_CONNECTION_STRING);
-
             // Create the blob client.
             CloudBlobClient blobClient = storageAccount.createCloudBlobClient();
 
@@ -50,13 +73,31 @@ public class BlobStorageServiceImpl implements BlobStorageService {
         return false;
     }
 
+    public boolean deleteContainer(DeleteContainerDto dto) {
+        try
+        {
+            // Create the blob client.
+            CloudBlobClient blobClient = storageAccount.createCloudBlobClient();
+
+            // Get a reference to a container.
+            // The container name must be lower case
+            CloudBlobContainer container = blobClient.getContainerReference(dto.getContainerName());
+
+            // Delete the container if it exists.
+            return container.deleteIfExists();
+        }
+        catch (Exception e)
+        {
+            // Output the stack trace.
+            e.printStackTrace();
+        }
+        return false;
+    }
+
     @Override
     public boolean upload(UploadBlobDto dto) {
         try
         {
-            // Retrieve storage account from connection-string.
-            CloudStorageAccount storageAccount = CloudStorageAccount.parse(STORAGE_CONNECTION_STRING);
-
             // Create the blob client.
             CloudBlobClient blobClient = storageAccount.createCloudBlobClient();
 
@@ -84,9 +125,6 @@ public class BlobStorageServiceImpl implements BlobStorageService {
         List<ListBlobItem> list = new ArrayList<>();
         try
         {
-            // Retrieve storage account from connection-string.
-            CloudStorageAccount storageAccount = CloudStorageAccount.parse(STORAGE_CONNECTION_STRING);
-
             // Create the blob client.
             CloudBlobClient blobClient = storageAccount.createCloudBlobClient();
 
@@ -111,9 +149,6 @@ public class BlobStorageServiceImpl implements BlobStorageService {
     public void download(DownloadBlobDto dto) {
         try
         {
-            // Retrieve storage account from connection-string.
-            CloudStorageAccount storageAccount = CloudStorageAccount.parse(STORAGE_CONNECTION_STRING);
-
             // Create the blob client.
             CloudBlobClient blobClient = storageAccount.createCloudBlobClient();
 
@@ -143,9 +178,6 @@ public class BlobStorageServiceImpl implements BlobStorageService {
     public boolean delete(DeleteBlobDto dto) {
         try
         {
-            // Retrieve storage account from connection-string.
-            CloudStorageAccount storageAccount = CloudStorageAccount.parse(STORAGE_CONNECTION_STRING);
-
             // Create the blob client.
             CloudBlobClient blobClient = storageAccount.createCloudBlobClient();
 

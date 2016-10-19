@@ -1,4 +1,4 @@
-package me.skynda.helper;
+package me.skynda.common.helper;
 
 import lombok.SneakyThrows;
 import org.springframework.web.multipart.MultipartFile;

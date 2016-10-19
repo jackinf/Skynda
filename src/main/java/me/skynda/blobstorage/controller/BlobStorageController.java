@@ -7,7 +7,7 @@ import io.swagger.annotations.ApiResponses;
 import me.skynda.blobstorage.dto.*;
 import me.skynda.blobstorage.service.BlobStorageService;
 import me.skynda.car.controller.BaseController;
-import me.skynda.helper.FileHelper;
+import me.skynda.common.helper.FileHelper;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

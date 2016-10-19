@@ -15,13 +15,23 @@ public interface BlobStorageService {
 
     /**
      * Create a container where blobs will be stored.
+     *
      * @param dto Settings
      * @return Success
      */
     boolean createContainer(CreateContainerDto dto);
 
     /**
+     * Deletes a container.
+     *
+     * @param dto Settings
+     * @return Success
+     */
+    boolean deleteContainer(DeleteContainerDto dto);
+
+    /**
      * Uploads a new blob element.
+     *
      * @param dto blob element with info.
      * @return Success
      */
@@ -29,6 +39,7 @@ public interface BlobStorageService {
 
     /**
      * Returns a list of existing blobs.
+     *
      * @param dto Settings
      * @return Blobs
      */
@@ -36,14 +47,17 @@ public interface BlobStorageService {
 
     /**
      * Downloads a blob using stream.
+     *
      * @param dto Settings
      */
     void download(DownloadBlobDto dto);
 
     /**
      * Deletes a blob.
+     *
      * @param dto Settings
      * @return Success
      */
     boolean delete(DeleteBlobDto dto);
+
 }
