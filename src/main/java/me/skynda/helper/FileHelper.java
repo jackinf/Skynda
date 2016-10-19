@@ -9,6 +9,12 @@ import java.io.IOException;
 
 public class FileHelper {
 
+    /**
+     * Converts uploaded MultipartFile to File
+     *
+     * @param file Multipart file
+     * @return File
+     */
     @SneakyThrows(IOException.class)
     public static File convert(MultipartFile file) {
         File convertedFile = new File(file.getOriginalFilename());
