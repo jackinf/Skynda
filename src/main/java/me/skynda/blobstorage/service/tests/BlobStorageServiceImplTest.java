@@ -1,12 +1,12 @@
 package me.skynda.blobstorage.service.tests;
 
+import com.microsoft.azure.storage.blob.ListBlobItem;
 import lombok.SneakyThrows;
-import me.skynda.blobstorage.dto.CreateContainerDto;
-import me.skynda.blobstorage.dto.DeleteContainerDto;
-import me.skynda.blobstorage.dto.UploadBlobDto;
+import me.skynda.blobstorage.dto.*;
 import me.skynda.blobstorage.service.BlobStorageServiceImpl;
 
 import java.nio.file.Paths;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -66,12 +66,13 @@ public class BlobStorageServiceImplTest {
         /*
          * ARRANGE
          */
+        createContainer();
+
+        final String blobName = "readme123.md";
         UploadBlobDto dto = new UploadBlobDto();
         dto.setContainerName(TEST_CONTAINER_NAME);
         dto.setFileSource(Paths.get("README.md").toFile());
-        dto.setBlobName("readme123.md");
-
-        createContainer();
+        dto.setBlobName(blobName);
 
         /*
          * ACT
@@ -92,7 +93,35 @@ public class BlobStorageServiceImplTest {
     @org.junit.Test
     @SneakyThrows(Exception.class)
     public void list() throws Exception {
+        /*
+         * ARRANGE
+         */
+        createContainer();
 
+        final String blobName = "readme123.md";
+        UploadBlobDto dto = new UploadBlobDto();
+        dto.setContainerName(TEST_CONTAINER_NAME);
+        dto.setFileSource(Paths.get("README.md").toFile());
+        dto.setBlobName(blobName);
+        boolean success = service.upload(dto);
+        assertTrue("Upload failed", success);
+
+        /*
+         * ACT
+         */
+        ListBlobsDto listBlobsDto = new ListBlobsDto();
+        listBlobsDto.setContainerName(TEST_CONTAINER_NAME);
+        List<ListBlobItem> list = service.list(listBlobsDto);
+
+        /*
+         * ASSERT
+         */
+        assertEquals(1, list.toArray().length); // there should be 1 file
+
+        /*
+         * CLEANUP
+         */
+        deleteContainer();
     }
 
     @org.junit.Test
@@ -104,6 +133,35 @@ public class BlobStorageServiceImplTest {
     @org.junit.Test
     @SneakyThrows(Exception.class)
     public void delete() {
+        /*
+         * ARRANGE
+         */
+        createContainer();
 
+        final String blobName = "readme123.md";
+        UploadBlobDto dto = new UploadBlobDto();
+        dto.setContainerName(TEST_CONTAINER_NAME);
+        dto.setFileSource(Paths.get("README.md").toFile());
+        dto.setBlobName(blobName);
+        boolean successfulUpload = service.upload(dto);
+        assertTrue("Upload was unsuccessful", successfulUpload);
+
+        /*
+         * ACT
+         */
+        DeleteBlobDto deleteBlobDto = new DeleteBlobDto();
+        deleteBlobDto.setContainerName(TEST_CONTAINER_NAME);
+        deleteBlobDto.setBlobName(blobName);
+        boolean success = service.delete(deleteBlobDto);
+
+        /*
+         * ASSERT
+         */
+        assertTrue("Delete failed", success);
+
+        /*
+         * CLEANUP
+         */
+        deleteContainer();
     }
 }
