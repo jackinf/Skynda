@@ -50,7 +50,7 @@ export class About extends React.Component {
                     {this.props.people.map((person, i) => personBlockFn(person, i))}
                   </Row>
                 </AboutSkblock>)
-            : "Is loading"}
+            : <h2>Is loading</h2>}
         </Col>
 
         <Col md={4}>
