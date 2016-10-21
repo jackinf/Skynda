@@ -3,14 +3,16 @@
  */
 import {connect} from "react-redux";
 import {getList} from "../actions/Cars.action";
+import {setCars} from "./../reducers/SetCars.reducer";
 import CarList from "./../components/Cars.component";
 
 const mapDispatchToProps = {
-  getList
+  getList,
+  setCars
 };
 
 const mapStateToProps = (state) => ({
-  carData: state.carData
+  carsData: state.carsData
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CarList);

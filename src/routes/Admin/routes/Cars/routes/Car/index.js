@@ -6,7 +6,7 @@ import { reducer as formReducer } from 'redux-form';
 import {REDUX_FORM_KEY} from "./constants/Car.constant";
 
 export default (store) => ({
-  path: "car/{id}",
+  path: "car(/:pathParam)",
   getComponent(nextState, cb) {
     require.ensure([], (require) => {
       injectReducer(store, {key: "carData", reducer: require("./reducers/SetCarData.reducer")});

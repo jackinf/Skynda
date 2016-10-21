@@ -11,7 +11,7 @@ class AdminView extends React.Component {
       <h2>Administration</h2>
 
       <Row>
-        <Link to={"admin/cars"}>Cars</Link>
+        <Link to={"/admin/cars"}>Cars</Link>
       </Row>
 
       <Row>
