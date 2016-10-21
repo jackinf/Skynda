@@ -4,6 +4,7 @@ import Home from "./Home";
 import Details from "./Details";
 import About from "./About";
 import Examples from "./Examples";
+import Admin from "./Admin";
 // import CounterRoute from './Counter'
 
 /*  Note: Instead of using JSX, we recommend using react-router
@@ -16,7 +17,8 @@ export const createRoutes = (store) => ({
   childRoutes : [
     Details(store),
     About(store),
-    Examples(store)
+    Examples(store),
+    Admin(store)
   ]
 });
 
