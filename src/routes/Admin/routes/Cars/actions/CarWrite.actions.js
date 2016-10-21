@@ -3,7 +3,7 @@
  */
 import {CAR_CREATE_FORM} from "./../constants/Car.constant";
 import fetch from "isomorphic-fetch";
-import remoteConfig from "../../../../../../../store/remoteConfig";
+import remoteConfig from "../../../../../store/remoteConfig";
 import {setCarData} from "../reducers/SetCarData.reducer";
 
 /**

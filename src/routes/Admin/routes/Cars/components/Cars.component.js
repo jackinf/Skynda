@@ -46,7 +46,7 @@ export default class CarList extends React.Component {
           header={<Cell>Actions</Cell>}
           cell={({rowIndex, ...props}) => (
             <Cell {...props}>
-              <Link to={`car/${rows[rowIndex].id}`}>Show</Link>
+              <Link to={`/admin/car/${rows[rowIndex].id}`}>Show</Link>
             </Cell>
           )}
           width={200}

@@ -2,7 +2,7 @@
  * Created by jevgenir on 10/21/2016.
  */
 import fetch from "isomorphic-fetch";
-import remoteConfig from "../../../../../../../store/remoteConfig";
+import remoteConfig from "../../../../../store/remoteConfig";
 import {setCarData} from "../reducers/SetCarData.reducer";
 
 export const getCarAsync = (id = 1) => (dispatch, getState) => {
