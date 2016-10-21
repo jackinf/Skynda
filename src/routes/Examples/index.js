@@ -1,4 +1,5 @@
 import ReduxFormRoute from "./routes/ReduxForm";
+import CarManagementRoute from "./routes/CarManagement";
 
 export default (store) => ({
   path: "examples",
@@ -9,6 +10,7 @@ export default (store) => ({
     })
   },
   childRoutes: [
-    ReduxFormRoute(store)
+    ReduxFormRoute(store),
+    CarManagementRoute(store)
   ]
 })
