@@ -12,6 +12,7 @@ export default (store) => ({
       if (!isNaN(id)) {
         const Container = require("./containers/Car.container.js").default;
         injectReducer(store, {key: "initialValues", reducer: require("./reducers/SetCar.reducer.js").default});
+        injectReducer(store, {key: "formMode", reducer: require("./reducers/SetFormMode.reducer.js").default});
         injectReducer(store, {key: REDUX_FORM_KEY, reducer: formReducer});
         cb(null, Container);
       } else {

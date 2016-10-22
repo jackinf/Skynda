@@ -14,6 +14,7 @@ import {
   renderReviews
 } from "./Car.component.renderers";
 import {ROUTE_PATH_PARAM_NAME} from "./../constants/Car.constant";
+import {FORM_MODE} from "../constants/Car.constant";
 
 class Car extends React.Component {
   static propTypes = {
@@ -23,8 +24,11 @@ class Car extends React.Component {
 
   componentWillMount() {
     const id = parseInt(this.props.params[ROUTE_PATH_PARAM_NAME]);
-    if (!isNaN(id))
+    if (!isNaN(id)) {
       this.props.load(id);
+    } else {
+      this.props.setFormMode(FORM_MODE.ADDING);
+    }
   }
 
   onSubmit = (e) => {
@@ -35,7 +39,7 @@ class Car extends React.Component {
   render() {
     return (
       <div>
-        <h3>Car {this.props.id}</h3>
+        <h3>Car {this.props.formMode}</h3>
         <form onSubmit={this.onSubmit}>
 
           <h4>General data</h4>
