@@ -13,12 +13,15 @@ const DecoratedCarComponent = reduxForm({
 })(CarComponent);
 
 const mapDispatchToProps = {
-  getCarAsync,
+  load: getCarAsync,
   submitCarForm
 };
 
-const mapStateToProps = (state) => ({
-  carData: state.carData
-});
+const mapStateToProps = (state) => {
+  console.log(state);
+  return {
+    initialValues: state.initialValues.data
+  };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(DecoratedCarComponent);

@@ -3,168 +3,29 @@
  */
 import React from 'react';
 import {Field, FieldArray} from 'redux-form';
-
-const renderFile = props => (
-  <div>
-    <label>{props.placeholder}</label>
-    <div>
-      <input type="file" name={props.name}/>
-      {props.touched && props.error && <span>{props.error}</span>}
-    </div>
-  </div>
-)
-
-
-
-const renderDescriptions = ({ fields }) => (
-  <ul>
-    <li>
-      <button type="button" onClick={() => fields.push()}>Add Description</button>
-    </li>
-    {fields.map((name, index) =>
-      <li key={index}>
-        <Field name={`${name}.title`} type="text" component="input" placeholder={`Description #${index + 1}`}/>
-        <Field name={`${name}.text`} type="text" component="textarea" placeholder={`Description #${index + 1}`}/>
-        <button type="button" onClick={() => fields.remove(index)}>X</button>
-      </li>
-    )}
-    {fields.error && <li className="error">{fields.error}</li>}
-  </ul>
-);
-
-const renderFeatures = ({ fields }) => (
-  <ul>
-    <li>
-      <button type="button" onClick={() => fields.push()}>Add Features</button>
-    </li>
-    {fields.map((name, index) =>
-      <li key={index}>
-        <Field name={name} type="text" component="textarea" placeholder={`Feature #${index + 1}`}/>
-        <button type="button" onClick={() => fields.remove(index)}>X</button>
-      </li>
-    )}
-    {fields.error && <li className="error">{fields.error}</li>}
-  </ul>
-);
-
-const renderHistoryProblems = ({ fields }) => (
-  <ul>
-    <li>
-      <button type="button" onClick={() => fields.push()}>Add Problems</button>
-    </li>
-    {fields.map((name, index) =>
-      <li key={index}>
-        <Field name={name} type="text" component="textarea" placeholder={`Problem #${index + 1}`}/>
-        <button type="button" onClick={() => fields.remove(index)}>X</button>
-      </li>
-    )}
-    {fields.error && <li className="error">{fields.error}</li>}
-  </ul>
-);
-
-const renderImages = ({ fields }) => (
-  <ul>
-    <li>
-      <button type="button" onClick={() => fields.push()}>Add Image</button>
-    </li>
-    {fields.map((name, index) =>
-      <li key={index}>
-        <Field name={name} type="file" component={renderFile} placeholder={`Image #${index + 1}`}/>
-        <button type="button" onClick={() => fields.remove(index)}>X</button>
-      </li>
-    )}
-    {fields.error && <li className="error">{fields.error}</li>}
-  </ul>
-);
-
-
-const renderOverviews = ({ fields }) => (
-  <ul>
-    <li>
-      <button type="button" onClick={() => fields.push()}>Add Overview</button>
-    </li>
-    {fields.map((description, index) =>
-      <li key={index}>
-        <Field name={`${description}.iconUrl`} type="text" component="input" placeholder={`Icon URL #${index + 1}`}/>
-        <Field name={`${description}.label`} type="text" component="input" placeholder={`label #${index + 1}`}/>
-        <button type="button" onClick={() => fields.remove(index)}>X</button>
-      </li>
-    )}
-    {fields.error && <li className="error">{fields.error}</li>}
-  </ul>
-);
-
-const renderReportCategories = ({ fields }) => (
-  <ul>
-    <li>
-      <button type="button" onClick={() => fields.push()}>Add Report Category</button>
-    </li>
-    {fields.map((categoriesName, index) =>
-      <li key={index}>
-        <Field name={`${categoriesName}.title`} type="text" component="input" placeholder={`Title #${index + 1}`}/>
-
-        <FieldArray name={`${categoriesName}.points`} component={({ fields }) => (
-          <ul>
-            <li>
-              <button type="button" onClick={() => fields.push()}>Add Points</button>
-            </li>
-            {fields.map((pointsName, index) =>
-              <li key={index}>
-                <Field name={`${pointsName}.pass`} type="checkbox" component="checkbox" />
-                <Field name={`${pointsName}.text`} type="text" component="input" placeholder={`text #${index + 1}`}/>
-                <button type="button" onClick={() => fields.remove(index)}>X</button>
-              </li>
-            )}
-            {fields.error && <li className="error">{fields.error}</li>}
-          </ul>
-        )}/>
-        <button type="button" onClick={() => fields.remove(index)}>X</button>
-      </li>
-    )}
-    {fields.error && <li className="error">{fields.error}</li>}
-  </ul>
-);
-
-
-const renderReportFaults = ({ fields }) => (
-  <ul>
-    <li>
-      <button type="button" onClick={() => fields.push()}>Add Fault</button>
-    </li>
-    {fields.map((name, index) =>
-      <li key={index}>
-        <Field name={`${name}.img`} type="text" component="input" placeholder={`Image URL #${index + 1}`}/>
-        <Field name={`${name}.text`} type="text" component="input" placeholder={`Text #${index + 1}`}/>
-        <button type="button" onClick={() => fields.remove(index)}>X</button>
-      </li>
-    )}
-    {fields.error && <li className="error">{fields.error}</li>}
-  </ul>
-);
-
-
-const renderReviews = ({ fields }) => (
-  <ul>
-    <li>
-      <button type="button" onClick={() => fields.push()}>Add Review</button>
-    </li>
-    {fields.map((name, index) =>
-      <li key={index}>
-        <Field name={`${name}.logoUrl`} type="text" component="input" placeholder={`Logo URL #${index + 1}`}/>
-        <Field name={`${name}.rating`} type="text" component="number" placeholder={`Rating #${index + 1}`}/>
-        <Field name={`${name}.text`} type="text" component="input" placeholder={`Text #${index + 1}`}/>
-        <Field name={`${name}.videoUrl`} type="text" component="input" placeholder={`Video URL #${index + 1}`}/>
-        <button type="button" onClick={() => fields.remove(index)}>X</button>
-      </li>
-    )}
-    {fields.error && <li className="error">{fields.error}</li>}
-  </ul>
-);
+import {
+  renderDescriptions,
+  renderFeatures,
+  renderHistoryProblems,
+  renderImages,
+  renderOverviews,
+  renderReportCategories,
+  renderReportFaults,
+  renderReviews
+} from "./Car.component.renderers";
+import {ROUTE_PATH_PARAM_NAME} from "./../constants/Car.constant";
 
 class Car extends React.Component {
   static propTypes = {
-    submitCarForm: React.PropTypes.func.isRequired
+    submitCarForm: React.PropTypes.func.isRequired,
+    load: React.PropTypes.func.isRequired
   };
+
+  componentWillMount() {
+    const id = parseInt(this.props.params[ROUTE_PATH_PARAM_NAME]);
+    if (!isNaN(id))
+      this.props.load(id);
+  }
 
   onSubmit = (e) => {
     e.preventDefault();
@@ -174,61 +35,61 @@ class Car extends React.Component {
   render() {
     return (
       <div>
-        <h3>Car</h3>
+        <h3>Car {this.props.id}</h3>
         <form onSubmit={this.onSubmit}>
 
           <h4>General data</h4>
           <div>
-            <label htmlFor="carGeneralDto.colorInside">Color inside</label>
-            <Field name="carGeneralDto.colorInside" component="input" type="text"/>
+            <label htmlFor="general.colorInside">Color inside</label>
+            <Field name="general.colorInside" component="input" type="text"/>
           </div>
           <div>
-            <label htmlFor="carGeneralDto.colorOutside">Color outside</label>
-            <Field name="carGeneralDto.colorOutside" component="input" type="text"/>
+            <label htmlFor="general.colorOutside">Color outside</label>
+            <Field name="general.colorOutside" component="input" type="text"/>
           </div>
           <div>
-            <label htmlFor="carGeneralDto.doors">Doors</label>
-            <Field name="carGeneralDto.doors" component="input" type="text"/>
+            <label htmlFor="general.doors">Doors</label>
+            <Field name="general.doors" component="input" type="text"/>
           </div>
           <div>
-            <label htmlFor="carGeneralDto.drive">Drive</label>
-            <Field name="carGeneralDto.drive" component="input" type="text"/>
+            <label htmlFor="general.drive">Drive</label>
+            <Field name="general.drive" component="input" type="text"/>
           </div>
           <div>
-            <label htmlFor="carGeneralDto.engine">Engine</label>
-            <Field name="carGeneralDto.engine" component="input" type="text"/>
+            <label htmlFor="general.engine">Engine</label>
+            <Field name="general.engine" component="input" type="text"/>
           </div>
           <div>
-            <label htmlFor="carGeneralDto.horsePower">Horse power</label>
-            <Field name="carGeneralDto.horsePower" component="input" type="text"/>
+            <label htmlFor="general.horsePower">Horse power</label>
+            <Field name="general.horsePower" component="input" type="text"/>
           </div>
           <div>
-            <label htmlFor="carGeneralDto.manufacturer">Manufacturer</label>
-            <Field name="carGeneralDto.manufacturer" component="input" type="text"/>
+            <label htmlFor="general.manufacturer">Manufacturer</label>
+            <Field name="general.manufacturer" component="input" type="text"/>
           </div>
           <div>
-            <label htmlFor="carGeneralDto.mileage">Mileage</label>
-            <Field name="carGeneralDto.mileage" component="input" type="text"/>
+            <label htmlFor="general.mileage">Mileage</label>
+            <Field name="general.mileage" component="input" type="text"/>
           </div>
           <div>
-            <label htmlFor="carGeneralDto.model">Model</label>
-            <Field name="carGeneralDto.model" component="input" type="text"/>
+            <label htmlFor="general.model">Model</label>
+            <Field name="general.model" component="input" type="text"/>
           </div>
           <div>
-            <label htmlFor="carGeneralDto.seats">Seats</label>
-            <Field name="carGeneralDto.seats" component="input" type="text"/>
+            <label htmlFor="general.seats">Seats</label>
+            <Field name="general.seats" component="input" type="text"/>
           </div>
           <div>
-            <label htmlFor="carGeneralDto.src">Source</label>
-            <Field name="carGeneralDto.src" component="input" type="text"/>
+            <label htmlFor="general.src">Source</label>
+            <Field name="general.src" component="input" type="text"/>
           </div>
           <div>
-            <label htmlFor="carGeneralDto.transmission">Transmission</label>
-            <Field name="carGeneralDto.transmission" component="input" type="text"/>
+            <label htmlFor="general.transmission">Transmission</label>
+            <Field name="general.transmission" component="input" type="text"/>
           </div>
           <div>
-            <label htmlFor="carGeneralDto.year">Year</label>
-            <Field name="carGeneralDto.year" component="input" type="text"/>
+            <label htmlFor="general.year">Year</label>
+            <Field name="general.year" component="input" type="text"/>
           </div>
 
           <h4>Descriptions</h4>
@@ -251,7 +112,7 @@ class Car extends React.Component {
           </div>
 
           <div>
-            <FieldArray name="features" component={renderHistoryProblems}/>
+            <FieldArray name="history.problems" component={renderHistoryProblems}/>
           </div>
 
           <h4>Images</h4>

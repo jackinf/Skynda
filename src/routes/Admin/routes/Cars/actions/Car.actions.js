@@ -4,7 +4,7 @@
 import fetch from "isomorphic-fetch";
 import remoteConfig from "../../../../../store/remoteConfig";
 import {CAR_CREATE_FORM} from "./../constants/Car.constant";
-import {setCarData} from "../reducers/SetCarData.reducer";
+import {setCarData} from "../reducers/SetCar.reducer";
 
 export const getCarAsync = (id = 1) => (dispatch, getState) => {
   dispatch(setCarData({isFetching: true}));
@@ -18,7 +18,7 @@ export const getCarAsync = (id = 1) => (dispatch, getState) => {
 
       // TEMP FIXES
       data["general"] = data["carGeneralDto"];
-      data["reviews"] = data["review"];
+      data["reviews"] = data["review"] || [];
       for (let i = 0; i < data["reviews"].length; i++) {
         data["reviews"][i]["rating"] = parseInt(data["reviews"][i]["rating"]);
       }
@@ -38,7 +38,7 @@ export const getCarAsync = (id = 1) => (dispatch, getState) => {
       delete data["carGeneralDto"];
       delete data["review"];
 
-      dispatch(setCarData({isFetching: false}));
+      dispatch(setCarData({isFetching: false, data}));
     })
     .catch((error) => {
       console.log("ERROR: ", error);
