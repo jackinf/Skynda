@@ -1,0 +1,14 @@
+#localeChanger {
+  float: right;
+  margin-bottom: 15px;
+  button{
+    color: #5A5B5C;
+  }
+  .btn.active{
+    color: #019BFF;
+    background-color: #fff;
+  }
+  .btn:focus {
+    outline: none;
+  }
+}

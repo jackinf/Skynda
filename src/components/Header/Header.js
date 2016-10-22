@@ -12,7 +12,9 @@ import "./Header.scss";
 
 import image1 from "./../../static/images/standard/skynda logo 4-mask-4@2x.png";
 import image2 from "./../../static/images/standard/SKYNDA@2x.png";
-import translations from "../../store/locales/en";
+import LocaleContainer from "../Locale/LocaleContainer";
+import {Translate} from 'react-redux-i18n';
+
 
 class Header extends React.Component {
   render() {
@@ -25,16 +27,19 @@ class Header extends React.Component {
               <img src={image2}/>
             </a>
           </div>
+          <div>
+            <LocaleContainer />
+          </div>
           <div id='navbar' className='navbar_collapse collapse'>
             <ul className='nav navbar-nav pull-right'>
               <li className='sk_menu__sell'>
                 <a href='#' onClick={e => this.sellCar(e)} className='orange_header'>
-                  {translations.components.header.sell_car_txt}
+                  <Translate value="components.header.sell_car_txt"/>
                 </a>
               </li>
               <li className='sk_menu__buy'>
                 <a href='/search' className='blue_header'>
-                  {translations.components.header.buy_car_txt}
+                  <Translate value="components.header.buy_car_txt"/>
                 </a>
               </li>
             </ul>

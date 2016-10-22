@@ -7,7 +7,7 @@ import "./Home.hero.scss";
 import {Button} from "react-bootstrap";
 import {browserHistory} from "react-router";
 import heroImageUrl from "../../../static/images/standard/hero-01-2.jpg";
-import translations from "../../../store/locales/et";
+import { Translate } from 'react-redux-i18n';
 
 /**
  * Main jumbotron for a primary marketing message or call to action
@@ -30,11 +30,13 @@ class Hero extends React.Component {
         <div className='container'>
           <div className='grid'>
             <div className='col-md-9'>
-              <h2>{translations.routes.home_page.hero.main_text}</h2>
+              <h2>
+                <Translate value="home_page.hero.main_text"/>
+              </h2>
             </div>
             <div className='col-md-3'>
               <Button className='primary-button' onClick={this.gotoDetails}>
-                {translations.routes.home_page.hero.read_more}
+                <Translate value="home_page.hero.read_more"/>
               </Button>
             </div>
           </div>

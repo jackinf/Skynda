@@ -5,8 +5,7 @@ import SliderContainer from "../../containers/SliderContainer";
 import ToggleButton from "../../containers/ToggleAdvancedSearchContainer";
 import SearchButton from "../../containers/SearchButtonContainer";
 
-// translation
-import translations from "../../../../store/locales/et";
+import { Translate } from 'react-redux-i18n';
 
 
 const colors = [
@@ -45,7 +44,7 @@ class SearchComponent extends React.Component {
 
       <Row>
         <Col md={12} className='range-slider-wrapper'>
-          <label>{translations.components.car_search.brand}</label>
+          <label><Translate value="components.car_search.brand"/></label>
           <ButtonGroup options={this.props.brands}/>
         </Col>
       </Row>
@@ -56,7 +55,7 @@ class SearchComponent extends React.Component {
             <Col md={12}>
 
               <SliderContainer
-                title={translations.components.car_search.mileage}
+                title={<Translate value="components.car_search.mileage"/>}
                 step={100}
                 min={this.props.sliderValues.mileage.min}
                 max={this.props.sliderValues.mileage.max}
@@ -72,7 +71,7 @@ class SearchComponent extends React.Component {
             <Col md={12} className='range-slider-wrapper'>
 
               <SliderContainer
-                title={translations.components.car_search.price}
+                title={<Translate value="components.car_search.price"/>}
                 step={100}
                 min={this.props.sliderValues.price.min}
                 max={this.props.sliderValues.price.max}
@@ -88,7 +87,7 @@ class SearchComponent extends React.Component {
             <Col md={12} className='range-slider-wrapper'>
 
               <SliderContainer
-                title={translations.components.car_search.year}
+                title={<Translate value="components.car_search.year"/>}
                 step={1}
                 min={this.props.sliderValues.year.min}
                 max={this.props.sliderValues.year.max}
@@ -109,12 +108,12 @@ class SearchComponent extends React.Component {
                 this.props.showAdvancedSearch ?
                 <span className='glyphicon glyphicon-minus' /> : <span className='glyphicon glyphicon-plus'/>
               }
-              {translations.components.car_search.advanced_txt}
+              <Translate value="components.car_search.advanced_txt"/>
             </ToggleButton>
 
             <SearchButton className='btn btn-info sk-btn--search' >
               <span className='glyphicon glyphicon-search'/>
-              {translations.components.car_search.btn_search}
+              <Translate value="components.car_search.btn_search"/>
             </SearchButton>
 
           </div>
@@ -130,7 +129,7 @@ class SearchComponent extends React.Component {
             <Col md={8}>
               <Row>
                 <Col md={12} className='range-slider-wrapper'>
-                  <label>{translations.components.car_search.colors}</label><br />
+                  <label><Translate value="components.car_search.colors"/></label><br />
                   <ButtonGroup md={1} xs={2} options={colors} shape='circle'/>
                 </Col>
               </Row>
@@ -139,7 +138,7 @@ class SearchComponent extends React.Component {
               <Row>
                 <Col md={12} className='range-slider-wrapper'>
                   <SliderContainer
-                    title={translations.components.car_search.petrol_consumption}
+                    title={<Translate value="components.car_search.petrol_consumption"/>}
                     step={0.1}
                     min={this.props.sliderValues.petrol_consumption.min}
                     max={this.props.sliderValues.petrol_consumption.max}
@@ -155,7 +154,7 @@ class SearchComponent extends React.Component {
             <Col md={8}>
               <Row>
                 <Col md={12} className='range-slider-wrapper'>
-                  <label>{translations.components.car_search.features}</label>
+                  <label><Translate value="components.car_search.features"/></label>
                   <ButtonGroup md={3} options={this.props.features}/>
                 </Col>
               </Row>
@@ -164,7 +163,7 @@ class SearchComponent extends React.Component {
               <Row>
                 <Col md={12} className='range-slider-wrapper'>
                   <SliderContainer
-                    title={translations.components.car_search.power}
+                    title={<Translate value="components.car_search.power"/>}
                     step={1}
                     min={this.props.sliderValues.power.min}
                     max={this.props.sliderValues.power.max}
@@ -180,7 +179,7 @@ class SearchComponent extends React.Component {
             <Col md={4}>
               <Row>
                 <Col md={12} className='range-slider-wrapper'>
-                  <label>{translations.components.car_search.doors}</label><br />
+                  <label><Translate value="components.car_search.doors"/></label><br />
                   <ButtonGroup md={2} xs={2} options={this.props.doors} shape='circle'/>
                 </Col>
               </Row>
@@ -188,7 +187,7 @@ class SearchComponent extends React.Component {
             <Col md={4}>
               <Row>
                 <Col md={12} className='range-slider-wrapper'>
-                  <label>{translations.components.car_search.seats}</label><br />
+                  <label><Translate value="components.car_search.seats"/></label><br />
                   <ButtonGroup md={2} xs={2} options={this.props.seats} shape='circle'/>
                 </Col>
               </Row>
@@ -196,7 +195,7 @@ class SearchComponent extends React.Component {
             <Col md={4}>
               <Row>
                 <Col md={12} className='range-slider-wrapper'>
-                  <label>{translations.components.car_search.transmission}</label><br />
+                  <label><Translate value="components.car_search.transmission"/></label><br />
                   <ButtonGroup md={8} xs={6} options={this.props.transmissions}/>
                 </Col>
               </Row>

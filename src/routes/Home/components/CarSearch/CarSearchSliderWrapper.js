@@ -52,7 +52,6 @@ class SliderWrapper extends React.Component {
 }
 
 SliderWrapper.propTypes = {
-  title: React.PropTypes.string.isRequired,
   min: React.PropTypes.number.isRequired,
   max: React.PropTypes.number.isRequired,
   units: React.PropTypes.string,

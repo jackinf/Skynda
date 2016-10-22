@@ -1,26 +1,11 @@
-/**
- * React Starter Kit (https://www.reactstarterkit.com/)
- *
- * Copyright © 2014-2016 Kriasoft, LLC. All rights reserved.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE.txt file in the root directory of this source tree.
- */
-
 import React from "react";
 import "./Home.scss";
-
 import {Row, Col} from "react-bootstrap";
-
-import CarPreview from "./../../components/CarPreview";
-import SearchBlock from "./components/SearchBlock";
-
-// Images
-import imageTestcar from "../../static/images/cars/accord/accord.jpg";
-// Inner components
-import Hero from "./components/Home.hero";
-// translation
-import translations from "../../store/locales/et";
+import CarPreview from "./../../../components/CarPreview";
+import SearchBlock from "./SearchBlock";
+import imageTestcar from "../../../static/images/cars/accord/accord.jpg";
+import Hero from "./Home.hero";
+import { Translate } from 'react-redux-i18n';
 
 // List of rows
 // TODO: redux
@@ -84,7 +69,6 @@ class Home extends React.Component {
   render() {
     return (
       <div>
-
         <Hero/>
         <br/>
 
@@ -107,11 +91,13 @@ class Home extends React.Component {
           }
 
           {this.state.isSearching
-            ? (<Row>{translations.home_page.searching}</Row>) : cars.searchResults.length > 0
+            ? (<Row>
+                <Translate value="home_page.searching"/>
+              </Row>) : cars.searchResults.length > 0
             ? (<Row>
               <Col sm={12}>
                 <h2 className='primary-header-2 text-center'>
-                  {translations.routes.home_page.found}: {cars.searchResults[0].length}
+                  <Translate value="home_page.found"/> : {cars.searchResults[0].length}
                 </h2>
               </Col>
               <br />
@@ -132,7 +118,9 @@ class Home extends React.Component {
           <Row>
             <Row>
               <Col sm={12}>
-                <h2 className='primary-header-2 text-center'>{translations.routes.home_page.recently_added}</h2>
+                <h2 className='primary-header-2 text-center'>
+                  <Translate value="home_page.recently_added"/>
+                </h2>
               </Col>
               <br />
               <Row>

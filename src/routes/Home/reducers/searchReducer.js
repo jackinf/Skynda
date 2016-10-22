@@ -1,16 +1,16 @@
-// translation
-import translations from "../../../store/locales/et";
 import moment from "moment";
-import {setStateValues, onSliderChange} from './../actions/index';
+import {setStateValues} from './../actions/index';
+import { Translate } from 'react-redux-i18n';
+import React from "react";
 
 export const loadBaseData = () => {
-  return (dispatch, getState) => {
+  return (dispatch) => {
     return new Promise((resolve) => {
       setTimeout(() => {
         // TODO: temporary data. Use API data.
         // TODO: REPLACE with api data
         const brands = [
-          {id: -1, name: "Kõik"},
+          {id: -1, name: <Translate value="all"/>},
           {id: 0, name: "BMW"},
           {id: 1, name: "Chrysler"},
           {id: 2, name: "Citroen"},
@@ -33,7 +33,7 @@ export const loadBaseData = () => {
         ];
 
         const features = [
-          {id: -1, name: "Kõik", toggled: true},
+          {id: -1, name: <Translate value="all"/>, toggled: true},
           {id: 0, name: "Parking Sensors"},
           {id: 1, name: "Bluetooth"},
           {id: 2, name: "Sunroof"},
@@ -43,19 +43,19 @@ export const loadBaseData = () => {
         ];
 
         const transmissions = [
-          {id: 0, name: translations.components.car_search.automatic, toggled: true},
-          {id: 1, name: translations.components.car_search.manual, toggled: true}
+          {id: 0, name: <Translate value="components.car_search.automatic"/>, toggled: true},
+          {id: 1, name: <Translate value="components.car_search.manual"/>, toggled: true}
         ];
 
         const doors = [
-          {id: -1, name: "Kõik", toggled: true},
+          {id: -1, name: <Translate value="all"/>, toggled: true},
           {id: 0, name: "2"},
           {id: 1, name: "3"},
           {id: 2, name: "4+"}
         ];
 
         const seats = [
-          {id: -1, name: "Kõik", toggled: true},
+          {id: -1, name: <Translate value="all"/>, toggled: true},
           {id: 0, name: "2"},
           {id: 1, name: "3"},
           {id: 2, name: "5"},

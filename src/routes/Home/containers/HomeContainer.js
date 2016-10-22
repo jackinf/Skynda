@@ -1,4 +1,4 @@
-import Home from "../Home";
+import Home from "../components/Home";
 import { connect } from "react-redux";
 import {searchBtn, toggleBtn, setValues, loadBaseData, onSliderChange} from "../reducers";
 
