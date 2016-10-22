@@ -10,7 +10,6 @@ import me.skynda.common.dto.BaseDto;
 @Data
 @ToString(callSuper = false)
 public class CarDto extends BaseDto {
-	private Long id;
     private String carModelsCode;
 	private String vinCode;
 	private BigDecimal price;
