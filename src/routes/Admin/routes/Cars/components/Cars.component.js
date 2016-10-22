@@ -23,23 +23,41 @@ export default class CarList extends React.Component {
     const loading = this.props.carsData.isFetching ? "Fetching" : "Cars";
 
     return (<div className="container">
-      TODO: Cars
-
       <h3>{loading}</h3>
 
-      <Table
-        rowHeight={50}
-        rowsCount={rows.length}
-        width={1000}
-        maxHeight={1000}
-        headerHeight={50}>
+      <Table rowHeight={50} rowsCount={rows.length} width={1000} maxHeight={500} headerHeight={50}>
         <Column
-          header={<Cell>Name</Cell>}
+          header={<Cell>#</Cell>}
           cell={({rowIndex, ...props}) => (
             <Cell {...props}>
-              {rows[rowIndex].name}
+              {rowIndex+1}.
             </Cell>
           )}
+          width={50}
+        />
+        <Column
+          header={<Cell>Id</Cell>}
+          cell={({rowIndex, ...props}) => {
+            var car = rows[rowIndex];
+            return (
+              <Cell {...props}>
+                {car.id}
+              </Cell>
+            );
+          }}
+          width={200}
+        />
+        <Column
+          header={<Cell>Name</Cell>}
+          cell={({rowIndex, ...props}) => {
+            var car = rows[rowIndex];
+            var model = car.carGeneralDto ? car.carGeneralDto.model : "";
+            return (
+              <Cell {...props}>
+                {model}
+              </Cell>
+            );
+          }}
           width={200}
         />
         <Column

@@ -3,7 +3,7 @@
  */
 
 const config = {
-  remote: "http://localhost:8080"
+  remote: "http://localhost:8888"
 };
 
 export default config;

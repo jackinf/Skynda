@@ -2,19 +2,19 @@
  * Created by jevgenir on 10/21/2016.
  */
 import {connect} from "react-redux";
-import { reduxForm } from 'redux-form';
-import {submitCarForm} from '../actions/CarWrite.actions';
-import {getCarAsync} from '../actions/CarRead.actions';
+import {reduxForm} from 'redux-form';
+import {getCarAsync, submitCarForm} from '../actions/Car.actions';
 import CarComponent from "../components/Car.component";
+import {CAR_CREATE_FORM} from "./../constants/Car.constant";
 
 // Decorate the form component
 const DecoratedCarComponent = reduxForm({
-  form: 'reduxForm' // a unique name for this form
+  form: CAR_CREATE_FORM // a unique name for this form
 })(CarComponent);
 
 const mapDispatchToProps = {
-  submitCarForm,
-  getCarAsync
+  getCarAsync,
+  submitCarForm
 };
 
 const mapStateToProps = (state) => ({

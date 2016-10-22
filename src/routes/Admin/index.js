@@ -6,7 +6,6 @@ import CarsRoute from "./routes/Cars";
 export default (store) => ({
   path: "admin",
   getComponent(nextState, callBack) {
-    console.log(nextState);
     require.ensure([], (require) => {
       callBack(null, require("./AdminView").default);
     })
