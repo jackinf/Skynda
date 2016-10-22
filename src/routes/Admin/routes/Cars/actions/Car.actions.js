@@ -8,7 +8,20 @@ import {setCarData} from "../reducers/SetCar.reducer";
 import {setFormMode} from "../reducers/SetFormMode.reducer";
 import {FORM_MODE} from "../constants/Car.constant";
 
-export const getCarAsync = (id = 1) => (dispatch, getState) => {
+export const load = (param) => (dispatch) => {
+  dispatch(setCarData({isFetching: true}));
+
+  const id = parseInt(param);
+  if (isNaN(id)) {
+    setTimeout(() => {
+      dispatch(setCarData({isFetching: false, data: {
+        general: {}
+      }}));
+      dispatch(setFormMode(FORM_MODE.ADDING));
+    }, 1000);
+    return Promise.resolve(true);
+  }
+
   dispatch(setCarData({isFetching: true}));
 
   return fetch(`${remoteConfig.remote}/api/car/${id}`, {
@@ -40,11 +53,13 @@ export const getCarAsync = (id = 1) => (dispatch, getState) => {
       delete data["carGeneralDto"];
       delete data["review"];
 
+      console.log(data);
+
       dispatch(setCarData({isFetching: false, data}));
       dispatch(setFormMode(FORM_MODE.UPDATING));
     })
     .catch((error) => {
-      console.log("ERROR: ", error);
+      console.error("ERROR: ", error);
       dispatch(setCarData({isFetching: false}));
     });
 };
@@ -59,19 +74,25 @@ export const submitCarForm = () => {
     const contextForm = state.form[CAR_CREATE_FORM];
     console.log("Submitted values: ", contextForm.values);
 
-    // TODO: Create or update
+    if (state.formMode1 == FORM_MODE.ADDING) {
+      dispatch(createCarAsync(contextForm.values));
+    } else if (state.formMode1 == FORM_MODE.UPDATING) {
+      // TODO: get id.
+      dispatch(updateCarAsync(1, contextForm.values));
+    }
   };
 };
 
 /**
  * Private. Creates car
  */
-const createCarAsync = () => (dispatch, getState) => {
+const createCarAsync = (data) => (dispatch) => {
   dispatch(setCarData({isFetching: true}));
 
-  return fetch(`${remoteConfig.remote}/api/car/${id}`, {
+  return fetch(`${remoteConfig.remote}/api/car`, {
     method: "POST",
-    headers: {"Accept": "application/json", "Content-Type": "application/json"}
+    headers: {"Accept": "application/json", "Content-Type": "application/json"},
+    body: JSON.stringify(data)
   })
     .then(resp => resp.json())
     .then(data => {
@@ -86,12 +107,13 @@ const createCarAsync = () => (dispatch, getState) => {
  * Private. Updates car
  * @param id - car id
  */
-const updateCarAsync = (id = 1) => (dispatch, getState) => {
+const updateCarAsync = (id, data) => (dispatch) => {
   dispatch(setCarData({isFetching: true}));
 
   return fetch(`${remoteConfig.remote}/api/car/${id}`, {
     method: "PUT",
-    headers: {"Accept": "application/json", "Content-Type": "application/json"}
+    headers: {"Accept": "application/json", "Content-Type": "application/json"},
+    body: JSON.stringify(data)
   })
     .then(resp => resp.json())
     .then(data => {
@@ -103,6 +125,6 @@ const updateCarAsync = (id = 1) => (dispatch, getState) => {
 };
 
 export const actions = {
-  getCarAsync,
+  load,
   submitCarForm
 };

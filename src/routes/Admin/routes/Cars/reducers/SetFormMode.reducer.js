@@ -24,7 +24,7 @@ const ACTION_HANDLERS = {
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState = {formMode: FORM_MODE.READING};
+const initialState = FORM_MODE.READING;
 export default function reducer(state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type];
   return handler ? handler(state, action) : state;

@@ -3,7 +3,7 @@
  */
 import {connect} from "react-redux";
 import {reduxForm} from 'redux-form';
-import {getCarAsync, submitCarForm} from '../actions/Car.actions';
+import {load, submitCarForm} from '../actions/Car.actions';
 import {setFormMode} from "../reducers/SetFormMode.reducer";
 import CarComponent from "../components/Car.component";
 import {CAR_CREATE_FORM} from "./../constants/Car.constant";
@@ -14,14 +14,14 @@ const DecoratedCarComponent = reduxForm({
 })(CarComponent);
 
 const mapDispatchToProps = {
-  load: getCarAsync,
+  load,
   submitCarForm,
   setFormMode
 };
 
 const mapStateToProps = (state) => ({
   initialValues: state.initialValues.data,
-  formMode: state.formMode
+  formMode1: state.formMode1
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(DecoratedCarComponent);
