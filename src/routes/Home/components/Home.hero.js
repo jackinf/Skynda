@@ -1,17 +1,11 @@
-/**
- * Created by jevgenir on 18/09/2016.
- */
-
 import React from "react";
 import "./Home.hero.scss";
 import {Button} from "react-bootstrap";
 import {browserHistory} from "react-router";
 import heroImageUrl from "../../../static/images/standard/hero-01-2.jpg";
-import { Translate } from 'react-redux-i18n';
+import {Translate} from 'react-redux-i18n';
+import {Row, Col, Grid} from "react-bootstrap";
 
-/**
- * Main jumbotron for a primary marketing message or call to action
- */
 class Hero extends React.Component {
   constructor() {
     super();
@@ -28,18 +22,20 @@ class Hero extends React.Component {
       <img className='sk_hero__image' src={heroImageUrl} alt='image'/>
       <div className='sk_hero__text'>
         <div className='container'>
-          <div className='grid'>
-            <div className='col-md-9'>
+          <Row className="grid">
+            <Col className='col-md-9'>
               <h2>
                 <Translate value="home_page.hero.main_text"/>
               </h2>
-            </div>
-            <div className='col-md-3'>
-              <Button className='primary-button' onClick={this.gotoDetails}>
-                <Translate value="home_page.hero.read_more"/>
-              </Button>
-            </div>
-          </div>
+            </Col>
+            <Col className='col-md-3'>
+              <h2>
+                <Button className='primary-button read-more-btn' onClick={this.gotoDetails}>
+                  <Translate value="home_page.hero.read_more"/>
+                </Button>
+              </h2>
+            </Col>
+          </Row>
         </div>
       </div>
 

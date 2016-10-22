@@ -2,8 +2,6 @@ import React from "react";
 import Slider from "rc-slider";
 import {Row, Col} from "react-bootstrap";
 import reactMixin from "react-mixin";
-
-// mixins
 import settimeoutMixin from "../../../../mixins/settimeout";
 
 class SliderWrapper extends React.Component {

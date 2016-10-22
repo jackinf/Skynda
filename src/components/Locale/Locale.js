@@ -10,7 +10,6 @@ const languages = [
 class LocaleChanger extends React.Component {
 
   render() {
-    console.log("LocaleChanger", this.props)
     return (
       <div id="localeChanger" >
           {languages.map((language, i) => {

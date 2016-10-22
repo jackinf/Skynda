@@ -1,3 +1,3 @@
-import CarSearch from "./CarSearchFilterGroup";
+import SearchComponent from "./SearchComponent";
 
-export default CarSearch;
+export default SearchComponent;

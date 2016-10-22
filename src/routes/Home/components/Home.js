@@ -2,11 +2,10 @@ import React from "react";
 import "./Home.scss";
 import {Row, Col} from "react-bootstrap";
 import CarPreview from "./../../../components/CarPreview";
-import SearchBlock from "./SearchBlock";
 import imageTestcar from "../../../static/images/cars/accord/accord.jpg";
 import Hero from "./Home.hero";
 import { Translate } from 'react-redux-i18n';
-
+import SearchContainer from "../containers/SearchContainer"
 // List of rows
 // TODO: redux
 const cars = {
@@ -74,21 +73,10 @@ class Home extends React.Component {
 
         <div className='container'>
 
-          {
-            /**
-             * SEARCH
-             */
-          }
 
-          <SearchBlock />
+          <SearchContainer />
 
           <br/>
-
-          {
-            /**
-             * SEARCH RESULTS
-             */
-          }
 
           {this.state.isSearching
             ? (<Row>

@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux'
 import {onSliderChange} from '../actions'
-import SliderWrapper from "../components/CarSearch/CarSearchSliderWrapper";
+import SliderWrapper from "../components/CarSearch/SliderWrapper";
 
 const mapStateToProps = (state, ownProps) => {
   return {

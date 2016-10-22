@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux'
 import SearchComponent from '../components/CarSearch/SearchComponent'
-import {setStateValues, loadBaseData} from '../reducers'
+import {setValues, loadBaseData} from '../reducers'
 
 const mapStateToProps = (state) => {
   return {
@@ -17,7 +17,7 @@ const mapStateToProps = (state) => {
 
 
 const mapDispatchToProps = {
-  setStateValues,
+  setValues,
   loadBaseData
 };
 

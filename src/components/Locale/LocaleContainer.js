@@ -11,7 +11,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps =   {
   onLocaleChange: (value) => (dispatch) => {
-    console.log("OnLocaleChange init value> ", value)
     dispatch(setLocale(value));
   }
 };

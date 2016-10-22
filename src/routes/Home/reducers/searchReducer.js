@@ -1,6 +1,6 @@
 import moment from "moment";
 import {setStateValues} from './../actions/index';
-import { Translate } from 'react-redux-i18n';
+import {Translate} from 'react-redux-i18n';
 import React from "react";
 
 export const loadBaseData = () => {
