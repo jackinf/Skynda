@@ -3,7 +3,8 @@ package me.skynda.car.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +20,6 @@ import me.skynda.car.model.CarManufacturer;
 import me.skynda.car.model.CarModels;
 import me.skynda.car.service.CarService;
 
-import javax.ws.rs.Path;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -41,17 +41,23 @@ public class CarController extends BaseController {
 
     @RequestMapping(value = "/carmodel", method = RequestMethod.POST, consumes = "application/json")
     public CarModels saveCarModel(@RequestBody CarModelsDto carModelsDto) {
-        return carService.saveCarModel(carModelsDto);
+        return carService.saveOrUpdateCarModel(carModelsDto);
     }
 
 	@RequestMapping(value = "/carmanufacturer", method = RequestMethod.POST, consumes = "application/json")
     public CarManufacturer saveCarManufacturer(@RequestBody CarManufacturerDto carManufacturerDto) {
-        return carService.saveCarManufacturer(carManufacturerDto);
+        return carService.saveOrUpdateCarManufacturer(carManufacturerDto);
     }
 
 	@RequestMapping(value = "/car", method = RequestMethod.POST, consumes = "application/json")
     public Car saveCarForSale(@RequestBody CarDto carDto) {
         return carService.saveCarForSale(carDto);
+    }
+	
+	@RequestMapping(value = "/deletecar/{id}", method = RequestMethod.DELETE, consumes = "application/json")
+    public ResponseEntity<Car> deleteCar(@PathVariable("id") Integer id) {
+        carService.deleteCar(id);
+		return new ResponseEntity<Car>(HttpStatus.NO_CONTENT);
     }
 
 }
