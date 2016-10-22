@@ -1,4 +1,4 @@
-import HomeRoute from "routes/Home";
+import HomeRoute from "routes/Home_todelete";
 
 describe("(Route) Home", () => {
   let _component;

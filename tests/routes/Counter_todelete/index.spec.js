@@ -1,4 +1,4 @@
-import CounterRoute from "routes/Counter";
+import CounterRoute from "routes/Counter_todelete";
 
 describe("(Route) Counter", () => {
   let _route;
