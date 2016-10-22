@@ -5,11 +5,11 @@ import java.util.Date;
 
 import lombok.Data;
 import lombok.ToString;
+import me.skynda.common.dto.BaseDto;
 
 @Data
 @ToString(callSuper = false)
-public class CarDto {
-
+public class CarDto extends BaseDto {
     private String carModelsCode;
 	private String vinCode;
 	private BigDecimal price;
