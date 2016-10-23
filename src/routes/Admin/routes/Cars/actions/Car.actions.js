@@ -3,36 +3,58 @@
  */
 import fetch from "isomorphic-fetch";
 import remoteConfig from "../../../../../store/remoteConfig";
-import {CAR_CREATE_FORM} from "./../constants/Car.constant";
+import {FORMS, FORM_MODE} from "./../constants/Car.constant";
 import {setCarData} from "../reducers/SetCar.reducer";
 import {setFormMode} from "../reducers/SetFormMode.reducer";
-import {FORM_MODE} from "../constants/Car.constant";
 
 export const clear = () => (dispatch) => {
   dispatch(setCarData({isFetching: false, data: null}));
 };
 
-export const loadCreateForm = (param) => (dispatch) => {
+export const load = (param) => (dispatch, getState) => {
+  const currentFormMode = getState().formMode1;
+
+  if (currentFormMode === FORM_MODE.ADDING) {
+    dispatch(loadCreateForm());
+  } else if (currentFormMode == FORM_MODE.UPDATING && !isNaN(parseInt(param))) {
+    dispatch(loadUpdateForm(parseInt(param)));
+  } else {
+    console.error("Invalid form mode");
+  }
+};
+
+/**
+ * Is executed on form submit
+ * @returns {function(*, *)}
+ */
+export const submitCarForm = () => (dispatch, getState) => {
+  const state = getState();
+  const contextForm = state.form[FORMS.CAR_FORM];
+  console.log("Submitted values: ", contextForm.values);
+
+  if (state.formMode1 == FORM_MODE.ADDING) {
+    dispatch(createCarAsync(contextForm.values));
+  } else if (state.formMode1 == FORM_MODE.UPDATING) {
+    // TODO: get id.
+    dispatch(updateCarAsync(1, contextForm.values));
+  }
+};
+
+/**
+ * Private. Initializes a create form.
+ */
+const loadCreateForm = () => (dispatch) => {
   console.log("LOAD CREATE FORM");
   dispatch(setCarData({isFetching: false, data: null}));
   dispatch(setFormMode(FORM_MODE.ADDING));
 };
 
-export const loadUpdateForm = (param) => (dispatch) => {
+/**
+ * Private. Fetches data from API and prepares update form.
+ * @param param - car ID.
+ */
+const loadUpdateForm = (id) => (dispatch) => {
   console.log("LOAD UPDATE FORM");
-  // dispatch(setCarData({isFetching: true}));
-  //
-  const id = parseInt(param);
-  // if (isNaN(id)) {
-  //   setTimeout(() => {
-  //     dispatch(setCarData({isFetching: false, data: {
-  //       general: {}
-  //     }}));
-  //     dispatch(setFormMode(FORM_MODE.ADDING));
-  //   }, 1000);
-  //   return Promise.resolve(true);
-  // }
-
   dispatch(setCarData({isFetching: true}));
 
   return fetch(`${remoteConfig.remote}/api/car/${id}`, {
@@ -73,25 +95,6 @@ export const loadUpdateForm = (param) => (dispatch) => {
       console.error("ERROR: ", error);
       dispatch(setCarData({isFetching: false}));
     });
-};
-
-/**
- * Is executed on form submit
- * @returns {function(*, *)}
- */
-export const submitCarForm = () => {
-  return (dispatch, getState) => {
-    const state = getState();
-    const contextForm = state.form[CAR_CREATE_FORM];
-    console.log("Submitted values: ", contextForm.values);
-
-    if (state.formMode1 == FORM_MODE.ADDING) {
-      dispatch(createCarAsync(contextForm.values));
-    } else if (state.formMode1 == FORM_MODE.UPDATING) {
-      // TODO: get id.
-      dispatch(updateCarAsync(1, contextForm.values));
-    }
-  };
 };
 
 /**

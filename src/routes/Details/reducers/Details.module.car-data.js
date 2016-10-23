@@ -153,7 +153,7 @@ sale`
 };
 
 
-export const SET_CAR_DATA = "SET_CAR";
+export const SET_CAR_DATA = "SET_CAR_DATA";
 
 export const getDataAsync = (id = 1) => (dispatch, getState) => {
     dispatch(toggleLoading(true));

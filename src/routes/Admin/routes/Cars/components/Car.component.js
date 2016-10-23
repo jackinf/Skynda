@@ -2,8 +2,8 @@
  * Created by jevgenir on 10/21/2016.
  */
 import React from 'react';
-import {Field, FieldArray, reset} from 'redux-form';
-import {REDUX_FORM_KEY, ROUTE_PATH_PARAM_NAME, CAR_CREATE_FORM} from "./../constants/Car.constant";
+import {Field, FieldArray} from 'redux-form';
+import {ROUTE_PARAMS} from "./../constants/Car.constant";
 import {
   renderDescriptions,
   renderFeatures,
@@ -17,19 +17,19 @@ import {
 
 class Car extends React.Component {
   static propTypes = {
+    isFetching: React.PropTypes.bool.isRequired,
     submitCarForm: React.PropTypes.func.isRequired,
     load: React.PropTypes.func.isRequired,
-    clear: React.PropTypes.func.isRequired
+    clear: React.PropTypes.func.isRequired,
+    carData: React.PropTypes.object
   };
 
   componentDidMount() {
-    this.props.load(this.props.params[ROUTE_PATH_PARAM_NAME]);
-    // setTimeout(() => this.forceUpdate(), 3000);
+    this.props.load(this.props.params[ROUTE_PARAMS.CAR_ID]);
   }
 
   componentWillUnmount() {
     this.props.clear();
-    // reset(CAR_CREATE_FORM);
   }
 
   onSubmit = (e) => {
@@ -38,15 +38,13 @@ class Car extends React.Component {
   };
 
   render() {
-    const isFetching = this.props.initialValues ? this.props.initialValues.isFetching : false;
-
-    console.log("Is fetching", isFetching, this.props);
+    const isFetching = this.props.isFetching;
 
     return (
       <div>
-        <h3>Car {this.props.formMode1}</h3>
         {isFetching ? "Loading..." : (
           <form onSubmit={this.onSubmit}>
+            <h3>Car {this.props.formMode1}</h3>
 
             <h4>General data</h4>
             <div>

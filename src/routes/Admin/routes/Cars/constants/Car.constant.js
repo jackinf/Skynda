@@ -1,26 +1,24 @@
 /**
  * Created by jevgenir on 10/21/2016.
  */
-export const REDUX_FORM_KEY = "form";  // redux-form requries "form" key to work
-export const CAR_CREATE_FORM = "carCreateForm";
-export const CAR_UPDATE_FORM = "carUpdateForm";
-export const SET_CAR = "SET_CAR";
+export const ACTIONS = {
+  SET_CAR_DATA: "CAR/SET_CAR_DATA",
+  SET_FORM_MODE: "CAR/SET_FORM_MODE"
+};
 
 export const FORMS = {
-  DEFAULT_REDUX_FORM_KEY: "form",
-  CAR_CREATE_FORM: "carCreateForm",
-  CAR_UPDATE_FORM: "carUpdateForm"
+  DEFAULT_REDUX_FORM_KEY: "form", // Do not change the value! redux-forms depends on it.
+  CAR_FORM: "adminCarAddUpdateForm",
 };
 
-export const ACTIONS = {
-  FETCH_CAR_REQUEST: "CAR/FETCH_CAR_REQUEST",
-  FETCH_CAR_SUCCESS: "CAR/FETCH_CAR_SUCCESS",
-  FETCH_CAR_FAILURE: "CAR/FETCH_CAR_FAILURE"
+export const ROUTE_PARAMS = {
+  CAR_ID: "carId",
+
+  values: {
+    NEW: "new"
+  }
 };
 
-export const ROUTE_PATH_PARAM_NAME = "pathParam";
-
-export const SET_FORM_MODE = "Car/Action/SetFormMode";
 export const FORM_MODE = {
   READING: "READING",
   ADDING: "ADDING",

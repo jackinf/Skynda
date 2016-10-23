@@ -1,11 +1,11 @@
 /**
  * Created by jevgenir on 10/22/2016.
  */
-import {SET_FORM_MODE, FORM_MODE} from "./../constants/Car.constant";
+import {ACTIONS, FORM_MODE} from "./../constants/Car.constant";
 
 export function setFormMode(value) {
   return {
-    type: SET_FORM_MODE,
+    type: ACTIONS.SET_FORM_MODE,
     payload: value
   };
 }
@@ -18,7 +18,7 @@ export const actions = {
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
-  [SET_FORM_MODE]: (state, action) => action.payload
+  [ACTIONS.SET_FORM_MODE]: (state, action) => action.payload
 };
 
 // ------------------------------------
