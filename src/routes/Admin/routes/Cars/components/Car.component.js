@@ -25,6 +25,7 @@ class Car extends React.Component {
   };
 
   componentDidMount() {
+    console.log(this.props);
     this.props.load(this.props.params[ROUTE_PARAMS.CAR_ID]);
   }
 

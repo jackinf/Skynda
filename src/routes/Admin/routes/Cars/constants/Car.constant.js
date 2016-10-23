@@ -2,8 +2,12 @@
  * Created by jevgenir on 10/21/2016.
  */
 export const ACTIONS = {
+  // For Car
   SET_CAR_DATA: "CAR/SET_CAR_DATA",
-  SET_FORM_MODE: "CAR/SET_FORM_MODE"
+  SET_FORM_MODE: "CAR/SET_FORM_MODE",
+
+  // For Cars
+  SET_CARS_DATA: "CARS/SET_CAR_DATA"
 };
 
 export const FORMS = {
@@ -25,3 +29,8 @@ export const FORM_MODE = {
   UPDATING: "UPDATING"
 };
 
+export const REDUCER_KEYS = {
+  CAR_DATA: "carData",
+  CARS_DATA: "carsData",
+  FORM_MODE: "formMode1"
+};

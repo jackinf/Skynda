@@ -3,17 +3,6 @@
  */
 import {ACTIONS} from "./../constants/Car.constant";
 
-export function setCarData(value) {
-  return {
-    type: ACTIONS.SET_CAR_DATA,
-    payload: value
-  };
-}
-
-export const actions = {
-  setCarData
-};
-
 // ------------------------------------
 // Action Handlers
 // ------------------------------------

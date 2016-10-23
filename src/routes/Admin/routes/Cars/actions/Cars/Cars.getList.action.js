@@ -2,8 +2,8 @@
  * Created by jevgenir on 10/21/2016.
  */
 import fetch from "isomorphic-fetch";
-import remoteConfig from "../../../../../store/remoteConfig";
-import {setCars} from "./../reducers/SetCars.reducer";
+import remoteConfig from "store/remoteConfig";
+import {setCars} from "./../../reducers/SetCars.reducer";
 
 const useFallbackDemoData = true;
 

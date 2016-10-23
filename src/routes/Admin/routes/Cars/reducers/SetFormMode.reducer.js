@@ -3,17 +3,6 @@
  */
 import {ACTIONS, FORM_MODE} from "./../constants/Car.constant";
 
-export function setFormMode(value) {
-  return {
-    type: ACTIONS.SET_FORM_MODE,
-    payload: value
-  };
-}
-
-export const actions = {
-  setFormMode
-};
-
 // ------------------------------------
 // Action Handlers
 // ------------------------------------

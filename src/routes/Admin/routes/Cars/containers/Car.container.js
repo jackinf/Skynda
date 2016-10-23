@@ -3,8 +3,7 @@
  */
 import {connect} from "react-redux";
 import {reduxForm} from 'redux-form';
-import {load, submitCarForm, clear} from '../actions/Car.actions';
-import {setFormMode} from "../reducers/SetFormMode.reducer";
+import {clear, load, setFormMode, submitCarForm} from "../actions/Car";
 import CarComponent from "../components/Car.component";
 import {FORMS} from "./../constants/Car.constant";
 

@@ -1,11 +1,11 @@
 /**
  * Created by jevgenir on 10/21/2016.
  */
-import {SET_CARS} from "./../constants/Cars.constant";
+import {ACTIONS} from "./../constants/Car.constant";
 
 export function setCars(value) {
   return {
-    type: SET_CARS,
+    type: ACTIONS.SET_CARS_DATA,
     payload: value
   };
 }
@@ -18,7 +18,7 @@ export const actions = {
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
-  [SET_CARS]: (state, action) => action.payload
+  [ACTIONS.SET_CARS_DATA]: (state, action) => action.payload
 };
 
 // ------------------------------------
