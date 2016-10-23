@@ -46,7 +46,7 @@ public class CarServiceImpl implements CarService {
 	}
 
 	@Override
-	public SingleCarDataDto getCar(int id) {
+	public SingleCarDataDto getCar(Long id) {
 		Car model = carDao.get(id);
 		SingleCarDataDto dto = carConverter.transform(model);
 		return dto;
@@ -81,7 +81,7 @@ public class CarServiceImpl implements CarService {
 	}
 
 	@Override
-	public void deleteCar(Integer id) {
+	public void deleteCar(Long id) {
 		carDao.delete(id);
 	}
 

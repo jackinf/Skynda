@@ -35,7 +35,7 @@ public class CarController extends BaseController {
     }
 
     @RequestMapping(value = "/car/{id}", method = RequestMethod.GET, produces = "application/json")
-    public SingleCarDataDto getCar(@PathVariable("id") Integer id) {
+    public SingleCarDataDto getCar(@PathVariable("id") Long id) {
         return carService.getCar(id);
     }
 
@@ -55,7 +55,7 @@ public class CarController extends BaseController {
     }
 	
 	@RequestMapping(value = "/deletecar/{id}", method = RequestMethod.DELETE, consumes = "application/json")
-    public ResponseEntity<Car> deleteCar(@PathVariable("id") Integer id) {
+    public ResponseEntity<Car> deleteCar(@PathVariable("id") Long id) {
         carService.deleteCar(id);
 		return new ResponseEntity<Car>(HttpStatus.NO_CONTENT);
     }

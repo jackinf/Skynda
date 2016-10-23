@@ -25,6 +25,7 @@ public class CarConverter {
 	
 	public SingleCarDataDto transform(Car car) {
 		SingleCarDataDto singleCarDataDto = new SingleCarDataDto();
+		singleCarDataDto.setId(car.getId());
 		// GENERAL PART
 		convertGeneralData(car, singleCarDataDto);
 		// OVERVIEW PART

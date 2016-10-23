@@ -45,13 +45,13 @@ public interface CarService {
 	 * @param id car's id
 	 * @return single car's dto
 	 */
-	SingleCarDataDto getCar(int id);
+	SingleCarDataDto getCar(Long id);
 	
 	/**
 	 * Delets a single car
 	 * @param id car's id
 	 * @return void
 	 */
-	void deleteCar(Integer id);
+	void deleteCar(Long id);
 
 }
