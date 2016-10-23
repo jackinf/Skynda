@@ -9,6 +9,9 @@ import me.skynda.car.dto.SingleCarDataDto;
 import me.skynda.car.model.Car;
 import me.skynda.car.model.CarManufacturer;
 import me.skynda.car.model.CarModels;
+import me.skynda.common.dto.CreateResponseDto;
+import me.skynda.common.dto.DeleteResponseDto;
+import me.skynda.common.dto.UpdateResponseDto;
 
 public interface CarService {
 
@@ -34,11 +37,18 @@ public interface CarService {
 	CarModels saveOrUpdateCarModel(CarModelsDto carModelsDto);
 
 	/**
-	 * Adds new or updates an existing car for sale
+	 * Adds new car for sale
 	 * @param carDto Added car's dto
-	 * @return Added car's db model
+	 * @return Response
 	 */
-	Car saveCarForSale(CarDto carDto);
+	CreateResponseDto saveCarForSale(CarDto carDto);
+
+	/**
+	 * Updates an existing car for sale
+	 * @param carDto Updated car's dto
+	 * @return Response
+	 */
+	UpdateResponseDto updateCarForSale(CarDto carDto);
 
 	/**
 	 * Gets a single car
@@ -50,8 +60,8 @@ public interface CarService {
 	/**
 	 * Delets a single car
 	 * @param id car's id
-	 * @return void
+	 * @return Is the deletion successful or not
 	 */
-	void deleteCar(Long id);
+	DeleteResponseDto deleteCar(Long id);
 
 }

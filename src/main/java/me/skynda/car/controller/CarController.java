@@ -2,6 +2,8 @@ package me.skynda.car.controller;
 
 import java.util.List;
 
+import me.skynda.common.dto.CreateResponseDto;
+import me.skynda.common.dto.UpdateResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,22 +41,18 @@ public class CarController extends BaseController {
         return carService.getCar(id);
     }
 
-    @RequestMapping(value = "/carmodel", method = RequestMethod.POST, consumes = "application/json")
-    public CarModels saveCarModel(@RequestBody CarModelsDto carModelsDto) {
-        return carService.saveOrUpdateCarModel(carModelsDto);
-    }
-
-	@RequestMapping(value = "/carmanufacturer", method = RequestMethod.POST, consumes = "application/json")
-    public CarManufacturer saveCarManufacturer(@RequestBody CarManufacturerDto carManufacturerDto) {
-        return carService.saveOrUpdateCarManufacturer(carManufacturerDto);
-    }
-
 	@RequestMapping(value = "/car", method = RequestMethod.POST, consumes = "application/json")
-    public Car saveCarForSale(@RequestBody CarDto carDto) {
+    public CreateResponseDto saveCarForSale(@RequestBody CarDto carDto) {
         return carService.saveCarForSale(carDto);
     }
+
+	@RequestMapping(value = "/car/{id}", method = RequestMethod.PUT, consumes = "application/json")
+    public UpdateResponseDto updateCarForSale(@PathVariable("id") Long id, @RequestBody CarDto carDto) {
+        carDto.setId(id);
+        return carService.updateCarForSale(carDto);
+    }
 	
-	@RequestMapping(value = "/deletecar/{id}", method = RequestMethod.DELETE, consumes = "application/json")
+	@RequestMapping(value = "/car/{id}", method = RequestMethod.DELETE, consumes = "application/json")
     public ResponseEntity<Car> deleteCar(@PathVariable("id") Long id) {
         carService.deleteCar(id);
 		return new ResponseEntity<Car>(HttpStatus.NO_CONTENT);

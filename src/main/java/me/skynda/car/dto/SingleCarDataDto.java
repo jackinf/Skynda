@@ -19,7 +19,7 @@ public class SingleCarDataDto {
 	private PetrolConsumptionDto petrolConsumption;
 	private PerformanceDto performance;
 	private Integer safetyStars;
-	private List<ReportDto> report;
+	private ReportDto report;
 	private List<ReviewDto> reviews;
 
 }

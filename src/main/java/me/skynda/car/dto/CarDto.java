@@ -2,6 +2,7 @@ package me.skynda.car.dto;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 import lombok.Data;
 import lombok.ToString;
@@ -10,29 +11,27 @@ import me.skynda.common.dto.BaseDto;
 @Data
 @ToString(callSuper = false)
 public class CarDto extends BaseDto {
-    private String carModelsCode;
+	private String carModelsCode;		// TODO: Foreign key
+    private String carManufacturerCode;	// TODO: Foreign key
 	private String vinCode;
 	private BigDecimal price;
-	private Date created;
 	private String registrationNumber;
-	private String mileage;
+	private Integer mileage;
 	private String colorOutside;
 	private String colorInside;
-	private String images;
+
+	private List<ImagesDto> images;		// TODO: we need table car_image
 	private Boolean isSold;
 	private String fuelCity;
 	private String fuelHighway;
-	private String features;
-	private String problems;
-	private String compressionRatio;
-	private String compressionType;
-	private String configuration;
-	private String cylinders;
-	private String displacement;
-	private String fuelType;
-	private String size;
-	private String torque;
-	private String totalValves;
-	private String powerTrain;
-	private String safetyStars;
+	private List<FeatureDto> features;	// TODO: we need table car_feature
+	private List<FaultsDto> faults;		// TODO: we need table car_fault
+	private PerformanceDto performance;
+	private Integer safetyStars;
+
+	@Data
+	public class FeatureDto {
+		private Integer id;
+		private String text;
+	}
 }
