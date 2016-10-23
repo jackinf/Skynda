@@ -25,8 +25,8 @@ export default class CarList extends React.Component {
     return (<div className="container">
       <h3>{loading}</h3>
 
-      {/*<Link to="/admin/car/new">Add new</Link>*/}
-      <a href="/admin/car/new">Idi nahuj</a>
+      <Link to="/admin/car/new">Add new</Link>
+      {/*<a href="/admin/car/new">Add new</a>*/}
 
       <Table rowHeight={50} rowsCount={rows.length} width={1000} maxHeight={500} headerHeight={50}>
         <Column

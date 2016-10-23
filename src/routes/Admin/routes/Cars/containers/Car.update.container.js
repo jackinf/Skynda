@@ -3,18 +3,19 @@
  */
 import {connect} from "react-redux";
 import {reduxForm} from 'redux-form';
-import {load, submitCarForm} from '../actions/Car.actions';
+import {loadUpdateForm, submitCarForm, clear} from '../actions/Car.actions';
 import {setFormMode} from "../reducers/SetFormMode.reducer";
 import CarComponent from "../components/Car.component";
-import {CAR_CREATE_FORM} from "./../constants/Car.constant";
+import {CAR_UPDATE_FORM} from "./../constants/Car.constant";
 
 // Decorate the form component
 const DecoratedCarComponent = reduxForm({
-  form: CAR_CREATE_FORM // a unique name for this form
+  form: CAR_UPDATE_FORM
 })(CarComponent);
 
 const mapDispatchToProps = {
-  load,
+  load: loadUpdateForm,
+  clear,
   submitCarForm,
   setFormMode
 };

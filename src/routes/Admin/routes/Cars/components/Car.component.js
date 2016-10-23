@@ -18,17 +18,18 @@ import {
 class Car extends React.Component {
   static propTypes = {
     submitCarForm: React.PropTypes.func.isRequired,
-    load: React.PropTypes.func.isRequired
+    load: React.PropTypes.func.isRequired,
+    clear: React.PropTypes.func.isRequired
   };
 
   componentDidMount() {
     this.props.load(this.props.params[ROUTE_PATH_PARAM_NAME]);
-    this.forceUpdate();
+    // setTimeout(() => this.forceUpdate(), 3000);
   }
 
   componentWillUnmount() {
-    console.log("FUCK YOU");
-    reset(CAR_CREATE_FORM);
+    this.props.clear();
+    // reset(CAR_CREATE_FORM);
   }
 
   onSubmit = (e) => {
@@ -37,7 +38,9 @@ class Car extends React.Component {
   };
 
   render() {
-    const isFetching = this.props.initialValues ? this.props.initialValues.isFetching : true;
+    const isFetching = this.props.initialValues ? this.props.initialValues.isFetching : false;
+
+    console.log("Is fetching", isFetching, this.props);
 
     return (
       <div>

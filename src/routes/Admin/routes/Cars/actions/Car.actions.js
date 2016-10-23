@@ -8,19 +8,30 @@ import {setCarData} from "../reducers/SetCar.reducer";
 import {setFormMode} from "../reducers/SetFormMode.reducer";
 import {FORM_MODE} from "../constants/Car.constant";
 
-export const load = (param) => (dispatch) => {
-  dispatch(setCarData({isFetching: true}));
+export const clear = () => (dispatch) => {
+  dispatch(setCarData({isFetching: false, data: null}));
+};
 
+export const loadCreateForm = (param) => (dispatch) => {
+  console.log("LOAD CREATE FORM");
+  dispatch(setCarData({isFetching: false, data: null}));
+  dispatch(setFormMode(FORM_MODE.ADDING));
+};
+
+export const loadUpdateForm = (param) => (dispatch) => {
+  console.log("LOAD UPDATE FORM");
+  // dispatch(setCarData({isFetching: true}));
+  //
   const id = parseInt(param);
-  if (isNaN(id)) {
-    setTimeout(() => {
-      dispatch(setCarData({isFetching: false, data: {
-        general: {}
-      }}));
-      dispatch(setFormMode(FORM_MODE.ADDING));
-    }, 1000);
-    return Promise.resolve(true);
-  }
+  // if (isNaN(id)) {
+  //   setTimeout(() => {
+  //     dispatch(setCarData({isFetching: false, data: {
+  //       general: {}
+  //     }}));
+  //     dispatch(setFormMode(FORM_MODE.ADDING));
+  //   }, 1000);
+  //   return Promise.resolve(true);
+  // }
 
   dispatch(setCarData({isFetching: true}));
 
@@ -125,6 +136,7 @@ const updateCarAsync = (id, data) => (dispatch) => {
 };
 
 export const actions = {
-  load,
+  loadUpdateForm,
+  loadCreateForm,
   submitCarForm
 };
