@@ -7,22 +7,21 @@ import {setCars} from "./../../reducers/SetCars.reducer";
 
 const useFallbackDemoData = true;
 
-export const getList = () => (dispatch) => {
-  dispatch(setCars({isFetching: true}));
+export default function getList() {
+  return (dispatch) => {
+    dispatch(setCars({isFetching: true}));
 
-  return fetch(`${remoteConfig.remote}/api/cars`, {
-    method: "GET",
-    headers: {"Accept": "application/json", "Content-Type": "application/json"}
-  })
-    .then(resp => resp.json())
-    .then(resp => {
-      dispatch(setCars({isFetching: false, cars: resp}));
+    return fetch(`${remoteConfig.remote}/api/cars`, {
+      method: "GET",
+      headers: {"Accept": "application/json", "Content-Type": "application/json"}
     })
-    .catch(err => {
-      var demoCars = useFallbackDemoData ? [{id: 1, name: "BMW"}] : [];
-      dispatch(setCars({isFetching: false, cars: demoCars}));
-    });
-
-  // return setTimeout(() => {
-  // }, 1000);
-};
+      .then(resp => resp.json())
+      .then(resp => {
+        dispatch(setCars({isFetching: false, cars: resp}));
+      })
+      .catch(err => {
+        var demoCars = useFallbackDemoData ? [{id: 1, name: "BMW"}] : [];
+        dispatch(setCars({isFetching: false, cars: demoCars}));
+      });
+  };
+}

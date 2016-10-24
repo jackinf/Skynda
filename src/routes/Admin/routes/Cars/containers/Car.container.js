@@ -3,9 +3,9 @@
  */
 import {connect} from "react-redux";
 import {reduxForm} from 'redux-form';
-import {clear, load, setFormMode, submitCarForm} from "../actions/Car";
+import {clear, load, setFormMode, submitCarForm, fillWithFakeData} from "../actions/Car";
 import CarComponent from "../components/Car.component";
-import {FORMS} from "./../constants/Car.constant";
+import {FORMS, REDUCER_KEYS} from "./../constants/Car.constant";
 
 // Decorate the form component
 const DecoratedCarComponent = reduxForm({
@@ -16,13 +16,14 @@ const mapDispatchToProps = {
   load,
   clear,
   submitCarForm,
-  setFormMode
+  setFormMode,
+  fillWithFakeData
 };
 
 const mapStateToProps = (state) => ({
-  isFetching: state.carData.isFetching,
-  initialValues: state.carData.data,
-  formMode1: state.formMode1
+  isFetching: state[REDUCER_KEYS.CAR_DATA].isFetching,
+  initialValues: state[REDUCER_KEYS.CAR_DATA].data,
+  formMode1: state[REDUCER_KEYS.FORM_MODE]
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(DecoratedCarComponent);
