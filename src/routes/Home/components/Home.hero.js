@@ -19,21 +19,22 @@ class Hero extends React.Component {
 
   render() {
     return (<div className='sk_hero'>
+
       <img className='sk_hero__image' src={heroImageUrl} alt='image'/>
       <div className='sk_hero__text'>
         <div className='container'>
-          <Row className="grid">
-            <Col className='col-md-9'>
+          <Row className="aligner grid">
+            <Col md={9}>
               <h2>
-                <Translate value="home_page.hero.main_text"/>
+              <Translate value="home_page.hero.main_text"/>
               </h2>
             </Col>
-            <Col className='col-md-3'>
-              <h2>
-                <Button className='primary-button read-more-btn' onClick={this.gotoDetails}>
-                  <Translate value="home_page.hero.read_more"/>
-                </Button>
-              </h2>
+            <Col md={3}>
+              {/*<h2>*/}
+              <Button className='primary-button read-more-btn' onClick={this.gotoDetails}>
+                <Translate value="home_page.hero.read_more"/>
+              </Button>
+              {/*</h2>*/}
             </Col>
           </Row>
         </div>

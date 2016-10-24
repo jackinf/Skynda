@@ -6,20 +6,7 @@ import React from "react";
 import "./CarSearchButtonGroup.scss";
 import {Button, Col} from "react-bootstrap";
 
-// TODO: fix icon import
-// import a from 'react-icons/md/done.js';
-let IconBase = require("react-icon-base");
-class MdDone extends React.Component {
-  render() {
-    return (
-      <IconBase viewBox='0 0 40 40' {...this.props}>
-        <g>
-          <path d='m15 27l17.7-17.7 2.3 2.3-20 20-9.3-9.3 2.3-2.3z'/>
-        </g>
-      </IconBase>
-    );
-  }
-}
+import MdDone from 'react-icons/lib/md/done';
 
 class ButtonGroup extends React.Component {
   constructor() {
@@ -61,13 +48,16 @@ class ButtonGroup extends React.Component {
         let classNameShape = (this.props.shape === "circle" ? "btn-group__circle" : "btn-group__element-button");
         let classNameToggle = (option.toggled ? "btn-group__element-button-toggled" : "");
 
-        return (<Col md={mdCol} sm={smCol} xs={xsCol} key={key} className='btn-group__element'>
+        return (<Col md={mdCol} sm={smCol} xs={xsCol} key={key} className='btn-group'>
           <Button
             style={style}
             className={`btn-group__element-button ${classNameToggle} ${classNameShape}`}
             bsStyle={(!option.toggled ? "default" : "primary")}
             onClick={e => this.toggle(option)}>
-            {option.hideName ? <MdDone /> : option.name}
+            {option.hideName && option.toggled
+              ? <MdDone style={ option.name === "white"
+                ? {color: "black"} : ""} />
+              : option.hideName ? "" : option.name}
           </Button>
         </Col>);
       })}
