@@ -122,24 +122,9 @@ class Car extends React.Component {
             <Field name="colorInside" component={renderTextField}/>
             <Field name="colorOutside" component={renderTextField}/>
 
-            <h4>Descriptions</h4>
-
-            <Row>
-              <FieldArray name="descriptions" component={renderDescriptions}/>
-            </Row>
-
-            <h4>Features</h4>
-
-            <Row>
-              <FieldArray name="features" component={renderFeatures}/>
-            </Row>
-
-            <h4>Faults (TODO: history problems?)</h4>
-
-            <Row>
-              <FieldArray name="faults" component={renderHistoryProblems}/>
-            </Row>
-
+            <FieldArray name="descriptions" component={renderDescriptions}/>
+            <FieldArray name="features" component={renderFeatures}/>
+            <FieldArray name="faults" component={renderHistoryProblems}/>
             <Field name="fuelCity" component={renderTextField}/>
             <Field name="fuelHighway" component={renderTextField}/>
 
