@@ -2,7 +2,15 @@
  * Created by jevgenir on 10/22/2016.
  */
 import React from "react";
-import {Field, FieldArray} from 'redux-form';
+import {Field} from 'redux-form';
+import TextField from 'material-ui/TextField';
+import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
+import Checkbox from 'material-ui/Checkbox';
+import SelectField from 'material-ui/SelectField';
+import {Row, Col} from "react-bootstrap";
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
+import ContentRemove from 'material-ui/svg-icons/content/remove';
 
 const renderFile = props => (
   <div>
@@ -14,68 +22,164 @@ const renderFile = props => (
   </div>
 );
 
-export const renderDescriptions = ({fields}) => (
-  <ul>
-    <li>
-      <button type="button" onClick={() => fields.push()}>Add Description</button>
-    </li>
-    {fields.map((name, index) =>
-      <li key={index}>
-        <Field name={`${name}.title`} type="text" component="input" placeholder={`Description #${index + 1}`}/>
-        <Field name={`${name}.text`} type="text" component="textarea" placeholder={`Description #${index + 1}`}/>
-        <button type="button" onClick={() => fields.remove(index)}>X</button>
-      </li>
-    )}
-    {fields.error && <li className="error">{fields.error}</li>}
-  </ul>
+/*
+ ====================================
+ MATERIAL UI
+ ====================================
+ */
+
+export const renderTextField = ({input, label, meta: {touched, error}, ...custom}) => (
+  <Row style={{marginBottom: "10px"}}>
+    <Col sm={3}>
+      <label>{custom.name}</label>
+    </Col>
+    <Col sm={9}>
+      <TextField hintText={label}
+                 floatingLabelText={label}
+                 errorText={touched && error}
+                 {...input}
+                 {...custom}
+      />
+    </Col>
+  </Row>
 );
 
-export const renderFeatures = ({fields}) => (
-  <ul>
-    <li>
-      <button type="button" onClick={() => fields.push()}>Add Features</button>
-    </li>
-    {fields.map((name, index) =>
-      <li key={index}>
-        <Field name={`${name}.id`} type="number" component="input" placeholder={`Id #${index + 1}`}/>
-        <Field name={`${name}.text`} type="text" component="input" placeholder={`Feature #${index + 1}`}/>
-        <button type="button" onClick={() => fields.remove(index)}>X</button>
-      </li>
-    )}
-    {fields.error && <li className="error">{fields.error}</li>}
-  </ul>
+export const renderCheckbox = ({input, label, ...custom}) => (
+  <Row style={{marginBottom: "10px"}}>
+    <Col sm={3}>
+      <label>{custom.name}</label>
+    </Col>
+    <Col sm={9}>
+      <Checkbox label={label}
+                checked={input.value ? true : false}
+                onCheck={input.onChange}/>
+    </Col>
+  </Row>
 );
 
-export const renderHistoryProblems = ({fields}) => (
-  <ul>
-    <li>
-      <button type="button" onClick={() => fields.push()}>Add Features</button>
-    </li>
-    {fields.map((name, index) =>
-      <li key={index}>
-        <Field name={`${name}.id`} type="number" component="input" placeholder={`Id #${index + 1}`}/>
-        <Field name={`${name}.img`} type="text" component="input" placeholder={`Image #${index + 1}`}/>
-        <Field name={`${name}.text`} type="text" component="input" placeholder={`Text #${index + 1}`}/>
-        <button type="button" onClick={() => fields.remove(index)}>X</button>
-      </li>
-    )}
-    {fields.error && <li className="error">{fields.error}</li>}
-  </ul>
+export const renderRadioGroup = ({input, ...rest}) => (
+  <RadioButtonGroup {...input} {...rest}
+                    valueSelected={input.value}
+                    onChange={(event, value) => input.onChange(value)}/>
 );
 
-export const renderImages = ({fields}) => (
-  <ul>
-    <li>
-      <button type="button" onClick={() => fields.push()}>Add Features</button>
-    </li>
+export const renderSelectField = ({input, label, meta: {touched, error}, children, ...custom}) => (
+  <Row style={{marginBottom: "10px"}}>
+    <Col sm={3}>
+      <label>{custom.name}</label>
+    </Col>
+    <Col sm={9}>
+      <SelectField
+        floatingLabelText={label}
+        errorText={touched && error}
+        {...input}
+        onChange={(event, index, value) => input.onChange(value)}
+        children={children}
+        {...custom}/>
+    </Col>
+  </Row>
+);
+
+/*
+ ====================================
+ FIELD ARRAYS
+ ====================================
+ */
+export const renderDescriptions = ({fields, ...custom}) => fieldListWrapper({
+  fields,
+  title: custom.name,
+  block: (<ul>
     {fields.map((name, index) =>
       <li key={index}>
-        <Field name={`${name}.id`} type="number" component="input" placeholder={`Id #${index + 1}`}/>
-        <Field name={`${name}.original`} type="text" component="input" placeholder={`Original #${index + 1}`}/>
-        <Field name={`${name}.thumbnail`} type="text" component="input" placeholder={`Thumbnail #${index + 1}`}/>
-        <button type="button" onClick={() => fields.remove(index)}>X</button>
-      </li>
+        <Field name={`${name}.title`} type="text" component={renderTextField}
+               placeholder={`Description #${index + 1}`}/>
+        <Field name={`${name}.text`} type="text" component={renderTextField} placeholder={`Description #${index + 1}`}/>
+        <FloatingActionButton mini={true} secondary={true} onClick={() => fields.remove(index)}>
+          <ContentRemove />
+        </FloatingActionButton></li>
     )}
     {fields.error && <li className="error">{fields.error}</li>}
-  </ul>
+  </ul>)
+});
+
+export const renderFeatures = ({fields, ...custom}) => fieldListWrapper({
+  fields,
+  title: custom.name,
+  block: (<ul>
+    {fields.map((name, index) =>
+      <li key={index}>
+        <Field name={`${name}.id`} type="number" component={renderTextField} placeholder={`Id #${index + 1}`}/>
+        <Field name={`${name}.text`} type="text" component={renderTextField} placeholder={`Feature #${index + 1}`}/>
+        <FloatingActionButton mini={true} secondary={true} onClick={() => fields.remove(index)}>
+          <ContentRemove />
+        </FloatingActionButton></li>
+    )}
+    {fields.error && <li className="error">{fields.error}</li>}
+  </ul>)
+});
+
+export const renderHistoryProblems = ({fields, ...custom}) => fieldListWrapper({
+  fields,
+  title: custom.name,
+  block: (<ul>
+    {fields.map((name, index) =>
+      <li key={index}>
+        <Field name={`${name}.id`} type="number" component={renderTextField} placeholder={`Id #${index + 1}`}/>
+        <Field name={`${name}.img`} type="text" component={renderTextField} placeholder={`Image #${index + 1}`}/>
+        <Field name={`${name}.text`} type="text" component={renderTextField} placeholder={`Text #${index + 1}`}/>
+        <FloatingActionButton mini={true} secondary={true} onClick={() => fields.remove(index)}>
+          <ContentRemove />
+        </FloatingActionButton></li>
+    )}
+    {fields.error && <li className="error">{fields.error}</li>}
+  </ul>)
+});
+
+export const renderImages = ({fields, ...custom}) => fieldListWrapper({
+  fields,
+  title: custom.name,
+  block: (
+    <ul>
+      {fields.map((name, index) =>
+        <li key={index}>
+          <Field name={`${name}.id`} type="number" component={renderTextField} placeholder={`Id #${index + 1}`}/>
+          <Field name={`${name}.original`} type="text" component={renderTextField}
+                 placeholder={`Original #${index + 1}`}/>
+          <Field name={`${name}.thumbnail`} type="text" component={renderTextField}
+                 placeholder={`Thumbnail #${index + 1}`}/>
+          <FloatingActionButton mini={true} secondary={true} onClick={() => fields.remove(index)}>
+            <ContentRemove />
+          </FloatingActionButton>
+        </li>
+      )}
+      {fields.error && <li className="error">{fields.error}</li>}
+    </ul>
+  )
+});
+
+/**
+ * Private. Wraps around list of items
+ * @param fields
+ * @param title
+ * @param block - REACT element
+ */
+const fieldListWrapper = ({fields, title, block}) => (
+  <Row style={{marginBottom: "20px", border: "1px solid #cdcdcd", background: "#efefef"}}>
+    <Col sm={12}>
+      <Row>
+        <Col sm={12}>
+          <h3>
+            <FloatingActionButton mini={true} onClick={() => fields.push()}>
+              <ContentAdd />
+            </FloatingActionButton>&nbsp;{title} ({fields.length})
+          </h3>
+        </Col>
+      </Row>
+      <Row>
+        <Col sm={12}>
+          {block}
+        </Col>
+      </Row>
+    </Col>
+  </Row>
 );

@@ -5,11 +5,18 @@ import React from 'react';
 import {Field, FieldArray} from 'redux-form';
 import {ROUTE_PARAMS, FORM_MODE} from "./../constants/Car.constant";
 import {
+  renderTextField,
+  renderCheckbox,
+  renderSelectField,
+
   renderDescriptions,
   renderFeatures,
   renderHistoryProblems,
   renderImages
 } from "./Car.component.renderers";
+import MenuItem from 'material-ui/MenuItem';
+import RaisedButton from 'material-ui/RaisedButton';
+import {Row, Col} from "react-bootstrap";
 
 class Car extends React.Component {
   static propTypes = {
@@ -33,10 +40,10 @@ class Car extends React.Component {
         })
       ),
       "features": React.PropTypes.arrayOf(
-        {
+        React.PropTypes.shape({
           "id": React.PropTypes.number,
           "text": React.PropTypes.string
-        }
+        })
       ),
       "fuelCity": React.PropTypes.string,
       "fuelHighway": React.PropTypes.string,
@@ -48,7 +55,7 @@ class Car extends React.Component {
           "thumbnail": React.PropTypes.string
         })
       ),
-      "isSold": true,
+      "isSold": React.PropTypes.bool,
       "mileage": React.PropTypes.number,
       "performance": React.PropTypes.shape({
         "compressionRatio": React.PropTypes.number,
@@ -99,153 +106,71 @@ class Car extends React.Component {
               : ""}
 
             <h4>General data</h4>
-            <div>
-              <label htmlFor="carManufacturerCode">Car Manufacturer Code (TODO: SelectBox)</label>
-              <Field name="carManufacturerCode" component="input" type="text"/>
-            </div>
-            <div>
-              <label htmlFor="carModelsCode">Car Models Code (TODO: SelectBox)</label>
-              <Field name="carModelsCode" component="input" type="text"/>
-            </div>
-            <div>
-              <label htmlFor="colorInside">Colors Inside</label>
-              <Field name="colorInside" component="input" type="text"/>
-            </div>
-            <div>
-              <label htmlFor="colorOutside">Colors Outside</label>
-              <Field name="colorOutside" component="input" type="text"/>
-            </div>
 
-            <hr/>
+            <Field name="carManufacturerCode" component={renderSelectField}>
+              <MenuItem value={"bmw"} primaryText="BMW" />
+              <MenuItem value={"toyota"} primaryText="Toyota"/>
+              <MenuItem value={"honda"} primaryText="Honda"/>
+            </Field>
+
+            <Field name="carModelsCode" component={renderSelectField}>
+              <MenuItem value={"D1"} primaryText="D1"/>
+              <MenuItem value={"V5"} primaryText="V5"/>
+              <MenuItem value={"G8"} primaryText="G8"/>
+            </Field>
+
+            <Field name="colorInside" component={renderTextField}/>
+            <Field name="colorOutside" component={renderTextField}/>
 
             <h4>Descriptions</h4>
 
-            <div>
+            <Row>
               <FieldArray name="descriptions" component={renderDescriptions}/>
-            </div>
-
-            <hr/>
+            </Row>
 
             <h4>Features</h4>
 
-            <div>
+            <Row>
               <FieldArray name="features" component={renderFeatures}/>
-            </div>
-
-            <hr/>
+            </Row>
 
             <h4>Faults (TODO: history problems?)</h4>
 
-            <div>
+            <Row>
               <FieldArray name="faults" component={renderHistoryProblems}/>
-            </div>
+            </Row>
 
-            <hr/>
+            <Field name="fuelCity" component={renderTextField}/>
+            <Field name="fuelHighway" component={renderTextField}/>
 
-            <div>
-              <label htmlFor="fuelCity">Fuel City</label>
-              <Field name="fuelCity" component="input" type="text"/>
-            </div>
-            <div>
-              <label htmlFor="fuelHighway">Fuel Highway</label>
-              <Field name="fuelHighway" component="input" type="text"/>
-            </div>
-
-            <hr/>
-
-            <h4>Images</h4>
-
-            <div>
-              <FieldArray name="images" component={renderImages}/>
-            </div>
-
-            <hr/>
-
-            <div>
-              <label htmlFor="isSold">Is sold</label>
-              <Field name="isSold" component="input" type="checkbox"/>
-            </div>
-
-            <div>
-              <label htmlFor="mileage">Mileage</label>
-              <Field name="mileage" component="input" type="number"/>
-            </div>
+            <FieldArray name="images" component={renderImages}/>
+            <Field name="isSold" component={renderCheckbox}/>
+            <Field name="mileage" component={renderTextField} type="number"/>
 
             <h4>Performance</h4>
 
-            <div>
-              <label htmlFor="performance.compressionRatio">compressionRatio</label>
-              <Field name="performance.compressionRatio" component="input" type="number"/>
-            </div>
-            <div>
-              <label htmlFor="performance.compressionType">compressorType</label>
-              <Field name="performance.compressorType" component="input" type="text"/>
-            </div>
-            <div>
-              <label htmlFor="performance.configuration">configuration</label>
-              <Field name="performance.configuration" component="input" type="text"/>
-            </div>
-            <div>
-              <label htmlFor="performance.cylinders">cylinders</label>
-              <Field name="performance.cylinders" component="input" type="text"/>
-            </div>
-            <div>
-              <label htmlFor="performance.displacement">displacement</label>
-              <Field name="performance.displacement" component="input" type="text"/>
-            </div>
-            <div>
-              <label htmlFor="performance.doors">doors</label>
-              <Field name="performance.doors" component="input" type="number"/>
-            </div>
-            <div>
-              <label htmlFor="performance.drivenWheels">drivenWheels</label>
-              <Field name="performance.drivenWheels" component="input" type="text"/>
-            </div>
-            <div>
-              <label htmlFor="performance.fuelType">fuelType</label>
-              <Field name="performance.fuelType" component="input" type="text"/>
-            </div>
-            <div>
-              <label htmlFor="performance.horsePower">horsePower</label>
-              <Field name="performance.horsePower" component="input" type="number"/>
-            </div>
-            <div>
-              <label htmlFor="performance.powerTrain">powerTrain</label>
-              <Field name="performance.powerTrain" component="input" type="text"/>
-            </div>
-            <div>
-              <label htmlFor="performance.size">size</label>
-              <Field name="performance.size" component="input" type="number"/>
-            </div>
-            <div>
-              <label htmlFor="performance.torque">torque</label>
-              <Field name="performance.torque" component="input" type="number"/>
-            </div>
-            <div>
-              <label htmlFor="performance.totalValves">totalValves</label>
-              <Field name="performance.totalValves" component="input" type="number"/>
-            </div>
+            <Field name="performance.compressionRatio" component={renderTextField} type="number"/>
+            <Field name="performance.compressorType" component={renderTextField}/>
+            <Field name="performance.configuration" component={renderTextField}/>
+            <Field name="performance.cylinders" component={renderTextField}/>
+            <Field name="performance.displacement" component={renderTextField}/>
+            <Field name="performance.doors" component={renderTextField} type="number"/>
+            <Field name="performance.drivenWheels" component={renderTextField}/>
+            <Field name="performance.fuelType" component={renderTextField}/>
+            <Field name="performance.horsePower" component={renderTextField} type="number"/>
+            <Field name="performance.powerTrain" component={renderTextField}/>
+            <Field name="performance.size" component={renderTextField} type="number"/>
+            <Field name="performance.torque" component={renderTextField} type="number"/>
+            <Field name="performance.totalValves" component={renderTextField} type="number"/>
 
             <hr/>
 
-            <div>
-              <label htmlFor="price">Price</label>
-              <Field name="price" component="input" type="number"/>
-            </div>
-            <div>
-              <label htmlFor="registrationNumber">Registration Number</label>
-              <Field name="registrationNumber" component="input" type="text"/>
-            </div>
-            <div>
-              <label htmlFor="safetyStars">Safety Stars</label>
-              <Field name="safetyStars" component="input" type="number"/>
-            </div>
-            <div>
-              <label htmlFor="vinCode">Vin Code</label>
-              <Field name="vinCode" component="input" type="text"/>
-            </div>
+            <Field name="price" component={renderTextField} type="number"/>
+            <Field name="registrationNumber" component={renderTextField}/>
+            <Field name="safetyStars" component={renderTextField} type="number"/>
+            <Field name="vinCode" component={renderTextField}/>
 
-            <button type="submit">Submit</button>
+            <RaisedButton label="Submit" />
           </form>
 
         )}
