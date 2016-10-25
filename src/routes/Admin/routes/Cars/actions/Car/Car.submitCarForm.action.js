@@ -3,6 +3,7 @@
  */
 import {FORMS, FORM_MODE, REDUCER_KEYS} from "./../../constants/Car.constant";
 import setCarData from "./Car.setCarData.action";
+import remoteConfig from "store/remoteConfig";
 
 /**
  * Is executed on form submit
@@ -36,6 +37,9 @@ const createCarAsync = (data) => (dispatch) => {
   })
     .then(resp => resp.json())
     .then(data => {
+      if (data.error) {
+        console.error(data);
+      }
       dispatch(setCarData({isFetching: false, data}));
     })
     .catch(err => {

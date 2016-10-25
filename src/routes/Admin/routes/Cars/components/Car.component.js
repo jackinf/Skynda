@@ -16,7 +16,6 @@ import {
 } from "./Car.component.renderers";
 import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
-import {Row, Col} from "react-bootstrap";
 
 class Car extends React.Component {
   static propTypes = {
@@ -89,6 +88,7 @@ class Car extends React.Component {
 
   onSubmit = (e) => {
     e.preventDefault();
+    console.log("Submitting");
     this.props.submitCarForm();
   };
 
@@ -108,15 +108,11 @@ class Car extends React.Component {
             <h4>General data</h4>
 
             <Field name="carManufacturerCode" component={renderSelectField}>
-              <MenuItem value={"bmw"} primaryText="BMW" />
-              <MenuItem value={"toyota"} primaryText="Toyota"/>
-              <MenuItem value={"honda"} primaryText="Honda"/>
+              <MenuItem value={"Honda"} primaryText="Honda"/>
             </Field>
 
             <Field name="carModelsCode" component={renderSelectField}>
-              <MenuItem value={"D1"} primaryText="D1"/>
-              <MenuItem value={"V5"} primaryText="V5"/>
-              <MenuItem value={"G8"} primaryText="G8"/>
+              <MenuItem value={"SERVER75"} primaryText="SERVER75"/>
             </Field>
 
             <Field name="colorInside" component={renderTextField}/>
@@ -155,7 +151,8 @@ class Car extends React.Component {
             <Field name="safetyStars" component={renderTextField} type="number"/>
             <Field name="vinCode" component={renderTextField}/>
 
-            <RaisedButton label="Submit" />
+            <input type="submit" value="Submit"/>
+            {/*<RaisedButton label="Submit" />*/}
           </form>
 
         )}
