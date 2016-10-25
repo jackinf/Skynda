@@ -81,5 +81,7 @@ $default-color: #019BFF;
   .fk-filter-advance {
     border: transparent !important;
     color: $default-color;
+    text-decoration: none;
+    outline: none;
   }
 }

@@ -30,8 +30,8 @@ const translationsObject = {
         not_found: "Not Found"
       },
       header: {
-        sell_car_txt: "Soovin müüa autot",
-        buy_car_txt: "Soovin osta autot",
+        sell_car_txt: "Müün auto",
+        buy_car_txt: "Ostan auto",
         about_us: "Meist",
         contacts: "Kontaktid"
       },

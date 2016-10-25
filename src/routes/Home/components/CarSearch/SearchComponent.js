@@ -6,7 +6,8 @@ import ToggleButton from "../../containers/ToggleAdvancedSearchContainer";
 import SearchButton from "../../containers/SearchButtonContainer";
 import "./SearchComponent.scss";
 import {Translate} from 'react-redux-i18n';
-
+import Plus from 'react-icons/lib/fa/plus'
+import Minus from 'react-icons/lib/fa/minus'
 
 const colors = [
   {id: -1, name: "Kõik", toggled: true},
@@ -33,6 +34,8 @@ class SearchComponent extends React.Component {
   async componentWillMount() {
     await this.props.loadBaseData();
   }
+
+
 
   render() {
     const data = this.props.seats;
@@ -114,9 +117,11 @@ class SearchComponent extends React.Component {
                     <div className='text-right'>
                       <ToggleButton className='btn btn-link fk-filter-advance'>
                         {
-                          this.props.showAdvancedSearch ?
-                            <span className='glyphicon glyphicon-minus'/> : <span className='glyphicon glyphicon-plus'/>
+                          this.props.showAdvancedSearch
+                            ? <Minus/>
+                            : <Plus />
                         }
+                        &nbsp;&nbsp;
                         <Translate value="components.car_search.advanced_txt"/>
                       </ToggleButton>
 

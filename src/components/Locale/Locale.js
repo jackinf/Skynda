@@ -1,6 +1,8 @@
 import React, {PropTypes} from "react";
 import {Button, Row, Col} from "react-bootstrap";
 import "./Locale.scss";
+import est from "../../static/images/flags/flags-iso/shiny/24/ee.png"
+import eng from "../../static/images/flags/flags-iso/shiny/24/gb.png"
 
 const languages = [
   {title: "EST", value: "et"},
@@ -19,7 +21,15 @@ class LocaleChanger extends React.Component {
                   e.preventDefault();
                   this.props.onLocaleChange(language.value)
                 }}
-              >{language.title}
+              >
+                {language.value === "et"
+                ? <img
+                    src={est}
+                  />
+                : <img
+                    src={eng}
+                  />
+                }
               </Button>
             );
           })}
