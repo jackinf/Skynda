@@ -17,8 +17,6 @@ export const sendEmailAsync = (data) => {
       formData.append(key, data[key]);
     }
 
-
-
     return fetch(remoteConfig.remote + "/api/email/person", {
       method: "POST",
       headers: {"Accept": "application/json", "Content-Type": "application/json"},

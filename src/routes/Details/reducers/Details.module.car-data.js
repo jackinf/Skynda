@@ -2,6 +2,8 @@
  * Created by jevgenir on 10/1/2016.
  */
 
+import fetch from "isomorphic-fetch";
+import remoteConfig from "../../../store/remoteConfig";
 import {toggleLoading} from "./Details.module.toggle-loading";
 
 // Images
@@ -16,152 +18,184 @@ import dummyImage1 from "./../../../static/images/cars/accord/accord.jpg";
 import dummyImage2 from "./../../../static/images/cars/accord/accord2.jpg";
 import dummyImage3 from "./../../../static/images/cars/accord/accord3.jpg";
 
-export const SET_CAR_DATA = "SET_CAR_DATA";
-
-export const getDataAsync = () => {
-  return (dispatch, getState) => {
-    dispatch(toggleLoading(true));
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        // TODO: temporary data. Use API data.
-        const carData = {// TODO: REPLACE with api data
-          general: {
-            src: dummyImage1,
-            year: 2012,
-            brand: "Honda",
-            model: "Accord",
-            engine: "3.0",
-            horsepower: "225 kW",
-            mileage: "75 000 km",
-            transmission: "automaatne",
-            drive: "Esivedu",
-            color_outside: "Tumesinine",
-            color_inside: "Must",
-            doors: "2",
-            seats: "5"
-          },
-          overview: [
-            {label: "75 000 km", iconUrl: imageOverview1},
-            {label: "Automaatne", iconUrl: imageOverview2},
-            {label: "3.0 (225 kW)", iconUrl: imageOverview3},
-            {label: "Esivedu", iconUrl: imageOverview4},
-            {label: "2 ust 5 istekohta", iconUrl: imageOverview5},
-            {label: "Tumesinine", iconUrl: imageOverview6},
-            {label: "Must", iconUrl: imageOverview7}
-          ],
-          images: [
-            {
-              original: dummyImage1,
-              thumbnail: dummyImage1
-            },
-            {
-              original: dummyImage2,
-              thumbnail: dummyImage2
-            },
-            {
-              original: dummyImage3,
-              thumbnail: dummyImage3
-            }
-          ],
-          descriptions: [{
-            title: "Mis on mudeli eripära?",
-            text: `The BMW 3 Series offers the a combination of luxury and performance that is unmatched
+// TODO: This is temporary car information for testing purposes (when there is no connection to the internet)
+// We can also see the entire structure of the object
+const fakeCarData = {
+  general: {
+    src: dummyImage1,
+    year: 2012,
+    brand: "Honda",
+    model: "Accord",
+    engine: "3.0",
+    horsepower: "225 kW",
+    mileage: "75 000 km",
+    transmission: "automaatne",
+    drive: "Esivedu",
+    colorOutside: "Tumesinine",
+    colorInside: "Must",
+    doors: "2",
+    seats: "5"
+  },
+  overview: [
+    {label: "75 000 km", iconUrl: imageOverview1},
+    {label: "Automaatne", iconUrl: imageOverview2},
+    {label: "3.0 (225 kW)", iconUrl: imageOverview3},
+    {label: "Esivedu", iconUrl: imageOverview4},
+    {label: "2 ust 5 istekohta", iconUrl: imageOverview5},
+    {label: "Tumesinine", iconUrl: imageOverview6},
+    {label: "Must", iconUrl: imageOverview7}
+  ],
+  images: [
+    {
+      original: dummyImage1,
+      thumbnail: dummyImage1
+    },
+    {
+      original: dummyImage2,
+      thumbnail: dummyImage2
+    },
+    {
+      original: dummyImage3,
+      thumbnail: dummyImage3
+    }
+  ],
+  descriptions: [{
+    title: "Mis on mudeli eripära?",
+    text: `The BMW 3 Series offers the a combination of luxury and performance that is unmatched
 by its competitors. With refined driving dynamics and drop-dead gorgeous looks to
 match, this elegant sports coupe is truly an amazing driving machine`
-          }, {
-            title: "Meil on see suurepärases seisukorras!",
-            text: `Skynda seller Aju is switching things up with a new ride! Skynda Inspector Nicolas thought this
+  }, {
+    title: "Meil on see suurepärases seisukorras!",
+    text: `Skynda seller Aju is switching things up with a new ride! Skynda Inspector Nicolas thought this
 car was in excellent condition. We would love to drop off this great BMW right in your
 driveway! Skynda bought this car from private seller Aju, and now Skyda is offering this car for
 sale`
-          }],
-          features: [
-            "Steering Wheel Controls",
-            "Paddle Shifters",
-            "Premium Lights",
-            "Turbocharger",
-            "Parking Sensors"
-          ],
-          history: {
-            problems: [],
-            vin_code: "WVWHV71K68W164858"
-          },
-          petrol_consumption: {
-            city: "7.5 l / 100 km",
-            highway: "6.5 l / 100 km",
-            average: "7.0 l / 100 km"
-          },
-          performance: {
-            driven_wheels: "Tagavedu",
-            doors: 4,
-            compression_ratio: 10,
-            compressor_type: "Turbo",
-            configuration: "Inline",
-            cylinders: 4,
-            displacement: 1997,
-            fuel_type: "Premium unlead",
-            horsepower: 240,
-            size: 2,
-            torque: 255,
-            total_valves: 16,
-            power_train: "Gas"
-          },
-          safety_stars: 5,
-          report: {
-            categories: [
-              {
-                title: "Kategooria 1",
-                points: [
-                  {text: "Automatic transmission flawless in cold temperature", pass: true},
-                  {text: "Steering wheel centered", pass: true},
-                  {text: "Steering wheel centered", pass: true},
-                  {text: "Automatic transmission flawless in cold temperature", pass: false},
-                  {text: "Automatic transmission flawless in cold temperature", pass: true},
-                  {text: "Steering wheel centered", pass: true}
-                ]
-              },
-              {
-                title: "Kategooria 2",
-                points: [
-                  {text: "Automatic transmission flawless in cold temperature", pass: true},
-                  {text: "Steering wheel centered", pass: true},
-                  {text: "Steering wheel centered", pass: true},
-                  {text: "Automatic transmission flawless in cold temperature", pass: false},
-                  {text: "Automatic transmission flawless in cold temperature", pass: true},
-                  {text: "Steering wheel centered", pass: true}
-                ]
-              }
-            ],
-            faults: [
-              {text: "Scratches near the ignition", img: "TODO"},
-              {text: "Scratches on the glovebox", img: "TODO"},
-              {text: "Scratches on the back door", img: "TODO"}
-            ]
-          },
-          reviews: [
-            {
-              logoUrl: imageOverview1,
-              videoUrl: null,
-              text: "The Dacia Sandero demands compromises, but it’s likeable and offers more practicality than " +
-                "anything in this price range",
-              rating: 4
-            },
-            {
-              logoUrl: imageOverview2,
-              videoUrl: null,
-              text: "The Jeep Renegade stands out from the crowd with its chunky looks and excellent off-road " +
-                "performance.",
-              rating: 3
-            }
-          ]
+  }],
+  features: [
+    "Steering Wheel Controls",
+    "Paddle Shifters",
+    "Premium Lights",
+    "Turbocharger",
+    "Parking Sensors"
+  ],
+  history: {
+    problems: [],
+    vinCode: "WVWHV71K68W164858"
+  },
+  petrolConsumption: {
+    city: "7.5 l / 100 km",
+    highway: "6.5 l / 100 km",
+    average: "7.0 l / 100 km"
+  },
+  performance: {
+    drivenWheels: "Tagavedu",
+    doors: 4,
+    compressionRatio: 10,
+    compressorType: "Turbo",
+    configuration: "Inline",
+    cylinders: 4,
+    displacement: 1997,
+    fuelType: "Premium unlead",
+    horsePower: 240,
+    size: 2,
+    torque: 255,
+    totalValves: 16,
+    powerTrain: "Gas"
+  },
+  safetyStars: 5,
+  report: {
+    categories: [
+      {
+        title: "Kategooria 1",
+        points: [
+          {text: "Automatic transmission flawless in cold temperature", pass: true},
+          {text: "Steering wheel centered", pass: true},
+          {text: "Steering wheel centered", pass: true},
+          {text: "Automatic transmission flawless in cold temperature", pass: false},
+          {text: "Automatic transmission flawless in cold temperature", pass: true},
+          {text: "Steering wheel centered", pass: true}
+        ]
+      },
+      {
+        title: "Kategooria 2",
+        points: [
+          {text: "Automatic transmission flawless in cold temperature", pass: true},
+          {text: "Steering wheel centered", pass: true},
+          {text: "Steering wheel centered", pass: true},
+          {text: "Automatic transmission flawless in cold temperature", pass: false},
+          {text: "Automatic transmission flawless in cold temperature", pass: true},
+          {text: "Steering wheel centered", pass: true}
+        ]
+      }
+    ],
+    faults: [
+      {text: "Scratches near the ignition", img: "TODO"},
+      {text: "Scratches on the glovebox", img: "TODO"},
+      {text: "Scratches on the back door", img: "TODO"}
+    ]
+  },
+  reviews: [
+    {
+      logoUrl: imageOverview1,
+      videoUrl: null,
+      text: "The Dacia Sandero demands compromises, but it’s likeable and offers more practicality than " +
+      "anything in this price range",
+      rating: 4
+    },
+    {
+      logoUrl: imageOverview2,
+      videoUrl: null,
+      text: "The Jeep Renegade stands out from the crowd with its chunky looks and excellent off-road " +
+      "performance.",
+      rating: 3
+    }
+  ]
+};
+
+
+export const SET_CAR_DATA = "SET_CAR_DATA";
+
+export const getDataAsync = (id = 1) => (dispatch, getState) => {
+    dispatch(toggleLoading(true));
+
+    return fetch(`${remoteConfig.remote}/api/car/${id}`, {
+      method: "GET",
+      headers: {"Accept": "application/json", "Content-Type": "application/json"}
+    })
+      .then(resp => resp.json())
+      .then(data => {
+
+        // TEMP FIXES
+        data["general"] = data["carGeneralDto"];
+        data["reviews"] = data["review"];
+        for (let i = 0; i < data["reviews"].length; i++) {
+          data["reviews"][i]["rating"] = parseInt(data["reviews"][i]["rating"]);
+        }
+        data["general"]["year"] = parseInt(data["general"]["year"]);
+        data["performance"]["doors"] = parseInt(data["performance"]["doors"]);
+        data["performance"]["compressionRatio"] = parseInt(data["performance"]["compressionRatio"]);
+        data["performance"]["horsePower"] = parseInt(data["performance"]["horsePower"]);
+        data["performance"]["size"] = parseInt(data["performance"]["size"]);
+        data["performance"]["torque"] = parseInt(data["performance"]["torque"]);
+        data["performance"]["totalValves"] = parseInt(data["performance"]["totalValves"]);
+        data["safetyStars"] = parseInt(data["safetyStars"]);
+        data["report"] = {
+          categories: [],
+          faults: []
         };
 
-        dispatch(setCarData(carData));
+        delete data["carGeneralDto"];
+        delete data["review"];
+
+        dispatch(setCarData(data));
         dispatch(toggleLoading(false));
-        resolve();
-      }, 200);
-    });
-  };
+      })
+      .catch((error) => {
+        console.log("ERROR: ", error);
+        dispatch(setCarData(fakeCarData));
+        dispatch(toggleLoading(false));
+      });
+
 };
 
 export function setCarData(value) {

@@ -5,7 +5,8 @@ import "./../../Details.mainimage.modal.scss";
 
 import image360 from "./assets/group-78@2x.png";
 import {Button, Modal} from "react-bootstrap";
-import translations from "../../../../../../store/locales/et";
+import { Translate } from 'react-redux-i18n';
+
 
 class ModalBtn360 extends React.Component {
   constructor() {
@@ -26,7 +27,7 @@ class ModalBtn360 extends React.Component {
       <Button onClick={this.onShowModal}>
         <div className='image-btn-content-wrapper'>
           <img src={image360}/>
-          <span>{translations.routes.details.components.main_image.btn_txt_360}</span>
+          <span><Translate value="details.components.main_image.btn_txt_360"/></span>
         </div>
       </Button>
 
