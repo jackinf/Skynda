@@ -6,7 +6,7 @@ import java.util.List;
 
 @Data
 public class CreateResponseDto {
-    private Integer id;
+    private Long id;
     private boolean success;
     private List<String> errors;
 }

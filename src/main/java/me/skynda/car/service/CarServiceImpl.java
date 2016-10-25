@@ -23,6 +23,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -90,8 +91,14 @@ public class CarServiceImpl implements CarService {
         //        for (CarDto.FeatureDto feature : car.getFaults()) { .../* add or update or delete faults */ }
         //        for (CarDto.FeatureDto feature : car.getImages()) { .../* add or update or delete images */ }
 
-        throw new NotImplementedException("Update car is not implemented");
-//        return carDao.save(car);
+//        throw new NotImplementedException("Update car is not implemented");
+        car.setCreated(new Date());
+        Car addedCar = carDao.save(car);    // TODO: Get success code
+
+        CreateResponseDto response = new CreateResponseDto();
+        response.setId(addedCar.getId());
+        response.setSuccess(true);
+        return response;
     }
 
     @Override

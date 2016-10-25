@@ -185,7 +185,7 @@ public class CarConverter {
 		car.setVinCode(carDto.getVinCode());
 		car.setPrice(carDto.getPrice());
 		car.setRegistrationNumber(carDto.getRegistrationNumber());
-//		carModel.setMileage(carDto.getMileage());		// TODO: Fix type to Integer
+		car.setMileage(carDto.getMileage().toString());		// TODO: Fix type to Integer
 		car.setColorInside(carDto.getColorInside());
 		car.setColorOutside(carDto.getColorOutside());
 		car.setIsSold(carDto.getIsSold());
@@ -197,16 +197,18 @@ public class CarConverter {
 			PERFORMANCE section
 		 */
 		PerformanceDto performanceDto = carDto.getPerformance();
-		car.setCompressionRatio(performanceDto.getCompressionRatio());
-		car.setCompressionType(performanceDto.getCompressionType());
-		car.setConfiguration(performanceDto.getConfiguration());
-		car.setCylinders(performanceDto.getCylinders());
-		car.setDisplacement(performanceDto.getDisplacement());
-		car.setFuelType(performanceDto.getFuelType());
-		car.setSize(performanceDto.getSize());
-		car.setTorque(performanceDto.getTorque());
-		car.setTotalValves(performanceDto.getTotalValves());
-		car.setPowerTrain(performanceDto.getPowerTrain());
+		if (performanceDto != null) {
+			car.setCompressionRatio(performanceDto.getCompressionRatio());
+			car.setCompressionType(performanceDto.getCompressionType());
+			car.setConfiguration(performanceDto.getConfiguration());
+			car.setCylinders(performanceDto.getCylinders());
+			car.setDisplacement(performanceDto.getDisplacement());
+			car.setFuelType(performanceDto.getFuelType());
+			car.setSize(performanceDto.getSize());
+			car.setTorque(performanceDto.getTorque());
+			car.setTotalValves(performanceDto.getTotalValves());
+			car.setPowerTrain(performanceDto.getPowerTrain());
+		}
 
 		return car;
 	}
