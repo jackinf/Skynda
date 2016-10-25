@@ -3,6 +3,7 @@ import Slider from "rc-slider";
 import {Row, Col} from "react-bootstrap";
 import reactMixin from "react-mixin";
 import settimeoutMixin from "../../../../mixins/settimeout";
+import {Localize} from 'react-redux-i18n';
 
 class SliderWrapper extends React.Component {
 
@@ -19,7 +20,7 @@ class SliderWrapper extends React.Component {
 
   render() {
     const {min, max, units, step} = this.props;
-
+console.log(max.toString().length);
     return (<div className='range-slider-wrapper'>
       <label>{this.props.title}</label>
 
@@ -29,7 +30,11 @@ class SliderWrapper extends React.Component {
         </Col>
         <Col md={6}>
           <span className='pull-right'>
-            {max} {units}
+            {
+              max.toString().length > 4
+                ? <Localize value={max} />
+                : max
+            } {units}
           </span>
         </Col>
       </Row>

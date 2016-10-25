@@ -43,7 +43,7 @@ class SearchComponent extends React.Component {
       return <div>Loading...</div>;
     }
 
-    return (
+    return ( 
       <div>
         <Row>
           <Col xs={12}>
