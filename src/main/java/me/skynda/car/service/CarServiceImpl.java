@@ -1,7 +1,6 @@
 package me.skynda.car.service;
 
-import me.skynda.car.dao.CarDao;
-import me.skynda.car.dao.CarModelsDao;
+import me.skynda.car.dao.*;
 import me.skynda.car.dto.CarDto;
 import me.skynda.car.dto.SingleCarDataDto;
 import me.skynda.car.model.Car;
@@ -30,6 +29,15 @@ public class CarServiceImpl implements CarService {
     CarModelsDao carModelsDao;
 
     @Autowired
+    CarFeatureDao carFeatureDao;
+
+    @Autowired
+    CarFaultDao carFaultDao;
+
+    @Autowired
+    CarImageDao carImageDao;
+
+    @Autowired
     private CarConverter carConverter;
 
     @Override
@@ -55,12 +63,10 @@ public class CarServiceImpl implements CarService {
         CarModels carModel = carModelsDao.getByModelCode(carDto.getCarModelsCode());
         car.setCarModels(carModel);
 
-        // TODO:
-        //        for (CarDto.FeatureDto feature : car.getFeatures()) { .../* add or update or delete features */ }
-        //        for (CarDto.FeatureDto feature : car.getFaults()) { .../* add or update or delete faults */ }
-        //        for (CarDto.FeatureDto feature : car.getImages()) { .../* add or update or delete images */ }
+        carFeatureDao.addMultipleToCar(car, carDto.getFeatures());
+        carFaultDao.addMultipleToCar(car, carDto.getFaults());
+        carImageDao.addMultipleToCar(car, carDto.getImages());
 
-//        throw new NotImplementedException("Update car is not implemented");
         car.setCreated(new Date());
         Car addedCar = carDao.save(car);    // TODO: Get success code
 
