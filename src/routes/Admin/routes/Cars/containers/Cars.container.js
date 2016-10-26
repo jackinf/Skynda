@@ -2,17 +2,17 @@
  * Created by jevgenir on 10/21/2016.
  */
 import {connect} from "react-redux";
-import {getList} from "../actions/Cars";
-import {setCars} from "./../reducers/SetCars.reducer";
-import CarList from "./../components/Cars.component";
+import {getList, deleteItem} from "../actions/Cars";
+import CarsComponent from "./../components/Cars.component";
+import {REDUCER_KEYS} from "../constants/Car.constant";
 
 const mapDispatchToProps = {
   getList,
-  setCars
+  deleteItem
 };
 
 const mapStateToProps = (state) => ({
-  carsData: state.carsData
+  data: state[REDUCER_KEYS.CARS_DATA]
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(CarList);
+export default connect(mapStateToProps, mapDispatchToProps)(CarsComponent);

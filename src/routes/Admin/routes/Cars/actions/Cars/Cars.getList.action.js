@@ -17,11 +17,11 @@ export default function getList() {
     })
       .then(resp => resp.json())
       .then(resp => {
-        dispatch(setCars({isFetching: false, cars: resp}));
+        dispatch(setCars({isFetching: false, items: resp}));
       })
       .catch(err => {
         var demoCars = useFallbackDemoData ? [{id: 1, name: "BMW"}] : [];
-        dispatch(setCars({isFetching: false, cars: demoCars}));
+        dispatch(setCars({isFetching: false, items: demoCars}));
       });
   };
 }

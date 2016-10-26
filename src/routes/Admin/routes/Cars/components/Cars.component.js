@@ -4,13 +4,16 @@
 import React from "react";
 import {Table, Column, Cell} from 'fixed-data-table';
 import 'fixed-data-table/dist/fixed-data-table.css';
-import {Link} from "react-router";
+import RaisedButton from "material-ui/RaisedButton";
+import { browserHistory } from "react-router"
 
 export default class CarList extends React.Component {
   static propTypes = {
-    carsData: React.PropTypes.shape({
+    getList: React.PropTypes.func.isRequired,
+    deleteItem: React.PropTypes.func.isRequired,
+    data: React.PropTypes.shape({
       isFetching: React.PropTypes.bool.isRequired,
-      cars: React.PropTypes.array
+      items: React.PropTypes.array
     })
   };
 
@@ -19,13 +22,14 @@ export default class CarList extends React.Component {
   }
 
   render() {
-    let rows = !this.props.carsData.isFetching ? this.props.carsData.cars : [{name: "Is loading..."}];
-    const loading = this.props.carsData.isFetching ? "Fetching" : "Cars";
+    let rows = !this.props.data.isFetching ? this.props.data.items : [];
+    const loading = this.props.data.isFetching ? "Fetching" : "Cars";
 
     return (<div className="container">
       <h3>{loading}</h3>
 
-      <Link to="/admin/car/new">Add new</Link>
+      <RaisedButton secondary={true} label="Add" onClick={e => browserHistory.push(`/admin/car/new`)}/>
+      {/*<Link to="/admin/car/new">Add new</Link>*/}
       {/*<a href="/admin/car/new">Add new</a>*/}
 
       <Table rowHeight={50} rowsCount={rows.length} width={1000} maxHeight={500} headerHeight={50}>
@@ -67,7 +71,9 @@ export default class CarList extends React.Component {
           header={<Cell>Actions</Cell>}
           cell={({rowIndex, ...props}) => (
             <Cell {...props}>
-              <Link to={`/admin/car/${rows[rowIndex].id}`}>Show</Link>
+              {/*<Link to={`/admin/car/${rows[rowIndex].id}`}>Show</Link>*/}
+              <RaisedButton label="Show" onClick={e => browserHistory.push(`/admin/car/${rows[rowIndex].id}`)}/>
+              <RaisedButton secondary={true} label="Delete" onClick={e => this.props.deleteItem(rows[rowIndex].id)}/>
             </Cell>
           )}
           width={200}
