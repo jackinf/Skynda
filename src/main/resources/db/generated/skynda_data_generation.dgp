@@ -2356,7 +2356,7 @@
 </DT>
 </ATTR>
 <ATTR>
-<NAME>problems</NAME>
+<NAME>faults</NAME>
 <ID>19</ID>
 <POSNR>0</POSNR>
 <SCHEMA></SCHEMA>
@@ -5704,7 +5704,7 @@ N(3)[-]N(3)[-]N(4)
 <FILLTYPE>Value from list</FILLTYPE>
 <DPEXPRESSION></DPEXPRESSION>
 <FORMULA></FORMULA>
-<PICKLISTITEMS>demands compromises, but it’s likeable and offers more practicality than anything in this price range
+<PICKLISTITEMS>demands compromises, but itï¿½s likeable and offers more practicality than anything in this price range
 stands out from the crowd with its chunky looks and excellent off-road performance.</PICKLISTITEMS>
 <DGRANDOMFILE>C:\Program Files (x86)\Datanamic\Datanamic Data Generator for PostgreSQL V6\blobs\</DGRANDOMFILE>
 <EXTERNALFILE></EXTERNALFILE>
@@ -7322,7 +7322,7 @@ Parking Sensors</PICKLISTITEMS>
 <FILLTYPE>Value from list</FILLTYPE>
 <DPEXPRESSION></DPEXPRESSION>
 <FORMULA></FORMULA>
-<PICKLISTITEMS>problems with engine
+<PICKLISTITEMS>faults with engine
 back door is not working
 glass is broken
 this is a stolen car</PICKLISTITEMS>
@@ -7356,7 +7356,7 @@ this is a stolen car</PICKLISTITEMS>
 <USESAMEVALUEFROM>1</USESAMEVALUEFROM>
 <USESAMEVALUETO>1</USESAMEVALUETO>
 <QUALIFIEDENTITYNAME>public.cars_for_sale</QUALIFIEDENTITYNAME>
-<ATTRIBUTENAME>problems</ATTRIBUTENAME>
+<ATTRIBUTENAME>faults</ATTRIBUTENAME>
 <NAMEDGENERATORNAME></NAMEDGENERATORNAME>
 <UNIQUEVALUESONLY>0</UNIQUEVALUESONLY>
 </ATTRIBUTEGENERATOR>

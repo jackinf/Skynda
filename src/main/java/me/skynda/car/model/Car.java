@@ -23,11 +23,10 @@ import javax.persistence.Table;
 @Table(name = "cars_for_sale")
 public class Car {
 
-	// TODO: Add id to base model class
 	@Id
 	@Column(name = "id", columnDefinition = "serial")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Long id;			// TODO: Add id to base model class
 	
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "model_code", nullable = false)
@@ -36,49 +35,39 @@ public class Car {
 	@OneToMany(mappedBy = "car", fetch = FetchType.LAZY)
     private List<CarReport> carReport;
 
-	/**
-	 * Reviewer's comments and ratings of this specific car.
-	 */
 	@OneToMany(mappedBy = "car", fetch = FetchType.LAZY)
     private List<CarReview> carReview;
 	
 	private String vinCode;
-
 	private BigDecimal price;
 
-	/**
-	 * TODO: Add to base model
-	 */
-	private Date created;
-
-	/**
-	 * TODO: private Date updated, and add it to base model
-	 */
+	private Date created;	// TODO: Add to base model (rename to createdOn)
+//	private Date updatedOn;	// TODO: Add to base model
 
 	//TODO FK customerId
 
-	/**
-	 * Car's registration number for... TODO
-	 */
 	private String registrationNumber;
-	private String mileage;
+	private BigDecimal mileage;			// TODO: Integer
 	private String colorOutside;
 	private String colorInside;
 
-	/**
-	 * Url's of the car.
-	 */
-	private String images;
+	@OneToMany(mappedBy = "car", fetch = FetchType.LAZY)
+	private List<CarImage> images;
+
 	private Boolean isSold;
 	private String fuelCity;
 	private String fuelHighway;
-	private String features;
 
-	/**
-	 * TODO: array of string.
-	 * List of problems with the car.
+	@OneToMany(mappedBy = "car", fetch = FetchType.LAZY)
+	private List<CarFeature> features;
+
+	@OneToMany(mappedBy = "car", fetch = FetchType.LAZY)
+	private List<CarFault> faults;
+	private Integer safetyStars;
+
+	/*
+		PERFORMANCE section.
 	 */
-	private String problems;
 	private Integer compressionRatio;
 	private String compressionType;
 	private String configuration;
@@ -89,5 +78,4 @@ public class Car {
 	private Integer torque;
 	private Integer totalValves;
 	private String powerTrain;
-	private Integer safetyStars;
 }

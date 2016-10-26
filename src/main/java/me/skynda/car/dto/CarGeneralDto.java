@@ -3,6 +3,8 @@ package me.skynda.car.dto;
 import lombok.Data;
 import lombok.ToString;
 
+import java.math.BigDecimal;
+
 @Data
 @ToString(callSuper = false)
 public class CarGeneralDto {
@@ -13,7 +15,7 @@ public class CarGeneralDto {
 	private String model;
 	private String engine;
 	private Integer horsePower;
-	private String mileage;
+	private BigDecimal mileage;
 	private String transmission;
 	private String drive;
 	private String colorOutside;

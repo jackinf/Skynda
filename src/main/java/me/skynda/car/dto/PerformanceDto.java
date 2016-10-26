@@ -10,7 +10,7 @@ public class PerformanceDto {
 	private String drivenWheels;
 	private Integer doors;
 	private Integer compressionRatio;
-	private String compressorType;
+	private String compressionType;
 	private String configuration;
 	private String cylinders;
 	private String displacement;

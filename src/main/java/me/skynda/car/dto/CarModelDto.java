@@ -6,7 +6,7 @@ import lombok.ToString;
 
 @Data
 @ToString(callSuper = false)
-public class CarModelsDto {
+public class CarModelDto {
 
 	private String modelCode;// PK
 	private String carManufacturerCode;

@@ -4,11 +4,11 @@ import java.util.List;
 
 import me.skynda.car.dto.CarDto;
 import me.skynda.car.dto.CarManufacturerDto;
-import me.skynda.car.dto.CarModelsDto;
 import me.skynda.car.dto.SingleCarDataDto;
-import me.skynda.car.model.Car;
 import me.skynda.car.model.CarManufacturer;
-import me.skynda.car.model.CarModels;
+import me.skynda.common.dto.CreateResponseDto;
+import me.skynda.common.dto.DeleteResponseDto;
+import me.skynda.common.dto.UpdateResponseDto;
 
 public interface CarService {
 
@@ -19,39 +19,31 @@ public interface CarService {
 	List<SingleCarDataDto> getCars();
 
 	/**
-	 * Adds new or updates an existing car manufacturer
-	 * @param carManufacturerDto Added manufacturer's dto
-	 * @return Added manufacturer's db model
-	 */
-	CarManufacturer saveOrUpdateCarManufacturer(CarManufacturerDto carManufacturerDto);
-
-	/**
-	 * Adds new or updates an existing car model
-	 * E.g. BMW
-	 * @param carModelsDto Added car model's dto
-	 * @return Added car model's db model
-	 */
-	CarModels saveOrUpdateCarModel(CarModelsDto carModelsDto);
-
-	/**
-	 * Adds new or updates an existing car for sale
+	 * Adds new car for sale
 	 * @param carDto Added car's dto
-	 * @return Added car's db model
+	 * @return Response
 	 */
-	Car saveCarForSale(CarDto carDto);
+	CreateResponseDto saveCarForSale(CarDto carDto);
+
+	/**
+	 * Updates an existing car for sale
+	 * @param carDto Updated car's dto
+	 * @return Response
+	 */
+	UpdateResponseDto updateCarForSale(CarDto carDto);
 
 	/**
 	 * Gets a single car
 	 * @param id car's id
 	 * @return single car's dto
 	 */
-	SingleCarDataDto getCar(int id);
+	SingleCarDataDto getCar(Long id);
 	
 	/**
 	 * Delets a single car
 	 * @param id car's id
-	 * @return void
+	 * @return Is the deletion successful or not
 	 */
-	void deleteCar(Integer id);
+	DeleteResponseDto deleteCar(Long id);
 
 }
