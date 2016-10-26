@@ -108,7 +108,6 @@ export const renderFeatures = ({fields, ...custom}) => fieldListWrapper({
   block: (<ul>
     {fields.map((name, index) =>
       <li key={index}>
-        <Field name={`${name}.id`} type="number" component={renderTextField} placeholder={`Id #${index + 1}`}/>
         <Field name={`${name}.text`} type="text" component={renderTextField} placeholder={`Feature #${index + 1}`}/>
         <FloatingActionButton mini={true} secondary={true} onClick={() => fields.remove(index)}>
           <ContentRemove />
@@ -124,7 +123,6 @@ export const renderHistoryProblems = ({fields, ...custom}) => fieldListWrapper({
   block: (<ul>
     {fields.map((name, index) =>
       <li key={index}>
-        <Field name={`${name}.id`} type="number" component={renderTextField} placeholder={`Id #${index + 1}`}/>
         <Field name={`${name}.img`} type="text" component={renderTextField} placeholder={`Image #${index + 1}`}/>
         <Field name={`${name}.text`} type="text" component={renderTextField} placeholder={`Text #${index + 1}`}/>
         <FloatingActionButton mini={true} secondary={true} onClick={() => fields.remove(index)}>
@@ -142,11 +140,10 @@ export const renderImages = ({fields, ...custom}) => fieldListWrapper({
     <ul>
       {fields.map((name, index) =>
         <li key={index}>
-          <Field name={`${name}.id`} type="number" component={renderTextField} placeholder={`Id #${index + 1}`}/>
           <Field name={`${name}.original`} type="text" component={renderTextField}
                  placeholder={`Original #${index + 1}`}/>
-          <Field name={`${name}.thumbnail`} type="text" component={renderTextField}
-                 placeholder={`Thumbnail #${index + 1}`}/>
+          {/*<Field name={`${name}.thumbnail`} type="text" component={renderTextField}*/}
+                 {/*placeholder={`Thumbnail #${index + 1}`}/>*/}
           <FloatingActionButton mini={true} secondary={true} onClick={() => fields.remove(index)}>
             <ContentRemove />
           </FloatingActionButton>
@@ -162,8 +159,9 @@ export const renderImages = ({fields, ...custom}) => fieldListWrapper({
  * @param fields
  * @param title
  * @param block - REACT element
+ * @param isRequired - is the field required for submission?
  */
-const fieldListWrapper = ({fields, title, block}) => (
+const fieldListWrapper = ({fields, title, block, isRequired = false}) => (
   <Row style={{marginBottom: "20px", border: "1px solid #cdcdcd", background: "#efefef"}}>
     <Col sm={12}>
       <Row>
