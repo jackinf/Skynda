@@ -3,6 +3,7 @@
  */
 import CarsRoute from "./routes/Cars";
 import CarModelsRoute from "./routes/CarModels";
+import CarManufacturersRoute from "./routes/CarManufacturers";
 
 export default (store) => ({
   path: "admin",
@@ -13,6 +14,7 @@ export default (store) => ({
   },
   childRoutes: [
     CarsRoute(store),
-    CarModelsRoute(store)
+    CarModelsRoute(store),
+    CarManufacturersRoute(store)
   ]
 })

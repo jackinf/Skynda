@@ -11,8 +11,9 @@ export default class CarModels extends React.Component {
     data: React.PropTypes.shape({
       isFetching: React.PropTypes.bool.isRequired,
       items: React.PropTypes.arrayOf(React.PropTypes.shape({
-        modelCode: React.PropTypes.string,
-        title: React.PropTypes.string
+        manufacturerCode: React.PropTypes.string,
+        title: React.PropTypes.string,
+        description: React.PropTypes.string
       }))
     })
   };
@@ -23,7 +24,7 @@ export default class CarModels extends React.Component {
 
   render() {
     let rows = !this.props.data.isFetching ? this.props.data.items : [];
-    const loading = this.props.data.isFetching ? "Fetching" : "Car Models";
+    const loading = this.props.data.isFetching ? "Fetching" : "Car Manufacturers";
 
     return (<div className="container">
       <h3>{loading}</h3>
@@ -41,7 +42,7 @@ export default class CarModels extends React.Component {
         <Column
           header={<Cell>Id</Cell>}
           cell={({rowIndex, ...props}) => (<Cell {...props}>
-              {rows[rowIndex].modelCode}
+              {rows[rowIndex].manufacturerCode}
             </Cell>
           )}
           width={200}
@@ -53,6 +54,14 @@ export default class CarModels extends React.Component {
             </Cell>
           )}
           width={200}
+        />
+        <Column
+          header={<Cell>Name</Cell>}
+          cell={({rowIndex, ...props}) => (<Cell {...props}>
+              {rows[rowIndex].description}
+            </Cell>
+          )}
+          width={400}
         />
       </Table>
 

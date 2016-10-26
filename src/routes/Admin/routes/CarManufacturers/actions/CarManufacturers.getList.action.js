@@ -3,22 +3,22 @@
  */
 import fetch from "isomorphic-fetch";
 import remoteConfig from "store/remoteConfig";
-import {setCarModels} from "./../reducers/CarModels.setData.reducer";
+import {setCarManufacturers} from "../reducers/CarManufacturers.setData.reducer";
 
 export default function getList() {
   return (dispatch) => {
-    dispatch(setCarModels({isFetching: true}));
+    dispatch(setCarManufacturers({isFetching: true}));
 
-    return fetch(`${remoteConfig.remote}/api/car-models`, {
+    return fetch(`${remoteConfig.remote}/api/car-manufacturers`, {
       method: "GET",
       headers: {"Accept": "application/json", "Content-Type": "application/json"}
     })
       .then(resp => resp.json())
       .then(resp => {
-        dispatch(setCarModels({isFetching: false, items: resp}));
+        dispatch(setCarManufacturers({isFetching: false, items: resp}));
       })
       .catch(err => {
-        dispatch(setCarModels({isFetching: false, items: []}));
+        dispatch(setCarManufacturers({isFetching: false, items: []}));
       });
   };
 }

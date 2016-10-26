@@ -1,24 +1,24 @@
 /**
  * Created by jevgenir on 10/26/2016.
  */
-import {ACTIONS} from "./../constants/CarModel.constant";
+import {ACTIONS} from "../constants/CarManufacturers.constant";
 
-export function setCarModels(value) {
+export function setCarManufacturers(value) {
   return {
-    type: ACTIONS.SET_CAR_MODELS_DATA,
+    type: ACTIONS.SET_CAR_MANUFACTURERS_DATA,
     payload: value
   };
 }
 
 export const actions = {
-  setCarModels
+  setCarManufacturers
 };
 
 // ------------------------------------
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
-  [ACTIONS.SET_CAR_MODELS_DATA]: (state, action) => action.payload
+  [ACTIONS.SET_CAR_MANUFACTURERS_DATA]: (state, action) => action.payload
 };
 
 // ------------------------------------
