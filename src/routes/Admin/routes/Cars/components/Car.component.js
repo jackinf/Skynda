@@ -15,7 +15,6 @@ import {
   renderImages
 } from "./Car.component.renderers";
 import MenuItem from 'material-ui/MenuItem';
-import RaisedButton from 'material-ui/RaisedButton';
 
 class Car extends React.Component {
   static propTypes = {
