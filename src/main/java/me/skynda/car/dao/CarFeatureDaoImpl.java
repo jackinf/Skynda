@@ -1,6 +1,6 @@
 package me.skynda.car.dao;
 
-import me.skynda.car.dto.CarDto;
+import me.skynda.car.dto.FeatureDto;
 import me.skynda.car.model.Car;
 import me.skynda.car.model.CarFeature;
 import me.skynda.common.db.SkyndaBaseEntityDaoImpl;
@@ -13,14 +13,14 @@ import java.util.List;
 public class CarFeatureDaoImpl extends SkyndaBaseEntityDaoImpl<CarFeature> implements CarFeatureDao {
 
     @Override
-    public void addMultipleToCar(Car car, List<CarDto.FeatureDto> features) {
+    public void addMultipleToCar(Car car, List<FeatureDto> features) {
 
         Session session = getSession();
         session.createSQLQuery("DELETE FROM car_feature WHERE cars_for_sale.id = :carId")
                 .setLong("carId", car.getId())
                 .executeUpdate();
 
-        for (CarDto.FeatureDto feature : features) {
+        for (FeatureDto feature : features) {
             CarFeature carFeature = new CarFeature();
             carFeature.setCar(car);
             carFeature.setText(feature.getText());

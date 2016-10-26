@@ -11,27 +11,20 @@ import me.skynda.common.dto.BaseDto;
 @Data
 @ToString(callSuper = false)
 public class CarDto extends BaseDto {
-	private String carModelsCode;		// TODO: Foreign key
-    private String carManufacturerCode;	// TODO: Foreign key
+	private String carModelsCode;
 	private String vinCode;
 	private BigDecimal price;
 	private String registrationNumber;
-	private Integer mileage;
+	private BigDecimal mileage;
 	private String colorOutside;
 	private String colorInside;
 
-	private List<ImagesDto> images;		// TODO: we need table car_image
+	private List<ImagesDto> images;
 	private Boolean isSold;
 	private String fuelCity;
 	private String fuelHighway;
-	private List<FeatureDto> features;	// TODO: we need table car_feature
-	private List<FaultsDto> faults;		// TODO: we need table car_fault
+	private List<FeatureDto> features;
+	private List<FaultsDto> faults;
 	private PerformanceDto performance;
 	private Integer safetyStars;
-
-	@Data
-	public class FeatureDto {
-		private Integer id;
-		private String text;
-	}
 }

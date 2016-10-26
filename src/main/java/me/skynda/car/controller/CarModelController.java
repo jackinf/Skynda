@@ -18,7 +18,7 @@ public class CarModelController {
     @Autowired
     private CarModelService carModelService;
 
-    @RequestMapping(value = "/car-model", method = RequestMethod.GET)
+    @RequestMapping(value = "/car-models", method = RequestMethod.GET)
     public List<CarModelResponseDto> getAll(@RequestBody(required = false) CarModelsRequestDto searchDto) {
         return carModelService.get(searchDto);
     }

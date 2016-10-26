@@ -63,12 +63,12 @@ public class CarServiceImpl implements CarService {
         CarModels carModel = carModelsDao.getByModelCode(carDto.getCarModelsCode());
         car.setCarModels(carModel);
 
-        carFeatureDao.addMultipleToCar(car, carDto.getFeatures());
-        carFaultDao.addMultipleToCar(car, carDto.getFaults());
-        carImageDao.addMultipleToCar(car, carDto.getImages());
-
         car.setCreated(new Date());
         Car addedCar = carDao.save(car);    // TODO: Get success code
+
+        carFeatureDao.addMultipleToCar(addedCar, carDto.getFeatures());
+        carFaultDao.addMultipleToCar(addedCar, carDto.getFaults());
+        carImageDao.addMultipleToCar(addedCar, carDto.getImages());
 
         CreateResponseDto response = new CreateResponseDto();
         response.setId(addedCar.getId());

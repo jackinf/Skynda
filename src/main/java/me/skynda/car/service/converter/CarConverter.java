@@ -52,7 +52,7 @@ public class CarConverter {
 		OverviewDto overviewDto = new OverviewDto();
 		List<OverviewDto> overviewDtoList = new ArrayList<OverviewDto>();
 		overviewDto.setIconUrl("hardcodedMileageIconLink");
-		overviewDto.setLabel(car.getMileage());
+		overviewDto.setLabel(car.getMileage() != null ? car.getMileage().toString() : "");
 		overviewDtoList.add(overviewDto);
 		overviewDto.setIconUrl("hardcodedTransmissionIconLink");
 		overviewDto.setLabel(car.getCarModels().getTransmission());
@@ -184,7 +184,7 @@ public class CarConverter {
 		car.setVinCode(carDto.getVinCode());
 		car.setPrice(carDto.getPrice());
 		car.setRegistrationNumber(carDto.getRegistrationNumber());
-		car.setMileage(carDto.getMileage().toString());		// TODO: Fix type to Integer
+		car.setMileage(carDto.getMileage());
 		car.setColorInside(carDto.getColorInside());
 		car.setColorOutside(carDto.getColorOutside());
 		car.setIsSold(carDto.getIsSold());

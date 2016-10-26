@@ -20,7 +20,7 @@ public class CarManufacturer extends BaseController {
     @Autowired
     private CarManufacturerService carManufacturerService;
 
-    @RequestMapping(value = "/car-manufacturer", method = RequestMethod.GET)
+    @RequestMapping(value = "/car-manufacturers", method = RequestMethod.GET)
     public List<CarManufacturerResponseDto> getAll(@RequestBody(required = false) CarManufacturersSearchDto searchDto) {
         return carManufacturerService.get(searchDto);
     }

@@ -47,7 +47,7 @@ public class Car {
 	//TODO FK customerId
 
 	private String registrationNumber;
-	private String mileage;			// TODO: Integer
+	private BigDecimal mileage;			// TODO: Integer
 	private String colorOutside;
 	private String colorInside;
 

@@ -4,6 +4,7 @@ import java.util.List;
 
 import me.skynda.car.dto.request.CarSearchRequestDto;
 import me.skynda.common.dto.CreateResponseDto;
+import me.skynda.common.dto.DeleteResponseDto;
 import me.skynda.common.dto.UpdateResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -50,9 +51,8 @@ public class CarController extends BaseController {
     }
 	
 	@RequestMapping(value = "/car/{id}", method = RequestMethod.DELETE, consumes = "application/json")
-    public ResponseEntity<Car> delete(@PathVariable("id") Long id) {
-        carService.deleteCar(id);
-		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    public DeleteResponseDto delete(@PathVariable("id") Long id) {
+        return carService.deleteCar(id);
     }
 
 }
