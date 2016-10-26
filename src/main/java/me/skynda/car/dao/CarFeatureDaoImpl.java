@@ -15,10 +15,10 @@ public class CarFeatureDaoImpl extends SkyndaBaseEntityDaoImpl<CarFeature> imple
     @Override
     public void addMultipleToCar(Car car, List<CarDto.FeatureDto> features) {
 
-        // TODO: Fix sql injection problems
         Session session = getSession();
-        session.createSQLQuery("DELETE FROM car_feature WHERE cars_for_sale.id = " + car.getId()).executeUpdate();
-        session.getTransaction().commit();
+        session.createSQLQuery("DELETE FROM car_feature WHERE cars_for_sale.id = :carId")
+                .setLong("carId", car.getId())
+                .executeUpdate();
 
         for (CarDto.FeatureDto feature : features) {
             CarFeature carFeature = new CarFeature();

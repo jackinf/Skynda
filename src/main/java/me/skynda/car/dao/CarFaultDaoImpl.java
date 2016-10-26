@@ -14,10 +14,11 @@ public class CarFaultDaoImpl extends SkyndaBaseEntityDaoImpl<CarFault> implement
 
     @Override
     public void addMultipleToCar(Car car, List<FaultsDto> faults) {
-        // TODO: Fix sql injection problems
+
         Session session = getSession();
-        session.createSQLQuery("DELETE FROM car_fault WHERE cars_for_sale.id = " + car.getId()).executeUpdate();
-        session.getTransaction().commit();
+        session.createSQLQuery("DELETE FROM car_fault WHERE cars_for_sale.id = :carId")
+                .setLong("carId", car.getId())
+                .executeUpdate();
 
         for (FaultsDto fault : faults) {
             CarFault carFault = new CarFault();

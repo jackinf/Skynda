@@ -15,10 +15,10 @@ public class CarImageDaoImpl extends SkyndaBaseEntityDaoImpl<CarImage> implement
     @Override
     public void addMultipleToCar(Car car, List<ImagesDto> images) {
 
-        // TODO: Fix sql injection problems
         Session session = getSession();
-        session.createSQLQuery("DELETE FROM car_image WHERE cars_for_sale.id = " + car.getId()).executeUpdate();
-        session.getTransaction().commit();
+        session.createSQLQuery("DELETE FROM car_image WHERE cars_for_sale.id = :carId")
+                .setLong("carId", car.getId())
+                .executeUpdate();
 
         for (ImagesDto image : images) {
             CarImage carImage = new CarImage();
