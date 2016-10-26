@@ -3,12 +3,11 @@ package me.skynda.car.service.converter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import me.skynda.car.dto.*;
+import me.skynda.car.model.*;
 import org.springframework.stereotype.Component;
-
-import me.skynda.car.model.Car;
-import me.skynda.car.model.CarReview;
 
 @Component
 public class CarConverter {
@@ -43,7 +42,7 @@ public class CarConverter {
 		carGeneralDto.setMileage(car.getMileage());
 		carGeneralDto.setModel(car.getCarModels().getModelCode());
 		carGeneralDto.setSeats(car.getCarModels().getSeats());
-		carGeneralDto.setSrc(car.getImages());
+//		carGeneralDto.setSrc(car.getImages());	// TODO: Why do we need this?
 		carGeneralDto.setTransmission(car.getCarModels().getTransmission());
 		carGeneralDto.setYear(car.getCarModels().getYear());
 		singleCarDataDto.setCarGeneralDto(carGeneralDto);
@@ -78,7 +77,7 @@ public class CarConverter {
 
 	private void convertImagesData(Car car, SingleCarDataDto singleCarDataDto) {
 		if (car.getImages() != null) {
-			List<String> listOfImages = Arrays.asList(car.getImages().split(","));
+			List<String> listOfImages = car.getImages().stream().map(CarImage::getImageUrl).collect(Collectors.toList());
 			List<ImagesDto> imagesDtoList = new ArrayList<ImagesDto>();
 			for (String image : listOfImages) {
 				ImagesDto imagesDto = new ImagesDto();
@@ -106,15 +105,15 @@ public class CarConverter {
 
 	private void convertFeaturesData(Car car, SingleCarDataDto singleCarDataDto) {
 		if (car.getFeatures() != null) {
-			List<String> listOfFeatures = Arrays.asList(car.getFeatures().split(","));
+			List<String> listOfFeatures = car.getFeatures().stream().map(CarFeature::getText).collect(Collectors.toList());
 			singleCarDataDto.setFeatures(listOfFeatures);
 		}
 	}
 
 	private void convertHistoryData(Car car, SingleCarDataDto singleCarDataDto) {
-		if (car.getProblems() != null) {
+		if (car.getFaults() != null) {
 			HistoryDto historyDto = new HistoryDto();
-			List<String> listOfProblems = Arrays.asList(car.getProblems().split(","));
+			List<String> listOfProblems = car.getFaults().stream().map(CarFault::getText).collect(Collectors.toList());
 			historyDto.setProblems(listOfProblems);
 			historyDto.setVinCode(car.getVinCode());
 			singleCarDataDto.setHistory(historyDto);

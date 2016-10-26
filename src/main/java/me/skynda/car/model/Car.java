@@ -51,15 +51,18 @@ public class Car {
 	private String colorOutside;
 	private String colorInside;
 
-	/**
-	 * Url's of the car.
-	 */
-	private String images;			// TODO: we need table car_image. Change type to List<CarImage>
+	@OneToMany(mappedBy = "car", fetch = FetchType.LAZY)
+	private List<CarImage> images;
+
 	private Boolean isSold;
 	private String fuelCity;
 	private String fuelHighway;
-	private String features;		// TODO: we need table car_features. Change type to List<CarFeature>
-	private String problems;		// TODO: we need table car_faults (not problems). Change type to List<CarFault>
+
+	@OneToMany(mappedBy = "car", fetch = FetchType.LAZY)
+	private List<CarFeature> features;
+
+	@OneToMany(mappedBy = "car", fetch = FetchType.LAZY)
+	private List<CarFault> faults;
 	private Integer safetyStars;
 
 	/*

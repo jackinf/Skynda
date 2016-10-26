@@ -25,7 +25,7 @@ CREATE TABLE "car_feature"
 )
 ;
 
-/* for storing car problems */
+/* for storing car faults */
 CREATE TABLE "car_fault"
 (
 	"id" serial,
@@ -36,5 +36,5 @@ CREATE TABLE "car_fault"
 ;
 
 /* They are now foreign keys, no need for those columns */
-ALTER TABLE "cars_for_sale" DROP COLUMN "features";
-ALTER TABLE "cars_for_sale" DROP COLUMN "images";
+ALTER TABLE "cars_for_sale" DROP COLUMN IF EXISTS "features";
+ALTER TABLE "cars_for_sale" DROP COLUMN IF EXISTS "images";
