@@ -35,8 +35,6 @@ class SearchComponent extends React.Component {
     await this.props.loadBaseData();
   }
 
-
-
   render() {
     const data = this.props.seats;
     if (data === undefined) {

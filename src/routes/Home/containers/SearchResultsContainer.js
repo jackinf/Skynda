@@ -4,12 +4,13 @@ import ResultsComponent from '../components/CarSearch/ResultsComponent'
 
 const mapStateToProps = (state) => {
   return {
-
+    searchResults: state.searchResults,
+    recentlyAdded: state.recentlyAdded
   };
 };
 
 
-const mapDispatchToProps = {
+const mapDispatchToProps =  {
 
 };
 

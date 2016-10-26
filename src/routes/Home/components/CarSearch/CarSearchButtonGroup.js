@@ -56,7 +56,8 @@ class ButtonGroup extends React.Component {
             onClick={e => this.toggle(option)}>
             {option.hideName && option.toggled
               ? <MdDone style={ option.name === "white"
-                ? {color: "black"} : ""} />
+                ? {color: "black"}
+                : {}} />
               : option.hideName ? "" : option.name}
           </Button>
         </Col>);

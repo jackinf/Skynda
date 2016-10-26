@@ -15,9 +15,9 @@ class Home extends React.Component {
           {/*Search block*/}
           <SearchContainer />
           <br/>
-
           {/*Search results block*/}
           <SearchResultsContainer />
+
         </div>
       </div>
     );

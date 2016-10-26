@@ -20,7 +20,6 @@ class SliderWrapper extends React.Component {
 
   render() {
     const {min, max, units, step} = this.props;
-console.log(max.toString().length);
     return (<div className='range-slider-wrapper'>
       <label>{this.props.title}</label>
 
