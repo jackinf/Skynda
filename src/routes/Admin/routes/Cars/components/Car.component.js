@@ -23,10 +23,19 @@ class Car extends React.Component {
     load: React.PropTypes.func.isRequired,
     clear: React.PropTypes.func.isRequired,
     fillWithFakeData: React.PropTypes.func.isRequired,
+    getCarModelsList: React.PropTypes.func.isRequired,
+
+    // car models data for combobox
+    carModels: React.PropTypes.shape({
+      isFetching: React.PropTypes.bool,
+      items: React.PropTypes.arrayOf(React.PropTypes.shape({
+        modelCode: React.PropTypes.string.isRequired,
+        manufacturerCode: React.PropTypes.string.isRequired
+      }))
+    }),
 
     // car data
     initialValues: React.PropTypes.shape({
-      "carManufacturerCode": React.PropTypes.string,
       "carModelsCode": React.PropTypes.string,
       "colorInside": React.PropTypes.string,
       "colorOutside": React.PropTypes.string,
@@ -79,6 +88,7 @@ class Car extends React.Component {
 
   componentDidMount() {
     this.props.load(this.props.params[ROUTE_PARAMS.CAR_ID]);
+    this.props.getCarModelsList();
   }
 
   componentWillUnmount() {
@@ -92,11 +102,9 @@ class Car extends React.Component {
   };
 
   render() {
-    const isFetching = this.props.isFetching;
-
     return (
       <div>
-        {isFetching ? "Loading..." : (
+        {this.props.isFetching ? "Loading..." : (
           <form onSubmit={this.onSubmit}>
             <h3>Car {this.props.formMode1}</h3>
 
@@ -106,13 +114,13 @@ class Car extends React.Component {
 
             <h4>General data</h4>
 
-            <Field name="carManufacturerCode" component={renderSelectField}>
-              <MenuItem value={"Honda"} primaryText="Honda"/>
-            </Field>
-
-            <Field name="carModelsCode" component={renderSelectField}>
-              <MenuItem value={"SERVER75"} primaryText="SERVER75"/>
-            </Field>
+            {this.props.carModels.isFetching ? "Fetching car models" : (
+              <Field name="carModelsCode" component={renderSelectField}>
+                {this.props.carModels.items.map((item, i) => (
+                  <MenuItem key={i} value={item.modelCode} primaryText={`${item.manufacturerCode} ${item.modelCode}`}/>
+                ))}
+              </Field>
+            )}
 
             <Field name="colorInside" component={renderTextField}/>
             <Field name="colorOutside" component={renderTextField}/>

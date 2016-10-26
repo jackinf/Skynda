@@ -16,7 +16,7 @@ export default (store) => ({
         injectReducer(store, {key: REDUCER_KEYS.CAR_DATA, reducer: require("./reducers/SetCar.reducer.js").default});
         injectReducer(store, {key: REDUCER_KEYS.FORM_MODE, reducer: require("./reducers/SetFormMode.reducer.js").default});
         injectReducer(store, {key: FORMS.DEFAULT_REDUX_FORM_KEY, reducer: formReducer});
-        injectReducer(store, {key: REDUCER_KEYS.CAR_MODEL_DATA, reducer: require("./../CarModels/reducers/CarModels.setData.reducer").default});
+        injectReducer(store, {key: REDUCER_KEYS.CAR_MODELS_DATA, reducer: require("./../CarModels/reducers/CarModels.setData.reducer").default});
 
         store.dispatch(setFormMode(isUpdate ? FORM_MODE.UPDATING : FORM_MODE.ADDING));
         cb(null, Container);
