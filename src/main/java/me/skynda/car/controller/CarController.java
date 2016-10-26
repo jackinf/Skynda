@@ -2,6 +2,7 @@ package me.skynda.car.controller;
 
 import java.util.List;
 
+import me.skynda.car.dto.request.CarSearchRequestDto;
 import me.skynda.common.dto.CreateResponseDto;
 import me.skynda.common.dto.UpdateResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,48 +15,44 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import me.skynda.car.dto.CarDto;
-import me.skynda.car.dto.CarManufacturerDto;
-import me.skynda.car.dto.CarModelsDto;
 import me.skynda.car.dto.SingleCarDataDto;
 import me.skynda.car.model.Car;
-import me.skynda.car.model.CarManufacturer;
-import me.skynda.car.model.CarModels;
 import me.skynda.car.service.CarService;
 
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/api")
+@RequestMapping(value = "/api", produces = "application/json")
 public class CarController extends BaseController {
 	
 	@Autowired
 	private CarService carService;
 	
-    @RequestMapping(value = "/cars", method = RequestMethod.GET, produces = "application/json")
-    public List<SingleCarDataDto> getCars() {
+    @RequestMapping(value = "/cars", method = RequestMethod.GET)
+    public List<SingleCarDataDto> getAll(@RequestBody(required = false) CarSearchRequestDto dto) {
         return carService.getCars();
     }
 
-    @RequestMapping(value = "/car/{id}", method = RequestMethod.GET, produces = "application/json")
-    public SingleCarDataDto getCar(@PathVariable("id") Long id) {
+    @RequestMapping(value = "/car/{id}", method = RequestMethod.GET)
+    public SingleCarDataDto get(@PathVariable("id") Long id) {
         return carService.getCar(id);
     }
 
 	@RequestMapping(value = "/car", method = RequestMethod.POST, consumes = "application/json")
-    public CreateResponseDto saveCarForSale(@RequestBody CarDto carDto) {
+    public CreateResponseDto save(@RequestBody CarDto carDto) {
         return carService.saveCarForSale(carDto);
     }
 
 	@RequestMapping(value = "/car/{id}", method = RequestMethod.PUT, consumes = "application/json")
-    public UpdateResponseDto updateCarForSale(@PathVariable("id") Long id, @RequestBody CarDto carDto) {
+    public UpdateResponseDto update(@PathVariable("id") Long id, @RequestBody CarDto carDto) {
         carDto.setId(id);
         return carService.updateCarForSale(carDto);
     }
 	
 	@RequestMapping(value = "/car/{id}", method = RequestMethod.DELETE, consumes = "application/json")
-    public ResponseEntity<Car> deleteCar(@PathVariable("id") Long id) {
+    public ResponseEntity<Car> delete(@PathVariable("id") Long id) {
         carService.deleteCar(id);
-		return new ResponseEntity<Car>(HttpStatus.NO_CONTENT);
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 }

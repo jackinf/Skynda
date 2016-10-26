@@ -1,23 +1,16 @@
 package me.skynda.car.service;
 
 import me.skynda.car.dao.CarDao;
-import me.skynda.car.dao.CarManufacturerDao;
 import me.skynda.car.dao.CarModelsDao;
 import me.skynda.car.dto.CarDto;
-import me.skynda.car.dto.CarManufacturerDto;
-import me.skynda.car.dto.CarModelsDto;
 import me.skynda.car.dto.SingleCarDataDto;
 import me.skynda.car.model.Car;
-import me.skynda.car.model.CarManufacturer;
 import me.skynda.car.model.CarModels;
 import me.skynda.car.service.converter.CarConverter;
-
 import me.skynda.common.dto.CreateResponseDto;
 import me.skynda.common.dto.DeleteResponseDto;
 import me.skynda.common.dto.UpdateResponseDto;
 import org.apache.commons.lang3.NotImplementedException;
-import org.dozer.DozerBeanMapper;
-import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,9 +25,6 @@ public class CarServiceImpl implements CarService {
 
     @Autowired
     CarDao carDao;
-
-    @Autowired
-    CarManufacturerDao carManufacturerDao;
 
     @Autowired
     CarModelsDao carModelsDao;
@@ -59,32 +49,11 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public CarManufacturer saveOrUpdateCarManufacturer(CarManufacturerDto carManufacturerDto) {
-        CarManufacturer carManufacturer;
-        Mapper mapper = new DozerBeanMapper();
-        carManufacturer = mapper.map(carManufacturerDto, CarManufacturer.class);
-        return carManufacturerDao.saveOrUpdate(carManufacturer);
-    }
-
-    @Override
-    public CarModels saveOrUpdateCarModel(CarModelsDto carModelsDto) {
-        CarModels carModels;
-        Mapper mapper = new DozerBeanMapper();
-        carModels = mapper.map(carModelsDto, CarModels.class);
-        CarManufacturer cm = carManufacturerDao.getByManufacturerCode(carModelsDto.getCarManufacturerCode());
-        carModels.setCarManufacturer(cm);
-        return carModelsDao.saveOrUpdate(carModels);
-    }
-
-    @Override
     public CreateResponseDto saveCarForSale(CarDto carDto) {
         Car car = carConverter.transform(carDto);
 
         CarModels carModel = carModelsDao.getByModelCode(carDto.getCarModelsCode());
         car.setCarModels(carModel);
-
-        CarManufacturer carManufacturer = carManufacturerDao.getByManufacturerCode(carDto.getCarManufacturerCode());
-        // TODO: car.setCarManufacturer(carManufacturer);
 
         // TODO:
         //        for (CarDto.FeatureDto feature : car.getFeatures()) { .../* add or update or delete features */ }
