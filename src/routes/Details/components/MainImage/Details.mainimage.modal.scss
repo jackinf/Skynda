@@ -124,6 +124,8 @@ $border-radius-large:       6px !default;
   opacity: .9;
   font-size: 30px;
   color: #fff;
+  position: relative;
+  z-index: 1;
 }
 
 // Title text within header
