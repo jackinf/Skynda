@@ -5,9 +5,11 @@ import me.skynda.car.model.Car;
 import me.skynda.car.model.CarFault;
 import me.skynda.common.db.SkyndaBaseEntityDaoImpl;
 import org.hibernate.Session;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public class CarFaultDaoImpl extends SkyndaBaseEntityDaoImpl<CarFault> implements CarFaultDao {
 
     @Override
