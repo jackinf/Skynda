@@ -16,8 +16,9 @@ public class CarFeatureDaoImpl extends SkyndaBaseEntityDaoImpl<CarFeature> imple
     public void addMultipleToCar(Car car, List<FeatureDto> features) {
 
         Session session = getSession();
-        session.createSQLQuery("DELETE FROM car_feature WHERE cars_for_sale.id = :carId")
-                .setLong("carId", car.getId())
+        String id = car.getId().toString();
+        session.createSQLQuery("DELETE FROM car_feature WHERE cars_for_sale_id = "  + id)   // TODO: avoid SQL injection
+//                .setParameter("xxx", id)
                 .executeUpdate();
 
         for (FeatureDto feature : features) {
@@ -26,7 +27,6 @@ public class CarFeatureDaoImpl extends SkyndaBaseEntityDaoImpl<CarFeature> imple
             carFeature.setText(feature.getText());
             session.save(carFeature);
         }
-        session.close();
     }
 
 }

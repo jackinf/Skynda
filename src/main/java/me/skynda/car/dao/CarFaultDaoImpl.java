@@ -16,8 +16,9 @@ public class CarFaultDaoImpl extends SkyndaBaseEntityDaoImpl<CarFault> implement
     public void addMultipleToCar(Car car, List<FaultsDto> faults) {
 
         Session session = getSession();
-        session.createSQLQuery("DELETE FROM car_fault WHERE cars_for_sale.id = :carId")
-                .setLong("carId", car.getId())
+        String id = car.getId().toString();
+        session.createSQLQuery("DELETE FROM car_fault WHERE cars_for_sale_id = " + id)  // TODO: avoid SQL injection
+//                .setParameter("xxx", id)
                 .executeUpdate();
 
         for (FaultsDto fault : faults) {
@@ -27,7 +28,6 @@ public class CarFaultDaoImpl extends SkyndaBaseEntityDaoImpl<CarFault> implement
             carFault.setImageUrl(fault.getImg());
             session.save(carFault);
         }
-        session.close();
     }
 
 }

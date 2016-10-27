@@ -15,8 +15,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import lombok.Data;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Data
@@ -30,6 +33,7 @@ public class Car {
 	
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "model_code", nullable = false)
+	@NotNull
     private CarModels carModels;
 
 	@OneToMany(mappedBy = "car", fetch = FetchType.LAZY)
@@ -37,8 +41,11 @@ public class Car {
 
 	@OneToMany(mappedBy = "car", fetch = FetchType.LAZY)
     private List<CarReview> carReview;
-	
+
+	@NotEmpty
 	private String vinCode;
+
+	@NotNull
 	private BigDecimal price;
 
 	private Date created;	// TODO: Add to base model (rename to createdOn)
@@ -46,9 +53,16 @@ public class Car {
 
 	//TODO FK customerId
 
+	@NotEmpty
 	private String registrationNumber;
-	private BigDecimal mileage;			// TODO: Integer
+
+	@NotNull
+	private BigDecimal mileage;
+
+	@NotEmpty
 	private String colorOutside;
+
+	@NotEmpty
 	private String colorInside;
 
 	@OneToMany(mappedBy = "car", fetch = FetchType.LAZY)

@@ -9,6 +9,7 @@ import me.skynda.common.dto.UpdateResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,14 +41,16 @@ public class CarController extends BaseController {
     }
 
 	@RequestMapping(value = "/car", method = RequestMethod.POST, consumes = "application/json")
-    public CreateResponseDto save(@RequestBody CarDto carDto) {
-        return carService.saveCarForSale(carDto);
+    public CreateResponseDto add(@RequestBody CarDto carDto, BindingResult bindingResult) {
+        return carService.saveCarForSale(carDto, bindingResult);
     }
 
 	@RequestMapping(value = "/car/{id}", method = RequestMethod.PUT, consumes = "application/json")
-    public UpdateResponseDto update(@PathVariable("id") Long id, @RequestBody CarDto carDto) {
+    public UpdateResponseDto update(@PathVariable("id") Long id,
+                                    @RequestBody CarDto carDto,
+                                    BindingResult bindingResult) {
         carDto.setId(id);
-        return carService.updateCarForSale(carDto);
+        return carService.updateCarForSale(carDto, bindingResult);
     }
 	
 	@RequestMapping(value = "/car/{id}", method = RequestMethod.DELETE, consumes = "application/json")

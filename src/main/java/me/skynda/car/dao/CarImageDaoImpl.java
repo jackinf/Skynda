@@ -16,8 +16,9 @@ public class CarImageDaoImpl extends SkyndaBaseEntityDaoImpl<CarImage> implement
     public void addMultipleToCar(Car car, List<ImagesDto> images) {
 
         Session session = getSession();
-        session.createSQLQuery("DELETE FROM car_image WHERE cars_for_sale.id = :carId")
-                .setLong("carId", car.getId())
+        String id = car.getId().toString();
+        session.createSQLQuery("DELETE FROM car_image WHERE cars_for_sale_id = " + id)  // TODO: avoid SQL injection
+//                .setParameter("xxx", id)
                 .executeUpdate();
 
         for (ImagesDto image : images) {
@@ -27,6 +28,5 @@ public class CarImageDaoImpl extends SkyndaBaseEntityDaoImpl<CarImage> implement
 //            carImage.setImageUrl(image.getThumbnail());
             session.save(carImage);
         }
-        session.close();
     }
 }
