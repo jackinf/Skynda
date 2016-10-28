@@ -42,13 +42,13 @@ export function submitTest(values) {
 }
 
 /**
- * Private. Creates car
+ * Private. Creates car TODO: not a redux action...
  */
-export const createCarAsync = (data) =>
+export function createCarAsync(data) {
   // (dispatch) =>
-  {
-  // dispatch(setCarData({isFetching: true}));
 
+  // dispatch(setCarData({isFetching: true}));
+  console.log(data);
   return fetch(`${remoteConfig.remote}/api/car`, {
     method: "POST",
     headers: {"Accept": "application/json", "Content-Type": "application/json"},
@@ -57,8 +57,8 @@ export const createCarAsync = (data) =>
     .then(resp => resp.json())
     .then(resp => {
       let err = {
-        username: 'User does not exist',
-        password: 'Wrong password',
+        colorInside: 'User does not exist',
+        colorOutside: 'Wrong password',
         _error: 'Login failed!'
       };
       // dispatch(setCarData({isFetching: false, data}));
@@ -67,7 +67,7 @@ export const createCarAsync = (data) =>
         throw new SubmissionError(err);
       }
     })
-};
+}
 
 /**
  * Private. Updates car

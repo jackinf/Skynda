@@ -14,7 +14,7 @@ import {
   renderHistoryProblems,
   renderImages
 } from "./Car.component.renderers";
-import {submitTest, submitCarForm} from "../actions/Car";
+import {submitTest, createCarAsync} from "../actions/Car";
 import MenuItem from 'material-ui/MenuItem';
 
 class Car extends React.Component {
@@ -97,24 +97,28 @@ class Car extends React.Component {
   }
 
   onSubmit(e) {
-    var myPromise = new Promise(async (resolve, reject) => {
-      // await this.props.submitCarForm();
-      this.props.handleSubmit(t => submitTest(t))(e).then(() => {
-        resolve();
-      }, reject);
+    // var myPromise = new Promise(async (resolve, reject) => {
+    //   this.props.handleSubmit(t => createCarAsync(t))(e).then(() => {
+    //     resolve();
+    //   }, reject);
+    // });
+    // return myPromise;
+    this.props.handleSubmit(t => createCarAsync(t))(e).then(() => {
+      console.log("success", this.props);
+    }, () => {
+      console.log("error");
     });
-    return myPromise;
   };
 
   render() {
     console.log("PROPS", this.props);
-
     return (
 
       <div>
         {/*<form onSubmit={this.onSubmit.bind(this)}>*/}
+        {/*<form onSubmit={this.onSubmit.bind(this)}>*/}
         {this.props.isFetching ? "Loading..." : (
-          <form onSubmit={this.props.handleSubmit(submitTest)}>
+          <form onSubmit={this.onSubmit.bind(this)}>
             <h3>Car {this.props.formMode1}</h3>
 
             {this.props.formMode1 === FORM_MODE.ADDING
