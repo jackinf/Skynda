@@ -14,6 +14,7 @@ import {
   renderHistoryProblems,
   renderImages
 } from "./Car.component.renderers";
+import {submitTest, submitCarForm} from "../actions/Car";
 import MenuItem from 'material-ui/MenuItem';
 
 class Car extends React.Component {
@@ -95,17 +96,25 @@ class Car extends React.Component {
     this.props.clear();
   }
 
-  onSubmit = (e) => {
-    e.preventDefault();
-    console.log("Submitting");
-    this.props.submitCarForm();
+  onSubmit(e) {
+    var myPromise = new Promise(async (resolve, reject) => {
+      // await this.props.submitCarForm();
+      this.props.handleSubmit(t => submitTest(t))(e).then(() => {
+        resolve();
+      }, reject);
+    });
+    return myPromise;
   };
 
   render() {
+    console.log("PROPS", this.props);
+
     return (
+
       <div>
+        {/*<form onSubmit={this.onSubmit.bind(this)}>*/}
         {this.props.isFetching ? "Loading..." : (
-          <form onSubmit={this.onSubmit}>
+          <form onSubmit={this.props.handleSubmit(submitTest)}>
             <h3>Car {this.props.formMode1}</h3>
 
             {this.props.formMode1 === FORM_MODE.ADDING
@@ -133,13 +142,14 @@ class Car extends React.Component {
 
             <FieldArray name="images" component={renderImages}/>
             <Field name="isSold" component={renderCheckbox}/>
+
             <Field name="mileage" component={renderTextField} type="number"/>
 
             <h4>Performance</h4>
 
-            <Field name="performance.compressionRatio" component={renderTextField} type="number"/>
+            <Field name="performance.compressionRatio" component={renderTextField}/>
             <Field name="performance.compressorType" component={renderTextField}/>
-            <Field name="performance.configuration" component={renderTextField}/>
+            <Field name="performance.configuration" component={renderTextField} />
             <Field name="performance.cylinders" component={renderTextField}/>
             <Field name="performance.displacement" component={renderTextField}/>
             <Field name="performance.doors" component={renderTextField} type="number"/>
@@ -158,7 +168,7 @@ class Car extends React.Component {
             <Field name="safetyStars" component={renderTextField} type="number"/>
             <Field name="vinCode" component={renderTextField}/>
 
-            <input type="submit" value="Submit"/>
+            <button type="submit" disabled={this.props.submitting}>Submit</button>
             {/*<RaisedButton label="Submit" />*/}
           </form>
 
