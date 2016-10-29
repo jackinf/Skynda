@@ -1,4 +1,5 @@
 import ReduxFormRoute from "./routes/ReduxForm";
+import FileUploadRoute from "./routes/FileUpload";
 
 export default (store) => ({
   path: "examples",
@@ -9,6 +10,7 @@ export default (store) => ({
     })
   },
   childRoutes: [
-    ReduxFormRoute(store)
+    ReduxFormRoute(store),
+    FileUploadRoute(store)
   ]
 })
