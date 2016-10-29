@@ -8,6 +8,9 @@ import CounterRoute from './Counter_todelete'
 import { loadTranslations, setLocale, syncTranslationWithStore, i18nReducer } from 'react-redux-i18n';
 import translationsObject from '../store/translations';
 import {injectReducer} from "../store/reducers";
+import Examples from "./Examples";
+import Admin from "./Admin";
+// import CounterRoute from './Counter'
 
 /*  Note: Instead of using JSX, we recommend using react-router
     PlainRoute objects to build route definitions.   */
@@ -17,7 +20,7 @@ export const createRoutes = (store) => {
   // ========================================================
   // Translation setup
   // ========================================================
-  injectReducer(store, {key: "i18n", reducer: i18nReducer})
+  injectReducer(store, {key: "i18n", reducer: i18nReducer});
   syncTranslationWithStore(store);
   store.dispatch(loadTranslations(translationsObject));
   store.dispatch(setLocale('et'));
@@ -29,9 +32,11 @@ export const createRoutes = (store) => {
     childRoutes : [
       Details(store),
       About(store),
-      CounterRoute(store)
+      CounterRoute(store),
+      Examples(store),
+      Admin(store)
     ]
-  }
+  };
 
 };
 

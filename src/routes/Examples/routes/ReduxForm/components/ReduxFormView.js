@@ -10,7 +10,7 @@ class ReduxFormView extends React.Component {
     e.preventDefault();
     console.log(values);
     this.props.submitMyForm();
-    // this.props.submitMyForm.bind(this);
+    // this.props.submitUploadForm.bind(this);
   };
 
   render() {
