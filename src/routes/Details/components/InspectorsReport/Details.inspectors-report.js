@@ -13,8 +13,7 @@ import imageOk from "./../../../../static/images/standard/ok.png";
 import imageCancel from "./../../../../static/images/standard/cancel.png";
 import imageCarInspector from "./assets/carinspector.png";
 import imagesClose from "./assets/cancel@2x.png";
-
-import translations from "../../../../store/locales/et";
+import { Translate } from 'react-redux-i18n';
 
 /**
  * Draws a single icon (tick if pass or cross if not pass) and a description.
@@ -61,13 +60,13 @@ class Report extends React.Component {
     const {categories} = this.props.report;
 
     return (
-      <Skblock header={translations.routes.details.components.inspector_report.header}>
+      <Skblock header={<Translate value="details.components.inspector_report.header"/>}>
         <Row>
           <Col md={3}><label className='sk_details__certified_developer'>Artur P.</label></Col>
           <Col md={4}><img src={imageCarInspector} width='130' alt='happy'/></Col>
           <Col md={5} className='sk_details__certified_developer'>
             <Button className='sk_details__report__button-have-questions' onClick={this.openQuestionModal}>
-              {translations.routes.details.components.inspector_report.question}
+              <Translate value="details.components.inspector_report.question"/>
             </Button>
           </Col>
         </Row>
@@ -92,7 +91,7 @@ class Report extends React.Component {
               <Row>
                 <Col md={11}>
                   <Button className='pull-right sk_details__report__button-show-all'>
-                    {translations.routes.details.components.inspector_report.show_all}
+                    <Translate value="details.components.inspector_report.show_all"/>
                   </Button>
                 </Col>
               </Row>
@@ -105,7 +104,7 @@ class Report extends React.Component {
             <img className='sk_details__report__question-close-button' onClick={this.closeQuestionModal}
                  src={imagesClose}/></div>)}
           actions={[(<Button className='sk_details__report__button-send-question' onClick={this.submitQuestion}>
-            {translations.routes.details.components.inspector_report.send_question}
+            <Translate value="details.components.inspector_report.send_question"/>
           </Button>)]}
           modal={false}
           open={this.state.open}

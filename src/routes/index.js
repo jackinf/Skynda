@@ -3,22 +3,37 @@ import CoreLayout from "../layouts/CoreLayout/CoreLayout";
 import Home from "./Home";
 import Details from "./Details";
 import About from "./About";
-import Examples from "./Examples";
-// import CounterRoute from './Counter'
+
+import CounterRoute from './Counter_todelete'
+import { loadTranslations, setLocale, syncTranslationWithStore, i18nReducer } from 'react-redux-i18n';
+import translationsObject from '../store/translations';
+import {injectReducer} from "../store/reducers";
 
 /*  Note: Instead of using JSX, we recommend using react-router
     PlainRoute objects to build route definitions.   */
 
-export const createRoutes = (store) => ({
-  path        : "/",
-  component   : CoreLayout,
-  indexRoute  : Home,
-  childRoutes : [
-    Details(store),
-    About(store),
-    Examples(store)
-  ]
-});
+export const createRoutes = (store) => {
+
+  // ========================================================
+  // Translation setup
+  // ========================================================
+  injectReducer(store, {key: "i18n", reducer: i18nReducer})
+  syncTranslationWithStore(store);
+  store.dispatch(loadTranslations(translationsObject));
+  store.dispatch(setLocale('et'));
+
+  return {
+    path        : "/",
+    component   : CoreLayout,
+    indexRoute  : Home(store),
+    childRoutes : [
+      Details(store),
+      About(store),
+      CounterRoute(store)
+    ]
+  }
+
+};
 
 /*  Note: childRoutes can be chunked or otherwise loaded programmatically
     using getChildRoutes with the following signature:

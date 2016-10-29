@@ -12,7 +12,7 @@ import TextField from "material-ui/TextField";
 import {Tabs, Tab} from "material-ui/Tabs";
 import {Row, Col} from "react-bootstrap";
 import {orange500} from "material-ui/styles/colors";
-import translations from "../../../../store/locales/et";
+import { Translate } from 'react-redux-i18n';
 
 const styles = {
   backgroundDefault: "#019bff",
@@ -37,7 +37,7 @@ const PersonInfoTab = (props) => (<li className='tab-pane fade active in' id='ht
       <Row>
         <Col md={6}>
           <TextField
-            floatingLabelText={translations.routes.details.components.checkout_panel.first_name}
+            floatingLabelText={<Translate value="details.components.checkout_panel.first_name"/>}
             fullWidth
             floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
             underlineFocusStyle={styles.underlineFocusStyle}
@@ -48,7 +48,7 @@ const PersonInfoTab = (props) => (<li className='tab-pane fade active in' id='ht
         </Col>
         <Col md={6}>
           <TextField
-            floatingLabelText={translations.routes.details.components.checkout_panel.last_name}
+            floatingLabelText={<Translate value="details.components.checkout_panel.last_name"/>}
             fullWidth
             floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
             underlineFocusStyle={styles.underlineFocusStyle}
@@ -62,7 +62,7 @@ const PersonInfoTab = (props) => (<li className='tab-pane fade active in' id='ht
         <Col md={6}>
           <TextField
             type='email'
-            floatingLabelText={translations.routes.details.components.checkout_panel.email}
+            floatingLabelText={<Translate value="details.components.checkout_panel.email"/>}
             fullWidth
             floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
             underlineFocusStyle={styles.underlineFocusStyle}
@@ -73,7 +73,7 @@ const PersonInfoTab = (props) => (<li className='tab-pane fade active in' id='ht
         </Col>
         <Col md={6}>
           <TextField
-            floatingLabelText={translations.routes.details.components.checkout_panel.phone}
+            floatingLabelText={<Translate value="details.components.checkout_panel.phone"/>}
             fullWidth
             floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
             underlineFocusStyle={styles.underlineFocusStyle}
@@ -86,7 +86,7 @@ const PersonInfoTab = (props) => (<li className='tab-pane fade active in' id='ht
       <Row className='dialog-btn-footer'>
         <Col md={12}>
           <RaisedButton
-            label={translations.routes.details.components.checkout_panel.btn_send}
+            label={<Translate value="details.components.checkout_panel.btn_send"/>}
             className='sk_details__checkout_tab_action_button pull-right'
             backgroundColor={styles.backgroundDefault}
             labelStyle={{color: "white", weight: 600}}
@@ -145,11 +145,11 @@ class Checkout extends React.Component {
         open={this.state.openSentMsg}
         onRequestClose={this.handleClose}
       >
-        {translations.routes.details.components.checkout_panel.contact_24h_txt}
+        <Translate value="details.components.checkout_panel.contact_24h_txt"/>
       </Dialog>
 
       <Tabs inkBarStyle={styles.backgroundInkBar}>
-        <Tab label={translations.routes.details.components.checkout_panel.contact_us_txt}
+        <Tab label={<Translate value="details.components.checkout_panel.contact_us_txt"/>}
              className='sk_details__checkout_tab'>
           <div className='sk_details__checkout_tab_inner'>
             <PersonInfoTab displaySuccessPopup={this.displaySuccessPopup} person={this.state.personDetails}/>

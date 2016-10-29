@@ -8,7 +8,7 @@ import "./../../Details.mainimage.scss";
 import "./../../Details.mainimage.modal.scss";
 
 import {Button, Carousel, Modal} from "react-bootstrap";
-import translations from "../../../../../../store/locales/et";
+import { Translate } from 'react-redux-i18n';
 
 class ModalBtnCarousel extends React.Component {
   constructor() {
@@ -29,7 +29,7 @@ class ModalBtnCarousel extends React.Component {
       <Button onClick={this.onShowModal}>
         <div className='image-btn-content-wrapper'>
           <img src={imageCam}/>
-          <span>{translations.routes.details.components.main_image.btn_txt_view_photos}</span>
+          <span><Translate value="details.components.main_image.btn_txt_view_photos"/></span>
         </div>
       </Button>
 
