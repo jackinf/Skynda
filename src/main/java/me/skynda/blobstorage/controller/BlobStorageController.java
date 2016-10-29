@@ -9,10 +9,14 @@ import me.skynda.blobstorage.service.BlobStorageService;
 import me.skynda.car.controller.BaseController;
 import me.skynda.common.helper.FileHelper;
 
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.datasource.embedded.ConnectionProperties;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -89,5 +93,15 @@ public class BlobStorageController extends BaseController {
     @RequestMapping(value = "/delete", method = RequestMethod.DELETE, produces = "application/json")
     public boolean delete(@RequestBody DeleteBlobDto dto) {
         return blobStorageService.delete(dto);
+    }
+
+
+    @RequestMapping(value = "/test-upload", method = RequestMethod.POST,
+            consumes = {"multipart/form-data"})
+    @ResponseBody
+    public boolean testUpload(
+//            @RequestPart("properties") @Valid ConnectionProperties properties,
+            @RequestPart("file") @Valid @NotNull @NotBlank MultipartFile file) {
+        return true;
     }
 }
