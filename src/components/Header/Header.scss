@@ -1,46 +1,48 @@
-/**
- * React Starter Kit (https://www.reactstarterkit.com/)
- *
- * Copyright © 2014_2016 Kriasoft, LLC. All rights reserved.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE.txt file in the root directory of this source tree.
- */
-
 @import '../../styles/variables';
 
-.sk_navbar{
-  height: 70px;
-}
-.sk_logo{
-  padding: 0;
-}
+.header-container{
+  align-items: center;
+  justify-content: center;
 
-.navbar_default .navbar_nav > .sk_menu__sell >a,
-.navbar_default .navbar_nav > .sk_menu__buy > a{
-  margin_top: 8px;
-  font_size: 24px;
-}
-.navbar_default .navbar_nav > .sk_menu__sell >a:hover,
-.navbar_default .navbar_nav > .sk_menu__buy > a:hover{
-  color: #5A5B5C;
-}
-.navbar_default .navbar_nav > .sk_menu__sell >a{
-  color: #FBBB68;
-}
-
-.navbar_default .navbar_nav > .sk_menu__buy > a{
-  color: #019BFF;
-}
-
-.sk_logo img{
-  height:56px;
-  margin-right: 15px;
-  &:first-child{
-    margin-left: 15px
+  .sk-navbar{
+    height: 70px;
+    .sk-menu{
+      display: flex;
+      font-size: 24px;
+      a{
+        padding: 0 20px 0 20px;
+        color: $color-third;
+      }
+    }
   }
-}
-.sk_logo img + img{
-  height: 48px;
+
+  .sk_logo{
+    padding: 0;
+
+    img{
+      height:56px;
+      margin-right: 15px;
+      &:first-child{
+        margin-left: 15px
+      }
+    }
+
+    img + img{
+      height: 48px;
+    }
+  }
+
+  //.navbar_default .navbar_nav > .sk_menu__sell >a:hover,
+  //.navbar_default .navbar_nav > .sk_menu__buy > a:hover{
+  //  color: #5A5B5C;
+  //}
+  .navbar_default .navbar_nav > .sk_menu__sell >a{
+    color: #FBBB68;
+  }
+
+  .navbar_default .navbar_nav > .sk_menu__buy > a{
+    color: #019BFF;
+  }
 
 }
+

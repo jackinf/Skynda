@@ -11,8 +11,10 @@ class BlockContainer extends React.Component {
 }
 
 BlockContainer.propTypes = {
-  header: React.PropTypes.string.isRequired,
-  children: React.PropTypes.array
+  header: React.PropTypes.oneOfType([
+    React.PropTypes.string,
+    React.PropTypes.object]).isRequired,
+  children: React.PropTypes.node
 };
 
 export default BlockContainer;

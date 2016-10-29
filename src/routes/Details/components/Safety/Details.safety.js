@@ -4,7 +4,7 @@
 
 import React from "react";
 import "./Details.safety.scss";
-import translations from "../../../../store/locales/et";
+import { Translate } from 'react-redux-i18n';
 
 // Images
 import imageStar2x from "./../../../../static/images/standard/star@2x.png";
@@ -19,7 +19,7 @@ class Safety extends React.Component {
   render() {
     const stars = this.props.stars;
 
-    return (<Skblock header={translations.routes.details.components.safety.header}>
+    return (<Skblock header={<Translate value="details.components.safety.header"/>}>
       <div className='sk_details__safety__stars_outer_container'>
         <div className='sk_details__safety__stars_inner_container'>
           {Array.from({length: stars}).map((_, idx) => <img key={idx} className='sk_safety__details__star'

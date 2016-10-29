@@ -1,0 +1,19 @@
+#localeChanger {
+  position:absolute;
+  right: 150px;
+  top:10px;
+  button{
+    color: #5A5B5C;
+    line-height: 0.8;
+  }
+  .btn.active{
+    color: #019BFF;
+    background-color: #fff;
+  }
+  .btn:focus {
+    outline: none;
+  }
+  .btn-default{
+    border-color: transparent;
+  }
+}

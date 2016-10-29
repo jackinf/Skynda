@@ -14,7 +14,7 @@ class AboutSkblock extends React.Component {
 
 AboutSkblock.propTypes = {
   header: React.PropTypes.string,
-  children: React.PropTypes.array
+  children: React.PropTypes.node
 };
 
 export default AboutSkblock;

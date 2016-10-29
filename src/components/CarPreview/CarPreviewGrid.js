@@ -9,14 +9,14 @@ import {Row, Col} from "react-bootstrap";
 
 class CarPreviewGrid extends React.Component {
   render() {
-    return (<section>
-      <Row>
-        {this.props.cars.map((car, i) =>
-          (<Col md={4} key={i}>
-            <CarPreviewItem car={car}>{this.props.children}</CarPreviewItem>
-          </Col>))}
-      </Row>
-    </section>);
+    return (<Row>
+      {this.props.cars.map((car, i) =>
+        (<Col md={4} key={i}>
+          <CarPreviewItem car={car}>{this.props.children}</CarPreviewItem>
+        </Col>))}
+    </Row>
+
+    );
   }
 }
 

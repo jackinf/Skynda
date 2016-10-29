@@ -4,9 +4,9 @@ import Skblock from "../BlockContainer";
 import "../Details.scss";
 import "./Details.reviews.scss";
 import {Row, Col, Button} from "react-bootstrap";
-import translations from "../../../../store/locales/et";
 import imageStar from "./../../../../static/images/standard/star@2x.png";
 import imageUnstar from "./../../../../static/images/standard/star-1@2x.png";
+import { Translate } from 'react-redux-i18n';
 
 const maxStars = 5;
 const Star = (props) => (<img className='sk_safety__details__star pull-right' width='24' src={props.src}/>);
@@ -19,7 +19,7 @@ class Reviews extends React.Component {
   render() {
     const reviews = this.props.reviews;
 
-    return (<Skblock header={translations.routes.details.components.reviews.header}>
+    return (<Skblock header={<Translate value="details.components.reviews.header"/>}>
       {reviews.map((review, i) => (<div key={i} className='panel panel-default'>
           <div className='panel-body'>
             <Row className='sk_details__reviews__header'>
@@ -48,7 +48,7 @@ class Reviews extends React.Component {
               <Col md={12}>
                 <Button
                   className='pull-right sk_details__reviews__button-read-more'>
-                  {translations.routes.details.components.reviews.btn_read_more}
+                  <Translate value="details.components.reviews.btn_read_more"/>
                 </Button>
               </Col>
             </Row>
@@ -63,7 +63,7 @@ Reviews.propTypes = {
   reviews: React.PropTypes.arrayOf(React.PropTypes.shape({
     logoUrl: React.PropTypes.string,
     rating: React.PropTypes.number.isRequired,
-    text: React.PropTypes.string.isRequired,
+    text: React.PropTypes.string, // isRequired
     videoUrl: React.PropTypes.string
   })).isRequired
 };

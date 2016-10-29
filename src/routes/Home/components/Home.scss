@@ -1,0 +1,81 @@
+/**
+ * React Starter Kit (https://www.reactstarterkit.com/)
+ *
+ * Copyright © 2014-2016 Kriasoft, LLC. All rights reserved.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE.txt file in the root directory of this source tree.
+ */
+
+@import '../../../styles/variables';
+
+/*
+===========================
+===========================
+===========================
+   Homepage
+  */
+
+
+/* Keypoints */
+
+.sk_search {
+  border-radius: 5px;
+}
+.sk_search input{
+  font-size: 18px;
+  padding: 28px;
+  border-radius: 5px;
+
+}
+.sk_search button{
+  margin: 0;
+  border: none;
+  font-size: 18px;
+  height: 58px;
+  border-radius: 5px;
+}
+
+.sk_car-placeholder{
+  margin-bottom: 20px;
+}
+
+.sk_home__popular-image-title {
+  font-size: 1.3em;
+  font-weight: bolder;
+  color: whitesmoke
+}
+
+.info-image{
+  overflow: hidden;
+}
+
+.primary-button,
+.primary-button:hover,
+.primary-button:active,
+.primary-button:focus,
+.primary-button:visited,
+.read_more {
+  color: whitesmoke;
+  background: $color-primary;
+}
+
+.primary-header {
+  font-family: inherit;
+  font-weight: 800;
+  color: $color-primary;
+}
+
+.primary-header-2 {
+  font-family: inherit;
+  font-weight: 400;
+  color: $color-primary;
+  margin: 20px 0 15px 0;
+}
+
+.text-center {
+  text-align: center;
+}
+
+
+

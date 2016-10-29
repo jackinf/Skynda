@@ -19,10 +19,10 @@ import Reviews from "./Reviews";
 import CarDetailsMainImage from "./MainImage";
 import Checkout from "./CheckoutPanel/Details.checkout";
 import CarPreview from "./../../../components/CarPreview";
-import translations from "../../../store/locales/et";
 
 // List of rows
 import imageTestcar from "../../../static/images/cars/accord/accord.jpg";
+import { Translate } from 'react-redux-i18n';
 
 const cars = {
   other: [
@@ -87,9 +87,9 @@ class CarDetails extends React.Component {
 
                 <Fetaures features={carData.features}/>
                 <History history={carData.history}/>
-                <PetrolConsumption petrol_consumption={carData.petrol_consumption}/>
+                <PetrolConsumption petrolConsumption={carData.petrolConsumption}/>
                 <Performance performance={carData.performance}/>
-                <Safety stars={carData.safety_stars}/>
+                <Safety stars={carData.safetyStars}/>
                 <InspectorsReport report={carData.report}
                                   sendQuestionByEmailAsync={this.props.sendQuestionByEmailAsync}/>
                 <Reviews reviews={carData.reviews}/>
@@ -104,7 +104,7 @@ class CarDetails extends React.Component {
           </StickyContainer>
 
           <div className='row'>
-            <Skblock header={translations.routes.details.other_txt}>
+            <Skblock header={<Translate value="details.other_txt"/>}>
               <CarPreview.Grid cars={cars.other}/>
             </Skblock>
           </div>
