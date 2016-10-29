@@ -34,11 +34,17 @@ public interface CarService {
 	UpdateResponseDto updateCarForSale(CarDto carDto, BindingResult bindingResult);
 
 	/**
-	 * Gets a single car
+	 * Gets a single car. Used for udpating a car.
 	 * @param id car's id
 	 * @return single car's dto
 	 */
-	SingleCarDataDto getCar(Long id);
+	CarDto getCar(Long id);
+	/**
+	 * Gets a single car. Used for displaying full info about the car to the user
+	 * @param id car's id
+	 * @return single car's dto
+	 */
+	SingleCarDataDto getCarDetailed(Long id);
 	
 	/**
 	 * Delets a single car

@@ -36,7 +36,12 @@ public class CarController extends BaseController {
     }
 
     @RequestMapping(value = "/car/{id}", method = RequestMethod.GET)
-    public SingleCarDataDto get(@PathVariable("id") Long id) {
+    public CarDto get(@PathVariable("id") Long id) {
+        return carService.getCar(id);
+    }
+
+    @RequestMapping(value = "/car/{id}/detailed", method = RequestMethod.GET)
+    public CarDto getDetailed(@PathVariable("id") Long id) {
         return carService.getCar(id);
     }
 

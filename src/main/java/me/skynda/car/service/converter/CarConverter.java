@@ -174,7 +174,7 @@ public class CarConverter {
 
 	/*
 	====================================
-	====================================
+	==================================== CAR DTO -> CAR MODEL
 	====================================
 	 */
 
@@ -210,5 +210,44 @@ public class CarConverter {
 		}
 
 		return car;
+	}
+
+	/*
+	====================================
+	====  CAR MODEL -> CAR DTO
+	====================================
+	 */
+
+	public CarDto transformToCarDto(Car carDb) {
+		CarDto carDto = new CarDto();
+		carDto.setId(carDb.getId());
+		carDto.setVinCode(carDb.getVinCode());
+		carDto.setPrice(carDb.getPrice());
+		carDto.setRegistrationNumber(carDb.getRegistrationNumber());
+		carDto.setMileage(carDb.getMileage());
+		carDto.setColorInside(carDb.getColorInside());
+		carDto.setColorOutside(carDb.getColorOutside());
+		carDto.setIsSold(carDb.getIsSold());
+		carDto.setFuelCity(carDb.getFuelCity());
+		carDto.setFuelHighway(carDb.getFuelHighway());
+		carDto.setSafetyStars(carDb.getSafetyStars());
+
+		/*
+			PERFORMANCE section
+		 */
+		PerformanceDto performanceDto = new PerformanceDto();
+		performanceDto.setCompressionRatio(carDb.getCompressionRatio());
+		performanceDto.setCompressionType(carDb.getCompressionType());
+		performanceDto.setConfiguration(carDb.getConfiguration());
+		performanceDto.setCylinders(carDb.getCylinders());
+		performanceDto.setDisplacement(carDb.getDisplacement());
+		performanceDto.setFuelType(carDb.getFuelType());
+		performanceDto.setSize(carDb.getSize());
+		performanceDto.setTorque(carDb.getTorque());
+		performanceDto.setTotalValves(carDb.getTotalValves());
+		performanceDto.setPowerTrain(carDb.getPowerTrain());
+        carDto.setPerformance(performanceDto);
+
+		return carDto;
 	}
 }

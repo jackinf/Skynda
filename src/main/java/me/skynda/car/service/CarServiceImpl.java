@@ -51,10 +51,15 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public SingleCarDataDto getCar(Long id) {
+    public CarDto getCar(Long id) {
         Car model = carDao.get(id);
-        SingleCarDataDto dto = carConverter.transform(model);
-        return dto;
+        return carConverter.transformToCarDto(model);
+    }
+
+    @Override
+    public SingleCarDataDto getCarDetailed(Long id) {
+        Car model = carDao.get(id);
+        return carConverter.transform(model);
     }
 
     @Override
