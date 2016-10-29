@@ -87,6 +87,11 @@ class Car extends React.Component {
     })
   };
 
+  constructor(props) {
+    super(props);
+    this.state = {id: this.props.params[ROUTE_PARAMS.CAR_ID]};
+  }
+
   componentDidMount() {
     this.props.load(this.props.params[ROUTE_PARAMS.CAR_ID]);
     this.props.getCarModelsList();
@@ -107,7 +112,7 @@ class Car extends React.Component {
     return (<div>
         {this.props.isFetching ? "Loading..." : (
           <form onSubmit={this.onSubmit.bind(this)}>
-            <h3>Car {this.props.formMode1}</h3>
+            <h3>Car {this.props.formMode1} ({this.state.id})</h3>
 
             {this.props.formMode1 === FORM_MODE.ADDING
               ? (<a onClick={this.props.fillWithFakeData}>Fill with fake data</a>)
