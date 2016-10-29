@@ -16,6 +16,8 @@ import {
 } from "./Car.component.renderers";
 import {submitCarForm} from "../actions/Car";
 import MenuItem from 'material-ui/MenuItem';
+import {Row, Col} from "react-bootstrap";
+import { browserHistory } from "react-router";
 
 class Car extends React.Component {
   static propTypes = {
@@ -102,9 +104,15 @@ class Car extends React.Component {
   }
 
   onSubmit(e) {
-    this.props.handleSubmit(t => submitCarForm(t, this.props.formMode1))(e)
+    this.props.handleSubmit(data => submitCarForm(data, this.props.formMode1))(e)
       .then(
-        () => (console.log("success", this.props)),
+        (t) => {
+          console.log(t);
+          if (!!this.props.submitSucceeded) {
+            alert("Success!");
+            browserHistory.push(`/admin/car`);
+          }
+        },
         () => (console.log("error")));
   };
 
@@ -112,58 +120,61 @@ class Car extends React.Component {
     return (<div>
         {this.props.isFetching ? "Loading..." : (
           <form onSubmit={this.onSubmit.bind(this)}>
-            <h3>Car {this.props.formMode1} ({this.state.id})</h3>
 
-            {this.props.formMode1 === FORM_MODE.ADDING
-              ? (<a onClick={this.props.fillWithFakeData}>Fill with fake data</a>)
-              : ""}
+            <Row>
+              <Col xs={12}>
+                <h3>Car {this.props.formMode1} (ID: {this.state.id})</h3>
 
-            <h4>General data</h4>
+                {this.props.formMode1 === FORM_MODE.ADDING
+                  ? (<a onClick={this.props.fillWithFakeData}>Fill with fake data</a>)
+                  : ""}
+              </Col>
+            </Row>
 
-            {this.props.carModels.isFetching ? "Fetching car models" : (
-              <Field name="carModelsCode" component={renderSelectField}>
-                {this.props.carModels.items.map((item, i) => (
-                  <MenuItem key={i} value={item.modelCode} primaryText={`${item.manufacturerCode} ${item.modelCode}`}/>
-                ))}
-              </Field>
-            )}
+            <Row>
+              <Col md={6} xs={12}>
+                <h4>General data</h4>
 
-            <Field name="colorInside" component={renderTextField}/>
-            <Field name="colorOutside" component={renderTextField}/>
+                {this.props.carModels.isFetching ? "Fetching car models" : (
+                  <Field name="carModelsCode" label="Model Code *" component={renderSelectField}>
+                    {this.props.carModels.items.map((item, i) => (
+                      <MenuItem key={i} value={item.modelCode} primaryText={`${item.manufacturerCode} ${item.modelCode}`}/>
+                    ))}
+                  </Field>
+                )}
 
-            <FieldArray name="descriptions" component={renderDescriptions}/>
-            <FieldArray name="features" component={renderFeatures}/>
-            <FieldArray name="faults" component={renderHistoryProblems}/>
-            <Field name="fuelCity" component={renderTextField}/>
-            <Field name="fuelHighway" component={renderTextField}/>
-
-            <FieldArray name="images" component={renderImages}/>
-            <Field name="isSold" component={renderCheckbox}/>
-
-            <Field name="mileage" component={renderTextField} type="number"/>
-
-            <h4>Performance</h4>
-
-            <Field name="performance.compressionRatio" component={renderTextField}/>
-            <Field name="performance.compressorType" component={renderTextField}/>
-            <Field name="performance.configuration" component={renderTextField}/>
-            <Field name="performance.cylinders" component={renderTextField}/>
-            <Field name="performance.displacement" component={renderTextField}/>
-            <Field name="performance.doors" component={renderTextField} type="number"/>
-            <Field name="performance.drivenWheels" component={renderTextField}/>
-            <Field name="performance.fuelType" component={renderTextField}/>
-            <Field name="performance.horsePower" component={renderTextField} type="number"/>
-            <Field name="performance.powerTrain" component={renderTextField}/>
-            <Field name="performance.size" component={renderTextField} type="number"/>
-            <Field name="performance.torque" component={renderTextField} type="number"/>
-            <Field name="performance.totalValves" component={renderTextField} type="number"/>
-
-            <hr/>
-
-            <Field name="price" component={renderTextField} type="number"/>
-            <Field name="registrationNumber" component={renderTextField}/>
-            <Field name="safetyStars" component={renderTextField} type="number"/>
-            <Field name="vinCode" component={renderTextField}/>
+                <Field name="colorInside" label="Color Inside *" component={renderTextField}/>
+                <Field name="colorOutside" label="Color Outside *" component={renderTextField}/>
+                <FieldArray name="descriptions" label="Descriptions" component={renderDescriptions}/>
+                <FieldArray name="features" label="Features" component={renderFeatures}/>
+                <FieldArray name="faults" label="Faults" component={renderHistoryProblems}/>
+                <Field name="fuelCity" label="Fuel City" component={renderTextField}/>
+                <Field name="fuelHighway" label="Fuel Highway" component={renderTextField}/>
+                <FieldArray name="images" label="Images" component={renderImages}/>
+                <Field name="isSold" label="Is Sold" component={renderCheckbox}/>
+                <Field name="mileage" label="Mileage *" component={renderTextField} type="number"/>
+                <Field name="price" label="Price *" component={renderTextField} type="number"/>
+                <Field name="registrationNumber" label="Registration Number *" component={renderTextField}/>
+                <Field name="safetyStars" label="Safety Stars" component={renderTextField} type="number"/>
+                <Field name="vinCode" label="Vin Code *" component={renderTextField}/>
+              </Col>
+              <Col md={6} xs={12}>
+                <h4>Performance</h4>
+                <Field name="performance.compressionRatio" label="Compression Ratio" component={renderTextField}/>
+                <Field name="performance.compressorType" label="Compressor Type" component={renderTextField}/>
+                <Field name="performance.configuration" label="Configuration" component={renderTextField}/>
+                <Field name="performance.cylinders" label="Cylinders" component={renderTextField}/>
+                <Field name="performance.displacement" label="Displacement" component={renderTextField}/>
+                <Field name="performance.doors" label="Doors" component={renderTextField} type="number"/>
+                <Field name="performance.drivenWheels" label="Driven Wheels" component={renderTextField}/>
+                <Field name="performance.fuelType" label="Fuel Type" component={renderTextField}/>
+                <Field name="performance.horsePower" label="Horse Power" component={renderTextField} type="number"/>
+                <Field name="performance.powerTrain" label="Power Train" component={renderTextField}/>
+                <Field name="performance.size" label="Size" component={renderTextField} type="number"/>
+                <Field name="performance.torque" label="Torque" component={renderTextField} type="number"/>
+                <Field name="performance.totalValves" label="Total Valves" component={renderTextField} type="number"/>
+              </Col>
+            </Row>
 
             <button type="submit" disabled={this.props.submitting}>Submit</button>
             {/*<RaisedButton label="Submit" />*/}

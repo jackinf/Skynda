@@ -32,6 +32,7 @@ function createCarAsync(data) {
       if (!resp.success) {
         throw new SubmissionError(fromSpringToReduxFormError(resp.errors));
       }
+      return resp;
     })
 }
 

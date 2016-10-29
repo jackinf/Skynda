@@ -30,10 +30,10 @@ const renderFile = props => (
 
 export const renderTextField = ({input, label, meta: {touched, error}, ...custom}) => (
   <Row style={{marginBottom: "10px"}}>
-    <Col sm={3}>
-      <label>{custom.name}</label>
-    </Col>
-    <Col sm={9}>
+    {/*<Col sm={3}>*/}
+      {/*<label>{custom.name}</label>*/}
+    {/*</Col>*/}
+    <Col sm={12}>
       <TextField hintText={label}
                  floatingLabelText={label}
                  errorText={touched && error}
@@ -46,10 +46,7 @@ export const renderTextField = ({input, label, meta: {touched, error}, ...custom
 
 export const renderCheckbox = ({input, label, ...custom}) => (
   <Row style={{marginBottom: "10px"}}>
-    <Col sm={3}>
-      <label>{custom.name}</label>
-    </Col>
-    <Col sm={9}>
+    <Col sm={12}>
       <Checkbox label={label}
                 checked={input.value ? true : false}
                 onCheck={input.onChange}/>
@@ -65,10 +62,7 @@ export const renderRadioGroup = ({input, ...rest}) => (
 
 export const renderSelectField = ({input, label, meta: {touched, error}, children, ...custom}) => (
   <Row style={{marginBottom: "10px"}}>
-    <Col sm={3}>
-      <label>{custom.name}</label>
-    </Col>
-    <Col sm={9}>
+    <Col sm={12}>
       <SelectField
         floatingLabelText={label}
         errorText={touched && error}
