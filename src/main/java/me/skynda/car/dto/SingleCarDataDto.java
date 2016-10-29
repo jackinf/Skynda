@@ -1,5 +1,6 @@
 package me.skynda.car.dto;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import lombok.Data;
@@ -21,5 +22,6 @@ public class SingleCarDataDto {
 	private Integer safetyStars;
 	private ReportDto report;
 	private List<ReviewDto> reviews;
+	private BigDecimal price;
 
 }

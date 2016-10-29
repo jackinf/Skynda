@@ -28,6 +28,7 @@ public class CarConverter {
 		singleCarDataDto.setSafetyStars(car.getSafetyStars());
 		convertReportData(car, singleCarDataDto);
 		convertReviewData(car, singleCarDataDto);
+        singleCarDataDto.setPrice(car.getPrice());
 		
 		return singleCarDataDto;
 	}
