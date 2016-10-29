@@ -21,6 +21,9 @@ public class CarFaultDaoImpl extends SkyndaBaseEntityDaoImpl<CarFault> implement
 //                .setParameter("xxx", id)
                 .executeUpdate();
 
+        if (faults == null)
+            return;
+
         for (FaultsDto fault : faults) {
             CarFault carFault = new CarFault();
             carFault.setCar(car);

@@ -21,6 +21,9 @@ public class CarFeatureDaoImpl extends SkyndaBaseEntityDaoImpl<CarFeature> imple
 //                .setParameter("xxx", id)
                 .executeUpdate();
 
+        if (features == null)
+            return;
+
         for (FeatureDto feature : features) {
             CarFeature carFeature = new CarFeature();
             carFeature.setCar(car);

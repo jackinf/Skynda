@@ -21,6 +21,9 @@ public class CarImageDaoImpl extends SkyndaBaseEntityDaoImpl<CarImage> implement
 //                .setParameter("xxx", id)
                 .executeUpdate();
 
+        if (images == null)
+            return;
+
         for (ImagesDto image : images) {
             CarImage carImage = new CarImage();
             carImage.setCar(car);

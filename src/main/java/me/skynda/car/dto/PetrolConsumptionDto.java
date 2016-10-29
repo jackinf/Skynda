@@ -16,8 +16,12 @@ public class PetrolConsumptionDto {
 		if (StringHelper.empty(fuelCity) || StringHelper.empty(fuelHigway)) {
 			this.average = null;
 		} else {
-			double result = (Double.parseDouble(fuelCity) + Double.parseDouble(fuelHigway)) / 2;
-			this.average = String.valueOf(result);
+			try {
+				double result = (Double.parseDouble(fuelCity) + Double.parseDouble(fuelHigway)) / 2;
+				this.average = String.valueOf(result);
+			} catch (NumberFormatException e) {
+				this.average = "0";
+			}
 		}
 	}
 
