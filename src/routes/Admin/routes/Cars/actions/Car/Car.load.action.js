@@ -43,29 +43,6 @@ const loadUpdateForm = (id) => (dispatch) => {
   })
     .then(resp => resp.json())
     .then(data => {
-
-      // TEMP FIXES
-      data["general"] = data["carGeneralDto"];
-      data["reviews"] = data["review"] || [];
-      for (let i = 0; i < data["reviews"].length; i++) {
-        data["reviews"][i]["rating"] = parseInt(data["reviews"][i]["rating"]);
-      }
-      data["general"]["year"] = parseInt(data["general"]["year"]);
-      data["performance"]["doors"] = parseInt(data["performance"]["doors"]);
-      data["performance"]["compressionRatio"] = parseInt(data["performance"]["compressionRatio"]);
-      data["performance"]["horsePower"] = parseInt(data["performance"]["horsePower"]);
-      data["performance"]["size"] = parseInt(data["performance"]["size"]);
-      data["performance"]["torque"] = parseInt(data["performance"]["torque"]);
-      data["performance"]["totalValves"] = parseInt(data["performance"]["totalValves"]);
-      data["safetyStars"] = parseInt(data["safetyStars"]);
-      data["report"] = {
-        categories: [],
-        faults: []
-      };
-
-      delete data["carGeneralDto"];
-      delete data["review"];
-
       dispatch(setCarData({isFetching: false, data}));
       dispatch(setFormMode(FORM_MODE.UPDATING));
     })

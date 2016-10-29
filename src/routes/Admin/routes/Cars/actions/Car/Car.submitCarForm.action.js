@@ -13,7 +13,7 @@ import {SubmissionError} from 'redux-form';
 export default function submitCarForm(data, formMode) {
   return formMode == FORM_MODE.ADDING
     ? createCarAsync(data)
-    : updateCarAsync(1, data);  // TODO: get id.
+    : updateCarAsync(data);
 }
 
 /**
@@ -40,8 +40,8 @@ function createCarAsync(data) {
  * @param id - car id
  * @param data - car input fields sent to the server
  */
-function updateCarAsync(id, data) {
-  return fetch(`${remoteConfig.remote}/api/car/${id}`, {
+function updateCarAsync(data) {
+  return fetch(`${remoteConfig.remote}/api/car/${data.id}`, {
     method: "PUT",
     headers: {"Accept": "application/json", "Content-Type": "application/json"},
     body: JSON.stringify(data)
