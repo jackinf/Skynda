@@ -1,5 +1,5 @@
 import {connect} from "react-redux";
-import { reduxForm } from 'redux-form';
+import {reduxForm} from 'redux-form';
 import {submitMyForm} from '../actions/actions';
 import ReduxFormView from "../components/ReduxFormView";
 
