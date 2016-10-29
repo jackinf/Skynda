@@ -91,6 +91,7 @@ class CarDetails extends React.Component {
                 <InspectorsReport report={carData.report}
                                   sendQuestionByEmailAsync={this.props.sendQuestionByEmailAsync}/>
                 <Reviews reviews={carData.reviews}/>
+                <Skblock header={<Translate value="details.components.additional_info.header"/>}>{carData.additionalInfo}</Skblock>
 
               </div>
               <div className='col col-md-5'>

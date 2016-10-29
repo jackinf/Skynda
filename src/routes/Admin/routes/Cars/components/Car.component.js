@@ -84,7 +84,8 @@ class Car extends React.Component {
       "price": React.PropTypes.number,
       "registrationNumber": React.PropTypes.string,
       "safetyStars": React.PropTypes.number,
-      "vinCode": React.PropTypes.string
+      "vinCode": React.PropTypes.string,
+      "additionalInfo": React.PropTypes.string
     })
   };
 
@@ -155,6 +156,7 @@ class Car extends React.Component {
                 <Field name="registrationNumber" label="Registration Number *" component={renderTextField}/>
                 <Field name="safetyStars" label="Safety Stars" component={renderTextField} type="number"/>
                 <Field name="vinCode" label="Vin Code *" component={renderTextField}/>
+                <Field name="additionalInfo" label="Additional info" component={renderTextField}/>
               </Col>
               <Col md={6} xs={12}>
                 <h4>Performance</h4>

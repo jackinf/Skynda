@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from "react";
 import LocaleChanger from "./Locale";
-import { setLocale } from 'react-redux-i18n';
+import {setLocale} from 'react-redux-i18n';
 import {connect} from 'react-redux'
 
 const mapStateToProps = (state) => {
@@ -9,7 +9,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps =   {
+const mapDispatchToProps = {
   onLocaleChange: (value) => (dispatch) => {
     dispatch(setLocale(value));
   }

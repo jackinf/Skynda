@@ -13,26 +13,26 @@ class LocaleChanger extends React.Component {
 
   render() {
     return (
-      <div id="localeChanger" >
-          {languages.map((language, i) => {
-            return (
-              <Button key={i} className={this.props.activeLocale == language.value ? "active" : ""}
-                onClick={ e => {
-                  e.preventDefault();
-                  this.props.onLocaleChange(language.value)
-                }}
-              >
-                {language.value === "et"
+      <div id="localeChanger">
+        {languages.map((language, i) => {
+          return (
+            <Button key={i} className={this.props.activeLocale == language.value ? "active" : ""}
+                    onClick={ e => {
+                      e.preventDefault();
+                      this.props.onLocaleChange(language.value)
+                    }}
+            >
+              {language.value === "et"
                 ? <img
-                    src={est}
-                  />
+                src={est}
+              />
                 : <img
-                    src={eng}
-                  />
-                }
-              </Button>
-            );
-          })}
+                src={eng}
+              />
+              }
+            </Button>
+          );
+        })}
       </div>
     );
   }
