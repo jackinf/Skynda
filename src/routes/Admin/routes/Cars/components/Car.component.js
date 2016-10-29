@@ -8,7 +8,6 @@ import {
   renderTextField,
   renderCheckbox,
   renderSelectField,
-
   renderDescriptions,
   renderFeatures,
   renderHistoryProblems,
@@ -17,7 +16,7 @@ import {
 import {submitCarForm} from "../actions/Car";
 import MenuItem from 'material-ui/MenuItem';
 import {Row, Col} from "react-bootstrap";
-import { browserHistory } from "react-router";
+import {browserHistory} from "react-router";
 
 class Car extends React.Component {
   static propTypes = {
@@ -107,7 +106,6 @@ class Car extends React.Component {
     this.props.handleSubmit(data => submitCarForm(data, this.props.formMode1))(e)
       .then(
         (t) => {
-          console.log(t);
           if (!!this.props.submitSucceeded) {
             alert("Success!");
             browserHistory.push(`/admin/car`);
@@ -123,8 +121,7 @@ class Car extends React.Component {
 
             <Row>
               <Col xs={12}>
-                <h3>Car {this.props.formMode1} (ID: {this.state.id})</h3>
-
+                <h3>{this.props.formMode1} (ID: {this.state.id})</h3>
                 {this.props.formMode1 === FORM_MODE.ADDING
                   ? (<a onClick={this.props.fillWithFakeData}>Fill with fake data</a>)
                   : ""}
@@ -138,7 +135,8 @@ class Car extends React.Component {
                 {this.props.carModels.isFetching ? "Fetching car models" : (
                   <Field name="carModelsCode" label="Model Code *" component={renderSelectField}>
                     {this.props.carModels.items.map((item, i) => (
-                      <MenuItem key={i} value={item.modelCode} primaryText={`${item.manufacturerCode} ${item.modelCode}`}/>
+                      <MenuItem key={i} value={item.modelCode}
+                                primaryText={`${item.manufacturerCode} ${item.modelCode}`}/>
                     ))}
                   </Field>
                 )}

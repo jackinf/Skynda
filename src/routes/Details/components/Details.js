@@ -12,7 +12,6 @@ import Overview from "./Overview";
 import Fetaures from "./Features";
 import History from "./History";
 import PetrolConsumption from "./PetrolConsumption";
-import Performance from "./Performance";
 import Safety from "./Safety";
 import InspectorsReport from "./InspectorsReport/Details.inspectors-report";
 import Reviews from "./Reviews";
@@ -88,7 +87,6 @@ class CarDetails extends React.Component {
                 <Fetaures features={carData.features}/>
                 <History history={carData.history}/>
                 <PetrolConsumption petrolConsumption={carData.petrolConsumption}/>
-                <Performance performance={carData.performance}/>
                 <Safety stars={carData.safetyStars}/>
                 <InspectorsReport report={carData.report}
                                   sendQuestionByEmailAsync={this.props.sendQuestionByEmailAsync}/>
