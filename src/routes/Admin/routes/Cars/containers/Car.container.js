@@ -8,7 +8,6 @@ import {getList} from "../../CarModels/actions";
 import CarComponent from "../components/Car.component";
 import {FORMS, REDUCER_KEYS} from "./../constants/Car.constant";
 
-
 // Decorate the form component
 const DecoratedCarComponent = reduxForm({
   form: FORMS.CAR_FORM

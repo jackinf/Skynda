@@ -14,7 +14,7 @@ import {
   renderHistoryProblems,
   renderImages
 } from "./Car.component.renderers";
-import {submitTest, createCarAsync} from "../actions/Car";
+import {submitCarForm} from "../actions/Car";
 import MenuItem from 'material-ui/MenuItem';
 
 class Car extends React.Component {
@@ -97,26 +97,14 @@ class Car extends React.Component {
   }
 
   onSubmit(e) {
-    // var myPromise = new Promise(async (resolve, reject) => {
-    //   this.props.handleSubmit(t => createCarAsync(t))(e).then(() => {
-    //     resolve();
-    //   }, reject);
-    // });
-    // return myPromise;
-    this.props.handleSubmit(t => createCarAsync(t))(e).then(() => {
-      console.log("success", this.props);
-    }, () => {
-      console.log("error");
-    });
+    this.props.handleSubmit(t => submitCarForm(t, this.props.formMode1))(e)
+      .then(
+        () => (console.log("success", this.props)),
+        () => (console.log("error")));
   };
 
   render() {
-    console.log("PROPS", this.props);
-    return (
-
-      <div>
-        {/*<form onSubmit={this.onSubmit.bind(this)}>*/}
-        {/*<form onSubmit={this.onSubmit.bind(this)}>*/}
+    return (<div>
         {this.props.isFetching ? "Loading..." : (
           <form onSubmit={this.onSubmit.bind(this)}>
             <h3>Car {this.props.formMode1}</h3>
@@ -153,7 +141,7 @@ class Car extends React.Component {
 
             <Field name="performance.compressionRatio" component={renderTextField}/>
             <Field name="performance.compressorType" component={renderTextField}/>
-            <Field name="performance.configuration" component={renderTextField} />
+            <Field name="performance.configuration" component={renderTextField}/>
             <Field name="performance.cylinders" component={renderTextField}/>
             <Field name="performance.displacement" component={renderTextField}/>
             <Field name="performance.doors" component={renderTextField} type="number"/>

@@ -1,54 +1,27 @@
 /**
  * Created by zekar on 10/23/2016.
  */
-import {FORMS, FORM_MODE, REDUCER_KEYS} from "./../../constants/Car.constant";
-import setCarData from "./Car.setCarData.action";
+import {FORM_MODE} from "./../../constants/Car.constant";
 import remoteConfig from "store/remoteConfig";
 import {fromSpringToReduxFormError} from "../../../../../../utils/formUtils";
 import {SubmissionError} from 'redux-form';
 
 /**
- * Is executed on form submit
+ * Is executed on form submit. Not a redux action.
  * @returns {function(*, *)}
  */
-export default function submitCarForm() {
-  return (dispatch, getState) => {
-    const state = getState();
-    const contextForm = state.form[FORMS.CAR_FORM];
-    const values = contextForm.values || {};
-    console.log("Submitted values: ", values);
-
-    if (state[REDUCER_KEYS.FORM_MODE] == FORM_MODE.ADDING) {
-      dispatch(createCarAsync(values));
-    } else if (state[REDUCER_KEYS.FORM_MODE] == FORM_MODE.UPDATING) {
-      // TODO: get id.
-      dispatch(updateCarAsync(1, values));
-    }
-  };
-}
-
-const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
-
-export function submitTest(values) {
-  console.log(values);
-  return sleep(1000) // simulate server latency
-    .then(() => {
-      if (![ 'black' ].includes(values.colorInside)) {
-        throw new SubmissionError({ colorInside1: 'BLACK', _error: 'LOL' })
-      } else {
-        window.alert(`You submitted:\n\n${JSON.stringify(values, null, 2)}`)
-      }
-    })
+export default function submitCarForm(data, formMode) {
+  return formMode == FORM_MODE.ADDING
+    ? createCarAsync(data)
+    : updateCarAsync(1, data);  // TODO: get id.
 }
 
 /**
- * Private. Creates car TODO: not a redux action...
+ *
+ * @param data - car input fields sent to the server
+ * @returns {*|Promise.<TResult>|Promise<U>|Thenable<U>}
  */
-export function createCarAsync(data) {
-  // (dispatch) =>
-
-  // dispatch(setCarData({isFetching: true}));
-  console.log(data);
+function createCarAsync(data) {
   return fetch(`${remoteConfig.remote}/api/car`, {
     method: "POST",
     headers: {"Accept": "application/json", "Content-Type": "application/json"},
@@ -56,15 +29,8 @@ export function createCarAsync(data) {
   })
     .then(resp => resp.json())
     .then(resp => {
-      let err = {
-        colorInside: 'User does not exist',
-        colorOutside: 'Wrong password',
-        _error: 'Login failed!'
-      };
-      // dispatch(setCarData({isFetching: false, data}));
       if (!resp.success) {
-        // fromSpringToReduxFormError(resp.errors)
-        throw new SubmissionError(err);
+        throw new SubmissionError(fromSpringToReduxFormError(resp.errors));
       }
     })
 }
@@ -72,20 +38,18 @@ export function createCarAsync(data) {
 /**
  * Private. Updates car
  * @param id - car id
+ * @param data - car input fields sent to the server
  */
-const updateCarAsync = (id, data) => (dispatch) => {
-  dispatch(setCarData({isFetching: true}));
-
+function updateCarAsync(id, data) {
   return fetch(`${remoteConfig.remote}/api/car/${id}`, {
     method: "PUT",
     headers: {"Accept": "application/json", "Content-Type": "application/json"},
     body: JSON.stringify(data)
   })
     .then(resp => resp.json())
-    .then(data => {
-      dispatch(setCarData({isFetching: false, data}));
+    .then(resp => {
+      if (!resp.success) {
+        throw new SubmissionError(fromSpringToReduxFormError(resp.errors));
+      }
     })
-    .catch(err => {
-      dispatch(setCarData({isFetching: false}));
-    });
-};
+}

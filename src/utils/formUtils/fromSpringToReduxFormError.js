@@ -12,7 +12,7 @@ export default function fromSpringToReduxFormError(springErrors) {
     .filter(springError => "code" in springError && "defaultMessage" in springError)
     .map(springError => ({[springError.code]: springError.defaultMessage}));
 
-  const reduxErrors = {};
+  const reduxErrors = {_error: "Failed"};
   for (let i in errs) {
     if (!errs.hasOwnProperty(i)) {
       continue;

@@ -6,7 +6,7 @@ import clear from "./Car.clear.action";
 import load from "./Car.load.action";
 import setCarData from "./Car.setCarData.action";
 import setFormMode from "./Car.setFormMode.action";
-import submitCarForm, {submitTest, createCarAsync} from "./Car.submitCarForm.action";
+import submitCarForm, {createCarAsync} from "./Car.submitCarForm.action";
 import fillWithFakeData from "./Car.fillWithFakeData.action";
 
 export {
@@ -16,6 +16,5 @@ export {
   setFormMode,
   submitCarForm,
   fillWithFakeData,
-  submitTest,
   createCarAsync
 }
