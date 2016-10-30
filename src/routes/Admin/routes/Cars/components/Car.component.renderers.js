@@ -11,6 +11,7 @@ import {Row, Col} from "react-bootstrap";
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import ContentRemove from 'material-ui/svg-icons/content/remove';
+import {guidUtil} from "../../../../../utils/allUtils";
 
 const renderFile = props => (
   <div>
@@ -111,22 +112,30 @@ export const renderFeatures = ({fields, ...custom}) => fieldListWrapper({
   </ul>)
 });
 
-export const renderHistoryProblems = ({fields, ...custom}) => fieldListWrapper({
+export const renderFaults = ({fields, ...custom}) => fieldListWrapper({
   fields,
   title: custom.name,
   block: (<ul>
-    {fields.map((name, index) =>
-      <li key={index}>
-        <Field name={`${name}.img`} type="text" component={renderTextField} placeholder={`Image #${index + 1}`}/>
-        <Field name={`${name}.text`} type="text" component={renderTextField} placeholder={`Text #${index + 1}`}/>
-        <FloatingActionButton mini={true} secondary={true} onClick={() => fields.remove(index)}>
+    {fields.map((field, index) => {
+      return (<li key={index}>
+        <Field name={`${field}.file`} type="file" component="input" onChange={e => custom.onFaultImageAdd(e, index)}/>
+        {/*<Field name={`${field}.img`} type="text" component={renderTextField} placeholder={`Image #${index + 1}`}/>*/}
+        <Field name={`${field}.text`} type="text" component={renderTextField} placeholder={`Text #${index + 1}`}/>
+        <FloatingActionButton mini={true} secondary={true}
+                              onClick={(e) => {
+                                fields.remove(index);
+                                custom.onFaultRemove(e, index);
+                              }}>
           <ContentRemove />
         </FloatingActionButton></li>
+      );
+      }
     )}
     {fields.error && <li className="error">{fields.error}</li>}
   </ul>)
 });
 
+// TODO: Remove
 export const renderImages = ({fields, ...custom}) => fieldListWrapper({
   fields,
   title: custom.name,

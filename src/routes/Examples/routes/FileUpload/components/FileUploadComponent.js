@@ -57,9 +57,14 @@ class FileUploadComponent extends React.Component {
             <input name="testFile" type="file" multiple="multiple" onChange={(e) => this.onFilesAdded(e.target.files, "testFiles") }/>
           </div>
 
-          <ul>
-            {this.state.testFiles.map((file, i) => <li key={i}>{file.name}</li>)}
-          </ul>
+          {/*<ul>*/}
+            {/*{this.state.testFiles.map((file, i) => <li key={i}>{file.name}</li>)}*/}
+          {/*</ul>*/}
+
+          <h2>Uploading {this.state.formtestFiles.length} files...</h2>
+          <div>
+            {this.state.formtestFiles.map((file, i) => <img key={i} src={file.preview} />)}
+          </div>
 
           {/*<div>*/}
             {/*<label htmlFor="testFile">Test file</label>*/}

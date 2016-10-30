@@ -10,13 +10,15 @@ import {
   renderSelectField,
   renderDescriptions,
   renderFeatures,
-  renderHistoryProblems,
+  renderFaults,
   renderImages
 } from "./Car.component.renderers";
 import {submitCarForm} from "../actions/Car";
 import MenuItem from 'material-ui/MenuItem';
 import {Row, Col} from "react-bootstrap";
 import {browserHistory} from "react-router";
+import Dropzone from "react-dropzone";
+import _ from "underscore";
 
 class Car extends React.Component {
   static propTypes = {
@@ -91,7 +93,11 @@ class Car extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {id: this.props.params[ROUTE_PARAMS.CAR_ID]};
+    this.state = {
+      id: this.props.params[ROUTE_PARAMS.CAR_ID],
+      imageFiles: [],
+      faultsFiles: []
+    };
   }
 
   componentDidMount() {
@@ -103,10 +109,34 @@ class Car extends React.Component {
     this.props.clear();
   }
 
+  onFileImageAdd = (acceptedFiles, rejectedFiles) => {
+    console.log('Accepted files: ', acceptedFiles);
+    console.log('Rejected files: ', rejectedFiles);
+    this.setState({imageFiles: this.state.imageFiles.concat(acceptedFiles)});
+  };
+
+  onFileImageRemove = (removedIndex) => {
+    let spliced = this.state.imageFiles.filter((file, i) => i !== removedIndex);
+    console.log(spliced);
+    this.setState({imageFiles: spliced});
+  };
+
+  onFaultImageAdd = (e, id) => {
+    let files = this.state.faultsFiles.filter((item, i) => i !== id);
+    files.push(e.target.files[0]);  // File input can accept multiple files. To avoid this, we take the first only.
+    console.log(files);
+    this.setState({faultsFiles: files});
+  };
+
+  onFaultRemove = (e, id) => {
+    let files = this.state.faultsFiles.filter((item, i) => i !== id);
+    console.log(files);
+    this.setState({faultsFiles: files});
+  };
+
   onSubmit(e) {
     this.props.handleSubmit(data => submitCarForm(data, this.props.formMode1))(e)
-      .then(
-        (t) => {
+      .then(() => {
           if (!!this.props.submitSucceeded) {
             alert("Success!");
             browserHistory.push(`/admin/car`);
@@ -146,10 +176,29 @@ class Car extends React.Component {
                 <Field name="colorOutside" label="Color Outside *" component={renderTextField}/>
                 <FieldArray name="descriptions" label="Descriptions" component={renderDescriptions}/>
                 <FieldArray name="features" label="Features" component={renderFeatures}/>
-                <FieldArray name="faults" label="Faults" component={renderHistoryProblems}/>
+                <FieldArray name="faults" label="Faults" component={renderFaults}
+                            onFaultImageAdd={this.onFaultImageAdd} onFaultRemove={this.onFaultRemove}
+                />
                 <Field name="fuelCity" label="Fuel City" component={renderTextField}/>
                 <Field name="fuelHighway" label="Fuel Highway" component={renderTextField}/>
-                <FieldArray name="images" label="Images" component={renderImages}/>
+
+                {/*<FieldArray name="images" label="Images" component={renderImages}/>*/}
+                <Row>
+                  <Col xs={12} md={6}>
+                    <h4>Images</h4>
+                    <Dropzone onDrop={this.onFileImageAdd} multiple={true}>
+                      <div>Try dropping some files here, or click to select files to upload.</div>
+                    </Dropzone>
+
+                    <h4>Uploading {this.state.imageFiles.length} files</h4>
+                    <div>
+                      {this.state.imageFiles.map((file, i) =>
+                        <img width={100} key={i} src={file.preview} onClick={e => this.onFileImageRemove(i)} />)}
+                    </div>
+                  </Col>
+                </Row>
+                <br/>
+
                 <Field name="isSold" label="Is Sold" component={renderCheckbox}/>
                 <Field name="mileage" label="Mileage *" component={renderTextField} type="number"/>
                 <Field name="price" label="Price *" component={renderTextField} type="number"/>
