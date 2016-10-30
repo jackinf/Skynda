@@ -1,4 +1,5 @@
 import ReduxFormRoute from "./routes/ReduxForm";
+import ToastrRoute from "./routes/Toastr";
 
 export default (store) => ({
   path: "examples",
@@ -9,6 +10,7 @@ export default (store) => ({
     })
   },
   childRoutes: [
-    ReduxFormRoute(store)
+    ReduxFormRoute(store),
+    ToastrRoute(store)
   ]
 })
