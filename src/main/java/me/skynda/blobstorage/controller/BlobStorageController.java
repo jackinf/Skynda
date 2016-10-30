@@ -159,4 +159,15 @@ public class BlobStorageController extends BaseController {
         }
         return true;
     }
+
+    @RequestMapping(value = "/test-upload-4-complex", method = RequestMethod.PUT)
+    @ResponseBody
+    public boolean testUpload4(MultipartHttpServletRequest request,
+                               @RequestPart("files") MultipartFile[] files,
+                               @RequestPart("info") FileTestUpload3 info) {
+        for (MultipartFile file : files) {
+            // Do your stuff...
+        }
+        return true;
+    }
 }
