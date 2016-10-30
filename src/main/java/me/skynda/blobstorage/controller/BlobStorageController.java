@@ -135,7 +135,7 @@ public class BlobStorageController extends BaseController {
      */
     @RequestMapping(value = "/test-upload-2-multiple", method = RequestMethod.POST)
     @ResponseBody
-    public boolean testUpload2(MultipartHttpServletRequest request, @RequestParam("files") MultipartFile[] files) {
+    public boolean testUpload2(MultipartHttpServletRequest request, @RequestPart("files") MultipartFile[] files) {
         // Method 1. Getting files from request param
         for (MultipartFile file : files) {
             // Do your stuff...
@@ -149,9 +149,14 @@ public class BlobStorageController extends BaseController {
         return true;
     }
 
-    @RequestMapping(value = "/test-upload-3-complex", method = RequestMethod.POST, consumes = {"multipart/form-data"})
+    @RequestMapping(value = "/test-upload-3-complex", method = RequestMethod.POST)
     @ResponseBody
-    public boolean testUpload3(FileTestUpload3 info) {
+    public boolean testUpload3(MultipartHttpServletRequest request,
+                               @RequestPart("files") MultipartFile[] files,
+                               @RequestPart("info") FileTestUpload3 info) {
+        for (MultipartFile file : files) {
+            // Do your stuff...
+        }
         return true;
     }
 }

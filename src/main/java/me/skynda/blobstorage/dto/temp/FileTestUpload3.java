@@ -1,7 +1,7 @@
 package me.skynda.blobstorage.dto.temp;
 
 import lombok.Data;
-import org.springframework.web.multipart.MultipartFile;
+import me.skynda.car.dto.FeatureDto;
 
 import java.util.List;
 
@@ -9,6 +9,5 @@ import java.util.List;
 public class FileTestUpload3 {
 
     private String name;
-    private MultipartFile file;
-    private List<MultipartFile> files;
+    private List<FeatureDto> features;
 }
