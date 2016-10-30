@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import me.skynda.blobstorage.dto.*;
+import me.skynda.blobstorage.dto.temp.FileTestUpload3;
 import me.skynda.blobstorage.service.BlobStorageService;
 import me.skynda.car.controller.BaseController;
 import me.skynda.common.helper.FileHelper;
@@ -12,8 +13,10 @@ import me.skynda.common.helper.FileHelper;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.datasource.embedded.ConnectionProperties;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -96,12 +99,59 @@ public class BlobStorageController extends BaseController {
     }
 
 
-    @RequestMapping(value = "/test-upload", method = RequestMethod.POST,
-            consumes = {"multipart/form-data"})
+    /*
+    ============================
+    == UPLOADIMISE TEST actionid
+    ============================
+     */
+
+    @RequestMapping(value = "/test-upload-1-single", method = RequestMethod.POST, consumes = {"multipart/form-data"})
     @ResponseBody
-    public boolean testUpload(
-//            @RequestPart("properties") @Valid ConnectionProperties properties,
-            @RequestPart("file") @Valid @NotNull @NotBlank MultipartFile file) {
+    public boolean testUpload1(/*  @RequestPart("properties") @Valid ConnectionProperties properties, */
+        @RequestParam("file") @Valid @NotNull @NotBlank MultipartFile file) {
+        return true;
+    }
+
+    /**
+     * JavaScript:
+     * fetch(`.../api/blob/test-upload-2-multiple`, {
+         method: "POST",
+         mode: 'no-cors',   // optional
+         headers: {"Content-Type": undefined},
+         body: formData
+         })
+     *
+     *
+     * REQUEST:
+     *  KEY 1: Content-Disposition: form-data; name="files"; filename="test1.txt" Content-Type: text/plain
+     *  VALUE 1: FormFile
+     *
+     *  KEY 2: Content-Disposition: form-data; name="files"; filename="test2.txt" Content-Type: text/plain
+     *  VALUE 2: FormFile
+     *
+     * @param request The entire HTTP request. You can get any request param from it
+     * @param files form files
+     * @return
+     */
+    @RequestMapping(value = "/test-upload-2-multiple", method = RequestMethod.POST)
+    @ResponseBody
+    public boolean testUpload2(MultipartHttpServletRequest request, @RequestParam("files") MultipartFile[] files) {
+        // Method 1. Getting files from request param
+        for (MultipartFile file : files) {
+            // Do your stuff...
+        }
+
+        // Method 2. Each key is request param, like "files"
+        MultiValueMap<String, MultipartFile> multiFileMap = request.getMultiFileMap();
+
+        // Method 3.
+        List<MultipartFile> file2 = request.getFiles("files");
+        return true;
+    }
+
+    @RequestMapping(value = "/test-upload-3-complex", method = RequestMethod.POST, consumes = {"multipart/form-data"})
+    @ResponseBody
+    public boolean testUpload3(FileTestUpload3 info) {
         return true;
     }
 }
