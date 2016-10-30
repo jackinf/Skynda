@@ -1,6 +1,7 @@
 /**
  * Created by zekar on 10/30/2016.
  */
+
 export default (store) => ({
   path: "toastr",
   getComponent(nextState, cb) {

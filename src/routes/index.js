@@ -10,8 +10,6 @@ import CounterRoute from './Counter_todelete'
 import {loadTranslations, setLocale, syncTranslationWithStore, i18nReducer} from 'react-redux-i18n';
 import {injectReducer} from "../store/reducers";
 // import 'react-redux-toastr/src/less/index.less';
-import {reducer as toastrReducer} from 'react-redux-toastr';
-
 import "react-redux-toastr/lib/css/react-redux-toastr.min.css";
 
 /*  Note: Instead of using JSX, we recommend using react-router
@@ -23,7 +21,6 @@ export const createRoutes = (store) => {
   // Translation setup
   // ========================================================
   injectReducer(store, {key: "i18n", reducer: i18nReducer});
-  injectReducer(store, {key: "toastr", reducer: toastrReducer});
   syncTranslationWithStore(store);
   store.dispatch(loadTranslations({
     et: require("./../store/translations/et.json"),
