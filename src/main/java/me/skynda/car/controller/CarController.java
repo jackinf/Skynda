@@ -2,7 +2,7 @@ package me.skynda.car.controller;
 
 import java.util.List;
 
-import me.skynda.blobstorage.dto.temp.FileTestUpload3;
+import com.google.gson.Gson;
 import me.skynda.car.dto.request.CarSearchRequestDto;
 import me.skynda.common.dto.CreateResponseDto;
 import me.skynda.common.dto.DeleteResponseDto;
@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import me.skynda.car.dto.CarDto;
 import me.skynda.car.dto.SingleCarDataDto;
-import me.skynda.car.model.Car;
 import me.skynda.car.service.CarService;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -49,13 +48,15 @@ public class CarController extends BaseController {
     }
 
     @RequestMapping(value = "/car", method = RequestMethod.POST)
-    public @ResponseBody CreateResponseDto add(MultipartHttpServletRequest request,
-                                 @RequestPart("faultsFiles") MultipartFile[] faultsFiles,
-                                 @RequestPart("imageFiles") MultipartFile[] imageFiles,
-                                 @RequestPart("car") CarDto carDto,
-                                 BindingResult bindingResult) {
+    @ResponseBody
+    public ResponseEntity<String> add(MultipartHttpServletRequest request,
+               @RequestPart("faultsFiles") MultipartFile[] faultsFiles,
+               @RequestPart("imageFiles") MultipartFile[] imageFiles,
+               @RequestPart("car") CarDto carDto,
+               BindingResult bindingResult) {
         // TODO: Problems is that it does not return a JSON response. Make it so that it would return a JSON response!!
-        return carService.saveCarForSale(carDto, bindingResult);
+        CreateResponseDto createResponseDto = carService.saveCarForSale(carDto, bindingResult);
+        return new ResponseEntity<>(new Gson().toJson(createResponseDto), HttpStatus.OK);
     }
 
 //	@RequestMapping(value = "/car", method = RequestMethod.POST, consumes = "application/json")
