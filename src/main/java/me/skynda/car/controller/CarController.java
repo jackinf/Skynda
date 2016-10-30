@@ -2,6 +2,7 @@ package me.skynda.car.controller;
 
 import java.util.List;
 
+import me.skynda.blobstorage.dto.temp.FileTestUpload3;
 import me.skynda.car.dto.request.CarSearchRequestDto;
 import me.skynda.common.dto.CreateResponseDto;
 import me.skynda.common.dto.DeleteResponseDto;
@@ -20,16 +21,18 @@ import me.skynda.car.dto.CarDto;
 import me.skynda.car.dto.SingleCarDataDto;
 import me.skynda.car.model.Car;
 import me.skynda.car.service.CarService;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(value = "/api", produces = "application/json")
 public class CarController extends BaseController {
-	
-	@Autowired
-	private CarService carService;
-	
+
+    @Autowired
+    private CarService carService;
+
     @RequestMapping(value = "/cars", method = RequestMethod.GET)
     public List<SingleCarDataDto> getAll(@RequestBody(required = false) CarSearchRequestDto dto) {
         return carService.getCars();
@@ -40,25 +43,35 @@ public class CarController extends BaseController {
         return carService.getCar(id);
     }
 
-    @RequestMapping(value = "/car/{id}/detailed", method = RequestMethod.GET)
+    @RequestMapping(value = "/car/{id}/detailed", method = RequestMethod.GET, produces = "application/json")
     public SingleCarDataDto getDetailed(@PathVariable("id") Long id) {
         return carService.getCarDetailed(id);
     }
 
-	@RequestMapping(value = "/car", method = RequestMethod.POST, consumes = "application/json")
-    public CreateResponseDto add(@RequestBody CarDto carDto, BindingResult bindingResult) {
+    @RequestMapping(value = "/car", method = RequestMethod.POST)
+    public @ResponseBody CreateResponseDto add(MultipartHttpServletRequest request,
+                                 @RequestPart("faultsFiles") MultipartFile[] faultsFiles,
+                                 @RequestPart("imageFiles") MultipartFile[] imageFiles,
+                                 @RequestPart("car") CarDto carDto,
+                                 BindingResult bindingResult) {
+        // TODO: Problems is that it does not return a JSON response. Make it so that it would return a JSON response!!
         return carService.saveCarForSale(carDto, bindingResult);
     }
 
-	@RequestMapping(value = "/car/{id}", method = RequestMethod.PUT, consumes = "application/json")
+//	@RequestMapping(value = "/car", method = RequestMethod.POST, consumes = "application/json")
+//    public CreateResponseDto add(@RequestBody CarDto carDto, BindingResult bindingResult) {
+//        return carService.saveCarForSale(carDto, bindingResult);
+//    }
+
+    @RequestMapping(value = "/car/{id}", method = RequestMethod.PUT, consumes = "application/json")
     public UpdateResponseDto update(@PathVariable("id") Long id,
                                     @RequestBody CarDto carDto,
                                     BindingResult bindingResult) {
         carDto.setId(id);
         return carService.updateCarForSale(carDto, bindingResult);
     }
-	
-	@RequestMapping(value = "/car/{id}", method = RequestMethod.DELETE, consumes = "application/json")
+
+    @RequestMapping(value = "/car/{id}", method = RequestMethod.DELETE, consumes = "application/json")
     public DeleteResponseDto delete(@PathVariable("id") Long id) {
         return carService.deleteCar(id);
     }
