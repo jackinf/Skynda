@@ -11,9 +11,7 @@ export default (store) => ({
   getComponent(nextState, cb) {
     require.ensure([], (require) => {
       const FileUploadContainer = require("./containers/FileUploadContainer").default;
-      const setTestFileReducer = require("./reducers/FileUpload.setTestFile.reducer");
       injectReducer(store, {key: REDUX_FORM_KEY, reducer: formReducer});
-      injectReducer(store, {key: "setTestFile", reducer: setTestFileReducer});
       cb(null, FileUploadContainer);
     })
   }

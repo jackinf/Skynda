@@ -1,10 +1,13 @@
 /**
  * Created by jevgenir on 10/29/2016.
  */
-import submitMyForm from "./FileUpload.submit.action";
+import {submitFormTest1, submitFormTest2, submitFormTest3, submitFormTest4} from "./FileUpload.submit.action";
 import onChangeFiles from "./FileUpload.onChangeFiles.action";
 
 export {
-  submitMyForm,
+  submitFormTest1,
+  submitFormTest2,
+  submitFormTest3,
+  submitFormTest4,
   onChangeFiles
 }
