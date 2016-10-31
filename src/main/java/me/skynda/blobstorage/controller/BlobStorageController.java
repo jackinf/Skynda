@@ -23,7 +23,6 @@ import javax.validation.constraints.NotNull;
 import javax.xml.bind.DatatypeConverter;
 import java.util.Base64;
 import java.util.List;
-
 /**
  * Controller for managing media files (blobs)
  */
@@ -164,7 +163,8 @@ public class BlobStorageController extends BaseController {
 
     @RequestMapping(value = "/test-upload-4-complex", method = RequestMethod.POST, consumes = "application/json")
     public boolean testUpload4(@RequestBody String file) {
-        byte[] bytes = DatatypeConverter.parseBase64Binary(file);
+        String second = file.split(",")[1];
+        byte[] bytes = org.apache.commons.codec.binary.Base64.decodeBase64(second.getBytes());
         UploadBlobDto dto = new UploadBlobDto();
         dto.setContainerName("skynda");
         dto.setBlobName("pic001.png");
