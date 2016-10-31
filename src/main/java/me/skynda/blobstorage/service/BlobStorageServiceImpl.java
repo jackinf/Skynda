@@ -9,6 +9,7 @@ import me.skynda.blobstorage.dto.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -110,6 +111,32 @@ public class BlobStorageServiceImpl implements BlobStorageService {
             // Create or overwrite the "myimage.jpg" blob with contents from a local file.
             CloudBlockBlob blob = container.getBlockBlobReference(dto.getBlobName());   // e.g. "myimage.jpg"
             blob.upload(new FileInputStream(fileSource), fileSource.length());
+        }
+        catch (Exception e)
+        {
+            // Output the stack trace.
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public boolean uploadStream(UploadBlobDto dto) {
+        try
+        {
+            // Create the blob client.
+            CloudBlobClient blobClient = storageAccount.createCloudBlobClient();
+
+            // Retrieve reference to a previously created container.
+            CloudBlobContainer container = blobClient.getContainerReference(dto.getContainerName());    // "mycontainer"
+
+            // Get the file's stream or define the path to a local file.
+            byte[] byteArray = dto.getByteArray();  // e.g. new File("C:\\myimages\\myimage.jpg")
+            ByteArrayInputStream bis = new ByteArrayInputStream(byteArray);
+            // Create or overwrite the "myimage.jpg" blob with contents from a local file.
+            CloudBlockBlob blob = container.getBlockBlobReference(dto.getBlobName());   // e.g. "myimage.jpg"
+            blob.upload(bis, byteArray.length);
         }
         catch (Exception e)
         {

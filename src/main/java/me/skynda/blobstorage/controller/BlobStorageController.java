@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.DatatypeConverter;
 import java.util.Base64;
 import java.util.List;
 
@@ -163,7 +164,13 @@ public class BlobStorageController extends BaseController {
 
     @RequestMapping(value = "/test-upload-4-complex", method = RequestMethod.POST, consumes = "application/json")
     public boolean testUpload4(@RequestBody String file) {
-        byte[] decode = Base64.getDecoder().decode(file);
+        byte[] bytes = DatatypeConverter.parseBase64Binary(file);
+        UploadBlobDto dto = new UploadBlobDto();
+        dto.setContainerName("skynda");
+        dto.setBlobName("pic001.png");
+        dto.setByteArray(bytes);
+        blobStorageService.uploadStream(dto);
+//        byte[] decode = Base64.getMimeDecoder().decode(file);
         return true;
     }
 }

@@ -24,4 +24,9 @@ public class UploadBlobDto {
      * Uploaded file
      */
     private File fileSource;
+
+    /**
+     * Alternative way for uploading files
+     */
+    private byte[] byteArray;
 }

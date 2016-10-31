@@ -12,6 +12,7 @@ public interface BlobStorageService {
     boolean createContainer(CreateContainerDto dto);
     boolean deleteContainer(DeleteContainerDto dto);
     boolean upload(UploadBlobDto dto);
+    boolean uploadStream(UploadBlobDto dto);
     List<ListBlobItem> list(ListBlobsDto dto);
     void download(DownloadBlobDto dto);
     boolean delete(DeleteBlobDto dto);
