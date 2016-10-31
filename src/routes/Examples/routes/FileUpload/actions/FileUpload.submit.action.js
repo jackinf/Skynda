@@ -58,7 +58,7 @@ export function submitFormTest2(data, files) {
     })
 }
 
-export function submitFormTest3(data, files) {
+export function submitFormTest4(data, files) {
   console.log("Submitted values: ", data);
   console.log("File: ", files);
 
@@ -67,12 +67,42 @@ export function submitFormTest3(data, files) {
     formData.append("files", files[x]);
   }
 
-  var reader  = new FileReader();
-  reader.addEventListener("load", function () {
-    console.log("READER RESULT", reader.result);
-    // console.log(reader.result);
-  }, false);
-  reader.readAsDataURL(files[0]);
+  // var reader  = new FileReader();
+  // reader.addEventListener("load", function () {
+  //   console.log("READER RESULT", reader.result);
+  //   formData.append("file", reader.result);
+  //   // console.log(reader.result);
+  //
+  //   fetch(`${remoteConfig.remote}/api/blob/test-upload-4-complex`, {
+  //     method: "POST",
+  //     // mode: 'no-cors',
+  //     headers: {"Content-Type": "application/json", "Accept": "application/json"},
+  //     // headers: {"Content-Type": "multipart/form-data"},
+  //     // headers: {"Content-Type": "application/x-www-form-urlencoded"},
+  //     body: reader.result
+  //   })
+  //     .then(resp => resp.json())
+  //     .then(resp => {
+  //       console.log(resp);
+  //     })
+  // }, false);
+  // reader.readAsDataURL(files[0]);
+
+  let fileStr = btoa(files[0]);
+  console.log(fileStr);
+
+  return fetch(`${remoteConfig.remote}/api/blob/test-upload-4-complex`, {
+    method: "POST",
+    // mode: 'no-cors',
+    headers: {"Content-Type": "application/json", "Accept": "application/json"},
+    // headers: {"Content-Type": "multipart/form-data"},
+    // headers: {"Content-Type": "application/x-www-form-urlencoded"},
+    body: JSON.stringify(fileStr)
+  })
+    .then(resp => resp.json())
+    .then(resp => {
+      console.log(resp);
+    });
 
   return Promise.resolve(true);
   // formData.append("info", new Blob([JSON.stringify({
@@ -101,7 +131,7 @@ export function submitFormTest3(data, files) {
   //   })
 }
 
-export function submitFormTest4(data, files) {
+export function submitFormTest3(data, files) {
   console.log("Submitted values: ", data);
   console.log("File: ", files);
 
@@ -109,17 +139,17 @@ export function submitFormTest4(data, files) {
   for (let x = 0; x < files.length; x++) {
     formData.append("files", files[x]);
   }
-  formData.append("info", new Blob([JSON.stringify({
-    "name": "john",
-    "features": [{"id": "1", "text": "text123"}]
-  })], {
-    type: "application/json"
-  }));
+  // formData.append("info", new Blob([JSON.stringify({
+  //   "name": "john",
+  //   "features": [{"id": "1", "text": "text123"}]
+  // })], {
+  //   type: "application/json"
+  // }));
 
   return fetch(`${remoteConfig.remote}/api/blob/test-upload-3-complex`, {
     method: "POST",
-    mode: 'no-cors',
-    headers: {"Content-Type": undefined},
+    // mode: 'no-cors',
+    headers: {"Content-Type": "application/form-data"},
     body: formData
   })
     .then(resp => resp.json())

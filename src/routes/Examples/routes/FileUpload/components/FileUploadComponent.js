@@ -38,7 +38,7 @@ class FileUploadComponent extends React.Component {
 
   onSubmit = (e) => {
     // let allFiles = this.state.testFiles.concat(this.state.otherTestFiles);
-    this.props.handleSubmit(data => submitFormTest3(data, this.state.formtestFiles))(e);
+    this.props.handleSubmit(data => submitFormTest4(data, this.state.formtestFiles))(e);
   };
 
   render() {
