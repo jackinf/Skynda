@@ -67,42 +67,44 @@ export function submitFormTest4(data, files) {
     formData.append("files", files[x]);
   }
 
-  // var reader  = new FileReader();
-  // reader.addEventListener("load", function () {
-  //   console.log("READER RESULT", reader.result);
-  //   formData.append("file", reader.result);
-  //   // console.log(reader.result);
+  var reader  = new FileReader();
+  reader.addEventListener("load", function () {
+    let res = reader.result;
+    res = res.trim();
+    console.log("READER RESULT", res);
+    formData.append("file", res);
+    // console.log(reader.result);
+
+    fetch(`${remoteConfig.remote}/api/blob/test-upload-4-complex`, {
+      method: "POST",
+      // mode: 'no-cors',
+      headers: {"Content-Type": "application/json", "Accept": "application/json"},
+      // headers: {"Content-Type": "multipart/form-data"},
+      // headers: {"Content-Type": "application/x-www-form-urlencoded"},
+      body: res
+    })
+      .then(resp => resp.json())
+      .then(resp => {
+        console.log(resp);
+      })
+  }, false);
+  reader.readAsDataURL(files[0]);
+
+  // let fileStr = btoa(files[0]);
+  // console.log(fileStr);
   //
-  //   fetch(`${remoteConfig.remote}/api/blob/test-upload-4-complex`, {
-  //     method: "POST",
-  //     // mode: 'no-cors',
-  //     headers: {"Content-Type": "application/json", "Accept": "application/json"},
-  //     // headers: {"Content-Type": "multipart/form-data"},
-  //     // headers: {"Content-Type": "application/x-www-form-urlencoded"},
-  //     body: reader.result
-  //   })
-  //     .then(resp => resp.json())
-  //     .then(resp => {
-  //       console.log(resp);
-  //     })
-  // }, false);
-  // reader.readAsDataURL(files[0]);
-
-  let fileStr = btoa(files[0]);
-  console.log(fileStr);
-
-  return fetch(`${remoteConfig.remote}/api/blob/test-upload-4-complex`, {
-    method: "POST",
-    // mode: 'no-cors',
-    headers: {"Content-Type": "application/json", "Accept": "application/json"},
-    // headers: {"Content-Type": "multipart/form-data"},
-    // headers: {"Content-Type": "application/x-www-form-urlencoded"},
-    body: JSON.stringify(fileStr)
-  })
-    .then(resp => resp.json())
-    .then(resp => {
-      console.log(resp);
-    });
+  // return fetch(`${remoteConfig.remote}/api/blob/test-upload-4-complex`, {
+  //   method: "POST",
+  //   // mode: 'no-cors',
+  //   headers: {"Content-Type": "application/json", "Accept": "application/json"},
+  //   // headers: {"Content-Type": "multipart/form-data"},
+  //   // headers: {"Content-Type": "application/x-www-form-urlencoded"},
+  //   body: JSON.stringify(fileStr)
+  // })
+  //   .then(resp => resp.json())
+  //   .then(resp => {
+  //     console.log(resp);
+  //   });
 
   return Promise.resolve(true);
   // formData.append("info", new Blob([JSON.stringify({
