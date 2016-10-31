@@ -2,6 +2,7 @@
  * Created by jevgenir on 10/29/2016.
  */
 import remoteConfig from "store/remoteConfig";
+import $ from "jquery";
 
 export function submitFormTest1(data, files) {
   console.log("Submitted values: ", data);
@@ -65,31 +66,41 @@ export function submitFormTest3(data, files) {
   for (let x = 0; x < files.length; x++) {
     formData.append("files", files[x]);
   }
-  formData.append("info", new Blob([JSON.stringify({
-    "name": "john",
-    "features": [{"id": "1", "text": "text123"}]
-  })], {
-    type: "application/json"
-  }));
 
-  return fetch(`${remoteConfig.remote}/api/blob/test-upload-3-complex`, {
-    method: "POST",
-    mode: 'no-cors',
-    headers: {"Content-Type": undefined},
-    body: formData
-  })
-    .then(resp => resp.json())
-    .then(resp => {
-      console.log(resp);
-    })
+  var reader  = new FileReader();
+  reader.addEventListener("load", function () {
+    console.log("READER RESULT", reader.result);
+    // console.log(reader.result);
+  }, false);
+  reader.readAsDataURL(files[0]);
+
+  return Promise.resolve(true);
+  // formData.append("info", new Blob([JSON.stringify({
+  //   "name": "john",
+  //   "features": [{"id": "1", "text": "text123"}]
+  // })], {
+  //   type: "application/json"
+  // }));
+
+  // $.ajax(`${remoteConfig.remote}/api/blob/test-upload-3-complex`, {
+  //
+  // });
+
+  // return Promise.resolve;
+  // return fetch(`${remoteConfig.remote}/api/blob/test-upload-3-complex`, {
+  //   method: "POST",
+  //   mode: 'no-cors',
+  //   // headers: {"Content-Type": undefined},
+  //   headers: {"Content-Type": "multipart/form-data", "Access-Control-Allow-Origin": "*"},
+  //   // headers: {"Content-Type": "application/x-www-form-urlencoded"},
+  //   body: formData
+  // })
+  //   .then(resp => resp.json())
+  //   .then(resp => {
+  //     console.log(resp);
+  //   })
 }
 
-/**
- * NB! THIS SHOULD FAIL! YOU CANNOT SEND FILES USING SOMETHING OTHER THAN POST.
- * @param data
- * @param files
- * @returns {Promise.<TResult>|*|Thenable<U>|Promise<U>}
- */
 export function submitFormTest4(data, files) {
   console.log("Submitted values: ", data);
   console.log("File: ", files);
@@ -105,8 +116,8 @@ export function submitFormTest4(data, files) {
     type: "application/json"
   }));
 
-  return fetch(`${remoteConfig.remote}/api/blob/test-upload-4-complex`, {
-    method: "PUT",
+  return fetch(`${remoteConfig.remote}/api/blob/test-upload-3-complex`, {
+    method: "POST",
     mode: 'no-cors',
     headers: {"Content-Type": undefined},
     body: formData
