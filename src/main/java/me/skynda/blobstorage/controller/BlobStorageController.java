@@ -20,12 +20,13 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.util.Base64;
 import java.util.List;
 
 /**
  * Controller for managing media files (blobs)
  */
-@CrossOrigin(origins = "*")
+//@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/blob")
 public class BlobStorageController extends BaseController {
@@ -157,6 +158,7 @@ public class BlobStorageController extends BaseController {
         for (MultipartFile file : files) {
             // Do your stuff...
         }
+//        Base64.getDecoder().decode(encoded)
         return true;
     }
 
