@@ -152,24 +152,18 @@ public class BlobStorageController extends BaseController {
 
     @RequestMapping(value = "/test-upload-3-complex", method = RequestMethod.POST)
     @ResponseBody
-    public boolean testUpload3(MultipartHttpServletRequest request,
-                               @RequestPart("files") MultipartFile[] files,
-                               @RequestPart("info") FileTestUpload3 info) {
-        for (MultipartFile file : files) {
-            // Do your stuff...
-        }
+    public boolean testUpload3(@RequestParam("files") MultipartFile[] files,
+                               @RequestParam("info") FileTestUpload3 info) {
+//        for (MultipartFile file : files) {
+//            // Do your stuff...
+//        }
 //        Base64.getDecoder().decode(encoded)
         return true;
     }
 
-    @RequestMapping(value = "/test-upload-4-complex", method = RequestMethod.PUT)
-    @ResponseBody
-    public boolean testUpload4(MultipartHttpServletRequest request,
-                               @RequestPart("files") MultipartFile[] files,
-                               @RequestPart("info") FileTestUpload3 info) {
-        for (MultipartFile file : files) {
-            // Do your stuff...
-        }
+    @RequestMapping(value = "/test-upload-4-complex", method = RequestMethod.POST, consumes = "application/json")
+    public boolean testUpload4(@RequestBody String file) {
+        byte[] decode = Base64.getDecoder().decode(file);
         return true;
     }
 }
