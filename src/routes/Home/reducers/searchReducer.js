@@ -1,5 +1,5 @@
 import moment from "moment";
-import {setStateValues} from './../actions/index';
+import {setStateValues, setIsSearching} from './../actions/index';
 import {Translate} from 'react-redux-i18n';
 import React from "react";
 
@@ -33,7 +33,7 @@ export const loadBaseData = () => {
         ];
 
         const features = [
-          {id: -1, name: <Translate value="all"/>, toggled: true},
+          {id: -1, name: <Translate value="all"/>},
           {id: 0, name: "Parking Sensors"},
           {id: 1, name: "Bluetooth"},
           {id: 2, name: "Sunroof"},
@@ -43,19 +43,19 @@ export const loadBaseData = () => {
         ];
 
         const transmissions = [
-          {id: 0, name: <Translate value="components.car_search.automatic"/>, toggled: true},
-          {id: 1, name: <Translate value="components.car_search.manual"/>, toggled: true}
+          {id: 0, name: <Translate value="components.car_search.automatic"/>},
+          {id: 1, name: <Translate value="components.car_search.manual"/>}
         ];
 
         const doors = [
-          {id: -1, name: <Translate value="all"/>, toggled: true},
+          {id: -1, name: <Translate value="all"/>},
           {id: 0, name: "2"},
           {id: 1, name: "3"},
           {id: 2, name: "4+"}
         ];
 
         const seats = [
-          {id: -1, name: <Translate value="all"/>, toggled: true},
+          {id: -1, name: <Translate value="all"/>},
           {id: 0, name: "2"},
           {id: 1, name: "3"},
           {id: 2, name: "5"},

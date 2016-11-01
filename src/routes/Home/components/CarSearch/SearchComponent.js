@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react'
 import {Row, Col} from "react-bootstrap";
-import ButtonGroup from "./CarSearchButtonGroup";
+import ButtonGroupContainer from "../../containers/ButtonGroupContainer";
 import SliderContainer from "../../containers/SliderContainer";
 import ToggleButton from "../../containers/ToggleAdvancedSearchContainer";
 import SearchButton from "../../containers/SearchButtonContainer";
@@ -10,23 +10,22 @@ import Plus from 'react-icons/lib/fa/plus'
 import Minus from 'react-icons/lib/fa/minus'
 
 const colors = [
-  {id: -1, name: "Kõik", toggled: true},
-  {id: 0, name: "red", style: {"backgroundColor": "#EF1717"}, toggled: true, hideName: true},
-  {id: 1, name: "orange", style: {"backgroundColor": "#E87846"}, toggled: true, hideName: true},
-  {id: 2, name: "yellow", style: {"backgroundColor": "#DECC44"}, toggled: true, hideName: true},
-  {id: 3, name: "green", style: {"backgroundColor": "#91DD59"}, toggled: true, hideName: true},
-  {id: 4, name: "green", style: {"backgroundColor": "#3AC99D"}, toggled: true, hideName: true},
-  {id: 5, name: "green", style: {"backgroundColor": "#44DE62"}, toggled: true, hideName: true},
-  {id: 6, name: "blue", style: {"backgroundColor": "#15A6DB"}, toggled: true, hideName: true},
+  {id: -1, name: "Kõik"},
+  {id: 0, name: "red", style: {"backgroundColor": "#EF1717"}, hideName: true},
+  {id: 1, name: "orange", style: {"backgroundColor": "#E87846"}, hideName: true},
+  {id: 2, name: "yellow", style: {"backgroundColor": "#DECC44"}, hideName: true},
+  {id: 3, name: "green", style: {"backgroundColor": "#91DD59"}, hideName: true},
+  {id: 4, name: "green", style: {"backgroundColor": "#3AC99D"}, hideName: true},
+  {id: 5, name: "green", style: {"backgroundColor": "#44DE62"}, hideName: true},
+  {id: 6, name: "blue", style: {"backgroundColor": "#15A6DB"}, hideName: true},
   {
     id: 7,
     name: "white",
     style: {"backgroundColor": "#FFFFFF"},
-    toggled: true,
     hideName: true,
     extraClass: "btn-inverse"
   },
-  {id: 8, name: "black", style: {"backgroundColor": "#000000"}, toggled: true, hideName: true}
+  {id: 8, name: "black", style: {"backgroundColor": "#000000"}, hideName: true}
 ];
 
 class SearchComponent extends React.Component {
@@ -55,7 +54,7 @@ class SearchComponent extends React.Component {
                 <Row>
                   <Col md={12} className='range-slider-wrapper'>
                     <label><Translate value="components.car_search.brand"/></label>
-                    <ButtonGroup options={this.props.brands}/>
+                    <ButtonGroupContainer type={"brands"} options={this.props.brands}/>
                   </Col>
                 </Row>
 
@@ -142,7 +141,7 @@ class SearchComponent extends React.Component {
                             <Row>
                               <Col md={12} className='range-slider-wrapper'>
                                 <label><Translate value="components.car_search.colors"/></label><br />
-                                <ButtonGroup md={1} xs={2} options={colors} shape='circle'/>
+                                <ButtonGroupContainer type={"colors"} md={1} xs={2} options={colors} shape='circle'/>
                               </Col>
                             </Row>
                           </Col>
@@ -167,7 +166,7 @@ class SearchComponent extends React.Component {
                             <Row>
                               <Col md={12} className='range-slider-wrapper'>
                                 <label><Translate value="components.car_search.features"/></label>
-                                <ButtonGroup md={3} options={this.props.features}/>
+                                <ButtonGroupContainer type={"features"} md={3} options={this.props.features}/>
                               </Col>
                             </Row>
                           </Col>
@@ -192,7 +191,7 @@ class SearchComponent extends React.Component {
                             <Row>
                               <Col md={12} className='range-slider-wrapper'>
                                 <label><Translate value="components.car_search.doors"/></label><br />
-                                <ButtonGroup md={2} xs={2} options={this.props.doors} shape='circle'/>
+                                <ButtonGroupContainer type={"doors"} md={2} xs={2} options={this.props.doors} shape='circle'/>
                               </Col>
                             </Row>
                           </Col>
@@ -200,7 +199,7 @@ class SearchComponent extends React.Component {
                             <Row>
                               <Col md={12} className='range-slider-wrapper'>
                                 <label><Translate value="components.car_search.seats"/></label><br />
-                                <ButtonGroup md={2} xs={2} options={this.props.seats} shape='circle'/>
+                                <ButtonGroupContainer type={"seats"} md={2} xs={2} options={this.props.seats} shape='circle'/>
                               </Col>
                             </Row>
                           </Col>
@@ -208,7 +207,7 @@ class SearchComponent extends React.Component {
                             <Row>
                               <Col md={12} className='range-slider-wrapper'>
                                 <label><Translate value="components.car_search.transmission"/></label><br />
-                                <ButtonGroup md={8} xs={6} options={this.props.transmissions}/>
+                                <ButtonGroupContainer type={"transmission"} md={8} xs={6} options={this.props.transmissions}/>
                               </Col>
                             </Row>
                           </Col>
