@@ -1,7 +1,6 @@
 package me.skynda.car.dto;
 
 import java.math.BigDecimal;
-import java.util.Date;
 import java.util.List;
 
 import lombok.Data;
@@ -27,4 +26,7 @@ public class CarDto extends BaseDto {
 	private List<FaultsDto> faults;
 	private PerformanceDto performance;
 	private Integer safetyStars;
+
+	private List<CarDtoImageFile> imageFiles;
+	private List<CarDtoFaultsFile> faultsFiles;
 }

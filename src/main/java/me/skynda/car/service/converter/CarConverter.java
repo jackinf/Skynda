@@ -1,14 +1,12 @@
 package me.skynda.car.service.converter;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import me.skynda.car.dto.*;
 import me.skynda.car.model.*;
-import me.skynda.common.helper.Utility;
+import me.skynda.common.helper.SkyndaUtility;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -224,7 +222,7 @@ public class CarConverter {
 	public CarDto transformToCarDto(Car carDb) {
 		CarDto carDto = new CarDto();
 		carDto.setId(carDb.getId());
-        carDto.setCarModelsCode(Utility.resolve(() -> carDb.getCarModels().getModelCode()).get());
+        carDto.setCarModelsCode(SkyndaUtility.resolve(() -> carDb.getCarModels().getModelCode()).get());
 		carDto.setVinCode(carDb.getVinCode());
 		carDto.setPrice(carDb.getPrice());
 		carDto.setRegistrationNumber(carDb.getRegistrationNumber());

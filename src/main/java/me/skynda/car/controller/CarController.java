@@ -2,14 +2,11 @@ package me.skynda.car.controller;
 
 import java.util.List;
 
-import com.google.gson.Gson;
 import me.skynda.car.dto.request.CarSearchRequestDto;
 import me.skynda.common.dto.CreateResponseDto;
 import me.skynda.common.dto.DeleteResponseDto;
 import me.skynda.common.dto.UpdateResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,8 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 import me.skynda.car.dto.CarDto;
 import me.skynda.car.dto.SingleCarDataDto;
 import me.skynda.car.service.CarService;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 
 @CrossOrigin(origins = "*")
@@ -47,29 +42,30 @@ public class CarController extends BaseController {
         return carService.getCarDetailed(id);
     }
 
-    @RequestMapping(value = "/car", method = RequestMethod.POST)
-    @ResponseBody
-    public ResponseEntity<String> add(MultipartHttpServletRequest request,
-               @RequestPart("faultsFiles") MultipartFile[] faultsFiles,
-               @RequestPart("imageFiles") MultipartFile[] imageFiles,
-               @RequestPart("car") CarDto carDto,
-               BindingResult bindingResult) {
-        // TODO: Problems is that it does not return a JSON response. Make it so that it would return a JSON response!!
-        CreateResponseDto createResponseDto = carService.saveCarForSale(carDto, bindingResult);
-        return new ResponseEntity<>(new Gson().toJson(createResponseDto), HttpStatus.OK);
-    }
-
-//	@RequestMapping(value = "/car", method = RequestMethod.POST, consumes = "application/json")
-//    public CreateResponseDto add(@RequestBody CarDto carDto, BindingResult bindingResult) {
-//        return carService.saveCarForSale(carDto, bindingResult);
+//    @RequestMapping(value = "/car", method = RequestMethod.POST)
+//    @ResponseBody
+//    public ResponseEntity<String> add(MultipartHttpServletRequest request,
+//               @RequestPart("faultsFiles") MultipartFile[] faultsFiles,
+//               @RequestPart("imageFiles") MultipartFile[] imageFiles,
+//               @RequestPart("car") CarDto carDto,
+//               BindingResult bindingResult) {
+//        // TODO: Problems is that it does not return a JSON response. Make it so that it would return a JSON response!!
+//        CreateResponseDto createResponseDto = carService.createOrUpdateCarForSale(carDto, bindingResult);
+//        return new ResponseEntity<>(new Gson().toJson(createResponseDto), HttpStatus.OK);
 //    }
 
+	@RequestMapping(value = "/car", method = RequestMethod.POST, consumes = "application/json")
+    public CreateResponseDto add(@RequestBody CarDto carDto, BindingResult bindingResult) {
+        carDto.setId(null);
+        return carService.createOrUpdateCarForSale(carDto, bindingResult);
+    }
+
     @RequestMapping(value = "/car/{id}", method = RequestMethod.PUT, consumes = "application/json")
-    public UpdateResponseDto update(@PathVariable("id") Long id,
+    public CreateResponseDto update(@PathVariable("id") Long id,
                                     @RequestBody CarDto carDto,
                                     BindingResult bindingResult) {
         carDto.setId(id);
-        return carService.updateCarForSale(carDto, bindingResult);
+        return carService.createOrUpdateCarForSale(carDto, bindingResult);
     }
 
     @RequestMapping(value = "/car/{id}", method = RequestMethod.DELETE, consumes = "application/json")
