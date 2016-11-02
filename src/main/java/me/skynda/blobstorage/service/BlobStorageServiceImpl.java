@@ -6,6 +6,7 @@ import com.microsoft.azure.storage.blob.*;
 import lombok.SneakyThrows;
 import me.skynda.blobstorage.dto.*;
 
+import me.skynda.blobstorage.dto.response.BlobStorageUploadStreamResponseDto;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -122,7 +123,7 @@ public class BlobStorageServiceImpl implements BlobStorageService {
     }
 
     @Override
-    public boolean uploadStream(UploadBlobDto dto) {
+    public BlobStorageUploadStreamResponseDto uploadStream(UploadBlobDto dto) {
         try
         {
             // Create the blob client.
@@ -132,19 +133,20 @@ public class BlobStorageServiceImpl implements BlobStorageService {
             CloudBlobContainer container = blobClient.getContainerReference(dto.getContainerName());    // "mycontainer"
 
             // Get the file's stream or define the path to a local file.
-            byte[] byteArray = dto.getByteArray();  // e.g. new File("C:\\myimages\\myimage.jpg")
+            byte[] byteArray = dto.getByteArray();
             ByteArrayInputStream bis = new ByteArrayInputStream(byteArray);
+
             // Create or overwrite the "myimage.jpg" blob with contents from a local file.
             CloudBlockBlob blob = container.getBlockBlobReference(dto.getBlobName());   // e.g. "myimage.jpg"
             blob.upload(bis, byteArray.length);
+            return BlobStorageUploadStreamResponseDto.Factory.succeed(blob.getUri().toString());
         }
         catch (Exception e)
         {
             // Output the stack trace.
             e.printStackTrace();
-            return false;
+            return BlobStorageUploadStreamResponseDto.Factory.fail();
         }
-        return true;
     }
 
     @Override

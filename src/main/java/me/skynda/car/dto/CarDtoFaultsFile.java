@@ -3,7 +3,9 @@ package me.skynda.car.dto;
 import lombok.Data;
 
 @Data
-public class FeatureDto {
+public class CarDtoFaultsFile {
+
     private Long id;
-    private String text;
+    private String base64File;
+
 }

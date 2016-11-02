@@ -1,23 +1,23 @@
 package me.skynda.car.service;
 
+import me.skynda.blobstorage.dto.UploadBlobDto;
+import me.skynda.blobstorage.dto.response.BlobStorageUploadStreamResponseDto;
+import me.skynda.blobstorage.service.BlobStorageService;
 import me.skynda.car.dao.*;
-import me.skynda.car.dto.CarDto;
-import me.skynda.car.dto.SingleCarDataDto;
+import me.skynda.car.dto.*;
 import me.skynda.car.model.Car;
 import me.skynda.car.model.CarModels;
 import me.skynda.car.service.converter.CarConverter;
 import me.skynda.car.validators.CarValidator;
 import me.skynda.common.dto.CreateResponseDto;
 import me.skynda.common.dto.DeleteResponseDto;
-import me.skynda.common.dto.UpdateResponseDto;
+import me.skynda.common.helper.SkyndaUtility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service
 @Transactional
@@ -37,6 +37,9 @@ public class CarServiceImpl implements CarService {
 
     @Autowired
     CarImageDao carImageDao;
+
+    @Autowired
+    private BlobStorageService blobStorageService;
 
     @Autowired
     private CarConverter carConverter;
@@ -63,7 +66,7 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public CreateResponseDto saveCarForSale(CarDto carDto, BindingResult bindingResult) {
+    public CreateResponseDto createOrUpdateCarForSale(CarDto carDto, BindingResult bindingResult) {
         Car car = carConverter.transform(carDto);
 
         CarModels carModel = carModelsDao.getByModelCode(carDto.getCarModelsCode());
@@ -78,43 +81,59 @@ public class CarServiceImpl implements CarService {
             return response;
         }
 
+        /*
+            Upload files and get uploaded url-s
+         */
+
+        List<FaultsDto> faults = carDto.getFaults();
+        List<CarDtoFaultsFile> faultsFiles = carDto.getFiles().getFaultsFiles();
+        faultsFiles.forEach(file -> {
+            UploadBlobDto uploadBlobDto = new UploadBlobDto();
+            uploadBlobDto.setContainerName("skynda");                   // TODO: use correct container
+            uploadBlobDto.setBlobName(UUID.randomUUID().toString());    // TODO: use correct file name
+            uploadBlobDto.setByteArray(SkyndaUtility.toBytearray(file.getBase64File()));
+            BlobStorageUploadStreamResponseDto responseDto = blobStorageService.uploadStream(uploadBlobDto);
+            if (responseDto.isSuccess()) {
+                for (FaultsDto dto : faults) {
+                    if (Objects.equals(dto.getId(), file.getId())) {
+                        dto.setImg(responseDto.getUri());
+                        break;
+                    }
+                }
+            }
+        });
+
+        List<ImagesDto> images = carDto.getImages() != null ? carDto.getImages() : new ArrayList<>();
+        List<CarDtoImageFile> imageFiles = carDto.getFiles().getImageFiles();
+        imageFiles.forEach(file -> {
+            UploadBlobDto uploadBlobDto = new UploadBlobDto();
+            uploadBlobDto.setContainerName("skynda");                   // TODO: use correct container
+            uploadBlobDto.setBlobName(UUID.randomUUID().toString());    // TODO: use correct file name
+            uploadBlobDto.setByteArray(SkyndaUtility.toBytearray(file.getBase64File()));
+            BlobStorageUploadStreamResponseDto responseDto = blobStorageService.uploadStream(uploadBlobDto);
+            if (responseDto.isSuccess()) {
+                ImagesDto dto = new ImagesDto();
+                dto.setOriginal(responseDto.getUri());
+                images.add(dto);
+            }
+        });
+
+        /*
+            Add Car to the database TODO: If some logic fails after this code, then undo transaction
+         */
+
         car.setCreated(new Date());
-        Car addedCar = carDao.save(car);    // TODO: Get success code
+        Car addedCar = carDao.saveOrUpdate(car);    // TODO: Get success code
+
+        /*
+            Save all the one-2-many relations with car-to-be-sold
+         */
 
         carFeatureDao.addMultipleToCar(addedCar, carDto.getFeatures());
-        carFaultDao.addMultipleToCar(addedCar, carDto.getFaults());
-        carImageDao.addMultipleToCar(addedCar, carDto.getImages());
+        carFaultDao.addMultipleToCar(addedCar, faults);
+        carImageDao.addMultipleToCar(addedCar, images);
 
         CreateResponseDto response = new CreateResponseDto();
-        response.setId(addedCar.getId());
-        response.setSuccess(true);
-        return response;
-    }
-
-    @Override
-    public UpdateResponseDto updateCarForSale(CarDto carDto, BindingResult bindingResult) {
-        Car car = carConverter.transform(carDto);
-
-        CarModels carModel = carModelsDao.getByModelCode(carDto.getCarModelsCode());
-        car.setCarModels(carModel);
-
-        CarValidator validator = new CarValidator();
-        validator.validate(car, bindingResult);
-        if (bindingResult.hasErrors()) {
-            UpdateResponseDto response = new UpdateResponseDto();
-            response.setSuccess(false);
-            response.setErrors(bindingResult.getAllErrors());
-            return response;
-        }
-
-        car.setCreated(new Date());
-        Car addedCar = carDao.update(car);    // TODO: Get success code
-
-        carFeatureDao.addMultipleToCar(addedCar, carDto.getFeatures());
-        carFaultDao.addMultipleToCar(addedCar, carDto.getFaults());
-        carImageDao.addMultipleToCar(addedCar, carDto.getImages());
-
-        UpdateResponseDto response = new UpdateResponseDto();
         response.setId(addedCar.getId());
         response.setSuccess(true);
         return response;

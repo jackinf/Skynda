@@ -1,9 +1,11 @@
 package me.skynda.common.helper;
 
+import org.apache.commons.codec.binary.Base64;
+
 import java.util.Optional;
 import java.util.function.Supplier;
 
-public class Utility {
+public class SkyndaUtility {
 
     /**
      * Instead of using if param != null && param.nested != null && param.nested.foo != null
@@ -21,5 +23,13 @@ public class Utility {
         catch (NullPointerException e) {
             return Optional.empty();
         }
+    }
+
+    public static byte[] toBytearray(String base64File) {
+        // Cut out the part describing the type of the file
+        String second = base64File.split(",")[1];
+
+        // Convert base64 to bytes
+        return Base64.decodeBase64(second.getBytes());
     }
 }

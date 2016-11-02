@@ -24,14 +24,14 @@ public interface CarService {
 	 * @param carDto Added car's dto
 	 * @return Response
 	 */
-	CreateResponseDto saveCarForSale(CarDto carDto, BindingResult bindingResult);
+	CreateResponseDto createOrUpdateCarForSale(CarDto carDto, BindingResult bindingResult);
 
-	/**
-	 * Updates an existing car for sale
-	 * @param carDto Updated car's dto
-	 * @return Response
-	 */
-	UpdateResponseDto updateCarForSale(CarDto carDto, BindingResult bindingResult);
+//	/**
+//	 * Updates an existing car for sale
+//	 * @param carDto Updated car's dto
+//	 * @return Response
+//	 */
+//	UpdateResponseDto updateCarForSale(CarDto carDto, BindingResult bindingResult);
 
 	/**
 	 * Gets a single car. Used for udpating a car.

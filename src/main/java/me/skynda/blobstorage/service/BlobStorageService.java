@@ -2,6 +2,8 @@ package me.skynda.blobstorage.service;
 
 import com.microsoft.azure.storage.blob.ListBlobItem;
 import me.skynda.blobstorage.dto.*;
+import me.skynda.blobstorage.dto.response.BlobStorageUploadStreamResponseDto;
+
 import java.util.List;
 
 /**
@@ -12,7 +14,7 @@ public interface BlobStorageService {
     boolean createContainer(CreateContainerDto dto);
     boolean deleteContainer(DeleteContainerDto dto);
     boolean upload(UploadBlobDto dto);
-    boolean uploadStream(UploadBlobDto dto);
+    BlobStorageUploadStreamResponseDto uploadStream(UploadBlobDto dto);
     List<ListBlobItem> list(ListBlobsDto dto);
     void download(DownloadBlobDto dto);
     boolean delete(DeleteBlobDto dto);
