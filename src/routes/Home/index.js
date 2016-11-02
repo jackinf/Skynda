@@ -9,15 +9,12 @@ export default (store) => ({
     require.ensure([], (require) => {
       const Home = require("./containers/HomeContainer").default;
 
-      const {setValues, updateSliderValue, searchBtn,
-        toggleBtn, toggleButtonGroupValue, searchCars} = require("./reducers");
+      const {setBaseValues, changeSearchValues, searchBtn, toggleBtn} = require("./reducers");
 
       injectReducer(store, {key: "isSearching", reducer: searchBtn});
       injectReducer(store, {key: "showAdvancedSearch", reducer: toggleBtn});
-      injectReducer(store, {key: "base", reducer: setValues});
-      injectReducer(store, {key: "sliderValues", reducer: updateSliderValue});
-      injectReducer(store, {key: "buttonGroupValues", reducer: toggleButtonGroupValue});
-      injectReducer(store, {key: "searchResults", reducer: searchCars});
+      injectReducer(store, {key: "base", reducer: setBaseValues});
+      injectReducer(store, {key: "searchValues", reducer: changeSearchValues});
 
       cb(null, Home);
     }, "");

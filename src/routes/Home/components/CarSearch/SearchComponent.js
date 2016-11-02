@@ -31,7 +31,7 @@ const colors = [
 class SearchComponent extends React.Component {
 
   async componentWillMount() {
-    await this.props.loadBaseData();
+    await this.props.getClassificationsAsync();
   }
 
   render() {
@@ -226,7 +226,7 @@ class SearchComponent extends React.Component {
 }
 
 SearchComponent.propTypes = {
-  loadBaseData: React.PropTypes.func.isRequired
+  getClassificationsAsync: React.PropTypes.func.isRequired
 };
 
 export default SearchComponent
