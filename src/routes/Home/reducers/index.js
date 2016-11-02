@@ -1,15 +1,15 @@
-import { searchBtn, toggleBtn } from "./searchBtnReducers";
-import { setValues, loadBaseData } from "./searchReducer";
-import searchCars from "./searchCarsReducer";
-import updateSliderValue from "./updateSliderValue";
-import toggleButtonGroupValue from "./toggleButtonGroupValue";
+import {searchBtn, toggleBtn} from "./Home.module-search.Click.Button";
+import {getClassificationsAsync} from "./Home.module-search.Load.Values";
+import {searchCarAsync, setSearchResults} from "./Home.module-search.Search.CarAsync";
+import changeSearchValues from "./Home.module-search.Change.Value";
+import setBaseValues from "./Home.module-search.Set.BaseValues";
 
 export {
   searchBtn,
   toggleBtn,
-  setValues,
-  loadBaseData,
-  updateSliderValue,
-  toggleButtonGroupValue,
-  searchCars
+  setBaseValues,
+  getClassificationsAsync,
+  changeSearchValues,
+  searchCarAsync,
+  setSearchResults
 };

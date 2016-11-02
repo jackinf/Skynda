@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux'
 import SearchComponent from '../components/CarSearch/SearchComponent'
-import {setValues, loadBaseData} from '../reducers'
+import {setValues, getClassificationsAsync} from '../reducers'
 
 const mapStateToProps = (state) => {
   return {
@@ -18,7 +18,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   setValues,
-  loadBaseData
+  getClassificationsAsync
 };
 
 const SearchContainer = connect(

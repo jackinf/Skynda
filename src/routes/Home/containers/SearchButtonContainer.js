@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux'
-import {searchCars} from '../actions'
+import {searchCarAsync} from '../reducers/Home.module-search.Search.CarAsync'
 import ButtonSkynda from '../components/Button'
 
 const mapStateToProps = (state, ownProps) => {
@@ -12,7 +12,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = {
   onClick: () => (dispatch, getState) => {
-    dispatch(searchCars(getState()));
+    dispatch(searchCarAsync());
   }
 };
 

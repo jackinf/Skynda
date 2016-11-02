@@ -1,9 +1,9 @@
 import moment from "moment";
-import {setStateValues, setIsSearching} from './../actions/index';
+import {setBaseValues} from "./../actions"
 import {Translate} from 'react-redux-i18n';
 import React from "react";
 
-export const loadBaseData = () => {
+export const getClassificationsAsync = () => {
   return (dispatch) => {
     return new Promise((resolve) => {
       setTimeout(() => {
@@ -70,7 +70,7 @@ export const loadBaseData = () => {
           power: {min: 0, max: 500, units: "KW"}
         };
 
-        dispatch(setStateValues({
+        dispatch(setBaseValues({
           sliderValues: {
             key: "sliderValues",
             value: sliderValues
@@ -100,24 +100,4 @@ export const loadBaseData = () => {
       }, 200);
     });
   };
-};
-
-
-export const setValues = (state = [], action) => {
-  switch (action.type) {
-    case "SET_STATE_VALUES":
-      var newState = {...state};
-      newState[action.payload.sliderValues.key] = action.payload.sliderValues.value;
-      newState[action.payload.brands.key] = action.payload.brands.value;
-      newState[action.payload.features.key] = action.payload.features.value;
-      newState[action.payload.transmissions.key] = action.payload.transmissions.value;
-      newState[action.payload.doors.key] = action.payload.doors.value;
-      newState[action.payload.seats.key] = action.payload.seats.value;
-      return {
-        ...newState
-      };
-
-    default:
-      return state;
-  }
 };
