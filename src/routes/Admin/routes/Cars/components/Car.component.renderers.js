@@ -13,16 +13,6 @@ import ContentAdd from 'material-ui/svg-icons/content/add';
 import ContentRemove from 'material-ui/svg-icons/content/remove';
 import {guidUtil} from "../../../../../utils/allUtils";
 
-const renderFile = props => (
-  <div>
-    <label>{props.placeholder}</label>
-    <div>
-      <input type="file" name={props.name}/>
-      {props.touched && props.error && <span>{props.error}</span>}
-    </div>
-  </div>
-);
-
 /*
  ====================================
  MATERIAL UI
@@ -31,16 +21,8 @@ const renderFile = props => (
 
 export const renderTextField = ({input, label, meta: {touched, error}, ...custom}) => (
   <Row style={{marginBottom: "10px"}}>
-    {/*<Col sm={3}>*/}
-      {/*<label>{custom.name}</label>*/}
-    {/*</Col>*/}
     <Col sm={12}>
-      <TextField hintText={label}
-                 floatingLabelText={label}
-                 errorText={touched && error}
-                 {...input}
-                 {...custom}
-      />
+      <TextField hintText={label} floatingLabelText={label} errorText={touched && error} {...input} {...custom} />
     </Col>
   </Row>
 );
@@ -118,7 +100,7 @@ export const renderFaults = ({fields, ...custom}) => fieldListWrapper({
   block: (<ul>
     {fields.map((field, index) => {
       return (<li key={index}>
-        <Field name={`${field}.file`} type="file" component="input" onChange={e => custom.onFaultImageAdd(e, index)}/>
+        <Field name={`${field}.file`} type="file" component="input" onChange={e => custom.onFaultFileAdd(e, index)}/>
         {/*<Field name={`${field}.img`} type="text" component={renderTextField} placeholder={`Image #${index + 1}`}/>*/}
         <Field name={`${field}.text`} type="text" component={renderTextField} placeholder={`Text #${index + 1}`}/>
         <FloatingActionButton mini={true} secondary={true}
@@ -133,28 +115,6 @@ export const renderFaults = ({fields, ...custom}) => fieldListWrapper({
     )}
     {fields.error && <li className="error">{fields.error}</li>}
   </ul>)
-});
-
-// TODO: Remove
-export const renderImages = ({fields, ...custom}) => fieldListWrapper({
-  fields,
-  title: custom.name,
-  block: (
-    <ul>
-      {fields.map((name, index) =>
-        <li key={index}>
-          <Field name={`${name}.original`} type="text" component={renderTextField}
-                 placeholder={`Original #${index + 1}`}/>
-          {/*<Field name={`${name}.thumbnail`} type="text" component={renderTextField}*/}
-                 {/*placeholder={`Thumbnail #${index + 1}`}/>*/}
-          <FloatingActionButton mini={true} secondary={true} onClick={() => fields.remove(index)}>
-            <ContentRemove />
-          </FloatingActionButton>
-        </li>
-      )}
-      {fields.error && <li className="error">{fields.error}</li>}
-    </ul>
-  )
 });
 
 /**

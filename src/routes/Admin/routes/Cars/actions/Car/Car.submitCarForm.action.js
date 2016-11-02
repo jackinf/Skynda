@@ -10,7 +10,8 @@ import {SubmissionError} from 'redux-form';
  * Is executed on form submit. Not a redux action.
  * @returns {function(*, *)}
  */
-export default function submitCarForm(data, formMode) {
+export default function submitCarForm(data, formMode, files) {
+  data.files = files;
   return formMode == FORM_MODE.ADDING
     ? createCarAsync(data)
     : updateCarAsync(data);
