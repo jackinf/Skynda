@@ -10,6 +10,10 @@ import me.skynda.common.dto.BaseDto;
 @Data
 @ToString(callSuper = false)
 public class CarDto extends BaseDto {
+    public CarDto() {
+        this.files = new CarDtoFiles();
+    }
+
 	private String carModelsCode;
 	private String vinCode;
 	private BigDecimal price;
@@ -27,6 +31,5 @@ public class CarDto extends BaseDto {
 	private PerformanceDto performance;
 	private Integer safetyStars;
 
-	private List<CarDtoImageFile> imageFiles;
-	private List<CarDtoFaultsFile> faultsFiles;
+    private CarDtoFiles files;
 }

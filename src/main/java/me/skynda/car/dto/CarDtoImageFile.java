@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class CarDtoImageFile {
 
-    private Long id;
+    private String id;
     private String base64File;
 
 }
