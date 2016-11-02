@@ -3,7 +3,7 @@
  */
 
 import React from "react";
-import "./CarSearchButtonGroup.scss";
+import "./Btn.Group.scss";
 import {Button, Col} from "react-bootstrap";
 
 import MdDone from 'react-icons/lib/md/done';

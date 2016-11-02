@@ -1,6 +1,6 @@
 import ACTIONS from './../actions/constants';
 
-export const searchBtn = (state = false, action) => {
+export const setIsSearching = (state = false, action) => {
   switch (action.type) {
     case ACTIONS.SET_IS_SEARCHING:
       return !action.value;
@@ -10,7 +10,7 @@ export const searchBtn = (state = false, action) => {
   }
 };
 
-export const toggleBtn = (state = false, action) => {
+export const toggleAdvanced = (state = false, action) => {
   switch (action.type) {
     case ACTIONS.TOGGLE_ADVANCED_SEARCH:
       return !action.value;
