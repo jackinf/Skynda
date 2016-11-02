@@ -1,10 +1,10 @@
 import React, {PropTypes} from 'react'
 import {Row, Col} from "react-bootstrap";
-import ButtonGroupContainer from "../../containers/ButtonGroupContainer";
-import SliderContainer from "../../containers/SliderContainer";
-import ToggleButton from "../../containers/ToggleAdvancedSearchContainer";
-import SearchButton from "../../containers/SearchButtonContainer";
-import "./SearchComponent.scss";
+import ButtonGroupContainer from "../../containers/CarSearch/Search.Block-Container.Btn.Group";
+import SliderContainer from "../../containers/CarSearch/Search.Block-Container.Slider";
+import ToggleButton from "../../containers/CarSearch/Search.Block-Container.Btn.Advanced.Search";
+import SearchButton from "../../containers/CarSearch/Search.Block-Container.Btn.Search";
+import "./Search.Block.scss";
 import {Translate} from 'react-redux-i18n';
 import Plus from 'react-icons/lib/fa/plus'
 import Minus from 'react-icons/lib/fa/minus'
@@ -57,7 +57,6 @@ class SearchComponent extends React.Component {
                     <ButtonGroupContainer type={"brands"} options={this.props.brands}/>
                   </Col>
                 </Row>
-
                 <Row>
                   <Col md={4}>
                     <Row>

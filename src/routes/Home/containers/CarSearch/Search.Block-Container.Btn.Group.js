@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux'
-import {updateSearchValues, toggleButtonGroupValue} from '../actions'
-import CarSearchButtonGroup from "../components/CarSearch/CarSearchButtonGroup";
+import {toggleButtonGroupValue} from '../../actions'
+import CarSearchButtonGroup from "../../components/CarSearch/Btn.Group";
 
 const mapStateToProps = (state, ownProps) => {
   return {

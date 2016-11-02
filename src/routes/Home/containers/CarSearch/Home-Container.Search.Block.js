@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux'
-import SearchComponent from '../components/CarSearch/SearchComponent'
-import {setValues, getClassificationsAsync} from '../reducers'
+import SearchComponent from '../../components/CarSearch/Search.Block'
+import {getClassificationsAsync} from '../../reducers'
 
 const mapStateToProps = (state) => {
   return {
@@ -17,7 +17,6 @@ const mapStateToProps = (state) => {
 
 
 const mapDispatchToProps = {
-  setValues,
   getClassificationsAsync
 };
 
