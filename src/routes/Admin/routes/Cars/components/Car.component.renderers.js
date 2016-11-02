@@ -27,6 +27,8 @@ export const renderTextField = ({input, label, meta: {touched, error}, ...custom
   </Row>
 );
 
+export const renderImage = ({input}) => (<img src={input.value} width={100} />);
+
 export const renderCheckbox = ({input, label, ...custom}) => (
   <Row style={{marginBottom: "10px"}}>
     <Col sm={12}>
@@ -100,9 +102,10 @@ export const renderFaults = ({fields, ...custom}) => fieldListWrapper({
   block: (<ul>
     {fields.map((field, index) => {
       return (<li key={index}>
+        {/*<Field name={`${field}.id`} type="text" component="input" />*/}
         <Field name={`${field}.file`} type="file" component="input" onChange={e => custom.onFaultFileAdd(e, index)}/>
-        {/*<Field name={`${field}.img`} type="text" component={renderTextField} placeholder={`Image #${index + 1}`}/>*/}
         <Field name={`${field}.text`} type="text" component={renderTextField} placeholder={`Text #${index + 1}`}/>
+        <Field name={`${field}.img`} type="text" component={renderImage} />
         <FloatingActionButton mini={true} secondary={true}
                               onClick={(e) => {
                                 fields.remove(index);
