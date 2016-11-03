@@ -5,8 +5,6 @@ import fetch from "isomorphic-fetch";
 import remoteConfig from "store/remoteConfig";
 import {setCars} from "./../../reducers/SetCars.reducer";
 
-const useFallbackDemoData = true;
-
 export default function getList() {
   return (dispatch) => {
     dispatch(setCars({isFetching: true}));
@@ -20,8 +18,7 @@ export default function getList() {
         dispatch(setCars({isFetching: false, items: resp}));
       })
       .catch(err => {
-        var demoCars = useFallbackDemoData ? [{id: 1, name: "BMW"}] : [];
-        dispatch(setCars({isFetching: false, items: demoCars}));
+        dispatch(setCars({isFetching: false, items: []}));
       });
   };
 }

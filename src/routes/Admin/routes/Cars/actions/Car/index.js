@@ -8,7 +8,14 @@ import setCarData from "./Car.setCarData.action";
 import setFormMode from "./Car.setFormMode.action";
 import submitCarForm from "./Car.submitCarForm.action";
 import fillWithFakeData from "./Car.fillWithFakeData.action";
-import removePersistedImage from "./Car.removePersistedImage.action";
+import {
+  onMainImageUpload,
+  onMainImageRemove,
+  onImageFileUpload,
+  onImageFileRemove,
+  onFaultFileUpload,
+  onFaultRemove
+} from "./Car.images.action";
 
 export {
   clear,
@@ -17,5 +24,10 @@ export {
   setFormMode,
   submitCarForm,
   fillWithFakeData,
-  removePersistedImage
+  onMainImageUpload,
+  onMainImageRemove,
+  onImageFileUpload,
+  onImageFileRemove,
+  onFaultFileUpload,
+  onFaultRemove
 }

@@ -7,7 +7,7 @@ export function imageFileToBase64(file, onSuccess) {
   if (/\.(jpe?g|png|gif)$/i.test(file.name)) {
     var reader = new FileReader();
     reader.addEventListener("load", function () {
-      onSuccess(this.result);
+      onSuccess(this.result); // returns base64File
     }, false);
     reader.readAsDataURL(file);
   }

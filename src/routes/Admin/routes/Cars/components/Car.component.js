@@ -17,7 +17,6 @@ import MenuItem from 'material-ui/MenuItem';
 import {Row, Col} from "react-bootstrap";
 import {browserHistory} from "react-router";
 import Dropzone from "react-dropzone";
-import {imageUtil} from "../../../../../utils/allUtils";
 
 class Car extends React.Component {
   static propTypes = {
@@ -94,8 +93,9 @@ class Car extends React.Component {
     super(props);
     this.state = {
       id: this.props.params[ROUTE_PARAMS.CAR_ID],
-      imageFiles: [],
-      faultsFiles: []
+
+      // Files that should be cleaned from file storage
+      filesToDelete: [] // (blobName + containerName)
     };
   }
 
@@ -108,38 +108,11 @@ class Car extends React.Component {
     this.props.clear();
   }
 
-  onImageFileAdd = (acceptedFiles, rejectedFiles) => {
-    let files = this.state.imageFiles;
-    acceptedFiles.forEach(file => {
-      imageUtil.imageFileToBase64(file, (base64File) => {
-        files.push({base64File}); // TODO: we need only simple array
-        this.setState({imageFiles: files});
-      });
-    });
-  };
-
-  onPendingImageRemove = (removedIndex) => {
-    let spliced = this.state.imageFiles.filter((file, i) => i !== removedIndex);
-    this.setState({imageFiles: spliced});
-  };
-
-  onFaultFileAdd = (e, id) => {
-    const uploadedFile = e.target.files[0]; // File input can accept multiple files. To avoid this, we take the first only.
-    let files = this.state.faultsFiles.filter((item, i) => i !== id);
-    imageUtil.imageFileToBase64(uploadedFile, (base64File) => {
-      files.push({id, base64File});
-      this.setState({faultsFiles: files});
-    });
-  };
-
-  onFaultRemove = (e, id) => {
-    let files = this.state.faultsFiles.filter((item, i) => i !== id);
-    this.setState({faultsFiles: files});
-  };
-
+  /*
+   *  Form submit logic. Saves or updates
+   */
   onSubmit(e) {
-    const files = {faultsFiles: this.state.faultsFiles, imageFiles: this.state.imageFiles};
-    this.props.handleSubmit(data => submitCarForm(data, this.props.formMode1, files))(e)
+    this.props.handleSubmit(data => submitCarForm(data, this.props.formMode1))(e)
       .then(() => {
           if (!!this.props.submitSucceeded) {
             alert("Success!");
@@ -150,9 +123,6 @@ class Car extends React.Component {
   };
 
   render() {
-    // const persistedImages = this.props.initialValues && this.props.initialValues.images || [];
-    const pendingImages = this.state.imageFiles || [];
-
     return (<div>
         {this.props.isFetching || this.props.submitting ? "Loading..." : (
           <form onSubmit={this.onSubmit.bind(this)}>
@@ -179,36 +149,36 @@ class Car extends React.Component {
                   </Field>
                 )}
 
+                <Field name="mainImageUrl" label="Main image" component={({input, i}) => (<div>
+                  {input.value
+                    ? <img src={input.value} onClick={e => this.props.onMainImageRemove(e)} width={100}/>
+                    : <input type="file" onChange={e => this.props.onMainImageUpload(e)}/>}
+                </div>)}/>
+
                 <Field name="colorInside" label="Color Inside *" component={renderTextField}/>
                 <Field name="colorOutside" label="Color Outside *" component={renderTextField}/>
                 <FieldArray name="descriptions" label="Descriptions" component={renderDescriptions}/>
                 <FieldArray name="features" label="Features" component={renderFeatures}/>
                 <FieldArray name="faults" label="Faults" component={renderFaults}
-                            onFaultFileAdd={this.onFaultFileAdd} onFaultRemove={this.onFaultRemove}
+                            onFaultFileAdd={this.props.onFaultFileUpload} onFaultRemove={this.props.onFaultRemove}
                 />
                 <Field name="fuelCity" label="Fuel City" component={renderTextField}/>
                 <Field name="fuelHighway" label="Fuel Highway" component={renderTextField}/>
                 <Row>
                   <Col xs={12} md={6}>
                     <h4>Images</h4>
-                    <Dropzone onDrop={this.onImageFileAdd} multiple={true}>
+                    <Dropzone onDrop={this.props.onImageFileUpload} multiple={true}>
                       <div>Try dropping some files here, or click to select files to upload.</div>
                     </Dropzone>
-
-                    <h4>Uploading {pendingImages.length} files</h4>
-                    <div>
-                      {pendingImages.map((image, i) =>
-                        <img width={100} key={i} src={image.base64File} onClick={e => this.onPendingImageRemove(i)}/>)}
-                    </div>
 
                     <h4>Persisted:</h4>
 
                     <FieldArray name="images" component={({fields}) => (<div>
                       {fields.map((field, index) => {
                         const componentFn = ({input}) => (<img src={input.value} width={100}
-                           onClick={e => this.props.removePersistedImage(index)} />);
-                        return <Field key={index} name={`${field}.original`} type="text" component={componentFn}/>;
-                      })}</div>)} />
+                                                               onClick={e => this.props.onImageFileRemove(e, index)}/>);
+                        return <Field key={index} name={`${field}`} type="text" component={componentFn}/>;
+                      })}</div>)}/>
 
                   </Col>
                 </Row>
@@ -239,6 +209,46 @@ class Car extends React.Component {
                 <Field name="performance.totalValves" label="Total Valves" component={renderTextField} type="number"/>
               </Col>
             </Row>
+
+            <Row style={{border: "1px solid #dedede", background: "#efefef"}}>
+              <Col xs={12}>
+                <h3>Files that are pending for upload:</h3>
+
+                <h4>Main file</h4>
+                <Row>
+                  <Col xs={12}>
+                    <Field name="filesToUpload.mainImageFile"
+                           type="text"
+                           component={({input}) => (<img src={input.value} width={100}/>)}/>
+                  </Col>
+                </Row>
+
+                <h4>Image files</h4>
+                <Row>
+                  <Col xs={12}>
+                    <FieldArray name="filesToUpload.imageFiles" component={({fields}) => (<div>
+                      {fields.map((field, index) => {
+                        const componentFn = ({input}) => (<img src={input.value} width={100}/>);
+                        return <Field key={index} name={`${field}`} component={componentFn}/>;
+                      })}</div>)}/>
+                  </Col>
+                </Row>
+
+                {/*<h4>Faults files</h4>*/}
+                {/*<Row>*/}
+                  {/*<Col xs={12}>*/}
+                    {/*<FieldArray name="filesToUpload.faultsFiles" component={({fields}) => (<div>*/}
+                      {/*{fields.map((field, index) => {*/}
+                        {/*const componentFn = ({input}) => (<img src={input.value} width={100}/>);*/}
+                        {/*return <Field key={index} name={`${field}.base64File`} component={componentFn}/>;*/}
+                      {/*})}</div>)}/>*/}
+                  {/*</Col>*/}
+                {/*</Row>*/}
+
+              </Col>
+            </Row>
+
+            <br />
 
             <button type="submit" disabled={this.props.submitting}>Submit</button>
             {/*<RaisedButton label="Submit" />*/}
