@@ -10,12 +10,6 @@ import me.skynda.common.dto.BaseDto;
 @Data
 @ToString(callSuper = false)
 public class CarDto extends BaseDto {
-    public CarDto() {
-
-        this.filesToUpload = new CarDtoFilesToUpload();
-        this.filesToDelete = new CarDtoFilesToDelete();
-    }
-
     private String mainImageUrl;
     private String mainImageBlobName;
     private String mainImageContainerName;
@@ -38,12 +32,14 @@ public class CarDto extends BaseDto {
 	private Integer safetyStars;
 
     /**
-     * base64 files that are prepared to be uploaded to file cloud storage
+     * base64 files that are prepared to be uploaded to file cloud storage.
+     * We add files by base64 file string and item's id.
      */
     private CarDtoFilesToUpload filesToUpload;
 
     /**
-     * base64 files that are prepared to be deleted from file cloud storage
+     * files that are prepared to be deleted from file cloud storage.
+     * We delete files by blobName and blobContainer
      */
-    private CarDtoFilesToDelete filesToDelete;
+    private List<CarDtoImageFileToDelete> filesToDelete;
 }
