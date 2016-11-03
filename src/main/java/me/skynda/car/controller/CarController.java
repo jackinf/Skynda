@@ -1,11 +1,13 @@
 package me.skynda.car.controller;
 
+import java.lang.reflect.Array;
 import java.util.List;
 
 import com.google.gson.Gson;
 import me.skynda.car.dto.request.CarSearchRequestDto;
 import me.skynda.common.dto.CreateResponseDto;
 import me.skynda.common.dto.DeleteResponseDto;
+import me.skynda.common.dto.SearchResponseDto;
 import me.skynda.common.dto.UpdateResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -77,4 +79,8 @@ public class CarController extends BaseController {
         return carService.deleteCar(id);
     }
 
+    @RequestMapping(value = "/car/search", method = RequestMethod.POST, consumes = "application/json")
+    public SearchResponseDto search(@RequestBody CarSearchRequestDto searchParams){
+        return carService.search(searchParams);
+    }
 }

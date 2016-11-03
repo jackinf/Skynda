@@ -14,6 +14,7 @@ public class CarImage {
     private Long id;
 
     private String imageUrl;
+    private boolean isPrimary;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "cars_for_sale_id", nullable = false)
