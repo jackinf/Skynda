@@ -11,8 +11,14 @@ import me.skynda.common.dto.BaseDto;
 @ToString(callSuper = false)
 public class CarDto extends BaseDto {
     public CarDto() {
-        this.filesToUpload = new CarDtoFiles();
+
+        this.filesToUpload = new CarDtoFilesToUpload();
+        this.filesToDelete = new CarDtoFilesToDelete();
     }
+
+    private String mainImageUrl;
+    private String mainImageBlobName;
+    private String mainImageContainerName;
 
 	private String carModelsCode;
 	private String vinCode;
@@ -34,10 +40,10 @@ public class CarDto extends BaseDto {
     /**
      * base64 files that are prepared to be uploaded to file cloud storage
      */
-    private CarDtoFiles filesToUpload;
+    private CarDtoFilesToUpload filesToUpload;
 
     /**
      * base64 files that are prepared to be deleted from file cloud storage
      */
-    private CarDtoFiles filesToDelete;
+    private CarDtoFilesToDelete filesToDelete;
 }

@@ -106,7 +106,7 @@ public class CarServiceImpl implements CarService {
 
         // Upload faults images
         List<FaultsDto> faults = carDto.getFaults();
-        List<CarDtoImageFile> faultsFiles = carDto.getFilesToUpload().getFaultsFiles();
+        List<CarDtoImageFileToUpload> faultsFiles = carDto.getFilesToUpload().getFaultsFiles();
         faultsFiles.forEach(file -> {
             UploadBlobDto uploadBlobDto = new UploadBlobDto();
             uploadBlobDto.setContainerName(DEFAULT_CONTAINER_NAME);
@@ -128,7 +128,7 @@ public class CarServiceImpl implements CarService {
 
         // Upload image gallery
         List<ImagesDto> images = carDto.getImages() != null ? carDto.getImages() : new ArrayList<>();
-        List<CarDtoImageFile> imageFiles = carDto.getFilesToUpload().getImageFiles();
+        List<CarDtoImageFileToUpload> imageFiles = carDto.getFilesToUpload().getImageFiles();
         imageFiles.forEach(file -> {
             UploadBlobDto uploadBlobDto = new UploadBlobDto();
             uploadBlobDto.setContainerName(DEFAULT_CONTAINER_NAME);
@@ -149,7 +149,7 @@ public class CarServiceImpl implements CarService {
             Clean file could storage from uploaded files
          */
 
-        CarDtoFiles filesToDelete = carDto.getFilesToDelete();
+        CarDtoFilesToDelete filesToDelete = carDto.getFilesToDelete();
         tryDeleteBlob(filesToDelete.getMainImageFile());
         filesToDelete.getImageFiles().forEach(this::tryDeleteBlob);
         filesToDelete.getFaultsFiles().forEach(this::tryDeleteBlob);
@@ -184,7 +184,7 @@ public class CarServiceImpl implements CarService {
         return response;
     }
 
-    private void tryDeleteBlob(CarDtoImageFile dto) {
+    private void tryDeleteBlob(CarDtoImageFileToDelete dto) {
         if (dto == null || dto.getBlobName().isEmpty())
             return;
 

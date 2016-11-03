@@ -3,11 +3,16 @@ package me.skynda.car.dto;
 import lombok.Data;
 
 @Data
-public class CarDtoImageFile {
+public class CarDtoImageFileToDelete {
 
-    private Long id;
-    private String base64File;
+    /**
+     * REQUIRED!
+     */
     private String blobName;
+
+    /**
+     * REQUIRED!
+     */
     private String containerName;
 
 }
