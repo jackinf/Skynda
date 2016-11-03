@@ -21,7 +21,7 @@ public class SkyndaUtility {
             return Optional.ofNullable(result);
         }
         catch (NullPointerException e) {
-            return Optional.empty();
+            return null;
         }
     }
 

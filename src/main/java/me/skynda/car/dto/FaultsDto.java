@@ -9,7 +9,13 @@ import me.skynda.common.dto.BaseDto;
 public class FaultsDto extends BaseDto {
 	
 	private String text;
+
+	/**
+	 * Shows image using url
+	 */
 	private String img;
+
+	private String base64File;	// TODO: use this for uploads
 	private String blobName;
 	private String contaienrName;
 

@@ -13,7 +13,18 @@ public class CarDtoFilesToUpload {
         this.faultsFiles = new ArrayList<>();
     }
 
-    private CarDtoImageFileToUpload mainImageFile;
-    private List<CarDtoImageFileToUpload> imageFiles;
+    /**
+     * Base64 image file
+     */
+    private String mainImageFile;
+
+    /**
+     * Base64 image files
+     */
+    private List<String> imageFiles;
+
+    /**
+     * Data transfer objects, which hold Base64 image files and ids
+     */
     private List<CarDtoImageFileToUpload> faultsFiles;
 }
