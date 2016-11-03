@@ -5,6 +5,11 @@ import me.skynda.blobstorage.dto.UploadBlobDto;
 import me.skynda.blobstorage.dto.response.BlobStorageUploadStreamResponseDto;
 import me.skynda.blobstorage.service.BlobStorageService;
 import me.skynda.car.dao.*;
+import me.skynda.car.dto.CarDto;
+import me.skynda.car.dto.CarGeneralDto;
+import me.skynda.car.dto.SingleCarDataDto;
+import me.skynda.car.dto.request.CarSearchRequestDto;
+import me.skynda.car.dto.response.CarModelResponseDto;
 import me.skynda.car.dto.*;
 import me.skynda.car.model.Car;
 import me.skynda.car.model.CarModels;
@@ -12,12 +17,18 @@ import me.skynda.car.service.converter.CarConverter;
 import me.skynda.car.validators.CarValidator;
 import me.skynda.common.dto.CreateOrUpdateResponseDto;
 import me.skynda.common.dto.DeleteResponseDto;
+import me.skynda.common.dto.SearchResponseDto;
+import me.skynda.common.dto.UpdateResponseDto;
 import me.skynda.common.helper.SkyndaUtility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.*;
 
 @Service
@@ -197,6 +208,67 @@ public class CarServiceImpl implements CarService {
 
         DeleteResponseDto response = new DeleteResponseDto();
         response.setSuccess(true);
+        return response;
+    }
+
+    @Override
+    public SearchResponseDto search(CarSearchRequestDto params) {
+        SearchResponseDto response = new SearchResponseDto();
+        List<CarGeneralDto> carsGeneralDto = new ArrayList<>();
+        List<Car> cars = carDao.getAll();
+
+        if(params.Brands != null){
+
+        }
+
+        if(params.Colors != null){
+
+        }
+
+        if(params.Features != null){
+
+        }
+
+        if(params.Doors != null){
+
+        }
+
+        if(params.Seats != null){
+
+        }
+
+        if(params.Transmission != null){
+
+        }
+
+        if(params.Mileage != null){
+
+        }
+
+        if(params.Price != null){
+
+        }
+
+        if(params.Year != null){
+
+        }
+
+        if(params.PetrolConsumption != null){
+
+        }
+
+        if(params.Power != null){
+
+        }
+
+        cars.forEach(car -> {
+            carsGeneralDto.add(carConverter.convertToSearchableCar(car));
+        });
+
+
+        response.setSuccess(true);
+        response.setCars(carsGeneralDto);
+
         return response;
     }
 

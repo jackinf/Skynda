@@ -1,11 +1,17 @@
 package me.skynda.car.service;
 
+import java.lang.reflect.Array;
 import java.util.List;
 
 import me.skynda.car.dto.CarDto;
 import me.skynda.car.dto.SingleCarDataDto;
+import me.skynda.car.dto.request.CarSearchRequestDto;
+import me.skynda.car.model.CarManufacturer;
+import me.skynda.common.dto.CreateResponseDto;
 import me.skynda.common.dto.CreateOrUpdateResponseDto;
 import me.skynda.common.dto.DeleteResponseDto;
+import me.skynda.common.dto.SearchResponseDto;
+import me.skynda.common.dto.UpdateResponseDto;
 import org.springframework.validation.BindingResult;
 
 public interface CarService {
@@ -42,5 +48,12 @@ public interface CarService {
 	 * @return Is the deletion successful or not
 	 */
 	DeleteResponseDto deleteCar(Long id);
+
+	/**
+	 * Search cars. Used for displaying full info about the car to the user
+	 * @params search params
+	 * @return search results
+	 */
+	SearchResponseDto search(CarSearchRequestDto params);
 
 }

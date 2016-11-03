@@ -14,6 +14,7 @@ public class CarImage {
     private Long id;
 
     private String imageUrl;
+    private boolean isPrimary;
     private String imageBlobName;
     private String imageContainerName;
 
