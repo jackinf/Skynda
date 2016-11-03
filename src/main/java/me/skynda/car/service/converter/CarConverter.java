@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.google.common.base.Strings;
 import me.skynda.car.dto.*;
 import me.skynda.car.model.*;
 import me.skynda.common.helper.SkyndaUtility;
@@ -279,5 +280,34 @@ public class CarConverter {
         carDto.setPerformance(performanceDto);
 
 		return carDto;
+	}
+
+	public CarGeneralDto convertToSearchableCar(Car car) {
+		CarGeneralDto carGeneralDto = new CarGeneralDto();
+		List<CarImage> images = car.getImages();
+		CarImage primaryImage = images.stream()
+				.filter(image -> image.isPrimary() == true)
+				.findFirst()
+				.orElse(new CarImage());
+
+//		if(Strings.isNullOrEmpty(primaryImage.getImageUrl())){
+//			throw new NullPointerException("No primary image for the car found");
+//		}
+		String url = primaryImage.getImageUrl();
+
+		carGeneralDto.setColorInside(car.getColorInside());
+		carGeneralDto.setColorOutside(car.getColorOutside());
+		carGeneralDto.setDoors(car.getCarModels().getDoors());
+		carGeneralDto.setDrive(car.getCarModels().getDrive());
+		carGeneralDto.setEngine(car.getCarModels().getEngine());
+		carGeneralDto.setHorsePower(car.getCarModels().getHorsePower());
+		carGeneralDto.setManufacturer(car.getCarModels().getCarManufacturer().getManufacturerCode());
+		carGeneralDto.setMileage(car.getMileage());
+		carGeneralDto.setModel(car.getCarModels().getModelCode());
+		carGeneralDto.setSeats(car.getCarModels().getSeats());
+		carGeneralDto.setSrc(primaryImage.getImageUrl());
+		carGeneralDto.setTransmission(car.getCarModels().getTransmission());
+		carGeneralDto.setYear(car.getCarModels().getYear());
+		return carGeneralDto;
 	}
 }
