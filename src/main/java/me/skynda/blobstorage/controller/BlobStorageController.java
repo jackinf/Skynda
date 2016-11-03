@@ -24,7 +24,7 @@ import javax.xml.bind.DatatypeConverter;
 import java.util.Base64;
 import java.util.List;
 /**
- * Controller for managing media files (blobs)
+ * Controller for managing media filesToUpload (blobs)
  */
 //@CrossOrigin(origins = "*")
 @RestController
@@ -46,7 +46,7 @@ public class BlobStorageController extends BaseController {
     }
 
     /**
-     * Action for uploading files
+     * Action for uploading filesToUpload
      *
      * @param dto  Settings
      * @param file File
@@ -68,10 +68,10 @@ public class BlobStorageController extends BaseController {
     }
 
     /**
-     * Action for listing all the files in the storage
+     * Action for listing all the filesToUpload in the storage
      *
      * @param dto Settings
-     * @return All the files in the container
+     * @return All the filesToUpload in the container
      */
     @RequestMapping(value = "/list", method = RequestMethod.GET, produces = "application/json")
     public List<ListBlobItem> list(@RequestBody ListBlobsDto dto) {
@@ -79,7 +79,7 @@ public class BlobStorageController extends BaseController {
     }
 
     /**
-     * Action for downloading all the files from the container
+     * Action for downloading all the filesToUpload from the container
      *
      * @param dto Settings
      */
@@ -124,37 +124,37 @@ public class BlobStorageController extends BaseController {
      *
      *
      * REQUEST:
-     *  KEY 1: Content-Disposition: form-data; name="files"; filename="test1.txt" Content-Type: text/plain
+     *  KEY 1: Content-Disposition: form-data; name="filesToUpload"; filename="test1.txt" Content-Type: text/plain
      *  VALUE 1: FormFile
      *
-     *  KEY 2: Content-Disposition: form-data; name="files"; filename="test2.txt" Content-Type: text/plain
+     *  KEY 2: Content-Disposition: form-data; name="filesToUpload"; filename="test2.txt" Content-Type: text/plain
      *  VALUE 2: FormFile
      *
      * @param request The entire HTTP request. You can get any request param from it
-     * @param files form files
+     * @param files form filesToUpload
      * @return
      */
     @RequestMapping(value = "/test-upload-2-multiple", method = RequestMethod.POST)
     @ResponseBody
-    public boolean testUpload2(MultipartHttpServletRequest request, @RequestPart("files") MultipartFile[] files) {
-        // Method 1. Getting files from request param
+    public boolean testUpload2(MultipartHttpServletRequest request, @RequestPart("filesToUpload") MultipartFile[] files) {
+        // Method 1. Getting filesToUpload from request param
         for (MultipartFile file : files) {
             // Do your stuff...
         }
 
-        // Method 2. Each key is request param, like "files"
+        // Method 2. Each key is request param, like "filesToUpload"
         MultiValueMap<String, MultipartFile> multiFileMap = request.getMultiFileMap();
 
         // Method 3.
-        List<MultipartFile> file2 = request.getFiles("files");
+        List<MultipartFile> file2 = request.getFiles("filesToUpload");
         return true;
     }
 
     @RequestMapping(value = "/test-upload-3-complex", method = RequestMethod.POST)
     @ResponseBody
-    public boolean testUpload3(@RequestParam("files") MultipartFile[] files,
+    public boolean testUpload3(@RequestParam("filesToUpload") MultipartFile[] files,
                                @RequestParam("info") FileTestUpload3 info) {
-//        for (MultipartFile file : files) {
+//        for (MultipartFile file : filesToUpload) {
 //            // Do your stuff...
 //        }
 //        Base64.getDecoder().decode(encoded)

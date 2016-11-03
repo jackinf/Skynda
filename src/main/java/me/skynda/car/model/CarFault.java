@@ -14,7 +14,10 @@ public class CarFault {
     private Long id;
 
     private String text;
+
     private String imageUrl;
+    private String imageBlobName;
+    private String imageContainerName;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "cars_for_sale_id", nullable = false)

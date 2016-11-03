@@ -3,7 +3,7 @@ package me.skynda.blobstorage.dto;
 import lombok.Data;
 
 /**
- * Settings for deleting blob files
+ * Settings for deleting blob filesToUpload
  */
 @Data
 public class DeleteBlobDto {

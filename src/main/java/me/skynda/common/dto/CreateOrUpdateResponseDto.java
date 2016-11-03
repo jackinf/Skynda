@@ -6,7 +6,7 @@ import org.springframework.validation.ObjectError;
 import java.util.List;
 
 @Data
-public class CreateResponseDto {
+public class CreateOrUpdateResponseDto {
     private Long id;
     private boolean success;
     private List<ObjectError> errors;

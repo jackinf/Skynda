@@ -11,7 +11,7 @@ import me.skynda.common.dto.BaseDto;
 @ToString(callSuper = false)
 public class CarDto extends BaseDto {
     public CarDto() {
-        this.files = new CarDtoFiles();
+        this.filesToUpload = new CarDtoFiles();
     }
 
 	private String carModelsCode;
@@ -31,5 +31,13 @@ public class CarDto extends BaseDto {
 	private PerformanceDto performance;
 	private Integer safetyStars;
 
-    private CarDtoFiles files;
+    /**
+     * base64 files that are prepared to be uploaded to file cloud storage
+     */
+    private CarDtoFiles filesToUpload;
+
+    /**
+     * base64 files that are prepared to be deleted from file cloud storage
+     */
+    private CarDtoFiles filesToDelete;
 }

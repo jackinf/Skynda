@@ -10,5 +10,7 @@ public class FaultsDto extends BaseDto {
 	
 	private String text;
 	private String img;
+	private String blobName;
+	private String contaienrName;
 
 }

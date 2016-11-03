@@ -3,9 +3,8 @@ package me.skynda.car.controller;
 import java.util.List;
 
 import me.skynda.car.dto.request.CarSearchRequestDto;
-import me.skynda.common.dto.CreateResponseDto;
+import me.skynda.common.dto.CreateOrUpdateResponseDto;
 import me.skynda.common.dto.DeleteResponseDto;
-import me.skynda.common.dto.UpdateResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -42,28 +41,16 @@ public class CarController extends BaseController {
         return carService.getCarDetailed(id);
     }
 
-//    @RequestMapping(value = "/car", method = RequestMethod.POST)
-//    @ResponseBody
-//    public ResponseEntity<String> add(MultipartHttpServletRequest request,
-//               @RequestPart("faultsFiles") MultipartFile[] faultsFiles,
-//               @RequestPart("imageFiles") MultipartFile[] imageFiles,
-//               @RequestPart("car") CarDto carDto,
-//               BindingResult bindingResult) {
-//        // TODO: Problems is that it does not return a JSON response. Make it so that it would return a JSON response!!
-//        CreateResponseDto createResponseDto = carService.createOrUpdateCarForSale(carDto, bindingResult);
-//        return new ResponseEntity<>(new Gson().toJson(createResponseDto), HttpStatus.OK);
-//    }
-
 	@RequestMapping(value = "/car", method = RequestMethod.POST, consumes = "application/json")
-    public CreateResponseDto add(@RequestBody CarDto carDto, BindingResult bindingResult) {
+    public CreateOrUpdateResponseDto add(@RequestBody CarDto carDto, BindingResult bindingResult) {
         carDto.setId(null);
         return carService.createOrUpdateCarForSale(carDto, bindingResult);
     }
 
     @RequestMapping(value = "/car/{id}", method = RequestMethod.PUT, consumes = "application/json")
-    public CreateResponseDto update(@PathVariable("id") Long id,
-                                    @RequestBody CarDto carDto,
-                                    BindingResult bindingResult) {
+    public CreateOrUpdateResponseDto update(@PathVariable("id") Long id,
+                                            @RequestBody CarDto carDto,
+                                            BindingResult bindingResult) {
         carDto.setId(id);
         return carService.createOrUpdateCarForSale(carDto, bindingResult);
     }

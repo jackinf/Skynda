@@ -7,8 +7,17 @@ import me.skynda.common.dto.BaseDto;
 @Data
 @ToString(callSuper = false)
 public class ImagesDto extends BaseDto {
-	
-	String original;
-	String thumbnail;
+
+	/**
+	 * Image url
+	 */
+	private String original;
+	private String blobName;
+	private String containerName;
+
+	/**
+	 * Small image url
+	 */
+	private String thumbnail;
 
 }

@@ -5,7 +5,9 @@ import lombok.Data;
 @Data
 public class CarDtoImageFile {
 
-    private String id;
+    private Long id;
     private String base64File;
+    private String blobName;
+    private String containerName;
 
 }

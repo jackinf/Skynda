@@ -13,7 +13,7 @@ public class CarDtoFiles {
         this.faultsFiles = new ArrayList<>();
     }
 
+    private CarDtoImageFile mainImageFile;
     private List<CarDtoImageFile> imageFiles;
-    private List<CarDtoFaultsFile> faultsFiles;
-
+    private List<CarDtoImageFile> faultsFiles;
 }

@@ -7,7 +7,7 @@ import me.skynda.blobstorage.dto.response.BlobStorageUploadStreamResponseDto;
 import java.util.List;
 
 /**
- * Service for managing heavy files (blobs) like images and videos.
+ * Service for managing heavy filesToUpload (blobs) like images and videos.
  */
 public interface BlobStorageService {
 

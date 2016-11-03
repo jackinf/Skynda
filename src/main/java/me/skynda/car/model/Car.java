@@ -26,70 +26,74 @@ import javax.validation.constraints.Size;
 @Table(name = "cars_for_sale")
 public class Car {
 
-	@Id
-	@Column(name = "id", columnDefinition = "serial")
+    @Id
+    @Column(name = "id", columnDefinition = "serial")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;			// TODO: Add id to base model class
-	
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+    private Long id;            // TODO: Add id to base model class
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "model_code", nullable = false)
-	@NotNull
+    @NotNull
     private CarModels carModels;
 
-	@OneToMany(mappedBy = "car", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "car", fetch = FetchType.LAZY)
     private List<CarReport> carReport;
 
-	@OneToMany(mappedBy = "car", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "car", fetch = FetchType.LAZY)
     private List<CarReview> carReview;
 
-	@NotEmpty
-	private String vinCode;
+    private String mainImageUrl;
+    private String mainImageBlobName;
+    private String mainImageContainerName;
 
-	@NotNull
-	private BigDecimal price;
+    @NotEmpty
+    private String vinCode;
 
-	private Date created;	// TODO: Add to base model (rename to createdOn)
+    @NotNull
+    private BigDecimal price;
+
+    private Date created;    // TODO: Add to base model (rename to createdOn)
 //	private Date updatedOn;	// TODO: Add to base model
 
-	//TODO FK customerId
+    //TODO FK customerId
 
-	@NotEmpty
-	private String registrationNumber;
+    @NotEmpty
+    private String registrationNumber;
 
-	@NotNull
-	private BigDecimal mileage;
+    @NotNull
+    private BigDecimal mileage;
 
-	@NotEmpty
-	private String colorOutside;
+    @NotEmpty
+    private String colorOutside;
 
-	@NotEmpty
-	private String colorInside;
+    @NotEmpty
+    private String colorInside;
 
-	@OneToMany(mappedBy = "car", fetch = FetchType.LAZY)
-	private List<CarImage> images;
+    @OneToMany(mappedBy = "car", fetch = FetchType.LAZY)
+    private List<CarImage> images;
 
-	private Boolean isSold;
-	private String fuelCity;
-	private String fuelHighway;
+    private Boolean isSold;
+    private String fuelCity;
+    private String fuelHighway;
 
-	@OneToMany(mappedBy = "car", fetch = FetchType.LAZY)
-	private List<CarFeature> features;
+    @OneToMany(mappedBy = "car", fetch = FetchType.LAZY)
+    private List<CarFeature> features;
 
-	@OneToMany(mappedBy = "car", fetch = FetchType.LAZY)
-	private List<CarFault> faults;
-	private Integer safetyStars;
+    @OneToMany(mappedBy = "car", fetch = FetchType.LAZY)
+    private List<CarFault> faults;
+    private Integer safetyStars;
 
-	/*
-		PERFORMANCE section.
-	 */
-	private Integer compressionRatio;
-	private String compressionType;
-	private String configuration;
-	private String cylinders;
-	private String displacement;
-	private String fuelType;
-	private Integer size;
-	private Integer torque;
-	private Integer totalValves;
-	private String powerTrain;
+    /*
+        PERFORMANCE section.
+     */
+    private Integer compressionRatio;
+    private String compressionType;
+    private String configuration;
+    private String cylinders;
+    private String displacement;
+    private String fuelType;
+    private Integer size;
+    private Integer torque;
+    private Integer totalValves;
+    private String powerTrain;
 }

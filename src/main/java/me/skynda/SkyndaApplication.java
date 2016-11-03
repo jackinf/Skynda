@@ -53,9 +53,9 @@ public class SkyndaApplication {
     }
 
     /**
-     * Enables uploading files.
+     * Enables uploading filesToUpload.
      *
-     * @return File upload setting (standard) for uploading files
+     * @return File upload setting (standard) for uploading filesToUpload
      */
     @Bean
     public MultipartResolver multipartResolver() {
