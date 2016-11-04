@@ -1,6 +1,7 @@
 package me.skynda.car.dto;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import lombok.Data;
@@ -10,6 +11,10 @@ import me.skynda.common.dto.BaseDto;
 @Data
 @ToString(callSuper = false)
 public class CarDto extends BaseDto {
+    public CarDto() {
+        this.filesToDelete = new ArrayList<>();
+    }
+
     private ImageContainerDto mainImageContainer;
 //    private String mainImageUrl;
 //    private String mainImageBlobName;
