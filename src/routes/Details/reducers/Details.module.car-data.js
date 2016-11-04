@@ -155,7 +155,7 @@ sale`
 
 export const SET_CAR_DATA = "SET_CAR_DATA";
 
-export const getDataAsync = (id = 1) => (dispatch, getState) => {
+export const getDataAsync = (id = 110) => (dispatch, getState) => {
     dispatch(toggleLoading(true));
 
     return fetch(`${remoteConfig.remote}/api/car/${id}/detailed`, {

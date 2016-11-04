@@ -92,10 +92,7 @@ class Car extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: this.props.params[ROUTE_PARAMS.CAR_ID],
-
-      // Files that should be cleaned from file storage
-      filesToDelete: [] // (blobName + containerName)
+      id: this.props.params[ROUTE_PARAMS.CAR_ID]
     };
   }
 
@@ -149,15 +146,16 @@ class Car extends React.Component {
                   </Field>
                 )}
 
-                Persisted: <Field name="mainImageContainer.imageUrl" label="Main image" component={({input, i}) => (<div>
-                  {input.value ? <img src={input.value} width={100}/> : ""}
-                </div>)}/>
-                <br />
+                Persisted: <Field name="mainImageContainer.imageUrl" label="Main image"
+                                  component={({input, i}) => (<div>
+                                    {input.value ? <img src={input.value} width={100}/> : ""}
+                                  </div>)}/>
+                <hr />
                 New: <Field name="mainImageContainer.base64File" label="Main image" component={({input, i}) => (<div>
-                  {input.value
-                    ? <img src={input.value} onClick={e => this.props.onMainImageRemove(e)} width={100}/>
-                    : <input type="file" onChange={e => this.props.onMainImageUpload(e)}/>}
-                </div>)}/>
+                {input.value
+                  ? <img src={input.value} onClick={e => this.props.onMainImageRemove(e)} width={100}/>
+                  : <input type="file" onChange={e => this.props.onMainImageUpload(e)}/>}
+              </div>)}/>
 
                 <Field name="colorInside" label="Color Inside *" component={renderTextField}/>
                 <Field name="colorOutside" label="Color Outside *" component={renderTextField}/>
@@ -181,7 +179,8 @@ class Car extends React.Component {
                         const componentFn = ({input}) => (<img src={input.value} width={100}
                                                                onClick={e => this.props.onImageFileRemove(e, index)}/>);
                         return (<div key={index}>
-                          Persisted: <Field name={`${field}.imageContainer.imageUrl`} type="text" component={componentFn}/><br />
+                          Persisted: <Field name={`${field}.imageContainer.imageUrl`} type="text"
+                                            component={componentFn}/><hr />
                           New: <Field name={`${field}.imageContainer.base64File`} type="text" component={componentFn}/>
                         </div>);
                       })}</div>)}/>
@@ -215,44 +214,6 @@ class Car extends React.Component {
                 <Field name="performance.totalValves" label="Total Valves" component={renderTextField} type="number"/>
               </Col>
             </Row>
-
-            {/*<Row style={{border: "1px solid #dedede", background: "#efefef"}}>*/}
-              {/*<Col xs={12}>*/}
-                {/*<h3>Files that are pending for upload:</h3>*/}
-
-                {/*<h4>Main file</h4>*/}
-                {/*<Row>*/}
-                  {/*<Col xs={12}>*/}
-                    {/*<Field name="filesToUpload.mainImageFile"*/}
-                           {/*type="text"*/}
-                           {/*component={({input}) => (<img src={input.value} width={100}/>)}/>*/}
-                  {/*</Col>*/}
-                {/*</Row>*/}
-
-                {/*<h4>Image files</h4>*/}
-                {/*<Row>*/}
-                  {/*<Col xs={12}>*/}
-                    {/*<FieldArray name="filesToUpload.imageFiles" component={({fields}) => (<div>*/}
-                      {/*{fields.map((field, index) => {*/}
-                        {/*const componentFn = ({input}) => (<img src={input.value} width={100}/>);*/}
-                        {/*return <Field key={index} name={`${field}`} component={componentFn}/>;*/}
-                      {/*})}</div>)}/>*/}
-                  {/*</Col>*/}
-                {/*</Row>*/}
-
-                {/*/!*<h4>Faults files</h4>*!/*/}
-                {/*/!*<Row>*!/*/}
-                  {/*/!*<Col xs={12}>*!/*/}
-                    {/*/!*<FieldArray name="filesToUpload.faultsFiles" component={({fields}) => (<div>*!/*/}
-                      {/*/!*{fields.map((field, index) => {*!/*/}
-                        {/*/!*const componentFn = ({input}) => (<img src={input.value} width={100}/>);*!/*/}
-                        {/*/!*return <Field key={index} name={`${field}.base64File`} component={componentFn}/>;*!/*/}
-                      {/*/!*})}</div>)}/>*!/*/}
-                  {/*/!*</Col>*!/*/}
-                {/*/!*</Row>*!/*/}
-
-              {/*</Col>*/}
-            {/*</Row>*/}
 
             <br />
 
