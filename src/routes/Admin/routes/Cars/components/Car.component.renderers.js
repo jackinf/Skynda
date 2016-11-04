@@ -11,16 +11,7 @@ import {Row, Col} from "react-bootstrap";
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import ContentRemove from 'material-ui/svg-icons/content/remove';
-
-const renderFile = props => (
-  <div>
-    <label>{props.placeholder}</label>
-    <div>
-      <input type="file" name={props.name}/>
-      {props.touched && props.error && <span>{props.error}</span>}
-    </div>
-  </div>
-);
+import {guidUtil} from "../../../../../utils/allUtils";
 
 /*
  ====================================
@@ -30,19 +21,13 @@ const renderFile = props => (
 
 export const renderTextField = ({input, label, meta: {touched, error}, ...custom}) => (
   <Row style={{marginBottom: "10px"}}>
-    {/*<Col sm={3}>*/}
-      {/*<label>{custom.name}</label>*/}
-    {/*</Col>*/}
     <Col sm={12}>
-      <TextField hintText={label}
-                 floatingLabelText={label}
-                 errorText={touched && error}
-                 {...input}
-                 {...custom}
-      />
+      <TextField hintText={label} floatingLabelText={label} errorText={touched && error} {...input} {...custom} />
     </Col>
   </Row>
 );
+
+export const renderImage = ({input}) => (<img src={input.value} width={100} />);
 
 export const renderCheckbox = ({input, label, ...custom}) => (
   <Row style={{marginBottom: "10px"}}>
@@ -111,41 +96,29 @@ export const renderFeatures = ({fields, ...custom}) => fieldListWrapper({
   </ul>)
 });
 
-export const renderHistoryProblems = ({fields, ...custom}) => fieldListWrapper({
+export const renderFaults = ({fields, ...custom}) => fieldListWrapper({
   fields,
   title: custom.name,
   block: (<ul>
-    {fields.map((name, index) =>
-      <li key={index}>
-        <Field name={`${name}.img`} type="text" component={renderTextField} placeholder={`Image #${index + 1}`}/>
-        <Field name={`${name}.text`} type="text" component={renderTextField} placeholder={`Text #${index + 1}`}/>
-        <FloatingActionButton mini={true} secondary={true} onClick={() => fields.remove(index)}>
+    {fields.map((field, index) => {
+      return (<li key={index}>
+        {/*<Field name={`${field}.id`} type="text" component="input" />*/}
+        <Field name={`${field}.file`} type="file" component="input" onChange={e => custom.onFaultFileAdd(e, index)}/>
+        <Field name={`${field}.text`} type="text" component={renderTextField} placeholder={`Text #${index + 1}`}/>
+        Persisted: <Field name={`${field}.imageContainer.imageUrl`} type="text" component={renderImage} />
+        New: <Field name={`${field}.imageContainer.base64File`} type="text" component={renderImage} />
+        <FloatingActionButton mini={true} secondary={true}
+                              onClick={(e) => {
+                                fields.remove(index);
+                                custom.onFaultRemove(e, index);
+                              }}>
           <ContentRemove />
         </FloatingActionButton></li>
+      );
+      }
     )}
     {fields.error && <li className="error">{fields.error}</li>}
   </ul>)
-});
-
-export const renderImages = ({fields, ...custom}) => fieldListWrapper({
-  fields,
-  title: custom.name,
-  block: (
-    <ul>
-      {fields.map((name, index) =>
-        <li key={index}>
-          <Field name={`${name}.original`} type="text" component={renderTextField}
-                 placeholder={`Original #${index + 1}`}/>
-          {/*<Field name={`${name}.thumbnail`} type="text" component={renderTextField}*/}
-                 {/*placeholder={`Thumbnail #${index + 1}`}/>*/}
-          <FloatingActionButton mini={true} secondary={true} onClick={() => fields.remove(index)}>
-            <ContentRemove />
-          </FloatingActionButton>
-        </li>
-      )}
-      {fields.error && <li className="error">{fields.error}</li>}
-    </ul>
-  )
 });
 
 /**

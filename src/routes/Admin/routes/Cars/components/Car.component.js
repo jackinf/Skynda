@@ -10,13 +10,13 @@ import {
   renderSelectField,
   renderDescriptions,
   renderFeatures,
-  renderHistoryProblems,
-  renderImages
+  renderFaults
 } from "./Car.component.renderers";
 import {submitCarForm} from "../actions/Car";
 import MenuItem from 'material-ui/MenuItem';
 import {Row, Col} from "react-bootstrap";
 import {browserHistory} from "react-router";
+import Dropzone from "react-dropzone";
 
 class Car extends React.Component {
   static propTypes = {
@@ -91,7 +91,9 @@ class Car extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {id: this.props.params[ROUTE_PARAMS.CAR_ID]};
+    this.state = {
+      id: this.props.params[ROUTE_PARAMS.CAR_ID]
+    };
   }
 
   componentDidMount() {
@@ -103,10 +105,12 @@ class Car extends React.Component {
     this.props.clear();
   }
 
+  /*
+   *  Form submit logic. Saves or updates
+   */
   onSubmit(e) {
     this.props.handleSubmit(data => submitCarForm(data, this.props.formMode1))(e)
-      .then(
-        (t) => {
+      .then(() => {
           if (!!this.props.submitSucceeded) {
             alert("Success!");
             browserHistory.push(`/admin/car`);
@@ -117,7 +121,7 @@ class Car extends React.Component {
 
   render() {
     return (<div>
-        {this.props.isFetching ? "Loading..." : (
+        {this.props.isFetching || this.props.submitting ? "Loading..." : (
           <form onSubmit={this.onSubmit.bind(this)}>
 
             <Row>
@@ -142,14 +146,49 @@ class Car extends React.Component {
                   </Field>
                 )}
 
+                Persisted: <Field name="mainImageContainer.imageUrl" label="Main image"
+                                  component={({input, i}) => (<div>
+                                    {input.value ? <img src={input.value} width={100}/> : ""}
+                                  </div>)}/>
+                <hr />
+                New: <Field name="mainImageContainer.base64File" label="Main image" component={({input, i}) => (<div>
+                {input.value
+                  ? <img src={input.value} onClick={e => this.props.onMainImageRemove(e)} width={100}/>
+                  : <input type="file" onChange={e => this.props.onMainImageUpload(e)}/>}
+              </div>)}/>
+
                 <Field name="colorInside" label="Color Inside *" component={renderTextField}/>
                 <Field name="colorOutside" label="Color Outside *" component={renderTextField}/>
                 <FieldArray name="descriptions" label="Descriptions" component={renderDescriptions}/>
                 <FieldArray name="features" label="Features" component={renderFeatures}/>
-                <FieldArray name="faults" label="Faults" component={renderHistoryProblems}/>
+                <FieldArray name="faults" label="Faults" component={renderFaults}
+                            onFaultFileAdd={this.props.onFaultFileUpload}
+                            onFaultRemove={this.props.onFaultRemove}
+                />
                 <Field name="fuelCity" label="Fuel City" component={renderTextField}/>
                 <Field name="fuelHighway" label="Fuel Highway" component={renderTextField}/>
-                <FieldArray name="images" label="Images" component={renderImages}/>
+                <Row>
+                  <Col xs={12} md={6}>
+                    <h4>Images</h4>
+                    <Dropzone onDrop={this.props.onImageFileUpload} multiple={true}>
+                      <div>Try dropping some files here, or click to select files to upload.</div>
+                    </Dropzone>
+
+                    <FieldArray name="images" component={({fields}) => (<div>
+                      {fields.map((field, index) => {
+                        const componentFn = ({input}) => (<img src={input.value} width={100}
+                                                               onClick={e => this.props.onImageFileRemove(e, index)}/>);
+                        return (<div key={index}>
+                          Persisted: <Field name={`${field}.imageContainer.imageUrl`} type="text"
+                                            component={componentFn}/><hr />
+                          New: <Field name={`${field}.imageContainer.base64File`} type="text" component={componentFn}/>
+                        </div>);
+                      })}</div>)}/>
+
+                  </Col>
+                </Row>
+                <br/>
+
                 <Field name="isSold" label="Is Sold" component={renderCheckbox}/>
                 <Field name="mileage" label="Mileage *" component={renderTextField} type="number"/>
                 <Field name="price" label="Price *" component={renderTextField} type="number"/>
@@ -175,6 +214,8 @@ class Car extends React.Component {
                 <Field name="performance.totalValves" label="Total Valves" component={renderTextField} type="number"/>
               </Col>
             </Row>
+
+            <br />
 
             <button type="submit" disabled={this.props.submitting}>Submit</button>
             {/*<RaisedButton label="Submit" />*/}

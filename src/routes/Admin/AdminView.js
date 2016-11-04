@@ -3,7 +3,7 @@
  */
 import React from "react";
 import {Row, Col, Breadcrumb} from "react-bootstrap";
-import { browserHistory } from "react-router"
+import {browserHistory} from "react-router"
 
 
 class AdminView extends React.Component {

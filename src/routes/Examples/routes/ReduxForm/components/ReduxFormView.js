@@ -1,5 +1,5 @@
 import React from 'react';
-import { Field } from 'redux-form';
+import {Field} from 'redux-form';
 
 class ReduxFormView extends React.Component {
   static propTypes = {
