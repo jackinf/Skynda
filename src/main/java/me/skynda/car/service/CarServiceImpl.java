@@ -89,46 +89,50 @@ public class CarServiceImpl implements CarService {
          */
 
         // Upload main image
-        Optional<String> base64FileOptional = SkyndaUtility.resolve(() -> carDto.getFilesToUpload().getMainImageFile());
+        Optional<ImageContainerDto> base64FileOptional = SkyndaUtility.resolve(carDto::getMainImageContainer);
         if (base64FileOptional != null) {
-            String base64File = base64FileOptional.get();
+            ImageContainerDto base64File = base64FileOptional.get();
+            if (base64File.getBase64File() != null && !base64File.getBase64File().isEmpty()) {
 
-            // Please, upload the fucking file!!!
-            UploadBlobDto uploadBlobDto1 = new UploadBlobDto();
-            uploadBlobDto1.setContainerName(DEFAULT_CONTAINER_NAME);
-            String blobName = UUID.randomUUID().toString();
-            uploadBlobDto1.setBlobName(blobName);
-            uploadBlobDto1.setByteArray(SkyndaUtility.toBytearray(base64File));
-            BlobStorageUploadStreamResponseDto responseDto1 = blobStorageService.uploadStream(uploadBlobDto1);
+                // Please, upload the fucking file!!!
+                UploadBlobDto uploadBlobDto1 = new UploadBlobDto();
+                uploadBlobDto1.setContainerName(DEFAULT_CONTAINER_NAME);
+                String blobName = UUID.randomUUID().toString();
+                uploadBlobDto1.setBlobName(blobName);
+                uploadBlobDto1.setByteArray(SkyndaUtility.toBytearray(base64File.getBase64File()));
+                BlobStorageUploadStreamResponseDto responseDto1 = blobStorageService.uploadStream(uploadBlobDto1);
 
-            // READY-HEHEHE!! Put ze file intu ze kar!
-            if (responseDto1.isSuccess()) {
-                car.setMainImageUrl(responseDto1.getUri());
-                car.setMainImageBlobName(blobName);
-                car.setMainImageContainerName(DEFAULT_CONTAINER_NAME);
+                // Was upload successful?
+                if (responseDto1.isSuccess()) {
+                    car.setMainImageUrl(responseDto1.getUri());
+                    car.setMainImageBlobName(blobName);
+                    car.setMainImageContainerName(DEFAULT_CONTAINER_NAME);
+                }
             }
         }
 
         // Upload image gallery
-        List<ImagesDto> images = carDto.getImages() != null ? carDto.getImages() : new ArrayList<>();
-        List<String> imageFiles = carDto.getFilesToUpload().getImageFiles();
-        imageFiles.forEach(file -> {
+        List<ImagesDto> imageDtos = carDto.getImages() != null ? carDto.getImages() : new ArrayList<>();
+        imageDtos.forEach(imageDto -> {
+            Optional<String> resolve = SkyndaUtility.resolve(() -> imageDto.getImageContainer().getBase64File());
+            if (resolve == null)
+                return;
 
             // Upload the fucking file, JIM!
             UploadBlobDto uploadBlobDto = new UploadBlobDto();
             uploadBlobDto.setContainerName(DEFAULT_CONTAINER_NAME);
             String blobName = UUID.randomUUID().toString();
             uploadBlobDto.setBlobName(blobName);
-            uploadBlobDto.setByteArray(SkyndaUtility.toBytearray(file));
+            uploadBlobDto.setByteArray(SkyndaUtility.toBytearray(resolve.get()));
             BlobStorageUploadStreamResponseDto responseDto = blobStorageService.uploadStream(uploadBlobDto);
 
             // Aww yeah, successful, right?
             if (responseDto.isSuccess()) {
                 ImagesDto dto = new ImagesDto();
-                dto.setOriginal(responseDto.getUri());
-                dto.setBlobName(blobName);
-                dto.setContainerName(DEFAULT_CONTAINER_NAME);
-                images.add(dto);
+                imageDto.getImageContainer().setImageUrl(responseDto.getUri());
+                imageDto.getImageContainer().setBlobName(blobName);
+                imageDto.getImageContainer().setContainerName(DEFAULT_CONTAINER_NAME);
+                imageDtos.add(dto);
             }
         });
 
@@ -136,7 +140,8 @@ public class CarServiceImpl implements CarService {
         List<FaultsDto> faults = carDto.getFaults();
         faults.forEach(fault -> {
             // Do we have a file, sir?
-            if (fault.getBase64File().isEmpty())
+            Optional<String> resolve = SkyndaUtility.resolve(() -> fault.getImageContainer().getBase64File());
+            if (resolve == null)
                 return;
 
             // Upload the file, Jim!
@@ -144,17 +149,16 @@ public class CarServiceImpl implements CarService {
             uploadBlobDto.setContainerName(DEFAULT_CONTAINER_NAME);
             String blobName = UUID.randomUUID().toString();
             uploadBlobDto.setBlobName(blobName);
-            uploadBlobDto.setByteArray(SkyndaUtility.toBytearray(fault.getBase64File()));
+            uploadBlobDto.setByteArray(SkyndaUtility.toBytearray(resolve.get()));
             BlobStorageUploadStreamResponseDto responseDto = blobStorageService.uploadStream(uploadBlobDto);
 
             // File upload successful, Jim, isn't it?
             if (responseDto.isSuccess()) {
-                fault.setImg(responseDto.getUri());
-                fault.setBlobName(blobName);
-                fault.setContaienrName(DEFAULT_CONTAINER_NAME);
-                fault.setBase64File(null);
+                fault.getImageContainer().setImageUrl(responseDto.getUri());
+                fault.getImageContainer().setBlobName(blobName);
+                fault.getImageContainer().setContainerName(DEFAULT_CONTAINER_NAME);
+                fault.getImageContainer().setBase64File(null);
             }
-
         });
 
         /*
@@ -176,7 +180,7 @@ public class CarServiceImpl implements CarService {
 
         carFeatureDao.addMultipleToCar(addedCar, carDto.getFeatures());
         carFaultDao.addMultipleToCar(addedCar, faults);
-        carImageDao.addMultipleToCar(addedCar, images);
+        carImageDao.addMultipleToCar(addedCar, imageDtos);
 
         CreateOrUpdateResponseDto response = new CreateOrUpdateResponseDto();
         response.setId(addedCar.getId());

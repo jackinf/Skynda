@@ -11,9 +11,10 @@ public class ImagesDto extends BaseDto {
 	/**
 	 * Image url
 	 */
-	private String original;
-	private String blobName;
-	private String containerName;
+	private ImageContainerDto imageContainer;
+//	private String original;
+//	private String blobName;
+//	private String containerName;
 
 	/**
 	 * Small image url

@@ -5,12 +5,12 @@ import lombok.Data;
 import java.util.ArrayList;
 import java.util.List;
 
+// TODO: DELETE
 @Data
 public class CarDtoFilesToUpload {
 
     public CarDtoFilesToUpload() {
         this.imageFiles = new ArrayList<>();
-        this.faultsFiles = new ArrayList<>();
     }
 
     /**
@@ -22,9 +22,4 @@ public class CarDtoFilesToUpload {
      * Base64 image files
      */
     private List<String> imageFiles;
-
-    /**
-     * Data transfer objects, which hold Base64 image files and ids
-     */
-    private List<CarDtoImageFileToUpload> faultsFiles;
 }

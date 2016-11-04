@@ -82,8 +82,10 @@ public class CarConverter {
 			List<ImagesDto> imagesDtoList = new ArrayList<ImagesDto>();
 			for (String image : listOfImages) {
 				ImagesDto imagesDto = new ImagesDto();
-				imagesDto.setOriginal(image);
-				imagesDto.setThumbnail(image);
+                ImageContainerDto imageContainerDto = new ImageContainerDto();
+                imageContainerDto.setImageUrl(image);
+                imagesDto.setImageContainer(new ImageContainerDto());
+//				imagesDto.setThumbnail(image);
 				imagesDtoList.add(imagesDto);
 			}
 			singleCarDataDto.setImages(imagesDtoList);
@@ -222,6 +224,14 @@ public class CarConverter {
 	public CarDto transformToCarDto(Car carDb) {
 		CarDto carDto = new CarDto();
 		carDto.setId(carDb.getId());
+
+        ImageContainerDto mainImageContainerDto = ImageContainerDto.Factory.create(
+            carDb.getMainImageUrl(),
+            carDb.getMainImageBlobName(),
+            carDb.getMainImageContainerName()
+        );
+        carDto.setMainImageContainer(mainImageContainerDto);
+
         carDto.setCarModelsCode(SkyndaUtility.resolve(() -> carDb.getCarModels().getModelCode()).get());
 		carDto.setVinCode(carDb.getVinCode());
 		carDto.setPrice(carDb.getPrice());
@@ -245,20 +255,34 @@ public class CarConverter {
 
         // Images
         List<ImagesDto> imageDtos = carDb.getImages().stream().map(image -> {
-            ImagesDto dto = new ImagesDto();
-            dto.setId(image.getId());
-            dto.setOriginal(image.getImageUrl());
-            return dto;
+            ImagesDto imageDto = new ImagesDto();
+            imageDto.setId(image.getId());
+
+            ImageContainerDto imageContainerDto = ImageContainerDto.Factory.create(
+                    image.getImageUrl(),
+                    image.getImageBlobName(),
+                    image.getImageContainerName()
+            );
+            imageDto.setImageContainer(imageContainerDto);
+
+            return imageDto;
         }).collect(Collectors.toList());
         carDto.setImages(imageDtos);
 
         // Faults
         List<FaultsDto> faultsDtos = carDb.getFaults().stream().map(fault -> {
-            FaultsDto dto = new FaultsDto();
-            dto.setId(fault.getId());
-            dto.setText(fault.getText());
-            dto.setImg(fault.getImageUrl());
-            return dto;
+            FaultsDto faultDto = new FaultsDto();
+            faultDto.setId(fault.getId());
+            faultDto.setText(fault.getText());
+
+            ImageContainerDto imageContainerDto = ImageContainerDto.Factory.create(
+                    fault.getImageUrl(),
+                    fault.getImageBlobName(),
+                    fault.getImageContainerName()
+            );
+            faultDto.setImageContainer(imageContainerDto);
+
+            return faultDto;
         }).collect(Collectors.toList());
         carDto.setFaults(faultsDtos);
 
