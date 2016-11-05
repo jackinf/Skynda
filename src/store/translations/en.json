@@ -93,9 +93,11 @@
         "displacement": "Displacement"
       },
       "petrol": {
+        "header": "Petrol Consumption",
         "city": "City",
         "highway": "Highway",
-        "average": "Average"
+        "average": "Average",
+        "fuel_type": "Fuel Type"
       },
       "reviews": {
         "header": "Reviews",

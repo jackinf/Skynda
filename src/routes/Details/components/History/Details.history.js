@@ -31,7 +31,9 @@ class History extends React.Component {
         </div>
       </Col>
       <Col md={6}>
-        <label><Translate value="details.components.history.vin"/>: </label> {this.props.history.vinCode}
+        <label className="sk_details__label">
+          <Translate value="details.components.history.vin"/>:
+        </label> {this.props.history.vinCode}
       </Col>
     </Skblock>);
   }

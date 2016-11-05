@@ -108,7 +108,8 @@
         "header": "Kütusekulu",
         "city": "Linn",
         "highway": "Maantee",
-        "average": "Keskmine"
+        "average": "Keskmine",
+        "fuel_type": "Kütuse tüüp"
       },
       "reviews": {
         "header": "Arvustused",
