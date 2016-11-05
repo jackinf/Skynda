@@ -10,11 +10,11 @@ import Skblock from "../BlockContainer";
 import {Translate} from 'react-redux-i18n';
 
 // Images
-import imageDiploma1 from "./../../../../static/images/standard/diploma_1.png";
+import imageDiploma1 from "./../../../../static/images/standard/diploma_1@2x.png";
 
 class History extends React.Component {
   render() {
-    return (<Skblock header={<Translate value="details.components.history.header"/>}>
+    return (<Skblock className="sk_details__history" header={<Translate value="details.components.history.header"/>}>
       <Col md={6}>
         <img src={imageDiploma1} width='24' className='sk_details__icon_list_image' />
         {this.props.history.problems > 0

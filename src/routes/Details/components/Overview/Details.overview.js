@@ -47,18 +47,14 @@ class Overview extends React.Component {
     ];
 
     return (<Skblock header={<Translate value="details.components.overview.header"/>}>
-      {overview.map((item, i) => (<Col key={i} md={3} xs={3} className='overview__overview-block'>
-        <Row className='overview__overview-icon-row'>
-          <Col md={12} className='overview__overview-icon-col'>
-            <img src={item.iconUrl} alt='' className='overview__overview-icon'/>
-          </Col>
-        </Row>
-        <Row className='overview__overview-label-row'>
-          <Col md={12} className='overview__overview-label-col'>
+      <Row>
+        <Col xs="12" className="sk_details__overview_flex-container">
+          {overview.map((item, i) => (<div className="sk_details__overview_flex-container-item">
+            <img src={item.iconUrl} alt='' className='overview__overview-icon' /><br />
             <span className='overview__overview-label'>{item.label}</span>
-          </Col>
-        </Row>
-      </Col>))}
+          </div>))}
+        </Col>
+      </Row>
     </Skblock>);
   }
 }
