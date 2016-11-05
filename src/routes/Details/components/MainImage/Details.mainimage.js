@@ -67,9 +67,8 @@ class MainImage extends React.Component {
 
 MainImage.propTypes = {
   car: React.PropTypes.shape({
-    mainImageUrl: React.PropTypes.string.isRequired,
     general: React.PropTypes.shape({
-      src: React.PropTypes.string,
+      src: React.PropTypes.string.isRequired,
       year: React.PropTypes.number.isRequired,
       brand: React.PropTypes.string,
       model: React.PropTypes.string,

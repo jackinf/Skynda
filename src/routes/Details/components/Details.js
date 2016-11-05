@@ -79,7 +79,7 @@ class CarDetails extends React.Component {
             <div className='row'>
               <div className='col col-md-7'>
 
-                <Overview overview={carData.overview}/>
+                <Overview general={carData.general}/>
 
                 {carData.descriptions.map((description, i) =>
                   <Skblock key={i} header={description.title}>{description.text}</Skblock>)}
