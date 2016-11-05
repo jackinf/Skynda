@@ -6,7 +6,7 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE.txt file in the root directory of this source tree.
  */
-@import '../../components/variables.css';
+@import '../../styles/variables';
 
 .root {
   padding-left: 20px;
@@ -86,31 +86,28 @@
 .facebook {
   border-color: #3b5998;
   background: #3b5998;
-  composes: button;
-}
 
-.facebook:hover {
-  background: #2d4373;
+  :hover {
+    background: #2d4373;
+  }
 }
 
 .google {
   border-color: #dd4b39;
   background: #dd4b39;
-  composes: button;
-}
 
-.google:hover {
-  background: #c23321;
+  :hover {
+    background: #c23321;
+  }
 }
 
 .twitter {
   border-color: #55acee;
   background: #55acee;
-  composes: button;
-}
 
-.twitter:hover {
-  background: #2795e9;
+  :hover {
+    background: #2795e9;
+  }
 }
 
 .icon {
@@ -119,7 +116,7 @@
   width: 20px;
   height: 20px;
   vertical-align: middle;
-  fill: currentColor;
+  //fill: currentColor;
 }
 
 .lineThrough {

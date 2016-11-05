@@ -8,19 +8,26 @@
  */
 
 import React from "react";
-import Login from "./Login";
 
-const title = "Log In";
-
-export default {
-
-  path: "/login",
-
-  action() {
-    return {
-      title,
-      component: <Login title={title}/>
-    };
+export default (store) => ({
+  path: "login",
+  getComponent(nextState, cb) {
+    require.ensure([], (require) => {
+      cb(null, require("./Login").default);
+    })
   }
+})
 
-};
+
+// export default {
+//
+//   path: "/login",
+//
+//   action() {
+//     return {
+//       title,
+//       component: <Login title={title}/>
+//     };
+//   }
+//
+// };

@@ -5,6 +5,7 @@ import Details from "./Details";
 import About from "./About";
 import Examples from "./Examples";
 import Admin from "./Admin";
+import Login from "./Login";
 
 import CounterRoute from './Counter_todelete'
 import {loadTranslations, setLocale, syncTranslationWithStore, i18nReducer} from 'react-redux-i18n';
@@ -37,7 +38,8 @@ export const createRoutes = (store) => {
       About(store),
       CounterRoute(store),
       Examples(store),
-      Admin(store)
+      Admin(store),
+      Login(store)
     ]
   };
 
