@@ -18,5 +18,11 @@ public class ImageContainerDto {
             dto.setContainerName(containerName);
             return dto;
         }
+
+        public static ImageContainerDto createForDisplay(String url) {
+            ImageContainerDto dto = new ImageContainerDto();
+            dto.setImageUrl(url);
+            return dto;
+        }
     }
 }

@@ -11,7 +11,7 @@ import lombok.ToString;
 public class SingleCarDataDto {
 
 	public Long id;
-	private CarGeneralDto carGeneralDto;
+    private CarGeneralDto carGeneralDto;
 	private List<ImagesDto> images;
 	private List<OverviewDto> overview;
 	private List<DescriptionsDto> descriptions;

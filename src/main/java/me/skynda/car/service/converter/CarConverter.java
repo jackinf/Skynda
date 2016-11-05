@@ -15,6 +15,7 @@ public class CarConverter {
 	public SingleCarDataDto transform(Car car) {
 		SingleCarDataDto singleCarDataDto = new SingleCarDataDto();
 		singleCarDataDto.setId(car.getId());
+
 		convertGeneralData(car, singleCarDataDto);
 		convertOverviewData(car, singleCarDataDto);
 		convertImagesData(car, singleCarDataDto);
@@ -33,6 +34,7 @@ public class CarConverter {
 
 	private void convertGeneralData(Car car, SingleCarDataDto singleCarDataDto) {
 		CarGeneralDto carGeneralDto = new CarGeneralDto();
+        carGeneralDto.setSrc(car.getMainImageUrl());
 		carGeneralDto.setColorInside(car.getColorInside());
 		carGeneralDto.setColorOutside(car.getColorOutside());
 		carGeneralDto.setDoors(car.getCarModels().getDoors());
@@ -43,7 +45,6 @@ public class CarConverter {
 		carGeneralDto.setMileage(car.getMileage());
 		carGeneralDto.setModel(car.getCarModels().getModelCode());
 		carGeneralDto.setSeats(car.getCarModels().getSeats());
-//		carGeneralDto.setSrc(car.getImages());	// TODO: Why do we need this?
 		carGeneralDto.setTransmission(car.getCarModels().getTransmission());
 		carGeneralDto.setYear(car.getCarModels().getYear());
 		singleCarDataDto.setCarGeneralDto(carGeneralDto);
@@ -77,20 +78,20 @@ public class CarConverter {
 	}
 
 	private void convertImagesData(Car car, SingleCarDataDto singleCarDataDto) {
-		if (car.getImages() != null) {
-			List<String> listOfImages = car.getImages().stream().map(CarImage::getImageUrl).collect(Collectors.toList());
-			List<ImagesDto> imagesDtoList = new ArrayList<ImagesDto>();
-			for (String image : listOfImages) {
-				ImagesDto imagesDto = new ImagesDto();
-                ImageContainerDto imageContainerDto = new ImageContainerDto();
-                imageContainerDto.setImageUrl(image);
-                imagesDto.setImageContainer(new ImageContainerDto());
-//				imagesDto.setThumbnail(image);
-				imagesDtoList.add(imagesDto);
-			}
-			singleCarDataDto.setImages(imagesDtoList);
-		}
-	}
+        List<CarImage> images = car.getImages();
+        if (images == null) {
+            return;
+        }
+
+        List<String> listOfImages = images.stream().map(CarImage::getImageUrl).collect(Collectors.toList());
+        List<ImagesDto> imagesDtoList = new ArrayList<ImagesDto>();
+        for (String image : listOfImages) {
+            ImagesDto imagesDto = new ImagesDto();
+            imagesDto.setImageContainer(ImageContainerDto.Factory.createForDisplay(image));
+            imagesDtoList.add(imagesDto);
+        }
+        singleCarDataDto.setImages(imagesDtoList);
+    }
 
 	private void convertDescriptionData(Car car, SingleCarDataDto singleCarDataDto) {
 		if (car.getCarModels().getDescription() != null) {
@@ -184,6 +185,14 @@ public class CarConverter {
 	public Car transform(CarDto carDto) {
 		Car car = new Car();
 		car.setId(carDto.getId());
+
+        ImageContainerDto mainImageContainer = carDto.getMainImageContainer();
+        if (mainImageContainer != null) {
+            car.setMainImageUrl(mainImageContainer.getImageUrl());
+            car.setMainImageBlobName(mainImageContainer.getBlobName());
+            car.setMainImageContainerName(mainImageContainer.getContainerName());
+        }
+
 		car.setVinCode(carDto.getVinCode());
 		car.setPrice(carDto.getPrice());
 		car.setRegistrationNumber(carDto.getRegistrationNumber());
