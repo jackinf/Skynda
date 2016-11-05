@@ -17,6 +17,7 @@ import MenuItem from 'material-ui/MenuItem';
 import {Row, Col} from "react-bootstrap";
 import {browserHistory} from "react-router";
 import Dropzone from "react-dropzone";
+import NotificationSystem from "react-notification-system";
 
 class Car extends React.Component {
   static propTypes = {
@@ -112,7 +113,10 @@ class Car extends React.Component {
     this.props.handleSubmit(data => submitCarForm(data, this.props.formMode1))(e)
       .then(() => {
           if (!!this.props.submitSucceeded) {
-            alert("Success!");
+            this.refs.notificationSystem.addNotification({
+              message: 'Notification message',
+              level: 'success'
+            });
             browserHistory.push(`/admin/car`);
           }
         },
@@ -121,6 +125,8 @@ class Car extends React.Component {
 
   render() {
     return (<div>
+        <NotificationSystem ref="notificationSystem" />
+
         {this.props.isFetching || this.props.submitting ? "Loading..." : (
           <form onSubmit={this.onSubmit.bind(this)}>
 

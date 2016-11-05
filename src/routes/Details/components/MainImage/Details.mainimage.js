@@ -23,7 +23,6 @@ class MainImage extends React.Component {
     const images = this.props.car.images ? this.props.car.images
       .filter(image => image.imageContainer)
       .map(image => ({original: image.imageContainer.imageUrl})) : [];
-    const mainImageUrl = this.props.car.mainImageUrl;
     const source360 = "https://www.panono.com/p/jmr7n52eIbDn/embed?autorotate=false";
 
     return (
@@ -31,7 +30,7 @@ class MainImage extends React.Component {
 
         <div className='image-preview'>
           <a>
-            <img src={mainImageUrl} className='main-image'/>
+            <img src={src} className='main-image'/>
           </a>
 
           <div className='info-panel-bg'/>

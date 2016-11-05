@@ -58,8 +58,8 @@ import {StickyContainer, Sticky} from "react-sticky";
 
 class CarDetails extends React.Component {
 
-  async componentWillMount() {
-    await this.props.getDataAsync();
+  componentWillMount() {
+    this.props.getDataAsync();
   }
 
   render() {
