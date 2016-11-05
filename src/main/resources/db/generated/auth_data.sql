@@ -16,9 +16,9 @@ insert into authority (name) values ('admin');
 insert into authority (name) values ('technical user');
 insert into authority (name) values ('user');
 
-insert into users_authority (id_user, id_authority) values (1, 1);
-insert into users_authority (id_user, id_authority) values (1, 2);
-insert into users_authority (id_user, id_authority) values (1, 3);
-insert into users_authority (id_user, id_authority) values (2, 3);
-insert into users_authority (id_user, id_authority) values (3, 3);
+insert into user_authority (id_user, id_authority) values (1, 1);
+insert into user_authority (id_user, id_authority) values (1, 2);
+insert into user_authority (id_user, id_authority) values (1, 3);
+insert into user_authority (id_user, id_authority) values (2, 3);
+insert into user_authority (id_user, id_authority) values (3, 3);
 	
