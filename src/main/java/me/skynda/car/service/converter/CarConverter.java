@@ -94,14 +94,12 @@ public class CarConverter {
     }
 
 	private void convertDescriptionData(Car car, SingleCarDataDto singleCarDataDto) {
+        // TODO: (list) car.getDescriptions(), not car.getCarModels().getDescription()
 		if (car.getCarModels().getDescription() != null) {
 			List<DescriptionsDto> descriptionsDtoList = new ArrayList<DescriptionsDto>();
 			DescriptionsDto descriptionDto = new DescriptionsDto();
 			descriptionDto.setText(car.getCarModels().getDescription());
 			descriptionDto.setTitle(car.getCarModels().getTitle());
-			descriptionsDtoList.add(descriptionDto);
-			descriptionDto.setText(car.getCarModels().getCarManufacturer().getDescription());
-			descriptionDto.setTitle(car.getCarModels().getCarManufacturer().getTitle());
 			descriptionsDtoList.add(descriptionDto);
 			singleCarDataDto.setDescriptions(descriptionsDtoList);
 		}
