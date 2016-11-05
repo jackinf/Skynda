@@ -34,4 +34,4 @@ class BlockContainer extends React.Component {
   }
 }
 
-export default BlockContainer;
+export default BlockContainerCard;

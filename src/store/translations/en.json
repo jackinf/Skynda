@@ -61,13 +61,12 @@
         "show_all": "Show all"
       },
       "checkout_panel": {
-        "first_name": "First Name",
-        "last_name": "Last Name",
+        "your_name": "Your Name",
         "email": "E-Mail",
         "phone": "Phone Number",
         "btn_send": "Send",
         "contact_24h_txt": "We will contact you in 24h.",
-        "contact_us_txt": "Contact Us"
+        "contact_us_txt": "Write To Us"
       },
       "features": {
         "header": "Nice features"
