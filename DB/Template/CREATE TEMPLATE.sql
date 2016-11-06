@@ -1,0 +1,1 @@
+CREATE DATABASE skynda_test WITH TEMPLATE skynda
