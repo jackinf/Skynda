@@ -8,7 +8,7 @@ import me.skynda.auth.model.User;
 import me.skynda.common.db.SkyndaBaseEntityDaoImpl;
 
 @Repository
-public class UserDaoImpl extends SkyndaBaseEntityDaoImpl<UserDao> implements UserDao{
+public class UserDaoImpl extends SkyndaBaseEntityDaoImpl<User> implements UserDao{
 
 	@Override
 	public User getByEmail(String email) {
