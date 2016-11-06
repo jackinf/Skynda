@@ -9,15 +9,6 @@ import me.skynda.car.dto.CarDto;
 import me.skynda.car.dto.CarGeneralDto;
 import me.skynda.car.dto.SingleCarDataDto;
 import me.skynda.car.dto.request.CarSearchRequestDto;
-import me.skynda.car.dto.CarDto;
-import me.skynda.car.dto.CarGeneralDto;
-import me.skynda.car.dto.SingleCarDataDto;
-import me.skynda.car.dto.request.CarSearchRequestDto;
-import me.skynda.car.dto.CarDto;
-import me.skynda.car.dto.CarGeneralDto;
-import me.skynda.car.dto.SingleCarDataDto;
-import me.skynda.car.dto.request.CarSearchRequestDto;
-import me.skynda.car.dto.response.CarModelResponseDto;
 import me.skynda.car.dto.*;
 import me.skynda.car.model.Car;
 import me.skynda.car.model.CarModels;
@@ -26,19 +17,12 @@ import me.skynda.car.validators.CarValidator;
 import me.skynda.common.dto.CreateOrUpdateResponseDto;
 import me.skynda.common.dto.DeleteResponseDto;
 import me.skynda.common.dto.SearchResponseDto;
-import me.skynda.common.dto.SearchResponseDto;
-import me.skynda.common.dto.SearchResponseDto;
-import me.skynda.common.dto.UpdateResponseDto;
 import me.skynda.common.helper.SkyndaUtility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 import java.util.*;
 
 @Service
