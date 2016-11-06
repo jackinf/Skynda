@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import me.skynda.auth.dto.AuthorityDto;
 import me.skynda.auth.dto.UserDto;
 import me.skynda.auth.service.UserService;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 @Component("userDetailsService")
 public class UserDetailsService implements org.springframework.security.core.userdetails.UserDetailsService {
