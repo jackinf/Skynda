@@ -10,26 +10,129 @@
 import React, {PropTypes} from "react";
 import "./Login.scss";
 import remoteConfig from "store/remoteConfig";
+import jQuery from "jquery";
 
 class Login extends React.Component {
   constructor() {
     super();
-    this.state = {login: "", pass: ""};
+    this.state = {username: "steve", email: "steve.jobs@apple.com", password: "steve", rememberme: true};
   }
 
   pleaseLogin = (e) => {
     e.preventDefault();
-    console.log(this.state);
+    // console.log(this.state);
 
-    fetch(`${remoteConfig.remote}/login`, {
-      method: "POST",
-      headers: {"Accept": "application/json", "Content-Type": "application/json"},
-      body: JSON.stringify(this.state)
+    var formData = new FormData();
+    formData.append("username", this.state.username);
+    formData.append("password", this.state.password);
+    formData.append("rememberme", this.state.rememberme);
+
+    jQuery.post({
+      url:  `${remoteConfig.remote}/login`,
+      data: formData,
+      processData: false,
+      contentType: false,
+      xhrFields: {
+        withCredentials: true
+      },
+      // headers: {"Content-Type": "application/x-www-form-urlencoded"},
+      type: 'POST',
+      success: function(data){
+        console.log(data);
+      }
+    });
+
+    // jQuery.ajax({
+    //   type: 'post',
+    //   url: `${remoteConfig.remote}/authenticate`,
+    //   data: formData,
+    //   // contentType: "application/json; charset=utf-8",
+    //   // traditional: true,
+    //   success: function (data) {
+    //     console.log(data);
+    //   }
+    // });
+    //
+    // jQuery.post(`${remoteConfig.remote}/authenticate`, {
+    //   method: "POST",
+    //   // contentType: 'application/x-www-form-urlencoded; charset=UTF-8'
+    //   data: formData
+    //   // headers
+    // }).done(function (data) {
+    //   console.log(data);
+    // });
+
+
+    // fetch(`${remoteConfig.remote}/` + "login", {
+    //   method: "POST",
+    //   headers: {"Accept": "application/json"},
+    //   credentials: "same-origin",
+    //   // body: JSON.stringify(this.state)
+    //   // headers: {"Content-Type": "application/form-data"},
+    //   body: formData
+    // })
+    //   .then(resp => resp.json())
+    //   .then(resp => {
+    //     console.log(resp);
+    //   })
+  };
+
+  pleaseCheckIfLoggedIn = (e) => {
+    e.preventDefault();
+
+    // jQuery.get(`${remoteConfig.remote}/user/`, {
+    //   xhrFields: {
+    //     withCredentials: true
+    //   }
+    // }, function success(data) {
+    //   console.log(data);
+    // });
+
+
+
+
+    // var url = `${remoteConfig.remote}/user/`;
+    // var http = new XMLHttpRequest();
+    //
+    // http.open("GET", url, true);
+    // // http.setDisableHeaderCheck(true);
+    // http.onreadystatechange = function()     {
+    //   console.log(http.responseText);
+    // };
+    // http.send(null);
+
+
+
+
+    fetch(`${remoteConfig.remote}/user/`, {
+      method: "GET",
+      credentials: 'include'
     })
-      .then(resp => resp.json())
-      .then(resp => {
-        console.log(resp);
-      })
+    .then(resp => resp.json())
+    .then(resp => {
+      console.log(resp);
+    });
+  };
+
+  pleaseLogout = (e) => {
+    e.preventDefault();
+
+    jQuery.post(`${remoteConfig.remote}/logout`, {      xhrFields: {
+      withCredentials: true
+    },}, function success(data) {
+      console.log(data);
+      // cookies.remove("JSESSIONID");
+    });
+
+    // fetch(`${remoteConfig.remote}/logout`, {
+    //   method: "GET",
+    //   headers: {"Accept": "application/json"},
+    //   credentials: 'same-origin', // here's the magical line that fixed everything
+    // })
+    // // .then(resp => resp.json())
+    // .then(resp => {
+    //   console.log(resp);
+    // });
   };
 
   render() {
@@ -105,11 +208,12 @@ class Login extends React.Component {
                 Username or email address:
               </label>
               <input
-                onChange={e => this.setState({login: e.target.value})}
+                onChange={e => this.setState({username: e.target.value})}
                 className="input"
                 id='usernameOrEmail'
                 type='text'
                 name='usernameOrEmail'
+                value={this.state.username}
                 autoFocus
               />
             </div>
@@ -118,16 +222,35 @@ class Login extends React.Component {
                 Password:
               </label>
               <input
-                onChange={e => this.setState({pass: e.target.value})}
+                onChange={e => this.setState({password: e.target.value})}
                 className="input"
                 id='password'
                 type='password'
                 name='password'
+                value={this.state.password}
+              />
+            </div>
+            <div className="formGroup">
+              <label className="label" htmlFor='rememberme'>
+                Remember me:
+              </label>
+              <input
+                onChange={e => this.setState({rememberme: e.target.value})}
+                className="input"
+                id='rememberme'
+                type='checkbox'
+                value={this.state.rememberme}
               />
             </div>
             <div className="formGroup">
               <button className="button" type='submit' onClick={e => this.pleaseLogin(e)}>
                 Log in
+              </button>
+              <button className="button" type='submit' onClick={e => this.pleaseCheckIfLoggedIn(e)}>
+                Check If Logged In!
+              </button>
+              <button className="button" type='submit' onClick={e => this.pleaseLogout(e)}>
+                Logout
               </button>
             </div>
           </form>
@@ -136,7 +259,5 @@ class Login extends React.Component {
     );
   }
 }
-
-Login.propTypes = {title: PropTypes.string.isRequired};
 
 export default Login;
