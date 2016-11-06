@@ -23,7 +23,7 @@ public class RestAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuc
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws ServletException, IOException {
-		UserDto user = userService.findByEmail(authentication.getName());
+		UserDto user = userService.findByLogin(authentication.getName());
 		SecurityUtils.sendResponse(response, HttpServletResponse.SC_OK, user);
 	}
 }

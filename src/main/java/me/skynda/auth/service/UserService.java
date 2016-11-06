@@ -9,5 +9,7 @@ public interface UserService {
 	List<UserDto> getAllUsers();
 
 	UserDto findByEmail(String email);
+	
+	UserDto findByLogin(String login);
 
 }

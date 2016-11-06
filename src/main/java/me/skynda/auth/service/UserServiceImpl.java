@@ -41,5 +41,14 @@ public class UserServiceImpl implements UserService {
 		return userDto;
 	}
 
+	@Override
+	public UserDto findByLogin(String login) {
+		Mapper mapper = new DozerBeanMapper();
+		User user = userDao.getByLogin(login);
+		UserDto userDto = new UserDto();
+		userDto = mapper.map(user, UserDto.class);
+		return userDto;
+	}
+
 
 }

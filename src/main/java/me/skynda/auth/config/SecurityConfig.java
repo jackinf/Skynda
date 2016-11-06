@@ -71,7 +71,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/api").hasAnyAuthority("admin").antMatchers("/users/**").hasAnyAuthority("admin")
 				.anyRequest().authenticated()
 //				.antMatchers("/index.html", "/home.html", "/login.html", "/").permitAll()
-				.anyRequest().authenticated()
+//				.anyRequest().authenticated()
 				.and().exceptionHandling().authenticationEntryPoint(restAuthenticationEntryPoint)
 				.accessDeniedHandler(restAccessDeniedHandler).and().formLogin().loginProcessingUrl("/authenticate")
 				.successHandler(restAuthenticationSuccessHandler).failureHandler(restAuthenticationFailureHandler)

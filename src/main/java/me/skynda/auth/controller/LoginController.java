@@ -31,7 +31,7 @@ public class LoginController extends BaseController {
 
 	@RequestMapping(value = "/security/account", method = RequestMethod.GET)
 	public UserDto getUserAccount() {
-		UserDto user = userService.findByEmail(SecurityUtils.getCurrentLogin());
+		UserDto user = userService.findByLogin(SecurityUtils.getCurrentLogin());
 		user.setPassword(null);
 		return user;
 	}

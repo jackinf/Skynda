@@ -30,7 +30,7 @@ public class UserDetailsService implements org.springframework.security.core.use
     public UserDetails loadUserByUsername(final String login) {
         log.debug("Authenticating {}", login);
 
-        UserDto user = userService.findByEmail(login);
+        UserDto user = userService.findByLogin(login);
         if (user == null) {
             throw new UsernameNotFoundException("User " + login + " was not found in the database");
         } else if (!user.getEnabled()) {

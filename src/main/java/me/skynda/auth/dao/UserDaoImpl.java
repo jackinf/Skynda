@@ -16,5 +16,12 @@ public class UserDaoImpl extends SkyndaBaseEntityDaoImpl<UserDao> implements Use
 	    c.add(Restrictions.eq("us.email", email));
 	    return (User) c.uniqueResult();
 	}
+
+	@Override
+	public User getByLogin(String login) {
+		Criteria c = getSession().createCriteria(User.class, "us");
+	    c.add(Restrictions.eq("us.login", login));
+	    return (User) c.uniqueResult();
+	}
 	
 }
