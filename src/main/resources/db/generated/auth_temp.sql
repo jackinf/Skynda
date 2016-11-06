@@ -1,5 +1,5 @@
 
-CREATE TABLE "user" (
+CREATE TABLE "users" (
 "id" serial primary key,
 "login" VARCHAR(45) NOT NULL UNIQUE,
 "first_name" VARCHAR(255), 

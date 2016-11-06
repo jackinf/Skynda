@@ -18,7 +18,7 @@ import javax.persistence.Table;
 
 @Entity
 @Data
-@Table(name = "user")
+@Table(name = "users")
 public class User {
 
 	@Id
@@ -35,7 +35,7 @@ public class User {
 	private Boolean enabled;
 	
 	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "users_authority", joinColumns = { @JoinColumn(name = "id_user", referencedColumnName = "id") }, inverseJoinColumns = { @JoinColumn(name = "id_authority", table = "authority", referencedColumnName = "id") })
+	@JoinTable(name = "user_authority", joinColumns = { @JoinColumn(name = "id_user", referencedColumnName = "id") }, inverseJoinColumns = { @JoinColumn(name = "id_authority", table = "authority", referencedColumnName = "id") })
     private List<Authority> authority;
 
 }
