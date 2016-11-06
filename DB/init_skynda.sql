@@ -44,14 +44,14 @@ SET default_with_oids = false;
 --
 
 CREATE TABLE address (
-	id integer NOT NULL,
-	linn character varying(100) NOT NULL,
-	maakond character varying(100),
-	vald character varying(100),
-	street character varying(100) NOT NULL,
-	house_number_name character varying(100) NOT NULL,
-	apartment_nr character varying(50) NOT NULL,
-	postal_code character varying(50)
+    id integer NOT NULL,
+    linn character varying(100) NOT NULL,
+    maakond character varying(100),
+    vald character varying(100),
+    street character varying(100) NOT NULL,
+    house_number_name character varying(100) NOT NULL,
+    apartment_nr character varying(50) NOT NULL,
+    postal_code character varying(50)
 );
 
 
@@ -87,9 +87,9 @@ ALTER SEQUENCE addresses_address_id_seq OWNED BY address.id;
 --
 
 CREATE TABLE authority (
-	id integer NOT NULL,
-	name character varying(50) NOT NULL,
-	archived time without time zone
+    id integer NOT NULL,
+    name character varying(50) NOT NULL,
+    archived time without time zone
 );
 
 
@@ -125,10 +125,10 @@ ALTER SEQUENCE authority_id_seq OWNED BY authority.id;
 --
 
 CREATE TABLE vehicle_description (
-	id integer NOT NULL,
-	title character varying(100),
-	content text,
-	archived time without time zone
+    id integer NOT NULL,
+    title character varying(100),
+    content text,
+    archived time without time zone
 );
 
 
@@ -164,11 +164,11 @@ ALTER SEQUENCE car_description_id_seq OWNED BY vehicle_description.id;
 --
 
 CREATE TABLE vehicle_fault (
-	id integer NOT NULL,
-	image_url character varying(100),
-	text character varying(100),
-	vehicle_id integer NOT NULL,
-	archived time without time zone
+    id integer NOT NULL,
+    image_url character varying(100),
+    text character varying(100),
+    vehicle_id integer NOT NULL,
+    archived time without time zone
 );
 
 
@@ -204,10 +204,10 @@ ALTER SEQUENCE car_fault_id_seq OWNED BY vehicle_fault.id;
 --
 
 CREATE TABLE vehicle_feature (
-	id integer NOT NULL,
-	text character varying(100),
-	vehicle_id integer NOT NULL,
-	archived time without time zone
+    id integer NOT NULL,
+    text character varying(100),
+    vehicle_id integer NOT NULL,
+    archived time without time zone
 );
 
 
@@ -243,10 +243,10 @@ ALTER SEQUENCE car_feature_id_seq OWNED BY vehicle_feature.id;
 --
 
 CREATE TABLE vehicle_image (
-	id integer NOT NULL,
-	image_url character varying(100),
-	vehicle_id integer,
-	archived time without time zone
+    id integer NOT NULL,
+    image_url character varying(100),
+    vehicle_id integer,
+    archived time without time zone
 );
 
 
@@ -282,21 +282,21 @@ ALTER SEQUENCE car_image_id_seq OWNED BY vehicle_image.id;
 --
 
 CREATE TABLE vehicle_model (
-	id integer NOT NULL,
-	model_code character varying(100) NOT NULL,
-	description text,
-	vehicle_manufacturer_id integer NOT NULL,
-	title character varying(255),
-	engine character varying(100) NOT NULL,
-	horse_power integer,
-	doors integer NOT NULL,
-	seats character varying(50) NOT NULL,
-	year integer NOT NULL,
-	archived time without time zone,
-	transmission_id integer NOT NULL,
-	drivetrain_id integer NOT NULL,
-	vehicle_body_id integer NOT NULL,
-	fuel_type_id integer NOT NULL
+    id integer NOT NULL,
+    model_code character varying(100) NOT NULL,
+    description text,
+    vehicle_manufacturer_id integer NOT NULL,
+    title character varying(255),
+    engine character varying(100) NOT NULL,
+    horse_power integer,
+    doors integer NOT NULL,
+    seats character varying(50) NOT NULL,
+    year integer NOT NULL,
+    archived time without time zone,
+    transmission_id integer NOT NULL,
+    drivetrain_id integer NOT NULL,
+    vehicle_body_id integer NOT NULL,
+    fuel_type_id integer NOT NULL
 );
 
 
@@ -332,14 +332,14 @@ ALTER SEQUENCE car_model_id_seq OWNED BY vehicle_model.id;
 --
 
 CREATE TABLE vehicle_report (
-	id integer NOT NULL,
-	vehicle_id integer NOT NULL,
-	title character varying(50),
-	is_pass boolean,
-	points_text text,
-	faults_text text,
-	fauls_img text,
-	archived time without time zone
+    id integer NOT NULL,
+    vehicle_id integer NOT NULL,
+    title character varying(50),
+    is_pass boolean,
+    points_text text,
+    faults_text text,
+    fauls_img text,
+    archived time without time zone
 );
 
 
@@ -375,13 +375,13 @@ ALTER SEQUENCE car_report_report_id_seq OWNED BY vehicle_report.id;
 --
 
 CREATE TABLE vehicle_review (
-	id integer NOT NULL,
-	vehicle_id integer NOT NULL,
-	logo_url character varying(255),
-	video_url character varying(255),
-	text text,
-	rating integer,
-	archived time without time zone
+    id integer NOT NULL,
+    vehicle_id integer NOT NULL,
+    logo_url character varying(255),
+    video_url character varying(255),
+    text text,
+    rating integer,
+    archived time without time zone
 );
 
 
@@ -417,30 +417,30 @@ ALTER SEQUENCE car_review_review_id_seq OWNED BY vehicle_review.id;
 --
 
 CREATE TABLE vehicle (
-	id integer NOT NULL,
-	vin_code character varying(100) NOT NULL,
-	price numeric(10,2) NOT NULL,
-	created timestamp without time zone NOT NULL,
-	registration_number character varying(100) NOT NULL,
-	mileage numeric(18,2) NOT NULL,
-	color_outside character varying(100) NOT NULL,
-	color_inside character varying(100) NOT NULL,
-	fuel_city character varying(100),
-	fuel_highway character varying(100),
-	problems text,
-	compression_ratio integer,
-	compression_type character varying(50),
-	configuration character varying(50),
-	cylinders character varying(50),
-	displacement character varying(50),
-	size integer,
-	torque integer,
-	total_valves integer,
-	safety_stars integer,
-	additional character varying(500),
-	archived time without time zone,
-	vehicle_model_id integer,
-	owner_id integer NOT NULL
+    id integer NOT NULL,
+    vin_code character varying(100) NOT NULL,
+    price numeric(10,2) NOT NULL,
+    created timestamp without time zone NOT NULL,
+    registration_number character varying(100) NOT NULL,
+    mileage numeric(18,2) NOT NULL,
+    color_outside character varying(100) NOT NULL,
+    color_inside character varying(100) NOT NULL,
+    fuel_city character varying(100),
+    fuel_highway character varying(100),
+    problems text,
+    compression_ratio integer,
+    compression_type character varying(50),
+    configuration character varying(50),
+    cylinders character varying(50),
+    displacement character varying(50),
+    size integer,
+    torque integer,
+    total_valves integer,
+    safety_stars integer,
+    additional character varying(500),
+    archived time without time zone,
+    vehicle_model_id integer,
+    owner_id integer NOT NULL
 );
 
 
@@ -476,19 +476,19 @@ ALTER SEQUENCE cars_for_sale_id_seq OWNED BY vehicle.id;
 --
 
 CREATE TABLE payment (
-	id integer NOT NULL,
-	vehicle_id integer NOT NULL,
-	agreed_price numeric(10,2),
-	customer_id integer NOT NULL,
-	date_sold timestamp without time zone,
-	monthly_payment_amount numeric(10,2),
-	monthly_payment_date timestamp without time zone,
-	archived time without time zone,
-	payment_type_id integer NOT NULL,
-	payment_start_date timestamp without time zone,
-	payment_end_date timestamp without time zone,
-	finance_company_id integer,
-	payment_status_id integer
+    id integer NOT NULL,
+    vehicle_id integer NOT NULL,
+    agreed_price numeric(10,2),
+    customer_id integer NOT NULL,
+    date_sold timestamp without time zone,
+    monthly_payment_amount numeric(10,2),
+    monthly_payment_date timestamp without time zone,
+    archived time without time zone,
+    payment_type_id integer NOT NULL,
+    payment_start_date timestamp without time zone,
+    payment_end_date timestamp without time zone,
+    finance_company_id integer,
+    payment_status_id integer
 );
 
 
@@ -524,18 +524,18 @@ ALTER SEQUENCE cars_sold_car_sold_id_seq OWNED BY payment.id;
 --
 
 CREATE TABLE classification (
-	id integer NOT NULL,
-	description text,
-	is_imported boolean NOT NULL,
-	weight integer,
-	value text,
-	modifier_user_id integer NOT NULL,
-	modifier_user_ip inet NOT NULL,
-	archived timestamp without time zone,
-	name character varying(150),
-	classification_type_id integer NOT NULL,
-	is_active boolean DEFAULT true,
-	value2 text
+    id integer NOT NULL,
+    description text,
+    is_imported boolean NOT NULL,
+    weight integer,
+    value text,
+    modifier_user_id integer NOT NULL,
+    modifier_user_ip inet NOT NULL,
+    archived timestamp without time zone,
+    name character varying(150),
+    classification_type_id integer NOT NULL,
+    is_active boolean DEFAULT true,
+    value2 text
 );
 
 
@@ -571,12 +571,12 @@ ALTER SEQUENCE classification_id_seq OWNED BY classification.id;
 --
 
 CREATE TABLE classification_type (
-	id integer NOT NULL,
-	name character varying(150),
-	description text,
-	modifier_user_id integer NOT NULL,
-	modifier_user_ip inet NOT NULL,
-	archived timestamp without time zone
+    id integer NOT NULL,
+    name character varying(150),
+    description text,
+    modifier_user_id integer NOT NULL,
+    modifier_user_ip inet NOT NULL,
+    archived timestamp without time zone
 );
 
 
@@ -612,10 +612,10 @@ ALTER SEQUENCE classification_type_id_seq OWNED BY classification_type.id;
 --
 
 CREATE TABLE finance_company (
-	finance_company_name character varying(100),
-	id integer NOT NULL,
-	name character varying(100),
-	archived time without time zone
+    finance_company_name character varying(100),
+    id integer NOT NULL,
+    name character varying(100),
+    archived time without time zone
 );
 
 
@@ -651,9 +651,9 @@ ALTER SEQUENCE finance_company_id_seq OWNED BY finance_company.id;
 --
 
 CREATE TABLE insurance_company (
-	id integer NOT NULL,
-	insurance_company_name character varying(100),
-	archived time without time zone
+    id integer NOT NULL,
+    insurance_company_name character varying(100),
+    archived time without time zone
 );
 
 
@@ -689,13 +689,13 @@ ALTER SEQUENCE insurance_companies_insurance_company_id_seq OWNED BY insurance_c
 --
 
 CREATE TABLE insurance_policy (
-	id integer NOT NULL,
-	car_sold_id integer,
-	policy_start_date timestamp without time zone,
-	policy_renewal_date timestamp without time zone,
-	monthly_payments numeric(10,2),
-	insurance_company_id integer,
-	archived time without time zone
+    id integer NOT NULL,
+    car_sold_id integer,
+    policy_start_date timestamp without time zone,
+    policy_renewal_date timestamp without time zone,
+    monthly_payments numeric(10,2),
+    insurance_company_id integer,
+    archived time without time zone
 );
 
 
@@ -731,12 +731,12 @@ ALTER SEQUENCE insurance_policies_policy_id_seq OWNED BY insurance_policy.id;
 --
 
 CREATE TABLE token (
-	series character varying(50) NOT NULL,
-	value character varying(50),
-	date timestamp without time zone,
-	ip_address character varying(50),
-	user_agent character varying(200),
-	user_login character varying(50)
+    series character varying(50) NOT NULL,
+    value character varying(50),
+    date timestamp without time zone,
+    ip_address character varying(50),
+    user_agent character varying(200),
+    user_login character varying(50)
 );
 
 
@@ -748,16 +748,16 @@ ALTER TABLE token OWNER TO postgres;
 --
 
 CREATE TABLE "user" (
-	id integer NOT NULL,
-	login character varying(45) NOT NULL,
-	first_name character varying(255),
-	last_name character varying(255),
-	phone character varying(255),
-	language character(2),
-	email character varying(255) NOT NULL,
-	password character varying(100) NOT NULL,
-	enabled boolean,
-	archived timestamp without time zone
+    id integer NOT NULL,
+    login character varying(45) NOT NULL,
+    first_name character varying(255),
+    last_name character varying(255),
+    phone character varying(255),
+    language character(2),
+    email character varying(255) NOT NULL,
+    password character varying(100) NOT NULL,
+    enabled boolean,
+    archived timestamp without time zone
 );
 
 
@@ -769,10 +769,10 @@ ALTER TABLE "user" OWNER TO postgres;
 --
 
 CREATE TABLE user_authority (
-	id integer NOT NULL,
-	user_id bigint NOT NULL,
-	authority_id bigint NOT NULL,
-	archived time without time zone
+    id integer NOT NULL,
+    user_id bigint NOT NULL,
+    authority_id bigint NOT NULL,
+    archived time without time zone
 );
 
 
@@ -976,7 +976,7 @@ ALTER TABLE ONLY vehicle_review ALTER COLUMN id SET DEFAULT nextval('car_review_
 --
 
 ALTER TABLE ONLY vehicle_fault
-	ADD CONSTRAINT "PK_car_fault" PRIMARY KEY (id);
+    ADD CONSTRAINT "PK_car_fault" PRIMARY KEY (id);
 
 
 --
@@ -985,7 +985,7 @@ ALTER TABLE ONLY vehicle_fault
 --
 
 ALTER TABLE ONLY vehicle_feature
-	ADD CONSTRAINT "PK_car_feature" PRIMARY KEY (id);
+    ADD CONSTRAINT "PK_car_feature" PRIMARY KEY (id);
 
 
 --
@@ -994,7 +994,7 @@ ALTER TABLE ONLY vehicle_feature
 --
 
 ALTER TABLE ONLY vehicle
-	ADD CONSTRAINT "PK_car_for_sale" PRIMARY KEY (id);
+    ADD CONSTRAINT "PK_car_for_sale" PRIMARY KEY (id);
 
 
 --
@@ -1003,7 +1003,7 @@ ALTER TABLE ONLY vehicle
 --
 
 ALTER TABLE ONLY vehicle_image
-	ADD CONSTRAINT "PK_car_image" PRIMARY KEY (id);
+    ADD CONSTRAINT "PK_car_image" PRIMARY KEY (id);
 
 
 --
@@ -1012,7 +1012,7 @@ ALTER TABLE ONLY vehicle_image
 --
 
 ALTER TABLE ONLY classification
-	ADD CONSTRAINT "PK_classification" PRIMARY KEY (id);
+    ADD CONSTRAINT "PK_classification" PRIMARY KEY (id);
 
 
 --
@@ -1021,7 +1021,7 @@ ALTER TABLE ONLY classification
 --
 
 ALTER TABLE ONLY classification_type
-	ADD CONSTRAINT "PK_classification_type" PRIMARY KEY (id);
+    ADD CONSTRAINT "PK_classification_type" PRIMARY KEY (id);
 
 
 --
@@ -1030,7 +1030,7 @@ ALTER TABLE ONLY classification_type
 --
 
 ALTER TABLE ONLY finance_company
-	ADD CONSTRAINT "PK_finance_company" PRIMARY KEY (id);
+    ADD CONSTRAINT "PK_finance_company" PRIMARY KEY (id);
 
 
 --
@@ -1039,7 +1039,7 @@ ALTER TABLE ONLY finance_company
 --
 
 ALTER TABLE ONLY insurance_company
-	ADD CONSTRAINT "PK_insurance_companies" PRIMARY KEY (id);
+    ADD CONSTRAINT "PK_insurance_companies" PRIMARY KEY (id);
 
 
 --
@@ -1048,7 +1048,7 @@ ALTER TABLE ONLY insurance_company
 --
 
 ALTER TABLE ONLY insurance_policy
-	ADD CONSTRAINT "PK_insurance_policies" PRIMARY KEY (id);
+    ADD CONSTRAINT "PK_insurance_policies" PRIMARY KEY (id);
 
 
 --
@@ -1057,7 +1057,7 @@ ALTER TABLE ONLY insurance_policy
 --
 
 ALTER TABLE ONLY vehicle_model
-	ADD CONSTRAINT "PK_vehicle_model" PRIMARY KEY (id);
+    ADD CONSTRAINT "PK_vehicle_model" PRIMARY KEY (id);
 
 
 --
@@ -1066,7 +1066,7 @@ ALTER TABLE ONLY vehicle_model
 --
 
 ALTER TABLE ONLY vehicle_report
-	ADD CONSTRAINT "PK_vehicle_report" PRIMARY KEY (id);
+    ADD CONSTRAINT "PK_vehicle_report" PRIMARY KEY (id);
 
 
 --
@@ -1075,7 +1075,7 @@ ALTER TABLE ONLY vehicle_report
 --
 
 ALTER TABLE ONLY vehicle_review
-	ADD CONSTRAINT "PK_vehicle_review" PRIMARY KEY (id);
+    ADD CONSTRAINT "PK_vehicle_review" PRIMARY KEY (id);
 
 
 --
@@ -1084,7 +1084,7 @@ ALTER TABLE ONLY vehicle_review
 --
 
 ALTER TABLE ONLY payment
-	ADD CONSTRAINT "PK_vehicle_sold" PRIMARY KEY (id);
+    ADD CONSTRAINT "PK_vehicle_sold" PRIMARY KEY (id);
 
 
 --
@@ -1093,7 +1093,7 @@ ALTER TABLE ONLY payment
 --
 
 ALTER TABLE ONLY authority
-	ADD CONSTRAINT "UNIQUE_auth_name" UNIQUE (name);
+    ADD CONSTRAINT "UNIQUE_auth_name" UNIQUE (name);
 
 
 --
@@ -1102,7 +1102,7 @@ ALTER TABLE ONLY authority
 --
 
 ALTER TABLE ONLY classification_type
-	ADD CONSTRAINT "UNIQUE_name" UNIQUE (name);
+    ADD CONSTRAINT "UNIQUE_name" UNIQUE (name);
 
 
 --
@@ -1111,7 +1111,7 @@ ALTER TABLE ONLY classification_type
 --
 
 ALTER TABLE ONLY classification
-	ADD CONSTRAINT "UNIQUE_row" UNIQUE (value, value2, classification_type_id);
+    ADD CONSTRAINT "UNIQUE_row" UNIQUE (value, value2, classification_type_id);
 
 
 --
@@ -1120,7 +1120,7 @@ ALTER TABLE ONLY classification
 --
 
 ALTER TABLE ONLY address
-	ADD CONSTRAINT address_pkey_id PRIMARY KEY (id);
+    ADD CONSTRAINT address_pkey_id PRIMARY KEY (id);
 
 
 --
@@ -1129,7 +1129,7 @@ ALTER TABLE ONLY address
 --
 
 ALTER TABLE ONLY authority
-	ADD CONSTRAINT authority_pkey PRIMARY KEY (id);
+    ADD CONSTRAINT authority_pkey PRIMARY KEY (id);
 
 
 --
@@ -1138,14 +1138,14 @@ ALTER TABLE ONLY authority
 --
 
 ALTER TABLE ONLY vehicle_description
-	ADD CONSTRAINT car_description_pkey PRIMARY KEY (id);
+    ADD CONSTRAINT car_description_pkey PRIMARY KEY (id);
 
 -- TOC entry 2184 (class 2606 OID 91108)
 -- Name: token_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY token
-	ADD CONSTRAINT token_pkey PRIMARY KEY (series);
+    ADD CONSTRAINT token_pkey PRIMARY KEY (series);
 
 
 --
@@ -1154,7 +1154,7 @@ ALTER TABLE ONLY token
 --
 
 ALTER TABLE ONLY user_authority
-	ADD CONSTRAINT user_authority_pkey PRIMARY KEY (id);
+    ADD CONSTRAINT user_authority_pkey PRIMARY KEY (id);
 
 
 --
@@ -1163,7 +1163,7 @@ ALTER TABLE ONLY user_authority
 --
 
 ALTER TABLE ONLY "user"
-	ADD CONSTRAINT user_email_key UNIQUE (email);
+    ADD CONSTRAINT user_email_key UNIQUE (email);
 
 
 --
@@ -1172,7 +1172,7 @@ ALTER TABLE ONLY "user"
 --
 
 ALTER TABLE ONLY "user"
-	ADD CONSTRAINT user_login_key UNIQUE (login);
+    ADD CONSTRAINT user_login_key UNIQUE (login);
 
 
 --
@@ -1181,7 +1181,7 @@ ALTER TABLE ONLY "user"
 --
 
 ALTER TABLE ONLY "user"
-	ADD CONSTRAINT user_pkey PRIMARY KEY (id);
+    ADD CONSTRAINT user_pkey PRIMARY KEY (id);
 
 
 --
@@ -1390,7 +1390,7 @@ CREATE INDEX classification_value_idx ON classification USING hash (value);
 --
 
 ALTER TABLE ONLY user_authority
-	ADD CONSTRAINT "FK_authority_id" FOREIGN KEY (authority_id) REFERENCES authority(id);
+    ADD CONSTRAINT "FK_authority_id" FOREIGN KEY (authority_id) REFERENCES authority(id);
 
 
 --
@@ -1399,7 +1399,7 @@ ALTER TABLE ONLY user_authority
 --
 
 ALTER TABLE ONLY insurance_policy
-	ADD CONSTRAINT "FK_car_sold_id" FOREIGN KEY (car_sold_id) REFERENCES payment(id);
+    ADD CONSTRAINT "FK_car_sold_id" FOREIGN KEY (car_sold_id) REFERENCES payment(id);
 
 
 --
@@ -1408,7 +1408,7 @@ ALTER TABLE ONLY insurance_policy
 --
 
 ALTER TABLE ONLY classification
-	ADD CONSTRAINT "FK_classification_type_id" FOREIGN KEY (classification_type_id) REFERENCES classification_type(id);
+    ADD CONSTRAINT "FK_classification_type_id" FOREIGN KEY (classification_type_id) REFERENCES classification_type(id);
 
 
 --
@@ -1417,7 +1417,7 @@ ALTER TABLE ONLY classification
 --
 
 ALTER TABLE ONLY payment
-	ADD CONSTRAINT "FK_customer_id" FOREIGN KEY (customer_id) REFERENCES "user"(id);
+    ADD CONSTRAINT "FK_customer_id" FOREIGN KEY (customer_id) REFERENCES "user"(id);
 
 
 --
@@ -1426,7 +1426,7 @@ ALTER TABLE ONLY payment
 --
 
 ALTER TABLE ONLY vehicle_model
-	ADD CONSTRAINT "FK_drivetrain_id" FOREIGN KEY (drivetrain_id) REFERENCES classification(id);
+    ADD CONSTRAINT "FK_drivetrain_id" FOREIGN KEY (drivetrain_id) REFERENCES classification(id);
 
 
 --
@@ -1435,7 +1435,7 @@ ALTER TABLE ONLY vehicle_model
 --
 
 ALTER TABLE ONLY payment
-	ADD CONSTRAINT "FK_finance_company_id" FOREIGN KEY (finance_company_id) REFERENCES finance_company(id);
+    ADD CONSTRAINT "FK_finance_company_id" FOREIGN KEY (finance_company_id) REFERENCES finance_company(id);
 
 
 --
@@ -1444,7 +1444,7 @@ ALTER TABLE ONLY payment
 --
 
 ALTER TABLE ONLY vehicle_model
-	ADD CONSTRAINT "FK_fuel_type_id" FOREIGN KEY (fuel_type_id) REFERENCES classification(id);
+    ADD CONSTRAINT "FK_fuel_type_id" FOREIGN KEY (fuel_type_id) REFERENCES classification(id);
 
 
 --
@@ -1453,7 +1453,7 @@ ALTER TABLE ONLY vehicle_model
 --
 
 ALTER TABLE ONLY insurance_policy
-	ADD CONSTRAINT "FK_insurance_company_id" FOREIGN KEY (insurance_company_id) REFERENCES insurance_company(id);
+    ADD CONSTRAINT "FK_insurance_company_id" FOREIGN KEY (insurance_company_id) REFERENCES insurance_company(id);
 
 
 --
@@ -1462,7 +1462,7 @@ ALTER TABLE ONLY insurance_policy
 --
 
 ALTER TABLE ONLY vehicle
-	ADD CONSTRAINT "FK_owner_id" FOREIGN KEY (owner_id) REFERENCES "user"(id);
+    ADD CONSTRAINT "FK_owner_id" FOREIGN KEY (owner_id) REFERENCES "user"(id);
 
 
 --
@@ -1471,7 +1471,7 @@ ALTER TABLE ONLY vehicle
 --
 
 ALTER TABLE ONLY payment
-	ADD CONSTRAINT "FK_payment_status_id" FOREIGN KEY (payment_status_id) REFERENCES classification(id);
+    ADD CONSTRAINT "FK_payment_status_id" FOREIGN KEY (payment_status_id) REFERENCES classification(id);
 
 
 --
@@ -1480,7 +1480,7 @@ ALTER TABLE ONLY payment
 --
 
 ALTER TABLE ONLY payment
-	ADD CONSTRAINT "FK_payment_type_id" FOREIGN KEY (payment_type_id) REFERENCES classification(id);
+    ADD CONSTRAINT "FK_payment_type_id" FOREIGN KEY (payment_type_id) REFERENCES classification(id);
 
 
 --
@@ -1489,7 +1489,7 @@ ALTER TABLE ONLY payment
 --
 
 ALTER TABLE ONLY vehicle_model
-	ADD CONSTRAINT "FK_transmission_id" FOREIGN KEY (transmission_id) REFERENCES classification(id);
+    ADD CONSTRAINT "FK_transmission_id" FOREIGN KEY (transmission_id) REFERENCES classification(id);
 
 
 --
@@ -1498,7 +1498,7 @@ ALTER TABLE ONLY vehicle_model
 --
 
 ALTER TABLE ONLY user_authority
-	ADD CONSTRAINT "FK_user_id" FOREIGN KEY (user_id) REFERENCES "user"(id);
+    ADD CONSTRAINT "FK_user_id" FOREIGN KEY (user_id) REFERENCES "user"(id);
 
 
 --
@@ -1507,7 +1507,7 @@ ALTER TABLE ONLY user_authority
 --
 
 ALTER TABLE ONLY vehicle_model
-	ADD CONSTRAINT "FK_vehicle_body_id" FOREIGN KEY (vehicle_body_id) REFERENCES classification(id);
+    ADD CONSTRAINT "FK_vehicle_body_id" FOREIGN KEY (vehicle_body_id) REFERENCES classification(id);
 
 
 --
@@ -1516,7 +1516,7 @@ ALTER TABLE ONLY vehicle_model
 --
 
 ALTER TABLE ONLY payment
-	ADD CONSTRAINT "FK_vehicle_id" FOREIGN KEY (vehicle_id) REFERENCES vehicle(id);
+    ADD CONSTRAINT "FK_vehicle_id" FOREIGN KEY (vehicle_id) REFERENCES vehicle(id);
 
 
 --
@@ -1525,7 +1525,7 @@ ALTER TABLE ONLY payment
 --
 
 ALTER TABLE ONLY vehicle_report
-	ADD CONSTRAINT "FK_vehicle_id" FOREIGN KEY (vehicle_id) REFERENCES vehicle(id);
+    ADD CONSTRAINT "FK_vehicle_id" FOREIGN KEY (vehicle_id) REFERENCES vehicle(id);
 
 
 --
@@ -1534,7 +1534,7 @@ ALTER TABLE ONLY vehicle_report
 --
 
 ALTER TABLE ONLY vehicle_review
-	ADD CONSTRAINT "FK_vehicle_id" FOREIGN KEY (vehicle_id) REFERENCES vehicle(id);
+    ADD CONSTRAINT "FK_vehicle_id" FOREIGN KEY (vehicle_id) REFERENCES vehicle(id);
 
 
 --
@@ -1543,7 +1543,7 @@ ALTER TABLE ONLY vehicle_review
 --
 
 ALTER TABLE ONLY vehicle_image
-	ADD CONSTRAINT "FK_vehicle_id" FOREIGN KEY (vehicle_id) REFERENCES vehicle(id);
+    ADD CONSTRAINT "FK_vehicle_id" FOREIGN KEY (vehicle_id) REFERENCES vehicle(id);
 
 
 --
@@ -1552,7 +1552,7 @@ ALTER TABLE ONLY vehicle_image
 --
 
 ALTER TABLE ONLY vehicle_feature
-	ADD CONSTRAINT "FK_vehicle_id" FOREIGN KEY (vehicle_id) REFERENCES vehicle(id);
+    ADD CONSTRAINT "FK_vehicle_id" FOREIGN KEY (vehicle_id) REFERENCES vehicle(id);
 
 
 --
@@ -1561,7 +1561,7 @@ ALTER TABLE ONLY vehicle_feature
 --
 
 ALTER TABLE ONLY vehicle_fault
-	ADD CONSTRAINT "FK_vehicle_id" FOREIGN KEY (vehicle_id) REFERENCES vehicle(id);
+    ADD CONSTRAINT "FK_vehicle_id" FOREIGN KEY (vehicle_id) REFERENCES vehicle(id);
 
 
 --
@@ -1570,7 +1570,7 @@ ALTER TABLE ONLY vehicle_fault
 --
 
 ALTER TABLE ONLY vehicle_model
-	ADD CONSTRAINT "FK_vehicle_manufacturer_id" FOREIGN KEY (vehicle_manufacturer_id) REFERENCES classification(id);
+    ADD CONSTRAINT "FK_vehicle_manufacturer_id" FOREIGN KEY (vehicle_manufacturer_id) REFERENCES classification(id);
 
 
 --
@@ -1579,7 +1579,7 @@ ALTER TABLE ONLY vehicle_model
 --
 
 ALTER TABLE ONLY vehicle
-	ADD CONSTRAINT "FK_vehicle_model_id" FOREIGN KEY (vehicle_model_id) REFERENCES vehicle_model(id);
+    ADD CONSTRAINT "FK_vehicle_model_id" FOREIGN KEY (vehicle_model_id) REFERENCES vehicle_model(id);
 
 
 --

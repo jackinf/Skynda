@@ -14,10 +14,11 @@ public class CarImage {
     private Long id;
 
     private String imageUrl;
+    private boolean isPrimary;
     private String imageBlobName;
     private String imageContainerName;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "cars_for_sale_id", nullable = false)
+    @JoinColumn(name = "car_for_sale_id", nullable = false)
     private Car car;
 }
