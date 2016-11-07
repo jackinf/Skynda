@@ -5,13 +5,15 @@ import Details from "./Details";
 import About from "./About";
 import Examples from "./Examples";
 import Admin from "./Admin";
-import Login from "./Login";
-
+import {LoginRoute, RegisterRoute} from "./Auth";
 import CounterRoute from './Counter_todelete'
+
 import {loadTranslations, setLocale, syncTranslationWithStore, i18nReducer} from 'react-redux-i18n';
 import {injectReducer} from "../store/reducers";
-// import 'react-redux-toastr/src/less/index.less';
-import "react-redux-toastr/lib/css/react-redux-toastr.min.css";
+
+// Bonus
+import {authSetUser} from "./Auth/modules/auth.module";
+import constants from "../utils/constants";
 
 /*  Note: Instead of using JSX, we recommend using react-router
  PlainRoute objects to build route definitions.   */
@@ -29,6 +31,15 @@ export const createRoutes = (store) => {
   }));
   store.dispatch(setLocale('et'));
 
+  // ========================================================
+  // Logged in user setup
+  // ========================================================
+  try {
+    const storedUser = JSON.parse(localStorage.getItem(constants.LOCAL_STORAGE_KEYS.SKYNDA_USER));
+    console.log(storedUser);
+    store.dispatch(authSetUser(storedUser));
+  } catch (ex) {}
+
   return {
     path: "/",
     component: CoreLayout,
@@ -39,7 +50,8 @@ export const createRoutes = (store) => {
       CounterRoute(store),
       Examples(store),
       Admin(store),
-      Login(store)
+      LoginRoute(store),
+      RegisterRoute(store),
     ]
   };
 
