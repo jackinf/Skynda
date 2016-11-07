@@ -14,5 +14,7 @@ const ReduxForm = reduxForm({
 const mapDispatchToProps = {
   submitLogin
 };
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+  auth: state.auth
+});
 export default connect(mapStateToProps, mapDispatchToProps)(ReduxForm);

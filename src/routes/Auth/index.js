@@ -12,7 +12,7 @@ export function LoginRoute(store) {
     path: "/login",
     getComponent(ns, cb) {
       require.ensure([], (require) => {
-        injectReducer(store, {key: "auth", reducer: require("./modules/auth.module").default});
+        // injectReducer(store, {key: "auth", reducer: require("./modules/auth.module").default});
         injectReducer(store, {key: REDUX_FORM_KEY, reducer: formReducer});
         cb(null, require("./containers/Login.container").default);
       })

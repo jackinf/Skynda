@@ -13,10 +13,21 @@ import {injectReducer} from "../store/reducers";
 
 // Bonus
 import {authSetUser} from "./Auth/modules/auth.module";
-import constants from "../utils/constants";
+import {getStoredUser} from "../utils/userUtils";
+import {isLoggedIn} from "../utils/userUtils";
 
-/*  Note: Instead of using JSX, we recommend using react-router
- PlainRoute objects to build route definitions.   */
+/**
+ * Router helper function to check if we need to be redirected.
+ * @param nextState
+ * @param replace
+ */
+function requireAuth(nextState, replace) {
+  console.info("ON ENTER REQUIRE AUTH?");
+  if (!isLoggedIn()) {
+    console.info("NOT LOGGED IN, REDIRECTING");
+    replace({ nextPathname: nextState.location.pathname, pathname: '/login' });
+  }
+}
 
 export const createRoutes = (store) => {
 
@@ -24,6 +35,7 @@ export const createRoutes = (store) => {
   // Translation setup
   // ========================================================
   injectReducer(store, {key: "i18n", reducer: i18nReducer});
+  injectReducer(store, {key: "auth", reducer: require("./Auth/modules/auth.module").default});
   syncTranslationWithStore(store);
   store.dispatch(loadTranslations({
     et: require("./../store/translations/et.json"),
@@ -34,11 +46,7 @@ export const createRoutes = (store) => {
   // ========================================================
   // Logged in user setup
   // ========================================================
-  try {
-    const storedUser = JSON.parse(localStorage.getItem(constants.LOCAL_STORAGE_KEYS.SKYNDA_USER));
-    console.log(storedUser);
-    store.dispatch(authSetUser(storedUser));
-  } catch (ex) {}
+  store.dispatch(authSetUser(getStoredUser()));
 
   return {
     path: "/",
@@ -46,7 +54,7 @@ export const createRoutes = (store) => {
     indexRoute: Home(store),
     childRoutes: [
       Details(store),
-      About(store),
+      About(store, requireAuth),
       CounterRoute(store),
       Examples(store),
       Admin(store),
@@ -56,23 +64,5 @@ export const createRoutes = (store) => {
   };
 
 };
-
-/*  Note: childRoutes can be chunked or otherwise loaded programmatically
- using getChildRoutes with the following signature:
-
- getChildRoutes (location, cb) {
- require.ensure([], (require) => {
- cb(null, [
- // Remove imports!
- require('./Counter').default(store)
- ])
- })
- }
-
- However, this is not necessary for code-splitting! It simply provides
- an API for async route definitions. Your code splitting should occur
- inside the route `getComponent` function, since it is only invoked
- when the route exists and matches.
- */
 
 export default createRoutes;

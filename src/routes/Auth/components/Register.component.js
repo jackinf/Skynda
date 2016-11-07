@@ -10,14 +10,16 @@ import {RaisedButton} from "material-ui";
 
 export default class RegisterComponent extends React.Component {
   render() {
-    return (<form>
-      <Row>
-        <Col xs={12}>
-          <Field name="username" component={TextField} hintText="Username"/>
-          <Field name="password" component={TextField} type="password" hintText="Password"/>
-          <RaisedButton label="Submit" onClick={e => this.props.submitRegister(e)} />
-        </Col>
-      </Row>
-    </form>)
+    const rowWrapper = (block) => (<Row style={{"margin": "10px", "padding": "5px"}}><Col xs={9} xsOffset={3}>{block}</Col></Row>);
+
+    return (<div className="container">
+      <h2>Login</h2>
+      <form>
+        {rowWrapper(<Field name="username" component={TextField} hintText="Username"/>)}
+        {rowWrapper(<Field name="password" component={TextField} type="password" hintText="Password"/>)}
+        {rowWrapper(<Field name="rememberme" component={Checkbox} label="Remember me"/>)}
+        {rowWrapper(<RaisedButton label="Submit" onClick={e => this.props.submitRegister(e)}/>)}
+      </form>
+    </div>)
   }
 }
