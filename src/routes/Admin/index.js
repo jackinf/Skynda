@@ -4,6 +4,7 @@
 import CarsRoute from "./routes/Cars";
 import CarModelsRoute from "./routes/CarModels";
 import CarManufacturersRoute from "./routes/CarManufacturers";
+import {isLoggedInAs} from "../../utils/userUtils";
 
 export default (store) => ({
   path: "admin",
@@ -16,5 +17,18 @@ export default (store) => ({
     CarsRoute(store),
     CarModelsRoute(store),
     CarManufacturersRoute(store)
-  ]
+  ],
+
+  /**
+   * Router helper function to check if we need to be redirected.
+   * @param nextState
+   * @param replace
+   */
+  onEnter: (nextState, replace) => {
+    console.info("ON ENTER REQUIRE AUTH?");
+    if (!isLoggedInAs(["admin"])) {
+      console.info("NOT LOGGED IN, REDIRECTING");
+      replace({ nextPathname: nextState.location.pathname, pathname: '/login' });
+    }
+  }
 })

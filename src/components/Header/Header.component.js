@@ -10,7 +10,8 @@
 import React from "react";
 import {Translate} from 'react-redux-i18n';
 import {Row, Col, Navbar, Nav, NavItem, NavDropdown, MenuItem} from "react-bootstrap";
-import {Link} from "react-router";
+import {Link, browserHistory} from "react-router";
+import {isLoggedInAs} from "../../utils/userUtils";
 
 // Local imports
 import "./Header.scss";
@@ -26,6 +27,10 @@ class Header extends React.Component {
   };
 
   render() {
+    const adminOptions = isLoggedInAs(["admin"])
+      ? [<MenuItem eventKey={3.1} onClick={e => browserHistory.push("/admin")}>Admin</MenuItem>]
+      : [];
+
     return (
       <div className='container header-container'>
         <LocaleContainer/>
@@ -46,7 +51,7 @@ class Header extends React.Component {
                     </a>
                   </li>
                   <li className='sk_menu__buy'>
-                    <Link to="/details">
+                    <Link to="/search">
                       <Translate value="components.header.buy_car_txt"/>
                     </Link>
                   </li>
@@ -55,16 +60,17 @@ class Header extends React.Component {
                       <Translate value="components.header.about_us"/>
                     </Link>
                   </li>
-                  <li>
-                    {this.props.auth.isLoggedIn ? (
-                      <NavDropdown eventKey={3} title={`Hello, ${this.props.auth.user.firstName}`} id="nav-user-name">
-                        <MenuItem eventKey={3.1}>Settings</MenuItem>
-                        <MenuItem divider/>
-                        <MenuItem eventKey={3.3} onClick={this.props.submitLogout}>Logout</MenuItem>
-                      </NavDropdown>)
-                      : "Hello, guest!"}
 
-                  </li>
+                  {this.props.auth.isLoggedIn ? (
+                    <NavDropdown eventKey={3} title={`Hello, ${this.props.auth.user.firstName}!`} id="nav-user-name">
+                      <MenuItem eventKey={3.1}>Settings</MenuItem>
+                      {adminOptions}
+                      <MenuItem divider/>
+                      <MenuItem eventKey={3.3} onClick={this.props.submitLogout}>Logout</MenuItem>
+                    </NavDropdown>): (
+                    <NavDropdown eventKey={3} title={`Hello, guest!`} id="nav-user-name">
+                      <MenuItem eventKey={3.1} onClick={e => browserHistory.push("/login")}>Login</MenuItem>
+                    </NavDropdown>)}
                 </ul>
               </div>
             </Col>

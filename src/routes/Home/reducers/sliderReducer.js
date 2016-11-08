@@ -2,7 +2,7 @@ export const onSliderChange = (state = [], action) => {
   switch (action.type) {
     case "SET_SLIDER_VALUE":
     {
-      console.log("activated slider. Type> ", action.payload.type)
+      console.log("activated slider. Type> ", action.payload.type);
       // console.log("FOUND REDUCER ")
       // console.log("payload ", action.payload)
       // console.log("Old state values ", state)
