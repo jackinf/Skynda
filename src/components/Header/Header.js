@@ -26,7 +26,7 @@ class Header extends React.Component {
   };
 
   render() {
-    // console.info(this.props.auth);
+    console.info(this.props);
 
     return (
       <div className='container header-container'>
@@ -58,7 +58,7 @@ class Header extends React.Component {
                     </Link>
                   </li>
                   <li>
-
+                    {this.props.auth.isLoggedIn ? <div>Hello, {this.props.auth.user.firstName}!</div>: "Hello, guest!"}
                   </li>
                 </ul>
               </div>
