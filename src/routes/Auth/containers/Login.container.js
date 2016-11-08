@@ -5,16 +5,8 @@ import {connect} from "react-redux";
 import {reduxForm} from "redux-form";
 import LoginComponent from "../components/Login.component";
 import {submitLogin} from "./../actions";
+import {LOGIN_FORM} from "../constants";
 
-// Decorate the form component
-const ReduxForm = reduxForm({
-  form: 'loginForm' // a unique name for this form
-})(LoginComponent);
+const ReduxForm = reduxForm({form: LOGIN_FORM})(LoginComponent);
 
-const mapDispatchToProps = {
-  submitLogin
-};
-const mapStateToProps = (state) => ({
-  auth: state.auth
-});
-export default connect(mapStateToProps, mapDispatchToProps)(ReduxForm);
+export default connect((state) => ({auth: state.auth}), {submitLogin})(ReduxForm);

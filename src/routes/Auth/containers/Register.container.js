@@ -5,14 +5,8 @@ import {connect} from "react-redux";
 import {reduxForm} from "redux-form";
 import RegisterComponent from "../components/Register.component";
 import {submitRegister} from "../actions";
+import {REGISTER_FORM} from "../constants";
 
-// Decorate the form component
-const ReduxForm = reduxForm({
-  form: 'registerForm' // a unique name for this form
-})(RegisterComponent);
+const ReduxForm = reduxForm({form: REGISTER_FORM})(RegisterComponent);
 
-const mapDispatchToProps = {
-  submitRegister
-};
-const mapStateToProps = (state) => ({});
-export default connect(mapStateToProps, mapDispatchToProps)(ReduxForm);
+export default connect((state) => ({auth: state.auth}), {submitRegister})(ReduxForm);

@@ -8,13 +8,17 @@
  */
 
 import React from "react";
+import {Translate} from 'react-redux-i18n';
+import {Row, Col, Navbar, Nav, NavItem, NavDropdown, MenuItem} from "react-bootstrap";
+import {Link} from "react-router";
+
+// Local imports
 import "./Header.scss";
+import LocaleContainer from "../Locale/LocaleContainer";
+
+// Images
 import image1 from "./../../static/images/standard/skynda logo 4-mask-4@2x.png";
 import image2 from "./../../static/images/standard/SKYNDA@2x.png";
-import LocaleContainer from "../Locale/LocaleContainer";
-import {Translate} from 'react-redux-i18n';
-import {Row, Col} from "react-bootstrap";
-import {Link} from "react-router";
 
 class Header extends React.Component {
   sellCar = (e) => {
@@ -22,6 +26,8 @@ class Header extends React.Component {
   };
 
   render() {
+    // console.info(this.props.auth);
+
     return (
       <div className='container header-container'>
         <LocaleContainer/>
@@ -50,6 +56,9 @@ class Header extends React.Component {
                     <Link to="/about">
                       <Translate value="components.header.about_us"/>
                     </Link>
+                  </li>
+                  <li>
+
                   </li>
                 </ul>
               </div>

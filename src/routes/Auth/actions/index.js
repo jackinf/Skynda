@@ -4,8 +4,10 @@
 
 import submitLogin from "./submiLogin.action";
 import submitRegister from "./submiRegister.action";
+import submitLogout from "./submitLogout.action";
 
 export {
   submitLogin,
-  submitRegister
+  submitRegister,
+  submitLogout
 }

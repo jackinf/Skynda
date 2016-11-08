@@ -3,7 +3,6 @@
  */
 import remoteConfig from "store/remoteConfig";
 import {authSetUser} from "../modules/auth.module";
-import constants from "../../../utils/constants";
 
 export default function submitLogin(data) {
   return (dispatch, getState) => {
@@ -25,9 +24,7 @@ export default function submitLogin(data) {
       // headers: {"Content-Type": "application/x-www-form-urlencoded"},
       type: 'POST',
       success: function(data){
-        console.log(data);
         dispatch(authSetUser(data));
-        localStorage.setItem(constants.LOCAL_STORAGE_KEYS.SKYNDA_USER, JSON.stringify(data));
       }
     });
 

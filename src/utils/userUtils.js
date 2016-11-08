@@ -17,6 +17,14 @@ export function isLoggedIn() {
   return user != null && !_.isEmpty(user);
 }
 
+export function setUser(data) {
+  localStorage.setItem(constants.LOCAL_STORAGE_KEYS.SKYNDA_USER, JSON.stringify(data));
+}
+
+export function unsetUser() {
+  localStorage.removeItem(constants.LOCAL_STORAGE_KEYS.SKYNDA_USER);
+}
+
 /**
  * @param roleNames - List<string>
  * @returns {boolean} - success
