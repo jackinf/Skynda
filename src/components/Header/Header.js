@@ -26,8 +26,6 @@ class Header extends React.Component {
   };
 
   render() {
-    console.info(this.props);
-
     return (
       <div className='container header-container'>
         <LocaleContainer/>
@@ -58,7 +56,14 @@ class Header extends React.Component {
                     </Link>
                   </li>
                   <li>
-                    {this.props.auth.isLoggedIn ? <div>Hello, {this.props.auth.user.firstName}!</div>: "Hello, guest!"}
+                    {this.props.auth.isLoggedIn ? (
+                      <NavDropdown eventKey={3} title={`Hello, ${this.props.auth.user.firstName}`} id="nav-user-name">
+                        <MenuItem eventKey={3.1}>Settings</MenuItem>
+                        <MenuItem divider/>
+                        <MenuItem eventKey={3.3} onClick={this.props.submitLogout}>Logout</MenuItem>
+                      </NavDropdown>)
+                      : "Hello, guest!"}
+
                   </li>
                 </ul>
               </div>

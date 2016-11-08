@@ -3,4 +3,5 @@
  */
 import {connect} from "react-redux";
 import Header from "./Header";
-export default connect((state) => ({auth: state.auth}), {})(Header);
+import submitLogout from "./../../routes/Auth/actions/submitLogout.action";
+export default connect((state) => ({auth: state.auth}), {submitLogout})(Header);
