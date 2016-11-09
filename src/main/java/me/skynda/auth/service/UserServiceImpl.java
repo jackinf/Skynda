@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import me.skynda.auth.dao.UserDao;
 import me.skynda.auth.dto.UserDto;
+import me.skynda.auth.model.User;
 
 @Service
 @Transactional
@@ -29,6 +30,24 @@ public class UserServiceImpl implements UserService {
 			userDtoList.add(userDto);
         });
 		return userDtoList;
+	}
+
+	@Override
+	public UserDto findByEmail(String email) {
+		Mapper mapper = new DozerBeanMapper();
+		User user = userDao.getByEmail(email);
+		UserDto userDto = new UserDto();
+		userDto = mapper.map(user, UserDto.class);
+		return userDto;
+	}
+
+	@Override
+	public UserDto findByLogin(String login) {
+		Mapper mapper = new DozerBeanMapper();
+		User user = userDao.getByLogin(login);
+		UserDto userDto = new UserDto();
+		userDto = mapper.map(user, UserDto.class);
+		return userDto;
 	}
 
 

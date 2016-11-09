@@ -1,5 +1,7 @@
 package me.skynda.auth.dto;
 
+import java.util.List;
+
 import lombok.Data;
 import lombok.ToString;
 
@@ -8,9 +10,14 @@ import lombok.ToString;
 public class UserDto {
 
 	private Long id;
-	private String username;
+	private String login;
 	private String email;
+	private String phone;
 	private String password;
-	private Integer enabled;
+	private String language;
+	private String firstName;
+	private String lastName;
+	private Boolean enabled;
+	private List<AuthorityDto> authority;
 	
 }
