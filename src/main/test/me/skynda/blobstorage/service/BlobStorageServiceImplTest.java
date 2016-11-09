@@ -1,4 +1,4 @@
-package me.skynda.blobstorage.service.tests;
+package me.skynda.blobstorage.service;
 
 import com.microsoft.azure.storage.blob.ListBlobItem;
 import lombok.SneakyThrows;

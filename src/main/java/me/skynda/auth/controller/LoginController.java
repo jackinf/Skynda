@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import me.skynda.auth.config.SecurityUtils;
 import me.skynda.auth.dto.UserDto;
 import me.skynda.auth.service.UserService;
-import me.skynda.car.controller.BaseController;
+import me.skynda.common.controller.BaseController;
 
 @RestController
 public class LoginController extends BaseController {

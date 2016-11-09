@@ -8,6 +8,7 @@ import me.skynda.car.dto.request.CarModelsRequestDto;
 import me.skynda.car.dto.response.CarModelResponseDto;
 import me.skynda.car.model.CarManufacturer;
 import me.skynda.car.model.CarModels;
+import me.skynda.common.helper.SkyndaUtility;
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class CarModelServiceImpl implements  CarModelService {
+public class CarModelServiceImpl implements CarModelService {
 
     @Autowired
     CarManufacturerDao carManufacturerDao;
@@ -32,7 +33,10 @@ public class CarModelServiceImpl implements  CarModelService {
         List<CarModelResponseDto> responseDtos = new ArrayList<>();
         carModelsDao.getAll().forEach(c -> {
             CarModelResponseDto responseDto = new CarModelResponseDto();
-            responseDto.setManufacturerCode(c.getCarManufacturer().getManufacturerCode());
+            CarManufacturer carManufacturer = c.getCarManufacturer();
+            if (carManufacturer != null) {
+                responseDto.setManufacturerCode(carManufacturer.getManufacturerCode());
+            }
             responseDto.setModelCode(c.getModelCode());
             responseDto.setTitle(c.getTitle());
             responseDtos.add(responseDto);

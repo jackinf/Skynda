@@ -1,13 +1,12 @@
 package me.skynda.car.controller;
 
-import java.lang.reflect.Array;
 import java.util.List;
 
 import me.skynda.car.dto.request.CarSearchRequestDto;
+import me.skynda.common.controller.BaseController;
 import me.skynda.common.dto.CreateOrUpdateResponseDto;
 import me.skynda.common.dto.DeleteResponseDto;
 import me.skynda.common.dto.SearchResponseDto;
-import me.skynda.common.dto.UpdateResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;

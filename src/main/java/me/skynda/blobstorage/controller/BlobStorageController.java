@@ -7,12 +7,11 @@ import io.swagger.annotations.ApiResponses;
 import me.skynda.blobstorage.dto.*;
 import me.skynda.blobstorage.dto.temp.FileTestUpload3;
 import me.skynda.blobstorage.service.BlobStorageService;
-import me.skynda.car.controller.BaseController;
+import me.skynda.common.controller.BaseController;
 import me.skynda.common.helper.FileHelper;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.datasource.embedded.ConnectionProperties;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,8 +19,6 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import javax.xml.bind.DatatypeConverter;
-import java.util.Base64;
 import java.util.List;
 /**
  * Controller for managing media filesToUpload (blobs)

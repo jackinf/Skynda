@@ -1,6 +1,6 @@
 package me.skynda.email.controller;
 
-import me.skynda.car.controller.BaseController;
+import me.skynda.common.controller.BaseController;
 import me.skynda.email.dto.EmailQuestionDto;
 import me.skynda.email.dto.EmailSubscribeDto;
 import me.skynda.email.service.EmailService;
