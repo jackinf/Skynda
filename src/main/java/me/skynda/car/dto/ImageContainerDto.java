@@ -24,5 +24,12 @@ public class ImageContainerDto {
             dto.setImageUrl(url);
             return dto;
         }
+
+
+        public static ImageContainerDto createWithBase64(String base64File) {
+            ImageContainerDto dto = new ImageContainerDto();
+            dto.setBase64File(base64File);
+            return dto;
+        }
     }
 }

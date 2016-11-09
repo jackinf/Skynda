@@ -8,6 +8,7 @@ import me.skynda.car.dao.*;
 import me.skynda.car.dto.CarDto;
 import me.skynda.car.dto.CarGeneralDto;
 import me.skynda.car.dto.SingleCarDataDto;
+import me.skynda.car.dto.interfaces.IImageContainerableDto;
 import me.skynda.car.dto.request.CarSearchRequestDto;
 import me.skynda.car.dto.*;
 import me.skynda.car.model.Car;
@@ -52,6 +53,9 @@ public class CarServiceImpl implements CarService {
     @Autowired
     private CarConverter carConverter;
 
+    //    @Autowired
+    private CarValidator validator = new CarValidator();
+
     @Override
     public List<SingleCarDataDto> getCars() {
         List<SingleCarDataDto> singleCarDataDto = new ArrayList<SingleCarDataDto>();
@@ -80,7 +84,6 @@ public class CarServiceImpl implements CarService {
         CarModels carModel = carModelsDao.getByModelCode(carDto.getCarModelsCode());
         car.setCarModels(carModel);
 
-        CarValidator validator = new CarValidator();
         validator.validate(car, bindingResult);
         if (bindingResult.hasErrors()) {
             CreateOrUpdateResponseDto response = new CreateOrUpdateResponseDto();
@@ -94,8 +97,8 @@ public class CarServiceImpl implements CarService {
          */
 
         // Upload main image
-        ImageContainerDto base64File = SkyndaUtility.resolve(carDto::getMainImageContainer).get();
-        if (base64File.getBase64File() != null) {
+        ImageContainerDto base64File = carDto.getMainImageContainer();
+        if (base64File != null && base64File.getBase64File() != null) {
             // Please, upload the fucking file!!!
             UploadBlobDto uploadBlobDto1 = new UploadBlobDto();
             uploadBlobDto1.setContainerName(DEFAULT_CONTAINER_NAME);
@@ -114,55 +117,15 @@ public class CarServiceImpl implements CarService {
 
         // Upload image gallery
         List<ImagesDto> imageDtos = carDto.getImages() != null ? carDto.getImages() : new ArrayList<>();
-        imageDtos.forEach(imageDto -> {
-            String imageBase64File = imageDto.getImageContainer() != null
-                ? imageDto.getImageContainer().getBase64File()
-                : null;
-            if (imageBase64File == null || imageBase64File.isEmpty())
-                return;
-
-            // Upload the fucking file, JIM!
-            UploadBlobDto uploadBlobDto = new UploadBlobDto();
-            uploadBlobDto.setContainerName(DEFAULT_CONTAINER_NAME);
-            String blobName = UUID.randomUUID().toString();
-            uploadBlobDto.setBlobName(blobName);
-            uploadBlobDto.setByteArray(SkyndaUtility.toBytearray(imageBase64File));
-            BlobStorageUploadStreamResponseDto responseDto = blobStorageService.uploadStream(uploadBlobDto);
-
-            // Aww yeah, successful, right?
-            if (responseDto.isSuccess()) {
-                imageDto.getImageContainer().setImageUrl(responseDto.getUri());
-                imageDto.getImageContainer().setBlobName(blobName);
-                imageDto.getImageContainer().setContainerName(DEFAULT_CONTAINER_NAME);
-                imageDto.getImageContainer().setBase64File(null);
-            }
-        });
+        if (imageDtos != null) {
+            imageDtos.forEach(this::fromBase64ToUrl);
+        }
 
         // Upload faults images
         List<FaultsDto> faultDtos = carDto.getFaults();
-        faultDtos.forEach(faultDto -> {
-            String faultBase64File = faultDto.getImageContainer() != null
-                    ? faultDto.getImageContainer().getBase64File()
-                    : null;
-            if (faultBase64File == null || faultBase64File.isEmpty())
-                return;
-
-            // Upload the file, Jim!
-            UploadBlobDto uploadBlobDto = new UploadBlobDto();
-            uploadBlobDto.setContainerName(DEFAULT_CONTAINER_NAME);
-            String blobName = UUID.randomUUID().toString();
-            uploadBlobDto.setBlobName(blobName);
-            uploadBlobDto.setByteArray(SkyndaUtility.toBytearray(faultBase64File));
-            BlobStorageUploadStreamResponseDto responseDto = blobStorageService.uploadStream(uploadBlobDto);
-
-            // File upload successful, Jim, isn't it?
-            if (responseDto.isSuccess()) {
-                faultDto.getImageContainer().setImageUrl(responseDto.getUri());
-                faultDto.getImageContainer().setBlobName(blobName);
-                faultDto.getImageContainer().setContainerName(DEFAULT_CONTAINER_NAME);
-                faultDto.getImageContainer().setBase64File(null);
-            }
-        });
+        if (faultDtos != null) {
+            faultDtos.forEach(this::fromBase64ToUrl);
+        }
 
         /*
             Clean file could storage from uploaded files
@@ -170,9 +133,7 @@ public class CarServiceImpl implements CarService {
 
         List<CarDtoImageFileToDelete> filesToDelete = carDto.getFilesToDelete();
         if (filesToDelete != null) {
-            for (CarDtoImageFileToDelete fileToDelete : filesToDelete) {
-                tryDeleteBlob(fileToDelete);
-            }
+            filesToDelete.forEach(this::tryDeleteBlob);
         }
 
         /*
@@ -211,47 +172,47 @@ public class CarServiceImpl implements CarService {
         List<CarGeneralDto> carsGeneralDto = new ArrayList<>();
         List<Car> cars = carDao.getAll();
 
-        if(params.Brands != null){
+        if (params.Brands != null) {
 
         }
 
-        if(params.Colors != null){
+        if (params.Colors != null) {
 
         }
 
-        if(params.Features != null){
+        if (params.Features != null) {
 
         }
 
-        if(params.Doors != null){
+        if (params.Doors != null) {
 
         }
 
-        if(params.Seats != null){
+        if (params.Seats != null) {
 
         }
 
-        if(params.Transmission != null){
+        if (params.Transmission != null) {
 
         }
 
-        if(params.Mileage != null){
+        if (params.Mileage != null) {
 
         }
 
-        if(params.Price != null){
+        if (params.Price != null) {
 
         }
 
-        if(params.Year != null){
+        if (params.Year != null) {
 
         }
 
-        if(params.PetrolConsumption != null){
+        if (params.PetrolConsumption != null) {
 
         }
 
-        if(params.Power != null){
+        if (params.Power != null) {
 
         }
 
@@ -266,6 +227,30 @@ public class CarServiceImpl implements CarService {
         return response;
     }
 
+    private void fromBase64ToUrl(IImageContainerableDto dto) {
+        String faultBase64File = dto.getImageContainer() != null
+                ? dto.getImageContainer().getBase64File()
+                : null;
+        if (faultBase64File == null || faultBase64File.isEmpty())
+            return;
+
+        // Upload the file, Jim!
+        UploadBlobDto uploadBlobDto = new UploadBlobDto();
+        uploadBlobDto.setContainerName(DEFAULT_CONTAINER_NAME);
+        String blobName = UUID.randomUUID().toString();
+        uploadBlobDto.setBlobName(blobName);
+        uploadBlobDto.setByteArray(SkyndaUtility.toBytearray(faultBase64File));
+        BlobStorageUploadStreamResponseDto responseDto = blobStorageService.uploadStream(uploadBlobDto);
+
+        // File upload successful, Jim, isn't it?
+        if (responseDto.isSuccess()) {
+            dto.getImageContainer().setImageUrl(responseDto.getUri());
+            dto.getImageContainer().setBlobName(blobName);
+            dto.getImageContainer().setContainerName(DEFAULT_CONTAINER_NAME);
+            dto.getImageContainer().setBase64File(null);
+        }
+    }
+
     private void tryDeleteBlob(CarDtoImageFileToDelete dto) {
         if (dto == null || dto.getBlobName() == null || dto.getBlobName().isEmpty())
             return;
@@ -278,6 +263,7 @@ public class CarServiceImpl implements CarService {
             deleteBlobDto.setBlobName(blobName);
             deleteBlobDto.setContainerName(containerName);
             blobStorageService.delete(deleteBlobDto);
-        } catch(Exception ex) {}
+        } catch (Exception ex) {
+        }
     }
 }

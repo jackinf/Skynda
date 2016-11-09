@@ -100,7 +100,6 @@ public class CarControllerTest {
     @Test
     public void delete() throws Exception {
         // Arrange
-        CarDto dto = new CarDto();
         DeleteResponseDto deleteResponseDto = new DeleteResponseDto();
         deleteResponseDto.setSuccess(true);
         when(carService.deleteCar(1L)).thenReturn(deleteResponseDto);

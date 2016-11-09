@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.google.common.base.Strings;
 import me.skynda.car.dto.*;
 import me.skynda.car.model.*;
 import me.skynda.common.helper.SkyndaUtility;
