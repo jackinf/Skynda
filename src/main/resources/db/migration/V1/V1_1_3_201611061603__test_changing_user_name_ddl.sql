@@ -22,8 +22,8 @@ ALTER TABLE user_authority
 
 DROP TABLE "user";
 
-ALTER SEQUENCE user_id_seq
-	OWNED BY users.id;
+DROP SEQUENCE IF EXISTS user_id_seq;
+CREATE SEQUENCE user_id_seq;
 
 CREATE TABLE users (
 	id integer DEFAULT nextval('user_id_seq'::regclass) NOT NULL,
@@ -37,6 +37,9 @@ CREATE TABLE users (
 	enabled boolean,
 	archived timestamp without time zone
 );
+
+ALTER SEQUENCE user_id_seq
+   OWNED BY users.id;
 
 ALTER TABLE users
 	ADD CONSTRAINT user_pkey PRIMARY KEY (id);
