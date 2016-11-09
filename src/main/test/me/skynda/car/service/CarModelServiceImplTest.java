@@ -1,4 +1,4 @@
-package me;
+package me.skynda.car.service;
 
 import me.skynda.car.dao.CarManufacturerDao;
 import me.skynda.car.dao.CarModelsDao;
