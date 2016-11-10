@@ -1,7 +1,7 @@
 package me.skynda.blobstorage.dto.temp;
 
 import lombok.Data;
-import me.skynda.car.dto.FeatureDto;
+import me.skynda.vehicle.dto.FeatureDto;
 
 import java.util.List;
 

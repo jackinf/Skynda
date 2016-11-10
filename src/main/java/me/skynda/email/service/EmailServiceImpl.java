@@ -19,7 +19,7 @@ public class EmailServiceImpl implements EmailService {
      * Sends email using GMAIL settings.
      * http://stackoverflow.com/questions/19493904/javax-mail-messagingexception-could-not-connect-to-smtp-host-localhost-port
      *
-     * @param dto - person's info and car id.
+     * @param dto - person's info and vehicle id.
      * @return Successfully sent or not
      */
     @Override

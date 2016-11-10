@@ -1,0 +1,23 @@
+package me.skynda.vehicle.dto;
+
+
+import lombok.Data;
+import lombok.ToString;
+
+@Data
+@ToString(callSuper = false)
+public class VehicleModelDto {
+
+	private String modelCode;// PK
+	private String vehicleManufacturerCode;
+	private String description;
+	private String title;
+	private String transmission;
+	private String engine;
+	private String horsePower;
+	private String drive;
+	private String doors;
+	private String seats;
+	private String year;
+	private String bodyType;
+}

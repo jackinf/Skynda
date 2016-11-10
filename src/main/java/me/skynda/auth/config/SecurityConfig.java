@@ -30,6 +30,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         logger.info("loading SecurityConfig ................................................ ");
     }
 
+	public static final String CREDENTIALS_NAME = "Access-Control-Allow-Credentials";
+	public static final String ORIGIN_NAME = "Access-Control-Allow-Origin";
+	public static final String METHODS_NAME = "Access-Control-Allow-Methods";
+	public static final String HEADERS_NAME = "Access-Control-Allow-Headers";
+	public static final String MAX_AGE_NAME = "Access-Control-Max-Age";
+
+
 	@Autowired
 	private RestUnauthorizedEntryPoint restAuthenticationEntryPoint;
 
@@ -89,7 +96,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.formLogin()
 //		 .loginPage("/login")
 			.and()
-		.httpBasic();
+		.httpBasic().and().headers().addHeaderWriter((request, response) -> {
+			response.setHeader(ORIGIN_NAME, request.getHeader("Origin"));
+			response.setHeader(CREDENTIALS_NAME, "true");
+			response.setHeader(METHODS_NAME, "POST, GET, OPTIONS, DELETE");
+			response.setHeader(MAX_AGE_NAME, "3600");
+			response.setHeader(HEADERS_NAME, "Content-Type, Accept, X-Requested-With, remember-me");
+		});
 
 
 //		http

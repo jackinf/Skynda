@@ -20,7 +20,7 @@ mvn clean package
 
 ## RUN ##
 1. Run As -> Spring Boot App
-2. API available here: http://localhost:8080/car
+2. API available here: http://localhost:8080/vehicle
 
 ## DATABASE MIGRATION ##
 1. All database scripts put under resource/db/migration  

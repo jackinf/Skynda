@@ -144,19 +144,19 @@ IF NOT EXISTS (SELECT * FROM "classification_type" WHERE "name" = 'VEHICLE_BODY'
 	INSERT INTO "classification_type" ("name", "description", "modifier_user_id", "modifier_user_ip", "archived") VALUES ('VEHICLE_BODY', 'vehicle body type', 1, '127.0.0.1', null);
 
 	INSERT INTO "classification" ("description", "is_imported", "weight", "value", "modifier_user_id", "modifier_user_ip", "archived", "name", "classification_type_id", "is_active", "value2")
-	VALUES ('car', true, 1, 'SEDAN', 1, '127.0.0.1', null, 'Sedan', (SELECT "id" FROM "classification_type" WHERE "name"='VEHICLE_BODY'), true, 'PASSANGER_CAR');
+	VALUES ('vehicle', true, 1, 'SEDAN', 1, '127.0.0.1', null, 'Sedan', (SELECT "id" FROM "classification_type" WHERE "name"='VEHICLE_BODY'), true, 'PASSANGER_CAR');
 	INSERT INTO "classification" ("description", "is_imported", "weight", "value", "modifier_user_id", "modifier_user_ip", "archived", "name", "classification_type_id", "is_active", "value2")
-	VALUES ('car', true, 2, 'HATCHBACK', 1, '127.0.0.1', null, 'Hatchback', (SELECT "id" FROM "classification_type" WHERE "name"='VEHICLE_BODY'), true, 'PASSANGER_CAR');
+	VALUES ('vehicle', true, 2, 'HATCHBACK', 1, '127.0.0.1', null, 'Hatchback', (SELECT "id" FROM "classification_type" WHERE "name"='VEHICLE_BODY'), true, 'PASSANGER_CAR');
 	INSERT INTO "classification" ("description", "is_imported", "weight", "value", "modifier_user_id", "modifier_user_ip", "archived", "name", "classification_type_id", "is_active", "value2")
-	VALUES ('car', true, 3, 'TOURING', 1, '127.0.0.1', null, 'Touring', (SELECT "id" FROM "classification_type" WHERE "name"='VEHICLE_BODY'), true, 'PASSANGER_CAR');
+	VALUES ('vehicle', true, 3, 'TOURING', 1, '127.0.0.1', null, 'Touring', (SELECT "id" FROM "classification_type" WHERE "name"='VEHICLE_BODY'), true, 'PASSANGER_CAR');
 	INSERT INTO "classification" ("description", "is_imported", "weight", "value", "modifier_user_id", "modifier_user_ip", "archived", "name", "classification_type_id", "is_active", "value2")
-	VALUES ('car', true, 4, 'MINIVAN', 1, '127.0.0.1', null, 'Minivan', (SELECT "id" FROM "classification_type" WHERE "name"='VEHICLE_BODY'), true, 'PASSANGER_CAR');
+	VALUES ('vehicle', true, 4, 'MINIVAN', 1, '127.0.0.1', null, 'Minivan', (SELECT "id" FROM "classification_type" WHERE "name"='VEHICLE_BODY'), true, 'PASSANGER_CAR');
 	INSERT INTO "classification" ("description", "is_imported", "weight", "value", "modifier_user_id", "modifier_user_ip", "archived", "name", "classification_type_id", "is_active", "value2")
-	VALUES ('car', true, 5, 'COUPE', 1, '127.0.0.1', null, 'Coupe', (SELECT "id" FROM "classification_type" WHERE "name"='VEHICLE_BODY'), true, 'PASSANGER_CAR');
+	VALUES ('vehicle', true, 5, 'COUPE', 1, '127.0.0.1', null, 'Coupe', (SELECT "id" FROM "classification_type" WHERE "name"='VEHICLE_BODY'), true, 'PASSANGER_CAR');
 	INSERT INTO "classification" ("description", "is_imported", "weight", "value", "modifier_user_id", "modifier_user_ip", "archived", "name", "classification_type_id", "is_active", "value2")
-	VALUES ('car', true, 6, 'CABRIOLET', 1, '127.0.0.1', null, 'Cabriolet', (SELECT "id" FROM "classification_type" WHERE "name"='VEHICLE_BODY'), true, 'PASSANGER_CAR');
+	VALUES ('vehicle', true, 6, 'CABRIOLET', 1, '127.0.0.1', null, 'Cabriolet', (SELECT "id" FROM "classification_type" WHERE "name"='VEHICLE_BODY'), true, 'PASSANGER_CAR');
 	INSERT INTO "classification" ("description", "is_imported", "weight", "value", "modifier_user_id", "modifier_user_ip", "archived", "name", "classification_type_id", "is_active", "value2")
-	VALUES ('car', true, 7, 'LIMOUSINE', 1, '127.0.0.1', null, 'Limousine', (SELECT "id" FROM "classification_type" WHERE "name"='VEHICLE_BODY'), true, 'PASSANGER_CAR');
+	VALUES ('vehicle', true, 7, 'LIMOUSINE', 1, '127.0.0.1', null, 'Limousine', (SELECT "id" FROM "classification_type" WHERE "name"='VEHICLE_BODY'), true, 'PASSANGER_CAR');
 
 	INSERT INTO "classification" ("description", "is_imported", "weight", "value", "modifier_user_id", "modifier_user_ip", "archived", "name", "classification_type_id", "is_active", "value2")
 	VALUES ('SUV', true, 1, 'TOURING', 1, '127.0.0.1', null, 'Limousine', (SELECT "id" FROM "classification_type" WHERE "name"='VEHICLE_BODY'), true, 'SUV');

@@ -26,8 +26,8 @@ public class EmailSubscribeDto implements IEmailBaseDto {
     private String mobilePhone;
 
     /**
-     * Primary key of car to know from which page was the info sent.
-     * This helps to identify, in which car the user is interested in.
+     * Primary key of vehicle to know from which page was the info sent.
+     * This helps to identify, in which vehicle the user is interested in.
      */
     private String carPk;
 
@@ -38,7 +38,7 @@ public class EmailSubscribeDto implements IEmailBaseDto {
 
     @Override
     public String getContent() {
-        return "Client is interested in buying a car. " +
+        return "Client is interested in buying a vehicle. " +
                 "First name: " + this.getFirstName() +
                 ", Last name: " + this.getLastName() +
                 ", Car he/she is interested in: " + this.getCarPk();

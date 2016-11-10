@@ -35,7 +35,8 @@ public class User {
 	private Boolean enabled;
 	
 	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "user_authority", joinColumns = { @JoinColumn(name = "id_user", referencedColumnName = "id") }, inverseJoinColumns = { @JoinColumn(name = "id_authority", table = "authority", referencedColumnName = "id") })
+	@JoinTable(name = "user_authority", joinColumns = { @JoinColumn(name = "user_id", referencedColumnName = "id") },
+		inverseJoinColumns = { @JoinColumn(name = "authority_id", table = "authority", referencedColumnName = "id") })
     private List<Authority> authority;
 
 }
