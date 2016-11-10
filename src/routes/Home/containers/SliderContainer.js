@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux'
-import {onSliderChange} from '../actions'
+import {updateSliderValue} from '../actions'
 import SliderWrapper from "../components/CarSearch/SliderWrapper";
 
 const mapStateToProps = (state, ownProps) => {
@@ -18,7 +18,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps =   {
   onSliderChange: (value) => (dispatch, getState) => {
-    dispatch(onSliderChange(value));
+    dispatch(updateSliderValue(getState().sliderValues, value));
   }
 };
 

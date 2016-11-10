@@ -13,7 +13,17 @@ export const setStateValues = (value) => ({
   payload: value
 });
 
-export const onSliderChange = (value) => ({
+export const updateSliderValue = (state , value) => ({
   type: "SET_SLIDER_VALUE",
+  payload: value
+});
+
+export const toggleButtonGroupValue = (state, value) => ({
+  type: "TOGGLE_BUTTON_GROUP_VALUE",
+  payload: value
+});
+
+export const searchCars = (value) => ({
+  type: "SEARCH_CARS",
   payload: value
 });
