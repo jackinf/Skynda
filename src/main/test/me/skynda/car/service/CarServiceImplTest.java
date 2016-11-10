@@ -4,14 +4,14 @@ import me.skynda.blobstorage.dto.UploadBlobDto;
 import me.skynda.blobstorage.dto.response.BlobStorageUploadStreamResponseDto;
 import me.skynda.blobstorage.service.BlobStorageService;
 import me.skynda.car.dao.*;
-import me.skynda.car.dto.CarDto;
-import me.skynda.car.dto.FaultsDto;
-import me.skynda.car.dto.ImageContainerDto;
-import me.skynda.car.dto.ImagesDto;
+import me.skynda.car.dto.*;
+import me.skynda.car.dto.request.CarSearchRequestDto;
 import me.skynda.car.model.Car;
 import me.skynda.car.model.CarModels;
 import me.skynda.car.service.converter.CarConverter;
 import me.skynda.common.dto.CreateOrUpdateResponseDto;
+import me.skynda.common.dto.DeleteResponseDto;
+import me.skynda.common.dto.SearchResponseDto;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -22,6 +22,7 @@ import org.springframework.validation.BindingResult;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
@@ -59,16 +60,47 @@ public class CarServiceImplTest {
     @Test
     public void getCars() throws Exception {
 
+        /*
+            ACT
+         */
+        List<SingleCarDataDto> cars = service.getCars();
+
+        /*
+            ASSERT
+         */
+        assertEquals(3, cars.size());
     }
 
     @Test
     public void getCar() throws Exception {
+        /*
+            ARRANGE
+         */
 
+        /*
+            ACT
+         */
+        service.getCar(1L);
+
+        /*
+            ASSERT
+         */
     }
 
     @Test
     public void getCarDetailed() throws Exception {
+        /*
+            ARRANGE
+         */
 
+        /*
+            ACT
+         */
+        service.getCarDetailed(1L);
+
+        /*
+            ASSERT
+         */
     }
 
     @Test
@@ -89,7 +121,9 @@ public class CarServiceImplTest {
 
     @Test
     public void createOrUpdateCarForSale_test2() throws Exception {
-        // Arrange
+        /*
+            ARRANGE
+         */
 
         // Prepare car
         CarDto carDto = new CarDto();
@@ -144,10 +178,14 @@ public class CarServiceImplTest {
         addedCar.setId(addedCarValue);
         when(carDao.saveOrUpdate(any(Car.class))).thenReturn(addedCar);
 
-        // Act
+        /*
+            ACT
+         */
         CreateOrUpdateResponseDto orUpdateCarForSale = service.createOrUpdateCarForSale(carDto, bindingResult);
 
-        // Assert
+        /*
+            ASSERT
+         */
         assertEquals(true, orUpdateCarForSale.isSuccess());
         assertEquals(addedCarValue, orUpdateCarForSale.getId());
         assertEquals(null, cont2.getBase64File());
@@ -158,6 +196,7 @@ public class CarServiceImplTest {
         assertEquals(newUri, cont4.getImageUrl());
         assertEquals(null, cont5.getBase64File());
         assertEquals(newUri, cont5.getImageUrl());
+
         // Make sure there were no errors
         final Integer totalErrors = 0;
         verify(bindingResult, times(totalErrors)).reject(any(String.class), any(String.class));
@@ -167,12 +206,36 @@ public class CarServiceImplTest {
 
     @Test
     public void deleteCar() throws Exception {
+        /*
+            ACT
+         */
+        DeleteResponseDto deleteResponseDto = service.deleteCar(1L);
 
+        /*
+            ASSERT
+         */
+        assertTrue(deleteResponseDto.isSuccess());
+        verify(carDao, times(1)).delete(1L);
     }
 
     @Test
     public void search() throws Exception {
+        /*
+            ARRANGE
+         */
+        CarSearchRequestDto carSearchRequestDto = new CarSearchRequestDto();
+        when(carDao.getAll()).thenReturn(new ArrayList<>());
 
+        /*
+            ACT
+         */
+        SearchResponseDto responseDto = service.search(carSearchRequestDto);
+
+        /*
+            ASSERT
+         */
+        assertTrue(responseDto.isSuccess());
+        assertEquals(3, responseDto.getCars().size());
     }
 
 }

@@ -170,56 +170,11 @@ public class CarServiceImpl implements CarService {
     public SearchResponseDto search(CarSearchRequestDto params) {
         SearchResponseDto response = new SearchResponseDto();
         List<CarGeneralDto> carsGeneralDto = new ArrayList<>();
-        List<Car> cars = carDao.getAll();
-
-        if (params.Brands != null) {
-
-        }
-
-        if (params.Colors != null) {
-
-        }
-
-        if (params.Features != null) {
-
-        }
-
-        if (params.Doors != null) {
-
-        }
-
-        if (params.Seats != null) {
-
-        }
-
-        if (params.Transmission != null) {
-
-        }
-
-        if (params.Mileage != null) {
-
-        }
-
-        if (params.Price != null) {
-
-        }
-
-        if (params.Year != null) {
-
-        }
-
-        if (params.PetrolConsumption != null) {
-
-        }
-
-        if (params.Power != null) {
-
-        }
+        List<Car> cars = carDao.search(params);
 
         cars.forEach(car -> {
             carsGeneralDto.add(carConverter.convertToSearchableCar(car));
         });
-
 
         response.setSuccess(true);
         response.setCars(carsGeneralDto);
