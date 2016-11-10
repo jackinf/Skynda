@@ -1,4 +1,4 @@
-package me.skynda.car.controller;
+package me.skynda.vehicle.controller;
 
 import org.junit.Test;
 

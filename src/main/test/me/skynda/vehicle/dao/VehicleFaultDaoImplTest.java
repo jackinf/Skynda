@@ -1,29 +1,27 @@
-package me.skynda.car.dao;
+package me.skynda.vehicle.dao;
 
-import me.skynda.car.model.Car;
+import me.skynda.vehicle.model.Vehicle;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class CarFaultDaoImplTest {
+public class VehicleFaultDaoImplTest {
 
-    CarFaultDaoImpl carFaultDao = new CarFaultDaoImpl();
+    VehicleFaultDaoImpl vehicleFaultDao = new VehicleFaultDaoImpl();
 
 //    @Before
 //    public void setUp() throws Exception {
 //        // setup the session factory
 //
 //        Configuration configuration = new Configuration();
-//        configuration.addAnnotatedClass(Car.class)
-//                .addAnnotatedClass(CarModel.class)
-//                .addAnnotatedClass(CarManufacturer.class);
+//        configuration.addAnnotatedClass(Vehicle.class)
+//                .addAnnotatedClass(VehicleModel.class)
+//                .addAnnotatedClass(VehicleManufacturer.class);
 //
 //        configuration.setProperty("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
 //        configuration.setProperty("hibernate.connection.driver_class", "org.h2.Driver");
@@ -35,8 +33,8 @@ public class CarFaultDaoImplTest {
 //    }
 
     @Test
-    public void addMultipleToCar() throws Exception {
-        carFaultDao.addMultipleToCar(new Car(), new ArrayList<>());
+    public void addMultipleToVehicle() throws Exception {
+        vehicleFaultDao.addMultipleToVehicle(new Vehicle(), new ArrayList<>());
     }
 
 }
