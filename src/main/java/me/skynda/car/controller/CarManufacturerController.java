@@ -13,7 +13,7 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(value = "/api", produces = "application/json")
-public class CarManufacturer extends BaseController {
+public class CarManufacturerController extends BaseController {
 
     @Autowired
     private CarManufacturerService carManufacturerService;
