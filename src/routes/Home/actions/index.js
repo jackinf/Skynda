@@ -24,3 +24,8 @@ export const toggleButtonGroupValue = (state, value) => ({
   type: ACTIONS.TOGGLE_BUTTON_GROUP_VALUE,
   payload: value
 });
+
+export const setSearchResults = (value) => ({
+  type: ACTIONS.SET_SEARCH_RESULTS,
+  payload: value
+});

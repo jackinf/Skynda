@@ -11,13 +11,9 @@ class Home extends React.Component {
         <Hero/>
         <br/>
         <div className='container'>
-
-          {/*Search block*/}
           <SearchContainer />
           <br/>
-          {/*Search results block*/}
           <SearchResultsContainer />
-
         </div>
       </div>
     );
