@@ -6,9 +6,7 @@ import me.skynda.car.dto.CarModelDto;
 import me.skynda.car.dto.request.CarModelsRequestDto;
 import me.skynda.car.dto.response.CarModelResponseDto;
 import me.skynda.car.model.CarManufacturer;
-import me.skynda.car.model.CarModels;
-import me.skynda.car.service.CarModelService;
-import me.skynda.car.service.CarModelServiceImpl;
+import me.skynda.car.model.CarModel;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -37,16 +35,16 @@ public class CarModelServiceImplTest {
     @Test
     public void get() throws Exception {
         // Arrange
-        ArrayList<CarModels> prepared = new ArrayList<>();
-        CarModels first = new CarModels();
+        ArrayList<CarModel> prepared = new ArrayList<>();
+        CarModel first = new CarModel();
         first.setTitle("title123");
         first.setModelCode("modelCode123");
         CarManufacturer carManufacturer = new CarManufacturer();
         carManufacturer.setManufacturerCode("manufacturerCode123");
         first.setCarManufacturer(carManufacturer);
         prepared.add(first);
-        prepared.add(new CarModels());
-        prepared.add(new CarModels());
+        prepared.add(new CarModel());
+        prepared.add(new CarModel());
         when(carModelsDao.getAll()).thenReturn(prepared);
 
         // Act
@@ -66,7 +64,7 @@ public class CarModelServiceImplTest {
         service.save(new CarModelDto());
 
         // Assert
-        verify(carModelsDao, times(1)).saveOrUpdate(any(CarModels.class));
+        verify(carModelsDao, times(1)).saveOrUpdate(any(CarModel.class));
     }
 
 }

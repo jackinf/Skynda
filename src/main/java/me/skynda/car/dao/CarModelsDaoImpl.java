@@ -4,17 +4,17 @@ import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
-import me.skynda.car.model.CarModels;
+import me.skynda.car.model.CarModel;
 import me.skynda.common.db.SkyndaBaseEntityDaoImpl;
 
 @Repository
-public class CarModelsDaoImpl extends SkyndaBaseEntityDaoImpl<CarModels> implements CarModelsDao{
+public class CarModelsDaoImpl extends SkyndaBaseEntityDaoImpl<CarModel> implements CarModelsDao{
 
 	@Override
-	public CarModels getByModelCode(String carModelsCode) {
-		Criteria c = getSession().createCriteria(CarModels.class, "cm");
+	public CarModel getByModelCode(String carModelsCode) {
+		Criteria c = getSession().createCriteria(CarModel.class, "cm");
         c.add(Restrictions.eq("cm.modelCode", carModelsCode));
-        return (CarModels) c.uniqueResult();
+        return (CarModel) c.uniqueResult();
 	}
 
 }

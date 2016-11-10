@@ -3,12 +3,10 @@ package me.skynda.car.service;
 import me.skynda.car.dao.CarManufacturerDao;
 import me.skynda.car.dao.CarModelsDao;
 import me.skynda.car.dto.CarModelDto;
-import me.skynda.car.dto.SingleCarDataDto;
 import me.skynda.car.dto.request.CarModelsRequestDto;
 import me.skynda.car.dto.response.CarModelResponseDto;
 import me.skynda.car.model.CarManufacturer;
-import me.skynda.car.model.CarModels;
-import me.skynda.common.helper.SkyndaUtility;
+import me.skynda.car.model.CarModel;
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,12 +43,12 @@ public class CarModelServiceImpl implements CarModelService {
     }
 
     @Override
-    public CarModels save(CarModelDto carModelDto) {
-        CarModels carModels;
+    public CarModel save(CarModelDto carModelDto) {
+        CarModel carModel;
         Mapper mapper = new DozerBeanMapper();
-        carModels = mapper.map(carModelDto, CarModels.class);
+        carModel = mapper.map(carModelDto, CarModel.class);
         CarManufacturer cm = carManufacturerDao.getByManufacturerCode(carModelDto.getCarManufacturerCode());
-        carModels.setCarManufacturer(cm);
-        return carModelsDao.saveOrUpdate(carModels);
+        carModel.setCarManufacturer(cm);
+        return carModelsDao.saveOrUpdate(carModel);
     }
 }

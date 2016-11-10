@@ -19,7 +19,6 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 @Entity
 @Data
@@ -34,7 +33,7 @@ public class Car {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "model_code", nullable = false)
     @NotNull
-    private CarModels carModels;
+    private CarModel carModel;
 
     @OneToMany(mappedBy = "car", fetch = FetchType.LAZY)
     private List<CarReport> carReport;

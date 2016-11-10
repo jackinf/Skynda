@@ -37,43 +37,50 @@ public class CarConverter {
         carGeneralDto.setSrc(car.getMainImageUrl());
 		carGeneralDto.setColorInside(car.getColorInside());
 		carGeneralDto.setColorOutside(car.getColorOutside());
-		carGeneralDto.setDoors(car.getCarModels().getDoors());
-		carGeneralDto.setDrive(car.getCarModels().getDrive());
-		carGeneralDto.setEngine(car.getCarModels().getEngine());
-		carGeneralDto.setHorsePower(car.getCarModels().getHorsePower());
-		carGeneralDto.setManufacturer(car.getCarModels().getCarManufacturer().getManufacturerCode());
-		carGeneralDto.setMileage(car.getMileage());
-		carGeneralDto.setModel(car.getCarModels().getModelCode());
-		carGeneralDto.setSeats(car.getCarModels().getSeats());
-		carGeneralDto.setTransmission(car.getCarModels().getTransmission());
-		carGeneralDto.setYear(car.getCarModels().getYear());
+		setCarModel(car.getCarModel(), carGeneralDto);
 		singleCarDataDto.setCarGeneralDto(carGeneralDto);
 	}
 
 	private void convertOverviewData(Car car, SingleCarDataDto singleCarDataDto) {
-		OverviewDto overviewDto = new OverviewDto();
 		List<OverviewDto> overviewDtoList = new ArrayList<OverviewDto>();
+        OverviewDto overviewDto = new OverviewDto();
 		overviewDto.setIconUrl("hardcodedMileageIconLink");
 		overviewDto.setLabel(car.getMileage() != null ? car.getMileage().toString() : "");
 		overviewDtoList.add(overviewDto);
-		overviewDto.setIconUrl("hardcodedTransmissionIconLink");
-		overviewDto.setLabel(car.getCarModels().getTransmission());
-		overviewDtoList.add(overviewDto);
-		overviewDto.setIconUrl("hardcodedEngineIconLink");
-		overviewDto.setLabel(car.getCarModels().getEngine() + " (" + car.getCarModels().getHorsePower() + ")");
-		overviewDtoList.add(overviewDto);
-		overviewDto.setIconUrl("hardcodedDriveIconLink");
-		overviewDto.setLabel(car.getCarModels().getDrive());
-		overviewDtoList.add(overviewDto);
-		overviewDto.setIconUrl("hardcodedDoorsSeatsIconLink");
-		overviewDto.setLabel(car.getCarModels().getDoors() + " doors " + car.getCarModels().getSeats() + " seats");
-		overviewDtoList.add(overviewDto);
+
+		CarModel carModel = car.getCarModel();
+        if (carModel != null) {
+            overviewDto.setIconUrl("hardcodedTransmissionIconLink");
+            overviewDto = new OverviewDto();
+            overviewDto.setLabel(carModel.getTransmission());
+            overviewDtoList.add(overviewDto);
+
+            overviewDto = new OverviewDto();
+            overviewDto.setIconUrl("hardcodedEngineIconLink");
+            overviewDto.setLabel(carModel.getEngine() + " (" + carModel.getHorsePower() + ")");
+            overviewDtoList.add(overviewDto);
+
+            overviewDto = new OverviewDto();
+            overviewDto.setIconUrl("hardcodedDriveIconLink");
+            overviewDto.setLabel(carModel.getDrive());
+            overviewDtoList.add(overviewDto);
+
+            overviewDto = new OverviewDto();
+            overviewDto.setIconUrl("hardcodedDoorsSeatsIconLink");
+            overviewDto.setLabel(carModel.getDoors() + " doors " + carModel.getSeats() + " seats");
+            overviewDtoList.add(overviewDto);
+        }
+
+        overviewDto = new OverviewDto();
 		overviewDto.setIconUrl("hardcodedColorOutsideIconLink");
 		overviewDto.setLabel(car.getColorOutside());
 		overviewDtoList.add(overviewDto);
+
+        overviewDto = new OverviewDto();
 		overviewDto.setIconUrl("hardcodedColorInsideIconLink");
 		overviewDto.setLabel(car.getColorInside());
 		overviewDtoList.add(overviewDto);
+
 		singleCarDataDto.setOverview(overviewDtoList);
 	}
 
@@ -95,11 +102,12 @@ public class CarConverter {
 
 	private void convertDescriptionData(Car car, SingleCarDataDto singleCarDataDto) {
         // TODO: (list) car.getDescriptions(), not car.getCarModels().getDescription()
-		if (car.getCarModels().getDescription() != null) {
+        CarModel carModel = car.getCarModel();
+		if (carModel != null && carModel.getDescription() != null) {
 			List<DescriptionsDto> descriptionsDtoList = new ArrayList<DescriptionsDto>();
 			DescriptionsDto descriptionDto = new DescriptionsDto();
-			descriptionDto.setText(car.getCarModels().getDescription());
-			descriptionDto.setTitle(car.getCarModels().getTitle());
+			descriptionDto.setText(carModel.getDescription());
+			descriptionDto.setTitle(carModel.getTitle());
 			descriptionsDtoList.add(descriptionDto);
 			singleCarDataDto.setDescriptions(descriptionsDtoList);
 		}
@@ -132,15 +140,20 @@ public class CarConverter {
 
 	private void convertPerformanceData(Car car, SingleCarDataDto singleCarDataDto) {
 		PerformanceDto performanceDto = new PerformanceDto();
-		performanceDto.setDrivenWheels(car.getCarModels().getDrive());
-		performanceDto.setDoors(car.getCarModels().getDoors());
+
+        CarModel carModel = car.getCarModel();
+        if (carModel != null) {
+            performanceDto.setDrivenWheels(carModel.getDrive());
+            performanceDto.setDoors(carModel.getDoors());
+            performanceDto.setHorsePower(carModel.getHorsePower());
+        }
+
 		performanceDto.setCompressionRatio(car.getCompressionRatio());
 		performanceDto.setCompressionType(car.getCompressionType());
 		performanceDto.setConfiguration(car.getConfiguration());
 		performanceDto.setCylinders(car.getCylinders());
 		performanceDto.setDisplacement(car.getDisplacement());
 		performanceDto.setFuelType(car.getFuelType());
-		performanceDto.setHorsePower(car.getCarModels().getHorsePower());
 		performanceDto.setSize(car.getSize());
 		performanceDto.setTorque(car.getTorque());
 		performanceDto.setTotalValves(car.getTotalValves());
@@ -163,14 +176,17 @@ public class CarConverter {
 
 	private void convertReviewData(Car car, SingleCarDataDto singleCarDataDto) {
 		List<ReviewDto> reviewDtoList = new ArrayList<ReviewDto>();
-		for (CarReview carReview : car.getCarReview()) {
-			ReviewDto reviewDto = new ReviewDto();
-			reviewDto.setLogoUrl(carReview.getLogoUrl());
-			reviewDto.setRating(carReview.getRating());
-			reviewDto.setText(carReview.getText());
-			reviewDto.setVideoUrl(carReview.getVideoUrl());
-			reviewDtoList.add(reviewDto);
-		}
+        List<CarReview> carReview1 = car.getCarReview();
+        if (carReview1 != null) {
+            for (CarReview carReview : carReview1) {
+                ReviewDto reviewDto = new ReviewDto();
+                reviewDto.setLogoUrl(carReview.getLogoUrl());
+                reviewDto.setRating(carReview.getRating());
+                reviewDto.setText(carReview.getText());
+                reviewDto.setVideoUrl(carReview.getVideoUrl());
+                reviewDtoList.add(reviewDto);
+            }
+        }
 		singleCarDataDto.setReviews(reviewDtoList);
 	}
 
@@ -239,7 +255,10 @@ public class CarConverter {
         );
         carDto.setMainImageContainer(mainImageContainerDto);
 
-        carDto.setCarModelsCode(SkyndaUtility.resolve(() -> carDb.getCarModels().getModelCode()).get());
+        CarModel carModel = carDb.getCarModel();
+        if (carModel != null) {
+            carDto.setCarModelsCode(carModel.getModelCode());
+        }
 		carDto.setVinCode(carDb.getVinCode());
 		carDto.setPrice(carDb.getPrice());
 		carDto.setRegistrationNumber(carDb.getRegistrationNumber());
@@ -252,46 +271,55 @@ public class CarConverter {
 		carDto.setSafetyStars(carDb.getSafetyStars());
 
         // Features
-        List<FeatureDto> featureDtos = carDb.getFeatures().stream().map(feature -> {
-            FeatureDto dto = new FeatureDto();
-            dto.setId(feature.getId());
-            dto.setText(feature.getText());
-            return dto;
-        }).collect(Collectors.toList());
-        carDto.setFeatures(featureDtos);
+        List<CarFeature> features = carDb.getFeatures();
+        if (features != null) {
+            List<FeatureDto> featureDtos = carDb.getFeatures().stream().map(feature -> {
+                FeatureDto dto = new FeatureDto();
+                dto.setId(feature.getId());
+                dto.setText(feature.getText());
+                return dto;
+            }).collect(Collectors.toList());
+            carDto.setFeatures(featureDtos);
+        }
 
         // Images
-        List<ImagesDto> imageDtos = carDb.getImages().stream().map(image -> {
-            ImagesDto imageDto = new ImagesDto();
-            imageDto.setId(image.getId());
+        List<CarImage> images = carDb.getImages();
+        if (images != null) {
+            List<ImagesDto> imageDtos = images.stream().map(image -> {
+                ImagesDto imageDto = new ImagesDto();
+                imageDto.setId(image.getId());
 
-            ImageContainerDto imageContainerDto = ImageContainerDto.Factory.create(
-                    image.getImageUrl(),
-                    image.getImageBlobName(),
-                    image.getImageContainerName()
-            );
-            imageDto.setImageContainer(imageContainerDto);
+                ImageContainerDto imageContainerDto = ImageContainerDto.Factory.create(
+                        image.getImageUrl(),
+                        image.getImageBlobName(),
+                        image.getImageContainerName()
+                );
+                imageDto.setImageContainer(imageContainerDto);
 
-            return imageDto;
-        }).collect(Collectors.toList());
-        carDto.setImages(imageDtos);
+                return imageDto;
+            }).collect(Collectors.toList());
+            carDto.setImages(imageDtos);
+        }
 
         // Faults
-        List<FaultsDto> faultsDtos = carDb.getFaults().stream().map(fault -> {
-            FaultsDto faultDto = new FaultsDto();
-            faultDto.setId(fault.getId());
-            faultDto.setText(fault.getText());
+        List<CarFault> faults = carDb.getFaults();
+        if (faults != null) {
+            List<FaultsDto> faultsDtos = faults.stream().map(fault -> {
+                FaultsDto faultDto = new FaultsDto();
+                faultDto.setId(fault.getId());
+                faultDto.setText(fault.getText());
 
-            ImageContainerDto imageContainerDto = ImageContainerDto.Factory.create(
-                    fault.getImageUrl(),
-                    fault.getImageBlobName(),
-                    fault.getImageContainerName()
-            );
-            faultDto.setImageContainer(imageContainerDto);
+                ImageContainerDto imageContainerDto = ImageContainerDto.Factory.create(
+                        fault.getImageUrl(),
+                        fault.getImageBlobName(),
+                        fault.getImageContainerName()
+                );
+                faultDto.setImageContainer(imageContainerDto);
 
-            return faultDto;
-        }).collect(Collectors.toList());
-        carDto.setFaults(faultsDtos);
+                return faultDto;
+            }).collect(Collectors.toList());
+            carDto.setFaults(faultsDtos);
+        }
 
 		/*
 			PERFORMANCE section
@@ -315,29 +343,45 @@ public class CarConverter {
 	public CarGeneralDto convertToSearchableCar(Car car) {
 		CarGeneralDto carGeneralDto = new CarGeneralDto();
 		List<CarImage> images = car.getImages();
-		CarImage primaryImage = images.stream()
-				.filter(image -> image.isPrimary() == true)
-				.findFirst()
-				.orElse(new CarImage());
-
-//		if(Strings.isNullOrEmpty(primaryImage.getImageUrl())){
-//			throw new NullPointerException("No primary image for the car found");
-//		}
-		String url = primaryImage.getImageUrl();
+		if (images != null) {
+			CarImage primaryImage = images.stream()
+					.filter(CarImage::isPrimary)
+					.findFirst()
+					.orElse(new CarImage());
+			carGeneralDto.setSrc(primaryImage.getImageUrl());
+		}
 
 		carGeneralDto.setColorInside(car.getColorInside());
 		carGeneralDto.setColorOutside(car.getColorOutside());
-		carGeneralDto.setDoors(car.getCarModels().getDoors());
-		carGeneralDto.setDrive(car.getCarModels().getDrive());
-		carGeneralDto.setEngine(car.getCarModels().getEngine());
-		carGeneralDto.setHorsePower(car.getCarModels().getHorsePower());
-		carGeneralDto.setManufacturer(car.getCarModels().getCarManufacturer().getManufacturerCode());
 		carGeneralDto.setMileage(car.getMileage());
-		carGeneralDto.setModel(car.getCarModels().getModelCode());
-		carGeneralDto.setSeats(car.getCarModels().getSeats());
-		carGeneralDto.setSrc(primaryImage.getImageUrl());
-		carGeneralDto.setTransmission(car.getCarModels().getTransmission());
-		carGeneralDto.setYear(car.getCarModels().getYear());
+
+		setCarModel(car.getCarModel(), carGeneralDto);
+
 		return carGeneralDto;
+	}
+
+	/**
+	 * Helper, convert carModel to dto to set into carGeneralDto.
+	 * @param carModel - source
+	 * @param carGeneralDto - destination
+	 */
+	private void setCarModel(CarModel carModel, CarGeneralDto carGeneralDto) {
+		if (carModel == null) {
+			return;
+		}
+
+		carGeneralDto.setDoors(carModel.getDoors());
+		carGeneralDto.setDrive(carModel.getDrive());
+		carGeneralDto.setEngine(carModel.getEngine());
+		carGeneralDto.setHorsePower(carModel.getHorsePower());
+		carGeneralDto.setModel(carModel.getModelCode());
+		carGeneralDto.setSeats(carModel.getSeats());
+		carGeneralDto.setTransmission(carModel.getTransmission());
+		carGeneralDto.setYear(carModel.getYear());
+
+		CarManufacturer carManufacturer = carModel.getCarManufacturer();
+		if (carManufacturer != null) {
+            carGeneralDto.setManufacturer(carManufacturer.getManufacturerCode());
+        }
 	}
 }

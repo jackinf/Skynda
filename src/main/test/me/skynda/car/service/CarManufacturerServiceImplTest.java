@@ -2,19 +2,14 @@ package me.skynda.car.service;
 
 import me.skynda.car.dao.CarManufacturerDao;
 import me.skynda.car.dto.CarManufacturerDto;
-import me.skynda.car.dto.CarModelDto;
 import me.skynda.car.dto.request.CarManufacturersSearchDto;
-import me.skynda.car.dto.request.CarModelsRequestDto;
 import me.skynda.car.dto.response.CarManufacturerResponseDto;
-import me.skynda.car.dto.response.CarModelResponseDto;
 import me.skynda.car.model.CarManufacturer;
-import me.skynda.car.model.CarModels;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;

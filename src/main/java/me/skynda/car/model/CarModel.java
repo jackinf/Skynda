@@ -11,8 +11,8 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "car_models")
-public class CarModels {
+@Table(name = "car_model")
+public class CarModel {
 
 	@Id
 	private String modelCode;// PK

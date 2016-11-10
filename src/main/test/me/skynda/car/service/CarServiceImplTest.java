@@ -7,7 +7,7 @@ import me.skynda.car.dao.*;
 import me.skynda.car.dto.*;
 import me.skynda.car.dto.request.CarSearchRequestDto;
 import me.skynda.car.model.Car;
-import me.skynda.car.model.CarModels;
+import me.skynda.car.model.CarModel;
 import me.skynda.car.service.converter.CarConverter;
 import me.skynda.common.dto.CreateOrUpdateResponseDto;
 import me.skynda.common.dto.DeleteResponseDto;
@@ -59,16 +59,24 @@ public class CarServiceImplTest {
 
     @Test
     public void getCars() throws Exception {
+        /*
+            ARRANGE
+         */
+        ArrayList<Car> cars = new ArrayList<>();
+        cars.add(new Car());
+        cars.add(new Car());
+        cars.add(new Car());
+        when(carDao.getAll()).thenReturn(cars);
 
         /*
             ACT
          */
-        List<SingleCarDataDto> cars = service.getCars();
+        List<SingleCarDataDto> cars1 = service.getCars();
 
         /*
             ASSERT
          */
-        assertEquals(3, cars.size());
+        assertEquals(cars.size(), cars1.size());
     }
 
     @Test
@@ -76,15 +84,21 @@ public class CarServiceImplTest {
         /*
             ARRANGE
          */
+        final String COLOR = "black";
+        Car car = new Car();
+        car.setColorInside(COLOR);
+        when(carDao.get(1L)).thenReturn(car);
 
         /*
             ACT
          */
-        service.getCar(1L);
+        CarDto car1 = service.getCar(1L);
 
         /*
             ASSERT
          */
+        assertEquals(COLOR, car1.getColorInside());
+        verify(carDao, times(1)).get(1L);
     }
 
     @Test
@@ -92,15 +106,21 @@ public class CarServiceImplTest {
         /*
             ARRANGE
          */
+        final String COLOR = "black";
+        Car car = new Car();
+        car.setColorInside(COLOR);
+        when(carDao.get(1L)).thenReturn(car);
 
         /*
             ACT
          */
-        service.getCarDetailed(1L);
+        SingleCarDataDto carDetailed = service.getCarDetailed(1L);
 
         /*
             ASSERT
          */
+        assertEquals(COLOR, carDetailed.getCarGeneralDto().getColorInside());
+        verify(carDao, times(1)).get(1L);
     }
 
     @Test
@@ -169,7 +189,7 @@ public class CarServiceImplTest {
             .thenReturn(BlobStorageUploadStreamResponseDto.Factory.succeed(newUri));
 
         // Prepare to return fake car model
-        CarModels carModel = new CarModels();
+        CarModel carModel = new CarModel();
         carModel.setModelCode(CAR_MODEL_CODE_1);
         when(carModelsDao.getByModelCode(CAR_MODEL_CODE_1)).thenReturn(carModel);
 
@@ -224,7 +244,11 @@ public class CarServiceImplTest {
             ARRANGE
          */
         CarSearchRequestDto carSearchRequestDto = new CarSearchRequestDto();
-        when(carDao.getAll()).thenReturn(new ArrayList<>());
+        ArrayList<Car> cars = new ArrayList<>();
+        cars.add(new Car());
+        cars.add(new Car());
+        cars.add(new Car());
+        when(carDao.search(carSearchRequestDto)).thenReturn(cars);
 
         /*
             ACT
@@ -235,7 +259,7 @@ public class CarServiceImplTest {
             ASSERT
          */
         assertTrue(responseDto.isSuccess());
-        assertEquals(3, responseDto.getCars().size());
+        assertEquals(cars.size(), responseDto.getCars().size());
     }
 
 }

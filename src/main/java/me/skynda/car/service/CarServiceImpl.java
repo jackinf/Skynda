@@ -12,7 +12,7 @@ import me.skynda.car.dto.interfaces.IImageContainerableDto;
 import me.skynda.car.dto.request.CarSearchRequestDto;
 import me.skynda.car.dto.*;
 import me.skynda.car.model.Car;
-import me.skynda.car.model.CarModels;
+import me.skynda.car.model.CarModel;
 import me.skynda.car.service.converter.CarConverter;
 import me.skynda.car.validators.CarValidator;
 import me.skynda.common.dto.CreateOrUpdateResponseDto;
@@ -81,8 +81,8 @@ public class CarServiceImpl implements CarService {
     public CreateOrUpdateResponseDto createOrUpdateCarForSale(CarDto carDto, BindingResult bindingResult) {
         Car car = carConverter.transform(carDto);
 
-        CarModels carModel = carModelsDao.getByModelCode(carDto.getCarModelsCode());
-        car.setCarModels(carModel);
+        CarModel carModel = carModelsDao.getByModelCode(carDto.getCarModelsCode());
+        car.setCarModel(carModel);
 
         validator.validate(car, bindingResult);
         if (bindingResult.hasErrors()) {
