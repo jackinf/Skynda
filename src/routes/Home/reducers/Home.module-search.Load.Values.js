@@ -1,9 +1,9 @@
 import moment from "moment";
-import {setStateValues} from './../actions/index';
+import {setBaseValues} from "./../actions"
 import {Translate} from 'react-redux-i18n';
 import React from "react";
 
-export const loadBaseData = () => {
+export const getClassificationsAsync = () => {
   return (dispatch) => {
     return new Promise((resolve) => {
       setTimeout(() => {
@@ -33,7 +33,7 @@ export const loadBaseData = () => {
         ];
 
         const features = [
-          {id: -1, name: <Translate value="all"/>, toggled: true},
+          {id: -1, name: <Translate value="all"/>},
           {id: 0, name: "Parking Sensors"},
           {id: 1, name: "Bluetooth"},
           {id: 2, name: "Sunroof"},
@@ -43,19 +43,19 @@ export const loadBaseData = () => {
         ];
 
         const transmissions = [
-          {id: 0, name: <Translate value="components.car_search.automatic"/>, toggled: true},
-          {id: 1, name: <Translate value="components.car_search.manual"/>, toggled: true}
+          {id: 0, name: <Translate value="components.car_search.automatic"/>},
+          {id: 1, name: <Translate value="components.car_search.manual"/>}
         ];
 
         const doors = [
-          {id: -1, name: <Translate value="all"/>, toggled: true},
+          {id: -1, name: <Translate value="all"/>},
           {id: 0, name: "2"},
           {id: 1, name: "3"},
           {id: 2, name: "4+"}
         ];
 
         const seats = [
-          {id: -1, name: <Translate value="all"/>, toggled: true},
+          {id: -1, name: <Translate value="all"/>},
           {id: 0, name: "2"},
           {id: 1, name: "3"},
           {id: 2, name: "5"},
@@ -66,11 +66,11 @@ export const loadBaseData = () => {
           mileage: {min: 0, max: 500000, units: "KM"},
           price: {min: 0, max: 500000, units: "EUR"},
           year: {min: 2006, max: moment().year(), units: ""},
-          petrol_consumption: {min: 0, max: 20, units: "L"},
+          petrolConsumption: {min: 0, max: 20, units: "L"},
           power: {min: 0, max: 500, units: "KW"}
         };
 
-        dispatch(setStateValues({
+        dispatch(setBaseValues({
           sliderValues: {
             key: "sliderValues",
             value: sliderValues
@@ -100,24 +100,4 @@ export const loadBaseData = () => {
       }, 200);
     });
   };
-};
-
-
-export const setValues = (state = [], action) => {
-  switch (action.type) {
-    case "SET_STATE_VALUES":
-      var newState = {...state};
-      newState[action.payload.sliderValues.key] = action.payload.sliderValues.value;
-      newState[action.payload.brands.key] = action.payload.brands.value;
-      newState[action.payload.features.key] = action.payload.features.value;
-      newState[action.payload.transmissions.key] = action.payload.transmissions.value;
-      newState[action.payload.doors.key] = action.payload.doors.value;
-      newState[action.payload.seats.key] = action.payload.seats.value;
-      return {
-        ...newState
-      };
-
-    default:
-      return state;
-  }
 };

@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react'
+import React, {PropTypes} from 'react'
 
 // TODO: Wrong place for this fucker
 class Button extends React.Component {

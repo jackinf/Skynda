@@ -3,7 +3,7 @@
  */
 
 import React from "react";
-import "./CarSearchButtonGroup.scss";
+import "./Btn.Group.scss";
 import {Button, Col} from "react-bootstrap";
 
 import MdDone from 'react-icons/lib/md/done';
@@ -15,6 +15,14 @@ class ButtonGroup extends React.Component {
     this.toggleAll = this.toggleAll.bind(this);
   }
 
+  updateButtonGroupValues = (option) =>{
+    this.props.onToggle({
+      type: this.props.type,
+      value: option.id,
+      isToggled: option.toggled
+    });
+  };
+
   toggle(option) {
     option.toggled = !option.toggled;
     if (option.id === -1) {
@@ -24,6 +32,8 @@ class ButtonGroup extends React.Component {
       if (all) {
         all.toggled = false;
       }
+
+      this.updateButtonGroupValues(option);
     }
 
     this.forceUpdate();
@@ -33,6 +43,7 @@ class ButtonGroup extends React.Component {
     for (var i = 0; i < this.props.options.length; i++) {
       var option = this.props.options[i];
       option.toggled = value;
+      this.updateButtonGroupValues(option);
     }
   }
 
@@ -75,7 +86,8 @@ ButtonGroup.propTypes = {
     toggled: React.PropTypes.bool,
     hideName: React.PropTypes.bool,
     name: React.PropTypes.name
-  }))
+  })).isRequired,
+  type: React.PropTypes.string.isRequired
 };
 
 export default ButtonGroup;
