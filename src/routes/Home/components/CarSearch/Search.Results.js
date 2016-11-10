@@ -60,18 +60,18 @@ class ResultsComponent extends React.Component {
             <Row>
               <Translate value="home_page.searching"/>
             </Row>)
-            : cars.searchResults.length > 0
+            : this.props.searchResults.length > 0
             ? (
             <Row>
               <Col sm={12}>
                 <h2 className='primary-header-2 text-center'>
-                  <Translate value="home_page.found"/> : {cars.searchResults[0].length}
+                  <Translate value="home_page.found"/> : {this.props.searchResults[0].length}
                 </h2>
               </Col>
               <br />
               <Row>
                 <Col md={12}>
-                  <CarPreview.Grid cars={cars.searchResults}/>
+                  <CarPreview.Grid cars={this.props.searchResults}/>
                 </Col>
               </Row>
             </Row>)

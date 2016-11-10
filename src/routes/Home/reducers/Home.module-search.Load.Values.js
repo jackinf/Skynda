@@ -66,7 +66,7 @@ export const getClassificationsAsync = () => {
           mileage: {min: 0, max: 500000, units: "KM"},
           price: {min: 0, max: 500000, units: "EUR"},
           year: {min: 2006, max: moment().year(), units: ""},
-          petrol_consumption: {min: 0, max: 20, units: "L"},
+          petrolConsumption: {min: 0, max: 20, units: "L"},
           power: {min: 0, max: 500, units: "KW"}
         };
 

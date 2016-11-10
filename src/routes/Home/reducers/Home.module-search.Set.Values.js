@@ -21,4 +21,15 @@ export const setBaseValues = (state = [], action) => {
   }
 };
 
-export default setBaseValues;
+
+export const setSearchResults = (state = false, action) => {
+  switch (action.type) {
+    case ACTIONS.SET_SEARCH_RESULTS: {
+      return action.payload;
+    }
+
+    default:
+      return state;
+  }
+};
+

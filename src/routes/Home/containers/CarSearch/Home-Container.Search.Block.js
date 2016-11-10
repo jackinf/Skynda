@@ -11,7 +11,8 @@ const mapStateToProps = (state) => {
     doors: state.base.doors,
     transmissions: state.base.transmissions,
     features: state.base.features,
-    brands: state.base.brands
+    brands: state.base.brands,
+    searchValues: state.searchValues
   };
 };
 
