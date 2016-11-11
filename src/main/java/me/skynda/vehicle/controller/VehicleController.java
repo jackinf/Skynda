@@ -27,28 +27,28 @@ public class VehicleController extends BaseController {
     @Autowired
     private VehicleService vehicleService;
 
-    @RequestMapping(value = "/cars", method = RequestMethod.GET)
+    @RequestMapping(value = "/vehicles", method = RequestMethod.GET)
     public List<SingleVehicleDataDto> getAll(@RequestBody(required = false) VehicleSearchRequestDto dto) {
         return vehicleService.getVehicles();
     }
 
-    @RequestMapping(value = "/car/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/vehicle/{id}", method = RequestMethod.GET)
     public VehicleDto get(@PathVariable("id") Long id) {
         return vehicleService.getVehicle(id);
     }
 
-    @RequestMapping(value = "/car/{id}/detailed", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/vehicle/{id}/detailed", method = RequestMethod.GET, produces = "application/json")
     public SingleVehicleDataDto getDetailed(@PathVariable("id") Long id) {
         return vehicleService.getVehicleDetailed(id);
     }
 
-	@RequestMapping(value = "/car", method = RequestMethod.POST, consumes = "application/json")
+	@RequestMapping(value = "/vehicle", method = RequestMethod.POST, consumes = "application/json")
     public CreateOrUpdateResponseDto add(@RequestBody VehicleDto vehicleDto, BindingResult bindingResult) {
         vehicleDto.setId(null);
         return vehicleService.createOrUpdateVehicle(vehicleDto, bindingResult);
     }
 
-    @RequestMapping(value = "/car/{id}", method = RequestMethod.PUT, consumes = "application/json")
+    @RequestMapping(value = "/vehicle/{id}", method = RequestMethod.PUT, consumes = "application/json")
     public CreateOrUpdateResponseDto update(@PathVariable("id") Long id,
                                             @RequestBody VehicleDto vehicleDto,
                                             BindingResult bindingResult) {
@@ -56,12 +56,12 @@ public class VehicleController extends BaseController {
         return vehicleService.createOrUpdateVehicle(vehicleDto, bindingResult);
     }
 
-    @RequestMapping(value = "/car/{id}", method = RequestMethod.DELETE, consumes = "application/json")
+    @RequestMapping(value = "/vehicle/{id}", method = RequestMethod.DELETE, consumes = "application/json")
     public DeleteResponseDto delete(@PathVariable("id") Long id) {
         return vehicleService.deleteVehicle(id);
     }
 
-    @RequestMapping(value = "/car/search", method = RequestMethod.POST, consumes = "application/json")
+    @RequestMapping(value = "/vehicle/search", method = RequestMethod.POST, consumes = "application/json")
     public SearchResponseDto search(@RequestBody VehicleSearchRequestDto searchParams){
         return vehicleService.search(searchParams);
     }

@@ -18,12 +18,12 @@ public class VehicleModelController {
     @Autowired
     private VehicleModelService vehicleModelService;
 
-    @RequestMapping(value = "/car-models", method = RequestMethod.GET)
+    @RequestMapping(value = "/vehicle-models", method = RequestMethod.GET)
     public List<VehicleModelResponseDto> getAll(@RequestBody(required = false) VehicleModelRequestDto searchDto) {
         return vehicleModelService.get(searchDto);
     }
 
-    @RequestMapping(value = "/car-model", method = RequestMethod.POST, consumes =  "application/json")
+    @RequestMapping(value = "/vehicle-model", method = RequestMethod.POST, consumes =  "application/json")
     public VehicleModel save(@RequestBody VehicleModelDto vehicleModelDto) {
         return vehicleModelService.save(vehicleModelDto);
     }

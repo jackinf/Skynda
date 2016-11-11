@@ -18,12 +18,12 @@ public class VehicleManufacturer extends BaseController {
     @Autowired
     private VehicleManufacturerService vehicleManufacturerService;
 
-    @RequestMapping(value = "/car-manufacturers", method = RequestMethod.GET)
+    @RequestMapping(value = "/vehicle-manufacturers", method = RequestMethod.GET)
     public List<VehicleManufacturerResponseDto> getAll(@RequestBody(required = false) VehicleManufacturerSearchDto searchDto) {
         return vehicleManufacturerService.get(searchDto);
     }
 
-    @RequestMapping(value = "/car-manufacturer", method = RequestMethod.POST, consumes =  "application/json")
+    @RequestMapping(value = "/vehicle-manufacturer", method = RequestMethod.POST, consumes =  "application/json")
     public me.skynda.vehicle.model.VehicleManufacturer save(@RequestBody VehicleManufacturerDto vehicleManufacturerDto) {
         return vehicleManufacturerService.save(vehicleManufacturerDto);
     }
