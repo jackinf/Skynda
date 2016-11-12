@@ -53,7 +53,7 @@ public class VehicleModel implements Serializable{
 	@JoinColumn(name = "transmission_id", nullable = false)
 	private Classification transmission;
 
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "drivetrain_id", nullable = false)
 	private Classification drivetrain;
 

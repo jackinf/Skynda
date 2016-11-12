@@ -33,7 +33,7 @@ public class Classification implements Serializable{
     private Integer modifierUserId;
 
     @Column(name = "modifier_user_ip")
-    private InetAddress modifierUserIp;
+    private String modifierUserIp;
 
     @Column(name = "archived")
     private Date archived;
@@ -41,9 +41,8 @@ public class Classification implements Serializable{
     @Column(name = "name")
     private String name;
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "classification_type_id")
-    @NotNull
     private ClassificationType classificationType;
 
     @Column(name = "is_active")

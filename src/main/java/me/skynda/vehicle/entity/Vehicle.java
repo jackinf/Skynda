@@ -60,7 +60,7 @@ public class Vehicle implements Serializable {
     @Column(name="problems")
     private String problems;
 
-    @Column(name="compression_ration")
+    @Column(name="compression_ratio")
     private Integer compressionRatio;
 
     @Column(name="compression_type")

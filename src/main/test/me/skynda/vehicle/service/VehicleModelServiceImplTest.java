@@ -43,8 +43,8 @@ public class VehicleModelServiceImplTest {
         ClassificationType type = new ClassificationType();
         type.setName("MANUFACTURER");
         Classification vehicleManufacturer = new Classification();
-        vehicleManufacturer.setClassificationType(type);
-        vehicleManufacturer.setValue("manufacturerCode123");
+//        vehicleManufacturer.setClassificationType(type);
+//        vehicleManufacturer.setValue("manufacturerCode123");
         first.setVehicleManufacturer(vehicleManufacturer);
         prepared.add(first);
         prepared.add(new VehicleModel());

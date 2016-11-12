@@ -389,8 +389,10 @@ public class VehicleConverter {
         }
 
         dto.setDoors(entity.getDoors());
-        if (entity.getDrivetrain() != null) {
-            dto.setDrive(entity.getDrivetrain().getName());
+        Classification drivetrain = entity.getDrivetrain();
+        if (drivetrain != null) {
+            String name = drivetrain.getName();
+            dto.setDrive(name);
         }
         dto.setEngine(entity.getEngine());
         dto.setHorsePower(entity.getHorsePower());
