@@ -5,24 +5,24 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import me.skynda.vehicle.dto.*;
-import me.skynda.vehicle.model.*;
+import me.skynda.vehicle.entity.*;
 import org.springframework.stereotype.Component;
 
 @Component
 public class VehicleConverter {
 	
-	public SingleVehicleDataDto transform(Vehicle vehicle) {
-		SingleVehicleDataDto singleVehicleDataDto = new SingleVehicleDataDto();
-		singleVehicleDataDto.setId(vehicle.getId());
+	public VehicleDto transform(Vehicle vehicle) {
+		VehicleDto vehicleDto = new VehicleDto();
+		vehicleDto.setId(vehicle.getId());
 
-		convertGeneralData(vehicle, singleVehicleDataDto);
-		convertOverviewData(vehicle, singleVehicleDataDto);
-		convertImagesData(vehicle, singleVehicleDataDto);
-		convertDescriptionData(vehicle, singleVehicleDataDto);
-		convertFeaturesData(vehicle, singleVehicleDataDto);
-		convertHistoryData(vehicle, singleVehicleDataDto);
-		convertPetrolData(vehicle, singleVehicleDataDto);
-		convertPerformanceData(vehicle, singleVehicleDataDto);
+		convertGeneralData(vehicle, vehicleDto);
+		convertOverviewData(vehicle, vehicleDto);
+		convertImagesData(vehicle, vehicleDto);
+		convertDescriptionData(vehicle, vehicleDto);
+		convertFeaturesData(vehicle, vehicleDto);
+		convertHistoryData(vehicle, vehicleDto);
+		convertPetrolData(vehicle, vehicleDto);
+		convertPerformanceData(vehicle, vehicleDto);
 		singleVehicleDataDto.setSafetyStars(vehicle.getSafetyStars());
 		convertReportData(vehicle, singleVehicleDataDto);
 		convertReviewData(vehicle, singleVehicleDataDto);
@@ -31,12 +31,12 @@ public class VehicleConverter {
 		return singleVehicleDataDto;
 	}
 
-	private void convertGeneralData(Vehicle vehicle, SingleVehicleDataDto singleVehicleDataDto) {
+	private void convertGeneralData(Vehicle vehicle, VehicleDto vehicleDto) {
 		VehicleGeneralDto vGeneralDto = new VehicleGeneralDto();
 		vGeneralDto.setSrc(vehicle.getMainImageUrl());
 		vGeneralDto.setColorInside(vehicle.getColorInside());
 		vGeneralDto.setColorOutside(vehicle.getColorOutside());
-		setVehicleModel(vehicle.getVehicleModel(), vGeneralDto);
+		setVehicleModel(vehicle.getModel(), vGeneralDto);
 		singleVehicleDataDto.setVehicleGeneralDto(vGeneralDto);
 	}
 
@@ -47,7 +47,7 @@ public class VehicleConverter {
 		overviewDto.setLabel(vehicle.getMileage() != null ? vehicle.getMileage().toString() : "");
 		overviewDtoList.add(overviewDto);
 
-		VehicleModel vehicleModel = vehicle.getVehicleModel();
+		VehicleModel vehicleModel = vehicle.getModel();
         if (vehicleModel != null) {
             overviewDto.setIconUrl("hardcodedTransmissionIconLink");
             overviewDto = new OverviewDto();
@@ -100,8 +100,8 @@ public class VehicleConverter {
     }
 
 	private void convertDescriptionData(Vehicle vehicle, SingleVehicleDataDto singleVehicleDataDto) {
-        // TODO: (list) vehicle.getDescription(), not vehicle.getVehicleModel().getDescription()
-        VehicleModel vehicleModel = vehicle.getVehicleModel();
+        // TODO: (list) vehicle.getDescription(), not vehicle.getModel().getDescription()
+        VehicleModel vehicleModel = vehicle.getModel();
 		if (vehicleModel != null && vehicleModel.getDescription() != null) {
 			List<DescriptionsDto> descriptionsDtoList = new ArrayList<DescriptionsDto>();
 			DescriptionsDto descriptionDto = new DescriptionsDto();
@@ -140,7 +140,7 @@ public class VehicleConverter {
 	private void convertPerformanceData(Vehicle vehicle, SingleVehicleDataDto singleVehicleDataDto) {
 		PerformanceDto performanceDto = new PerformanceDto();
 
-    	VehicleModel vehicleModel = vehicle.getVehicleModel();
+    	VehicleModel vehicleModel = vehicle.getModel();
         if (vehicleModel != null) {
             performanceDto.setDrivenWheels(vehicleModel.getDrive());
             performanceDto.setDoors(vehicleModel.getDoors());
@@ -162,20 +162,20 @@ public class VehicleConverter {
 
 	private void convertReportData(Vehicle vehicle, SingleVehicleDataDto singleVehicleDataDto) {
 			ReportDto reportDto = new ReportDto();
-//			reportDto.setCarsForSaleId(carReport.getVehicle().getId());
-//			reportDto.setFaultsImg(carReport.getFaulsImg());
-//			reportDto.setFaultsText(carReport.getFaultsText());
-//			reportDto.setIsPass(carReport.getIsPass());
-//			reportDto.setPointsText(carReport.getPointsText());
-//			reportDto.setReportId(carReport.getReportId());
-//			reportDto.setTitle(carReport.getTitle());
+//			reportDto.setCarsForSaleId(reports.getVehicle().getId());
+//			reportDto.setFaultsImg(reports.getFaulsImg());
+//			reportDto.setFaultsText(reports.getFaultsText());
+//			reportDto.setIsPass(reports.getIsPass());
+//			reportDto.setPointsText(reports.getPointsText());
+//			reportDto.setReportId(reports.getReportId());
+//			reportDto.setTitle(reports.getTitle());
 //			reportDtoList.add(reportDto);
 		singleVehicleDataDto.setReport(reportDto);
 	}
 
 	private void convertReviewData(Vehicle vehicle, SingleVehicleDataDto singleVehicleDataDto) {
 		List<ReviewDto> reviewDtoList = new ArrayList<ReviewDto>();
-        List<VehicleReview> vehicleReview1 = vehicle.getVehicleReview();
+        List<VehicleReview> vehicleReview1 = vehicle.getReviews();
         if (vehicleReview1 != null) {
             for (VehicleReview vehicleReview : vehicleReview1) {
                 ReviewDto reviewDto = new ReviewDto();
@@ -254,7 +254,7 @@ public class VehicleConverter {
         );
         vehicleDto.setMainImageContainer(mainImageContainerDto);
 
-       	VehicleModel vehicleModel = vehicleDb.getVehicleModel();
+       	VehicleModel vehicleModel = vehicleDb.getModel();
         if (vehicleModel != null) {
             vehicleDto.setVehicleModelsCode(vehicleModel.getModelCode());
         }
@@ -354,13 +354,13 @@ public class VehicleConverter {
 		vehicleGeneralDto.setColorOutside(vehicle.getColorOutside());
 		vehicleGeneralDto.setMileage(vehicle.getMileage());
 
-		setVehicleModel(vehicle.getVehicleModel(), vehicleGeneralDto);
+		setVehicleModel(vehicle.getModel(), vehicleGeneralDto);
 
 		return vehicleGeneralDto;
 	}
 
 	/**
-	 * Helper, convert vehicleModel to dto to set into vehicleGeneralDto.
+	 * Helper, convert model to dto to set into vehicleGeneralDto.
 	 * @param vehicleModel - source
 	 * @param vehicleGeneralDto - destination
 	 */

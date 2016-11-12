@@ -8,8 +8,8 @@ import me.skynda.vehicle.dao.*;
 import me.skynda.vehicle.dto.*;
 import me.skynda.vehicle.dto.interfaces.IImageContainerableDto;
 import me.skynda.vehicle.dto.request.VehicleSearchRequestDto;
-import me.skynda.vehicle.model.Vehicle;
-import me.skynda.vehicle.model.VehicleModel;
+import me.skynda.vehicle.entity.Vehicle;
+import me.skynda.vehicle.entity.VehicleModel;
 import me.skynda.vehicle.service.converter.VehicleConverter;
 import me.skynda.vehicle.validators.VehicleValidator;
 import me.skynda.common.dto.CreateOrUpdateResponseDto;
@@ -55,10 +55,10 @@ public class VehicleServiceImpl implements VehicleService {
     private VehicleValidator validator = new VehicleValidator();
 
     @Override
-    public List<SingleVehicleDataDto> getVehicles() {
-        List<SingleVehicleDataDto> singleVehicleDataDto = new ArrayList<SingleVehicleDataDto>();
+    public List<VehicleDto> getVehicles() {
+        List<VehicleDto> vehicles = new ArrayList<VehicleDto>();
         vehicleDao.getAll().forEach(c -> {
-            singleVehicleDataDto.add(vehicleConverter.transform(c));
+            vehicles.add(vehicleConverter.transform(c));
         });
         return singleVehicleDataDto;
     }
@@ -80,7 +80,7 @@ public class VehicleServiceImpl implements VehicleService {
         Vehicle vehicle = vehicleConverter.transform(vehicleDto);
 
         VehicleModel vehicleModel = vehicleModelsDao.getByModelCode(vehicleDto.getVehicleModelsCode());
-        vehicle.setVehicleModel(vehicleModel);
+        vehicle.setModel(vehicleModel);
 
         validator.validate(vehicle, bindingResult);
         if (bindingResult.hasErrors()) {
@@ -168,10 +168,10 @@ public class VehicleServiceImpl implements VehicleService {
     public SearchResponseDto search(VehicleSearchRequestDto params) {
         SearchResponseDto response = new SearchResponseDto();
         List<VehicleGeneralDto> vehiclesGeneralDto = new ArrayList<>();
-        List<Vehicle> cars = vehicleDao.search(params);
+        List<Vehicle> vehicles = vehicleDao.search(params);
 
-        cars.forEach(car -> {
-            vehiclesGeneralDto.add(vehicleConverter.convertToSearchableVehicle(car));
+        vehicles.forEach(vehicle -> {
+            vehiclesGeneralDto.add(vehicleConverter.convertToSearchableVehicle(vehicle));
         });
 
         response.setSuccess(true);

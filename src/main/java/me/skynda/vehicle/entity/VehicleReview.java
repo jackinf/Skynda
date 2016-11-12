@@ -1,4 +1,4 @@
-package me.skynda.vehicle.model;
+package me.skynda.vehicle.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,8 +13,8 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "vehicle_report")
-public class VehicleReport {
+@Table(name = "vehicle_review")
+public class VehicleReview {
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,10 +22,9 @@ public class VehicleReport {
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "vehicle_id", nullable = false)
 	private Vehicle vehicle;//FK
-	private String title;
-	private Boolean isPass;
-	private String pointsText;
-	private String faultsText;
-	private String faulsImg;
-	
+	private String logoUrl;
+	private String videoUrl;
+	private String text;
+	private Integer rating;
+
 }

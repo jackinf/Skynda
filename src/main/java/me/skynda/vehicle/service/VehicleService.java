@@ -12,44 +12,51 @@ import org.springframework.validation.BindingResult;
 
 public interface VehicleService {
 
-	/**
-	 * Gets all data from the database
-	 * @return all cars
-	 */
-	List<SingleVehicleDataDto> getVehicles();
+    /**
+     * Gets all data from the database
+     *
+     * @return all vehicles
+     */
+    List<VehicleDto> getVehicles();
 
-	/**
-	 * Adds new vehicle for sale
-	 * @param vehicleDto Added vehicle's dto
-	 * @return Response
-	 */
-	CreateOrUpdateResponseDto createOrUpdateVehicle(VehicleDto vehicleDto, BindingResult bindingResult);
+    /**
+     * Adds new vehicle for sale
+     *
+     * @param vehicleDto Added vehicle's dto
+     * @return Response
+     */
+    CreateOrUpdateResponseDto createOrUpdateVehicle(VehicleDto vehicleDto, BindingResult bindingResult);
 
-	/**
-	 * Gets a single vehicle. Used for udpating a vehicle.
-	 * @param id vehicle's id
-	 * @return single vehicle's dto
-	 */
-	VehicleDto getVehicle(Long id);
-	/**
-	 * Gets a single vehicle. Used for displaying full info about the vehicle to the user
-	 * @param id vehicle's id
-	 * @return single vehicle's dto
-	 */
-	SingleVehicleDataDto getVehicleDetailed(Long id);
-	
-	/**
-	 * Delets a single vehicle
-	 * @param id vehicle's id
-	 * @return Is the deletion successful or not
-	 */
-	DeleteResponseDto deleteVehicle(Long id);
+    /**
+     * Gets a single vehicle. Used for udpating a vehicle.
+     *
+     * @param id vehicle's id
+     * @return single vehicle's dto
+     */
+    VehicleDto getVehicle(Long id);
 
-	/**
-	 * Search cars. Used for displaying full info about the vehicle to the user
-	 * @params search params
-	 * @return search results
-	 */
-	SearchResponseDto search(VehicleSearchRequestDto params);
+    /**
+     * Gets a single vehicle. Used for displaying full info about the vehicle to the user
+     *
+     * @param id vehicle's id
+     * @return single vehicle's dto
+     */
+    SingleVehicleDataDto getVehicleDetailed(Long id);
+
+    /**
+     * Delets a single vehicle
+     *
+     * @param id vehicle's id
+     * @return Is the deletion successful or not
+     */
+    DeleteResponseDto deleteVehicle(Long id);
+
+    /**
+     * Search vehicles. Used for displaying full info about the vehicle to the user
+     *
+     * @return search results
+     * @params search params
+     */
+    SearchResponseDto search(VehicleSearchRequestDto params);
 
 }

@@ -3,7 +3,7 @@ package me.skynda.vehicle.service;
 import me.skynda.vehicle.dto.VehicleModelDto;
 import me.skynda.vehicle.dto.request.VehicleModelRequestDto;
 import me.skynda.vehicle.dto.response.VehicleModelResponseDto;
-import me.skynda.vehicle.model.VehicleModel;
+import me.skynda.vehicle.entity.VehicleModel;
 
 import java.util.List;
 

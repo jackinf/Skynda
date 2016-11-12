@@ -1,22 +1,24 @@
-package me.skynda.vehicle.model;
+package me.skynda.vehicle.entity;
 
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Data
-@Table(name = "vehicle_image")
-public class VehicleImage {
+@Table(name = "vehicle_feature")
+public class VehicleFeature {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String imageUrl;
-    private boolean isPrimary;
-    private String imageBlobName;
-    private String imageContainerName;
+    @Column(name="archived")
+    private Date archived;
+
+    @Column(name="text")
+    private String text;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "vehicle_id", nullable = false)

@@ -1,21 +1,25 @@
-package me.skynda.vehicle.model;
+package me.skynda.vehicle.entity;
 
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Data
-@Table(name = "vehicle_fault")
-public class VehicleFault {
+@Table(name = "vehicle_image")
+public class VehicleImage {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String text;
+    @Column(name="archived")
+    private Date archived;
 
+    @Column(name="archived")
     private String imageUrl;
+    private boolean isPrimary;
     private String imageBlobName;
     private String imageContainerName;
 

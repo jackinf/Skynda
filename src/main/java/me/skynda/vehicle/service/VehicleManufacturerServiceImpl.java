@@ -4,7 +4,6 @@ import me.skynda.vehicle.dao.VehicleManufacturerDao;
 import me.skynda.vehicle.dto.VehicleManufacturerDto;
 import me.skynda.vehicle.dto.request.VehicleManufacturerSearchDto;
 import me.skynda.vehicle.dto.response.VehicleManufacturerResponseDto;
-import me.skynda.vehicle.model.VehicleManufacturer;
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;

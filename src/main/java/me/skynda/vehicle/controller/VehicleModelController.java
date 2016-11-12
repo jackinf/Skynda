@@ -3,7 +3,7 @@ package me.skynda.vehicle.controller;
 import me.skynda.vehicle.dto.VehicleModelDto;
 import me.skynda.vehicle.dto.request.VehicleModelRequestDto;
 import me.skynda.vehicle.dto.response.VehicleModelResponseDto;
-import me.skynda.vehicle.model.VehicleModel;
+import me.skynda.vehicle.entity.VehicleModel;
 import me.skynda.vehicle.service.VehicleModelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

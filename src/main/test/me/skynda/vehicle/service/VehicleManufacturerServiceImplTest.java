@@ -4,7 +4,6 @@ import me.skynda.vehicle.dao.VehicleManufacturerDao;
 import me.skynda.vehicle.dto.VehicleManufacturerDto;
 import me.skynda.vehicle.dto.request.VehicleManufacturerSearchDto;
 import me.skynda.vehicle.dto.response.VehicleManufacturerResponseDto;
-import me.skynda.vehicle.model.VehicleManufacturer;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

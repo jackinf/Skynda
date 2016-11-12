@@ -4,8 +4,8 @@ import me.skynda.vehicle.dto.ImageContainerDto;
 import me.skynda.vehicle.dto.ImagesDto;
 import me.skynda.common.db.SkyndaBaseEntityDaoImpl;
 import me.skynda.common.helper.SkyndaUtility;
-import me.skynda.vehicle.model.Vehicle;
-import me.skynda.vehicle.model.VehicleImage;
+import me.skynda.vehicle.entity.Vehicle;
+import me.skynda.vehicle.entity.VehicleImage;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 

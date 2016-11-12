@@ -1,8 +1,8 @@
 package me.skynda.vehicle.dao;
 
 import me.skynda.vehicle.dto.FeatureDto;
-import me.skynda.vehicle.model.Vehicle;
-import me.skynda.vehicle.model.VehicleFeature;
+import me.skynda.vehicle.entity.Vehicle;
+import me.skynda.vehicle.entity.VehicleFeature;
 import me.skynda.common.db.SkyndaBaseEntityDaoImpl;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;

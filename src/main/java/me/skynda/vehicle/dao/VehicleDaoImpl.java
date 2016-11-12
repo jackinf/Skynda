@@ -1,7 +1,7 @@
 package me.skynda.vehicle.dao;
 
 import me.skynda.vehicle.dto.request.VehicleSearchRequestDto;
-import me.skynda.vehicle.model.Vehicle;
+import me.skynda.vehicle.entity.Vehicle;
 import org.apache.commons.lang3.NotImplementedException;
 import org.springframework.stereotype.Repository;
 

@@ -4,7 +4,6 @@ import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
-import me.skynda.vehicle.model.VehicleManufacturer;
 import me.skynda.common.db.SkyndaBaseEntityDaoImpl;
 
 @Repository

@@ -2,8 +2,8 @@ package me.skynda.vehicle.dao;
 
 import me.skynda.vehicle.dto.FaultsDto;
 import me.skynda.vehicle.dto.ImageContainerDto;
-import me.skynda.vehicle.model.Vehicle;
-import me.skynda.vehicle.model.VehicleFault;
+import me.skynda.vehicle.entity.Vehicle;
+import me.skynda.vehicle.entity.VehicleFault;
 import me.skynda.common.db.SkyndaBaseEntityDaoImpl;
 import me.skynda.common.helper.SkyndaUtility;
 import org.hibernate.Session;

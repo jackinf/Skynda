@@ -47,5 +47,5 @@ public class VehicleDto extends BaseDto {
      * files that are prepared to be deleted from file cloud storage.
      * We delete files by blobName and blobContainer
      */
-    private List<VehicleDtoImageFileToDelete> filesToDelete;
+	private List<VehicleDtoImageFileToDelete> filesToDelete;
 }
