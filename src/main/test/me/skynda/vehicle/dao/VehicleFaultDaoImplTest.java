@@ -21,7 +21,7 @@ public class VehicleFaultDaoImplTest {
 //        Configuration configuration = new Configuration();
 //        configuration.addAnnotatedClass(Vehicle.class)
 //                .addAnnotatedClass(VehicleModel.class)
-//                .addAnnotatedClass(VehicleManufacturer.class);
+//                .addAnnotatedClass(VehicleManufacturerController.class);
 //
 //        configuration.setProperty("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
 //        configuration.setProperty("hibernate.connection.driver_class", "org.h2.Driver");

@@ -24,7 +24,7 @@ public class VehicleManufacturer extends BaseController {
     }
 
     @RequestMapping(value = "/vehicle-manufacturer", method = RequestMethod.POST, consumes =  "application/json")
-    public me.skynda.vehicle.entity.VehicleManufacturer save(@RequestBody VehicleManufacturerDto vehicleManufacturerDto) {
+    public VehicleManufacturer save(@RequestBody VehicleManufacturerDto vehicleManufacturerDto) {
         return vehicleManufacturerService.save(vehicleManufacturerDto);
     }
 

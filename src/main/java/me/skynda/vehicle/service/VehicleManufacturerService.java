@@ -1,5 +1,6 @@
 package me.skynda.vehicle.service;
 
+import me.skynda.vehicle.controller.VehicleManufacturer;
 import me.skynda.vehicle.dto.VehicleManufacturerDto;
 import me.skynda.vehicle.dto.request.VehicleManufacturerSearchDto;
 import me.skynda.vehicle.dto.response.VehicleManufacturerResponseDto;
