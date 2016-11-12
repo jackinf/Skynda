@@ -8,6 +8,7 @@ import java.util.List;
 import javax.persistence.*;
 
 import lombok.Data;
+import me.skynda.common.entity.Image;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.NotNull;
@@ -96,7 +97,7 @@ public class Vehicle implements Serializable {
     @JoinColumn(name = "image_id", nullable = false)
     private Image mainImage;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "vehicle_model_id", nullable = false)
     @NotNull
     private VehicleModel model;

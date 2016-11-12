@@ -1,8 +1,9 @@
-package me.skynda.vehicle.entity;
+package me.skynda.common.entity;
 
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.net.InetAddress;
 import java.util.Date;
@@ -41,8 +42,8 @@ public class Classification implements Serializable{
     private String name;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @Column(name = "classification_type_id")
     @JoinColumn(name = "classification_type_id")
+    @NotNull
     private ClassificationType classificationType;
 
     @Column(name = "is_active")

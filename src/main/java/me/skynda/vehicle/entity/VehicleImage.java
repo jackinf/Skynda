@@ -1,6 +1,7 @@
 package me.skynda.vehicle.entity;
 
 import lombok.Data;
+import me.skynda.common.entity.Image;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -21,7 +22,7 @@ public class VehicleImage {
     @JoinColumn(name = "vehicle_id", nullable = false)
     private Vehicle vehicle;
 
-    @Column(name="image_id")
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "image_id", nullable = false)
     private Image image;
 }

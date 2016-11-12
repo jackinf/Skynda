@@ -1,6 +1,8 @@
 package me.skynda.vehicle.entity;
 
 import lombok.Data;
+import me.skynda.common.entity.Image;
+import org.hibernate.annotations.ManyToAny;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -17,7 +19,7 @@ public class VehicleFault {
     @Column(name="text")
     private String text;
 
-    @Column(name="image_id")
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "image_id", nullable = false)
     private Image image;
 

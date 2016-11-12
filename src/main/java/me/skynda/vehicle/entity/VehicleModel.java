@@ -3,6 +3,7 @@ package me.skynda.vehicle.entity;
 import javax.persistence.*;
 
 import lombok.Data;
+import me.skynda.common.entity.Classification;
 
 import java.io.Serializable;
 import java.util.Date;

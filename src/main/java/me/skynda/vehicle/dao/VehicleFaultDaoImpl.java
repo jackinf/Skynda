@@ -4,7 +4,7 @@ import me.skynda.common.dao.ImageDao;
 import me.skynda.common.db.SkyndaBaseEntityDaoImpl;
 import me.skynda.vehicle.dto.FaultsDto;
 import me.skynda.vehicle.dto.ImageContainerDto;
-import me.skynda.vehicle.entity.Image;
+import me.skynda.common.entity.Image;
 import me.skynda.vehicle.entity.Vehicle;
 import me.skynda.vehicle.entity.VehicleFault;
 import org.hibernate.Session;

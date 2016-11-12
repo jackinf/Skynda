@@ -9,7 +9,7 @@ import me.skynda.vehicle.dao.*;
 import me.skynda.vehicle.dto.*;
 import me.skynda.vehicle.dto.interfaces.IImageContainerableDto;
 import me.skynda.vehicle.dto.request.VehicleSearchRequestDto;
-import me.skynda.vehicle.entity.Image;
+import me.skynda.common.entity.Image;
 import me.skynda.vehicle.entity.Vehicle;
 import me.skynda.vehicle.entity.VehicleModel;
 import me.skynda.vehicle.service.converter.VehicleConverter;

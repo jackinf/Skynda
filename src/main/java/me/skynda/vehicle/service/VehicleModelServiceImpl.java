@@ -5,7 +5,7 @@ import me.skynda.vehicle.dao.VehicleModelsDao;
 import me.skynda.vehicle.dto.VehicleModelDto;
 import me.skynda.vehicle.dto.request.VehicleModelRequestDto;
 import me.skynda.vehicle.dto.response.VehicleModelResponseDto;
-import me.skynda.vehicle.entity.Classification;
+import me.skynda.common.entity.Classification;
 import me.skynda.vehicle.entity.VehicleModel;
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;

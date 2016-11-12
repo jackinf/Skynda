@@ -1,4 +1,4 @@
-package me.skynda.vehicle.entity;
+package me.skynda.common.entity;
 
 import lombok.Data;
 
@@ -10,7 +10,7 @@ import javax.persistence.*;
 
 @Entity
 @Data
-@Table(name = "vehicle")
+@Table(name = "image")
 public class Image {
 
     @Id

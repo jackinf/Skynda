@@ -1,4 +1,4 @@
-package me.skynda.vehicle.entity;
+package me.skynda.common.entity;
 
 import lombok.Data;
 
@@ -17,10 +17,13 @@ public class ClassificationType implements Serializable {
 
     @Column(name = "name")
     private String name;
+
     @Column(name = "description")
     private String description;
+
     @Column(name = "modifier_user_id")
     private Integer modifierUserId;
+
     @Column(name = "modifier_user_ip")
     private InetAddress modifierUserIp;
 }

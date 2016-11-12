@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import me.skynda.common.entity.Classification;
+import me.skynda.common.entity.Image;
 import me.skynda.vehicle.dto.*;
 import me.skynda.vehicle.entity.*;
 import org.springframework.stereotype.Component;
