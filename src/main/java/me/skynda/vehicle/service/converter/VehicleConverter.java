@@ -10,59 +10,64 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class VehicleConverter {
-	
-	public VehicleDto transform(Vehicle vehicle) {
-		VehicleDto vehicleDto = new VehicleDto();
-		vehicleDto.setId(vehicle.getId());
 
-		convertGeneralData(vehicle, vehicleDto);
-		convertOverviewData(vehicle, vehicleDto);
-		convertImagesData(vehicle, vehicleDto);
-		convertDescriptionData(vehicle, vehicleDto);
-		convertFeaturesData(vehicle, vehicleDto);
-		convertHistoryData(vehicle, vehicleDto);
-		convertPetrolData(vehicle, vehicleDto);
-		convertPerformanceData(vehicle, vehicleDto);
-		singleVehicleDataDto.setSafetyStars(vehicle.getSafetyStars());
-		convertReportData(vehicle, singleVehicleDataDto);
-		convertReviewData(vehicle, singleVehicleDataDto);
-        singleVehicleDataDto.setPrice(vehicle.getPrice());
-		
-		return singleVehicleDataDto;
-	}
+    public VehicleDisplayDto transform(Vehicle vehicleEntity) {
+        VehicleDisplayDto vehicleDto = new VehicleDisplayDto();
+        vehicleDto.setId(vehicleEntity.getId());
 
-	private void convertGeneralData(Vehicle vehicle, VehicleDto vehicleDto) {
-		VehicleGeneralDto vGeneralDto = new VehicleGeneralDto();
-		vGeneralDto.setSrc(vehicle.getMainImageUrl());
-		vGeneralDto.setColorInside(vehicle.getColorInside());
-		vGeneralDto.setColorOutside(vehicle.getColorOutside());
-		setVehicleModel(vehicle.getModel(), vGeneralDto);
-		singleVehicleDataDto.setVehicleGeneralDto(vGeneralDto);
-	}
+        convertGeneralData(vehicleEntity, vehicleDto);
+        convertOverviewData(vehicleEntity, vehicleDto);
+        convertImagesData(vehicleEntity, vehicleDto);
+        convertDescriptionData(vehicleEntity, vehicleDto);
+        convertFeaturesData(vehicleEntity, vehicleDto);
+        convertHistoryData(vehicleEntity, vehicleDto);
+        convertPetrolData(vehicleEntity, vehicleDto);
+        convertPerformanceData(vehicleEntity, vehicleDto);
+        vehicleDto.setSafetyStars(vehicleEntity.getSafetyStars());
+        convertReportData(vehicleEntity, vehicleDto);
+        convertReviewData(vehicleEntity, vehicleDto);
+        vehicleDto.setPrice(vehicleEntity.getPrice());
 
-	private void convertOverviewData(Vehicle vehicle, SingleVehicleDataDto singleVehicleDataDto) {
-		List<OverviewDto> overviewDtoList = new ArrayList<OverviewDto>();
+        return vehicleDto;
+    }
+
+    private void convertGeneralData(Vehicle vehicleEntity, VehicleDisplayDto vehicleDisplayDto) {
+        VehicleGeneralDto vGeneralDto = new VehicleGeneralDto();
+        if (vehicleEntity.getMainImage() != null) {
+            vGeneralDto.setSrc(vehicleEntity.getMainImage().getUrl());
+        }
+        vGeneralDto.setColorInside(vehicleEntity.getColorInside());
+        vGeneralDto.setColorOutside(vehicleEntity.getColorOutside());
+        setVehicleModel(vehicleEntity.getModel(), vGeneralDto);
+        vehicleDisplayDto.setVehicleGeneralDto(vGeneralDto);
+    }
+
+    private void convertOverviewData(Vehicle vehicleEntity, VehicleDisplayDto vehicleDisplayDto) {
+        List<OverviewDto> overviewDtoList = new ArrayList<OverviewDto>();
         OverviewDto overviewDto = new OverviewDto();
-		overviewDto.setIconUrl("hardcodedMileageIconLink");
-		overviewDto.setLabel(vehicle.getMileage() != null ? vehicle.getMileage().toString() : "");
-		overviewDtoList.add(overviewDto);
+        overviewDto.setIconUrl("hardcodedMileageIconLink");
+        overviewDto.setLabel(vehicleEntity.getMileage() != null ? vehicleEntity.getMileage().toString() : "");
+        overviewDtoList.add(overviewDto);
 
-		VehicleModel vehicleModel = vehicle.getModel();
+        VehicleModel vehicleModel = vehicleEntity.getModel();
         if (vehicleModel != null) {
-            overviewDto.setIconUrl("hardcodedTransmissionIconLink");
-            overviewDto = new OverviewDto();
-            overviewDto.setLabel(vehicleModel.getTransmission());
-            overviewDtoList.add(overviewDto);
+
+            if (vehicleModel.getTransmission() != null) {
+                overviewDto.setIconUrl("hardcodedTransmissionIconLink");
+                overviewDto = new OverviewDto();
+                overviewDto.setLabel(vehicleModel.getTransmission().getName());
+                overviewDtoList.add(overviewDto);
+            }
 
             overviewDto = new OverviewDto();
             overviewDto.setIconUrl("hardcodedEngineIconLink");
             overviewDto.setLabel(vehicleModel.getEngine() + " (" + vehicleModel.getHorsePower() + ")");
             overviewDtoList.add(overviewDto);
 
-            overviewDto = new OverviewDto();
-            overviewDto.setIconUrl("hardcodedDriveIconLink");
-            overviewDto.setLabel(vehicleModel.getDrive());
-            overviewDtoList.add(overviewDto);
+//            overviewDto = new OverviewDto();
+//            overviewDto.setIconUrl("hardcodedDriveIconLink");
+//            overviewDto.setLabel(vehicleModel.getDrive());
+//            overviewDtoList.add(overviewDto);
 
             overviewDto = new OverviewDto();
             overviewDto.setIconUrl("hardcodedDoorsSeatsIconLink");
@@ -71,97 +76,103 @@ public class VehicleConverter {
         }
 
         overviewDto = new OverviewDto();
-		overviewDto.setIconUrl("hardcodedColorOutsideIconLink");
-		overviewDto.setLabel(vehicle.getColorOutside());
-		overviewDtoList.add(overviewDto);
+        overviewDto.setIconUrl("hardcodedColorOutsideIconLink");
+        overviewDto.setLabel(vehicleEntity.getColorOutside());
+        overviewDtoList.add(overviewDto);
 
         overviewDto = new OverviewDto();
-		overviewDto.setIconUrl("hardcodedColorInsideIconLink");
-		overviewDto.setLabel(vehicle.getColorInside());
-		overviewDtoList.add(overviewDto);
+        overviewDto.setIconUrl("hardcodedColorInsideIconLink");
+        overviewDto.setLabel(vehicleEntity.getColorInside());
+        overviewDtoList.add(overviewDto);
 
-		singleVehicleDataDto.setOverview(overviewDtoList);
-	}
+        vehicleDisplayDto.setOverview(overviewDtoList);
+    }
 
-	private void convertImagesData(Vehicle vehicle, SingleVehicleDataDto singleVehicleDataDto) {
+    private void convertImagesData(Vehicle vehicle, VehicleDisplayDto vehicleDisplayDto) {
         List<VehicleImage> images = vehicle.getImages();
         if (images == null) {
             return;
         }
 
-        List<String> listOfImages = images.stream().map(VehicleImage::getImageUrl).collect(Collectors.toList());
-        List<ImagesDto> imagesDtoList = new ArrayList<ImagesDto>();
+        List<String> listOfImages = images.stream()
+                .map(VehicleImage::getImage)
+                .filter(image -> image != null)
+                .map(image -> image.getUrl())
+                .collect(Collectors.toList());
+
+        List<ImagesDto> imagesDtoList = new ArrayList<>();
         for (String image : listOfImages) {
             ImagesDto imagesDto = new ImagesDto();
             imagesDto.setImageContainer(ImageContainerDto.Factory.createForDisplay(image));
             imagesDtoList.add(imagesDto);
         }
-        singleVehicleDataDto.setImages(imagesDtoList);
+        vehicleDisplayDto.setImages(imagesDtoList);
     }
 
-	private void convertDescriptionData(Vehicle vehicle, SingleVehicleDataDto singleVehicleDataDto) {
+    private void convertDescriptionData(Vehicle vehicle, VehicleDisplayDto vehicleDisplayDto) {
         // TODO: (list) vehicle.getDescription(), not vehicle.getModel().getDescription()
         VehicleModel vehicleModel = vehicle.getModel();
-		if (vehicleModel != null && vehicleModel.getDescription() != null) {
-			List<DescriptionsDto> descriptionsDtoList = new ArrayList<DescriptionsDto>();
-			DescriptionsDto descriptionDto = new DescriptionsDto();
-			descriptionDto.setText(vehicleModel.getDescription());
-			descriptionDto.setTitle(vehicleModel.getTitle());
-			descriptionsDtoList.add(descriptionDto);
-			singleVehicleDataDto.setDescriptions(descriptionsDtoList);
-		}
-	}
+        if (vehicleModel != null && vehicleModel.getDescription() != null) {
+            List<DescriptionsDto> descriptionsDtoList = new ArrayList<DescriptionsDto>();
+            DescriptionsDto descriptionDto = new DescriptionsDto();
+            descriptionDto.setText(vehicleModel.getDescription());
+            descriptionDto.setTitle(vehicleModel.getTitle());
+            descriptionsDtoList.add(descriptionDto);
+            vehicleDisplayDto.setDescriptions(descriptionsDtoList);
+        }
+    }
 
-	private void convertFeaturesData(Vehicle vehicle, SingleVehicleDataDto singleVehicleDataDto) {
-		if (vehicle.getFeatures() != null) {
-			List<String> listOfFeatures = vehicle.getFeatures().stream().map(VehicleFeature::getText).collect(Collectors.toList());
-			singleVehicleDataDto.setFeatures(listOfFeatures);
-		}
-	}
+    private void convertFeaturesData(Vehicle vehicle, VehicleDisplayDto vehicleDisplayDto) {
+        if (vehicle.getFeatures() != null) {
+            List<String> listOfFeatures = vehicle.getFeatures().stream().map(VehicleFeature::getText).collect(Collectors.toList());
+            vehicleDisplayDto.setFeatures(listOfFeatures);
+        }
+    }
 
-	private void convertHistoryData(Vehicle vehicle, SingleVehicleDataDto singleVehicleDataDto) {
-		if (vehicle.getFaults() != null) {
-			HistoryDto historyDto = new HistoryDto();
-			List<String> listOfProblems = vehicle.getFaults().stream().map(VehicleFault::getText).collect(Collectors.toList());
-			historyDto.setProblems(listOfProblems);
-			historyDto.setVinCode(vehicle.getVinCode());
-			singleVehicleDataDto.setHistory(historyDto);
-		}
-	}
+    private void convertHistoryData(Vehicle vehicle, VehicleDisplayDto vehicleDisplayDto) {
+        if (vehicle.getFaults() != null) {
+            HistoryDto historyDto = new HistoryDto();
+            List<String> listOfProblems = vehicle.getFaults().stream().map(VehicleFault::getText).collect(Collectors.toList());
+            historyDto.setProblems(listOfProblems);
+            historyDto.setVinCode(vehicle.getVinCode());
+            vehicleDisplayDto.setHistory(historyDto);
+        }
+    }
 
-	private void convertPetrolData(Vehicle vehicle, SingleVehicleDataDto singleVehicleDataDto) {
-		PetrolConsumptionDto petrolConsumptionDto = new PetrolConsumptionDto();
-		petrolConsumptionDto.setCity(vehicle.getFuelCity());
-		petrolConsumptionDto.setHighWay(vehicle.getFuelHighway());
-		petrolConsumptionDto.setAverage(vehicle.getFuelCity(), vehicle.getFuelHighway());
-		singleVehicleDataDto.setPetrolConsumption(petrolConsumptionDto);
-	}
+    private void convertPetrolData(Vehicle vehicle, VehicleDisplayDto vehicleDisplayDto) {
+        PetrolConsumptionDto petrolConsumptionDto = new PetrolConsumptionDto();
+        petrolConsumptionDto.setCity(vehicle.getFuelCity());
+        petrolConsumptionDto.setHighWay(vehicle.getFuelHighway());
+        petrolConsumptionDto.setAverage(vehicle.getFuelCity(), vehicle.getFuelHighway());
+        vehicleDisplayDto.setPetrolConsumption(petrolConsumptionDto);
+    }
 
-	private void convertPerformanceData(Vehicle vehicle, SingleVehicleDataDto singleVehicleDataDto) {
-		PerformanceDto performanceDto = new PerformanceDto();
+    private void convertPerformanceData(Vehicle vehicle, VehicleDisplayDto vehicleDisplayDto) {
+        PerformanceDto performanceDto = new PerformanceDto();
 
-    	VehicleModel vehicleModel = vehicle.getModel();
+        VehicleModel vehicleModel = vehicle.getModel();
         if (vehicleModel != null) {
-            performanceDto.setDrivenWheels(vehicleModel.getDrive());
+//            performanceDto.setDrivenWheels(vehicleModel.getDrive());	// TODO: Is it needed?
             performanceDto.setDoors(vehicleModel.getDoors());
             performanceDto.setHorsePower(vehicleModel.getHorsePower());
         }
 
-		performanceDto.setCompressionRatio(vehicle.getCompressionRatio());
-		performanceDto.setCompressionType(vehicle.getCompressionType());
-		performanceDto.setConfiguration(vehicle.getConfiguration());
-		performanceDto.setCylinders(vehicle.getCylinders());
-		performanceDto.setDisplacement(vehicle.getDisplacement());
-		performanceDto.setFuelType(vehicle.getFuelType());
-		performanceDto.setSize(vehicle.getSize());
-		performanceDto.setTorque(vehicle.getTorque());
-		performanceDto.setTotalValves(vehicle.getTotalValves());
-		performanceDto.setPowerTrain(vehicle.getPowerTrain());
-		singleVehicleDataDto.setPerformance(performanceDto);
-	}
+        performanceDto.setCompressionRatio(vehicle.getCompressionRatio());
+        performanceDto.setCompressionType(vehicle.getCompressionType());
+        performanceDto.setConfiguration(vehicle.getConfiguration());
+        performanceDto.setCylinders(vehicle.getCylinders());
+        performanceDto.setDisplacement(vehicle.getDisplacement());
+//		performanceDto.setFuelType(vehicle.getFuelType());			// TODO: Is it needed?
+        performanceDto.setSize(vehicle.getSize());
+        performanceDto.setTorque(vehicle.getTorque());
+        performanceDto.setTotalValves(vehicle.getTotalValves());
+//		performanceDto.setPowerTrain(vehicle.getPowerTrain());		// TODO: Is it needed?
+        vehicleDisplayDto.setPerformance(performanceDto);
+    }
 
-	private void convertReportData(Vehicle vehicle, SingleVehicleDataDto singleVehicleDataDto) {
-			ReportDto reportDto = new ReportDto();
+    private void convertReportData(Vehicle vehicle, VehicleDisplayDto vehicleDisplayDto) {
+        // TODO: Is it needed?
+        ReportDto reportDto = new ReportDto();
 //			reportDto.setCarsForSaleId(reports.getVehicle().getId());
 //			reportDto.setFaultsImg(reports.getFaulsImg());
 //			reportDto.setFaultsText(reports.getFaultsText());
@@ -170,11 +181,11 @@ public class VehicleConverter {
 //			reportDto.setReportId(reports.getReportId());
 //			reportDto.setTitle(reports.getTitle());
 //			reportDtoList.add(reportDto);
-		singleVehicleDataDto.setReport(reportDto);
-	}
+        vehicleDisplayDto.setReport(reportDto);
+    }
 
-	private void convertReviewData(Vehicle vehicle, SingleVehicleDataDto singleVehicleDataDto) {
-		List<ReviewDto> reviewDtoList = new ArrayList<ReviewDto>();
+    private void convertReviewData(Vehicle vehicle, VehicleDisplayDto vehicleDisplayDto) {
+        List<ReviewDto> reviewDtoList = new ArrayList<ReviewDto>();
         List<VehicleReview> vehicleReview1 = vehicle.getReviews();
         if (vehicleReview1 != null) {
             for (VehicleReview vehicleReview : vehicleReview1) {
@@ -186,56 +197,57 @@ public class VehicleConverter {
                 reviewDtoList.add(reviewDto);
             }
         }
-		singleVehicleDataDto.setReviews(reviewDtoList);
-	}
+        vehicleDisplayDto.setReviews(reviewDtoList);
+    }
 
 	/*
-	====================================
-	==================================== VEHICLE DTO -> VEHICLE MODEL
+    ====================================
+	==================================== VEHICLE DTO -> VEHICLE ENTITY
 	====================================
 	 */
 
-	public Vehicle transform(VehicleDto vehicleDto) {
-		Vehicle vehicle = new Vehicle();
-		vehicle.setId(vehicleDto.getId());
+    public Vehicle transform(VehicleDto vehicleDto) {
+        Vehicle vehicle = new Vehicle();
+        vehicle.setId(vehicleDto.getId());
 
-        ImageContainerDto mainImageContainer = vehicleDto.getMainImageContainer();
-        if (mainImageContainer != null) {
-			vehicle.setMainImageUrl(mainImageContainer.getImageUrl());
-			vehicle.setMainImageBlobName(mainImageContainer.getBlobName());
-			vehicle.setMainImageContainerName(mainImageContainer.getContainerName());
-        }
+        // TODO: Is it needed?
+//        ImageContainerDto mainImageContainer = vehicleDto.getMainImageContainer();
+//        if (mainImageContainer != null) {
+//			vehicle.setMainImageUrl(mainImageContainer.getImageUrl());
+//			vehicle.setMainImageBlobName(mainImageContainer.getBlobName());
+//			vehicle.setMainImageContainerName(mainImageContainer.getContainerName());
+//        }
 
-		vehicle.setVinCode(vehicleDto.getVinCode());
-		vehicle.setPrice(vehicleDto.getPrice());
-		vehicle.setRegistrationNumber(vehicleDto.getRegistrationNumber());
-		vehicle.setMileage(vehicleDto.getMileage());
-		vehicle.setColorInside(vehicleDto.getColorInside());
-		vehicle.setColorOutside(vehicleDto.getColorOutside());
-		vehicle.setIsSold(vehicleDto.getIsSold());
-		vehicle.setFuelCity(vehicleDto.getFuelCity());
-		vehicle.setFuelHighway(vehicleDto.getFuelHighway());
-		vehicle.setSafetyStars(vehicleDto.getSafetyStars());
+        vehicle.setVinCode(vehicleDto.getVinCode());
+        vehicle.setPrice(vehicleDto.getPrice());
+        vehicle.setRegistrationNumber(vehicleDto.getRegistrationNumber());
+        vehicle.setMileage(vehicleDto.getMileage());
+        vehicle.setColorInside(vehicleDto.getColorInside());
+        vehicle.setColorOutside(vehicleDto.getColorOutside());
+//		vehicle.setIsSold(vehicleDto.getIsSold());					// TODO: Is it needed?
+        vehicle.setFuelCity(vehicleDto.getFuelCity());
+        vehicle.setFuelHighway(vehicleDto.getFuelHighway());
+        vehicle.setSafetyStars(vehicleDto.getSafetyStars());
 
 		/*
 			PERFORMANCE section
 		 */
-		PerformanceDto performanceDto = vehicleDto.getPerformance();
-		if (performanceDto != null) {
-			vehicle.setCompressionRatio(performanceDto.getCompressionRatio());
-			vehicle.setCompressionType(performanceDto.getCompressionType());
-			vehicle.setConfiguration(performanceDto.getConfiguration());
-			vehicle.setCylinders(performanceDto.getCylinders());
-			vehicle.setDisplacement(performanceDto.getDisplacement());
-			vehicle.setFuelType(performanceDto.getFuelType());
-			vehicle.setSize(performanceDto.getSize());
-			vehicle.setTorque(performanceDto.getTorque());
-			vehicle.setTotalValves(performanceDto.getTotalValves());
-			vehicle.setPowerTrain(performanceDto.getPowerTrain());
-		}
+        PerformanceDto performanceDto = vehicleDto.getPerformance();
+        if (performanceDto != null) {
+            vehicle.setCompressionRatio(performanceDto.getCompressionRatio());
+            vehicle.setCompressionType(performanceDto.getCompressionType());
+            vehicle.setConfiguration(performanceDto.getConfiguration());
+            vehicle.setCylinders(performanceDto.getCylinders());
+            vehicle.setDisplacement(performanceDto.getDisplacement());
+//			vehicle.setFuelType(performanceDto.getFuelType());		// TODO: Is it needed?
+            vehicle.setSize(performanceDto.getSize());
+            vehicle.setTorque(performanceDto.getTorque());
+            vehicle.setTotalValves(performanceDto.getTotalValves());
+//			vehicle.setPowerTrain(performanceDto.getPowerTrain());	// TODO: Is it needed?
+        }
 
-		return vehicle;
-	}
+        return vehicle;
+    }
 
 	/*
 	====================================
@@ -243,36 +255,39 @@ public class VehicleConverter {
 	====================================
 	 */
 
-	public VehicleDto transformToVehicleDto(Vehicle vehicleDb) {
-		VehicleDto vehicleDto = new VehicleDto();
-		vehicleDto.setId(vehicleDb.getId());
+    public VehicleDto transformToVehicleDto(Vehicle vehicleEntity) {
+        VehicleDto vehicleDto = new VehicleDto();
+        vehicleDto.setId(vehicleEntity.getId());
 
-        ImageContainerDto mainImageContainerDto = ImageContainerDto.Factory.create(
-				vehicleDb.getMainImageUrl(),
-				vehicleDb.getMainImageBlobName(),
-				vehicleDb.getMainImageContainerName()
-        );
-        vehicleDto.setMainImageContainer(mainImageContainerDto);
+        Image mainImage = vehicleEntity.getMainImage();
+        if (mainImage != null) {
+            ImageContainerDto imageContainerDto = ImageContainerDto.Factory.create(
+                    mainImage.getUrl(),
+                    mainImage.getBlobName(),
+                    mainImage.getContainerName()
+            );
+            vehicleDto.setMainImageContainer(imageContainerDto);
+        }
 
-       	VehicleModel vehicleModel = vehicleDb.getModel();
+        VehicleModel vehicleModel = vehicleEntity.getModel();
         if (vehicleModel != null) {
             vehicleDto.setVehicleModelsCode(vehicleModel.getModelCode());
         }
-		vehicleDto.setVinCode(vehicleDb.getVinCode());
-		vehicleDto.setPrice(vehicleDb.getPrice());
-		vehicleDto.setRegistrationNumber(vehicleDb.getRegistrationNumber());
-		vehicleDto.setMileage(vehicleDb.getMileage());
-		vehicleDto.setColorInside(vehicleDb.getColorInside());
-		vehicleDto.setColorOutside(vehicleDb.getColorOutside());
-		vehicleDto.setIsSold(vehicleDb.getIsSold());
-		vehicleDto.setFuelCity(vehicleDb.getFuelCity());
-		vehicleDto.setFuelHighway(vehicleDb.getFuelHighway());
-		vehicleDto.setSafetyStars(vehicleDb.getSafetyStars());
+        vehicleDto.setVinCode(vehicleEntity.getVinCode());
+        vehicleDto.setPrice(vehicleEntity.getPrice());
+        vehicleDto.setRegistrationNumber(vehicleEntity.getRegistrationNumber());
+        vehicleDto.setMileage(vehicleEntity.getMileage());
+        vehicleDto.setColorInside(vehicleEntity.getColorInside());
+        vehicleDto.setColorOutside(vehicleEntity.getColorOutside());
+//		vehicleDto.setIsSold(vehicleDb.getIsSold());	// TODO: Is sold?
+        vehicleDto.setFuelCity(vehicleEntity.getFuelCity());
+        vehicleDto.setFuelHighway(vehicleEntity.getFuelHighway());
+        vehicleDto.setSafetyStars(vehicleEntity.getSafetyStars());
 
         // Features
-        List<VehicleFeature> features = vehicleDb.getFeatures();
+        List<VehicleFeature> features = vehicleEntity.getFeatures();
         if (features != null) {
-            List<FeatureDto> featureDtos = vehicleDb.getFeatures().stream().map(feature -> {
+            List<FeatureDto> featureDtos = vehicleEntity.getFeatures().stream().map(feature -> {
                 FeatureDto dto = new FeatureDto();
                 dto.setId(feature.getId());
                 dto.setText(feature.getText());
@@ -282,18 +297,21 @@ public class VehicleConverter {
         }
 
         // Images
-        List<VehicleImage> images = vehicleDb.getImages();
+        List<VehicleImage> images = vehicleEntity.getImages();
         if (images != null) {
-            List<ImagesDto> imageDtos = images.stream().map(image -> {
+            List<ImagesDto> imageDtos = images.stream().map(vehicleImageEntity -> {
                 ImagesDto imageDto = new ImagesDto();
-                imageDto.setId(image.getId());
+                imageDto.setId(vehicleImageEntity.getId());
 
-                ImageContainerDto imageContainerDto = ImageContainerDto.Factory.create(
-                        image.getImageUrl(),
-                        image.getImageBlobName(),
-                        image.getImageContainerName()
-                );
-                imageDto.setImageContainer(imageContainerDto);
+                Image image = vehicleImageEntity.getImage();
+                if (image != null) {
+                    ImageContainerDto imageContainerDto = ImageContainerDto.Factory.create(
+                            image.getUrl(),
+                            image.getBlobName(),
+                            image.getContainerName()
+                    );
+                    imageDto.setImageContainer(imageContainerDto);
+                }
 
                 return imageDto;
             }).collect(Collectors.toList());
@@ -301,19 +319,22 @@ public class VehicleConverter {
         }
 
         // Faults
-        List<VehicleFault> faults = vehicleDb.getFaults();
+        List<VehicleFault> faults = vehicleEntity.getFaults();
         if (faults != null) {
             List<FaultsDto> faultsDtos = faults.stream().map(fault -> {
                 FaultsDto faultDto = new FaultsDto();
                 faultDto.setId(fault.getId());
                 faultDto.setText(fault.getText());
 
-                ImageContainerDto imageContainerDto = ImageContainerDto.Factory.create(
-                        fault.getImageUrl(),
-                        fault.getImageBlobName(),
-                        fault.getImageContainerName()
-                );
-                faultDto.setImageContainer(imageContainerDto);
+                Image image = fault.getImage();
+                if (image != null) {
+                    ImageContainerDto imageContainerDto = ImageContainerDto.Factory.create(
+                            image.getUrl(),
+                            image.getBlobName(),
+                            image.getContainerName()
+                    );
+                    faultDto.setImageContainer(imageContainerDto);
+                }
 
                 return faultDto;
             }).collect(Collectors.toList());
@@ -323,64 +344,64 @@ public class VehicleConverter {
 		/*
 			PERFORMANCE section
 		 */
-		PerformanceDto performanceDto = new PerformanceDto();
-		performanceDto.setCompressionRatio(vehicleDb.getCompressionRatio());
-		performanceDto.setCompressionType(vehicleDb.getCompressionType());
-		performanceDto.setConfiguration(vehicleDb.getConfiguration());
-		performanceDto.setCylinders(vehicleDb.getCylinders());
-		performanceDto.setDisplacement(vehicleDb.getDisplacement());
-		performanceDto.setFuelType(vehicleDb.getFuelType());
-		performanceDto.setSize(vehicleDb.getSize());
-		performanceDto.setTorque(vehicleDb.getTorque());
-		performanceDto.setTotalValves(vehicleDb.getTotalValves());
-		performanceDto.setPowerTrain(vehicleDb.getPowerTrain());
+        PerformanceDto performanceDto = new PerformanceDto();
+        performanceDto.setCompressionRatio(vehicleEntity.getCompressionRatio());
+        performanceDto.setCompressionType(vehicleEntity.getCompressionType());
+        performanceDto.setConfiguration(vehicleEntity.getConfiguration());
+        performanceDto.setCylinders(vehicleEntity.getCylinders());
+        performanceDto.setDisplacement(vehicleEntity.getDisplacement());
+//		performanceDto.setFuelType(vehicleDb.getFuelType());	// TODO: Fuel Type?
+        performanceDto.setSize(vehicleEntity.getSize());
+        performanceDto.setTorque(vehicleEntity.getTorque());
+        performanceDto.setTotalValves(vehicleEntity.getTotalValves());
+//		performanceDto.setPowerTrain(vehicleDb.getPowerTrain());	// TODO: Power train?
         vehicleDto.setPerformance(performanceDto);
 
-		return vehicleDto;
-	}
+        return vehicleDto;
+    }
 
-	public VehicleGeneralDto convertToSearchableVehicle(Vehicle vehicle) {
-		VehicleGeneralDto vehicleGeneralDto = new VehicleGeneralDto();
-		List<VehicleImage> images = vehicle.getImages();
-		if (images != null) {
-			VehicleImage primaryImage = images.stream()
-					.filter(VehicleImage::isPrimary)
-					.findFirst()
-					.orElse(new VehicleImage());
-			vehicleGeneralDto.setSrc(primaryImage.getImageUrl());
-		}
+    public VehicleGeneralDto convertToSearchableVehicle(Vehicle entity) {
+        VehicleGeneralDto vehicleGeneralDto = new VehicleGeneralDto();
 
-		vehicleGeneralDto.setColorInside(vehicle.getColorInside());
-		vehicleGeneralDto.setColorOutside(vehicle.getColorOutside());
-		vehicleGeneralDto.setMileage(vehicle.getMileage());
-
-		setVehicleModel(vehicle.getModel(), vehicleGeneralDto);
-
-		return vehicleGeneralDto;
-	}
-
-	/**
-	 * Helper, convert model to dto to set into vehicleGeneralDto.
-	 * @param vehicleModel - source
-	 * @param vehicleGeneralDto - destination
-	 */
-	private void setVehicleModel(VehicleModel vehicleModel, VehicleGeneralDto vehicleGeneralDto) {
-		if (vehicleModel == null) {
-			return;
-		}
-
-		vehicleGeneralDto.setDoors(vehicleModel.getDoors());
-		vehicleGeneralDto.setDrive(vehicleModel.getDrive());
-		vehicleGeneralDto.setEngine(vehicleModel.getEngine());
-		vehicleGeneralDto.setHorsePower(vehicleModel.getHorsePower());
-		vehicleGeneralDto.setModel(vehicleModel.getModelCode());
-		vehicleGeneralDto.setSeats(vehicleModel.getSeats());
-		vehicleGeneralDto.setTransmission(vehicleModel.getTransmission());
-		vehicleGeneralDto.setYear(vehicleModel.getYear());
-
-		VehicleManufacturer vehicleManufacturer = vehicleModel.getVehicleManufacturer();
-		if (vehicleManufacturer != null) {
-			vehicleGeneralDto.setManufacturer(vehicleManufacturer.getManufacturerCode());
+        if (entity.getMainImage() != null) {
+            vehicleGeneralDto.setSrc(entity.getMainImage().getUrl());
         }
-	}
+
+        vehicleGeneralDto.setColorInside(entity.getColorInside());
+        vehicleGeneralDto.setColorOutside(entity.getColorOutside());
+        vehicleGeneralDto.setMileage(entity.getMileage());
+        setVehicleModel(entity.getModel(), vehicleGeneralDto);
+
+        return vehicleGeneralDto;
+    }
+
+    /**
+     * Helper, convert model to dto to set into vehicleGeneralDto.
+     *
+     * @param entity - source
+     * @param dto    - destination
+     */
+    private void setVehicleModel(VehicleModel entity, VehicleGeneralDto dto) {
+        if (entity == null) {
+            return;
+        }
+
+        dto.setDoors(entity.getDoors());
+        if (entity.getDrivetrain() != null) {
+            dto.setDrive(entity.getDrivetrain().getName());
+        }
+        dto.setEngine(entity.getEngine());
+        dto.setHorsePower(entity.getHorsePower());
+        dto.setModel(entity.getModelCode());
+        dto.setSeats(entity.getSeats());
+        if (entity.getTransmission() != null) {
+            dto.setTransmission(entity.getTransmission().getName());
+        }
+        dto.setYear(entity.getYear());
+
+        Classification vehicleManufacturer = entity.getVehicleManufacturer();
+        if (vehicleManufacturer != null) {
+            dto.setManufacturer(vehicleManufacturer.getValue());
+        }
+    }
 }

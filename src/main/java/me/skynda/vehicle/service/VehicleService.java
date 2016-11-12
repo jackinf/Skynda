@@ -2,8 +2,8 @@ package me.skynda.vehicle.service;
 
 import java.util.List;
 
+import me.skynda.vehicle.dto.VehicleDisplayDto;
 import me.skynda.vehicle.dto.VehicleDto;
-import me.skynda.vehicle.dto.SingleVehicleDataDto;
 import me.skynda.vehicle.dto.request.VehicleSearchRequestDto;
 import me.skynda.common.dto.CreateOrUpdateResponseDto;
 import me.skynda.common.dto.DeleteResponseDto;
@@ -17,7 +17,7 @@ public interface VehicleService {
      *
      * @return all vehicles
      */
-    List<VehicleDto> getVehicles();
+    List<VehicleDisplayDto> getVehicles();
 
     /**
      * Adds new vehicle for sale
@@ -41,7 +41,7 @@ public interface VehicleService {
      * @param id vehicle's id
      * @return single vehicle's dto
      */
-    SingleVehicleDataDto getVehicleDetailed(Long id);
+    VehicleDisplayDto getVehicleDetailed(Long id);
 
     /**
      * Delets a single vehicle

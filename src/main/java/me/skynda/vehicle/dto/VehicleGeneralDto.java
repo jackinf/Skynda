@@ -21,5 +21,5 @@ public class VehicleGeneralDto {
 	private String colorOutside;
 	private String colorInside;
 	private Integer doors;
-	private String seats;
+	private Integer seats;
 }

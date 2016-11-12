@@ -8,7 +8,7 @@ import me.skynda.common.dto.CreateOrUpdateResponseDto;
 import me.skynda.common.dto.DeleteResponseDto;
 import me.skynda.common.dto.SearchResponseDto;
 import me.skynda.vehicle.dto.VehicleDto;
-import me.skynda.vehicle.dto.SingleVehicleDataDto;
+import me.skynda.vehicle.dto.VehicleDisplayDto;
 import me.skynda.vehicle.service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
@@ -28,7 +28,7 @@ public class VehicleController extends BaseController {
     private VehicleService vehicleService;
 
     @RequestMapping(value = "/vehicles", method = RequestMethod.GET)
-    public List<SingleVehicleDataDto> getAll(@RequestBody(required = false) VehicleSearchRequestDto dto) {
+    public List<VehicleDisplayDto> getAll(@RequestBody(required = false) VehicleSearchRequestDto dto) {
         return vehicleService.getVehicles();
     }
 
@@ -38,7 +38,7 @@ public class VehicleController extends BaseController {
     }
 
     @RequestMapping(value = "/vehicle/{id}/detailed", method = RequestMethod.GET, produces = "application/json")
-    public SingleVehicleDataDto getDetailed(@PathVariable("id") Long id) {
+    public VehicleDisplayDto getDetailed(@PathVariable("id") Long id) {
         return vehicleService.getVehicleDetailed(id);
     }
 

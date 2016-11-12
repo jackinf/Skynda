@@ -8,7 +8,7 @@ import lombok.ToString;
 
 @Data
 @ToString(callSuper = false)
-public class SingleVehicleDataDto {
+public class VehicleDisplayDto {
 
 	public Long id;
     private VehicleGeneralDto vehicleGeneralDto;

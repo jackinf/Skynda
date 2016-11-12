@@ -27,4 +27,13 @@ public class Image {
     @Column(name = "container_name")
     private String containerName;
 
+    public static class Factory {
+        public static Image create(String url, String blobName, String containerName) {
+            Image image = new Image();
+            image.setUrl(url);
+            image.setBlobName(blobName);
+            image.setContainerName(containerName);
+            return image;
+        }
+    }
 }

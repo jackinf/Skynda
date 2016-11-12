@@ -17,13 +17,11 @@ public class VehicleImage {
     @Column(name="archived")
     private Date archived;
 
-    @Column(name="archived")
-    private String imageUrl;
-    private boolean isPrimary;
-    private String imageBlobName;
-    private String imageContainerName;
-
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "vehicle_id", nullable = false)
     private Vehicle vehicle;
+
+    @Column(name="image_id")
+    @JoinColumn(name = "image_id", nullable = false)
+    private Image image;
 }

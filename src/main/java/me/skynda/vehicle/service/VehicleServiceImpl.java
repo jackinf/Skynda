@@ -4,10 +4,12 @@ import me.skynda.blobstorage.dto.DeleteBlobDto;
 import me.skynda.blobstorage.dto.UploadBlobDto;
 import me.skynda.blobstorage.dto.response.BlobStorageUploadStreamResponseDto;
 import me.skynda.blobstorage.service.BlobStorageService;
+import me.skynda.common.dao.ImageDao;
 import me.skynda.vehicle.dao.*;
 import me.skynda.vehicle.dto.*;
 import me.skynda.vehicle.dto.interfaces.IImageContainerableDto;
 import me.skynda.vehicle.dto.request.VehicleSearchRequestDto;
+import me.skynda.vehicle.entity.Image;
 import me.skynda.vehicle.entity.Vehicle;
 import me.skynda.vehicle.entity.VehicleModel;
 import me.skynda.vehicle.service.converter.VehicleConverter;
@@ -16,7 +18,6 @@ import me.skynda.common.dto.CreateOrUpdateResponseDto;
 import me.skynda.common.dto.DeleteResponseDto;
 import me.skynda.common.dto.SearchResponseDto;
 import me.skynda.common.helper.SkyndaUtility;
-import me.skynda.vehicle.dto.SingleVehicleDataDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -49,18 +50,21 @@ public class VehicleServiceImpl implements VehicleService {
     private BlobStorageService blobStorageService;
 
     @Autowired
+    private ImageDao imageDao;
+
+    @Autowired
     private VehicleConverter vehicleConverter;
 
     //    @Autowired
     private VehicleValidator validator = new VehicleValidator();
 
     @Override
-    public List<VehicleDto> getVehicles() {
-        List<VehicleDto> vehicles = new ArrayList<VehicleDto>();
+    public List<VehicleDisplayDto> getVehicles() {
+        List<VehicleDisplayDto> vehicles = new ArrayList<>();
         vehicleDao.getAll().forEach(c -> {
             vehicles.add(vehicleConverter.transform(c));
         });
-        return singleVehicleDataDto;
+        return vehicles;
     }
 
     @Override
@@ -70,7 +74,7 @@ public class VehicleServiceImpl implements VehicleService {
     }
 
     @Override
-    public SingleVehicleDataDto getVehicleDetailed(Long id) {
+    public VehicleDisplayDto getVehicleDetailed(Long id) {
         Vehicle model = vehicleDao.get(id);
         return vehicleConverter.transform(model);
     }
@@ -78,6 +82,8 @@ public class VehicleServiceImpl implements VehicleService {
     @Override
     public CreateOrUpdateResponseDto createOrUpdateVehicle(VehicleDto vehicleDto, BindingResult bindingResult) {
         Vehicle vehicle = vehicleConverter.transform(vehicleDto);
+        if (vehicle.getId() == null)
+            vehicle.setCreated(new Date());
 
         VehicleModel vehicleModel = vehicleModelsDao.getByModelCode(vehicleDto.getVehicleModelsCode());
         vehicle.setModel(vehicleModel);
@@ -107,9 +113,8 @@ public class VehicleServiceImpl implements VehicleService {
 
             // Was upload successful?
             if (responseDto1.isSuccess()) {
-                vehicle.setMainImageUrl(responseDto1.getUri());
-                vehicle.setMainImageBlobName(blobName);
-                vehicle.setMainImageContainerName(DEFAULT_CONTAINER_NAME);
+                Image image = imageDao.save(Image.Factory.create(responseDto1.getUri(), blobName, DEFAULT_CONTAINER_NAME));
+                vehicle.setMainImage(image);
             }
         }
 

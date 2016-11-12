@@ -1,10 +1,12 @@
 package me.skynda.vehicle.service;
 
-import me.skynda.vehicle.dao.VehicleManufacturerDao;
+import me.skynda.common.dao.ClassificationDao;
 import me.skynda.vehicle.dao.VehicleModelsDao;
 import me.skynda.vehicle.dto.VehicleModelDto;
 import me.skynda.vehicle.dto.request.VehicleModelRequestDto;
 import me.skynda.vehicle.dto.response.VehicleModelResponseDto;
+import me.skynda.vehicle.entity.Classification;
+import me.skynda.vehicle.entity.ClassificationType;
 import me.skynda.vehicle.entity.VehicleModel;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,7 +28,7 @@ public class VehicleModelServiceImplTest {
     private VehicleModelService service = new VehicleModelServiceImpl();
 
     @Mock
-    VehicleManufacturerDao vehicleManufacturerDao;
+    ClassificationDao vehicleManufacturerDao;
 
     @Mock
     VehicleModelsDao vehicleModelsDao;
@@ -38,8 +40,11 @@ public class VehicleModelServiceImplTest {
         VehicleModel first = new VehicleModel();
         first.setTitle("title123");
         first.setModelCode("modelCode123");
-        VehicleManufacturer vehicleManufacturer = new VehicleManufacturer();
-        vehicleManufacturer.setManufacturerCode("manufacturerCode123");
+        ClassificationType type = new ClassificationType();
+        type.setName("MANUFACTURER");
+        Classification vehicleManufacturer = new Classification();
+        vehicleManufacturer.setClassificationType(type);
+        vehicleManufacturer.setValue("manufacturerCode123");
         first.setVehicleManufacturer(vehicleManufacturer);
         prepared.add(first);
         prepared.add(new VehicleModel());
@@ -54,7 +59,7 @@ public class VehicleModelServiceImplTest {
         VehicleModelResponseDto vehicleModelResponseDto = response.get(0);
         assertEquals("title123", vehicleModelResponseDto.getTitle());
         assertEquals("modelCode123", vehicleModelResponseDto.getModelCode());
-        assertEquals("manufacturerCode123", vehicleModelResponseDto.getManufacturerCode());
+        assertEquals("manufacturerCode123", vehicleModelResponseDto.getVehicleManufacturerCode());
     }
 
     @Test

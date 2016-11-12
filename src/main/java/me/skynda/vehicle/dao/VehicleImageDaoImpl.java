@@ -1,19 +1,23 @@
 package me.skynda.vehicle.dao;
 
+import me.skynda.common.dao.ImageDao;
+import me.skynda.common.db.SkyndaBaseEntityDaoImpl;
 import me.skynda.vehicle.dto.ImageContainerDto;
 import me.skynda.vehicle.dto.ImagesDto;
-import me.skynda.common.db.SkyndaBaseEntityDaoImpl;
-import me.skynda.common.helper.SkyndaUtility;
+import me.skynda.vehicle.entity.Image;
 import me.skynda.vehicle.entity.Vehicle;
 import me.skynda.vehicle.entity.VehicleImage;
 import org.hibernate.Session;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 public class VehicleImageDaoImpl extends SkyndaBaseEntityDaoImpl<VehicleImage> implements VehicleImageDao {
+
+    @Autowired
+    private ImageDao imageDao;
 
     @Override
     public void addMultipleToVehicle(Vehicle vehicle, List<ImagesDto> images) {
@@ -31,12 +35,14 @@ public class VehicleImageDaoImpl extends SkyndaBaseEntityDaoImpl<VehicleImage> i
             VehicleImage vehicleImage = new VehicleImage();
             vehicleImage.setVehicle(vehicle);
 
-            Optional<ImageContainerDto> resolve = SkyndaUtility.resolve(() -> image.getImageContainer());
-            if (resolve != null) {
-                ImageContainerDto imageContainerDto = resolve.get();
-                vehicleImage.setImageUrl(imageContainerDto.getImageUrl());
-                vehicleImage.setImageBlobName(imageContainerDto.getBlobName());
-                vehicleImage.setImageContainerName(imageContainerDto.getContainerName());
+            if (image.getImageContainer() != null) {
+                ImageContainerDto imageContainerDto = image.getImageContainer();
+                Image imageEntity = imageDao.save(Image.Factory.create(
+                    imageContainerDto.getImageUrl(),
+                    imageContainerDto.getBlobName(),
+                    imageContainerDto.getContainerName())
+                );
+                vehicleImage.setImage(imageEntity);
             }
 //            vehicleImage.setImageUrl(image.getThumbnail());   // TODO?
             session.save(vehicleImage);

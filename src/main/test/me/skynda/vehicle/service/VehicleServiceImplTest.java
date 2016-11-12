@@ -3,6 +3,7 @@ package me.skynda.vehicle.service;
 import me.skynda.blobstorage.dto.UploadBlobDto;
 import me.skynda.blobstorage.dto.response.BlobStorageUploadStreamResponseDto;
 import me.skynda.blobstorage.service.BlobStorageService;
+import me.skynda.common.dao.ImageDao;
 import me.skynda.vehicle.dao.*;
 import me.skynda.vehicle.dto.*;
 import me.skynda.vehicle.dto.request.VehicleSearchRequestDto;
@@ -22,6 +23,7 @@ import org.springframework.validation.BindingResult;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -57,6 +59,9 @@ public class VehicleServiceImplTest {
     @Mock
     private BlobStorageService validator;
 
+    @Mock
+    private ImageDao imageDao;
+
     @Test
     public void getCars() throws Exception {
         /*
@@ -71,7 +76,7 @@ public class VehicleServiceImplTest {
         /*
             ACT
          */
-        List<SingleVehicleDataDto> cars1 = service.getVehicles();
+        List<VehicleDisplayDto> cars1 = service.getVehicles();
 
         /*
             ASSERT
@@ -114,7 +119,7 @@ public class VehicleServiceImplTest {
         /*
             ACT
          */
-        SingleVehicleDataDto carDetailed = service.getVehicleDetailed(1L);
+        VehicleDisplayDto carDetailed = service.getVehicleDetailed(1L);
 
         /*
             ASSERT
@@ -135,7 +140,7 @@ public class VehicleServiceImplTest {
 
         // Assert
         assertEquals(false, orUpdateCarForSale.isSuccess());
-        final Integer totalErrors = 7;
+        final Integer totalErrors = 8;
         verify(bindingResult, times(totalErrors)).reject(any(String.class), any(String.class));
     }
 

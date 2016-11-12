@@ -1,7 +1,7 @@
 package me.skynda.vehicle.controller;
 
 import me.skynda.vehicle.dto.VehicleDto;
-import me.skynda.vehicle.dto.SingleVehicleDataDto;
+import me.skynda.vehicle.dto.VehicleDisplayDto;
 import me.skynda.vehicle.dto.request.VehicleSearchRequestDto;
 import me.skynda.vehicle.service.VehicleService;
 import me.skynda.common.dto.CreateOrUpdateResponseDto;
@@ -53,12 +53,12 @@ public class VehicleControllerTest {
     @Test
     public void getDetailed() throws Exception {
         // Arrange
-        SingleVehicleDataDto dto = new SingleVehicleDataDto();
+        VehicleDisplayDto dto = new VehicleDisplayDto();
         when(vehicleService.getVehicleDetailed(1L)).thenReturn(dto);
 
         // Act
-        SingleVehicleDataDto detailed1 = controller.getDetailed(1L);
-        SingleVehicleDataDto detailed2 = controller.getDetailed(2L);
+        VehicleDisplayDto detailed1 = controller.getDetailed(1L);
+        VehicleDisplayDto detailed2 = controller.getDetailed(2L);
 
         // Assert
         assertEquals(dto, detailed1);

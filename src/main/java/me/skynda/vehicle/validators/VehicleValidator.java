@@ -25,7 +25,9 @@ public class VehicleValidator implements Validator {
         Vehicle car = (Vehicle) object;
         Set<ConstraintViolation<Vehicle>> constraintViolations = validator.validate(car);
         for (ConstraintViolation<Vehicle> constraintViolation : constraintViolations) {
-            errors.reject(constraintViolation.getPropertyPath().toString(), constraintViolation.getMessage());
+            String errorKey = constraintViolation.getPropertyPath().toString();
+            String errorMessage = constraintViolation.getMessage();
+            errors.reject(errorKey, errorMessage);
         }
     }
 }

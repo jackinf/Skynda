@@ -130,7 +130,7 @@ public class BlobStorageServiceImplTest {
 
     }
 
-    @org.junit.Test
+//    @org.junit.Test
     @SneakyThrows(Exception.class)
     public void delete() {
         /*

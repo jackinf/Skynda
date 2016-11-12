@@ -21,9 +21,6 @@ public class VehicleFault {
     @JoinColumn(name = "image_id", nullable = false)
     private Image image;
 
-    private String imageBlobName;
-    private String imageContainerName;
-
     @Column(name="archived")
     private Date archived;
 
