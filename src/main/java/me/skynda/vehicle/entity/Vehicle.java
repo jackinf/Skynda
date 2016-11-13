@@ -93,6 +93,9 @@ public class Vehicle implements Serializable {
     @Column(name="archived")
     private Date archived;
 
+    @Column(name="owner_id")
+    private Integer ownerId;
+
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "image_id", nullable = false)
     private Image mainImage;

@@ -209,7 +209,10 @@ public class VehicleConverter {
 	 */
 
     public Vehicle transform(VehicleDto vehicleDto) {
-        Vehicle vehicle = new Vehicle();
+        return transform(vehicleDto, new Vehicle());
+    }
+
+    public Vehicle transform(VehicleDto vehicleDto, Vehicle vehicle) {
         vehicle.setId(vehicleDto.getId());
 
         // TODO: Is it needed?

@@ -1,29 +1,33 @@
 package me.skynda.vehicle.service;
 
+import me.skynda.auth.service.UserService;
 import me.skynda.blobstorage.dto.DeleteBlobDto;
 import me.skynda.blobstorage.dto.UploadBlobDto;
 import me.skynda.blobstorage.dto.response.BlobStorageUploadStreamResponseDto;
 import me.skynda.blobstorage.service.BlobStorageService;
 import me.skynda.common.dao.ImageDao;
+import me.skynda.common.dto.CreateOrUpdateResponseDto;
+import me.skynda.common.dto.DeleteResponseDto;
+import me.skynda.common.dto.SearchResponseDto;
+import me.skynda.common.entity.Image;
+import me.skynda.common.helper.SkyndaUtility;
 import me.skynda.vehicle.dao.*;
 import me.skynda.vehicle.dto.*;
 import me.skynda.vehicle.dto.interfaces.IImageContainerableDto;
 import me.skynda.vehicle.dto.request.VehicleSearchRequestDto;
-import me.skynda.common.entity.Image;
 import me.skynda.vehicle.entity.Vehicle;
 import me.skynda.vehicle.entity.VehicleModel;
 import me.skynda.vehicle.service.converter.VehicleConverter;
 import me.skynda.vehicle.validators.VehicleValidator;
-import me.skynda.common.dto.CreateOrUpdateResponseDto;
-import me.skynda.common.dto.DeleteResponseDto;
-import me.skynda.common.dto.SearchResponseDto;
-import me.skynda.common.helper.SkyndaUtility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
 
 @Service
 @Transactional
@@ -55,6 +59,9 @@ public class VehicleServiceImpl implements VehicleService {
     @Autowired
     private VehicleConverter vehicleConverter;
 
+    @Autowired
+    UserService userService;
+
     //    @Autowired
     private VehicleValidator validator = new VehicleValidator();
 
@@ -81,13 +88,45 @@ public class VehicleServiceImpl implements VehicleService {
 
     @Override
     public CreateOrUpdateResponseDto createOrUpdateVehicle(VehicleDto vehicleDto, BindingResult bindingResult) {
-        Vehicle vehicle = vehicleConverter.transform(vehicleDto);
-        if (vehicle.getId() == null)
+        /*
+            Create new or load existing
+         */
+        Vehicle vehicle;
+        if (vehicleDto.getId() != null) {
+            vehicle = vehicleDao.get(vehicleDto.getId());
+            vehicle = vehicleConverter.transform(vehicleDto, vehicle);
+//            vehicle.setUpdated(new Date());   // TODO
+        } else {
+            vehicle = vehicleConverter.transform(vehicleDto);
             vehicle.setCreated(new Date());
+        }
 
+        /*
+            Find car model
+         */
         VehicleModel vehicleModel = vehicleModelsDao.getByModelCode(vehicleDto.getVehicleModelsCode());
         vehicle.setModel(vehicleModel);
 
+        /*
+            Get a new creator
+         */
+        vehicle.setOwnerId(1);  // TODO: use owner
+
+//        String currentLogin = SecurityUtils.getCurrentLogin();
+//        if (currentLogin != null && !currentLogin.isEmpty()) {
+//            UserDto byLogin = userService.findByLogin(currentLogin);
+//            if (byLogin != null) {
+//                vehicle.setOwnerId(byLogin.getId());
+//            } else {
+//                return CreateOrUpdateResponseDto.Factory.fail();
+//            }
+//        } else {
+//            return CreateOrUpdateResponseDto.Factory.fail();
+//        }
+
+        /*
+            Get images
+         */
         validator.validate(vehicle, bindingResult);
         if (bindingResult.hasErrors()) {
             CreateOrUpdateResponseDto response = new CreateOrUpdateResponseDto();
