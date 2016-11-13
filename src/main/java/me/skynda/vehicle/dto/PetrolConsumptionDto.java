@@ -25,4 +25,20 @@ public class PetrolConsumptionDto {
 		}
 	}
 
+	public String getAverage() {
+		if (StringHelper.empty(this.city) || StringHelper.empty(this.highWay)) {
+			this.average = null;
+		} else {
+			try {
+				double result = (Double.parseDouble(this.city) + Double.parseDouble(this.highWay)) / 2;
+				this.average = String.valueOf(result);
+			} catch (NumberFormatException e) {
+				this.average = null;
+			}
+		}
+
+		return this.average;
+
+	}
+
 }

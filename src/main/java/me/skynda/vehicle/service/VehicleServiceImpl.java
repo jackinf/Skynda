@@ -6,15 +6,19 @@ import me.skynda.blobstorage.dto.UploadBlobDto;
 import me.skynda.blobstorage.dto.response.BlobStorageUploadStreamResponseDto;
 import me.skynda.blobstorage.service.BlobStorageService;
 import me.skynda.common.dao.ImageDao;
+import me.skynda.common.dto.SearchResponseDto;
+import me.skynda.vehicle.dao.VehicleDao.VehicleDao;
+import me.skynda.vehicle.dao.VehicleFaultDao.VehicleFaultDao;
+import me.skynda.vehicle.dao.VehicleFeatureDao.VehicleFeatureDao;
+import me.skynda.vehicle.dao.VehicleImageDao.VehicleImageDao;
+import me.skynda.vehicle.dao.VehicleModelDao.VehicleModelDao;
 import me.skynda.common.dto.CreateOrUpdateResponseDto;
 import me.skynda.common.dto.DeleteResponseDto;
-import me.skynda.common.dto.SearchResponseDto;
 import me.skynda.common.entity.Image;
 import me.skynda.common.helper.SkyndaUtility;
-import me.skynda.vehicle.dao.*;
 import me.skynda.vehicle.dto.*;
 import me.skynda.vehicle.dto.interfaces.IImageContainerableDto;
-import me.skynda.vehicle.dto.request.VehicleSearchRequestDto;
+import me.skynda.vehicle.dto.request.SearchRequestDto;
 import me.skynda.vehicle.entity.Vehicle;
 import me.skynda.vehicle.entity.VehicleModel;
 import me.skynda.vehicle.service.converter.VehicleConverter;
@@ -39,7 +43,7 @@ public class VehicleServiceImpl implements VehicleService {
     VehicleDao vehicleDao;
 
     @Autowired
-    VehicleModelsDao vehicleModelsDao;
+    VehicleModelDao vehicleModelDao;
 
     @Autowired
     VehicleFeatureDao vehicleFeatureDao;
@@ -66,45 +70,45 @@ public class VehicleServiceImpl implements VehicleService {
     private VehicleValidator validator = new VehicleValidator();
 
     @Override
-    public List<VehicleDisplayDto> getVehicles() {
-        List<VehicleDisplayDto> vehicles = new ArrayList<>();
+    public List<VehicleDetailedDto> getVehicles() {
+        List<VehicleDetailedDto> vehicles = new ArrayList<>();
         vehicleDao.getAll().forEach(c -> {
-            vehicles.add(vehicleConverter.transform(c));
+            if(c.getArchived() == null)
+                vehicles.add(vehicleConverter.transformToVehicle(c));
         });
         return vehicles;
     }
 
     @Override
-    public VehicleDto getVehicle(Long id) {
+    public VehicleAdminDto getVehicle(Long id) {
         Vehicle model = vehicleDao.get(id);
-        return vehicleConverter.transformToVehicleDto(model);
+        return vehicleConverter.transformToAdminDto(model);
     }
 
     @Override
-    public VehicleDisplayDto getVehicleDetailed(Long id) {
+    public VehicleDetailedDto getVehicleDetailed(Long id) {
         Vehicle model = vehicleDao.get(id);
-        return vehicleConverter.transform(model);
+        return vehicleConverter.transformToVehicle(model);
     }
 
     @Override
-    public CreateOrUpdateResponseDto createOrUpdateVehicle(VehicleDto vehicleDto, BindingResult bindingResult) {
+    public CreateOrUpdateResponseDto createOrUpdateVehicle(VehicleAdminDto vehicleAdminDto, BindingResult bindingResult) {
         /*
             Create new or load existing
          */
         Vehicle vehicle;
-        if (vehicleDto.getId() != null) {
-            vehicle = vehicleDao.get(vehicleDto.getId());
-            vehicle = vehicleConverter.transform(vehicleDto, vehicle);
+        if (vehicleAdminDto.getId() != null) {
+            vehicle = vehicleDao.get(vehicleAdminDto.getId());
+            vehicle = vehicleConverter.transformToVehicle(vehicleAdminDto);
 //            vehicle.setUpdated(new Date());   // TODO
         } else {
-            vehicle = vehicleConverter.transform(vehicleDto);
+            vehicle = vehicleConverter.transformToVehicle(vehicleAdminDto);
             vehicle.setCreated(new Date());
         }
-
         /*
             Find car model
          */
-        VehicleModel vehicleModel = vehicleModelsDao.getByModelCode(vehicleDto.getVehicleModelsCode());
+        VehicleModel vehicleModel = vehicleModelDao.getByModelCode(vehicleAdminDto.getModel().getModelCode());
         vehicle.setModel(vehicleModel);
 
         /*
@@ -140,7 +144,7 @@ public class VehicleServiceImpl implements VehicleService {
          */
 
         // Upload main image
-        ImageContainerDto base64File = vehicleDto.getMainImageContainer();
+        ImageDto base64File = vehicleAdminDto.getMainImage();
         if (base64File != null && base64File.getBase64File() != null) {
             // Please, upload the fucking file!!!
             UploadBlobDto uploadBlobDto1 = new UploadBlobDto();
@@ -158,13 +162,13 @@ public class VehicleServiceImpl implements VehicleService {
         }
 
         // Upload image gallery
-        List<ImagesDto> imageDtos = vehicleDto.getImages() != null ? vehicleDto.getImages() : new ArrayList<>();
+        List<ImageContainerDto> imageDtos = vehicleAdminDto.getImages() != null ? vehicleAdminDto.getImages() : new ArrayList<>();
         if (imageDtos != null) {
             imageDtos.forEach(this::fromBase64ToUrl);
         }
 
         // Upload faults images
-        List<FaultsDto> faultDtos = vehicleDto.getFaults();
+        List<FaultDto> faultDtos = vehicleAdminDto.getFaults();
         if (faultDtos != null) {
             faultDtos.forEach(this::fromBase64ToUrl);
         }
@@ -173,7 +177,7 @@ public class VehicleServiceImpl implements VehicleService {
             Clean file could storage from uploaded files
          */
 
-        List<VehicleDtoImageFileToDelete> filesToDelete = vehicleDto.getFilesToDelete();
+        List<VehicleDtoImageFileToDelete> filesToDelete = vehicleAdminDto.getFilesToDelete();
         if (filesToDelete != null) {
             filesToDelete.forEach(this::tryDeleteBlob);
         }
@@ -189,7 +193,7 @@ public class VehicleServiceImpl implements VehicleService {
             Save all the one-2-many relations with vehicle-to-be-sold
          */
 
-        vehicleFeatureDao.addMultipleToVehicle(addedVehicle, vehicleDto.getFeatures());
+        vehicleFeatureDao.addMultipleToVehicle(addedVehicle, vehicleAdminDto.getFeatures());
         vehicleFaultDao.addMultipleToVehicle(addedVehicle, faultDtos);
         vehicleImageDao.addMultipleToVehicle(addedVehicle, imageDtos);
 
@@ -209,13 +213,13 @@ public class VehicleServiceImpl implements VehicleService {
     }
 
     @Override
-    public SearchResponseDto search(VehicleSearchRequestDto params) {
+    public SearchResponseDto search(SearchRequestDto params) {
         SearchResponseDto response = new SearchResponseDto();
-        List<VehicleGeneralDto> vehiclesGeneralDto = new ArrayList<>();
+        List<VehicleSearchDto> vehiclesGeneralDto = new ArrayList<>();
         List<Vehicle> vehicles = vehicleDao.search(params);
 
         vehicles.forEach(vehicle -> {
-            vehiclesGeneralDto.add(vehicleConverter.convertToSearchableVehicle(vehicle));
+            vehiclesGeneralDto.add(vehicleConverter.transformToSearchDto(vehicle));
         });
 
         response.setSuccess(true);
@@ -225,8 +229,8 @@ public class VehicleServiceImpl implements VehicleService {
     }
 
     private void fromBase64ToUrl(IImageContainerableDto dto) {
-        String faultBase64File = dto.getImageContainer() != null
-                ? dto.getImageContainer().getBase64File()
+        String faultBase64File = dto.getImage() != null
+                ? dto.getImage().getBase64File()
                 : null;
         if (faultBase64File == null || faultBase64File.isEmpty())
             return;
@@ -241,10 +245,10 @@ public class VehicleServiceImpl implements VehicleService {
 
         // File upload successful, Jim, isn't it?
         if (responseDto.isSuccess()) {
-            dto.getImageContainer().setImageUrl(responseDto.getUri());
-            dto.getImageContainer().setBlobName(blobName);
-            dto.getImageContainer().setContainerName(DEFAULT_CONTAINER_NAME);
-            dto.getImageContainer().setBase64File(null);
+            dto.getImage().setUrl(responseDto.getUri());
+            dto.getImage().setBlobName(blobName);
+            dto.getImage().setContainerName(DEFAULT_CONTAINER_NAME);
+            dto.getImage().setBase64File(null);
         }
     }
 

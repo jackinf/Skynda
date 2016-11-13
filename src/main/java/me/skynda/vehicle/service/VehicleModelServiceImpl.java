@@ -1,9 +1,9 @@
 package me.skynda.vehicle.service;
 
 import me.skynda.common.dao.ClassificationDao;
-import me.skynda.vehicle.dao.VehicleModelsDao;
+import me.skynda.vehicle.dao.VehicleModelDao.VehicleModelDao;
 import me.skynda.vehicle.dto.VehicleModelDto;
-import me.skynda.vehicle.dto.request.VehicleModelRequestDto;
+import me.skynda.vehicle.dto.request.ModelRequestDto;
 import me.skynda.vehicle.dto.response.VehicleModelResponseDto;
 import me.skynda.common.entity.Classification;
 import me.skynda.vehicle.entity.VehicleModel;
@@ -24,17 +24,17 @@ public class VehicleModelServiceImpl implements VehicleModelService {
     ClassificationDao classificationDao;
 
     @Autowired
-    VehicleModelsDao vehicleModelsDao;
+    VehicleModelDao vehicleModelDao;
 
     @Override
-    public List<VehicleModelResponseDto> get(VehicleModelRequestDto dto) { // TODO: use dto to search
+    public List<VehicleModelResponseDto> get(ModelRequestDto dto) { // TODO: use dto to search
         List<VehicleModelResponseDto> responseDtos = new ArrayList<>();
-        vehicleModelsDao.getAll().forEach(vehicleModelEntity -> {
+        vehicleModelDao.getAll().forEach(vehicleModelEntity -> {
             VehicleModelResponseDto responseDto = new VehicleModelResponseDto();
-            Classification vehicleManufacturer = vehicleModelEntity.getVehicleManufacturer();
-            if (vehicleManufacturer != null) {
-                responseDto.setVehicleManufacturerCode(vehicleManufacturer.getValue());
-            }
+//            Classification vehicleManufacturer = vehicleModelEntity.getVehicleManufacturer();
+//            if (vehicleManufacturer != null) {
+//                responseDto.setVehicleManufacturerCode(vehicleManufacturer.getValue());
+//            }
             responseDto.setModelCode(vehicleModelEntity.getModelCode());
             responseDto.setTitle(vehicleModelEntity.getTitle());
             responseDtos.add(responseDto);
@@ -47,8 +47,8 @@ public class VehicleModelServiceImpl implements VehicleModelService {
         VehicleModel vehicleModel;
         Mapper mapper = new DozerBeanMapper();
         vehicleModel = mapper.map(vehicleModelDto, VehicleModel.class);
-        Classification vehicleManufacturer = classificationDao.getManufacturer(vehicleModelDto.getVehicleManufacturerCode());
+        Classification vehicleManufacturer = classificationDao.getManufacturer(vehicleModelDto.getVehicleManufacturer().getValue());
         vehicleModel.setVehicleManufacturer(vehicleManufacturer);
-        return vehicleModelsDao.saveOrUpdate(vehicleModel);
+        return vehicleModelDao.saveOrUpdate(vehicleModel);
     }
 }

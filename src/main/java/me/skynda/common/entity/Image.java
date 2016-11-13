@@ -3,6 +3,7 @@ package me.skynda.common.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by ardi-pc on 2016-11-11.
@@ -11,7 +12,7 @@ import javax.persistence.*;
 @Entity
 @Data
 @Table(name = "image")
-public class Image {
+public class Image implements Serializable {
 
     @Id
     @Column(name = "id", columnDefinition = "serial")

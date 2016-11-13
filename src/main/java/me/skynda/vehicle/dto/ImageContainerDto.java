@@ -1,35 +1,22 @@
 package me.skynda.vehicle.dto;
 
 import lombok.Data;
+import lombok.ToString;
+import me.skynda.vehicle.dto.interfaces.IImageContainerableDto;
+import me.skynda.common.dto.BaseDto;
 
 @Data
-public class ImageContainerDto {
+@ToString(callSuper = false)
+public class ImageContainerDto extends BaseDto implements IImageContainerableDto {
 
-    private String imageUrl;
-    private String base64File;
-    private String blobName;
-    private String containerName;
+	/**
+	 * Image url
+	 */
+	private ImageDto image;
 
-    public static class Factory {
-        public static ImageContainerDto create(String url, String blobName, String containerName) {
-            ImageContainerDto dto = new ImageContainerDto();
-            dto.setImageUrl(url);
-            dto.setBlobName(blobName);
-            dto.setContainerName(containerName);
-            return dto;
-        }
+	/**
+	 * Small image url
+	 */
+	private String thumbnail;
 
-        public static ImageContainerDto createForDisplay(String url) {
-            ImageContainerDto dto = new ImageContainerDto();
-            dto.setImageUrl(url);
-            return dto;
-        }
-
-
-        public static ImageContainerDto createWithBase64(String base64File) {
-            ImageContainerDto dto = new ImageContainerDto();
-            dto.setBase64File(base64File);
-            return dto;
-        }
-    }
 }

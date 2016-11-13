@@ -2,9 +2,9 @@ package me.skynda.vehicle.service;
 
 import java.util.List;
 
-import me.skynda.vehicle.dto.VehicleDisplayDto;
-import me.skynda.vehicle.dto.VehicleDto;
-import me.skynda.vehicle.dto.request.VehicleSearchRequestDto;
+import me.skynda.vehicle.dto.VehicleDetailedDto;
+import me.skynda.vehicle.dto.VehicleAdminDto;
+import me.skynda.vehicle.dto.request.SearchRequestDto;
 import me.skynda.common.dto.CreateOrUpdateResponseDto;
 import me.skynda.common.dto.DeleteResponseDto;
 import me.skynda.common.dto.SearchResponseDto;
@@ -17,15 +17,15 @@ public interface VehicleService {
      *
      * @return all vehicles
      */
-    List<VehicleDisplayDto> getVehicles();
+    List<VehicleDetailedDto> getVehicles();
 
     /**
      * Adds new vehicle for sale
      *
-     * @param vehicleDto Added vehicle's dto
+     * @param vehicleAdminDto Added vehicle's dto
      * @return Response
      */
-    CreateOrUpdateResponseDto createOrUpdateVehicle(VehicleDto vehicleDto, BindingResult bindingResult);
+    CreateOrUpdateResponseDto createOrUpdateVehicle(VehicleAdminDto vehicleAdminDto, BindingResult bindingResult);
 
     /**
      * Gets a single vehicle. Used for udpating a vehicle.
@@ -33,7 +33,7 @@ public interface VehicleService {
      * @param id vehicle's id
      * @return single vehicle's dto
      */
-    VehicleDto getVehicle(Long id);
+    VehicleAdminDto getVehicle(Long id);
 
     /**
      * Gets a single vehicle. Used for displaying full info about the vehicle to the user
@@ -41,7 +41,7 @@ public interface VehicleService {
      * @param id vehicle's id
      * @return single vehicle's dto
      */
-    VehicleDisplayDto getVehicleDetailed(Long id);
+    VehicleDetailedDto getVehicleDetailed(Long id);
 
     /**
      * Delets a single vehicle
@@ -57,6 +57,6 @@ public interface VehicleService {
      * @return search results
      * @params search params
      */
-    SearchResponseDto search(VehicleSearchRequestDto params);
+    SearchResponseDto search(SearchRequestDto params);
 
 }

@@ -1,8 +1,8 @@
 package me.skynda.vehicle.controller;
 
-import me.skynda.vehicle.dto.VehicleDto;
-import me.skynda.vehicle.dto.VehicleDisplayDto;
-import me.skynda.vehicle.dto.request.VehicleSearchRequestDto;
+import me.skynda.vehicle.dto.VehicleAdminDto;
+import me.skynda.vehicle.dto.VehicleDetailedDto;
+import me.skynda.vehicle.dto.request.SearchRequestDto;
 import me.skynda.vehicle.service.VehicleService;
 import me.skynda.common.dto.CreateOrUpdateResponseDto;
 import me.skynda.common.dto.DeleteResponseDto;
@@ -31,19 +31,19 @@ public class VehicleControllerTest {
 
     @Test
     public void getAll() throws Exception {
-        controller.getAll(new VehicleSearchRequestDto());
+        controller.getAll(new SearchRequestDto());
         verify(vehicleService, times(1)).getVehicles();
     }
 
     @Test
     public void get() throws Exception {
         // Arrange
-        VehicleDto dto = new VehicleDto();
+        VehicleAdminDto dto = new VehicleAdminDto();
         when(vehicleService.getVehicle(1L)).thenReturn(dto);
 
         // Act
-        VehicleDto returnedDto1 = controller.get(1L);
-        VehicleDto returnedDto2 = controller.get(2L);
+        VehicleAdminDto returnedDto1 = controller.get(1L);
+        VehicleAdminDto returnedDto2 = controller.get(2L);
 
         // Assert
         assertEquals(dto, returnedDto1);
@@ -53,12 +53,12 @@ public class VehicleControllerTest {
     @Test
     public void getDetailed() throws Exception {
         // Arrange
-        VehicleDisplayDto dto = new VehicleDisplayDto();
+        VehicleDetailedDto dto = new VehicleDetailedDto();
         when(vehicleService.getVehicleDetailed(1L)).thenReturn(dto);
 
         // Act
-        VehicleDisplayDto detailed1 = controller.getDetailed(1L);
-        VehicleDisplayDto detailed2 = controller.getDetailed(2L);
+        VehicleDetailedDto detailed1 = controller.getDetailed(1L);
+        VehicleDetailedDto detailed2 = controller.getDetailed(2L);
 
         // Assert
         assertEquals(dto, detailed1);
@@ -68,32 +68,32 @@ public class VehicleControllerTest {
     @Test
     public void add() throws Exception {
         // Arrange
-        VehicleDto vehicleDto = new VehicleDto();
+        VehicleAdminDto vehicleAdminDto = new VehicleAdminDto();
         CreateOrUpdateResponseDto createOrUpdateResponseDto = new CreateOrUpdateResponseDto();
         BindingResult bindingResult = mock(BindingResult.class);
-        when(vehicleService.createOrUpdateVehicle(vehicleDto, bindingResult)).thenReturn(createOrUpdateResponseDto);
+        when(vehicleService.createOrUpdateVehicle(vehicleAdminDto, bindingResult)).thenReturn(createOrUpdateResponseDto);
 
         // Act
-        CreateOrUpdateResponseDto added = controller.add(vehicleDto, bindingResult);
+        CreateOrUpdateResponseDto added = controller.add(vehicleAdminDto, bindingResult);
 
         // Assert
-        verify(vehicleService, times(1)).createOrUpdateVehicle(vehicleDto, bindingResult);
+        verify(vehicleService, times(1)).createOrUpdateVehicle(vehicleAdminDto, bindingResult);
         assertEquals(createOrUpdateResponseDto, added);
     }
 
     @Test
     public void update() throws Exception {
         // Arrange
-        VehicleDto vehicleDto = new VehicleDto();
+        VehicleAdminDto vehicleAdminDto = new VehicleAdminDto();
         CreateOrUpdateResponseDto createOrUpdateResponseDto = new CreateOrUpdateResponseDto();
         BindingResult bindingResult = mock(BindingResult.class);
-        when(vehicleService.createOrUpdateVehicle(vehicleDto, bindingResult)).thenReturn(createOrUpdateResponseDto);
+        when(vehicleService.createOrUpdateVehicle(vehicleAdminDto, bindingResult)).thenReturn(createOrUpdateResponseDto);
 
         // Act
-        CreateOrUpdateResponseDto updated = controller.update(1L, vehicleDto, bindingResult);
+        CreateOrUpdateResponseDto updated = controller.update(1L, vehicleAdminDto, bindingResult);
 
         // Assert
-        verify(vehicleService, times(1)).createOrUpdateVehicle(vehicleDto, bindingResult);
+        verify(vehicleService, times(1)).createOrUpdateVehicle(vehicleAdminDto, bindingResult);
         assertEquals(createOrUpdateResponseDto, updated);
     }
 

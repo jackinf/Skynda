@@ -1,7 +1,7 @@
 package me.skynda.vehicle.dao;
 
+import me.skynda.vehicle.dao.VehicleFaultDao.VehicleFaultDaoImpl;
 import me.skynda.vehicle.entity.Vehicle;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;

@@ -1,9 +1,9 @@
-package me.skynda.vehicle.dao;
+package me.skynda.vehicle.dao.VehicleFaultDao;
 
 import me.skynda.common.dao.ImageDao;
 import me.skynda.common.db.SkyndaBaseEntityDaoImpl;
-import me.skynda.vehicle.dto.FaultsDto;
-import me.skynda.vehicle.dto.ImageContainerDto;
+import me.skynda.vehicle.dto.FaultDto;
+import me.skynda.vehicle.dto.ImageDto;
 import me.skynda.common.entity.Image;
 import me.skynda.vehicle.entity.Vehicle;
 import me.skynda.vehicle.entity.VehicleFault;
@@ -20,7 +20,7 @@ public class VehicleFaultDaoImpl extends SkyndaBaseEntityDaoImpl<VehicleFault> i
     private ImageDao imageDao;
 
     @Override
-    public void addMultipleToVehicle(Vehicle vehicle, List<FaultsDto> faults) {
+    public void addMultipleToVehicle(Vehicle vehicle, List<FaultDto> faults) {
 
         Session session = getSession();
         String id = vehicle.getId().toString();
@@ -31,17 +31,17 @@ public class VehicleFaultDaoImpl extends SkyndaBaseEntityDaoImpl<VehicleFault> i
         if (faults == null)
             return;
 
-        for (FaultsDto fault : faults) {
+        for (FaultDto fault : faults) {
             VehicleFault vehicleFault = new VehicleFault();
-            vehicleFault.setVehicle(vehicle);
+//            vehicleFault.setVehicle(vehicle);
             vehicleFault.setText(fault.getText());
 
-            if (fault.getImageContainer() != null) {
-                ImageContainerDto imageContainerDto = fault.getImageContainer();
-                Image image = imageDao.save(Image.Factory.create(imageContainerDto.getImageUrl(),
-                    imageContainerDto.getBlobName(),
-                    imageContainerDto.getContainerName()));
-                vehicleFault.setImage(image);
+            if (fault.getImage() != null) {
+                ImageDto imageDto = fault.getImage();
+                Image image = imageDao.save(Image.Factory.create(imageDto.getUrl(),
+                    imageDto.getBlobName(),
+                    imageDto.getContainerName()));
+//                vehicleFault.setImage(image);
             }
             session.save(vehicleFault);
         }

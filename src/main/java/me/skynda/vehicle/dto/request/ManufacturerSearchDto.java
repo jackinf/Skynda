@@ -3,5 +3,5 @@ package me.skynda.vehicle.dto.request;
 import lombok.Data;
 
 @Data
-public class VehicleManufacturerSearchDto {
+public class ManufacturerSearchDto {
 }

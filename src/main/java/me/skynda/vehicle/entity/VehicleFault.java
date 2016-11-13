@@ -5,12 +5,13 @@ import me.skynda.common.entity.Image;
 import org.hibernate.annotations.ManyToAny;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Data
 @Table(name = "vehicle_fault")
-public class VehicleFault {
+public class VehicleFault implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,10 +24,10 @@ public class VehicleFault {
     @JoinColumn(name = "image_id", nullable = false)
     private Image image;
 
+    @Column(name = "vehicle_id", nullable = false)
+    private Integer vehicleId;
+
     @Column(name="archived")
     private Date archived;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "vehicle_id", nullable = false)
-    private Vehicle vehicle;
 }

@@ -3,12 +3,13 @@ package me.skynda.vehicle.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Data
 @Table(name = "vehicle_description")
-public class VehicleDescription {
+public class VehicleDescription implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,7 +24,7 @@ public class VehicleDescription {
     @Column(name="archived")
     private Date archived;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "vehicle_id", nullable = false)
-    private Vehicle vehicle;
+    @Column(name = "vehicle_id", nullable = false)
+    private Integer vehicleId;
+
 }

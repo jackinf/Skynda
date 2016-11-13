@@ -10,5 +10,5 @@ import lombok.ToString;
 public class ReportDto {
 
 	private List<CategoriesDto> categories;
-	private List<FaultsDto> faults;
+	private List<FaultDto> faults;
 }

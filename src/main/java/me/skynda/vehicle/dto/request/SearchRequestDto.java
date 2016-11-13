@@ -7,7 +7,7 @@ import me.skynda.common.dto.ClassificationDto.SliderAttributesDto;
 import java.util.List;
 
 @Data
-public class VehicleSearchRequestDto {
+public class SearchRequestDto {
     public List<ButtonAttributesDto> Brands;
     public List<ButtonAttributesDto> Colors;
     public List<ButtonAttributesDto> Features;

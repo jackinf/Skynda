@@ -1,4 +1,4 @@
-package me.skynda.vehicle.dao;
+package me.skynda.vehicle.dao.VehicleFeatureDao;
 
 import me.skynda.vehicle.dto.FeatureDto;
 import me.skynda.vehicle.entity.Vehicle;

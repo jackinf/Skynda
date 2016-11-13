@@ -1,9 +1,9 @@
 package me.skynda.vehicle.service;
 
 import me.skynda.common.dao.ClassificationDao;
-import me.skynda.vehicle.dao.VehicleModelsDao;
+import me.skynda.vehicle.dao.VehicleModelDao.VehicleModelDao;
 import me.skynda.vehicle.dto.VehicleModelDto;
-import me.skynda.vehicle.dto.request.VehicleModelRequestDto;
+import me.skynda.vehicle.dto.request.ModelRequestDto;
 import me.skynda.vehicle.dto.response.VehicleModelResponseDto;
 import me.skynda.common.entity.Classification;
 import me.skynda.common.entity.ClassificationType;
@@ -31,7 +31,7 @@ public class VehicleModelServiceImplTest {
     ClassificationDao vehicleManufacturerDao;
 
     @Mock
-    VehicleModelsDao vehicleModelsDao;
+    VehicleModelDao vehicleModelDao;
 
     @Test
     public void get() throws Exception {
@@ -45,14 +45,14 @@ public class VehicleModelServiceImplTest {
         Classification vehicleManufacturer = new Classification();
 //        vehicleManufacturer.setClassificationType(type);
 //        vehicleManufacturer.setValue("manufacturerCode123");
-        first.setVehicleManufacturer(vehicleManufacturer);
+//        first.setVehicleManufacturer(vehicleManufacturer);
         prepared.add(first);
         prepared.add(new VehicleModel());
         prepared.add(new VehicleModel());
-        when(vehicleModelsDao.getAll()).thenReturn(prepared);
+        when(vehicleModelDao.getAll()).thenReturn(prepared);
 
         // Act
-        List<VehicleModelResponseDto> response = service.get(new VehicleModelRequestDto());
+        List<VehicleModelResponseDto> response = service.get(new ModelRequestDto());
 
         // Assert
         assertEquals(3, response.size());
@@ -68,7 +68,7 @@ public class VehicleModelServiceImplTest {
         service.save(new VehicleModelDto());
 
         // Assert
-        verify(vehicleModelsDao, times(1)).saveOrUpdate(any(VehicleModel.class));
+        verify(vehicleModelDao, times(1)).saveOrUpdate(any(VehicleModel.class));
     }
 
 }

@@ -7,9 +7,9 @@ import me.skynda.common.dto.BaseDto;
 
 @Data
 @ToString(callSuper = false)
-public class FaultsDto extends BaseDto implements IImageContainerableDto {
+public class FaultDto extends BaseDto implements IImageContainerableDto {
 	
 	private String text;
-    private ImageContainerDto imageContainer;
+    private ImageDto image;
 
 }
