@@ -263,8 +263,7 @@ public class VehicleConverter {
 
         Image mainImage = vehicleEntity.getMainImage();
         if (mainImage != null) {
-            ImageContainerDto imageContainerDto = ImageContainerDto.Factory.create(
-                    mainImage.getUrl(),
+            ImageContainerDto imageContainerDto = ImageContainerDto.Factory.create(mainImage.getUrl(),
                     mainImage.getBlobName(),
                     mainImage.getContainerName()
             );

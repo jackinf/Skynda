@@ -16,10 +16,6 @@ public class VehicleDto extends BaseDto {
     }
 
     private ImageContainerDto mainImageContainer;
-//    private String mainImageUrl;
-//    private String mainImageBlobName;
-//    private String mainImageContainerName;
-
 	private String vehicleModelsCode;
 	private String vinCode;
 	private BigDecimal price;
@@ -27,7 +23,6 @@ public class VehicleDto extends BaseDto {
 	private BigDecimal mileage;
 	private String colorOutside;
 	private String colorInside;
-
 	private List<ImagesDto> images;
 	private Boolean isSold;
 	private String fuelCity;
@@ -36,12 +31,6 @@ public class VehicleDto extends BaseDto {
 	private List<FaultsDto> faults;
 	private PerformanceDto performance;
 	private Integer safetyStars;
-
-//    /**
-//     * base64 files that are prepared to be uploaded to file cloud storage.
-//     * We add files by base64 file string and item's id.
-//     */
-//    private VehicleDtoFilesToUpload filesToUpload;
 
     /**
      * files that are prepared to be deleted from file cloud storage.

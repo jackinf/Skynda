@@ -98,6 +98,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.and()
 		.httpBasic().and().headers().addHeaderWriter((request, response) -> {
 			response.setHeader(ORIGIN_NAME, request.getHeader("Origin"));
+//			response.setHeader(ORIGIN_NAME, "http://localhost:3000/");
 			response.setHeader(CREDENTIALS_NAME, "true");
 			response.setHeader(METHODS_NAME, "POST, GET, OPTIONS, DELETE");
 			response.setHeader(MAX_AGE_NAME, "3600");

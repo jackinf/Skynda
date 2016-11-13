@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping(value = "/api", produces = "application/json")
+@RequestMapping(value = "/api")
 public class VehicleController extends BaseController {
 
     @Autowired
@@ -42,10 +42,15 @@ public class VehicleController extends BaseController {
         return vehicleService.getVehicleDetailed(id);
     }
 
-	@RequestMapping(value = "/vehicle", method = RequestMethod.POST, consumes = "application/json")
+	@RequestMapping(value = "/vehicle1", method = RequestMethod.POST)
     public CreateOrUpdateResponseDto add(@RequestBody VehicleDto vehicleDto, BindingResult bindingResult) {
         vehicleDto.setId(null);
         return vehicleService.createOrUpdateVehicle(vehicleDto, bindingResult);
+    }
+
+	@RequestMapping(value = "/vehicle", method = RequestMethod.POST)
+    public CreateOrUpdateResponseDto add1(String test) {
+        return null;
     }
 
     @RequestMapping(value = "/vehicle/{id}", method = RequestMethod.PUT, consumes = "application/json")
