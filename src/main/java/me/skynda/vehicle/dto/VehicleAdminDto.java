@@ -37,7 +37,6 @@ public class VehicleAdminDto extends BaseDto {
 	private ImageDto mainImage;
 	private VehicleModelDto model;
 
-	private Boolean isSold;
 	private PerformanceDto performance;
 	private Integer safetyStars;
 

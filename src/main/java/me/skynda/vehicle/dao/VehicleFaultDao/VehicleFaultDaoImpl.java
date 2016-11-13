@@ -24,7 +24,7 @@ public class VehicleFaultDaoImpl extends SkyndaBaseEntityDaoImpl<VehicleFault> i
 
         Session session = getSession();
         String id = vehicle.getId().toString();
-        session.createSQLQuery("DELETE FROM car_fault WHERE cars_for_sale_id = " + id)  // TODO: avoid SQL injection
+        session.createSQLQuery("DELETE FROM vehicle_fault WHERE vehicle_id = " + id)  // TODO: avoid SQL injection
 //                .setParameter("xxx", id)
                 .executeUpdate();
 

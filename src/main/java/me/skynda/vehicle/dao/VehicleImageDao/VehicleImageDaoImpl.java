@@ -24,7 +24,7 @@ public class VehicleImageDaoImpl extends SkyndaBaseEntityDaoImpl<VehicleImage> i
 
         Session session = getSession();
         String id = vehicle.getId().toString();
-        session.createSQLQuery("DELETE FROM car_image WHERE vehicle_id = " + id)  // TODO: avoid SQL injection
+        session.createSQLQuery("DELETE FROM vehicle_image WHERE vehicle_id = " + id)  // TODO: avoid SQL injection
 //                .setParameter("xxx", id)
                 .executeUpdate();
 

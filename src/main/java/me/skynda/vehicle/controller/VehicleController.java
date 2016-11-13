@@ -17,11 +17,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping(value = "/api", produces = "application/json")
+@RequestMapping(value = "/api")
 public class VehicleController extends BaseController {
 
     @Autowired
@@ -42,7 +43,7 @@ public class VehicleController extends BaseController {
         return vehicleService.getVehicleDetailed(id);
     }
 
-	@RequestMapping(value = "/vehicle", method = RequestMethod.POST, consumes = "application/json")
+	@RequestMapping(value = "/vehicle", method = RequestMethod.POST)
     public CreateOrUpdateResponseDto add(@RequestBody VehicleAdminDto vehicleAdminDto, BindingResult bindingResult) {
         vehicleAdminDto.setId(null);
         return vehicleService.createOrUpdateVehicle(vehicleAdminDto, bindingResult);
@@ -61,7 +62,7 @@ public class VehicleController extends BaseController {
         return vehicleService.deleteVehicle(id);
     }
 
-    @RequestMapping(value = "/vehicle/search", method = RequestMethod.POST, consumes = "application/json")
+    @RequestMapping(value = "/vehicle/search", method = RequestMethod.GET, consumes = "application/json")
     public SearchResponseDto search(@RequestBody SearchRequestDto searchParams){
 //        return vehicleService.search(searchParams);
         return null;
