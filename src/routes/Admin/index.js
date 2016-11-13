@@ -3,6 +3,7 @@
  */
 import CarsRoute from "./routes/Vehicles";
 import CarModelsRoute from "./routes/VehicleModels";
+import ClassifiersRoute from "./routes/Classifiers";
 import {isLoggedInAs} from "../../utils/userUtils";
 
 export default (store) => ({
@@ -14,7 +15,8 @@ export default (store) => ({
   },
   childRoutes: [
     CarsRoute(store),
-    CarModelsRoute(store)
+    CarModelsRoute(store),
+    ClassifiersRoute(store)
   ],
 
   /**
