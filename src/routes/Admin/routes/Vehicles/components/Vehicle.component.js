@@ -117,7 +117,7 @@ class Vehicle extends React.Component {
               message: 'Notification message',
               level: 'success'
             });
-            // browserHistory.push(`/admin/vehicle`);
+            browserHistory.push(`/admin/vehicle`);
           }
         },
         () => (console.log("error")));

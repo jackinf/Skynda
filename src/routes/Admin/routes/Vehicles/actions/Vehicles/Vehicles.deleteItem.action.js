@@ -14,7 +14,7 @@ export default function deleteItem(id) {
     return fetch(`${remoteConfig.remote}/api/vehicle/${id}`, {
       method: "DELETE",
       credentials: "include",
-      headers: {"Accept": "application/json", "Content-Type": "application/x-www-form-urlencoded"}
+      headers: {"Accept": "application/json", "Content-Type": "application/json"}
     })
       .then(resp => resp.json())
       .then(resp => {

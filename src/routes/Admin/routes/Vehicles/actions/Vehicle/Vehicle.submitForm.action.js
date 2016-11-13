@@ -22,7 +22,7 @@ export default function submitVehicleForm(data, formMode) {
  * @returns {*|Promise.<TResult>|Promise<U>|Thenable<U>}
  */
 function createVehicleAsync(data) {
-  return fetch(`${remoteConfig.remote}/api/vehicle1`, {
+  return fetch(`${remoteConfig.remote}/api/vehicle`, {
     method: "POST",
     credentials: "include",
     headers: {"Accept": "application/json", "Content-Type": "application/json"},
@@ -30,6 +30,7 @@ function createVehicleAsync(data) {
   })
     .then(resp => resp.json())
     .then(resp => {
+      console.log(resp);
       if (!resp.success) {
         throw new SubmissionError(fromSpringToReduxFormError(resp.errors));
       }
