@@ -101,17 +101,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.and()
 		.httpBasic().and().headers().addHeaderWriter((request, response) -> {
 			response.setHeader(ORIGIN_NAME, request.getHeader("Origin"));
-//			response.setHeader(ORIGIN_NAME, "http://localhost:3000/");
 			response.setHeader(CREDENTIALS_NAME, "true");
-//			response.setHeader(METHODS_NAME, "POST, GET, OPTIONS, DELETE");
-//			response.setHeader(MAX_AGE_NAME, "3600");
-//			response.setHeader(HEADERS_NAME, "Content-Type, Accept, X-Requested-With, remember-me");
-			response.setHeader("Location", "");
+			response.setHeader(METHODS_NAME, "POST, GET, PUT, OPTIONS, DELETE");
+			response.setHeader(MAX_AGE_NAME, "3600");
+			response.setHeader(HEADERS_NAME, "Content-Type, Accept, X-Requested-With, remember-me");
+//			response.setHeader("Location", "");
 //			response.setHeader("Access-Control-Allow-Origin", "*");
-			response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-			response.setHeader("Access-Control-Max-Age", "3600");
-			response.setHeader("Access-Control-Allow-Headers", "authorization, content-type, xsrf-token");
-			response.addHeader("Access-Control-Expose-Headers", "xsrf-token");
+//			response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+//			response.setHeader("Access-Control-Max-Age", "3600");
+//			response.setHeader("Access-Control-Allow-Headers", "authorization, content-type, xsrf-token");
+//			response.addHeader("Access-Control-Expose-Headers", "xsrf-token");
 //			response.setStatus(HttpServletResponse.SC_OK);
 		});
 

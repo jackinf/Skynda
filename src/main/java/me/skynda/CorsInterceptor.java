@@ -23,20 +23,20 @@ public class CorsInterceptor  extends HandlerInterceptorAdapter
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         response.setHeader(ORIGIN_NAME, request.getHeader("Origin"));
         response.setHeader(CREDENTIALS_NAME, "true");
-//        response.setHeader(METHODS_NAME, "POST, GET, OPTIONS, DELETE");
-//        response.setHeader(MAX_AGE_NAME, "3600");
-//        response.setHeader(HEADERS_NAME, "Content-Type, Accept, X-Requested-With, remember-me");
+        response.setHeader(METHODS_NAME, "POST, GET, PUT, OPTIONS, DELETE");
+        response.setHeader(MAX_AGE_NAME, "3600");
+        response.setHeader(HEADERS_NAME, "Content-Type, Accept, X-Requested-With, remember-me, authorization, xsrf-token");
 //        response.setHeader("Access-Control-Allow-Origin", "*");
-        response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-        response.setHeader("Access-Control-Max-Age", "3600");
-        response.setHeader("Access-Control-Allow-Headers", "authorization, content-type, xsrf-token");
-        response.addHeader("Access-Control-Expose-Headers", "xsrf-token"); // TODO: Remove?
-        response.setHeader("Location", ""); // TODO: Remove?
+//        response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+//        response.setHeader("Access-Control-Max-Age", "3600");
+//        response.setHeader("Access-Control-Allow-Headers", "authorization, content-type, xsrf-token");
+//        response.addHeader("Access-Control-Expose-Headers", "xsrf-token"); // TODO: Remove?
+//        response.setHeader("Location", ""); // TODO: Remove?
 //        response.setStatus(HttpServletResponse.SC_OK);
 
-        if ("OPTIONS".equals(request.getMethod())) {
-            response.setStatus(HttpServletResponse.SC_OK);
-        }
+//        if ("OPTIONS".equals(request.getMethod())) {
+//            response.setStatus(HttpServletResponse.SC_OK);
+//        }
         return true;
     }
 
