@@ -49,7 +49,7 @@ class Overview extends React.Component {
     return (<Skblock header={<Translate value="details.components.overview.header"/>}>
       <Row>
         <Col xs={12} className="sk_details__overview_flex-container">
-          {overview.map((item, i) => (<div className="sk_details__overview_flex-container-item">
+          {overview.map((item, i) => (<div key={i} className="sk_details__overview_flex-container-item">
             <img src={item.iconUrl} alt='' className='overview__overview-icon' /><br />
             <span className='overview__overview-label'>{item.label}</span>
           </div>))}

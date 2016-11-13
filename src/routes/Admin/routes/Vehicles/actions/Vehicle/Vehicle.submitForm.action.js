@@ -11,13 +11,6 @@ import {SubmissionError} from 'redux-form';
  * @returns {any}
  */
 export default function submitVehicleForm(data, formMode) {
-  // TODO: Fix
-  // data.filesToUpload = {
-  //   imageFiles: data.imageFilesToUpload,
-  //   faultsFiles: data.faultsFilesToUpload
-  // };
-
-  // return Promise.resolve(true);
   return formMode == FORM_MODE.ADDING
     ? createVehicleAsync(data)
     : updateVehicleAsync(data);
@@ -29,22 +22,19 @@ export default function submitVehicleForm(data, formMode) {
  * @returns {*|Promise.<TResult>|Promise<U>|Thenable<U>}
  */
 function createVehicleAsync(data) {
-  return fetch(`${remoteConfig.remote}/api/vehicle`, {
+  return fetch(`${remoteConfig.remote}/api/vehicle1`, {
     method: "POST",
     credentials: "include",
-    headers: {"Accept": "application/json", "Content-Type": "text/plain"},
-    body: "test"
+    headers: {"Accept": "application/json", "Content-Type": "application/json"},
+    body: JSON.stringify(data)
   })
+    .then(resp => resp.json())
     .then(resp => {
-      console.log(resp);
-    });
-    // .then(resp => resp.json())
-    // .then(resp => {
-    //   if (!resp.success) {
-    //     throw new SubmissionError(fromSpringToReduxFormError(resp.errors));
-    //   }
-    //   return resp;
-    // })
+      if (!resp.success) {
+        throw new SubmissionError(fromSpringToReduxFormError(resp.errors));
+      }
+      return resp;
+    })
 }
 
 /**
@@ -55,8 +45,8 @@ function createVehicleAsync(data) {
 function updateVehicleAsync(data) {
   return fetch(`${remoteConfig.remote}/api/vehicle/${data.id}`, {
     method: "PUT",
-
-    headers: {"Accept": "application/json", "Content-Type": "application/x-www-form-urlencoded"},
+    credentials: "include",
+    headers: {"Accept": "application/json", "Content-Type": "application/json"},
     body: JSON.stringify(data)
   })
     .then(resp => resp.json())

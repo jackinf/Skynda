@@ -3,8 +3,8 @@
  */
 import React from "react";
 import "../Home/components/Home.scss";
-import SearchContainer from "../Home/containers/SearchContainer";
-import SearchResultsContainer from "../Home/containers/SearchResultsContainer";
+import SearchContainer from "../Home/containers/CarSearch/Home-Container.Search.Block";
+import SearchResultsContainer from "../Home/containers/CarSearch/Home-Container.Search.Results";
 
 export default class SearchPage extends React.Component {
   render() {

@@ -10,7 +10,7 @@ const cars = {
   recentlyAdded: [
     {
       src: imageTestcar,
-      href: "/details",
+      href: "/details/1",
       year: 2012,
       brand: "Audi",
       price: 12100,
@@ -23,7 +23,7 @@ const cars = {
     },
     {
       src: imageTestcar,
-      href: "/details",
+      href: "/details/2",
       year: 2012,
       brand: "Audi",
       price: 12100,
@@ -36,7 +36,7 @@ const cars = {
     },
     {
       src: imageTestcar,
-      href: "/details",
+      href: "/details/3",
       year: 2012,
       brand: "Audi",
       price: 12100,

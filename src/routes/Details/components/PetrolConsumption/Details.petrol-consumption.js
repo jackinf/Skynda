@@ -21,7 +21,7 @@ class PetrolConsumption extends React.Component {
     return (<Skblock header={<Translate value="details.components.petrol.header"/>}>
       <Col md={2}>
         <img src={imageGasStation2x} className='sk_details__icon_list_image'
-             style={{"width": "55px", "margin-top": "20px"}}/>
+             style={{"width": "55px", marginTop: "20px"}}/>
       </Col>
       <Col md={10}>
         <Row>

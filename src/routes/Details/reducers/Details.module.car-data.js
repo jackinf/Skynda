@@ -153,19 +153,19 @@ sale`
 };
 
 
-export const SET_CAR_DATA = "SET_VEHICLE_DATA";
+export const SET_VEHICLE_DATA = "SET_VEHICLE_DATA";
 
-export const getDataAsync = (id = 110) => (dispatch, getState) => {
+export const getDataAsync = (id) => (dispatch, getState) => {
     dispatch(toggleLoading(true));
 
     return fetch(`${remoteConfig.remote}/api/vehicle/${id}/detailed`, {
       method: "GET",
       credentials: "include",
-      headers: {"Accept": "application/json", "Content-Type": "application/x-www-form-urlencoded"}
+      headers: {"Accept": "application/json", "Content-Type": "application/json"}
     })
       .then(resp => resp.json())
       .then(data => {
-        data["general"] = data["carGeneralDto"];
+        data["general"] = data["vehicleGeneralDto"];
         dispatch(setCarData(data));
         dispatch(toggleLoading(false));
       });
@@ -179,7 +179,7 @@ export const getDataAsync = (id = 110) => (dispatch, getState) => {
 
 export function setCarData(value) {
   return {
-    type: SET_CAR_DATA,
+    type: SET_VEHICLE_DATA,
     payload: value
   };
 }
@@ -192,7 +192,7 @@ export const actions = {
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
-  [SET_CAR_DATA]: (state, action) => action.payload
+  [SET_VEHICLE_DATA]: (state, action) => action.payload
 };
 
 // ------------------------------------

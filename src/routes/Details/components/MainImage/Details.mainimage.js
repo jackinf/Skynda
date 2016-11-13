@@ -19,8 +19,8 @@ class MainImage extends React.Component {
   }
 
   render() {
-    const {src, year, brand, model, engine, horsepower} = this.props.car.general;
-    const images = this.props.car.images ? this.props.car.images
+    const {src, year, brand, model, engine, horsepower} = this.props.vehicle.general;
+    const images = this.props.vehicle.images ? this.props.vehicle.images
       .filter(image => image.imageContainer)
       .map(image => ({original: image.imageContainer.imageUrl})) : [];
     const source360 = "https://www.panono.com/p/jmr7n52eIbDn/embed?autorotate=false";
@@ -66,7 +66,7 @@ class MainImage extends React.Component {
 }
 
 MainImage.propTypes = {
-  car: React.PropTypes.shape({
+  vehicle: React.PropTypes.shape({
     general: React.PropTypes.shape({
       src: React.PropTypes.string.isRequired,
       year: React.PropTypes.number.isRequired,
