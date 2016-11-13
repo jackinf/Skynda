@@ -18,6 +18,8 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.security.web.authentication.RememberMeServices;
 import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
 
+import javax.servlet.http.HttpServletResponse;
+
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -90,6 +92,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 		http
 		.csrf().disable().authorizeRequests()
+				.antMatchers(HttpMethod.OPTIONS).permitAll()//allow CORS option calls
 //		 .antMatchers("/login").permitAll()
 			.anyRequest().authenticated()
 			.and()
@@ -100,9 +103,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			response.setHeader(ORIGIN_NAME, request.getHeader("Origin"));
 //			response.setHeader(ORIGIN_NAME, "http://localhost:3000/");
 			response.setHeader(CREDENTIALS_NAME, "true");
-			response.setHeader(METHODS_NAME, "POST, GET, OPTIONS, DELETE");
-			response.setHeader(MAX_AGE_NAME, "3600");
-			response.setHeader(HEADERS_NAME, "Content-Type, Accept, X-Requested-With, remember-me");
+//			response.setHeader(METHODS_NAME, "POST, GET, OPTIONS, DELETE");
+//			response.setHeader(MAX_AGE_NAME, "3600");
+//			response.setHeader(HEADERS_NAME, "Content-Type, Accept, X-Requested-With, remember-me");
+			response.setHeader("Location", "");
+//			response.setHeader("Access-Control-Allow-Origin", "*");
+			response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+			response.setHeader("Access-Control-Max-Age", "3600");
+			response.setHeader("Access-Control-Allow-Headers", "authorization, content-type, xsrf-token");
+			response.addHeader("Access-Control-Expose-Headers", "xsrf-token");
+//			response.setStatus(HttpServletResponse.SC_OK);
 		});
 
 

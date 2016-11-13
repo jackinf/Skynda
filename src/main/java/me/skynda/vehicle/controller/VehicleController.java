@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 
 @CrossOrigin(origins = "*")
@@ -42,15 +43,10 @@ public class VehicleController extends BaseController {
         return vehicleService.getVehicleDetailed(id);
     }
 
-	@RequestMapping(value = "/vehicle1", method = RequestMethod.POST)
+	@RequestMapping(value = "/vehicle", method = RequestMethod.POST)
     public CreateOrUpdateResponseDto add(@RequestBody VehicleDto vehicleDto, BindingResult bindingResult) {
         vehicleDto.setId(null);
         return vehicleService.createOrUpdateVehicle(vehicleDto, bindingResult);
-    }
-
-	@RequestMapping(value = "/vehicle", method = RequestMethod.POST)
-    public CreateOrUpdateResponseDto add1(String test) {
-        return null;
     }
 
     @RequestMapping(value = "/vehicle/{id}", method = RequestMethod.PUT, consumes = "application/json")
