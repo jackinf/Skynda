@@ -1,9 +1,8 @@
 /**
  * Created by jevgenir on 10/21/2016.
  */
-import CarsRoute from "./routes/Cars";
-import CarModelsRoute from "./routes/CarModels";
-import CarManufacturersRoute from "./routes/CarManufacturers";
+import CarsRoute from "./routes/Vehicles";
+import CarModelsRoute from "./routes/VehicleModels";
 import {isLoggedInAs} from "../../utils/userUtils";
 
 export default (store) => ({
@@ -15,8 +14,7 @@ export default (store) => ({
   },
   childRoutes: [
     CarsRoute(store),
-    CarModelsRoute(store),
-    CarManufacturersRoute(store)
+    CarModelsRoute(store)
   ],
 
   /**
@@ -25,9 +23,9 @@ export default (store) => ({
    * @param replace
    */
   onEnter: (nextState, replace) => {
-    console.info("ON ENTER REQUIRE AUTH?");
+    // console.info("ON ENTER REQUIRE AUTH?");
     if (!isLoggedInAs(["admin"])) {
-      console.info("NOT LOGGED IN, REDIRECTING");
+      // console.info("NOT LOGGED IN, REDIRECTING");
       replace({ nextPathname: nextState.location.pathname, pathname: '/login' });
     }
   }

@@ -153,14 +153,15 @@ sale`
 };
 
 
-export const SET_CAR_DATA = "SET_CAR_DATA";
+export const SET_CAR_DATA = "SET_VEHICLE_DATA";
 
 export const getDataAsync = (id = 110) => (dispatch, getState) => {
     dispatch(toggleLoading(true));
 
-    return fetch(`${remoteConfig.remote}/api/car/${id}/detailed`, {
+    return fetch(`${remoteConfig.remote}/api/vehicle/${id}/detailed`, {
       method: "GET",
-      headers: {"Accept": "application/json", "Content-Type": "application/json"}
+      credentials: "include",
+      headers: {"Accept": "application/json", "Content-Type": "application/x-www-form-urlencoded"}
     })
       .then(resp => resp.json())
       .then(data => {
@@ -170,7 +171,7 @@ export const getDataAsync = (id = 110) => (dispatch, getState) => {
       });
       // .catch((error) => {
       //   console.log("ERROR: ", error);
-      //   dispatch(setCarData(fakeCarData));
+      //   dispatch(setVehicleData(fakeCarData));
       //   dispatch(toggleLoading(false));
       // });
 

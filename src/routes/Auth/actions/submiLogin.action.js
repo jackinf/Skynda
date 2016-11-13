@@ -3,6 +3,7 @@
  */
 import remoteConfig from "store/remoteConfig";
 import {authSetUser} from "../modules/auth.module";
+import _ from "underscore";
 
 export default function submitLogin(data) {
   return (dispatch, getState) => {
@@ -24,7 +25,20 @@ export default function submitLogin(data) {
       // headers: {"Content-Type": "application/x-www-form-urlencoded"},
       type: 'POST',
       success: function(data){
-        dispatch(authSetUser(data));
+        // Hack. we don't expect to receive correct stuff from login response, ask for legit account info from other api
+        if (_.isObject(data)) {
+          fetch(`${remoteConfig.remote}/security/account`, {
+            method: 'GET',
+            credentials: 'include'
+          })
+            .then(resp => resp.json())
+            .then(resp => {
+            console.log(resp);
+            dispatch(authSetUser(resp));
+          });
+        } else {
+          console.error("Logging in failed");
+        }
       }
     });
 

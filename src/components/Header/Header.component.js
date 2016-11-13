@@ -28,7 +28,7 @@ class Header extends React.Component {
 
   render() {
     const adminOptions = isLoggedInAs(["admin"])
-      ? [<MenuItem eventKey={3.1} onClick={e => browserHistory.push("/admin")}>Admin</MenuItem>]
+      ? [<MenuItem key={1} eventKey={3.2} onClick={e => browserHistory.push("/admin")}>Admin</MenuItem>]
       : [];
 
     return (
