@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux'
-import {toggleAdvanced} from '../actions'
-import ButtonSkynda from '../components/Button'
+import {toggleAdvanced} from '../../actions'
+import ButtonSkynda from '../../components/CarSearch/Button'
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -16,9 +16,9 @@ const mapDispatchToProps =   {
   }
 };
 
-const Button = connect(
+const ToggleButton = connect(
   mapStateToProps,
   mapDispatchToProps
 )(ButtonSkynda);
 
-export default Button
+export default ToggleButton
