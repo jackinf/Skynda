@@ -1,8 +1,8 @@
 package me.skynda.vehicle.dto.interfaces;
 
-import me.skynda.vehicle.dto.ImageContainerDto;
+import me.skynda.vehicle.dto.ImageDto;
 
 public interface IImageContainerableDto {
 
-    ImageContainerDto getImageContainer();
+    ImageDto getImage();
 }

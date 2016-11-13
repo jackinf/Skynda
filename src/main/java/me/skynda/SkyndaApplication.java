@@ -2,12 +2,15 @@ package me.skynda;
 
 import javax.persistence.EntityManagerFactory;
 
+import org.dozer.DozerBeanMapper;
+import org.dozer.Mapper;
 import org.hibernate.SessionFactory;
 import org.springframework.boot.*;
 import org.springframework.boot.autoconfigure.*;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 
@@ -20,6 +23,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @SpringBootApplication
 @EnableSwagger2
 @EntityScan(basePackages = {"me.skynda"})
+@ComponentScan()
 public class SkyndaApplication {
 
     /**
@@ -59,6 +63,17 @@ public class SkyndaApplication {
     @Bean
     public MultipartResolver multipartResolver() {
         return new StandardServletMultipartResolver();
+    }
+
+    /**
+     * Enables Dozer injection with autowired.
+     *
+     * @return
+     */
+    @Bean
+    public Mapper mapper()
+    {
+        return new DozerBeanMapper();
     }
 
     /**

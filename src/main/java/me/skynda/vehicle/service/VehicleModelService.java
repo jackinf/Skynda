@@ -1,7 +1,7 @@
 package me.skynda.vehicle.service;
 
 import me.skynda.vehicle.dto.VehicleModelDto;
-import me.skynda.vehicle.dto.request.VehicleModelRequestDto;
+import me.skynda.vehicle.dto.request.ModelRequestDto;
 import me.skynda.vehicle.dto.response.VehicleModelResponseDto;
 import me.skynda.vehicle.entity.VehicleModel;
 
@@ -12,7 +12,7 @@ public interface VehicleModelService {
      * Gets all data from the database
      * @return all vehicle models
      */
-    List<VehicleModelResponseDto> get(VehicleModelRequestDto dto);
+    List<VehicleModelResponseDto> get(ModelRequestDto dto);
 
     /**
      * Adds new vehicle model

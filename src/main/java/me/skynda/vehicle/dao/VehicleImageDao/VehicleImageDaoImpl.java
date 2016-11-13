@@ -1,9 +1,9 @@
-package me.skynda.vehicle.dao;
+package me.skynda.vehicle.dao.VehicleImageDao;
 
 import me.skynda.common.dao.ImageDao;
 import me.skynda.common.db.SkyndaBaseEntityDaoImpl;
+import me.skynda.vehicle.dto.ImageDto;
 import me.skynda.vehicle.dto.ImageContainerDto;
-import me.skynda.vehicle.dto.ImagesDto;
 import me.skynda.common.entity.Image;
 import me.skynda.vehicle.entity.Vehicle;
 import me.skynda.vehicle.entity.VehicleImage;
@@ -20,7 +20,7 @@ public class VehicleImageDaoImpl extends SkyndaBaseEntityDaoImpl<VehicleImage> i
     private ImageDao imageDao;
 
     @Override
-    public void addMultipleToVehicle(Vehicle vehicle, List<ImagesDto> images) {
+    public void addMultipleToVehicle(Vehicle vehicle, List<ImageContainerDto> images) {
 
         Session session = getSession();
         String id = vehicle.getId().toString();
@@ -31,20 +31,20 @@ public class VehicleImageDaoImpl extends SkyndaBaseEntityDaoImpl<VehicleImage> i
         if (images == null)
             return;
 
-        for (ImagesDto image : images) {
+        for (ImageContainerDto image : images) {
             VehicleImage vehicleImage = new VehicleImage();
-            vehicleImage.setVehicle(vehicle);
+//            vehicleImage.setVehicle(vehicle);
 
-            if (image.getImageContainer() != null) {
-                ImageContainerDto imageContainerDto = image.getImageContainer();
+            if (image.getImage() != null) {
+                ImageDto imageDto = image.getImage();
                 Image imageEntity = imageDao.save(Image.Factory.create(
-                    imageContainerDto.getImageUrl(),
-                    imageContainerDto.getBlobName(),
-                    imageContainerDto.getContainerName())
+                    imageDto.getUrl(),
+                    imageDto.getBlobName(),
+                    imageDto.getContainerName())
                 );
-                vehicleImage.setImage(imageEntity);
+//                vehicleImage.setImage(imageEntity);
             }
-//            vehicleImage.setImageUrl(image.getThumbnail());   // TODO?
+//            vehicleImage.setUrl(image.getThumbnail());   // TODO?
             session.save(vehicleImage);
         }
     }

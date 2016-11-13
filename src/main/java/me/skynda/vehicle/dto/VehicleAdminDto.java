@@ -10,32 +10,45 @@ import me.skynda.common.dto.BaseDto;
 
 @Data
 @ToString(callSuper = false)
-public class VehicleDto extends BaseDto {
-    public VehicleDto() {
+public class VehicleAdminDto extends BaseDto {
+    public VehicleAdminDto() {
         this.filesToDelete = new ArrayList<>();
     }
 
-    private ImageContainerDto mainImageContainer;
-//    private String mainImageUrl;
-//    private String mainImageBlobName;
-//    private String mainImageContainerName;
-
-	private String vehicleModelsCode;
 	private String vinCode;
 	private BigDecimal price;
 	private String registrationNumber;
 	private BigDecimal mileage;
 	private String colorOutside;
 	private String colorInside;
-
-	private List<ImagesDto> images;
-	private Boolean isSold;
 	private String fuelCity;
 	private String fuelHighway;
-	private List<FeatureDto> features;
-	private List<FaultsDto> faults;
+	private String problems;
+	private Integer compressionRatio;
+	private String compressionType;
+	private String configuration;
+	private String cylinders;
+	private String displacement;
+	private String size;
+	private Integer torque;
+	private Integer totalValves;
+	private String additional;
+
+	private ImageDto mainImage;
+	private VehicleModelDto model;
+
+	private Boolean isSold;
 	private PerformanceDto performance;
 	private Integer safetyStars;
+
+	private List<FeatureDto> features;
+	private List<FaultDto> faults;
+	private List<ImageContainerDto> images;
+	private List<DescriptionDto> descriptions;
+	private List<ReportDto> reports;
+	private List<ReviewDto> reviews;
+
+	private String vehicleModelCode;
 
 //    /**
 //     * base64 files that are prepared to be uploaded to file cloud storage.

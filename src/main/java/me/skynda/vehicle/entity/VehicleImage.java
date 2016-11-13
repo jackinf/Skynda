@@ -4,12 +4,13 @@ import lombok.Data;
 import me.skynda.common.entity.Image;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Data
 @Table(name = "vehicle_image")
-public class VehicleImage {
+public class VehicleImage implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,9 +19,8 @@ public class VehicleImage {
     @Column(name="archived")
     private Date archived;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "vehicle_id", nullable = false)
-    private Vehicle vehicle;
+    @Column(name = "vehicle_id", nullable = false)
+    private Integer vehicleId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "image_id", nullable = false)

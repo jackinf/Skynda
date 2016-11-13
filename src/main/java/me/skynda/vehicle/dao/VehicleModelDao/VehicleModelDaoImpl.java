@@ -1,4 +1,4 @@
-package me.skynda.vehicle.dao;
+package me.skynda.vehicle.dao.VehicleModelDao;
 
 import me.skynda.vehicle.entity.VehicleModel;
 import org.hibernate.Criteria;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import me.skynda.common.db.SkyndaBaseEntityDaoImpl;
 
 @Repository
-public class VehicleModelsDaoImpl extends SkyndaBaseEntityDaoImpl<VehicleModel> implements VehicleModelsDao {
+public class VehicleModelDaoImpl extends SkyndaBaseEntityDaoImpl<VehicleModel> implements VehicleModelDao {
 
 	@Override
 	public VehicleModel getByModelCode(String carModelsCode) {

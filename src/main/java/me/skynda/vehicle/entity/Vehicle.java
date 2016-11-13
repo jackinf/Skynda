@@ -97,27 +97,27 @@ public class Vehicle implements Serializable {
     @JoinColumn(name = "image_id", nullable = false)
     private Image mainImage;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "vehicleId", fetch = FetchType.LAZY)
+    private List<VehicleImage> images;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "vehicle_model_id", nullable = false)
     @NotNull
     private VehicleModel model;
 
-    @OneToMany(mappedBy = "vehicle", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "vehicleId", fetch = FetchType.LAZY)
     private List<VehicleDescription> descriptions;
 
-    @OneToMany(mappedBy = "vehicle", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "vehicleId", fetch = FetchType.LAZY)
     private List<VehicleFault> faults;
 
-    @OneToMany(mappedBy = "vehicle", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "vehicleId", fetch = FetchType.LAZY)
     private List<VehicleFeature> features;
 
-    @OneToMany(mappedBy = "vehicle", fetch = FetchType.LAZY)
-    private List<VehicleImage> images;
-
-    @OneToMany(mappedBy = "vehicle", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "vehicleId", fetch = FetchType.LAZY)
     private List<VehicleReport> reports;
 
-    @OneToMany(mappedBy = "vehicle", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "vehicleId", fetch = FetchType.LAZY)
     private List<VehicleReview> reviews;
 
 }

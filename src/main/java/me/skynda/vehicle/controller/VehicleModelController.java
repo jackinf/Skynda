@@ -1,7 +1,7 @@
 package me.skynda.vehicle.controller;
 
 import me.skynda.vehicle.dto.VehicleModelDto;
-import me.skynda.vehicle.dto.request.VehicleModelRequestDto;
+import me.skynda.vehicle.dto.request.ModelRequestDto;
 import me.skynda.vehicle.dto.response.VehicleModelResponseDto;
 import me.skynda.vehicle.entity.VehicleModel;
 import me.skynda.vehicle.service.VehicleModelService;
@@ -19,7 +19,7 @@ public class VehicleModelController {
     private VehicleModelService vehicleModelService;
 
     @RequestMapping(value = "/vehicle-models", method = RequestMethod.GET)
-    public List<VehicleModelResponseDto> getAll(@RequestBody(required = false) VehicleModelRequestDto searchDto) {
+    public List<VehicleModelResponseDto> getAll(@RequestBody(required = false) ModelRequestDto searchDto) {
         return vehicleModelService.get(searchDto);
     }
 

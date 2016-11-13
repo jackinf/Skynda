@@ -5,7 +5,7 @@ import lombok.ToString;
 
 @Data
 @ToString(callSuper = false)
-public class DescriptionsDto {
+public class DescriptionDto {
 	
 	private String title;
 	private String text;

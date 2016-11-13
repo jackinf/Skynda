@@ -25,5 +25,5 @@ public class ClassificationType implements Serializable {
     private Integer modifierUserId;
 
     @Column(name = "modifier_user_ip")
-    private InetAddress modifierUserIp;
+    private String modifierUserIp;
 }

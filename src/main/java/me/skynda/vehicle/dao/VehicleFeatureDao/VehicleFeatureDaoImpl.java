@@ -1,4 +1,4 @@
-package me.skynda.vehicle.dao;
+package me.skynda.vehicle.dao.VehicleFeatureDao;
 
 import me.skynda.vehicle.dto.FeatureDto;
 import me.skynda.vehicle.entity.Vehicle;
@@ -26,7 +26,7 @@ public class VehicleFeatureDaoImpl extends SkyndaBaseEntityDaoImpl<VehicleFeatur
 
         for (FeatureDto feature : features) {
             VehicleFeature vehicleFeature = new VehicleFeature();
-            vehicleFeature.setVehicle(vehicle);
+//            vehicleFeature.setVehicle(vehicle);
             vehicleFeature.setText(feature.getText());
             session.save(vehicleFeature);
         }
