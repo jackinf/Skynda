@@ -3,6 +3,7 @@ package me.skynda.vehicle.services;
 import me.skynda.common.dto.CreateOrUpdateResponseDto;
 import me.skynda.common.dto.DeleteResponseDto;
 import me.skynda.common.interfaces.daos.VehicleReviewDao;
+import me.skynda.common.interfaces.services.VehicleReviewService;
 import me.skynda.vehicle.dto.VehicleReportAdminDto;
 import me.skynda.vehicle.dto.VehicleReviewAdminDto;
 import me.skynda.vehicle.entity.VehicleReview;
