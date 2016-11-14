@@ -3,7 +3,7 @@ package me.skynda.vehicle.services;
 import me.skynda.blobstorage.dto.UploadBlobDto;
 import me.skynda.blobstorage.dto.response.BlobStorageUploadStreamResponseDto;
 import me.skynda.blobstorage.service.BlobStorageService;
-import me.skynda.image.dao.ImageDao;
+import me.skynda.common.interfaces.daos.ImageDao;
 import me.skynda.common.interfaces.daos.VehicleDao;
 import me.skynda.common.interfaces.daos.VehicleFaultDao;
 import me.skynda.common.interfaces.daos.VehicleFeatureDao;

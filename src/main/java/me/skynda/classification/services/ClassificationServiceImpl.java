@@ -1,6 +1,6 @@
 package me.skynda.classification.services;
 
-import me.skynda.classification.dao.ClassificationDao;
+import me.skynda.common.interfaces.daos.ClassificationDao;
 import me.skynda.classification.dto.ClassificationRequestDto;
 import me.skynda.classification.dto.ClassificationResponseDto;
 import me.skynda.common.interfaces.services.ClassificationService;

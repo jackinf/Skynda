@@ -1,7 +1,7 @@
 package me.skynda.image.services;
 
 import me.skynda.common.interfaces.services.ImageService;
-import me.skynda.image.dao.ImageDao;
+import me.skynda.common.interfaces.daos.ImageDao;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
