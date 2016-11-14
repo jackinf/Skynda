@@ -1,31 +1,31 @@
 SET datestyle = "ISO, MDY";
 
 
-INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('DeTomaso','Manufacturer title','This is a description 9872249');
+INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('DeTomaso','Manufacturer name','This is a description 9872249');
 
 
-INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Citroën','Manufacturer title','Description number 9442419');
+INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Citroën','Manufacturer name','Description number 9442419');
 
 
-INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Porche','Car title','Description number 5433378');
+INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Porche','Car name','Description number 5433378');
 
 
-INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Mini','Manufacturer title','Description number 2558371');
+INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Mini','Manufacturer name','Description number 2558371');
 
 
-INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Lamborghini','Manufacturer title','This is a description 4996073');
+INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Lamborghini','Manufacturer name','This is a description 4996073');
 
 
-INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Vauxhall','Car title','Description number 0901274');
+INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Vauxhall','Car name','Description number 0901274');
 
 
-INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Lancia','Manufacturer title','This is a description 5346559');
+INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Lancia','Manufacturer name','This is a description 5346559');
 
 
-INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Scion','Manufacturer title','Description number 8109783');
+INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Scion','Manufacturer name','Description number 8109783');
 
 
-INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Buick','Car title','This is a description 1002249');
+INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Buick','Car name','This is a description 1002249');
 
 
 INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('SEAT','Title of Brand','This is a description 9210934');
@@ -34,34 +34,34 @@ INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","descriptio
 INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Mitsubishi','Title of Brand','This is a description 3769243');
 
 
-INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Daewoo','Car title','Description number 3630315');
+INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Daewoo','Car name','Description number 3630315');
 
 
-INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Peugeot','Car title','This is a description 0208249');
+INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Peugeot','Car name','This is a description 0208249');
 
 
-INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Pontiac','Car title','This is a description 4559771');
+INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Pontiac','Car name','This is a description 4559771');
 
 
-INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('DAV','Car title','This is a description 6397058');
+INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('DAV','Car name','This is a description 6397058');
 
 
 INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Mazda','Title of Brand','This is a description 3866810');
 
 
-INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Isuzu','Manufacturer title','This is a description 7165201');
+INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Isuzu','Manufacturer name','This is a description 7165201');
 
 
-INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Hyundai','Car title','Description number 6254806');
+INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Hyundai','Car name','Description number 6254806');
 
 
-INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Audi','Car title','Description number 3663509');
+INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Audi','Car name','Description number 3663509');
 
 
-INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Bentley','Car title','This is a description 1288488');
+INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Bentley','Car name','This is a description 1288488');
 
 
-INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Saab','Manufacturer title','This is a description 2269697');
+INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Saab','Manufacturer name','This is a description 2269697');
 
 
 INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Cadillac','Title of Brand','Description number 8096327');
@@ -73,28 +73,28 @@ INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","descriptio
 INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Eagle','Title of Brand','Description number 5948399');
 
 
-INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Jaguar','Manufacturer title','Description number 7336023');
+INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Jaguar','Manufacturer name','Description number 7336023');
 
 
-INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Chrysler','Car title','Description number 4219475');
+INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Chrysler','Car name','Description number 4219475');
 
 
-INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Aston Martin','Manufacturer title','Description number 0796694');
+INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Aston Martin','Manufacturer name','Description number 0796694');
 
 
-INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Lotus','Manufacturer title','This is a description 9696073');
+INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Lotus','Manufacturer name','This is a description 9696073');
 
 
 INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Skoda','Title of Brand','Description number 9162007');
 
 
-INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Infiniti','Manufacturer title','This is a description 1369553');
+INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Infiniti','Manufacturer name','This is a description 1369553');
 
 
 INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Smart','Title of Brand','Description number 4517640');
 
 
-INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Land Rover','Car title','Description number 3401325');
+INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Land Rover','Car name','Description number 3401325');
 
 
 INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('GMC Trucks','Title of Brand','Description number 6656938');
@@ -109,46 +109,46 @@ INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","descriptio
 INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Plymouth','Title of Brand','This is a description 5979943');
 
 
-INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Ford','Car title','This is a description 0336676');
+INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Ford','Car name','This is a description 0336676');
 
 
-INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Acura','Manufacturer title','This is a description 3144618');
+INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Acura','Manufacturer name','This is a description 3144618');
 
 
-INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Nissan','Car title','Description number 9060493');
+INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Nissan','Car name','Description number 9060493');
 
 
-INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Chevrolet','Car title','Description number 8006114');
+INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Chevrolet','Car name','Description number 8006114');
 
 
 INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Subaru','Title of Brand','This is a description 0850263');
 
 
-INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Lincoln','Car title','This is a description 9372306');
+INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Lincoln','Car name','This is a description 9372306');
 
 
-INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('General Motors','Car title','Description number 1389133');
+INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('General Motors','Car name','Description number 1389133');
 
 
-INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Mercury','Manufacturer title','This is a description 8532411');
+INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Mercury','Manufacturer name','This is a description 8532411');
 
 
-INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Lexus','Car title','Description number 4387804');
+INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Lexus','Car name','Description number 4387804');
 
 
-INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Maserati','Car title','This is a description 9973701');
+INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Maserati','Car name','This is a description 9973701');
 
 
 INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Oldsmobile','Title of Brand','Description number 4174585');
 
 
-INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Honda','Manufacturer title','This is a description 5312085');
+INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Honda','Manufacturer name','This is a description 5312085');
 
 
-INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Suzuki','Manufacturer title','This is a description 0412699');
+INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Suzuki','Manufacturer name','This is a description 0412699');
 
 
-INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Fiat','Car title','Description number 3943627');
+INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Fiat','Car name','Description number 3943627');
 
 
 INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Volvo','Title of Brand','This is a description 6143472');
@@ -157,43 +157,43 @@ INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","descriptio
 INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Saleen','Title of Brand','Description number 5481671');
 
 
-INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('China Geely Group','Car title','Description number 6488345');
+INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('China Geely Group','Car name','Description number 6488345');
 
 
-INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Daimler','Manufacturer title','Description number 8481196');
+INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Daimler','Manufacturer name','Description number 8481196');
 
 
 INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Holden','Title of Brand','This is a description 3344129');
 
 
-INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Toyota','Manufacturer title','Description number 5950435');
+INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Toyota','Manufacturer name','Description number 5950435');
 
 
 INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Kia','Title of Brand','This is a description 5849632');
 
 
-INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Rolls-Royce','Car title','This is a description 5713641');
+INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Rolls-Royce','Car name','This is a description 5713641');
 
 
-INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Daihatsu','Car title','Description number 0128331');
+INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Daihatsu','Car name','Description number 0128331');
 
 
-INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('TaTa','Manufacturer title','This is a description 8350704');
+INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('TaTa','Manufacturer name','This is a description 8350704');
 
 
-INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Volkswagen','Car title','This is a description 2569718');
+INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Volkswagen','Car name','This is a description 2569718');
 
 
-INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Ferrari','Manufacturer title','This is a description 7152570');
+INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Ferrari','Manufacturer name','This is a description 7152570');
 
 
 INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Saturn','Title of Brand','Description number 2095792');
 
 
-INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('BMW','Car title','This is a description 6660379');
+INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('BMW','Car name','This is a description 6660379');
 
 
-INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Jeep','Manufacturer title','Description number 5686158');
+INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Jeep','Manufacturer name','Description number 5686158');
 
 
 INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Alfa Romeo','Title of Brand','Description number 2076205');
@@ -202,7 +202,7 @@ INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","descriptio
 INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('MG','Title of Brand','Description number 6794456');
 
 
-INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Hummer','Car title','This is a description 0952807');
+INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Hummer','Car name','This is a description 0952807');
 
 
 INSERT INTO "public"."car_manufacturer" ("manufacturer_code","title","description") VALUES ('Dodge','Title of Brand','This is a description 8194451');
