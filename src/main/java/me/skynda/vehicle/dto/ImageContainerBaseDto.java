@@ -1,4 +1,4 @@
-package me.skynda.common.interfaces.dtos;
+package me.skynda.vehicle.dto;
 
 import me.skynda.vehicle.dto.ImageDto;
 

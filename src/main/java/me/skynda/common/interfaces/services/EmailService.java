@@ -1,6 +1,6 @@
 package me.skynda.common.interfaces.services;
 
-import me.skynda.common.interfaces.dtos.EmailBaseDto;
+import me.skynda.email.dto.EmailBaseDto;
 
 public interface EmailService {
 

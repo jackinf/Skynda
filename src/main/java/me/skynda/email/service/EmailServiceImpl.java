@@ -5,7 +5,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import me.skynda.common.interfaces.services.EmailService;
-import me.skynda.common.interfaces.dtos.EmailBaseDto;
+import me.skynda.email.dto.EmailBaseDto;
 
 import java.util.Date;
 import java.util.Properties;

@@ -1,8 +1,9 @@
 package me.skynda.common.service;
 
 import me.skynda.common.dao.ClassificationDao;
-import me.skynda.common.dto.request.ClassifierRequestDto;
-import me.skynda.common.dto.response.ClassifierResponseDto;
+import me.skynda.common.dto.request.ClassificationRequestDto;
+import me.skynda.common.dto.response.ClassificationResponseDto;
+import me.skynda.common.interfaces.services.ClassificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,10 +19,10 @@ public class ClassificationServiceImpl implements ClassificationService {
     ClassificationDao dao;
 
     @Override
-    public List<ClassifierResponseDto> get(ClassifierRequestDto searchDto) {
-        ArrayList<ClassifierResponseDto> dtos = new ArrayList<>();
+    public List<ClassificationResponseDto> get(ClassificationRequestDto searchDto) {
+        ArrayList<ClassificationResponseDto> dtos = new ArrayList<>();
         dao.getAll().forEach(classificationEntitiy -> {
-            ClassifierResponseDto dto = new ClassifierResponseDto();
+            ClassificationResponseDto dto = new ClassificationResponseDto();
             dto.setName(classificationEntitiy.getName());
             dto.setValue(classificationEntitiy.getValue());
             dtos.add(dto);

@@ -12,7 +12,7 @@ import me.skynda.common.dto.DeleteResponseDto;
 import me.skynda.common.entity.Image;
 import me.skynda.common.helper.SkyndaUtility;
 import me.skynda.common.interfaces.daos.*;
-import me.skynda.common.interfaces.dtos.ImageContainerBaseDto;
+import me.skynda.vehicle.dto.ImageContainerBaseDto;
 import me.skynda.common.interfaces.services.VehicleService;
 import me.skynda.vehicle.dto.*;
 import me.skynda.vehicle.dto.request.SearchRequestDto;

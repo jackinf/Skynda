@@ -1,4 +1,4 @@
-package me.skynda.common.interfaces.dtos;
+package me.skynda.email.dto;
 
 public interface EmailBaseDto {
 

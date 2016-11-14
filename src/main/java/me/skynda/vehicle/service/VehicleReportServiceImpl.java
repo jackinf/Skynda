@@ -2,7 +2,7 @@ package me.skynda.vehicle.service;
 
 import me.skynda.common.dto.CreateOrUpdateResponseDto;
 import me.skynda.common.dto.DeleteResponseDto;
-import me.skynda.vehicle.dao.VehicleReportDao.VehicleReportDao;
+import me.skynda.common.interfaces.daos.VehicleReportDao;
 import me.skynda.vehicle.dto.VehicleReportAdminDto;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;

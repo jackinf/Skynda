@@ -1,7 +1,6 @@
 package me.skynda.email.dto;
 
 import lombok.Data;
-import me.skynda.common.interfaces.dtos.EmailBaseDto;
 
 @Data
 public class EmailSubscribeDto implements EmailBaseDto {

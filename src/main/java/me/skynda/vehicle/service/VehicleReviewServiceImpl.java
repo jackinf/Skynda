@@ -2,9 +2,7 @@ package me.skynda.vehicle.service;
 
 import me.skynda.common.dto.CreateOrUpdateResponseDto;
 import me.skynda.common.dto.DeleteResponseDto;
-import me.skynda.vehicle.dao.VehicleReviewDao.VehicleReviewDao;
-import me.skynda.vehicle.dto.VehicleAdminDto;
-import me.skynda.vehicle.dto.VehicleDetailedDto;
+import me.skynda.common.interfaces.daos.VehicleReviewDao;
 import me.skynda.vehicle.dto.VehicleReportAdminDto;
 import me.skynda.vehicle.dto.VehicleReviewAdminDto;
 import me.skynda.vehicle.entity.VehicleReview;
@@ -13,7 +11,6 @@ import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
