@@ -1,12 +1,13 @@
-package me.skynda.vehicle.dao.VehicleImageDao;
+package me.skynda.vehicle.dao;
 
 import me.skynda.common.dao.ImageDao;
 import me.skynda.common.db.SkyndaBaseEntityDaoImpl;
+import me.skynda.common.interfaces.daos.VehicleImageDao;
 import me.skynda.vehicle.dto.ImageDto;
 import me.skynda.vehicle.dto.ImageContainerDto;
 import me.skynda.common.entity.Image;
-import me.skynda.vehicle.entity.Vehicle;
-import me.skynda.vehicle.entity.VehicleImage;
+import me.skynda.vehicle.entities.Vehicle;
+import me.skynda.vehicle.entities.VehicleImage;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

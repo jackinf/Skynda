@@ -1,9 +1,9 @@
-package me.skynda.vehicle.dao.VehicleImageDao;
+package me.skynda.common.interfaces.daos;
 
 import me.skynda.vehicle.dto.ImageContainerDto;
 import me.skynda.common.db.SkyndaBaseEntityDao;
-import me.skynda.vehicle.entity.Vehicle;
-import me.skynda.vehicle.entity.VehicleImage;
+import me.skynda.vehicle.entities.Vehicle;
+import me.skynda.vehicle.entities.VehicleImage;
 
 import java.util.List;
 

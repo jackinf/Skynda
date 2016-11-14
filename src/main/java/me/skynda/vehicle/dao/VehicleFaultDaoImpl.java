@@ -1,12 +1,13 @@
-package me.skynda.vehicle.dao.VehicleFaultDao;
+package me.skynda.vehicle.dao;
 
 import me.skynda.common.dao.ImageDao;
 import me.skynda.common.db.SkyndaBaseEntityDaoImpl;
-import me.skynda.vehicle.dto.FaultDto;
+import me.skynda.common.interfaces.daos.VehicleFaultDao;
+import me.skynda.vehicle.dto.FaultBaseDto;
 import me.skynda.vehicle.dto.ImageDto;
 import me.skynda.common.entity.Image;
-import me.skynda.vehicle.entity.Vehicle;
-import me.skynda.vehicle.entity.VehicleFault;
+import me.skynda.vehicle.entities.Vehicle;
+import me.skynda.vehicle.entities.VehicleFault;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -20,7 +21,7 @@ public class VehicleFaultDaoImpl extends SkyndaBaseEntityDaoImpl<VehicleFault> i
     private ImageDao imageDao;
 
     @Override
-    public void addMultipleToVehicle(Vehicle vehicle, List<FaultDto> faults) {
+    public void addMultipleToVehicle(Vehicle vehicle, List<FaultBaseDto> faults) {
 
         Session session = getSession();
         String id = vehicle.getId().toString();
@@ -31,7 +32,7 @@ public class VehicleFaultDaoImpl extends SkyndaBaseEntityDaoImpl<VehicleFault> i
         if (faults == null)
             return;
 
-        for (FaultDto fault : faults) {
+        for (FaultBaseDto fault : faults) {
             VehicleFault vehicleFault = new VehicleFault();
 //            vehicleFault.setVehicle(vehicle);
             vehicleFault.setText(fault.getText());

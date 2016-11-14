@@ -1,8 +1,10 @@
-package me.skynda.vehicle.dao.VehicleDao;
+package me.skynda.vehicle.dao;
 
+import me.skynda.common.interfaces.daos.VehicleDao;
 import me.skynda.vehicle.dto.request.SearchRequestDto;
-import me.skynda.vehicle.entity.Vehicle;
+import me.skynda.vehicle.entities.Vehicle;
 import org.apache.commons.lang3.NotImplementedException;
+import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
 import me.skynda.common.db.SkyndaBaseEntityDaoImpl;
@@ -12,13 +14,11 @@ import java.util.List;
 @Repository
 public class VehicleDaoImpl extends SkyndaBaseEntityDaoImpl<Vehicle> implements VehicleDao {
 
-
-    public VehicleDaoImpl(){
-
-    }
-
     @Override
     public List<Vehicle> search(SearchRequestDto params) {
+
+        Session session = getSession();
+        List<Vehicle> vehicles = this.getAll();
 
         if (params.Brands != null) {
 

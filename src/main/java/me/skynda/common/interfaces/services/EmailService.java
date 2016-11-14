@@ -1,6 +1,6 @@
-package me.skynda.email.service;
+package me.skynda.common.interfaces.services;
 
-import me.skynda.email.dto.IEmailBaseDto;
+import me.skynda.common.interfaces.dtos.EmailBaseDto;
 
 public interface EmailService {
 
@@ -9,5 +9,5 @@ public interface EmailService {
      * @param dto Email message settings e.g. receiver, content, server...
      * @return Is message successfully sent
      */
-    boolean sendEmail(IEmailBaseDto dto);
+    boolean sendEmail(EmailBaseDto dto);
 }

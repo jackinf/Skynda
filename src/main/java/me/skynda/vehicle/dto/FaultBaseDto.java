@@ -2,12 +2,12 @@ package me.skynda.vehicle.dto;
 
 import lombok.Data;
 import lombok.ToString;
-import me.skynda.vehicle.dto.interfaces.IImageContainerableDto;
+import me.skynda.common.interfaces.dtos.ImageContainerBaseDto;
 import me.skynda.common.dto.BaseDto;
 
 @Data
 @ToString(callSuper = false)
-public class FaultDto extends BaseDto implements IImageContainerableDto {
+public class FaultBaseDto extends BaseDto implements ImageContainerBaseDto {
 	
 	private String text;
     private ImageDto image;

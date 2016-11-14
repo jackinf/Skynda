@@ -1,8 +1,7 @@
-package me.skynda.vehicle.entity;
+package me.skynda.vehicle.entities;
 
 import lombok.Data;
 import me.skynda.common.entity.Image;
-import org.hibernate.annotations.ManyToAny;
 
 import javax.persistence.*;
 import java.io.Serializable;

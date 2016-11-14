@@ -1,6 +1,7 @@
-package me.skynda.vehicle.entity;
+package me.skynda.vehicle.entities;
 
 import lombok.Data;
+import me.skynda.common.entity.Image;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -8,8 +9,8 @@ import java.util.Date;
 
 @Entity
 @Data
-@Table(name = "vehicle_feature")
-public class VehicleFeature implements Serializable{
+@Table(name = "vehicle_image")
+public class VehicleImage implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,10 +19,10 @@ public class VehicleFeature implements Serializable{
     @Column(name="archived")
     private Date archived;
 
-    @Column(name="text")
-    private String text;
-
     @Column(name = "vehicle_id", nullable = false)
     private Integer vehicleId;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "image_id", nullable = false)
+    private Image image;
 }

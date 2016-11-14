@@ -1,9 +1,9 @@
-package me.skynda.vehicle.service;
+package me.skynda.common.interfaces.services;
 
 import me.skynda.vehicle.dto.VehicleModelDto;
 import me.skynda.vehicle.dto.request.ModelRequestDto;
 import me.skynda.vehicle.dto.response.VehicleModelResponseDto;
-import me.skynda.vehicle.entity.VehicleModel;
+import me.skynda.vehicle.entities.VehicleModel;
 
 import java.util.List;
 

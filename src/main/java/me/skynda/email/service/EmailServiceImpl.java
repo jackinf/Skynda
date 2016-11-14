@@ -4,7 +4,8 @@ import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import me.skynda.email.dto.IEmailBaseDto;
+import me.skynda.common.interfaces.services.EmailService;
+import me.skynda.common.interfaces.dtos.EmailBaseDto;
 
 import java.util.Date;
 import java.util.Properties;
@@ -23,7 +24,7 @@ public class EmailServiceImpl implements EmailService {
      * @return Successfully sent or not
      */
     @Override
-    public boolean sendEmail(IEmailBaseDto dto) {
+    public boolean sendEmail(EmailBaseDto dto) {
 
         // Get a Properties object
         Properties props = System.getProperties();

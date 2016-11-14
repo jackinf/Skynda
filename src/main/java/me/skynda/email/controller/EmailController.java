@@ -3,7 +3,7 @@ package me.skynda.email.controller;
 import me.skynda.common.controller.BaseController;
 import me.skynda.email.dto.EmailQuestionDto;
 import me.skynda.email.dto.EmailSubscribeDto;
-import me.skynda.email.service.EmailService;
+import me.skynda.common.interfaces.services.EmailService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;

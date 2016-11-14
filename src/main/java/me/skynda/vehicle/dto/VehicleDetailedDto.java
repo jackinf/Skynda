@@ -38,7 +38,7 @@ public class VehicleDetailedDto {
 	private Integer safetyStars;
 
 	private List<FeatureDto> features;
-	private List<FaultDto> faults;
+	private List<FaultBaseDto> faults;
 	private List<ImageContainerDto> images;
 	private List<DescriptionDto> descriptions;
 	private List<ReportDto> reports;

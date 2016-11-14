@@ -7,20 +7,17 @@ import me.skynda.blobstorage.dto.response.BlobStorageUploadStreamResponseDto;
 import me.skynda.blobstorage.service.BlobStorageService;
 import me.skynda.common.dao.ImageDao;
 import me.skynda.common.dto.SearchResponseDto;
-import me.skynda.vehicle.dao.VehicleDao.VehicleDao;
-import me.skynda.vehicle.dao.VehicleFaultDao.VehicleFaultDao;
-import me.skynda.vehicle.dao.VehicleFeatureDao.VehicleFeatureDao;
-import me.skynda.vehicle.dao.VehicleImageDao.VehicleImageDao;
-import me.skynda.vehicle.dao.VehicleModelDao.VehicleModelDao;
 import me.skynda.common.dto.CreateOrUpdateResponseDto;
 import me.skynda.common.dto.DeleteResponseDto;
 import me.skynda.common.entity.Image;
 import me.skynda.common.helper.SkyndaUtility;
+import me.skynda.common.interfaces.daos.*;
+import me.skynda.common.interfaces.dtos.ImageContainerBaseDto;
+import me.skynda.common.interfaces.services.VehicleService;
 import me.skynda.vehicle.dto.*;
-import me.skynda.vehicle.dto.interfaces.IImageContainerableDto;
 import me.skynda.vehicle.dto.request.SearchRequestDto;
-import me.skynda.vehicle.entity.Vehicle;
-import me.skynda.vehicle.entity.VehicleModel;
+import me.skynda.vehicle.entities.Vehicle;
+import me.skynda.vehicle.entities.VehicleModel;
 import me.skynda.vehicle.service.converter.VehicleConverter;
 import me.skynda.vehicle.validators.VehicleValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -168,7 +165,7 @@ public class VehicleServiceImpl implements VehicleService {
         }
 
         // Upload faults images
-        List<FaultDto> faultDtos = vehicleAdminDto.getFaults();
+        List<FaultBaseDto> faultDtos = vehicleAdminDto.getFaults();
         if (faultDtos != null) {
             faultDtos.forEach(this::fromBase64ToUrl);
         }
@@ -228,7 +225,7 @@ public class VehicleServiceImpl implements VehicleService {
         return response;
     }
 
-    private void fromBase64ToUrl(IImageContainerableDto dto) {
+    private void fromBase64ToUrl(ImageContainerBaseDto dto) {
         String faultBase64File = dto.getImage() != null
                 ? dto.getImage().getBase64File()
                 : null;

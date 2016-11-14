@@ -3,7 +3,7 @@ package me.skynda.vehicle.controller;
 import me.skynda.vehicle.dto.VehicleAdminDto;
 import me.skynda.vehicle.dto.VehicleDetailedDto;
 import me.skynda.vehicle.dto.request.SearchRequestDto;
-import me.skynda.vehicle.service.VehicleService;
+import me.skynda.common.interfaces.services.VehicleService;
 import me.skynda.common.dto.CreateOrUpdateResponseDto;
 import me.skynda.common.dto.DeleteResponseDto;
 import org.junit.Before;

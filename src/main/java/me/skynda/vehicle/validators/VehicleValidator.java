@@ -1,6 +1,6 @@
 package me.skynda.vehicle.validators;
 
-import me.skynda.vehicle.entity.Vehicle;
+import me.skynda.vehicle.entities.Vehicle;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;

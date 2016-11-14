@@ -1,13 +1,14 @@
 package me.skynda.vehicle.service;
 
 import me.skynda.common.dao.ClassificationDao;
-import me.skynda.vehicle.dao.VehicleModelDao.VehicleModelDao;
+import me.skynda.common.interfaces.daos.VehicleModelDao;
+import me.skynda.common.interfaces.services.VehicleModelService;
 import me.skynda.vehicle.dto.VehicleModelDto;
 import me.skynda.vehicle.dto.request.ModelRequestDto;
 import me.skynda.vehicle.dto.response.VehicleModelResponseDto;
 import me.skynda.common.entity.Classification;
 import me.skynda.common.entity.ClassificationType;
-import me.skynda.vehicle.entity.VehicleModel;
+import me.skynda.vehicle.entities.VehicleModel;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

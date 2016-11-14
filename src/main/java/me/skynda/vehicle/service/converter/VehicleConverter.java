@@ -1,7 +1,7 @@
 package me.skynda.vehicle.service.converter;
 
 import me.skynda.vehicle.dto.*;
-import me.skynda.vehicle.entity.*;
+import me.skynda.vehicle.entities.*;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

@@ -1,4 +1,4 @@
-package me.skynda.vehicle.service;
+package me.skynda.common.interfaces.services;
 
 import java.util.List;
 

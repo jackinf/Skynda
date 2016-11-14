@@ -1,4 +1,4 @@
-package me.skynda.vehicle.entity;
+package me.skynda.vehicle.entities;
 
 import lombok.Data;
 

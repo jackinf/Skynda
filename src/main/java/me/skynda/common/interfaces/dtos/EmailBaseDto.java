@@ -1,6 +1,6 @@
-package me.skynda.email.dto;
+package me.skynda.common.interfaces.dtos;
 
-public interface IEmailBaseDto {
+public interface EmailBaseDto {
 
     /**
      * Sender of the email

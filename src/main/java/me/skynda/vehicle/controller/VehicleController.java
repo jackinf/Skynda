@@ -9,7 +9,7 @@ import me.skynda.common.dto.DeleteResponseDto;
 import me.skynda.common.dto.SearchResponseDto;
 import me.skynda.vehicle.dto.VehicleAdminDto;
 import me.skynda.vehicle.dto.VehicleDetailedDto;
-import me.skynda.vehicle.service.VehicleService;
+import me.skynda.common.interfaces.services.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 
 @CrossOrigin(origins = "*")
