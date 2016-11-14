@@ -4,8 +4,7 @@ package me.skynda.vehicle.dto;
 import lombok.Data;
 import lombok.ToString;
 import me.skynda.common.dto.BaseDto;
-import me.skynda.common.dto.ClassificationDto.ClassificationBaseDto;
-import me.skynda.common.dto.ClassificationDto.ClassificationDto;
+import me.skynda.classification.dto.ClassificationDto;
 
 @Data
 @ToString(callSuper = false)

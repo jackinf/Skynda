@@ -2,12 +2,9 @@ package me.skynda.vehicle.controller;
 
 import me.skynda.common.dto.CreateOrUpdateResponseDto;
 import me.skynda.common.dto.DeleteResponseDto;
-import me.skynda.vehicle.dto.VehicleAdminDto;
-import me.skynda.vehicle.dto.VehicleDetailedDto;
 import me.skynda.vehicle.dto.VehicleReviewAdminDto;
-import me.skynda.vehicle.dto.request.SearchRequestDto;
 import me.skynda.vehicle.dto.VehicleReportAdminDto;
-import me.skynda.vehicle.service.VehicleReviewService;
+import me.skynda.vehicle.services.VehicleReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;

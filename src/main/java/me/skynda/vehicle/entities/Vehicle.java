@@ -8,7 +8,7 @@ import java.util.List;
 import javax.persistence.*;
 
 import lombok.Data;
-import me.skynda.common.entity.Image;
+import me.skynda.image.entities.Image;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.NotNull;

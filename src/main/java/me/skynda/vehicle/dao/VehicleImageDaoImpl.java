@@ -1,11 +1,11 @@
 package me.skynda.vehicle.dao;
 
-import me.skynda.common.dao.ImageDao;
+import me.skynda.image.dao.ImageDao;
 import me.skynda.common.db.SkyndaBaseEntityDaoImpl;
 import me.skynda.common.interfaces.daos.VehicleImageDao;
 import me.skynda.vehicle.dto.ImageDto;
 import me.skynda.vehicle.dto.ImageContainerDto;
-import me.skynda.common.entity.Image;
+import me.skynda.image.entities.Image;
 import me.skynda.vehicle.entities.Vehicle;
 import me.skynda.vehicle.entities.VehicleImage;
 import org.hibernate.Session;

@@ -1,8 +1,8 @@
 package me.skynda.vehicle.dto.request;
 
 import lombok.Data;
-import me.skynda.common.dto.ClassificationDto.ButtonAttributesDto;
-import me.skynda.common.dto.ClassificationDto.SliderAttributesDto;
+import me.skynda.classification.dto.ButtonAttributesDto;
+import me.skynda.classification.dto.SliderAttributesDto;
 
 import java.util.List;
 

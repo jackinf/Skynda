@@ -1,7 +1,7 @@
 package me.skynda.common.interfaces.services;
 
-import me.skynda.common.dto.request.ClassificationRequestDto;
-import me.skynda.common.dto.response.ClassificationResponseDto;
+import me.skynda.classification.dto.ClassificationRequestDto;
+import me.skynda.classification.dto.ClassificationResponseDto;
 
 import java.util.List;
 

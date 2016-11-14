@@ -1,7 +1,7 @@
 package me.skynda.vehicle.entities;
 
 import lombok.Data;
-import me.skynda.common.entity.Image;
+import me.skynda.image.entities.Image;
 
 import javax.persistence.*;
 import java.io.Serializable;
