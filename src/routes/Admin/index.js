@@ -1,9 +1,11 @@
 /**
  * Created by jevgenir on 10/21/2016.
  */
-import CarsRoute from "./routes/Vehicles";
-import CarModelsRoute from "./routes/VehicleModels";
+import VehiclesRoute from "./routes/Vehicles";
+import VehicleModelsRoute from "./routes/VehicleModels";
 import ClassifiersRoute from "./routes/Classifiers";
+import VehicleReportsRoute from "./routes/VehicleReports";
+import VehicleReviewsRoute from "./routes/VehicleReviews";
 import {isLoggedInAs} from "../../utils/userUtils";
 
 export default (store) => ({
@@ -14,9 +16,11 @@ export default (store) => ({
     })
   },
   childRoutes: [
-    CarsRoute(store),
-    CarModelsRoute(store),
-    ClassifiersRoute(store)
+    VehiclesRoute(store),
+    VehicleModelsRoute(store),
+    ClassifiersRoute(store),
+    VehicleReportsRoute(store),
+    VehicleReviewsRoute(store)
   ],
 
   /**

@@ -171,7 +171,7 @@ export const getDataAsync = (id) => (dispatch, getState) => {
       });
       // .catch((error) => {
       //   console.log("ERROR: ", error);
-      //   dispatch(setVehicleData(fakeCarData));
+      //   dispatch(setVehicleReportData(fakeCarData));
       //   dispatch(toggleLoading(false));
       // });
 

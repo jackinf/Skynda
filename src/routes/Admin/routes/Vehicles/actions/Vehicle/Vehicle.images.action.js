@@ -2,7 +2,7 @@
  * Created by jevgenir on 11/2/2016.
  */
 
-// import setVehicleData from "./Car.setVehicleData.action";
+// import setVehicleReportData from "./Car.setVehicleReportData.action";
 import {FORMS} from "../../constants/Vehicle.constant";
 import {arrayPush, arrayRemove, change} from "redux-form";
 import {imageUtil} from "../../../../../../utils/allUtils";
