@@ -5,10 +5,12 @@ import me.skynda.common.dto.DeleteResponseDto;
 import me.skynda.common.interfaces.daos.VehicleReviewDao;
 import me.skynda.vehicle.dto.VehicleReportAdminDto;
 import me.skynda.vehicle.dto.VehicleReviewAdminDto;
-import me.skynda.vehicle.entity.VehicleReview;
+import me.skynda.vehicle.entities.VehicleReview;
 import org.apache.commons.lang3.NotImplementedException;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 
 import java.util.List;
@@ -17,6 +19,8 @@ import java.util.stream.Collectors;
 /**
  * Created by jevgenir on 11/14/2016.
  */
+@Service
+@Transactional
 public class VehicleReviewServiceImpl implements VehicleReviewService {
 
     @Autowired

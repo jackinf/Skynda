@@ -7,16 +7,16 @@ import me.skynda.vehicle.dto.VehicleReportAdminDto;
 import me.skynda.vehicle.services.VehicleReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 /**
  * Created by jevgenir on 11/14/2016.
  */
+@CrossOrigin(origins = "*")
+@RestController
+@RequestMapping(value = "/api")
 public class VehicleReviewController {
 
     @Autowired
