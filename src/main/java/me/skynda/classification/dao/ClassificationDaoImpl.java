@@ -2,6 +2,7 @@ package me.skynda.classification.dao;
 
 import me.skynda.common.db.SkyndaBaseEntityDaoImpl;
 import me.skynda.classification.entities.Classification;
+import me.skynda.common.interfaces.daos.ClassificationDao;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;

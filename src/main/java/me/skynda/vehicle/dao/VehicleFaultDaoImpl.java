@@ -1,6 +1,6 @@
 package me.skynda.vehicle.dao;
 
-import me.skynda.image.dao.ImageDao;
+import me.skynda.common.interfaces.daos.ImageDao;
 import me.skynda.common.db.SkyndaBaseEntityDaoImpl;
 import me.skynda.common.interfaces.daos.VehicleFaultDao;
 import me.skynda.vehicle.dto.FaultBaseDto;

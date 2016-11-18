@@ -1,6 +1,6 @@
 package me.skynda.vehicle.services;
 
-import me.skynda.classification.dao.ClassificationDao;
+import me.skynda.common.interfaces.daos.ClassificationDao;
 import me.skynda.common.interfaces.daos.VehicleModelDao;
 import me.skynda.common.interfaces.services.VehicleModelService;
 import me.skynda.vehicle.dto.VehicleModelDto;
