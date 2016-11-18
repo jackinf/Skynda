@@ -23,6 +23,7 @@ import image2 from "./../../static/images/standard/SKYNDA@2x.png";
 
 class Header extends React.Component {
   sellCar = (e) => {
+
     alert("Not implemented");
   };
 

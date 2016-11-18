@@ -49,12 +49,7 @@ export default class VehicleList extends React.Component {
           header={<Cell>Name</Cell>}
           cell={({rowIndex, ...props}) => {
             var car = rows[rowIndex];
-            var model = car.vehicleGeneralDto ? car.vehicleGeneralDto.model : "";
-            return (
-              <Cell {...props}>
-                {model}
-              </Cell>
-            );
+            return (<Cell {...props}>{car.model ? car.model.modelCode : ""}</Cell>);
           }}
           width={200}
         />

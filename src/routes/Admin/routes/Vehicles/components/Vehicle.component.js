@@ -201,23 +201,23 @@ class Vehicle extends React.Component {
                 <Field name="registrationNumber" label="Registration Number *" component={renderTextField}/>
                 <Field name="safetyStars" label="Safety Stars" component={renderTextField} type="number"/>
                 <Field name="vinCode" label="Vin Code *" component={renderTextField}/>
-                <Field name="additionalInfo" label="Additional info" component={renderTextField}/>
+                <Field name="additional" label="Additional info" component={renderTextField}/>
               </Col>
               <Col md={6} xs={12}>
                 <h4>Performance</h4>
-                <Field name="performance.compressionRatio" label="Compression Ratio" component={renderTextField}/>
-                <Field name="performance.compressorType" label="Compressor Type" component={renderTextField}/>
-                <Field name="performance.configuration" label="Configuration" component={renderTextField}/>
-                <Field name="performance.cylinders" label="Cylinders" component={renderTextField}/>
-                <Field name="performance.displacement" label="Displacement" component={renderTextField}/>
-                <Field name="performance.doors" label="Doors" component={renderTextField} type="number"/>
-                <Field name="performance.drivenWheels" label="Driven Wheels" component={renderTextField}/>
-                <Field name="performance.fuelType" label="Fuel Type" component={renderTextField}/>
-                <Field name="performance.horsePower" label="Horse Power" component={renderTextField} type="number"/>
-                <Field name="performance.powerTrain" label="Power Train" component={renderTextField}/>
-                <Field name="performance.size" label="Size" component={renderTextField} type="number"/>
-                <Field name="performance.torque" label="Torque" component={renderTextField} type="number"/>
-                <Field name="performance.totalValves" label="Total Valves" component={renderTextField} type="number"/>
+                <Field name="compressionRatio" label="Compression Ratio" component={renderTextField}/>
+                <Field name="compressorType" label="Compressor Type" component={renderTextField}/>
+                <Field name="configuration" label="Configuration" component={renderTextField}/>
+                <Field name="cylinders" label="Cylinders" component={renderTextField}/>
+                <Field name="displacement" label="Displacement" component={renderTextField}/>
+                <Field name="doors" label="Doors" component={renderTextField} type="number"/>
+                <Field name="drivenWheels" label="Driven Wheels" component={renderTextField}/>
+                <Field name="fuelType" label="Fuel Type" component={renderTextField}/>
+                <Field name="horsePower" label="Horse Power" component={renderTextField} type="number"/>
+                <Field name="powerTrain" label="Power Train" component={renderTextField}/>
+                <Field name="size" label="Size" component={renderTextField} type="number"/>
+                <Field name="torque" label="Torque" component={renderTextField} type="number"/>
+                <Field name="totalValves" label="Total Valves" component={renderTextField} type="number"/>
               </Col>
             </Row>
 
