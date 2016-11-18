@@ -13,7 +13,6 @@ import me.skynda.vehicle.dto.*;
 import me.skynda.vehicle.dto.request.SearchRequestDto;
 import me.skynda.vehicle.entities.Vehicle;
 import me.skynda.vehicle.entities.VehicleModel;
-import me.skynda.vehicle.services.converter.VehicleConverter;
 import me.skynda.common.dto.CreateOrUpdateResponseDto;
 import me.skynda.common.dto.DeleteResponseDto;
 import org.junit.Test;
@@ -54,9 +53,6 @@ public class VehicleServiceImplTest {
 
     @Mock
     private BlobStorageService blobStorageService;
-
-    @Spy
-    private VehicleConverter vehicleConverter;
 
     @Mock
     private BlobStorageService validator;

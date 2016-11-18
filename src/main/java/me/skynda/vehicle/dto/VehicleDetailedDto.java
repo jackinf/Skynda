@@ -11,6 +11,7 @@ import me.skynda.common.helper.StringHelper;
 @ToString(callSuper = false)
 public class VehicleDetailedDto {
 
+	private Integer id;
 	private String vinCode;
 	private BigDecimal price;
 	private String registrationNumber;

@@ -18,8 +18,8 @@ import me.skynda.vehicle.dto.*;
 import me.skynda.vehicle.dto.request.SearchRequestDto;
 import me.skynda.vehicle.entities.Vehicle;
 import me.skynda.vehicle.entities.VehicleModel;
-import me.skynda.vehicle.services.converter.VehicleConverter;
 import me.skynda.vehicle.validators.VehicleValidator;
+import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -58,7 +58,7 @@ public class VehicleServiceImpl implements VehicleService {
     private ImageDao imageDao;
 
     @Autowired
-    private VehicleConverter vehicleConverter;
+    private Mapper mapper;
 
     @Autowired
     UserService userService;
@@ -71,7 +71,7 @@ public class VehicleServiceImpl implements VehicleService {
         List<VehicleDetailedDto> vehicles = new ArrayList<>();
         vehicleDao.getAll().forEach(c -> {
             if(c.getArchived() == null)
-                vehicles.add(vehicleConverter.transformToVehicle(c));
+                vehicles.add(mapper.map(c, VehicleDetailedDto.class));
         });
         return vehicles;
     }
@@ -79,13 +79,13 @@ public class VehicleServiceImpl implements VehicleService {
     @Override
     public VehicleAdminDto getVehicle(Long id) {
         Vehicle model = vehicleDao.get(id);
-        return vehicleConverter.transformToAdminDto(model);
+        return mapper.map(model, VehicleAdminDto.class);
     }
 
     @Override
     public VehicleDetailedDto getVehicleDetailed(Long id) {
         Vehicle model = vehicleDao.get(id);
-        return vehicleConverter.transformToVehicle(model);
+        return mapper.map(model, VehicleDetailedDto.class);
     }
 
     @Override
@@ -96,10 +96,10 @@ public class VehicleServiceImpl implements VehicleService {
         Vehicle vehicle;
         if (vehicleAdminDto.getId() != null) {
             vehicle = vehicleDao.get(vehicleAdminDto.getId());
-            vehicle = vehicleConverter.transformToVehicle(vehicleAdminDto);
+            mapper.map(vehicleAdminDto, vehicle);
 //            vehicle.setUpdated(new Date());   // TODO
         } else {
-            vehicle = vehicleConverter.transformToVehicle(vehicleAdminDto);
+            vehicle = mapper.map(vehicleAdminDto, Vehicle.class);
             vehicle.setCreated(new Date());
         }
         /*
@@ -112,18 +112,6 @@ public class VehicleServiceImpl implements VehicleService {
             Get a new creator
          */
         vehicle.setOwnerId(1);  // TODO: use owner
-
-//        String currentLogin = SecurityUtils.getCurrentLogin();
-//        if (currentLogin != null && !currentLogin.isEmpty()) {
-//            UserDto byLogin = userService.findByLogin(currentLogin);
-//            if (byLogin != null) {
-//                vehicle.setOwnerId(byLogin.getId());
-//            } else {
-//                return CreateOrUpdateResponseDto.Factory.fail();
-//            }
-//        } else {
-//            return CreateOrUpdateResponseDto.Factory.fail();
-//        }
 
         /*
             Get images
@@ -216,7 +204,7 @@ public class VehicleServiceImpl implements VehicleService {
         List<Vehicle> vehicles = vehicleDao.search(params);
 
         vehicles.forEach(vehicle -> {
-            vehiclesGeneralDto.add(vehicleConverter.transformToSearchDto(vehicle));
+            vehiclesGeneralDto.add(mapper.map(vehicle, VehicleSearchDto.class));
         });
 
         response.setSuccess(true);
