@@ -27,7 +27,7 @@ public class VehicleFeatureDaoImpl extends SkyndaBaseEntityDaoImpl<VehicleFeatur
 
         for (FeatureDto feature : features) {
             VehicleFeature vehicleFeature = new VehicleFeature();
-//            vehicleFeature.setVehicle(vehicle);
+            vehicleFeature.setVehicleId(vehicle.getId());
             vehicleFeature.setText(feature.getText());
             session.save(vehicleFeature);
         }
