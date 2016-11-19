@@ -39,11 +39,11 @@ public class VehicleControllerTest {
     public void get() throws Exception {
         // Arrange
         VehicleAdminDto dto = new VehicleAdminDto();
-        when(vehicleService.getVehicle(1L)).thenReturn(dto);
+        when(vehicleService.getVehicle(1)).thenReturn(dto);
 
         // Act
-        VehicleAdminDto returnedDto1 = controller.get(1L);
-        VehicleAdminDto returnedDto2 = controller.get(2L);
+        VehicleAdminDto returnedDto1 = controller.get(1);
+        VehicleAdminDto returnedDto2 = controller.get(2);
 
         // Assert
         assertEquals(dto, returnedDto1);
@@ -54,11 +54,11 @@ public class VehicleControllerTest {
     public void getDetailed() throws Exception {
         // Arrange
         VehicleDetailedDto dto = new VehicleDetailedDto();
-        when(vehicleService.getVehicleDetailed(1L)).thenReturn(dto);
+        when(vehicleService.getVehicleDetailed(1)).thenReturn(dto);
 
         // Act
-        VehicleDetailedDto detailed1 = controller.getDetailed(1L);
-        VehicleDetailedDto detailed2 = controller.getDetailed(2L);
+        VehicleDetailedDto detailed1 = controller.getDetailed(1);
+        VehicleDetailedDto detailed2 = controller.getDetailed(2);
 
         // Assert
         assertEquals(dto, detailed1);
@@ -102,10 +102,10 @@ public class VehicleControllerTest {
         // Arrange
         DeleteResponseDto deleteResponseDto = new DeleteResponseDto();
         deleteResponseDto.setSuccess(true);
-        when(vehicleService.deleteVehicle(1L)).thenReturn(deleteResponseDto);
+        when(vehicleService.deleteVehicle(1)).thenReturn(deleteResponseDto);
 
         // Act
-        DeleteResponseDto deleteResponse = controller.delete(1L);
+        DeleteResponseDto deleteResponse = controller.delete(1);
 
         // Assert
         assertEquals(deleteResponseDto, deleteResponse);

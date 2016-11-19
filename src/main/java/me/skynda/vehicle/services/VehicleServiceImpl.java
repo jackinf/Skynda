@@ -77,13 +77,13 @@ public class VehicleServiceImpl implements VehicleService {
     }
 
     @Override
-    public VehicleAdminDto getVehicle(Long id) {
+    public VehicleAdminDto getVehicle(Integer id) {
         Vehicle model = vehicleDao.get(id);
         return mapper.map(model, VehicleAdminDto.class);
     }
 
     @Override
-    public VehicleDetailedDto getVehicleDetailed(Long id) {
+    public VehicleDetailedDto getVehicleDetailed(Integer id) {
         Vehicle model = vehicleDao.get(id);
         return mapper.map(model, VehicleDetailedDto.class);
     }
@@ -189,7 +189,7 @@ public class VehicleServiceImpl implements VehicleService {
     }
 
     @Override
-    public DeleteResponseDto deleteVehicle(Long id) {
+    public DeleteResponseDto deleteVehicle(Integer id) {
         vehicleDao.delete(id);  // TODO: make somehow sure that the item has been deleted.
 
         DeleteResponseDto response = new DeleteResponseDto();

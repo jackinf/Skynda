@@ -6,5 +6,5 @@ import me.skynda.classification.dto.ClassificationResponseDto;
 import java.util.List;
 
 public interface ClassificationService {
-    List<ClassificationResponseDto> get(ClassificationRequestDto searchDto);
+    List<ClassificationResponseDto> getByType(String param);
 }

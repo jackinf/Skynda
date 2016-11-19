@@ -33,12 +33,12 @@ public class VehicleController extends BaseController {
     }
 
     @RequestMapping(value = "/vehicle/{id}", method = RequestMethod.GET)
-    public VehicleAdminDto get(@PathVariable("id") Long id) {
+    public VehicleAdminDto get(@PathVariable("id") Integer id) {
         return vehicleService.getVehicle(id);
     }
 
     @RequestMapping(value = "/vehicle/{id}/detailed", method = RequestMethod.GET, produces = "application/json")
-    public VehicleDetailedDto getDetailed(@PathVariable("id") Long id) {
+    public VehicleDetailedDto getDetailed(@PathVariable("id") Integer id) {
         return vehicleService.getVehicleDetailed(id);
     }
 
@@ -57,7 +57,7 @@ public class VehicleController extends BaseController {
     }
 
     @RequestMapping(value = "/vehicle/{id}", method = RequestMethod.DELETE, consumes = "application/json")
-    public DeleteResponseDto delete(@PathVariable("id") Long id) {
+    public DeleteResponseDto delete(@PathVariable("id") Integer id) {
         return vehicleService.deleteVehicle(id);
     }
 

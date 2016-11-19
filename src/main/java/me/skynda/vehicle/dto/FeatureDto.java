@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class FeatureDto {
-    private Long id;
+    private Integer id;
     private String text;
 }

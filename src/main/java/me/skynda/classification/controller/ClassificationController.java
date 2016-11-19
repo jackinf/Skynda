@@ -17,9 +17,9 @@ public class ClassificationController extends BaseController {
     @Autowired
     private ClassificationService classificationService;
 
-    @RequestMapping(value = "/classifiers", method = RequestMethod.GET)
-    public List<ClassificationResponseDto> getAll(@RequestBody(required = false) ClassificationRequestDto searchDto) {
-        return classificationService.get(searchDto);
+    @RequestMapping(value = "/classifications/{type}", method = RequestMethod.GET)
+    public List<ClassificationResponseDto> getAll(@PathVariable String type) {
+        return classificationService.getByType(type);
     }
 
 }

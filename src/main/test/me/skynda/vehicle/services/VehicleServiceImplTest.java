@@ -98,7 +98,7 @@ public class VehicleServiceImplTest {
         /*
             ACT
          */
-        VehicleAdminDto car1 = service.getVehicle(1L);
+        VehicleAdminDto car1 = service.getVehicle(1);
 
         /*
             ASSERT
@@ -121,7 +121,7 @@ public class VehicleServiceImplTest {
         /*
             ACT
          */
-        VehicleDetailedDto carDetailed = service.getVehicleDetailed(1L);
+        VehicleDetailedDto carDetailed = service.getVehicleDetailed(1);
 
         /*
             ASSERT
@@ -204,7 +204,7 @@ public class VehicleServiceImplTest {
         when(vehicleModelDao.getByModelCode(CAR_MODEL_CODE_1)).thenReturn(carModel);
 
         Vehicle addedCar = new Vehicle();
-        final Long addedCarValue = 55L;
+        final Integer addedCarValue = 55;
         addedCar.setId(addedCarValue);
         when(vehicleDao.saveOrUpdate(any(Vehicle.class))).thenReturn(addedCar);
 
@@ -239,7 +239,7 @@ public class VehicleServiceImplTest {
         /*
             ACT
          */
-        DeleteResponseDto deleteResponseDto = service.deleteVehicle(1L);
+        DeleteResponseDto deleteResponseDto = service.deleteVehicle(1);
 
         /*
             ASSERT

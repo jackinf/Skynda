@@ -33,7 +33,7 @@ public interface VehicleService {
      * @param id vehicle's id
      * @return single vehicle's dto
      */
-    VehicleAdminDto getVehicle(Long id);
+    VehicleAdminDto getVehicle(Integer id);
 
     /**
      * Gets a single vehicle. Used for displaying full info about the vehicle to the user
@@ -41,7 +41,7 @@ public interface VehicleService {
      * @param id vehicle's id
      * @return single vehicle's dto
      */
-    VehicleDetailedDto getVehicleDetailed(Long id);
+    VehicleDetailedDto getVehicleDetailed(Integer id);
 
     /**
      * Delets a single vehicle
@@ -49,7 +49,7 @@ public interface VehicleService {
      * @param id vehicle's id
      * @return Is the deletion successful or not
      */
-    DeleteResponseDto deleteVehicle(Long id);
+    DeleteResponseDto deleteVehicle(Integer id);
 
     /**
      * Search vehicles. Used for displaying full info about the vehicle to the user

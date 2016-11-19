@@ -1,5 +1,6 @@
 package me.skynda.classification.dao;
 
+import me.skynda.classification.entities.ClassificationType;
 import me.skynda.common.db.SkyndaBaseEntityDaoImpl;
 import me.skynda.classification.entities.Classification;
 import me.skynda.common.interfaces.daos.ClassificationDao;
@@ -7,15 +8,23 @@ import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Repository
 public class ClassificationDaoImpl extends SkyndaBaseEntityDaoImpl<Classification> implements ClassificationDao {
 
     @Override
-    public Classification getManufacturer(String vehicleManufacturerCode) {
-        Criteria c = getSession().createCriteria(Classification.class, "с");
-        c.add(Restrictions.eq("с.value", vehicleManufacturerCode));
-        c.add(Restrictions.eq("с.classification_type_id", 6));  // TODO: Use enum and/or classifier_type table (JOIN)
-        return (Classification) c.uniqueResult();
+    public ArrayList<Classification> getByType(String type) {
+        Criteria classifierTypeCriteria = getSession().createCriteria(ClassificationType.class, "с");
+        classifierTypeCriteria.add(Restrictions.eq("с.name", type));
+        ClassificationType classificationType = (ClassificationType) classifierTypeCriteria.uniqueResult();
+        Integer classificationTypeId = classificationType.getId();
+
+        Criteria classifierCriteria = getSession().createCriteria(Classification.class, "с1");
+        classifierCriteria.add(Restrictions.eq("с1.classificationType.id", classificationTypeId));
+        List list = classifierCriteria.list();
+        return (ArrayList<Classification>) list;
     }
 
 }
