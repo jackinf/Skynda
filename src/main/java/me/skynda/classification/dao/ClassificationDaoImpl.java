@@ -16,14 +16,12 @@ public class ClassificationDaoImpl extends SkyndaBaseEntityDaoImpl<Classificatio
 
     @Override
     public ArrayList<Classification> getByType(String type) {
-        Criteria classifierTypeCriteria = getSession().createCriteria(ClassificationType.class, "с");
-        classifierTypeCriteria.add(Restrictions.eq("с.name", type));
-        ClassificationType classificationType = (ClassificationType) classifierTypeCriteria.uniqueResult();
-        Integer classificationTypeId = classificationType.getId();
+        Criteria classificationCriteria = getSession()
+            .createCriteria(Classification.class, "с1")
+            .createCriteria("classificationType", "с");
 
-        Criteria classifierCriteria = getSession().createCriteria(Classification.class, "с1");
-        classifierCriteria.add(Restrictions.eq("с1.classificationType.id", classificationTypeId));
-        List list = classifierCriteria.list();
+        classificationCriteria.add(Restrictions.eq("с.name", type));
+        List list = classificationCriteria.list();
         return (ArrayList<Classification>) list;
     }
 
