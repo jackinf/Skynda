@@ -8,6 +8,6 @@ import lombok.ToString;
 public class DescriptionDto {
 	
 	private String title;
-	private String text;
+	private String content;
 	
 }

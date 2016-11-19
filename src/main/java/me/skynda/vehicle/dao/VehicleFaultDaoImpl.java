@@ -34,7 +34,7 @@ public class VehicleFaultDaoImpl extends SkyndaBaseEntityDaoImpl<VehicleFault> i
 
         for (FaultBaseDto fault : faults) {
             VehicleFault vehicleFault = new VehicleFault();
-//            vehicleFault.setVehicle(vehicle);
+            vehicleFault.setVehicleId(vehicle.getId());
             vehicleFault.setText(fault.getText());
 
             if (fault.getImage() != null) {
@@ -42,7 +42,7 @@ public class VehicleFaultDaoImpl extends SkyndaBaseEntityDaoImpl<VehicleFault> i
                 Image image = imageDao.save(Image.Factory.create(imageDto.getUrl(),
                     imageDto.getBlobName(),
                     imageDto.getContainerName()));
-//                vehicleFault.setImage(image);
+                vehicleFault.setImage(image);
             }
             session.save(vehicleFault);
         }

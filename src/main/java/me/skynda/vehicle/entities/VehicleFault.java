@@ -14,7 +14,7 @@ public class VehicleFault implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @Column(name="text")
     private String text;

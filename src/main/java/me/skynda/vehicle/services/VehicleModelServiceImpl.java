@@ -8,6 +8,7 @@ import me.skynda.vehicle.dto.request.ModelRequestDto;
 import me.skynda.vehicle.dto.response.VehicleModelResponseDto;
 import me.skynda.classification.entities.Classification;
 import me.skynda.vehicle.entities.VehicleModel;
+import org.apache.commons.lang3.NotImplementedException;
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,10 +33,7 @@ public class VehicleModelServiceImpl implements VehicleModelService {
         List<VehicleModelResponseDto> responseDtos = new ArrayList<>();
         vehicleModelDao.getAll().forEach(vehicleModelEntity -> {
             VehicleModelResponseDto responseDto = new VehicleModelResponseDto();
-//            Classification vehicleManufacturer = vehicleModelEntity.getVehicleManufacturer();
-//            if (vehicleManufacturer != null) {
-//                responseDto.setVehicleManufacturerCode(vehicleManufacturer.getValue());
-//            }
+            responseDto.setId(vehicleModelEntity.getId());
             responseDto.setModelCode(vehicleModelEntity.getModelCode());
             responseDto.setTitle(vehicleModelEntity.getTitle());
             responseDtos.add(responseDto);
@@ -45,11 +43,6 @@ public class VehicleModelServiceImpl implements VehicleModelService {
 
     @Override
     public VehicleModel save(VehicleModelDto vehicleModelDto) {
-        VehicleModel vehicleModel;
-        Mapper mapper = new DozerBeanMapper();
-        vehicleModel = mapper.map(vehicleModelDto, VehicleModel.class);
-        Classification vehicleManufacturer = classificationDao.getManufacturer(vehicleModelDto.getVehicleManufacturer().getValue());
-        vehicleModel.setVehicleManufacturer(vehicleManufacturer);
-        return vehicleModelDao.saveOrUpdate(vehicleModel);
+        throw new NotImplementedException("Implementeerida");
     }
 }

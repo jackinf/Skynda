@@ -43,6 +43,9 @@ public class VehicleServiceImpl implements VehicleService {
     VehicleModelDao vehicleModelDao;
 
     @Autowired
+    VehicleDescriptionDao vehicleDescriptionDao;
+
+    @Autowired
     VehicleFeatureDao vehicleFeatureDao;
 
     @Autowired
@@ -77,13 +80,13 @@ public class VehicleServiceImpl implements VehicleService {
     }
 
     @Override
-    public VehicleAdminDto getVehicle(Long id) {
+    public VehicleAdminDto getVehicle(Integer id) {
         Vehicle model = vehicleDao.get(id);
         return mapper.map(model, VehicleAdminDto.class);
     }
 
     @Override
-    public VehicleDetailedDto getVehicleDetailed(Long id) {
+    public VehicleDetailedDto getVehicleDetailed(Integer id) {
         Vehicle model = vehicleDao.get(id);
         return mapper.map(model, VehicleDetailedDto.class);
     }
@@ -105,7 +108,7 @@ public class VehicleServiceImpl implements VehicleService {
         /*
             Find car model
          */
-        VehicleModel vehicleModel = vehicleModelDao.getByModelCode(vehicleAdminDto.getModel().getModelCode());
+        VehicleModel vehicleModel = vehicleModelDao.get(vehicleAdminDto.getModel().getId());
         vehicle.setModel(vehicleModel);
 
         /*
@@ -178,6 +181,7 @@ public class VehicleServiceImpl implements VehicleService {
             Save all the one-2-many relations with vehicle-to-be-sold
          */
 
+        vehicleDescriptionDao.addMultipleToVehicle(addedVehicle, vehicleAdminDto.getDescriptions());
         vehicleFeatureDao.addMultipleToVehicle(addedVehicle, vehicleAdminDto.getFeatures());
         vehicleFaultDao.addMultipleToVehicle(addedVehicle, faultDtos);
         vehicleImageDao.addMultipleToVehicle(addedVehicle, imageDtos);
@@ -189,7 +193,7 @@ public class VehicleServiceImpl implements VehicleService {
     }
 
     @Override
-    public DeleteResponseDto deleteVehicle(Long id) {
+    public DeleteResponseDto deleteVehicle(Integer id) {
         vehicleDao.delete(id);  // TODO: make somehow sure that the item has been deleted.
 
         DeleteResponseDto response = new DeleteResponseDto();

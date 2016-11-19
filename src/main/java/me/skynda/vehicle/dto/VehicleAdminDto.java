@@ -6,6 +6,7 @@ import java.util.List;
 
 import lombok.Data;
 import lombok.ToString;
+import me.skynda.classification.dto.ClassificationDto;
 import me.skynda.common.dto.BaseDto;
 
 @Data
@@ -19,8 +20,8 @@ public class VehicleAdminDto extends BaseDto {
 	private BigDecimal price;
 	private String registrationNumber;
 	private BigDecimal mileage;
-	private String colorOutside;
-	private String colorInside;
+	private ClassificationDto colorOutside;
+	private ClassificationDto colorInside;
 	private String fuelCity;
 	private String fuelHighway;
 	private String problems;
@@ -47,7 +48,7 @@ public class VehicleAdminDto extends BaseDto {
 	private List<ReportDto> reports;
 	private List<ReviewDto> reviews;
 
-	private String vehicleModelCode;
+//	private String vehicleModelCode;
 
 //    /**
 //     * base64 files that are prepared to be uploaded to file cloud storage.

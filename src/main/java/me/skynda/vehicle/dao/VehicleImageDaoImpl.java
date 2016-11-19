@@ -34,7 +34,7 @@ public class VehicleImageDaoImpl extends SkyndaBaseEntityDaoImpl<VehicleImage> i
 
         for (ImageContainerDto image : images) {
             VehicleImage vehicleImage = new VehicleImage();
-//            vehicleImage.setVehicle(vehicle);
+            vehicleImage.setVehicleId(vehicle.getId());
 
             if (image.getImage() != null) {
                 ImageDto imageDto = image.getImage();
@@ -43,7 +43,7 @@ public class VehicleImageDaoImpl extends SkyndaBaseEntityDaoImpl<VehicleImage> i
                     imageDto.getBlobName(),
                     imageDto.getContainerName())
                 );
-//                vehicleImage.setImage(imageEntity);
+                vehicleImage.setImage(imageEntity);
             }
 //            vehicleImage.setUrl(image.getThumbnail());   // TODO?
             session.save(vehicleImage);

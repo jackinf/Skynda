@@ -5,6 +5,7 @@ import java.util.List;
 
 import lombok.Data;
 import lombok.ToString;
+import me.skynda.classification.dto.ClassificationDto;
 import me.skynda.common.helper.StringHelper;
 
 @Data
@@ -16,8 +17,8 @@ public class VehicleDetailedDto {
 	private BigDecimal price;
 	private String registrationNumber;
 	private BigDecimal mileage;
-	private String colorOutside;
-	private String colorInside;
+	private ClassificationDto colorOutside;
+	private ClassificationDto colorInside;
 	private String fuelCity;
 	private String fuelHighway;
 	private String fuelAverage;
