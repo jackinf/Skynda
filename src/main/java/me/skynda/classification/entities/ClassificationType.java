@@ -13,7 +13,7 @@ public class ClassificationType implements Serializable {
     @Id
     @Column(name = "id", columnDefinition = "serial")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @Column(name = "name")
     private String name;

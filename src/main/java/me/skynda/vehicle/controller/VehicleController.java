@@ -61,9 +61,8 @@ public class VehicleController extends BaseController {
         return vehicleService.deleteVehicle(id);
     }
 
-    @RequestMapping(value = "/vehicle/search", method = RequestMethod.GET, consumes = "application/json")
+    @RequestMapping(value = "/vehicle/search", method = RequestMethod.POST, consumes = "application/json")
     public SearchResponseDto search(@RequestBody SearchRequestDto searchParams){
-//        return vehicleService.search(searchParams);
-        return null;
+        return vehicleService.search(searchParams);
     }
 }

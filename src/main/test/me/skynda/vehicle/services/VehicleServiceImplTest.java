@@ -197,7 +197,7 @@ public class VehicleServiceImplTest {
         when(vehicleModelDao.getByModelCode(CAR_MODEL_CODE_1)).thenReturn(carModel);
 
         Vehicle addedCar = new Vehicle();
-        final Long addedCarValue = 55L;
+        final Integer addedCarValue = 55;
         addedCar.setId(addedCarValue);
         when(vehicleDao.saveOrUpdate(any(Vehicle.class))).thenReturn(addedCar);
 

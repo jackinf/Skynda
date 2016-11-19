@@ -21,7 +21,7 @@ public class Vehicle implements Serializable {
     @Id
     @Column(name = "id", columnDefinition = "serial")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @NotEmpty
     @Column(name="vin_code")
