@@ -3,6 +3,8 @@ package me.skynda.vehicle.services;
 import me.skynda.blobstorage.dto.UploadBlobDto;
 import me.skynda.blobstorage.dto.response.BlobStorageUploadStreamResponseDto;
 import me.skynda.blobstorage.service.BlobStorageService;
+import me.skynda.classification.dto.ClassificationDto;
+import me.skynda.classification.entities.Classification;
 import me.skynda.common.interfaces.daos.ImageDao;
 import me.skynda.common.interfaces.daos.VehicleDao;
 import me.skynda.common.interfaces.daos.VehicleFaultDao;
@@ -87,7 +89,8 @@ public class VehicleServiceImplTest {
         /*
             ARRANGE
          */
-        final String COLOR = "black";
+        Classification COLOR = new Classification();
+        COLOR.setValue("BLACK");
         Vehicle car = new Vehicle();
         car.setColorInside(COLOR);
         when(vehicleDao.get(1L)).thenReturn(car);
@@ -109,10 +112,11 @@ public class VehicleServiceImplTest {
         /*
             ARRANGE
          */
-        final String COLOR = "black";
+        Classification COLOR = new Classification();
+        COLOR.setValue("BLACK");
         Vehicle car = new Vehicle();
         car.setColorInside(COLOR);
-        when(vehicleDao.get(1L)).thenReturn(car);
+        when(vehicleDao.get(1)).thenReturn(car);
 
         /*
             ACT
@@ -122,7 +126,7 @@ public class VehicleServiceImplTest {
         /*
             ASSERT
          */
-        assertEquals(COLOR, carDetailed.getColorInside());
+        assertEquals(COLOR, carDetailed.getColorInside().getValue());
         verify(vehicleDao, times(1)).get(1L);
     }
 
@@ -149,15 +153,18 @@ public class VehicleServiceImplTest {
          */
 
         // Prepare vehicle
+        ClassificationDto COLOR_BLACK = new ClassificationDto();
+        COLOR_BLACK.setValue("BLACK");
+        ClassificationDto COLOR_WHITE = new ClassificationDto();
+        COLOR_WHITE.setValue("WHITE");
         VehicleAdminDto vehicleAdminDto = new VehicleAdminDto();
-        vehicleAdminDto.setColorInside("black");
-        vehicleAdminDto.setColorOutside("white");
+        vehicleAdminDto.setColorInside(COLOR_BLACK);
+        vehicleAdminDto.setColorOutside(COLOR_WHITE);
         vehicleAdminDto.setVinCode("1234536564");
         vehicleAdminDto.setPrice(BigDecimal.TEN);
         vehicleAdminDto.setRegistrationNumber("123ABC");
         vehicleAdminDto.setMileage(BigDecimal.TEN);
         final String CAR_MODEL_CODE_1 = "AAA111";
-        vehicleAdminDto.setVehicleModelCode(CAR_MODEL_CODE_1);
         BindingResult bindingResult = mock(BindingResult.class);
 
         // Prepare images

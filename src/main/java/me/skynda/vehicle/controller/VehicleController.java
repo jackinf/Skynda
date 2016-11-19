@@ -49,7 +49,7 @@ public class VehicleController extends BaseController {
     }
 
     @RequestMapping(value = "/vehicle/{id}", method = RequestMethod.PUT, consumes = "application/json")
-    public CreateOrUpdateResponseDto update(@PathVariable("id") Long id,
+    public CreateOrUpdateResponseDto update(@PathVariable("id") Integer id,
                                             @RequestBody VehicleAdminDto vehicleAdminDto,
                                             BindingResult bindingResult) {
         vehicleAdminDto.setId(id);

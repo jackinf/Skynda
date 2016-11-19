@@ -8,6 +8,7 @@ import java.util.List;
 import javax.persistence.*;
 
 import lombok.Data;
+import me.skynda.classification.entities.Classification;
 import me.skynda.image.entities.Image;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -43,13 +44,13 @@ public class Vehicle implements Serializable {
     @Column(name="mileage")
     private BigDecimal mileage;
 
-    @NotEmpty
-    @Column(name="color_outside")
-    private String colorOutside;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "color_outside_id", nullable = false)
+    private Classification colorOutside;
 
-    @NotEmpty
-    @Column(name="color_inside")
-    private String colorInside;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "color_inside_id", nullable = false)
+    private Classification colorInside;
 
     @Column(name="fuel_city")
     private String fuelCity;

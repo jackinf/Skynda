@@ -16,7 +16,7 @@ public class VehicleModel implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", columnDefinition = "serial")
-	private Long id;
+	private Integer id;
 
 	@Column(name = "model_code")
 	private String modelCode;

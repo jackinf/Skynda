@@ -105,7 +105,7 @@ public class VehicleServiceImpl implements VehicleService {
         /*
             Find car model
          */
-        VehicleModel vehicleModel = vehicleModelDao.getByModelCode(vehicleAdminDto.getModel().getModelCode());
+        VehicleModel vehicleModel = vehicleModelDao.get(vehicleAdminDto.getModel().getId());
         vehicle.setModel(vehicleModel);
 
         /*

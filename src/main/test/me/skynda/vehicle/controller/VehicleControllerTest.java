@@ -90,7 +90,7 @@ public class VehicleControllerTest {
         when(vehicleService.createOrUpdateVehicle(vehicleAdminDto, bindingResult)).thenReturn(createOrUpdateResponseDto);
 
         // Act
-        CreateOrUpdateResponseDto updated = controller.update(1L, vehicleAdminDto, bindingResult);
+        CreateOrUpdateResponseDto updated = controller.update(1, vehicleAdminDto, bindingResult);
 
         // Assert
         verify(vehicleService, times(1)).createOrUpdateVehicle(vehicleAdminDto, bindingResult);

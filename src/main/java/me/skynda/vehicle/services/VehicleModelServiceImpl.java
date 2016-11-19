@@ -32,10 +32,7 @@ public class VehicleModelServiceImpl implements VehicleModelService {
         List<VehicleModelResponseDto> responseDtos = new ArrayList<>();
         vehicleModelDao.getAll().forEach(vehicleModelEntity -> {
             VehicleModelResponseDto responseDto = new VehicleModelResponseDto();
-//            Classification vehicleManufacturer = vehicleModelEntity.getVehicleManufacturer();
-//            if (vehicleManufacturer != null) {
-//                responseDto.setVehicleManufacturerCode(vehicleManufacturer.getValue());
-//            }
+            responseDto.setId(vehicleModelEntity.getId());
             responseDto.setModelCode(vehicleModelEntity.getModelCode());
             responseDto.setTitle(vehicleModelEntity.getTitle());
             responseDtos.add(responseDto);
