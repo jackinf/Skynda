@@ -7,6 +7,6 @@ import lombok.ToString;
 @ToString(callSuper = false)
 public class AuthorityDto {
 
-    private Long id;
+    private Integer id;
     private String name;
 }

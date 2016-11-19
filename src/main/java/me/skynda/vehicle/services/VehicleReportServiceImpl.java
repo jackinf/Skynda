@@ -37,7 +37,7 @@ public class VehicleReportServiceImpl implements VehicleReportService {
     }
 
     @Override
-    public VehicleReportAdminDto getSingleBy(Long id) {
+    public VehicleReportAdminDto getSingleBy(Integer id) {
         return null;
     }
 
@@ -47,7 +47,7 @@ public class VehicleReportServiceImpl implements VehicleReportService {
     }
 
     @Override
-    public DeleteResponseDto delete(Long id) {
+    public DeleteResponseDto delete(Integer id) {
         vehicleReportDao.delete(id);  // TODO: make somehow sure that the item has been deleted.
 
         DeleteResponseDto response = new DeleteResponseDto();

@@ -18,5 +18,12 @@ public class CreateOrUpdateResponseDto {
             dto.setSuccess(false);
             return dto;
         }
+
+        public static CreateOrUpdateResponseDto success(Integer id, boolean success) {
+            CreateOrUpdateResponseDto response = new CreateOrUpdateResponseDto();
+            response.setId(id);
+            response.setSuccess(success);
+            return response;
+        }
     }
 }

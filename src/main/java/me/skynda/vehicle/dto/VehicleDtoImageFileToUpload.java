@@ -13,7 +13,7 @@ public class VehicleDtoImageFileToUpload {
     /**
      * REQUIRED: Key of the database item to give url to
      */
-    private Long id;
+    private Integer id;
 
     /**
      * SHOULD BE NULL OR EMPTY! Upload output from file service

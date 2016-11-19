@@ -14,10 +14,10 @@ import java.util.List;
 public interface VehicleReviewService {
     List<VehicleReviewAdminDto> getAll();
 
-    VehicleReviewAdminDto getSingleBy(Long id);
+    VehicleReviewAdminDto getSingleBy(Integer id);
 
-    CreateOrUpdateResponseDto createOrUpdate(VehicleReportAdminDto dto, BindingResult bindingResult);
+    CreateOrUpdateResponseDto createOrUpdate(VehicleReviewAdminDto dto, BindingResult bindingResult);
 
-    DeleteResponseDto delete(Long id);
+    DeleteResponseDto delete(Integer id);
 
 }

@@ -8,4 +8,11 @@ import me.skynda.common.dto.BaseDto;
  */
 @Data
 public class VehicleReviewAdminDto extends BaseDto {
+
+    private Integer vehicleId;
+    private ImageDto logoUrl;
+    private ImageDto videoUrl;
+    private String text;
+    private Integer rating;
+
 }

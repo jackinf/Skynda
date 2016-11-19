@@ -17,6 +17,6 @@ public class Authority {
 	@Id
 	@Column(name = "id", columnDefinition = "serial")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Integer id;
 	private String name;
 }
