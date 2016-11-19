@@ -1,16 +1,12 @@
 
-ALTER TABLE vehicle
-	DROP COLUMN color_outside,
-	DROP COLUMN color_inside,
-	ADD COLUMN color_outside_id integer,
-	ADD COLUMN color_inside_id integer;
+ALTER TABLE vehicle_feature
+	DROP COLUMN text,
+	ADD COLUMN feature_id integer DEFAULT 92 NOT NULL;
 
-ALTER TABLE vehicle
-	ADD CONSTRAINT "FK_color_inside_id" FOREIGN KEY (color_inside_id) REFERENCES classification(id);
+ALTER TABLE vehicle_feature
+	ADD CONSTRAINT "FK_feature_id" FOREIGN KEY (feature_id) REFERENCES classification(id);
 
-ALTER TABLE vehicle
-	ADD CONSTRAINT "FK_color_outside_id" FOREIGN KEY (color_outside_id) REFERENCES classification(id);
+ALTER TABLE vehicle_feature
+	ADD CONSTRAINT "FK_vehicle_id" FOREIGN KEY (vehicle_id) REFERENCES vehicle(id);
 
-CREATE INDEX "FKI_color_inside_id" ON vehicle USING btree (color_inside_id);
-
-CREATE INDEX "FKI_color_outside_id" ON vehicle USING btree (color_outside_id);
+CREATE INDEX "FKI_feature_id" ON vehicle_feature USING btree (feature_id);

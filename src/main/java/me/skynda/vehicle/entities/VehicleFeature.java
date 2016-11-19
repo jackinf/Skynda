@@ -1,8 +1,10 @@
 package me.skynda.vehicle.entities;
 
 import lombok.Data;
+import me.skynda.classification.entities.Classification;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -18,8 +20,9 @@ public class VehicleFeature implements Serializable{
     @Column(name="archived")
     private Date archived;
 
-    @Column(name="text")
-    private String text;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "feature_id", nullable = false)
+    private Classification feature;
 
     @Column(name = "vehicle_id", nullable = false)
     private Integer vehicleId;
