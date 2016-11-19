@@ -3,6 +3,13 @@
  */
 import {ACTIONS} from "../constants/Vehicle.constant";
 
+export function setVehicleData(value) {
+  return {
+    type: ACTIONS.SET_VEHICLE_DATA,
+    payload: value
+  };
+}
+
 // ------------------------------------
 // Action Handlers
 // ------------------------------------

@@ -3,6 +3,14 @@
  */
 import {ACTIONS, FORM_MODE} from "../constants/Vehicle.constant";
 
+export function setFormMode(value) {
+  return {
+    type: ACTIONS.SET_FORM_MODE,
+    payload: value
+  };
+}
+
+
 // ------------------------------------
 // Action Handlers
 // ------------------------------------

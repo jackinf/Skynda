@@ -1,7 +1,7 @@
 /**
  * Created by jevgenir on 10/24/2016.
  */
-import setVehicleData from "./Vehicle.setVehicleData.action";
+import {setVehicleData} from "./../../reducers/SetVehicle.reducer";
 
 export default function fillWithFakeData() {
   const fakeData = {

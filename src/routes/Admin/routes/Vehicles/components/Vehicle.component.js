@@ -10,13 +10,14 @@ import {
   renderSelectField,
   renderDescriptions,
   renderFeatures,
-  renderFaults
+  renderFaults,
+  MainImageField,
+  ImagesField
 } from "./Vehicle.component.renderers";
 import {submitVehicleForm} from "../actions/Vehicle";
 import MenuItem from 'material-ui/MenuItem';
 import {Row, Col} from "react-bootstrap";
 import {browserHistory} from "react-router";
-import Dropzone from "react-dropzone";
 import NotificationSystem from "react-notification-system";
 
 class Vehicle extends React.Component {
@@ -33,60 +34,66 @@ class Vehicle extends React.Component {
       isFetching: React.PropTypes.bool,
       items: React.PropTypes.arrayOf(React.PropTypes.shape({
         modelCode: React.PropTypes.string.isRequired,
-        vehicleManufacturerCode: React.PropTypes.string.isRequired
+        title: React.PropTypes.string.isRequired
+      }))
+    }),
+
+    colors: React.PropTypes.shape({
+      isFetching: React.PropTypes.bool,
+      items: React.PropTypes.arrayOf(React.PropTypes.shape({
+        name: React.PropTypes.string.isRequired,
+        value: React.PropTypes.string.isRequired
       }))
     }),
 
     // vehicle data
     initialValues: React.PropTypes.shape({
-      "vehicleModelsCode": React.PropTypes.string,
-      "colorInside": React.PropTypes.string,
-      "colorOutside": React.PropTypes.string,
-      "faults": React.PropTypes.arrayOf(
+      vehicleModelsCode: React.PropTypes.string,
+      faults: React.PropTypes.arrayOf(
         React.PropTypes.shape({
-          "id": React.PropTypes.number,
-          "img": React.PropTypes.string,
-          "text": React.PropTypes.string
+          id: React.PropTypes.number,
+          img: React.PropTypes.string,
+          text: React.PropTypes.string
         })
       ),
-      "features": React.PropTypes.arrayOf(
+      features: React.PropTypes.arrayOf(
         React.PropTypes.shape({
-          "id": React.PropTypes.number,
-          "text": React.PropTypes.string
+          id: React.PropTypes.number,
+          text: React.PropTypes.string
         })
       ),
-      "fuelCity": React.PropTypes.string,
-      "fuelHighway": React.PropTypes.string,
-      "id": React.PropTypes.number,
-      "images": React.PropTypes.arrayOf(
+      fuelCity: React.PropTypes.string,
+      fuelHighway: React.PropTypes.string,
+      id: React.PropTypes.number,
+      images: React.PropTypes.arrayOf(
         React.PropTypes.shape({
-          "id": React.PropTypes.number,
-          "original": React.PropTypes.string,
-          "thumbnail": React.PropTypes.string
+          id: React.PropTypes.number,
+          original: React.PropTypes.string,
+          thumbnail: React.PropTypes.string
         })
       ),
-      "isSold": React.PropTypes.bool,
-      "mileage": React.PropTypes.number,
-      "performance": React.PropTypes.shape({
-        "compressionRatio": React.PropTypes.number,
-        "compressionType": React.PropTypes.string,
-        "configuration": React.PropTypes.string,
-        "cylinders": React.PropTypes.string,
-        "displacement": React.PropTypes.string,
-        "doors": React.PropTypes.number,
-        "drivenWheels": React.PropTypes.string,
-        "fuelType": React.PropTypes.string,
-        "horsePower": React.PropTypes.number,
-        "powerTrain": React.PropTypes.string,
-        "size": React.PropTypes.number,
-        "torque": React.PropTypes.number,
-        "totalValves": React.PropTypes.number
+      isSold: React.PropTypes.bool,
+      mileage: React.PropTypes.number,
+      performance: React.PropTypes.shape({
+        compressionRatio: React.PropTypes.number,
+        compressionType: React.PropTypes.string,
+        configuration: React.PropTypes.string,
+        cylinders: React.PropTypes.string,
+        displacement: React.PropTypes.string,
+        doors: React.PropTypes.number,
+        drivenWheels: React.PropTypes.string,
+        fuelType: React.PropTypes.string,
+        horsePower: React.PropTypes.number,
+        powerTrain: React.PropTypes.string,
+        size: React.PropTypes.number,
+        torque: React.PropTypes.number,
+        totalValves: React.PropTypes.number
       }),
-      "price": React.PropTypes.number,
-      "registrationNumber": React.PropTypes.string,
-      "safetyStars": React.PropTypes.number,
-      "vinCode": React.PropTypes.string,
-      "additionalInfo": React.PropTypes.string
+      price: React.PropTypes.number,
+      registrationNumber: React.PropTypes.string,
+      safetyStars: React.PropTypes.number,
+      vinCode: React.PropTypes.string,
+      additionalInfo: React.PropTypes.string
     })
   };
 
@@ -100,6 +107,7 @@ class Vehicle extends React.Component {
   componentDidMount() {
     this.props.load(this.props.params[ROUTE_PARAMS.VEHICLE_ID]);
     this.props.getVehicleModelsList();
+    this.props.getColors();
   }
 
   componentWillUnmount() {
@@ -125,7 +133,7 @@ class Vehicle extends React.Component {
 
   render() {
     return (<div>
-        <NotificationSystem ref="notificationSystem" />
+        <NotificationSystem ref="notificationSystem"/>
 
         {this.props.isFetching || this.props.submitting ? "Loading..." : (
           <form onSubmit={this.onSubmit.bind(this)}>
@@ -144,27 +152,33 @@ class Vehicle extends React.Component {
                 <h4>General data</h4>
 
                 {this.props.vehicleModels.isFetching ? "Fetching vehicle models" : (
-                  <Field name="vehicleModelsCode" label="Model Code *" component={renderSelectField}>
+                  <Field name="model.id" label="Model Code *" component={renderSelectField}>
                     {this.props.vehicleModels.items.map((item, i) => (
-                      <MenuItem key={i} value={item.modelCode}
-                                primaryText={`${item.vehicleManufacturerCode} ${item.modelCode}`}/>
+                      <MenuItem key={i} value={item.id} primaryText={`${item.title} ${item.modelCode}`}/>
                     ))}
                   </Field>
                 )}
 
-                Persisted: <Field name="mainImageContainer.imageUrl" label="Main image"
-                                  component={({input, i}) => (<div>
-                                    {input.value ? <img src={input.value} width={100}/> : ""}
-                                  </div>)}/>
-                <hr />
-                New: <Field name="mainImageContainer.base64File" label="Main image" component={({input, i}) => (<div>
-                {input.value
-                  ? <img src={input.value} onClick={e => this.props.onMainImageRemove(e)} width={100}/>
-                  : <input type="file" onChange={e => this.props.onMainImageUpload(e)}/>}
-              </div>)}/>
+                <MainImageField title="Main image"
+                                onMainImageRemove={this.props.onMainImageRemove}
+                                onMainImageUpload={this.props.onMainImageUpload} />
 
-                <Field name="colorInside" label="Color Inside *" component={renderTextField}/>
-                <Field name="colorOutside" label="Color Outside *" component={renderTextField}/>
+                {this.props.colors.isFetching ? "Fetching colors" : (
+                  <Field name="colorInside.id" label="Color Inside *" component={renderSelectField}>
+                    {this.props.colors.items.map((item, i) => (
+                      <MenuItem key={i} value={item.id} primaryText={`${item.name}`}/>
+                    ))}
+                  </Field>
+                )}
+
+                {this.props.colors.isFetching ? "Fetching colors" : (
+                  <Field name="colorOutside.id" label="Color Outside *" component={renderSelectField}>
+                    {this.props.colors.items.map((item, i) => (
+                      <MenuItem key={i} value={item.id} primaryText={`${item.name}`}/>
+                    ))}
+                  </Field>
+                )}
+
                 <FieldArray name="descriptions" label="Descriptions" component={renderDescriptions}/>
                 <FieldArray name="features" label="Features" component={renderFeatures}/>
                 <FieldArray name="faults" label="Faults" component={renderFaults}
@@ -173,26 +187,9 @@ class Vehicle extends React.Component {
                 />
                 <Field name="fuelCity" label="Fuel City" component={renderTextField}/>
                 <Field name="fuelHighway" label="Fuel Highway" component={renderTextField}/>
-                <Row>
-                  <Col xs={12} md={6}>
-                    <h4>Images</h4>
-                    <Dropzone onDrop={this.props.onImageFileUpload} multiple={true}>
-                      <div>Try dropping some files here, or click to select files to upload.</div>
-                    </Dropzone>
 
-                    <FieldArray name="images" component={({fields}) => (<div>
-                      {fields.map((field, index) => {
-                        const componentFn = ({input}) => (<img src={input.value} width={100}
-                                                               onClick={e => this.props.onImageFileRemove(e, index)}/>);
-                        return (<div key={index}>
-                          Persisted: <Field name={`${field}.imageContainer.imageUrl`} type="text"
-                                            component={componentFn}/><hr />
-                          New: <Field name={`${field}.imageContainer.base64File`} type="text" component={componentFn}/>
-                        </div>);
-                      })}</div>)}/>
-
-                  </Col>
-                </Row>
+                <ImagesField onImageFileUpload={this.props.onImageFileUpload}
+                             onImageFileRemove={this.props.onImageFileRemove} />
                 <br/>
 
                 <Field name="isSold" label="Is Sold" component={renderCheckbox}/>
@@ -206,15 +203,10 @@ class Vehicle extends React.Component {
               <Col md={6} xs={12}>
                 <h4>Performance</h4>
                 <Field name="compressionRatio" label="Compression Ratio" component={renderTextField}/>
-                <Field name="compressorType" label="Compressor Type" component={renderTextField}/>
+                <Field name="compressionType" label="Compression Type" component={renderTextField}/>
                 <Field name="configuration" label="Configuration" component={renderTextField}/>
                 <Field name="cylinders" label="Cylinders" component={renderTextField}/>
                 <Field name="displacement" label="Displacement" component={renderTextField}/>
-                <Field name="doors" label="Doors" component={renderTextField} type="number"/>
-                <Field name="drivenWheels" label="Driven Wheels" component={renderTextField}/>
-                <Field name="fuelType" label="Fuel Type" component={renderTextField}/>
-                <Field name="horsePower" label="Horse Power" component={renderTextField} type="number"/>
-                <Field name="powerTrain" label="Power Train" component={renderTextField}/>
                 <Field name="size" label="Size" component={renderTextField} type="number"/>
                 <Field name="torque" label="Torque" component={renderTextField} type="number"/>
                 <Field name="totalValves" label="Total Valves" component={renderTextField} type="number"/>

@@ -2,7 +2,7 @@
  * Created by jevgenir on 10/22/2016.
  */
 import React from "react";
-import {Field} from 'redux-form';
+import {Field, FieldArray} from 'redux-form';
 import TextField from 'material-ui/TextField';
 import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
 import Checkbox from 'material-ui/Checkbox';
@@ -11,7 +11,19 @@ import {Row, Col} from "react-bootstrap";
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import ContentRemove from 'material-ui/svg-icons/content/remove';
-import {guidUtil} from "../../../../../utils/allUtils";
+import Dropzone from "react-dropzone";
+
+import ReactIconDelete from 'react-icons/lib/md/delete';
+
+const styleDeleteIcon = {
+  position: "absolute",
+  border: "1px solid black",
+  borderRadius: "30px",
+  right: "40px",
+  background: "white"
+};
+const ReactIconDeleteWrapped = (props) => (<ReactIconDelete {...props} width="32" height="32"
+                                                            style={styleDeleteIcon} />);
 
 /*
  ====================================
@@ -27,13 +39,13 @@ export const renderTextField = ({input, label, meta: {touched, error}, ...custom
   </Row>
 );
 
-export const renderImage = ({input}) => (<img src={input.value} width={100} />);
+export const renderImage = ({input}) => (input.value ? <img src={input.value} width={100} /> : <div>-NONE-</div>);
 
 export const renderCheckbox = ({input, label, ...custom}) => (
   <Row style={{marginBottom: "10px"}}>
     <Col sm={12}>
       <Checkbox label={label}
-                checked={input.value ? true : false}
+                checked={!!input.value}
                 onCheck={input.onChange}/>
     </Col>
   </Row>
@@ -70,8 +82,7 @@ export const renderDescriptions = ({fields, ...custom}) => fieldListWrapper({
   block: (<ul>
     {fields.map((name, index) =>
       <li key={index}>
-        <Field name={`${name}.title`} type="text" component={renderTextField}
-               placeholder={`Description #${index + 1}`}/>
+        <Field name={`${name}.title`} type="text" component={renderTextField} placeholder={`Title #${index + 1}`}/>
         <Field name={`${name}.text`} type="text" component={renderTextField} placeholder={`Description #${index + 1}`}/>
         <FloatingActionButton mini={true} secondary={true} onClick={() => fields.remove(index)}>
           <ContentRemove />
@@ -148,3 +159,56 @@ const fieldListWrapper = ({fields, title, block, isRequired = false}) => (
     </Col>
   </Row>
 );
+
+const imageBlockStyle = {border: "1px solid #dedede", backgroundColor: "#efefef", padding: "10px"};
+
+export const MainImageField = (props) => (<div style={imageBlockStyle}>
+  <h4>{props.title} *</h4>
+  <span>Currently stored in database:</span>
+  <Field name="mainImage.url" component={({input, i}) => (<div>
+    {input.value ? (<div>
+      <img src={input.value} width={400}/>
+    </div>) : "-NONE-"}
+  </div>)}/>
+
+  <br/>
+
+  <span>New:</span>
+  <Field name="mainImage.base64File" component={({input, i}) => (<div>
+    {input.value
+      ? (<div>
+      <img src={input.value}  width={400}/>
+      <ReactIconDeleteWrapped onClick={e => props.onMainImageRemove(e)} />
+    </div>)
+      : <input type="file" onChange={e => props.onMainImageUpload(e)}/>}
+  </div>)}/>
+</div>);
+
+export const ImagesField = (props) => (<Row style={imageBlockStyle}>
+  <Col xs={12} md={6}>
+    <h4>Images</h4>
+    <div style={{marginBottom: "10px"}}>
+      <Dropzone onDrop={props.onImageFileUpload} multiple={true}>
+        <div style={{padding: "10px"}}>
+          Try dropping some files here, or click to select files to upload.
+        </div>
+      </Dropzone>
+    </div>
+
+    <FieldArray name="images" component={({fields}) => (<div>
+      {fields.map((field, index) => {
+        const componentFn = ({input}) =>
+          (input.value
+            ? (<div>
+            <img src={input.value} width={200}/>
+            <ReactIconDeleteWrapped onClick={e => props.onImageFileRemove(e, index)} />
+          </div>)
+            : (<div></div>));
+        return (<div key={index}>
+           <Field name={`${field}.image.url`} type="text" component={componentFn}/>
+           <Field name={`${field}.image.base64File`} type="text" component={componentFn}/>
+          <hr />
+        </div>);
+      })}</div>)}/>
+  </Col>
+</Row>);

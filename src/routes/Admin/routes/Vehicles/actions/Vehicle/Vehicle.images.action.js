@@ -2,22 +2,21 @@
  * Created by jevgenir on 11/2/2016.
  */
 
-// import setVehicleReportData from "./Car.setVehicleReportData.action";
 import {FORMS} from "../../constants/Vehicle.constant";
 import {arrayPush, arrayRemove, change} from "redux-form";
-import {imageUtil} from "../../../../../../utils/allUtils";
+import {imageUtil} from "utils/allUtils";
 
 export function onMainImageUpload(e) {
   return (dispatch) => {
     imageUtil.imageFileToBase64(e.target.files[0], (base64File) => {
-      dispatch(change(FORMS.VEHICLE_FORM, "mainImageContainer.base64File", base64File));
+      dispatch(change(FORMS.VEHICLE_FORM, "mainImage.base64File", base64File));
     });
   }
 }
 
 export function onMainImageRemove(e) {
   return (dispatch) => {
-    dispatch(change(FORMS.VEHICLE_FORM, "mainImageContainer.base64File", null));
+    dispatch(change(FORMS.VEHICLE_FORM, "mainImage.base64File", null));
     // TODO: use arrayPop and push the item into filesToDelete {blobName, containerName}
   }
 }
@@ -26,7 +25,7 @@ export function onImageFileUpload(acceptedFiles) {
   return (dispatch, getState) => {
     acceptedFiles.forEach(file => {
       imageUtil.imageFileToBase64(file, (base64File) => {
-        dispatch(arrayPush(FORMS.VEHICLE_FORM, `images`, {imageContainer: {base64File}}));
+        dispatch(arrayPush(FORMS.VEHICLE_FORM, `images`, {image: {base64File}}));
       });
     });
   }
@@ -42,7 +41,7 @@ export function onImageFileRemove(e, index) {
 export function onFaultFileUpload(e, index) {
   return (dispatch) => {
     imageUtil.imageFileToBase64(e.target.files[0], (base64File) => {
-      dispatch(change(FORMS.VEHICLE_FORM, `faults[${index}].imageContainer.base64File`, base64File));
+      dispatch(change(FORMS.VEHICLE_FORM, `faults[${index}].image.base64File`, base64File));
     });
   }
 }

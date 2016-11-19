@@ -3,8 +3,8 @@
  */
 import {FORM_MODE, REDUCER_KEYS} from "../../constants/Vehicle.constant";
 import remoteConfig from "store/remoteConfig";
-import setVehicleData from "./Vehicle.setVehicleData.action";
-import setFormMode from "./Vehicle.setFormMode.action";
+import {setVehicleData} from "./../../reducers/SetVehicle.reducer";
+import {setFormMode} from "./../../reducers/SetFormMode.reducer";
 
 /**
  * Loads "Create new vehicle" or "Update existing vehicle" forms

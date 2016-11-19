@@ -9,16 +9,18 @@ export default function getList() {
   return (dispatch) => {
     dispatch(getClassifiers({isFetching: true}));
 
-    return fetch(`${remoteConfig.remote}/api/classifiers`, {
+    return fetch(`${remoteConfig.remote}/api/classifications/COLOR`, {
       method: "GET",
       credentials: "include",
       headers: {"Accept": "application/json", "Content-Type": "application/x-www-form-urlencoded"}
     })
       .then(resp => resp.json())
       .then(resp => {
+        console.log(resp);
         dispatch(getClassifiers({isFetching: false, items: resp}));
       })
       .catch(err => {
+        console.error(err);
         dispatch(getClassifiers({isFetching: false, items: []}));
       });
   };

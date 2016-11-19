@@ -4,8 +4,6 @@
 
 import clear from "./Vehicle.clear.action";
 import load from "./Vehicle.load.action";
-import setVehicleData from "./Vehicle.setVehicleData.action";
-import setFormMode from "./Vehicle.setFormMode.action";
 import submitVehicleForm from "./Vehicle.submitForm.action";
 import fillWithFakeData from "./Vehicle.fillWithFakeData.action";
 import {
@@ -20,8 +18,6 @@ import {
 export {
   clear,
   load,
-  setVehicleData,
-  setFormMode,
   submitVehicleForm,
   fillWithFakeData,
   onMainImageUpload,
