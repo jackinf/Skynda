@@ -32,7 +32,7 @@ public class VehicleReportDaoImpl  extends SkyndaBaseEntityDaoImpl<VehicleReport
             VehicleReportCategoryItem vehicleReportCategoryItem = new VehicleReportCategoryItem();
             vehicleReportCategoryItem.setIsPass(dto.getIsPass());
             vehicleReportCategoryItem.setText(dto.getText());
-            vehicleReportCategoryItem.setVehicleReportCategoryId(persistedVehicleReportCategory.getId());
+            vehicleReportCategoryItem.setVehicleReportCategory(persistedVehicleReportCategory);
             session.save(vehicleReportCategoryItem);
         }
     }

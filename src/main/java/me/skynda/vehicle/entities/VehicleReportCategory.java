@@ -1,7 +1,6 @@
 package me.skynda.vehicle.entities;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 import lombok.Data;
 
@@ -19,9 +18,7 @@ public class VehicleReportCategory implements Serializable {
     @Column(name = "title")
     private String title;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "vehicle_id", nullable = false)
-    @NotNull
+    @Column(name = "vehicle_id", nullable = false)
     private Integer vehicleId;
 
 }
