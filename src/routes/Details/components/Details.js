@@ -63,7 +63,7 @@ class VehicleDetails extends React.Component {
   }
 
   render() {
-    const carData = this.props.car_data;
+    const vehicleData = this.props.car_data;
     if (this.props.isLoading) {
       return <div>Loading...</div>;
     }
@@ -71,28 +71,34 @@ class VehicleDetails extends React.Component {
     return (
       <div className='car-details'>
         <div className='container'>
-          <VehicleDetailsMainImage vehicle={carData}/>
+          <VehicleDetailsMainImage vehicleDetailsMainImage={vehicleData.vehicleDetailsMainImage}/>
         </div>
 
         <div className='container'>
           <StickyContainer>
             <div className='row'>
               <div className='col col-md-7'>
+                <Overview overview={vehicleData.overview}/>
 
-                <Overview general={carData.general}/>
+                {vehicleData.descriptions.map((description, i) =>
+                  <Skblock key={i} header={description.title}>
+                    {description.content}
+                  </Skblock>)
+                }
 
-                {carData.descriptions.map((description, i) =>
-                <Skblock key={i} header={description.title}>{description.text}</Skblock>)}
-
-                <Fetaures features={carData.features}/>
-                <History history={carData.history}/>
-                <PetrolConsumption petrolConsumption={carData.petrolConsumption}
-                fuelType={carData.performance ? carData.performance.fuelType : ""}/>
-                <Safety stars={carData.safetyStars}/>
-                <InspectorsReport report={carData.report}
-                sendQuestionByEmailAsync={this.props.sendQuestionByEmailAsync}/>
-                <Reviews reviews={carData.reviews}/>
-                <Skblock header={<Translate value="details.components.additional_info.header"/>}>{carData.additionalInfo}</Skblock>
+                <Fetaures features={vehicleData.features}/>
+                <History history={vehicleData.history}/>
+                <PetrolConsumption
+                  petrolConsumption={vehicleData.petrolConsumption}
+                />
+                <Safety stars={vehicleData.safetyStars}/>
+                <InspectorsReport
+                  report={vehicleData.report}
+                  sendQuestionByEmailAsync={this.props.sendQuestionByEmailAsync}/>
+                <Reviews reviews={vehicleData.reviews}/>
+                <Skblock header={<Translate value="details.components.additional_info.header"/>}>
+                  {vehicleData.additional}
+                </Skblock>
 
               </div>
               <div className='col col-md-5'>

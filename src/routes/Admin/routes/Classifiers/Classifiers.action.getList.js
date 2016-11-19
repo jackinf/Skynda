@@ -16,7 +16,6 @@ export default function getList() {
     })
       .then(resp => resp.json())
       .then(resp => {
-        console.log(resp);
         dispatch(getClassifiers({isFetching: false, items: resp}));
       })
       .catch(err => {

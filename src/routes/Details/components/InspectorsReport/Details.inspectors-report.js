@@ -41,7 +41,7 @@ const pointBlockXsFn = (point, i) => (<div key={i}>
 /**
  * Inspector's report
  */
-class Report extends React.Component {
+class InspectorsReport extends React.Component {
   constructor() {
     super();
     this.state = {open: false, question: {howCanWeHelp: "", name: "", email: ""}};
@@ -139,7 +139,7 @@ class Report extends React.Component {
   }
 }
 
-Report.propTypes = {
+InspectorsReport.propTypes = {
   report: React.PropTypes.shape({
     categories: React.PropTypes.arrayOf(React.PropTypes.shape({
       title: React.PropTypes.string.isRequired,
@@ -156,4 +156,4 @@ Report.propTypes = {
   sendQuestionByEmailAsync: React.PropTypes.func.isRequired
 };
 
-export default Report;
+export default InspectorsReport;

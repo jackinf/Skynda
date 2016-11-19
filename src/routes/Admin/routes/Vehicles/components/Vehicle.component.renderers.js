@@ -23,7 +23,7 @@ const styleDeleteIcon = {
   background: "white"
 };
 const ReactIconDeleteWrapped = (props) => (<ReactIconDelete {...props} width="32" height="32"
-                                                            style={styleDeleteIcon} />);
+                                                            style={styleDeleteIcon}/>);
 
 /*
  ====================================
@@ -39,7 +39,7 @@ export const renderTextField = ({input, label, meta: {touched, error}, ...custom
   </Row>
 );
 
-export const renderImage = ({input}) => (input.value ? <img src={input.value} width={100} /> : <div>-NONE-</div>);
+export const renderImage = ({input}) => (input.value ? <img src={input.value} width={100}/> : <div>-NONE-</div>);
 
 export const renderCheckbox = ({input, label, ...custom}) => (
   <Row style={{marginBottom: "10px"}}>
@@ -79,57 +79,72 @@ export const renderSelectField = ({input, label, meta: {touched, error}, childre
 export const renderDescriptions = ({fields, ...custom}) => fieldListWrapper({
   fields,
   title: custom.name,
-  block: (<ul>
+  block: (<div>
     {fields.map((name, index) =>
-      <li key={index}>
-        <Field name={`${name}.title`} type="text" component={renderTextField} placeholder={`Title #${index + 1}`}/>
-        <Field name={`${name}.text`} type="text" component={renderTextField} placeholder={`Description #${index + 1}`}/>
-        <FloatingActionButton mini={true} secondary={true} onClick={() => fields.remove(index)}>
-          <ContentRemove />
-        </FloatingActionButton></li>
+      <Row key={index}>
+        <Col sm={2}>
+          <FloatingActionButton mini={true} secondary={true} onClick={() => fields.remove(index)}>
+            <ContentRemove />
+          </FloatingActionButton>
+        </Col>
+        <Col md={10}>
+          <Field name={`${name}.title`} type="text" component={renderTextField} placeholder={`Title #${index + 1}`}/>
+          <Field name={`${name}.content`} type="text" component={renderTextField}
+                 placeholder={`Description #${index + 1}`}/>
+        </Col>
+      </Row>
     )}
     {fields.error && <li className="error">{fields.error}</li>}
-  </ul>)
+  </div>)
 });
 
 export const renderFeatures = ({fields, ...custom}) => fieldListWrapper({
   fields,
   title: custom.name,
-  block: (<ul>
+  block: (<div>
     {fields.map((name, index) =>
-      <li key={index}>
-        <Field name={`${name}.text`} type="text" component={renderTextField} placeholder={`Feature #${index + 1}`}/>
-        <FloatingActionButton mini={true} secondary={true} onClick={() => fields.remove(index)}>
-          <ContentRemove />
-        </FloatingActionButton></li>
+      <Row key={index}>
+        <Col sm={2}>
+          <FloatingActionButton mini={true} secondary={true} onClick={() => fields.remove(index)}>
+            <ContentRemove />
+          </FloatingActionButton>
+        </Col>
+        <Col sm={10}>
+          <Field name={`${name}.text`} type="text" component={renderTextField} placeholder={`Feature #${index + 1}`}/>
+        </Col>
+      </Row>
     )}
     {fields.error && <li className="error">{fields.error}</li>}
-  </ul>)
+  </div>)
 });
 
 export const renderFaults = ({fields, ...custom}) => fieldListWrapper({
   fields,
   title: custom.name,
-  block: (<ul>
+  block: (<div>
     {fields.map((field, index) => {
-      return (<li key={index}>
-        {/*<Field name={`${field}.id`} type="text" component="input" />*/}
-        <Field name={`${field}.file`} type="file" component="input" onChange={e => custom.onFaultFileAdd(e, index)}/>
-        <Field name={`${field}.text`} type="text" component={renderTextField} placeholder={`Text #${index + 1}`}/>
-        Persisted: <Field name={`${field}.imageContainer.imageUrl`} type="text" component={renderImage} />
-        New: <Field name={`${field}.imageContainer.base64File`} type="text" component={renderImage} />
-        <FloatingActionButton mini={true} secondary={true}
-                              onClick={(e) => {
-                                fields.remove(index);
-                                custom.onFaultRemove(e, index);
-                              }}>
-          <ContentRemove />
-        </FloatingActionButton></li>
-      );
+        return (<Row key={index}>
+            <Col sm={2}>
+              <FloatingActionButton mini={true} secondary={true} onClick={(e) => {
+                fields.remove(index);
+                custom.onFaultRemove(e, index);
+              }}>
+                <ContentRemove />
+              </FloatingActionButton>
+            </Col>
+            <Col sm={10}>
+              <Field name={`${field}.file`} type="file" component="input"
+                     onChange={e => custom.onFaultFileAdd(e, index)}/>
+              <Field name={`${field}.text`} type="text" component={renderTextField} placeholder={`Text #${index + 1}`}/>
+              Persisted: <Field name={`${field}.imageContainer.imageUrl`} type="text" component={renderImage}/>
+              New: <Field name={`${field}.imageContainer.base64File`} type="text" component={renderImage}/>
+            </Col>
+          </Row>
+        );
       }
     )}
     {fields.error && <li className="error">{fields.error}</li>}
-  </ul>)
+  </div>)
 });
 
 /**
@@ -177,8 +192,8 @@ export const MainImageField = (props) => (<div style={imageBlockStyle}>
   <Field name="mainImage.base64File" component={({input, i}) => (<div>
     {input.value
       ? (<div>
-      <img src={input.value}  width={400}/>
-      <ReactIconDeleteWrapped onClick={e => props.onMainImageRemove(e)} />
+      <img src={input.value} width={400}/>
+      <ReactIconDeleteWrapped onClick={e => props.onMainImageRemove(e)}/>
     </div>)
       : <input type="file" onChange={e => props.onMainImageUpload(e)}/>}
   </div>)}/>
@@ -201,12 +216,12 @@ export const ImagesField = (props) => (<Row style={imageBlockStyle}>
           (input.value
             ? (<div>
             <img src={input.value} width={200}/>
-            <ReactIconDeleteWrapped onClick={e => props.onImageFileRemove(e, index)} />
+            <ReactIconDeleteWrapped onClick={e => props.onImageFileRemove(e, index)}/>
           </div>)
             : (<div></div>));
         return (<div key={index}>
-           <Field name={`${field}.image.url`} type="text" component={componentFn}/>
-           <Field name={`${field}.image.base64File`} type="text" component={componentFn}/>
+          <Field name={`${field}.image.url`} type="text" component={componentFn}/>
+          <Field name={`${field}.image.base64File`} type="text" component={componentFn}/>
           <hr />
         </div>);
       })}</div>)}/>

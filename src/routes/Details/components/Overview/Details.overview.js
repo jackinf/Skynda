@@ -19,7 +19,7 @@ import imageOverview7 from "static/images/standard/group-121@2x.png";
 
 class Overview extends React.Component {
   static propTypes = {
-    general: React.PropTypes.shape({
+    overview: React.PropTypes.shape({
       manufacturer: React.PropTypes.string.isRequired,
       engine: React.PropTypes.string.isRequired,
       horsePower: React.PropTypes.number.isRequired,
@@ -35,7 +35,7 @@ class Overview extends React.Component {
 
   render() {
     // const overview = this.props.overview;
-    let {mileage, drive, engine, horsePower, transmission, doors, seats, colorOutside, colorInside} = this.props.general;
+    let {mileage, drive, engine, horsePower, transmission, doors, seats, colorOutside, colorInside} = this.props.overview;
     const overview = [
       {label: `${mileage} km`, iconUrl: imageOverview1},
       {label: drive, iconUrl: imageOverview2},

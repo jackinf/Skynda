@@ -152,6 +152,67 @@ sale`
   ]
 };
 
+function map(vehicleData) {
+  const vehicleDetailsMainImage = {
+    src: vehicleData.mainImage.url,
+    year: parseInt(vehicleData.model.year),
+    brand: vehicleData.model.vehicleManufacturer.name,
+    model: vehicleData.model.modelCode,
+    engine: vehicleData.model.engine,
+    horsepower: parseInt(vehicleData.model.horsePower),
+    images: vehicleData.images
+  };
+  const overview = {
+    manufacturer: vehicleData.model.vehicleManufacturer.name,
+    engine: vehicleData.model.engine,
+    horsePower: parseInt(vehicleData.model.horsePower),
+    mileage: vehicleData.mileage,
+    transmission: vehicleData.transmission ? vehicleData.transmission.name : "",
+    drive: "",
+    colorOutside: vehicleData.colorInside.name,
+    colorInside: vehicleData.colorOutside.name,
+    doors: parseInt(vehicleData.model.doors),
+    seats: vehicleData.model.seats
+  };
+  const descriptions = vehicleData.descriptions ? vehicleData.descriptions.map(description => ({
+      title: description.title,
+      content: description.content
+  })) : [];
+  const features = vehicleData.features ? vehicleData.features.map(feature => feature.text) : [];
+  const history = {
+    problems: [],
+    vinCode: vehicleData.vinCode
+  };
+  const petrolConsumption = {
+    city: vehicleData.fuelCity,
+    highway: vehicleData.fuelHighway,  // isRequired
+    average: vehicleData.fuelAverage,   // isRequired
+    fuelType: vehicleData.model.fuelType ? vehicleData.model.fuelType.name : ""
+  };
+  const safetyStars = vehicleData.safetyStars;
+  const report = {
+    categories: [],
+    faults: vehicleData.faults ? vehicleData.faults.map(fault => ({
+      text: fault.text,
+      img: fault.image ? fault.image.url : ""
+    })) : []
+  };
+  const reviews = vehicleData.reviews;
+  const additional = vehicleData.additional;
+
+  return {
+    vehicleDetailsMainImage,
+    overview,
+    descriptions,
+    features,
+    history,
+    petrolConsumption,
+    safetyStars,
+    report,
+    reviews,
+    additional
+  }
+}
 
 export const SET_VEHICLE_DATA = "SET_VEHICLE_DATA";
 
@@ -165,8 +226,8 @@ export const getDataAsync = (id) => (dispatch, getState) => {
     })
       .then(resp => resp.json())
       .then(data => {
-        data["general"] = data["vehicleGeneralDto"];
-        dispatch(setCarData(data));
+        const mappedData = map(data);
+        dispatch(setCarData(mappedData));
         dispatch(toggleLoading(false));
       });
       // .catch((error) => {
