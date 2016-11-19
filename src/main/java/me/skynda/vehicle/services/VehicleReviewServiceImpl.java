@@ -5,19 +5,14 @@ import me.skynda.common.dto.DeleteResponseDto;
 import me.skynda.common.interfaces.daos.VehicleDao;
 import me.skynda.common.interfaces.daos.VehicleReviewDao;
 import me.skynda.common.interfaces.services.VehicleReviewService;
-import me.skynda.vehicle.dto.VehicleReportAdminDto;
 import me.skynda.vehicle.dto.VehicleReviewAdminDto;
-import me.skynda.vehicle.entities.Vehicle;
-import me.skynda.vehicle.entities.VehicleModel;
 import me.skynda.vehicle.entities.VehicleReview;
-import org.apache.commons.lang3.NotImplementedException;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 

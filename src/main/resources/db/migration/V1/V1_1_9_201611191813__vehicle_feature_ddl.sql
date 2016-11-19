@@ -1,25 +1,6 @@
 DO LANGUAGE plpgsql $$
 BEGIN
 
-IF EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name='vehicle_feature' AND column_name='feature_id')
-THEN
-  RAISE NOTICE 'column already exists';
-ELSE
-  ALTER TABLE vehicle_feature
-    DROP COLUMN text,
-    ADD COLUMN feature_id integer DEFAULT 92 NOT NULL;
-
-  ALTER TABLE vehicle_feature
-    ADD CONSTRAINT "FK_feature_id" FOREIGN KEY (feature_id) REFERENCES classification(id);
-
-  ALTER TABLE vehicle_feature
-    ADD CONSTRAINT "FK_vehicle_id" FOREIGN KEY (vehicle_id) REFERENCES vehicle(id);
-
-  CREATE INDEX "FKI_feature_id" ON vehicle_feature USING btree (feature_id);
-END IF;
-
-
-
 IF NOT EXISTS (SELECT * FROM "classification" WHERE "classification_type_id" = (SELECT "id" FROM "classification_type" WHERE "name" = 'FEATURE') ) THEN
 	INSERT INTO "classification" ("description", "is_imported", "weight", "value", "modifier_user_id", "modifier_user_ip", "archived", "name", "classification_type_id", "is_active", "value2")
 		VALUES ('feature', true, 1, 'Parking Sensors', 1, '127.0.0.1', null, 'Parking Sensors', (SELECT "id" FROM "classification_type" WHERE "name"='FEATURE'), true, NULL);
@@ -55,6 +36,23 @@ IF NOT EXISTS (SELECT * FROM "classification" WHERE "classification_type_id" = (
 		VALUES ('feature', true, 16, 'Cruise Control', 1, '127.0.0.1', null, 'Cruise Control', (SELECT "id" FROM "classification_type" WHERE "name"='FEATURE'), true, NULL);
 ELSE
 	RAISE NOTICE 'records already exist';
+END IF;
+
+IF EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name='vehicle_feature' AND column_name='feature_id')
+THEN
+  RAISE NOTICE 'column already exists';
+ELSE
+  ALTER TABLE vehicle_feature
+    DROP COLUMN text,
+    ADD COLUMN feature_id integer DEFAULT 92 NOT NULL;
+
+  ALTER TABLE vehicle_feature
+    ADD CONSTRAINT "FK_feature_id" FOREIGN KEY (feature_id) REFERENCES classification(id);
+
+  ALTER TABLE vehicle_feature
+    ADD CONSTRAINT "FK_vehicle_id" FOREIGN KEY (vehicle_id) REFERENCES vehicle(id);
+
+  CREATE INDEX "FKI_feature_id" ON vehicle_feature USING btree (feature_id);
 END IF;
 
 

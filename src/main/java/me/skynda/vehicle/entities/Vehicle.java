@@ -119,7 +119,7 @@ public class Vehicle implements Serializable {
     private List<VehicleFeature> features;
 
     @OneToMany(mappedBy = "vehicleId", fetch = FetchType.LAZY)
-    private List<VehicleReport> reports;
+    private List<VehicleReportCategory> reports;
 
     @OneToMany(mappedBy = "vehicleId", fetch = FetchType.LAZY)
     private List<VehicleReview> reviews;

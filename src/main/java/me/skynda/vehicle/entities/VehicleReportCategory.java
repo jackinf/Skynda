@@ -1,6 +1,7 @@
 package me.skynda.vehicle.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 import lombok.Data;
 
@@ -8,8 +9,8 @@ import java.io.Serializable;
 
 @Entity
 @Data
-@Table(name = "vehicle_report")
-public class VehicleReport implements Serializable {
+@Table(name = "vehicle_report_category")
+public class VehicleReportCategory implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,13 +19,9 @@ public class VehicleReport implements Serializable {
     @Column(name = "title")
     private String title;
 
-    @Column(name = "is_pass")
-    private Boolean isPass;
-
-    @Column(name = "points_text")
-    private String pointsText;
-
-    @Column(name = "vehicle_id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "vehicle_id", nullable = false)
+    @NotNull
     private Integer vehicleId;
 
 }
