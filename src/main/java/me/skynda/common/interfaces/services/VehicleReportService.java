@@ -13,9 +13,9 @@ import java.util.List;
 public interface VehicleReportService {
     List<VehicleReportAdminDto> getAll();
 
-    VehicleReportAdminDto getSingleBy(Long id);
+    VehicleReportAdminDto getSingleBy(Integer id);
 
     CreateOrUpdateResponseDto createOrUpdate(VehicleReportAdminDto dto, BindingResult bindingResult);
 
-    DeleteResponseDto delete(Long id);
+    DeleteResponseDto delete(Integer id);
 }

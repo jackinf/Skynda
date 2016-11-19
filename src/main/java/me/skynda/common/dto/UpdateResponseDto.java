@@ -7,7 +7,7 @@ import java.util.List;
 
 @Data
 public class UpdateResponseDto {
-    private Long id;
+    private Integer id;
     private boolean success;
     private List<ObjectError> errors;
 }

@@ -24,7 +24,7 @@ public class User {
 	@Id
 	@Column(name = "id", columnDefinition = "serial")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Integer id;
 	private String login;
 	private String email;
 	private String phone;

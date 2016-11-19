@@ -28,7 +28,7 @@ public class VehicleReportController extends BaseController {
     }
 
     @RequestMapping(value = "/vehicle-report/{id}", method = RequestMethod.GET)
-    public VehicleReportAdminDto get(@PathVariable("id") Long id) {
+    public VehicleReportAdminDto get(@PathVariable("id") Integer id) {
         return service.getSingleBy(id);
     }
 
@@ -47,7 +47,7 @@ public class VehicleReportController extends BaseController {
     }
 
     @RequestMapping(value = "/vehicle-report/{id}", method = RequestMethod.DELETE, consumes = "application/json")
-    public DeleteResponseDto delete(@PathVariable("id") Long id) {
+    public DeleteResponseDto delete(@PathVariable("id") Integer id) {
         return service.delete(id);
     }
 }
