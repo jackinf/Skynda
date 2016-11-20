@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import {Field, FieldArray} from 'redux-form';
-import {ROUTE_PARAMS, FORM_MODE} from "../constants/VehicleReport.constant";
+import {ROUTE_PARAMS} from "../constants/VehicleReport.constant";
 import {formSubmit, onFormSubmitSuccess, onFormSubmitError} from "../actions";
 import {Row, Col} from "react-bootstrap";
 import {TextField} from "redux-form-material-ui";

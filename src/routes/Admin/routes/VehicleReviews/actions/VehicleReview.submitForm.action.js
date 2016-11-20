@@ -10,10 +10,20 @@ import {SubmissionError} from 'redux-form';
  * Is executed on form submit. Not a redux action.
  * @returns {any}
  */
-export default function submitVehicleForm(data, formMode) {
+export function formSubmit(data, formMode) {
   return formMode == FORM_MODE.ADDING
     ? createVehicleAsync(data)
     : updateVehicleAsync(data);
+}
+
+export function onFormSubmitSuccess(isSuccess) {
+  if (!!isSuccess) {
+    browserHistory.push(`/admin/vehicle-reviews`);
+  }
+}
+
+export function onFormSubmitError() {
+  console.log("error");
 }
 
 /**

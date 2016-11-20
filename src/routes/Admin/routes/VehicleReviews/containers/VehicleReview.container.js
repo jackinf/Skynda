@@ -6,12 +6,13 @@ import {reduxForm} from 'redux-form';
 import {
   clear,
   load,
-  setFormMode,
-  submitVehicleForm,
+  formSubmit,
   fillWithFakeData
 } from "../actions";
 import ViewComponent from "../components/VehicleReview.component";
 import {FORMS, REDUCER_KEYS} from "../constants/VehicleReview.constant";
+import {setFormMode} from "../reducers/SetFormMode.reducer";
+import getVehiclesList from "../../Vehicles/actions/Vehicles/Vehicles.getList.action";
 
 // Decorate the form component
 const DecoratedViewComponent = reduxForm({
@@ -21,7 +22,8 @@ const DecoratedViewComponent = reduxForm({
 const mapDispatchToProps = {
   load,
   clear,
-  submitVehicleForm,
+  getVehiclesList,
+  formSubmit,
   setFormMode,
   fillWithFakeData
 };
@@ -30,7 +32,8 @@ const mapStateToProps = (state) => {
   return {
     isFetching: state[REDUCER_KEYS.VEHICLE_DATA].isFetching,
     initialValues: state[REDUCER_KEYS.VEHICLE_DATA].data,
-    formMode1: state[REDUCER_KEYS.FORM_MODE]
+    formMode1: state[REDUCER_KEYS.FORM_MODE],
+    vehicles: state["vehicles"]
   };
 };
 

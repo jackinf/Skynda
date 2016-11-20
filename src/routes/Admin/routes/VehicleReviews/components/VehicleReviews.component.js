@@ -37,8 +37,32 @@ export default class VehicleList extends React.Component {
           width={50}
         />
         <Column
-          header={<Cell>Id</Cell>}
+          header={<Cell>ID</Cell>}
           cell={({rowIndex, ...props}) => (<Cell {...props}>{rows[rowIndex].id}</Cell>)}
+          width={50}
+        />
+        <Column
+          header={<Cell>Vehicle ID</Cell>}
+          cell={({rowIndex, ...props}) => (<Cell {...props}>{rows[rowIndex].vehicleId}</Cell>)}
+          width={50}
+        />
+        <Column
+          header={<Cell>Text</Cell>}
+          cell={({rowIndex, ...props}) => (<Cell {...props}>{rows[rowIndex].text}</Cell>)}
+          width={200}
+        />
+        <Column
+          header={<Cell>Logo</Cell>}
+          cell={({rowIndex, ...props}) => (<Cell {...props}>{rows[rowIndex].logo
+            ? (<a href={rows[rowIndex].logo.url} target="_blank" >{rows[rowIndex].logo.url}</a>)
+            : ""}</Cell>)}
+          width={200}
+        />
+        <Column
+          header={<Cell>Video</Cell>}
+          cell={({rowIndex, ...props}) => (<Cell {...props}>{rows[rowIndex].video
+            ? (<a href={rows[rowIndex].video.url} target="_blank">{rows[rowIndex].video.url}</a>)
+            : ""}</Cell>)}
           width={200}
         />
         <Column
