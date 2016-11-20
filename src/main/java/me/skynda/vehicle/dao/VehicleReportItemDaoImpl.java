@@ -21,7 +21,7 @@ public class VehicleReportItemDaoImpl extends SkyndaBaseEntityDaoImpl<VehicleRep
 
         Session session = getSession();
         String id = vehicle.getId().toString();
-        session.createSQLQuery("DELETE FROM vehicle_description WHERE vehicle_id = "  + id)   // TODO: avoid SQL injection
+        session.createSQLQuery("DELETE FROM vehicle_report_item WHERE vehicle_id = "  + id)   // TODO: avoid SQL injection
 //                .setParameter("xxx", id)
                 .executeUpdate();
 
