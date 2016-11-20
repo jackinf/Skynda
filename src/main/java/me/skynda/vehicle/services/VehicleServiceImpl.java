@@ -43,6 +43,9 @@ public class VehicleServiceImpl implements VehicleService {
     VehicleModelDao vehicleModelDao;
 
     @Autowired
+    VehicleReportItemDao vehicleReportItemDao;
+
+    @Autowired
     VehicleDescriptionDao vehicleDescriptionDao;
 
     @Autowired
@@ -181,6 +184,7 @@ public class VehicleServiceImpl implements VehicleService {
             Save all the one-2-many relations with vehicle-to-be-sold
          */
 
+        vehicleReportItemDao.addMultipleToVehicle(addedVehicle, vehicleAdminDto.getReportItems());
         vehicleDescriptionDao.addMultipleToVehicle(addedVehicle, vehicleAdminDto.getDescriptions());
         vehicleFeatureDao.addMultipleToVehicle(addedVehicle, vehicleAdminDto.getFeatures());
         vehicleFaultDao.addMultipleToVehicle(addedVehicle, faultDtos);

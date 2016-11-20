@@ -119,9 +119,15 @@ public class Vehicle implements Serializable {
     private List<VehicleFeature> features;
 
     @OneToMany(mappedBy = "vehicleId", fetch = FetchType.LAZY)
-    private List<VehicleReportCategory> reports;    // TODO: rename to reportCategories
+    private List<VehicleReportCategory> reportCategories;
 
     @OneToMany(mappedBy = "vehicleId", fetch = FetchType.LAZY)
     private List<VehicleReview> reviews;
+
+    @OneToMany(mappedBy = "vehicleId", fetch = FetchType.LAZY)
+    private List<VehicleReportItem> reportItems;
+
+    @Column(name="report_title")
+    private String reportTitle;
 
 }
