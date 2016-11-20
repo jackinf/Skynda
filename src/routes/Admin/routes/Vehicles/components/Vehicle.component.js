@@ -7,6 +7,7 @@ import {ROUTE_PARAMS, FORM_MODE} from "./../constants/Vehicle.constant";
 import {
   renderTextField,
   renderDescriptions,
+  renderReportItems,
   renderFeatures,
   renderFaults,
   MainImageField,
@@ -179,6 +180,7 @@ class Vehicle extends React.Component {
                 )}
 
                 <FieldArray name="descriptions" label="Descriptions" component={renderDescriptions}/>
+                <FieldArray name="reportItems" label="Report Items" component={renderReportItems}/>
                 <FieldArray name="features" label="Features" component={renderFeatures}/>
                 <FieldArray name="faults" label="Faults" component={renderFaults}
                             onFaultFileAdd={this.props.onFaultFileUpload}

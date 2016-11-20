@@ -67,6 +67,28 @@ export const renderDescriptions = ({fields, ...custom}) => fieldListWrapper({
   </div>)
 });
 
+export const renderReportItems = ({fields, ...custom}) => fieldListWrapper({
+  fields,
+  title: custom.name,
+  block: (<div>
+    {fields.map((name, index) =>
+      <Row key={index}>
+        <Col sm={2}>
+          <FloatingActionButton mini={true} secondary={true} onClick={() => fields.remove(index)}>
+            <ContentRemove />
+          </FloatingActionButton>
+        </Col>
+        <Col md={10}>
+          <Field name={`${name}.title`} type="text" component={renderTextField} placeholder={`Title #${index + 1}`}/>
+          <Field name={`${name}.description`} type="text" component={renderTextField}
+                 placeholder={`Description #${index + 1}`}/>
+        </Col>
+      </Row>
+    )}
+    {fields.error && <li className="error">{fields.error}</li>}
+  </div>)
+});
+
 export const renderFeatures = ({fields, ...custom}) => fieldListWrapper({
   fields,
   title: custom.name,
