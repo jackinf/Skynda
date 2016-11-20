@@ -6,7 +6,7 @@ import "./Details.inspectors-report.scss";
 
 // 3rd party
 import {Dialog, TextField} from "material-ui";
-import {Button, Row, Col} from "react-bootstrap";
+import {Button, Row, Col, Carousel, Thumbnail} from "react-bootstrap";
 
 // Images
 import imageOk from "./../../../../static/images/standard/ok.png";
@@ -14,6 +14,7 @@ import imageCancel from "./../../../../static/images/standard/cancel.png";
 import imageCarInspector from "./assets/carinspector.png";
 import imagesClose from "./assets/cancel@2x.png";
 import {Translate} from 'react-redux-i18n';
+// import NukaCarousel from 'nuka-carousel';
 
 /**
  * Draws a single icon (tick if pass or cross if not pass) and a description.
@@ -72,32 +73,67 @@ class InspectorsReport extends React.Component {
   };
 
   render() {
+    const {reportItems, faults} = this.props.report;
     let categories = this.state.categories;
 
     return (
       <Skblock header={<Translate value="details.components.inspector_report.header"/>}>
         <Row>
-          <Col md={3}><label className='sk_details__certified_developer'>Artur P.</label></Col>
-          <Col md={4}><img src={imageCarInspector} width='130' alt='happy'/></Col>
-          <Col md={5} className='sk_details__certified_developer'>
+          <Col md={3}><img src={imageCarInspector} width='130' alt='happy'/></Col>
+          <Col md={9} className='sk_details__certified_developer'>
             <Button className='sk_details__report__button-have-questions' onClick={this.openQuestionModal}>
               <Translate value="details.components.inspector_report.question"/>
             </Button>
           </Col>
         </Row>
 
-        {categories.map((categoryWrapper, i) => {
-          if (!categoryWrapper.category.points) {
-            return <div></div>
-          }
+        <Col sm={12}>
+          {reportItems.map(reportItem => (<Row>
+            <h3>{reportItem.title}</h3>
+            <div>
+              {reportItem.description }
+            </div>
+          </Row>))}
+        </Col>
 
-          let points = [];
-          let showButton = categoryWrapper.category.points.length > categoryWrapper.limit;
-          for (let j = 0; j < categoryWrapper.category.points.length && j < categoryWrapper.limit; j++) {
-            points.push({...categoryWrapper.category.points[j]});
-          }
+        <Row>
+          <Col xs={12} className="sk_details__overview_flex-container">
+            {faults.map((item, i) => (<div key={i} className="sk_details__overview_flex-container-item">
+              <Thumbnail href="#" alt="" style={{width: "200px"}} src={item.img}/>
+              <span className='overview__overview-label'>{item.text}</span>
+            </div>))}
+          </Col>
+        </Row>
+        {/*<Col sm={12} style={{marginTop: "20px"}}>*/}
+        {/*<Carousel>*/}
+        {/*{faults.map(fault => (<Carousel.Item>*/}
+        {/*<img width={300} height={200} alt={fault.text} src={fault.img}/>*/}
+        {/*<Carousel.Caption>*/}
+        {/*<h3>{fault.text}</h3>*/}
+        {/*</Carousel.Caption>*/}
+        {/*</Carousel.Item>))}*/}
+        {/*</Carousel>*/}
+        {/*</Col>*/}
 
-          return (<Row key={i} className='sk_details__report__category-block'>
+        {/*{faults && faults.length ? (<Col sm={12} style={{marginTop: "20px"}}>*/}
+        {/*<NukaCarousel autoplay={false} wrapAround={true} style={{minHeight: "150px"}}>*/}
+        {/*{faults.map(fault =>  <img src={fault.img} width={150} height={150}/>)}*/}
+        {/*</NukaCarousel>*/}
+        {/*</Col>): ""}*/}
+
+        <Col sm={12}>
+          {categories.map((categoryWrapper, i) => {
+            if (!categoryWrapper.category.points) {
+              return <div></div>
+            }
+
+            let points = [];
+            let showButton = categoryWrapper.category.points.length > categoryWrapper.limit;
+            for (let j = 0; j < categoryWrapper.category.points.length && j < categoryWrapper.limit; j++) {
+              points.push({...categoryWrapper.category.points[j]});
+            }
+
+            return (<Row key={i} className='sk_details__report__category-block'>
               <Col md={12}>
                 <h4 className='sk_details__report__category-title'>{categoryWrapper.category.title}</h4>
 
@@ -124,7 +160,8 @@ class InspectorsReport extends React.Component {
 
               </Col>
             </Row>);
-        })}
+          })}
+        </Col>
 
         <Dialog
           title={(<div><h4 className='sk_details__report__question-title'>Kas teil on küsimusi?</h4>
@@ -167,6 +204,10 @@ class InspectorsReport extends React.Component {
 
 InspectorsReport.propTypes = {
   report: React.PropTypes.shape({
+    reportItems: React.PropTypes.arrayOf(React.PropTypes.shape({
+      text: React.PropTypes.string.isRequired,
+      description: React.PropTypes.string.isRequired
+    })),
     categories: React.PropTypes.arrayOf(React.PropTypes.shape({
       title: React.PropTypes.string.isRequired,
       points: React.PropTypes.arrayOf(React.PropTypes.shape({

@@ -19,7 +19,7 @@ class VehicleDetailsMainImage extends React.Component {
   }
 
   render() {
-    const {src, year, brand, model, engine, horsepower} = this.props.vehicleDetailsMainImage;
+    const {src, year, brand, model, engine, horsepower, price} = this.props.vehicleDetailsMainImage;
     const images = this.props.images ? this.props.images
       .filter(imageItem => imageItem.image)
       .map(imageItem => ({original: imageItem.image.url})) : [];
@@ -42,7 +42,8 @@ class VehicleDetailsMainImage extends React.Component {
                 <span style={{margin: "0 15px 0 0"}}>{brand}</span>
                 <span style={{margin: "0 15px 0 0"}}>{model}</span>
                 <span style={{margin: "0 15px 0 0"}}>{engine}</span>
-                <span style={{margin: "0 15px 0 0"}}>({horsepower})</span>
+                <span style={{margin: "0 15px 0 0"}}>({horsepower} kW)</span>
+                <span style={{float: "right"}}>{parseInt(price).toLocaleString()} €</span>
               </Col>
             </Row>
             <Row className='image-buttons'>
@@ -73,7 +74,8 @@ VehicleDetailsMainImage.propTypes = {
     model: React.PropTypes.string,
     engine: React.PropTypes.string,
     horsepower: React.PropTypes.number,
-    images: React.PropTypes.array
+    images: React.PropTypes.array,
+    price: React.PropTypes.number
   }),
 };
 

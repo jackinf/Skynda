@@ -160,7 +160,8 @@ function map(vehicleData) {
     model: vehicleData.model.modelCode,
     engine: vehicleData.model.engine,
     horsepower: parseInt(vehicleData.model.horsePower),
-    images: vehicleData.images
+    images: vehicleData.images,
+    price: vehicleData.price
   };
   const overview = {
     manufacturer: vehicleData.model.vehicleManufacturer.name,
@@ -193,6 +194,10 @@ function map(vehicleData) {
   };
   const safetyStars = vehicleData.safetyStars;
   const report = {
+    reportItems: vehicleData.reportItems ? vehicleData.reportItems.map(reportItem => ({
+      title: reportItem.title,
+      description: reportItem.description
+    })) : [],
     categories: vehicleData.reports ? vehicleData.reports.map(reportCategory => ({
       title: reportCategory.title,
       points: reportCategory.items ? reportCategory.items.map(reportCategoryItem => ({
