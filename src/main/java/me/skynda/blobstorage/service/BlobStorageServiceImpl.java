@@ -244,59 +244,66 @@ public class BlobStorageServiceImpl implements BlobStorageService {
      * TODO: Create MediaService and move this method there
      * @param mediaDto - new media file
      * @param existingMedia - already persisted media file
-     * @return newly added image to the database
+     * @return newly added image to the database or existing image
      */
     public Image handleMedia(ImageDto mediaDto, Image existingMedia) {
-        if (mediaDto != null) {
-            if (mediaDto.getBase64File() != null && !mediaDto.getBase64File().isEmpty()) {
-                // Please, upload the fucking file!!!
-                UploadBlobDto uploadBlob = new UploadBlobDto();
-                uploadBlob.setContainerName(VehicleServiceImpl.DEFAULT_CONTAINER_NAME);
-                String blobName = UUID.randomUUID().toString();
-                uploadBlob.setBlobName(blobName);
-                uploadBlob.setByteArray(SkyndaUtility.toBytearray(mediaDto.getBase64File()));
-                BlobStorageUploadStreamResponseDto response = uploadStream(uploadBlob);
+        if (mediaDto == null) {
+            return null;
+        }
 
-                // Was upload successful?
-                if (response.isSuccess()) {
-                    return imageDao.save(Image.Factory.create(response.getUri(), blobName, VehicleServiceImpl.DEFAULT_CONTAINER_NAME));
-                }
-            } else if (mediaDto.getUrl() != null && !mediaDto.getUrl().isEmpty()) {
-                // Check if url has changed. If not, then presumably the image is the same.
-                if (existingMedia != null && !existingMedia.getUrl().trim().isEmpty()) {
-                    if (Objects.equals(existingMedia.getUrl(), mediaDto.getUrl())) {
-                        return null;    // Url is same. Presumably image did not change. Exit.
-                    }
-                    // TODO: delete previous image
-                }
+        if (mediaDto.getBase64File() != null && !mediaDto.getBase64File().isEmpty()) {
+            // Please, upload the media file
+            UploadBlobDto uploadBlob = new UploadBlobDto();
+            uploadBlob.setContainerName(VehicleServiceImpl.DEFAULT_CONTAINER_NAME);
+            String blobName = UUID.randomUUID().toString();
+            uploadBlob.setBlobName(blobName);
+            uploadBlob.setByteArray(SkyndaUtility.toBytearray(mediaDto.getBase64File()));
+            BlobStorageUploadStreamResponseDto response = uploadStream(uploadBlob);
 
-
-                // Try saving a new image first.
-                Image newImage = imageDao.save(Image.Factory.create(mediaDto.getUrl()));
-
-                 /*
-                     Cleanup existing image from azure cloud:
-                     use blob name + container name to delete image
-                 */
-                if (existingMedia != null
-                        && existingMedia.getBlobName() != null
-                        && !existingMedia.getBlobName().isEmpty()
-                        && existingMedia.getContainerName() != null
-                        && !existingMedia.getContainerName().isEmpty()) {
-
-                    try {
-
-                        DeleteBlobDto deleteBlob = new DeleteBlobDto();
-                        deleteBlob.setBlobName(existingMedia.getBlobName());
-                        deleteBlob.setContainerName(existingMedia.getContainerName());
-                        delete(deleteBlob);
-                    } catch (Exception ex) {
-                        // TODO: catch and log an exception
-                    }
-                }
-                return newImage;  // save new image and return
+            // Was upload successful?
+            if (response.isSuccess()) {
+                return imageDao.save(Image.Factory.create(response.getUri(), blobName, VehicleServiceImpl.DEFAULT_CONTAINER_NAME));
+            } else  {
+                return existingMedia;   // fail
             }
         }
-        return null;
+
+        // We made it here, meaning, that uploaded file was not base64. Check if uploaded file has at least url.
+        if (mediaDto.getUrl() == null || mediaDto.getUrl().trim().isEmpty()) {
+            return null;    // otherwise assume that the file is deleted
+        }
+
+        // Check if url has changed. If not, then presumably the image is the same.
+        if (existingMedia != null && !existingMedia.getUrl().trim().isEmpty()) {
+            if (Objects.equals(existingMedia.getUrl(), mediaDto.getUrl())) {
+                return existingMedia;    // Url is same. Presumably image did not change. Exit.
+            }
+        }
+
+        // Save the new file
+        Image newImage = imageDao.save(Image.Factory.create(mediaDto.getUrl()));
+
+         /*
+             Cleanup existing image from azure cloud:
+             use blob name + container name to delete image
+         */
+        if (existingMedia != null
+                && existingMedia.getBlobName() != null
+                && !existingMedia.getBlobName().isEmpty()
+                && existingMedia.getContainerName() != null
+                && !existingMedia.getContainerName().isEmpty()) {
+
+            try {
+                DeleteBlobDto deleteBlob = new DeleteBlobDto();
+                deleteBlob.setBlobName(existingMedia.getBlobName());
+                deleteBlob.setContainerName(existingMedia.getContainerName());
+                delete(deleteBlob);
+
+                // TODO: delete previous image and continue function execution -> imageDao.deleteByUrl
+            } catch (Exception ex) {
+                // TODO: catch and log an exception
+            }
+        }
+        return newImage;  // save new image and return
     }
 }

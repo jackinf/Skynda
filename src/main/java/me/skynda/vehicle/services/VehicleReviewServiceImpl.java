@@ -61,24 +61,23 @@ public class VehicleReviewServiceImpl implements VehicleReviewService {
 
     @Override
     public CreateOrUpdateResponseDto createOrUpdate(VehicleReviewAdminDto dto, BindingResult bindingResult) {
-        VehicleReview vehicleReview = dto.getId() != null ? vehicleReviewDao.get(dto.getId()) : new VehicleReview();
-
-        // In order to avoid mapping dto values using Dozer automapper, we break reference by cloning an object
-        Image oldLogo = Image.Factory.clone(vehicleReview.getLogo());
-        Image oldVideo = Image.Factory.clone(vehicleReview.getVideo());
+        VehicleReview vehicleReview = dto.getId() != null
+                ? vehicleReviewDao.get(dto.getId())     // existing (UPDATE
+                : new VehicleReview();                  // new (ADD)
 
         /*
             Map
          */
-        mapper.map(dto, vehicleReview);
+        vehicleReview.setText(dto.getText());
+        vehicleReview.setRating(dto.getRating());
 
         /*
             Media upload/save.
          */
-        Image newLogo = blobStorageService.handleMedia(dto.getLogo(), oldLogo);
-        Image newVideo = blobStorageService.handleMedia(dto.getVideo(), oldVideo);
-        vehicleReview.setLogo(newLogo != null ? newLogo : oldLogo);
-        vehicleReview.setVideo(newVideo != null ? newVideo : oldVideo);
+        Image newLogo = blobStorageService.handleMedia(dto.getLogo(), vehicleReview.getLogo());
+        Image newVideo = blobStorageService.handleMedia(dto.getVideo(), vehicleReview.getVideo());
+        vehicleReview.setLogo(newLogo);
+        vehicleReview.setVideo(newVideo);
 
         /*
             Save

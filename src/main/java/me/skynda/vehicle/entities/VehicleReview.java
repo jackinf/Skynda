@@ -17,14 +17,12 @@ public class VehicleReview implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "logo_id", nullable = false)
-	@NotNull
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "logo_id")
 	private Image logo;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "video_id", nullable = false)
-	@NotNull
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "video_id")
 	private Image video;
 
 	@Column(name = "text")
