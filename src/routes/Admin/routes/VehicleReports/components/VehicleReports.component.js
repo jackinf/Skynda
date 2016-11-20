@@ -37,8 +37,18 @@ export default class ListView extends React.Component {
           width={50}
         />
         <Column
-          header={<Cell>Id</Cell>}
+          header={<Cell>ID</Cell>}
           cell={({rowIndex, ...props}) => (<Cell {...props}>{rows[rowIndex].id}</Cell>)}
+          width={200}
+        />
+        <Column
+          header={<Cell>Title</Cell>}
+          cell={({rowIndex, ...props}) => (<Cell {...props}>{rows[rowIndex].title}</Cell>)}
+          width={200}
+        />
+        <Column
+          header={<Cell>Vehicle ID</Cell>}
+          cell={({rowIndex, ...props}) => (<Cell {...props}>{rows[rowIndex].vehicleId}</Cell>)}
           width={200}
         />
         <Column

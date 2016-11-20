@@ -5,15 +5,26 @@ import {FORM_MODE} from "../constants/VehicleReport.constant";
 import remoteConfig from "store/remoteConfig";
 import {fromSpringToReduxFormError} from "../../../../../utils/formUtils";
 import {SubmissionError} from 'redux-form';
+import {browserHistory} from "react-router";
 
 /**
  * Is executed on form submit. Not a redux action.
  * @returns {any}
  */
-export default function submitVehicleForm(data, formMode) {
+export function formSubmit(data, formMode) {
   return formMode == FORM_MODE.ADDING
     ? createVehicleAsync(data)
     : updateVehicleAsync(data);
+}
+
+export function onFormSubmitSuccess(isSuccess) {
+  if (!!isSuccess) {
+    browserHistory.push(`/admin/vehicle-reports`);
+  }
+}
+
+export function onFormSubmitError() {
+  console.log("error");
 }
 
 /**

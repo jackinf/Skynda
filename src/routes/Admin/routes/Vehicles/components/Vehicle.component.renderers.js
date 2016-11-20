@@ -4,16 +4,13 @@
 import React from "react";
 import {Field, FieldArray} from 'redux-form';
 import TextField from 'material-ui/TextField';
-import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
-import Checkbox from 'material-ui/Checkbox';
-import SelectField from 'material-ui/SelectField';
 import {Row, Col} from "react-bootstrap";
 import FloatingActionButton from 'material-ui/FloatingActionButton';
-import ContentAdd from 'material-ui/svg-icons/content/add';
 import ContentRemove from 'material-ui/svg-icons/content/remove';
 import Dropzone from "react-dropzone";
 
 import ReactIconDelete from 'react-icons/lib/md/delete';
+import {fieldListWrapper, renderImage} from "../../../components/FormRenderers/index";
 
 const styleDeleteIcon = {
   position: "absolute",
@@ -38,38 +35,10 @@ export const renderTextField = ({input, label, meta: {touched, error}, ...custom
     </Col>
   </Row>
 );
+//
+// export const renderImage = ({input}) => (input.value ? <img src={input.value} width={100}/> : <div>-NONE-</div>);
+//
 
-export const renderImage = ({input}) => (input.value ? <img src={input.value} width={100}/> : <div>-NONE-</div>);
-
-export const renderCheckbox = ({input, label, ...custom}) => (
-  <Row style={{marginBottom: "10px"}}>
-    <Col sm={12}>
-      <Checkbox label={label}
-                checked={!!input.value}
-                onCheck={input.onChange}/>
-    </Col>
-  </Row>
-);
-
-export const renderRadioGroup = ({input, ...rest}) => (
-  <RadioButtonGroup {...input} {...rest}
-                    valueSelected={input.value}
-                    onChange={(event, value) => input.onChange(value)}/>
-);
-
-export const renderSelectField = ({input, label, meta: {touched, error}, children, ...custom}) => (
-  <Row style={{marginBottom: "10px"}}>
-    <Col sm={12}>
-      <SelectField
-        floatingLabelText={label}
-        errorText={touched && error}
-        {...input}
-        onChange={(event, index, value) => input.onChange(value)}
-        children={children}
-        {...custom}/>
-    </Col>
-  </Row>
-);
 
 /*
  ====================================
@@ -146,34 +115,6 @@ export const renderFaults = ({fields, ...custom}) => fieldListWrapper({
     {fields.error && <li className="error">{fields.error}</li>}
   </div>)
 });
-
-/**
- * Private. Wraps around list of items
- * @param fields
- * @param title
- * @param block - REACT element
- * @param isRequired - is the field required for submission?
- */
-const fieldListWrapper = ({fields, title, block, isRequired = false}) => (
-  <Row style={{marginBottom: "20px", border: "1px solid #cdcdcd", background: "#efefef"}}>
-    <Col sm={12}>
-      <Row>
-        <Col sm={12}>
-          <h3>
-            <FloatingActionButton mini={true} onClick={() => fields.push()}>
-              <ContentAdd />
-            </FloatingActionButton>&nbsp;{title} ({fields.length})
-          </h3>
-        </Col>
-      </Row>
-      <Row>
-        <Col sm={12}>
-          {block}
-        </Col>
-      </Row>
-    </Col>
-  </Row>
-);
 
 const imageBlockStyle = {border: "1px solid #dedede", backgroundColor: "#efefef", padding: "10px"};
 

@@ -4,16 +4,21 @@
 import React from 'react';
 import {Field, FieldArray} from 'redux-form';
 import {ROUTE_PARAMS, FORM_MODE} from "../constants/VehicleReport.constant";
-import {submitVehicleForm} from "../actions";
+import {formSubmit, onFormSubmitSuccess, onFormSubmitError} from "../actions";
 import {Row, Col} from "react-bootstrap";
-import {browserHistory} from "react-router";
+import {TextField} from "redux-form-material-ui";
+import {
+  renderReportCategoryItems,
+  VehiclesSelectField
+} from "./VehicleReportCategory.component.renderers";
 
-class Vehicle extends React.Component {
+class VehicleReportCategory extends React.Component {
   static propTypes = {
     isFetching: React.PropTypes.bool.isRequired,
-    submitVehicleForm: React.PropTypes.func.isRequired,
+    formSubmit: React.PropTypes.func.isRequired,
     load: React.PropTypes.func.isRequired,
     clear: React.PropTypes.func.isRequired,
+    getVehiclesList: React.PropTypes.func.isRequired,
     fillWithFakeData: React.PropTypes.func.isRequired,
 
     // vehicle review data
@@ -31,7 +36,7 @@ class Vehicle extends React.Component {
 
   componentDidMount() {
     this.props.load(this.props.params[ROUTE_PARAMS.VEHICLE_ID]);
-    this.props.getVehicleModelsList();
+    this.props.getVehiclesList();
   }
 
   componentWillUnmount() {
@@ -42,19 +47,32 @@ class Vehicle extends React.Component {
    *  Form submit logic. Saves or updates
    */
   onSubmit(e) {
-    this.props.handleSubmit(data => submitVehicleForm(data, this.props.formMode1))(e)
-      .then(() => {
-          if (!!this.props.submitSucceeded) {
-            browserHistory.push(`/admin/vehicle-reviews`);
-          }
-        },
-        () => (console.log("error")));
+    this.props.handleSubmit(data => formSubmit(data, this.props.formMode1))(e)
+      .then(() => onFormSubmitSuccess(this.props.submitSucceeded), onFormSubmitError);
   };
 
   render() {
     return (<div>
         {this.props.isFetching || this.props.submitting ? "Loading..." : (
           <form onSubmit={this.onSubmit.bind(this)}>
+
+            <h3>{this.props.formMode1}</h3>
+
+            <VehiclesSelectField name="vehicleId" label="Vehicle *" vehicles={this.props.vehicles} />
+
+            <Row>
+              <Col sm={12}>
+                <Field name="title" component={TextField} hintText="Title"/>
+              </Col>
+            </Row>
+
+            <FieldArray name="items" label="Category items" component={renderReportCategoryItems}
+                        onCategoryItemLogoUpload={this.props.onCategoryItemLogoUpload}
+                        onCategoryItemLogoRemove={this.props.onCategoryItemLogoRemove}
+                        onCategoryItemVideoUpload={this.props.onCategoryItemVideoUpload}
+                        onCategoryItemVideoRemove={this.props.onCategoryItemVideoRemove}
+            />
+
             <button type="submit" disabled={this.props.submitting}>Submit</button>
           </form>
 
@@ -64,4 +82,4 @@ class Vehicle extends React.Component {
   }
 }
 
-export default Vehicle;
+export default VehicleReportCategory;

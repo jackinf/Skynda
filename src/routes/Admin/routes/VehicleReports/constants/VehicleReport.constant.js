@@ -12,7 +12,7 @@ export const ACTIONS = {
 
 export const FORMS = {
   DEFAULT_REDUX_FORM_KEY: "form", // Do not change the value! redux-forms depends on it.
-  VEHICLE_FORM: "adminVehicleAddUpdateForm",
+  VEHICLE_FORM: "adminVehicleReportCategoryAddUpdateForm",
 };
 
 export const ROUTE_PARAMS = {

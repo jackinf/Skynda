@@ -6,14 +6,13 @@ import {Field, FieldArray} from 'redux-form';
 import {ROUTE_PARAMS, FORM_MODE} from "./../constants/Vehicle.constant";
 import {
   renderTextField,
-  renderCheckbox,
-  renderSelectField,
   renderDescriptions,
   renderFeatures,
   renderFaults,
   MainImageField,
   ImagesField
 } from "./Vehicle.component.renderers";
+import {renderCheckbox, renderSelectField} from "../../../components/FormRenderers";
 import {submitVehicleForm} from "../actions/Vehicle";
 import MenuItem from 'material-ui/MenuItem';
 import {Row, Col} from "react-bootstrap";

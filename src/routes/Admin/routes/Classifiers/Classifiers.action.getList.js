@@ -5,7 +5,7 @@ import fetch from "isomorphic-fetch";
 import remoteConfig from "store/remoteConfig";
 import {getClassifiers} from "./Classifiers.module";
 
-export default function getList() {
+export function getList() {
   return (dispatch) => {
     dispatch(getClassifiers({isFetching: true}));
 
