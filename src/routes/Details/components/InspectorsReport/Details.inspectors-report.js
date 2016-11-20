@@ -72,10 +72,7 @@ class InspectorsReport extends React.Component {
   };
 
   render() {
-    // let {categories} = this.props.report;
-    // categories = categories || [];
     let categories = this.state.categories;
-    console.log(categories);
 
     return (
       <Skblock header={<Translate value="details.components.inspector_report.header"/>}>

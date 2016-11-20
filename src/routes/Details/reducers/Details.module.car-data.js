@@ -205,12 +205,14 @@ function map(vehicleData) {
       img: fault.image ? fault.image.url : ""
     })) : []
   };
-  const reviews = vehicleData.reviews.map(review => ({
-    text: review.text,
-    rating: review.rating,
-    logoUrl: review.logo != null ? review.logo.url : "",
-    videoUrl: review.video != null ? review.video.url : ""
-  }));
+  const reviews = vehicleData.reviews.map(review => {
+    return {
+      text: review.text,
+      rating: review.rating,
+      logoUrl: review.logo != null ? review.logo.url : "",
+      videoUrl: review.video != null ? review.video.url : ""
+    }
+  });
   const additional = vehicleData.additional;
 
   return {
