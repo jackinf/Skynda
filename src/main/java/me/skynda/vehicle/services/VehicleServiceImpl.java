@@ -34,7 +34,7 @@ import java.util.UUID;
 @Transactional
 public class VehicleServiceImpl implements VehicleService {
 
-    private final String DEFAULT_CONTAINER_NAME = "skynda";
+    public static String DEFAULT_CONTAINER_NAME = "skynda";
 
     @Autowired
     VehicleDao vehicleDao;

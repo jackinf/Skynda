@@ -1,12 +1,19 @@
 package me.skynda.vehicle.services;
 
+import me.skynda.blobstorage.dto.UploadBlobDto;
+import me.skynda.blobstorage.dto.response.BlobStorageUploadStreamResponseDto;
+import me.skynda.blobstorage.service.BlobStorageService;
 import me.skynda.common.dto.CreateOrUpdateResponseDto;
 import me.skynda.common.dto.DeleteResponseDto;
-import me.skynda.common.interfaces.daos.VehicleDao;
+import me.skynda.common.helper.SkyndaUtility;
+import me.skynda.common.interfaces.daos.ImageDao;
 import me.skynda.common.interfaces.daos.VehicleReviewDao;
 import me.skynda.common.interfaces.services.VehicleReviewService;
+import me.skynda.image.entities.Image;
+import me.skynda.vehicle.dto.ImageDto;
 import me.skynda.vehicle.dto.VehicleReviewAdminDto;
 import me.skynda.vehicle.entities.VehicleReview;
+import org.apache.commons.lang3.SerializationUtils;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +21,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 /**
@@ -27,10 +36,13 @@ public class VehicleReviewServiceImpl implements VehicleReviewService {
     VehicleReviewDao vehicleReviewDao;
 
     @Autowired
-    VehicleDao vehicleDao;
+    ImageDao imageDao;
 
     @Autowired
     private Mapper mapper;
+
+    @Autowired
+    BlobStorageService blobStorageService;
 
     @Override
     public List<VehicleReviewAdminDto> getAll() {
@@ -49,16 +61,24 @@ public class VehicleReviewServiceImpl implements VehicleReviewService {
 
     @Override
     public CreateOrUpdateResponseDto createOrUpdate(VehicleReviewAdminDto dto, BindingResult bindingResult) {
+        VehicleReview vehicleReview = dto.getId() != null ? vehicleReviewDao.get(dto.getId()) : new VehicleReview();
+
+        // In order to avoid mapping dto values using Dozer automapper, we break reference by cloning an object
+        Image oldLogo = Image.Factory.clone(vehicleReview.getLogo());
+        Image oldVideo = Image.Factory.clone(vehicleReview.getVideo());
+
         /*
-            Create new or load existing
+            Map
          */
-        VehicleReview vehicleReview;
-        if (dto.getId() != null) {
-            vehicleReview = vehicleReviewDao.get(dto.getId());
-            mapper.map(dto, vehicleReview);
-        } else {
-            vehicleReview = mapper.map(dto, VehicleReview.class);
-        }
+        mapper.map(dto, vehicleReview);
+
+        /*
+            Media upload/save.
+         */
+        Image newLogo = blobStorageService.handleMedia(dto.getLogo(), oldLogo);
+        Image newVideo = blobStorageService.handleMedia(dto.getVideo(), oldVideo);
+        vehicleReview.setLogo(newLogo != null ? newLogo : oldLogo);
+        vehicleReview.setVideo(newVideo != null ? newVideo : oldVideo);
 
         /*
             Save

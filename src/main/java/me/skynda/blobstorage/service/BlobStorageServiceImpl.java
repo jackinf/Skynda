@@ -7,6 +7,12 @@ import lombok.SneakyThrows;
 import me.skynda.blobstorage.dto.*;
 
 import me.skynda.blobstorage.dto.response.BlobStorageUploadStreamResponseDto;
+import me.skynda.common.helper.SkyndaUtility;
+import me.skynda.common.interfaces.daos.ImageDao;
+import me.skynda.image.entities.Image;
+import me.skynda.vehicle.dto.ImageDto;
+import me.skynda.vehicle.services.VehicleServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,6 +24,8 @@ import java.net.URISyntaxException;
 import java.security.InvalidKeyException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.UUID;
 
 /**
  * Tutorial: https://azure.microsoft.com/en-us/documentation/articles/storage-java-how-to-use-blob-storage/
@@ -31,6 +39,9 @@ public class BlobStorageServiceImpl implements BlobStorageService {
             "AccountKey=Fmwz4WFjCFQYxQesEQ6PVye/m+4OAIJiF6KARMzH3h7GfBUZDTG0U8U33J4kaQR4vP+OwLsZ8+WHN2D9KbX9UA==";
 
     private CloudStorageAccount storageAccount;
+
+    @Autowired
+    ImageDao imageDao;
 
     public BlobStorageServiceImpl() {
         this(false);
@@ -225,5 +236,67 @@ public class BlobStorageServiceImpl implements BlobStorageService {
             e.printStackTrace();
         }
         return false;
+    }
+
+    /**
+     * If image container has base64, then upload to cloud, get new url and save an image. Return new image.
+     * If image has only a url, then check if it has changed from previous time, and upload a new one.
+     * TODO: Create MediaService and move this method there
+     * @param mediaDto - new media file
+     * @param existingMedia - already persisted media file
+     * @return newly added image to the database
+     */
+    public Image handleMedia(ImageDto mediaDto, Image existingMedia) {
+        if (mediaDto != null) {
+            if (mediaDto.getBase64File() != null && !mediaDto.getBase64File().isEmpty()) {
+                // Please, upload the fucking file!!!
+                UploadBlobDto uploadBlob = new UploadBlobDto();
+                uploadBlob.setContainerName(VehicleServiceImpl.DEFAULT_CONTAINER_NAME);
+                String blobName = UUID.randomUUID().toString();
+                uploadBlob.setBlobName(blobName);
+                uploadBlob.setByteArray(SkyndaUtility.toBytearray(mediaDto.getBase64File()));
+                BlobStorageUploadStreamResponseDto response = uploadStream(uploadBlob);
+
+                // Was upload successful?
+                if (response.isSuccess()) {
+                    return imageDao.save(Image.Factory.create(response.getUri(), blobName, VehicleServiceImpl.DEFAULT_CONTAINER_NAME));
+                }
+            } else if (mediaDto.getUrl() != null && !mediaDto.getUrl().isEmpty()) {
+                // Check if url has changed. If not, then presumably the image is the same.
+                if (existingMedia != null && !existingMedia.getUrl().trim().isEmpty()) {
+                    if (Objects.equals(existingMedia.getUrl(), mediaDto.getUrl())) {
+                        return null;    // Url is same. Presumably image did not change. Exit.
+                    }
+                    // TODO: delete previous image
+                }
+
+
+                // Try saving a new image first.
+                Image newImage = imageDao.save(Image.Factory.create(mediaDto.getUrl()));
+
+                 /*
+                     Cleanup existing image from azure cloud:
+                     use blob name + container name to delete image
+                 */
+                if (existingMedia != null
+                        && existingMedia.getBlobName() != null
+                        && !existingMedia.getBlobName().isEmpty()
+                        && existingMedia.getContainerName() != null
+                        && !existingMedia.getContainerName().isEmpty()) {
+
+                    try {
+
+                        DeleteBlobDto deleteBlob = new DeleteBlobDto();
+                        deleteBlob.setBlobName(existingMedia.getBlobName());
+                        deleteBlob.setContainerName(existingMedia.getContainerName());
+                        delete(deleteBlob);
+                    } catch (Exception ex) {
+                        // TODO: catch and log an exception
+                    }
+                }
+                return newImage;  // save new image and return
+            }
+        }
+        return null;
     }
 }

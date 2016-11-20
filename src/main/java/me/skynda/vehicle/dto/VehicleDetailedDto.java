@@ -41,9 +41,9 @@ public class VehicleDetailedDto {
 
 	private List<FeatureDto> features;
 	private List<FaultBaseDto> faults;
+	private List<CategoriesDto> reports; // TODO: Rename to report categories
 	private List<ImageContainerDto> images;
 	private List<DescriptionDto> descriptions;
-	private List<ReportDto> reports;
 	private List<ReviewDto> reviews;
 
 	private String average;

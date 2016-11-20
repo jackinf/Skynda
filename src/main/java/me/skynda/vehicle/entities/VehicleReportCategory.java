@@ -5,6 +5,7 @@ import javax.persistence.*;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Data
@@ -20,5 +21,8 @@ public class VehicleReportCategory implements Serializable {
 
     @Column(name = "vehicle_id", nullable = false)
     private Integer vehicleId;
+
+    @OneToMany(mappedBy = "vehicleReportCategoryId", fetch = FetchType.LAZY)
+    private List<VehicleReportCategoryItem> items;
 
 }

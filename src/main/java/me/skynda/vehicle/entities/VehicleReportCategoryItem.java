@@ -24,9 +24,7 @@ public class VehicleReportCategoryItem  implements Serializable {
     @Column(name = "text")
     private String text;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "vehicle_report_category_id", nullable = false)
-    @NotNull
-    private VehicleReportCategory vehicleReportCategory;
+    @Column(name = "vehicle_report_category_id", nullable = false)
+    private Integer vehicleReportCategoryId;
 
 }

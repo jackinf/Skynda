@@ -1,8 +1,10 @@
 package me.skynda.vehicle.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 import lombok.Data;
+import me.skynda.image.entities.Image;
 
 import java.io.Serializable;
 
@@ -15,11 +17,15 @@ public class VehicleReview implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	@Column(name = "logo_url")
-	private String logoUrl;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "logo_id", nullable = false)
+	@NotNull
+	private Image logo;
 
-	@Column(name = "video_url")
-	private String videoUrl;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "video_id", nullable = false)
+	@NotNull
+	private Image video;
 
 	@Column(name = "text")
 	private String text;

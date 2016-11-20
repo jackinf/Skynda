@@ -8,6 +8,6 @@ import lombok.ToString;
 public class PointsDto {
 	
 	private String text;
-	private Boolean pass;
+	private Boolean isPass;
 
 }
