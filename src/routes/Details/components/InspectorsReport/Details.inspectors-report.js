@@ -13,7 +13,7 @@ import imageOk from "./../../../../static/images/standard/ok.png";
 import imageCancel from "./../../../../static/images/standard/cancel.png";
 import imageCarInspector from "./assets/carinspector.png";
 import imagesClose from "./assets/cancel@2x.png";
-import { Translate } from 'react-redux-i18n';
+import {Translate} from 'react-redux-i18n';
 
 /**
  * Draws a single icon (tick if pass or cross if not pass) and a description.
@@ -27,7 +27,7 @@ const pointBlockFn = (point, i) => (
   </Col>);
 
 const pointBlockXsFn = (point, i) => (<div key={i}>
-    <Col className='sk_details__report__category-col' xs={1} xsOffset={1} >
+    <Col className='sk_details__report__category-col' xs={1} xsOffset={1}>
       {(point.pass)
         ? (<img src={imageOk} width='24' className='sk_details__icon_list_image'/>)
         : (<img src={imageCancel} width='24' className='sk_details__icon_list_image'/>)}
@@ -42,9 +42,14 @@ const pointBlockXsFn = (point, i) => (<div key={i}>
  * Inspector's report
  */
 class InspectorsReport extends React.Component {
-  constructor() {
+  constructor(props) {
     super();
-    this.state = {open: false, question: {howCanWeHelp: "", name: "", email: ""}};
+    let categories = props.report.categories.map((category, index) => ({index, category, limit: 6}));
+    this.state = {
+      categories,
+      open: false,
+      question: {howCanWeHelp: "", name: "", email: ""}
+    };
   }
 
   openQuestionModal = () => {
@@ -55,10 +60,22 @@ class InspectorsReport extends React.Component {
     await this.props.sendQuestionByEmailAsync(this.state.question);
     this.closeQuestionModal();
   };
+  showAll = (e, index) => {
+    let categories = this.state.categories;
+    for (let i = 0; i < categories.length; i++) {
+      if (categories[i].index === index) {
+        categories[i].limit = 999;
+        break;
+      }
+    }
+    this.setState({categories});
+  };
 
   render() {
-    let {categories} = this.props.report;
-    categories = categories || [];
+    // let {categories} = this.props.report;
+    // categories = categories || [];
+    let categories = this.state.categories;
+    console.log(categories);
 
     return (
       <Skblock header={<Translate value="details.components.inspector_report.header"/>}>
@@ -72,33 +89,45 @@ class InspectorsReport extends React.Component {
           </Col>
         </Row>
 
-        {categories.map((category, i) => (
-          <Row key={i} className='sk_details__report__category-block'>
-            <Col md={12}>
-              <h4 className='sk_details__report__category-title'>{category.title}</h4>
+        {categories.map((categoryWrapper, i) => {
+          if (!categoryWrapper.category.points) {
+            return <div></div>
+          }
 
-              <Row className='hidden-xs sk_details__report__category-row'>
-                {category.points.map((point, i) => i % 2 === 0
-                  ? (<div key={i}>{pointBlockFn(point, i)}</div>)
-                  : (<Row key={i}>{pointBlockFn(point, i)}</Row>))}
-              </Row>
+          let points = [];
+          let showButton = categoryWrapper.category.points.length > categoryWrapper.limit;
+          for (let j = 0; j < categoryWrapper.category.points.length && j < categoryWrapper.limit; j++) {
+            points.push({...categoryWrapper.category.points[j]});
+          }
 
-              <Row className='visible-xs sk_details__report__category-row'>
-                <Col xs={12}>
-                  {category.points.map((point, i) => (<Row key={i}>{pointBlockXsFn(point, i)}</Row>))}
-                </Col>
-              </Row>
+          return (<Row key={i} className='sk_details__report__category-block'>
+              <Col md={12}>
+                <h4 className='sk_details__report__category-title'>{categoryWrapper.category.title}</h4>
 
-              <Row>
-                <Col md={11}>
-                  <Button className='pull-right sk_details__report__button-show-all'>
-                    <Translate value="details.components.inspector_report.show_all"/>
-                  </Button>
-                </Col>
-              </Row>
-            </Col>
-          </Row>
-        ))}
+                <Row className='hidden-xs sk_details__report__category-row'>
+                  {points.map((point, i) => i % 2 === 0
+                    ? (<div key={i}>{pointBlockFn(point, i)}</div>)
+                    : (<Row key={i}>{pointBlockFn(point, i)}</Row>))}
+                </Row>
+
+                <Row className='visible-xs sk_details__report__category-row'>
+                  <Col xs={12}>
+                    {points.map((point, i) => (<Row key={i}>{pointBlockXsFn(point, i)}</Row>))}
+                  </Col>
+                </Row>
+
+                {showButton ? (<Row>
+                  <Col md={11}>
+                    <Button className='pull-right sk_details__report__button-show-all'
+                            onClick={e => this.showAll(e, categoryWrapper.index)}>
+                      <Translate value="details.components.inspector_report.show_all"/>
+                    </Button>
+                  </Col>
+                </Row>) : ""}
+
+              </Col>
+            </Row>);
+        })}
 
         <Dialog
           title={(<div><h4 className='sk_details__report__question-title'>Kas teil on küsimusi?</h4>

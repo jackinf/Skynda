@@ -5,7 +5,7 @@ import React from "react";
 import {Table, Column, Cell} from 'fixed-data-table';
 import 'fixed-data-table/dist/fixed-data-table.css';
 import RaisedButton from "material-ui/RaisedButton";
-import { browserHistory } from "react-router"
+import {browserHistory, Link} from "react-router"
 
 export default class VehicleList extends React.Component {
   static propTypes = {
@@ -35,21 +35,22 @@ export default class VehicleList extends React.Component {
           header={<Cell>#</Cell>}
           cell={({rowIndex, ...props}) => (
             <Cell {...props}>
-              {rowIndex+1}.
+              {rowIndex + 1}.
             </Cell>
           )}
           width={50}
         />
         <Column
           header={<Cell>Id</Cell>}
-          cell={({rowIndex, ...props}) => (<Cell {...props}>{rows[rowIndex].id}</Cell>)}
+          cell={({rowIndex, ...props}) => (<Cell {...props}>
+            <a href={`/details/${rows[rowIndex].id}`} target="_blank">{rows[rowIndex].id}</a>
+          </Cell>)}
           width={200}
         />
         <Column
           header={<Cell>Name</Cell>}
           cell={({rowIndex, ...props}) => {
-            var car = rows[rowIndex];
-            return (<Cell {...props}>{car.model ? car.model.modelCode : ""}</Cell>);
+            return (<Cell {...props}>{rows[rowIndex].model ? rows[rowIndex].model.modelCode : ""}</Cell>);
           }}
           width={200}
         />

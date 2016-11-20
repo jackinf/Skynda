@@ -178,7 +178,9 @@ function map(vehicleData) {
       title: description.title,
       content: description.content
   })) : [];
-  const features = vehicleData.features ? vehicleData.features.map(feature => feature.text) : [];
+  const features = vehicleData.features
+    ? vehicleData.features.map(featureItem => featureItem.feature != null ? featureItem.feature.name : "")
+    : [];
   const history = {
     problems: [],
     vinCode: vehicleData.vinCode
@@ -191,13 +193,24 @@ function map(vehicleData) {
   };
   const safetyStars = vehicleData.safetyStars;
   const report = {
-    categories: [],
+    categories: vehicleData.reports ? vehicleData.reports.map(reportCategory => ({
+      title: reportCategory.title,
+      points: reportCategory.items ? reportCategory.items.map(reportCategoryItem => ({
+        text: reportCategoryItem.text,
+        pass: reportCategoryItem.isPass
+      })) : [],
+    })) : [],
     faults: vehicleData.faults ? vehicleData.faults.map(fault => ({
       text: fault.text,
       img: fault.image ? fault.image.url : ""
     })) : []
   };
-  const reviews = vehicleData.reviews;
+  const reviews = vehicleData.reviews.map(review => ({
+    text: review.text,
+    rating: review.rating,
+    logoUrl: review.logo != null ? review.logo.url : "",
+    videoUrl: review.video != null ? review.video.url : ""
+  }));
   const additional = vehicleData.additional;
 
   return {

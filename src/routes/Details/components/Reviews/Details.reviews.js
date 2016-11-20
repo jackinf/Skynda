@@ -24,7 +24,7 @@ class Reviews extends React.Component {
           <div className='panel-body'>
             <Row className='sk_details__reviews__header'>
               <Col md={6}>
-                <img src={review.logoUrl} alt='LOGO'/>
+                <img width={100} src={review.logoUrl} alt='LOGO'/>
               </Col>
               <Col md={6}>
                 {Array.from({length: maxStars - review.rating})
