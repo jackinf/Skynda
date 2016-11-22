@@ -42,7 +42,7 @@
       }
     },
     "deploy": {
-      "command": "npm run clean && npm run compile",
+      "command": "npm run clean && npm run compile && rm *.json.gzip",
       "env": {
         "DEBUG": "app:*"
       }
