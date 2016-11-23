@@ -24,7 +24,8 @@ const config = {
   // Server Configuration
   // ----------------------------------
   server_host : ip.address(), // use string 'localhost' to prevent exposure on local network
-  server_host_production: "138.68.71.198",
+  // server_host_production: "138.68.71.198",
+  server_host_production: "skynda.me",
   server_port : process.env.PORT || 3000,
   server_port_production : 80,
 
