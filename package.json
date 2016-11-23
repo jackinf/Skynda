@@ -20,7 +20,8 @@
     "deploy:dev": "better-npm-run deploy:dev",
     "deploy:prod": "better-npm-run deploy:prod",
     "codecov": "cat coverage/*/lcov.info | codecov",
-    "zip": "rimraf dist.zip && jar -cMf dist.zip dist"
+    "zip": "rimraf dist.zip && jar -cMf dist.zip dist",
+    "send-zip": "pscp1 -pw skyndar00t ./dist.zip root@138.68.71.198:/root/dev/skynda-frontend/"
   },
   "betterScripts": {
     "compile": {
@@ -56,7 +57,7 @@
       }
     },
     "deploy:prod": {
-      "command": "npm run deploy && npm run zip",
+      "command": "npm run deploy && npm run zip && npm run send-zip",
       "env": {
         "NODE_ENV": "production",
         "DEBUG": "app:*"
