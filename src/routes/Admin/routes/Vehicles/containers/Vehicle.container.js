@@ -16,7 +16,7 @@ import {
   onFaultRemove
 } from "../actions/Vehicle";
 import {getList as getVehicleModelsList} from "../../VehicleModels/actions";
-import {getList as getColors} from "../../Classifiers/Classifiers.action.getList";
+import {getColors} from "../../Classifiers/Classifiers.action.getList";
 import {setFormMode} from "../reducers/SetFormMode.reducer";
 import VehicleComponent from "../components/Vehicle.component";
 import {FORMS, REDUCER_KEYS} from "../constants/Vehicle.constant";

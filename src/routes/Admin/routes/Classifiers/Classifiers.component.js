@@ -8,7 +8,7 @@ import 'fixed-data-table/dist/fixed-data-table.css';
 
 export default class ClassifiersComponent extends React.Component {
   static propTypes = {
-    getList: React.PropTypes.func.isRequired,
+    getColors: React.PropTypes.func.isRequired,
     data: React.PropTypes.shape({
       isFetching: React.PropTypes.bool.isRequired,
       items: React.PropTypes.array
@@ -16,7 +16,7 @@ export default class ClassifiersComponent extends React.Component {
   };
 
   componentDidMount() {
-    this.props.getList();
+    this.props.getColors();
   }
 
   render() {
