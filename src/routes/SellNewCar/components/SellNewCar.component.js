@@ -10,11 +10,25 @@ import {Row, Col, Button} from "react-bootstrap";
 import Select from "react-select";
 import {change} from "redux-form";
 
-export const selectRenderer = (items, onChange) => ({input, label, meta: {touched, error}, ...custom}) => (
+const selectRenderer = (items, onChange) => ({input, label, meta: {touched, error}, ...custom}) => (
   <Row style={{marginBottom: "10px"}}>
     <Col sm={12}>
       <label htmlFor={input.name}>{label}</label>
       <Select name={input.name} value={input.value} options={items} onChange={value => onChange(input.name, value)}/>
+    </Col>
+  </Row>
+);
+
+const buttonRenderer = (items, onChange) => ({input, label, meta: {touched, error}, ...custom}) => (
+  <Row style={{marginBottom: "10px"}}>
+    <Col sm={12}>
+      <label htmlFor={input.name}>{label}</label>
+      <br />
+      {items.map((item, i) => (<Button key={i}
+                                       className={input.value === item.value ? "sell-your-car__button-active" : "sell-your-car__button"}
+                                       onClick={e => onChange(input.name, item.value)}>
+                                  {item.value}
+                                </Button>))}
     </Col>
   </Row>
 );
@@ -94,6 +108,11 @@ export default class extends React.Component {
                 {rowWrapper(<Field name="" component={TextField} hintText="Läbisõit kilomeetrites"/>)}
 
                 {rowWrapper(<Field name="" component={TextField} hintText="Käigukasti tüüp"/>)}
+                {this.props.vehicleModels.isFetching
+                  ? "Fetching"
+                  : rowWrapperCentered(<Field name="drivetrain.id"
+                                              label="Käigukasti tüüp"
+                                              component={buttonRenderer(drivetrains, this.setField)}/>)}
 
                 {rowWrapper(<Field name="" component={TextField} hintText="Mootori tüüp ja maht"/>)}
                 {rowWrapper(<Field name="" component={TextField} hintText="Vedav sild"/>)}

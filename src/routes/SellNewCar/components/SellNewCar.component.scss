@@ -38,3 +38,18 @@ $the-color: #FBBB68;
 .sell-your-car__button-submit:hover {
   background: $the-color;
 }
+
+.sell-your-car__button,
+.sell-your-car__button:hover,
+.sell-your-car__button:active,
+.sell-your-car__button:focus {
+  background: $the-color;
+  margin: 0 10px;
+}
+
+.sell-your-car__button-active,
+.sell-your-car__button-active:hover,
+.sell-your-car__button-active:active,
+.sell-your-car__button-active:focus {
+  margin: 0 10px;
+}
