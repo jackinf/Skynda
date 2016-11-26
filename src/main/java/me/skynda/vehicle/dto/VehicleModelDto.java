@@ -9,15 +9,14 @@ import me.skynda.classification.dto.ClassificationDto;
 @Data
 @ToString(callSuper = false)
 public class VehicleModelDto extends BaseDto {
-
 	private String modelCode;
 	private String description;
 	private String title;
 	private String engine;
-	private String horsePower;
-	private String doors;
-	private String seats;
-	private String year;
+	private Integer horsePower;
+	private Integer doors;
+	private Integer seats;
+	private Integer year;
 	private ClassificationDto vehicleManufacturer;
 	private ClassificationDto transmission;
 	private ClassificationDto drivetrain;

@@ -208,15 +208,15 @@ public class VehicleServiceImpl implements VehicleService {
     @Override
     public SearchResponseDto search(SearchRequestDto params) {
         SearchResponseDto response = new SearchResponseDto();
-        List<VehicleSearchDto> vehiclesGeneralDto = new ArrayList<>();
+        List<VehicleSearchDto> searchResultsDto = new ArrayList<>();
         List<Vehicle> vehicles = vehicleDao.search(params);
 
         vehicles.forEach(vehicle -> {
-            vehiclesGeneralDto.add(mapper.map(vehicle, VehicleSearchDto.class));
+            searchResultsDto.add(mapper.map(vehicle, VehicleSearchDto.class));
         });
 
-        response.setSuccess(true);
-        response.setVehicles(vehiclesGeneralDto);
+        response.setSuccess(!searchResultsDto.isEmpty());
+        response.setVehicles(searchResultsDto);
 
         return response;
     }
