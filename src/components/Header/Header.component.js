@@ -47,9 +47,9 @@ class Header extends React.Component {
               <div id='navbar' className='navbar_collapse'>
                 <ul className='nav navbar_nav sk-menu pull-right'>
                   <li className='sk_menu__sell'>
-                    <a href='#' onClick={e => this.sellCar(e)} className='orange_header'>
+                    <Link to="/sell-new-car">
                       <Translate value="components.header.sell_car_txt"/>
-                    </a>
+                    </Link>
                   </li>
                   <li className='sk_menu__buy'>
                     <Link to="/search">
