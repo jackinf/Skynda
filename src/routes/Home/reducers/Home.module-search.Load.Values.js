@@ -2,50 +2,50 @@ import moment from "moment";
 import {setBaseValues} from "./../actions"
 import {Translate} from 'react-redux-i18n';
 import React from "react";
+import remoteConfig from "store/remoteConfig";
+import fetch from "isomorphic-fetch";
 
-export const getClassificationsAsync = () => {
+async function getClassificationList(type){
+  return await fetch(`${remoteConfig.remote}/api/classifications/${type}`, {
+    method: "GET",
+    credentials: "include",
+    headers: {"Accept": "application/json", "Content-Type": "application/x-www-form-urlencoded"}
+  })
+    .then(resp => resp.json())
+    .then(resp => {
+      return { success: true, items: resp};
+    })
+    .catch(err => {
+      console.error(err);
+      return {success: false, items: [], error: err};
+    });
+}
+
+export const getClassificationsAsync =  () => {
   return (dispatch) => {
     return new Promise((resolve) => {
-      setTimeout(() => {
+      setTimeout(async() => {
         // TODO: temporary data. Use API data.
         // TODO: REPLACE with api data
-        const brands = [
-          {id: -1, name: <Translate value="all"/>},
-          {id: 0, name: "BMW"},
-          {id: 1, name: "Chrysler"},
-          {id: 2, name: "Citroen"},
-          {id: 3, name: "Fiat"},
-          {id: 4, name: "Ford"},
-          {id: 5, name: "Honda"},
-          {id: 6, name: "Hyundai"},
-          {id: 7, name: "Kia"},
-          {id: 8, name: "Lexus"},
-          {id: 9, name: "Mazda"},
-          {id: 10, name: "Nissan"},
-          {id: 11, name: "Opel"},
-          {id: 12, name: "Peugeot"},
-          {id: 13, name: "Renault"},
-          {id: 14, name: "Seat"},
-          {id: 15, name: "Skoda"},
-          {id: 16, name: "Subaru"},
-          {id: 17, name: "Volkswagen"},
-          {id: 18, name: "Volvo"}
-        ];
 
-        const features = [
-          {id: -1, name: <Translate value="all"/>},
-          {id: 0, name: "Parking Sensors"},
-          {id: 1, name: "Bluetooth"},
-          {id: 2, name: "Sunroof"},
-          {id: 3, name: "Navigation"},
-          {id: 4, name: "leather"},
-          {id: 5, name: "Premium Lights"}
-        ];
+        const respBrand = await getClassificationList("MANUFACTURER");
+        const brandsInit = [{id: -1, name: <Translate value="all"/>}];
+        const brands = brandsInit.concat(respBrand.items);
 
-        const transmissions = [
-          {id: 0, name: <Translate value="components.car_search.automatic"/>},
-          {id: 1, name: <Translate value="components.car_search.manual"/>}
-        ];
+        const respFeature = await getClassificationList("FEATURE");
+        const featuresInit = [{id: -1, name: <Translate value="all"/>}];
+        const features = featuresInit.concat(respFeature.items);
+
+        const respTransmission = await getClassificationList("TRANSMISSION");
+        const transmissions = respTransmission.items.map((obj)=>{
+          const translation = `components.car_search.${obj.name.toString().toLowerCase()}`;
+          var returnObj = {
+            id: obj.id,
+            name: <Translate value={translation} />,
+            value: obj.value
+          };
+          return returnObj;
+        });
 
         const doors = [
           {id: -1, name: <Translate value="all"/>},
@@ -67,7 +67,7 @@ export const getClassificationsAsync = () => {
           price: {min: 0, max: 500000, units: "EUR"},
           year: {min: 2006, max: moment().year(), units: ""},
           petrolConsumption: {min: 0, max: 20, units: "L"},
-          power: {min: 0, max: 500, units: "KW"}
+          power: {min: 0, max: 1000, units: "KW"}
         };
 
         dispatch(setBaseValues({

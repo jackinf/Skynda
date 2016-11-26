@@ -3,7 +3,7 @@ import ACTIONS from './../actions/constants';
 export const setIsSearching = (state = false, action) => {
   switch (action.type) {
     case ACTIONS.SET_IS_SEARCHING:
-      return !action.value;
+      return action.value;
 
     default:
       return state;

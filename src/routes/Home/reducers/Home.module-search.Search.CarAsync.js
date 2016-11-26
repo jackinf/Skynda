@@ -10,17 +10,18 @@ import {setIsSearching, setSearchResults} from './../actions';
 export const searchCarAsync = () => (dispatch, getState) => {
   var searchValues = {...getState().searchValues};
   dispatch(setIsSearching(true));
-  console.log(JSON.stringify(searchValues));
-  return fetch(`${remoteConfig.remote}/api/car/search`, {
+  return fetch(`${remoteConfig.remote}/api/vehicle/search`, {
     method: "POST",
+    credentials: "include",
     headers: {"Accept": "application/json", "Content-Type": "application/json"},
     body: JSON.stringify(searchValues)
-  }).then(resp => resp.json()).then(resp => {
-    dispatch(setSearchResults(resp.cars));
-    console.log("searchCarAsync failed", resp);
-    dispatch(setIsSearching(false));
-  }).catch(err => {
-    console.log("Car Search failed =>", err)
-    dispatch(setIsSearching(false));
+  })
+    .then(resp => resp.json())
+    .then(resp => {
+      dispatch(setSearchResults(resp.vehicles));
+      dispatch(setIsSearching(false));
+    }).catch(err => {
+      console.log("Car Search failed =>", err)
+      dispatch(setIsSearching(false));
   });
 };
