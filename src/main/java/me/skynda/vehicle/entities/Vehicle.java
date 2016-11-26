@@ -15,8 +15,8 @@ import org.hibernate.validator.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Data
 @Table(name = "vehicle")
+@Data
 public class Vehicle implements Serializable {
 
     @Id
@@ -118,10 +118,10 @@ public class Vehicle implements Serializable {
     @OneToMany(mappedBy = "vehicleId", fetch = FetchType.LAZY)
     private List<VehicleFeature> features;
 
-    @OneToMany(mappedBy = "vehicleId", fetch = FetchType.LAZY)
-    private List<VehicleReport> reports;
-
-    @OneToMany(mappedBy = "vehicleId", fetch = FetchType.LAZY)
-    private List<VehicleReview> reviews;
+//    @OneToMany(mappedBy = "vehicleId", fetch = FetchType.LAZY)
+//    private List<VehicleReport> reports;
+//
+//    @OneToMany(mappedBy = "vehicleId", fetch = FetchType.LAZY)
+//    private List<VehicleReview> reviews;
 
 }

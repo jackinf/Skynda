@@ -29,44 +29,50 @@ public class VehicleDaoImpl extends SkyndaBaseEntityDaoImpl<Vehicle> implements 
                     .createAlias("model", "model");
 
             ///Manufacturer code / Brand
-            if (params.Brands != null && !params.Brands.isEmpty()) {
-                Collection<Integer> brandList = params.Brands.stream()
-                        .map(x -> x.getValue())
-                        .collect(Collectors.toCollection(ArrayList::new));
-                vehicleCriteria.createAlias("vehicle.model.vehicleManufacturer", "manufacturer");
-                vehicleCriteria.add(Restrictions.in("manufacturer.id", brandList));
-            }
+//            if (params.Brands != null && !params.Brands.isEmpty()) {
+//                Collection<Integer> brandList = params.Brands.stream()
+//                        .map(x -> x.getValue())
+//                        .collect(Collectors.toCollection(ArrayList::new));
+//                vehicleCriteria.createAlias("vehicle.model.vehicleManufacturer", "manufacturer");
+//                vehicleCriteria.add(Restrictions.in("manufacturer.id", brandList));
+//            }
 
             ///Vehicle outside color
-            if (params.Colors != null && !params.Colors.isEmpty()) {
-                Collection<Integer> colorList = params.Colors.stream()
-                        .map(x -> x.getValue())
-                        .collect(Collectors.toCollection(ArrayList::new));
-                vehicleCriteria.createAlias("vehicle.colorOutside", "color");
-                vehicleCriteria.add(Restrictions.in("color.id", colorList));
-            }
-
-            params.Features = new ArrayList<ButtonAttributesDto>(){{
-                add(new ButtonAttributesDto(){{setValue(1);}});
-                add(new ButtonAttributesDto(){{setValue(2);}});
-            }};
+//            if (params.Colors != null && !params.Colors.isEmpty()) {
+//                Collection<Integer> colorList = params.Colors.stream()
+//                        .map(x -> x.getValue())
+//                        .collect(Collectors.toCollection(ArrayList::new));
+//                vehicleCriteria.createAlias("vehicle.colorOutside", "color");
+//                vehicleCriteria.add(Restrictions.in("color.id", colorList));
+//            }
 
             ///Vehicle feature
-            if (params.Features != null && !params.Colors.isEmpty()) {
-                Collection<Integer> featureList = params.Colors.stream()
-                        .map(x -> x.getValue())
-                        .collect(Collectors.toCollection(ArrayList::new));
-                vehicleCriteria.createAlias("vehicle.features", "vehicleFeature");
-                vehicleCriteria.add(Restrictions.in("vehicleFeature.feature.id", featureList));
+//            if (params.Features != null && !params.Features.isEmpty()) {
+//                Collection<Integer> featureList = params.Features.stream()
+//                        .map(x -> x.getValue())
+//                        .collect(Collectors.toCollection(ArrayList::new));
+//                vehicleCriteria.createAlias("vehicle.features", "vehicleFeature");
+//                vehicleCriteria.add(Restrictions.in("vehicleFeature.feature.id", featureList));
+//            }
+            if (params.Doors != null) {
+                Integer doors = 0;
+//                Integer featureList = params.Features.stream()
+//                        .map(x -> x.getValue())
+//                        .collect(Collectors.toCollection(ArrayList::new));
+                vehicleCriteria.createAlias("vehicle.model", "vehicleFeature");
+                vehicleCriteria.add(Restrictions.gt("model.doors", doors - 1));
             }
 
+
+            params.Colors = new ArrayList<ButtonAttributesDto>(){{
+                add(new ButtonAttributesDto(){{setValue(35);}});
+                add(new ButtonAttributesDto(){{setValue(36);}});
+            }};
             List<Vehicle>  result = (ArrayList<Vehicle>) vehicleCriteria.list();
 
             return result;
 
-//            if (params.Doors != null) {
-//
-//            }
+
 //
 //            if (params.Seats != null) {
 //
