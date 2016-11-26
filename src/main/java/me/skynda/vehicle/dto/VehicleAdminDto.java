@@ -22,8 +22,8 @@ public class VehicleAdminDto extends BaseDto {
 	private BigDecimal mileage;
 	private ClassificationDto colorOutside;
 	private ClassificationDto colorInside;
-	private String fuelCity;
-	private String fuelHighway;
+	private BigDecimal fuelCity;
+	private BigDecimal fuelHighway;
 	private String problems;
 	private Integer compressionRatio;
 	private String compressionType;

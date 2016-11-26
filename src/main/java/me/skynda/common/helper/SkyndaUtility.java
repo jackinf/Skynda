@@ -1,7 +1,10 @@
 package me.skynda.common.helper;
 
+import me.skynda.classification.dto.SliderAttributesDto;
 import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.lang3.NotImplementedException;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 import java.util.function.Supplier;
 

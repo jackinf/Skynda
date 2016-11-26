@@ -1,5 +1,7 @@
 package me.skynda.common.helper;
 
+import me.skynda.classification.dto.SliderAttributesDto;
+
 public class StringHelper {
 
     /**

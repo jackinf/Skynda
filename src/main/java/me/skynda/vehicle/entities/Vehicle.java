@@ -53,10 +53,10 @@ public class Vehicle implements Serializable {
     private Classification colorInside;
 
     @Column(name="fuel_city")
-    private String fuelCity;
+    private BigDecimal fuelCity;
 
     @Column(name="fuel_highway")
-    private String fuelHighway;
+    private BigDecimal fuelHighway;
 
     @Column(name="problems")
     private String problems;
