@@ -24,12 +24,16 @@ const statesToProps = (state) => {
   return {
     isSubmitting: sellNewCarInfo ? sellNewCarInfo.isSubmitting : false,
 
+    // Classifiers
     manufacturer: classificators ? classificators.manufacturer : null,
     color: classificators ? classificators.color : null,
     feature: classificators ? classificators.feature : null,
     fuel: classificators ? classificators.fuel : null,
     transmission: classificators ? classificators.transmission : null,
     drivetrain: classificators ? classificators.drivetrain : null,
+
+    // Vehicle model
+    vehicleModels: state.vehicleModels || {}
   }
 };
 

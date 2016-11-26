@@ -139,6 +139,7 @@
     "react-redux-i18n": "^0.1.0",
     "react-redux-toastr": "^3.9.1",
     "react-router": "^2.8.0",
+    "react-select": "^1.0.0-rc.2",
     "react-slick": "^0.14.4",
     "react-sticky": "^5.0.5",
     "react-tap-event-plugin": "^1.0.0",
