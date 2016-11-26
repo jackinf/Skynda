@@ -16,8 +16,8 @@ export default (store) => ({
         injectReducer(store, {key: REDUCER_KEYS.VEHICLE_DATA, reducer: require("./reducers/SetVehicle.reducer.js").default});
         injectReducer(store, {key: REDUCER_KEYS.FORM_MODE, reducer: require("./reducers/SetFormMode.reducer.js").default});
         injectReducer(store, {key: FORMS.DEFAULT_REDUX_FORM_KEY, reducer: formReducer});
-        injectReducer(store, {key: REDUCER_KEYS.VEHICLE_MODELS_DATA, reducer: require("./../VehicleModels/reducers/VehicleModels.setData.reducer").default});
-        injectReducer(store, {key: "colors", reducer: require("./../Classifiers/Classifiers.module").default});
+        injectReducer(store, {key: REDUCER_KEYS.VEHICLE_MODELS_DATA, reducer: require("./../VehicleModels/reducers/VehicleModels.reducer.js").default});
+        injectReducer(store, {key: "classificators", reducer: require("./../Classifiers/Classifiers.module").default});
 
         store.dispatch(setFormMode(isUpdate ? FORM_MODE.UPDATING : FORM_MODE.ADDING));
         cb(null, Container);

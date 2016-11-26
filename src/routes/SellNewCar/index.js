@@ -10,6 +10,7 @@ export default (store) => ({
     require.ensure([], (require) => {
       injectReducer(store, {key: "form", reducer: formReducer});
       injectReducer(store, {key: "sellNewCarInfo", reducer: require("./reducers/SellNewCar.reducer").default});
+      injectReducer(store, {key: "classificators", reducer: require("../Admin/routes/Classifiers/Classifiers.module.js").default});
 
       cb(null, require("./containers/SellNewCar.container.js").default);
     }, "sell-new-car");

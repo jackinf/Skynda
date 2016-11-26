@@ -9,6 +9,16 @@ import {TextField} from "redux-form-material-ui";
 import {Row, Col, Button} from "react-bootstrap";
 
 export default class extends React.Component {
+  componentDidMount() {
+    this.props.getModels();
+    this.props.getManufacturers();
+    this.props.getColors();
+    this.props.getFeatures();
+    this.props.getFuels();
+    this.props.getTransmissions();
+    this.props.getDrivetrains();
+  }
+
   render() {
     return (<div className="sell-your-car">
       <div className="sell-your-car__centered sell-your-car__main-image-background">

@@ -15,8 +15,8 @@ import {
   onFaultFileUpload,
   onFaultRemove
 } from "../actions/Vehicle";
-import {getList as getVehicleModelsList} from "../../VehicleModels/actions";
-import {getColors} from "../../Classifiers/Classifiers.action.getList";
+import {getList as getVehicleModelsList} from "../../VehicleModels/reducers/VehicleModels.reducer";
+import {getColors} from "../../Classifiers/Classifiers.module";
 import {setFormMode} from "../reducers/SetFormMode.reducer";
 import VehicleComponent from "../components/Vehicle.component";
 import {FORMS, REDUCER_KEYS} from "../constants/Vehicle.constant";
@@ -43,12 +43,14 @@ const mapDispatchToProps = {
 };
 
 const mapStateToProps = (state) => {
+  let classificators = state.classificators;
+
   return {
     isFetching: state[REDUCER_KEYS.VEHICLE_DATA].isFetching,
     initialValues: state[REDUCER_KEYS.VEHICLE_DATA].data,
     formMode1: state[REDUCER_KEYS.FORM_MODE],
     vehicleModels: state[REDUCER_KEYS.VEHICLE_MODELS_DATA],
-    colors: state["colors"]
+    colors: classificators ? classificators.color : {}
   };
 };
 

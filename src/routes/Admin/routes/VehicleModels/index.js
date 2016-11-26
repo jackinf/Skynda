@@ -9,7 +9,7 @@ export default (store) => ({
   getComponent(nextState, cb) {
     require.ensure([], (require) => {
       const Container = require("./containers/VehicleModels.container.js").default;
-      injectReducer(store, {key: REDUCER_KEYS.VEHICLE_MODELS_DATA, reducer: require("./reducers/VehicleModels.setData.reducer.js").default});
+      injectReducer(store, {key: REDUCER_KEYS.VEHICLE_MODELS_DATA, reducer: require("./reducers/VehicleModels.reducer.js").default});
       cb(null, Container);
     })
   }

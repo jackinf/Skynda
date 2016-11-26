@@ -9,7 +9,7 @@ export default (store) => ({
   getComponent(nextState, cb) {
     require.ensure([], (require) => {
       const Container = require("./Classifiers.container.js").default;
-      injectReducer(store, {key: REDUCER_KEYS.VEHICLE_MODELS_DATA, reducer: require("./Classifiers.module.js").default});
+      injectReducer(store, {key: "classificators", reducer: require("./Classifiers.module.js").default});
       cb(null, Container);
     })
   }
