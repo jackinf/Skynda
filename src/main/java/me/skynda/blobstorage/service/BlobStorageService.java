@@ -3,6 +3,8 @@ package me.skynda.blobstorage.service;
 import com.microsoft.azure.storage.blob.ListBlobItem;
 import me.skynda.blobstorage.dto.*;
 import me.skynda.blobstorage.dto.response.BlobStorageUploadStreamResponseDto;
+import me.skynda.image.entities.Image;
+import me.skynda.vehicle.dto.ImageDto;
 
 import java.util.List;
 
@@ -18,5 +20,6 @@ public interface BlobStorageService {
     List<ListBlobItem> list(ListBlobsDto dto);
     void download(DownloadBlobDto dto);
     boolean delete(DeleteBlobDto dto);
+    Image handleMedia(ImageDto mediaDto, Image existingMedia);
 
 }

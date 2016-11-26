@@ -10,8 +10,8 @@ import me.skynda.common.dto.BaseDto;
 public class VehicleReviewAdminDto extends BaseDto {
 
     private Integer vehicleId;
-    private ImageDto logoUrl;
-    private ImageDto videoUrl;
+    private ImageDto logo;
+    private ImageDto video;
     private String text;
     private Integer rating;
 

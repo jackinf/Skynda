@@ -2,7 +2,6 @@ package me.skynda.common.interfaces.services;
 
 import me.skynda.common.dto.CreateOrUpdateResponseDto;
 import me.skynda.common.dto.DeleteResponseDto;
-import me.skynda.vehicle.dto.VehicleReportAdminDto;
 import me.skynda.vehicle.dto.VehicleReviewAdminDto;
 import org.springframework.validation.BindingResult;
 

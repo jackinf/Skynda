@@ -3,7 +3,6 @@ package me.skynda.vehicle.controller;
 import me.skynda.common.dto.CreateOrUpdateResponseDto;
 import me.skynda.common.dto.DeleteResponseDto;
 import me.skynda.vehicle.dto.VehicleReviewAdminDto;
-import me.skynda.vehicle.dto.VehicleReportAdminDto;
 import me.skynda.common.interfaces.services.VehicleReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
