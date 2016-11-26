@@ -3,7 +3,7 @@
  */
 import React from "react";
 import {Row, Col, Breadcrumb} from "react-bootstrap";
-import { browserHistory } from "react-router"
+import {browserHistory} from "react-router"
 
 
 class AdminView extends React.Component {
@@ -16,20 +16,31 @@ class AdminView extends React.Component {
       <h2>Administration</h2>
 
       <Breadcrumb>
-        <Breadcrumb.Item onClick={e => this.goTo("/admin/car")}>
-          Cars
+        <Breadcrumb.Item onClick={e => this.goTo("/admin")}>
+          Home
         </Breadcrumb.Item>
-        <Breadcrumb.Item onClick={e => this.goTo("/admin/car-model")}>
-          Car Models
+        <Breadcrumb.Item onClick={e => this.goTo("/admin/vehicle")}>
+          Vehicles
         </Breadcrumb.Item>
-        <Breadcrumb.Item onClick={e => this.goTo("/admin/car-manufacturer")}>
-          Car Manufacturers
+        <Breadcrumb.Item onClick={e => this.goTo("/admin/vehicle-reports")}>
+          Vehicle Report Categories
+        </Breadcrumb.Item>
+        <Breadcrumb.Item onClick={e => this.goTo("/admin/vehicle-reviews")}>
+          Vehicles Reviews
+        </Breadcrumb.Item>
+        <Breadcrumb.Item onClick={e => this.goTo("/admin/vehicle-model")}>
+          Vehicle Models
+        </Breadcrumb.Item>
+        <Breadcrumb.Item onClick={e => this.goTo("/admin/classifier")}>
+          Classifiers
         </Breadcrumb.Item>
       </Breadcrumb>
 
       <Row>
         <Col sm={12}>
-          {this.props.children}
+          {this.props.children ? this.props.children : <div className="jumbotron">
+            <h2>Welcome to the administration panel</h2>
+          </div>}
         </Col>
       </Row>
     </div>;

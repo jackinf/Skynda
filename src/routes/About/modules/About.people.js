@@ -3,7 +3,6 @@ import imageFace2 from "../assets/group-1@2x.png.png";
 import imageFace3 from "../assets/group-2@2x.png.png";
 import imageFace4 from "../assets/group-3@2x.png.png";
 import imageFace5 from "../assets/group-4@2x.png.png";
-import imageFace6 from "../assets/group-5@2x.png.png";
 import imageFace7 from "../assets/group-6@2x.png.png";
 import imageFace8 from "../assets/face8.png";
 
@@ -53,11 +52,6 @@ const ACTION_HANDLERS = {
       {
         imageUrl: imageFace5,
         name: "Mihhail Marenkov",
-        position: "Arendaja"
-      },
-      {
-        imageUrl: imageFace6,
-        name: "Tauri Nikkari",
         position: "Arendaja"
       },
       {

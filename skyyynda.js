@@ -7,7 +7,7 @@ const express = require('express');
 //const exec = require('child_process').exec;
 require('shelljs/global');
 const path = require('path');
-const port = process.env.PORT || 3000;
+const port = 80; //process.env.PORT || 3000;
 const app = express();
 
 var pmx = require('pmx').init({

@@ -7,16 +7,6 @@ import {Translate} from 'react-redux-i18n';
 import {Row, Col, Grid} from "react-bootstrap";
 
 class Hero extends React.Component {
-  constructor() {
-    super();
-
-    this.gotoDetails = this.gotoDetails.bind(this);
-  }
-
-  gotoDetails() {
-    browserHistory.push("details");
-  }
-
   render() {
     return (
       <div className='sk_hero'>
@@ -31,7 +21,7 @@ class Hero extends React.Component {
               </Col>
               <Col md={3}>
                 {/*<h2>*/}
-                <Button className='primary-button read-more-btn' onClick={this.gotoDetails}>
+                <Button className='primary-button read-more-btn' onClick={e => browserHistory.push("details/1")}>
                   <Translate value="home_page.hero.read_more"/>
                 </Button>
                 {/*</h2>*/}

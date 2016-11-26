@@ -6,6 +6,7 @@ import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import injectTapEventPlugin from "react-tap-event-plugin";
 injectTapEventPlugin();
 
+import "./main.scss";
 require("rc-slider/assets/index.css");
 
 // ========================================================

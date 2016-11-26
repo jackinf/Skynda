@@ -19,7 +19,8 @@ export const sendEmailAsync = (data) => {
 
     return fetch(remoteConfig.remote + "/api/email/person", {
       method: "POST",
-      headers: {"Accept": "application/json", "Content-Type": "application/json"},
+      credentials: "include",
+      headers: {"Accept": "application/json", "Content-Type": "application/x-www-form-urlencoded"},
       body: JSON.stringify(data)
     });
   };
@@ -34,7 +35,8 @@ export const sendQuestionByEmailAsync = (data) => {
   return () => {
     return fetch(remoteConfig.remote + "/api/email/question", {
       method: "POST",
-      headers: {"Accept": "application/json", "Content-Type": "application/json"},
+      credentials: "include",
+      headers: {"Accept": "application/json", "Content-Type": "application/x-www-form-urlencoded"},
       body: JSON.stringify(data)
     });
   };

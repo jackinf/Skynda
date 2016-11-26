@@ -12,7 +12,7 @@ import TextField from "material-ui/TextField";
 import {Tabs, Tab} from "material-ui/Tabs";
 import {Row, Col} from "react-bootstrap";
 import {orange500} from "material-ui/styles/colors";
-import { Translate } from 'react-redux-i18n';
+import {Translate} from 'react-redux-i18n';
 
 const styles = {
   backgroundDefault: "#019bff",
@@ -35,25 +35,14 @@ const PersonInfoTab = (props) => (<li className='tab-pane fade active in' id='ht
   <Row>
     <Col md={12}>
       <Row>
-        <Col md={6}>
+        <Col md={12}>
           <TextField
-            floatingLabelText={<Translate value="details.components.checkout_panel.first_name"/>}
+            floatingLabelText={<Translate value="details.components.checkout_panel.your_name"/>}
             fullWidth
             floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
             underlineFocusStyle={styles.underlineFocusStyle}
             onChange={e => {
               props.person.firstName = e.target.value;
-            }}
-          />
-        </Col>
-        <Col md={6}>
-          <TextField
-            floatingLabelText={<Translate value="details.components.checkout_panel.last_name"/>}
-            fullWidth
-            floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
-            underlineFocusStyle={styles.underlineFocusStyle}
-            onChange={e => {
-              props.person.lastName = e.target.value;
             }}
           />
         </Col>
@@ -102,7 +91,6 @@ const PersonInfoTab = (props) => (<li className='tab-pane fade active in' id='ht
 PersonInfoTab.propTypes = {
   person: React.PropTypes.shape({
     firstName: React.PropTypes.string.isRequired,
-    lastName: React.PropTypes.string.isRequired,
     email: React.PropTypes.string.isRequired,
     phone: React.PropTypes.string.isRequired
   }),
@@ -120,7 +108,6 @@ class Checkout extends React.Component {
       openSentMsg: false,
       personDetails: {
         firstName: "",
-        lastName: "",
         email: "",
         phone: ""
       }

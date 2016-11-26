@@ -1,6 +1,11 @@
 
 @import '../../../styles/variables';
+
 .car-details{
+
+  .sk_details__label {
+    color: #95989A;
+  }
 
   .sk_details__icon {
     margin: 0 auto;
@@ -44,7 +49,14 @@
     border: 2px solid #019bff;
     border-radius: 5px;
   }
+
   .sk_details__skblock {
+
+    .blue_header {
+      font-size: 20px;
+      color: $color-primary
+    }
+
     margin: 20px 0;
     padding: 10px 10px;
   }

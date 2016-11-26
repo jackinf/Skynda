@@ -1,10 +1,23 @@
+/**
+ * Created by jevgenir on 10/21/2016.
+ */
 import React from "react";
-import {Row, Col} from "react-bootstrap";
+import {Row, Col, Breadcrumb} from "react-bootstrap";
+import { browserHistory } from "react-router"
 
-class ExampleView extends React.Component {
+class ExampleComponent extends React.Component {
   render() {
     return <div className="container">
       <h2>Examples</h2>
+
+      <Breadcrumb>
+        <Breadcrumb.Item onClick={e => browserHistory.push("/examples/redux-form")}>
+          Redux form
+        </Breadcrumb.Item>
+        <Breadcrumb.Item onClick={e => browserHistory.push("/examples/file-upload")}>
+          File upload
+        </Breadcrumb.Item>
+      </Breadcrumb>
 
       <Row>
         <Col sm={12}>
@@ -15,4 +28,4 @@ class ExampleView extends React.Component {
   }
 }
 
-export default ExampleView;
+export default ExampleComponent;

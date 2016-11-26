@@ -152,55 +152,115 @@ sale`
   ]
 };
 
+function map(vehicleData) {
+  const vehicleDetailsMainImage = {
+    src: vehicleData.mainImage.url,
+    year: parseInt(vehicleData.model.year),
+    brand: vehicleData.model.vehicleManufacturer.name,
+    model: vehicleData.model.modelCode,
+    engine: vehicleData.model.engine,
+    horsepower: parseInt(vehicleData.model.horsePower),
+    images: vehicleData.images,
+    price: vehicleData.price
+  };
+  const overview = {
+    manufacturer: vehicleData.model.vehicleManufacturer.name,
+    engine: vehicleData.model.engine,
+    horsePower: parseInt(vehicleData.model.horsePower),
+    mileage: vehicleData.mileage,
+    transmission: vehicleData.transmission ? vehicleData.transmission.name : "",
+    drive: "",
+    colorOutside: vehicleData.colorInside.name,
+    colorInside: vehicleData.colorOutside.name,
+    doors: parseInt(vehicleData.model.doors),
+    seats: vehicleData.model.seats
+  };
+  const descriptions = vehicleData.descriptions ? vehicleData.descriptions.map(description => ({
+      title: description.title,
+      content: description.content
+  })) : [];
+  const features = vehicleData.features
+    ? vehicleData.features.map(featureItem => featureItem.feature != null ? featureItem.feature.name : "")
+    : [];
+  const history = {
+    problems: [],
+    vinCode: vehicleData.vinCode
+  };
+  const petrolConsumption = {
+    city: vehicleData.fuelCity,
+    highway: vehicleData.fuelHighway,  // isRequired
+    average: vehicleData.fuelAverage,   // isRequired
+    fuelType: vehicleData.model.fuelType ? vehicleData.model.fuelType.name : ""
+  };
+  const safetyStars = vehicleData.safetyStars;
+  const report = {
+    reportItems: vehicleData.reportItems ? vehicleData.reportItems.map(reportItem => ({
+      title: reportItem.title,
+      description: reportItem.description
+    })) : [],
+    categories: vehicleData.reports ? vehicleData.reports.map(reportCategory => ({
+      title: reportCategory.title,
+      points: reportCategory.items ? reportCategory.items.map(reportCategoryItem => ({
+        text: reportCategoryItem.text,
+        pass: reportCategoryItem.isPass
+      })) : [],
+    })) : [],
+    faults: vehicleData.faults ? vehicleData.faults.map(fault => ({
+      text: fault.text,
+      img: fault.image ? fault.image.url : ""
+    })) : []
+  };
+  const reviews = vehicleData.reviews.map(review => {
+    return {
+      text: review.text,
+      rating: review.rating,
+      logoUrl: review.logo != null ? review.logo.url : "",
+      videoUrl: review.video != null ? review.video.url : ""
+    }
+  });
+  const additional = vehicleData.additional;
 
-export const SET_CAR_DATA = "SET_CAR_DATA";
+  return {
+    vehicleDetailsMainImage,
+    overview,
+    descriptions,
+    features,
+    history,
+    petrolConsumption,
+    safetyStars,
+    report,
+    reviews,
+    additional
+  }
+}
 
-export const getDataAsync = (id = 1) => (dispatch, getState) => {
+export const SET_VEHICLE_DATA = "SET_VEHICLE_DATA";
+
+export const getDataAsync = (id) => (dispatch, getState) => {
     dispatch(toggleLoading(true));
 
-    return fetch(`${remoteConfig.remote}/api/car/${id}`, {
+    return fetch(`${remoteConfig.remote}/api/vehicle/${id}/detailed`, {
       method: "GET",
+      credentials: "include",
       headers: {"Accept": "application/json", "Content-Type": "application/json"}
     })
       .then(resp => resp.json())
       .then(data => {
-
-        // TEMP FIXES
-        data["general"] = data["carGeneralDto"];
-        data["reviews"] = data["review"];
-        for (let i = 0; i < data["reviews"].length; i++) {
-          data["reviews"][i]["rating"] = parseInt(data["reviews"][i]["rating"]);
-        }
-        data["general"]["year"] = parseInt(data["general"]["year"]);
-        data["performance"]["doors"] = parseInt(data["performance"]["doors"]);
-        data["performance"]["compressionRatio"] = parseInt(data["performance"]["compressionRatio"]);
-        data["performance"]["horsePower"] = parseInt(data["performance"]["horsePower"]);
-        data["performance"]["size"] = parseInt(data["performance"]["size"]);
-        data["performance"]["torque"] = parseInt(data["performance"]["torque"]);
-        data["performance"]["totalValves"] = parseInt(data["performance"]["totalValves"]);
-        data["safetyStars"] = parseInt(data["safetyStars"]);
-        data["report"] = {
-          categories: [],
-          faults: []
-        };
-
-        delete data["carGeneralDto"];
-        delete data["review"];
-
-        dispatch(setCarData(data));
-        dispatch(toggleLoading(false));
-      })
-      .catch((error) => {
-        console.log("ERROR: ", error);
-        dispatch(setCarData(fakeCarData));
+        const mappedData = map(data);
+        dispatch(setCarData(mappedData));
         dispatch(toggleLoading(false));
       });
+      // .catch((error) => {
+      //   console.log("ERROR: ", error);
+      //   dispatch(setVehicleReportData(fakeCarData));
+      //   dispatch(toggleLoading(false));
+      // });
 
 };
 
 export function setCarData(value) {
   return {
-    type: SET_CAR_DATA,
+    type: SET_VEHICLE_DATA,
     payload: value
   };
 }
@@ -213,7 +273,7 @@ export const actions = {
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
-  [SET_CAR_DATA]: (state, action) => action.payload
+  [SET_VEHICLE_DATA]: (state, action) => action.payload
 };
 
 // ------------------------------------

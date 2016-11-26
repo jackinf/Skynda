@@ -22,11 +22,10 @@ class Safety extends React.Component {
     return (<Skblock header={<Translate value="details.components.safety.header"/>}>
       <div className='sk_details__safety__stars_outer_container'>
         <div className='sk_details__safety__stars_inner_container'>
-          {Array.from({length: stars}).map((_, idx) => <img key={idx} className='sk_safety__details__star'
-                                                            src={imageStar2x}/>)}
-          {Array.from({length: maxSafetyStars - stars}).map((_, idx) => <img key={idx}
-                                                                               className='sk_safety__details__star'
-                                                                               src={imageUnstar2x}/>)}
+          {Array.from({length: stars}).map((_, idx) =>
+            <img key={idx} className='sk_safety__details__star' src={imageStar2x}/>)}
+          {Array.from({length: maxSafetyStars - stars}).map((_, idx) =>
+            <img key={idx} className='sk_safety__details__star' src={imageUnstar2x}/>)}
           <img className='sk_details__safety__stars_euroncap' src={image42x}/>
         </div>
       </div>

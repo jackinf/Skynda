@@ -10,16 +10,16 @@ import Skblock from "../BlockContainer";
 import {Translate} from 'react-redux-i18n';
 
 // Images
-import imageOk from "./../../../../static/images/standard/ok.png";
+import imageOk from "./../../../../static/images/standard/ok@2x.png";
 
 class Features extends React.Component {
   render() {
     const features = this.props.features;
 
-    return (<Skblock header={<Translate value="details.components.features.header"/>}>
+    return (<Skblock className="sk_details__feature" header={<Translate value="details.components.features.header"/>}>
       {features.map((feature, i) => (<Col key={i} md={6} xs={2} className='sk_details__feature_block'>
         <img src={imageOk} className='sk_details__feature__icon_list_image' />
-        <span>{feature}</span>
+        <span className="sk_details__feature__icon_list_text">{feature}</span>
       </Col>))}
     </Skblock>);
   }

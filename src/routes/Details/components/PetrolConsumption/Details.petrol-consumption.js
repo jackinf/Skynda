@@ -15,24 +15,29 @@ import Skblock from "../BlockContainer";
 
 class PetrolConsumption extends React.Component {
   render() {
-    const {city, highway, average} = this.props.petrolConsumption;
+    const {city, highway, average, fuelType} = this.props.petrolConsumption;
 
     return (<Skblock header={<Translate value="details.components.petrol.header"/>}>
-      <Col md={6}>
-        <img src={imageGasStation2x} className='sk_details__icon_list_image'/>
+      <Col md={2}>
+        <img src={imageGasStation2x} className='sk_details__icon_list_image'
+             style={{"width": "55px", marginTop: "20px"}}/>
       </Col>
-      <Col md={6}>
+      <Col md={10}>
         <Row>
-          <Col md={6}><label><Translate value="details.components.petrol.city"/>: </label></Col>
-          <Col md={6}>{city}</Col>
+          <Col md={4}><label className="sk_details__label"><Translate value="details.components.petrol.city"/>: </label></Col>
+          <Col md={8}>{city}</Col>
         </Row>
         <Row>
-          <Col md={6}><label><Translate value="details.components.petrol.highway"/>: </label></Col>
-          <Col md={6}>{highway}</Col>
+          <Col md={4}><label className="sk_details__label"><Translate value="details.components.petrol.highway"/>: </label></Col>
+          <Col md={8}>{highway}</Col>
         </Row>
         <Row>
-          <Col md={6}><label><Translate value="details.components.petrol.average"/>: </label></Col>
-          <Col md={6}>{average}</Col>
+          <Col md={4}><label className="sk_details__label"><Translate value="details.components.petrol.average"/>: </label></Col>
+          <Col md={8}>{average}</Col>
+        </Row>
+        <Row>
+          <Col md={4}><label className="sk_details__label"><Translate value="details.components.petrol.fuel_type"/>: </label></Col>
+          <Col md={8}>{fuelType}</Col>
         </Row>
       </Col>
     </Skblock>);
@@ -43,7 +48,8 @@ PetrolConsumption.propTypes = {
   petrolConsumption: React.PropTypes.shape({
     city: React.PropTypes.string.isRequired,
     highway: React.PropTypes.string,  // isRequired
-    average: React.PropTypes.string   // isRequired
+    average: React.PropTypes.string,   // isRequired
+    fuelType: React.PropTypes.string
   })
 };
 

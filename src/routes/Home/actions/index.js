@@ -1,19 +1,31 @@
+import ACTIONS from "./constants"
+
 export const setIsSearching = (value) => ({
-  type: 'SET_IS_SEARCHING',
+  type: ACTIONS.SET_IS_SEARCHING,
   value
 });
 
 export const toggleAdvanced = (value) => ({
-  type: "TOGGLE_ADVANCED_SEARCH",
+  type: ACTIONS.TOGGLE_ADVANCED_SEARCH,
   value
 });
 
-export const setStateValues = (value) => ({
-  type: "SET_STATE_VALUES",
+export const setBaseValues = (value) => ({
+  type: ACTIONS.SET_BASE_VALUES,
   payload: value
 });
 
-export const onSliderChange = (value) => ({
-  type: "SET_SLIDER_VALUE",
+export const updateSliderValue = (state , value) => ({
+  type: ACTIONS.SET_SLIDER_VALUE,
+  payload: value
+});
+
+export const toggleButtonGroupValue = (state, value) => ({
+  type: ACTIONS.TOGGLE_BUTTON_GROUP_VALUE,
+  payload: value
+});
+
+export const setSearchResults = (value) => ({
+  type: ACTIONS.SET_SEARCH_RESULTS,
   payload: value
 });

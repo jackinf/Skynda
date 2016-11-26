@@ -19,7 +19,9 @@
     "deploy": "better-npm-run deploy",
     "deploy:dev": "better-npm-run deploy:dev",
     "deploy:prod": "better-npm-run deploy:prod",
-    "codecov": "cat coverage/*/lcov.info | codecov"
+    "codecov": "cat coverage/*/lcov.info | codecov",
+    "zip": "rimraf dist.zip && jar -cMf dist.zip dist",
+    "send-zip": "pscp1 -pw skyndar00t ./dist.zip root@138.68.71.198:/root/dev/skynda-frontend/"
   },
   "betterScripts": {
     "compile": {
@@ -42,7 +44,7 @@
       }
     },
     "deploy": {
-      "command": "npm run clean && npm run compile",
+      "command": "npm run clean && npm run compile && rimraf *.json.gzip",
       "env": {
         "DEBUG": "app:*"
       }
@@ -55,7 +57,14 @@
       }
     },
     "deploy:prod": {
-      "command": "npm run deploy",
+      "command": "npm run deploy && npm run zip && npm run send-zip",
+      "env": {
+        "NODE_ENV": "production",
+        "DEBUG": "app:*"
+      }
+    },
+    "deploy:fullprod": {
+      "command": "git fetch -p && git pull && npm install && npm run deploy",
       "env": {
         "NODE_ENV": "production",
         "DEBUG": "app:*"
@@ -124,15 +133,18 @@
     "react-icons": "^2.2.1",
     "react-image-gallery": "^0.7.1",
     "react-mixin": "^2.0.2",
+    "react-notification-system": "^0.2.10",
     "react-owl-carousel": "^0.14.0",
     "react-redux": "^4.4.5",
     "react-redux-i18n": "^0.1.0",
+    "react-redux-toastr": "^3.9.1",
     "react-router": "^2.8.0",
     "react-slick": "^0.14.4",
     "react-sticky": "^5.0.5",
     "react-tap-event-plugin": "^1.0.0",
     "redux": "^3.6.0",
     "redux-form": "^6.1.1",
+    "redux-form-material-ui": "^4.1.0",
     "redux-thunk": "^2.0.0",
     "rimraf": "^2.5.4",
     "sass-loader": "^4.0.0",

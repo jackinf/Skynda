@@ -12,15 +12,17 @@ import {Row, Col} from "react-bootstrap";
 import ModalBtnCarousel from "./components/ModalBtnCarousel";
 import ModalBtn360 from "./components/ModalBtn360";
 
-class MainImage extends React.Component {
+class VehicleDetailsMainImage extends React.Component {
   constructor() {
     super();
     this.state = {isShowModal: false};
   }
 
   render() {
-    const {src, year, brand, model, engine, horsepower} = this.props.car.general;
-    const images = this.props.car.images;
+    const {src, year, brand, model, engine, horsepower, price} = this.props.vehicleDetailsMainImage;
+    const images = this.props.images ? this.props.images
+      .filter(imageItem => imageItem.image)
+      .map(imageItem => ({original: imageItem.image.url})) : [];
     const source360 = "https://www.panono.com/p/jmr7n52eIbDn/embed?autorotate=false";
 
     return (
@@ -40,7 +42,8 @@ class MainImage extends React.Component {
                 <span style={{margin: "0 15px 0 0"}}>{brand}</span>
                 <span style={{margin: "0 15px 0 0"}}>{model}</span>
                 <span style={{margin: "0 15px 0 0"}}>{engine}</span>
-                <span style={{margin: "0 15px 0 0"}}>({horsepower})</span>
+                <span style={{margin: "0 15px 0 0"}}>({horsepower} kW)</span>
+                <span style={{float: "right"}}>{parseInt(price).toLocaleString()} €</span>
               </Col>
             </Row>
             <Row className='image-buttons'>
@@ -63,18 +66,17 @@ class MainImage extends React.Component {
   }
 }
 
-MainImage.propTypes = {
-  car: React.PropTypes.shape({
-    general: React.PropTypes.shape({
-      src: React.PropTypes.string.isRequired,
-      year: React.PropTypes.number.isRequired,
-      brand: React.PropTypes.string,
-      model: React.PropTypes.string,
-      engine: React.PropTypes.string,
-      horsepower: React.PropTypes.string
-    }),
-    images: React.PropTypes.array
-  }).isRequired
+VehicleDetailsMainImage.propTypes = {
+  vehicleDetailsMainImage: React.PropTypes.shape({
+    src: React.PropTypes.string.isRequired,
+    year: React.PropTypes.number.isRequired,
+    brand: React.PropTypes.string,
+    model: React.PropTypes.string,
+    engine: React.PropTypes.string,
+    horsepower: React.PropTypes.number,
+    images: React.PropTypes.array,
+    price: React.PropTypes.number
+  }),
 };
 
-export default MainImage;
+export default VehicleDetailsMainImage;

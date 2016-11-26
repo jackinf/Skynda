@@ -12,19 +12,18 @@ import Overview from "./Overview";
 import Fetaures from "./Features";
 import History from "./History";
 import PetrolConsumption from "./PetrolConsumption";
-import Performance from "./Performance";
 import Safety from "./Safety";
 import InspectorsReport from "./InspectorsReport/Details.inspectors-report";
 import Reviews from "./Reviews";
-import CarDetailsMainImage from "./MainImage";
+import VehicleDetailsMainImage from "./MainImage";
 import Checkout from "./CheckoutPanel/Details.checkout";
 import CarPreview from "./../../../components/CarPreview";
 
 // List of rows
 import imageTestcar from "../../../static/images/cars/accord/accord.jpg";
-import { Translate } from 'react-redux-i18n';
+import {Translate} from 'react-redux-i18n';
 
-const cars = {
+const vehicles = {
   other: [
     {
       src: imageTestcar,
@@ -57,14 +56,14 @@ const cars = {
 
 import {StickyContainer, Sticky} from "react-sticky";
 
-class CarDetails extends React.Component {
+class VehicleDetails extends React.Component {
 
-  async componentWillMount() {
-    await this.props.getDataAsync();
+  componentWillMount() {
+    this.props.getDataAsync(this.props.params["id"]);
   }
 
   render() {
-    const carData = this.props.car_data;
+    const vehicleData = this.props.car_data;
     if (this.props.isLoading) {
       return <div>Loading...</div>;
     }
@@ -72,27 +71,34 @@ class CarDetails extends React.Component {
     return (
       <div className='car-details'>
         <div className='container'>
-          <CarDetailsMainImage car={carData}/>
+          <VehicleDetailsMainImage vehicleDetailsMainImage={vehicleData.vehicleDetailsMainImage}/>
         </div>
 
         <div className='container'>
           <StickyContainer>
             <div className='row'>
               <div className='col col-md-7'>
+                <Overview overview={vehicleData.overview}/>
 
-                <Overview overview={carData.overview}/>
+                {vehicleData.descriptions.map((description, i) =>
+                  <Skblock key={i} header={description.title}>
+                    {description.content}
+                  </Skblock>)
+                }
 
-                {carData.descriptions.map((description, i) =>
-                  <Skblock key={i} header={description.title}>{description.text}</Skblock>)}
-
-                <Fetaures features={carData.features}/>
-                <History history={carData.history}/>
-                <PetrolConsumption petrolConsumption={carData.petrolConsumption}/>
-                <Performance performance={carData.performance}/>
-                <Safety stars={carData.safetyStars}/>
-                <InspectorsReport report={carData.report}
-                                  sendQuestionByEmailAsync={this.props.sendQuestionByEmailAsync}/>
-                <Reviews reviews={carData.reviews}/>
+                <Fetaures features={vehicleData.features}/>
+                <History history={vehicleData.history}/>
+                <PetrolConsumption
+                  petrolConsumption={vehicleData.petrolConsumption}
+                />
+                <Safety stars={vehicleData.safetyStars}/>
+                <InspectorsReport
+                  report={vehicleData.report}
+                  sendQuestionByEmailAsync={this.props.sendQuestionByEmailAsync}/>
+                <Reviews reviews={vehicleData.reviews}/>
+                <Skblock header={<Translate value="details.components.additional_info.header"/>}>
+                  {vehicleData.additional}
+                </Skblock>
 
               </div>
               <div className='col col-md-5'>
@@ -105,7 +111,7 @@ class CarDetails extends React.Component {
 
           <div className='row'>
             <Skblock header={<Translate value="details.other_txt"/>}>
-              <CarPreview.Grid cars={cars.other}/>
+              <CarPreview.Grid cars={vehicles.other}/>
             </Skblock>
           </div>
         </div>
@@ -114,7 +120,7 @@ class CarDetails extends React.Component {
   }
 }
 
-CarDetails.propTypes = {
+VehicleDetails.propTypes = {
   getDataAsync: React.PropTypes.func.isRequired,
   isLoading: React.PropTypes.bool.isRequired,
   sendEmailAsync: React.PropTypes.func.isRequired,
@@ -122,4 +128,4 @@ CarDetails.propTypes = {
   car_data: React.PropTypes.object.isRequired
 };
 
-export default CarDetails;
+export default VehicleDetails;
