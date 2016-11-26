@@ -19,7 +19,9 @@
     "deploy": "better-npm-run deploy",
     "deploy:dev": "better-npm-run deploy:dev",
     "deploy:prod": "better-npm-run deploy:prod",
-    "codecov": "cat coverage/*/lcov.info | codecov"
+    "codecov": "cat coverage/*/lcov.info | codecov",
+    "zip": "rimraf dist.zip && jar -cMf dist.zip dist",
+    "send-zip": "pscp1 -pw skyndar00t ./dist.zip root@138.68.71.198:/root/dev/skynda-frontend/"
   },
   "betterScripts": {
     "compile": {
@@ -42,7 +44,7 @@
       }
     },
     "deploy": {
-      "command": "npm run clean && npm run compile",
+      "command": "npm run clean && npm run compile && rimraf *.json.gzip",
       "env": {
         "DEBUG": "app:*"
       }
@@ -55,7 +57,14 @@
       }
     },
     "deploy:prod": {
-      "command": "npm run deploy",
+      "command": "npm run deploy && npm run zip && npm run send-zip",
+      "env": {
+        "NODE_ENV": "production",
+        "DEBUG": "app:*"
+      }
+    },
+    "deploy:fullprod": {
+      "command": "git fetch -p && git pull && npm install && npm run deploy",
       "env": {
         "NODE_ENV": "production",
         "DEBUG": "app:*"

@@ -8,3 +8,4 @@ coverage
 
 .idea/
 *.json.gzip
+dist.zip
