@@ -4,6 +4,7 @@
 $the-color: #FBBB68;
 
 .sell-your-car {
+  margin-top: 30px;
   margin-bottom: 200px;
 }
 
@@ -20,7 +21,7 @@ $the-color: #FBBB68;
 }
 
 .sell-your-car__main-image-background {
-  background:  url(../assets/sellyourcar.png);
+  background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url(../assets/sellyourcar.png);
   background-size:cover;
   min-height: 400px;
   width: 100%;
@@ -70,6 +71,7 @@ $the-color: #FBBB68;
   border-radius: 20px;
   min-height: 30px;
   margin: 10px;
+  cursor: pointer;
 }
 
 .sell-your-car__circle-button,

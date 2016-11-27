@@ -48,7 +48,7 @@ function getList(actionType, classificationTypeName = "") {
     })
       .then(resp => resp.json())
       .then(resp => {
-        console.info("Classifications response", resp);
+        // console.info("Classifications response", resp);
         dispatch(setItems(actionType, resp, false));
       })
       .catch(err => {
