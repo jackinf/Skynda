@@ -23,36 +23,36 @@ import CarPreview from "./../../../components/CarPreview";
 import imageTestcar from "../../../static/images/cars/accord/accord.jpg";
 import {Translate} from 'react-redux-i18n';
 
-const vehicles = {
-  other: [
-    {
-      src: imageTestcar,
-      href: "/details",
-      year: 2012,
-      brand: "Audi",
-      price: 12100,
-      mileage: 85000,
-      engine: "3.0",
-      power: "225 kW",
-      doors: 4,
-      seats: 5,
-      comment: "Comes with winter tires"
-    },
-    {
-      src: imageTestcar,
-      href: "/details",
-      year: 2012,
-      brand: "Audi",
-      price: 12100,
-      mileage: 85000,
-      engine: "3.0",
-      power: "225 kW",
-      doors: 4,
-      seats: 5,
-      comment: "Comes with winter tires"
-    }
-  ]
-};
+// const vehicles = {
+//   other: [
+//     {
+//       src: imageTestcar,
+//       href: "/details",
+//       year: 2012,
+//       brand: "Audi",
+//       price: 12100,
+//       mileage: 85000,
+//       engine: "3.0",
+//       power: "225 kW",
+//       doors: 4,
+//       seats: 5,
+//       comment: "Comes with winter tires"
+//     },
+//     {
+//       src: imageTestcar,
+//       href: "/details",
+//       year: 2012,
+//       brand: "Audi",
+//       price: 12100,
+//       mileage: 85000,
+//       engine: "3.0",
+//       power: "225 kW",
+//       doors: 4,
+//       seats: 5,
+//       comment: "Comes with winter tires"
+//     }
+//   ]
+// };
 
 import {StickyContainer, Sticky} from "react-sticky";
 
@@ -111,7 +111,7 @@ class VehicleDetails extends React.Component {
 
           <div className='row'>
             <Skblock header={<Translate value="details.other_txt"/>}>
-              <CarPreview.Grid cars={vehicles.other}/>
+              {/*<CarPreview.Grid vehicles={vehicles.other}/>*/}
             </Skblock>
           </div>
         </div>
