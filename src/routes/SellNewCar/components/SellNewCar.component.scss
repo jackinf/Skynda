@@ -1,8 +1,6 @@
 
 @import "../../../styles/variables";
 
-$the-color: #FBBB68;
-
 .sell-your-car {
   margin-top: 30px;
   margin-bottom: 200px;
@@ -34,18 +32,18 @@ $the-color: #FBBB68;
 
 .sell-your-car__main-image-background__button,
 .sell-your-car__main-image-background__button:hover{
-  background: $the-color;
+  background: $color-secondary;
   border-radius: 5px;
 }
 
 .sell-your-car__block-header {
-  color: $the-color;
+  color: $color-secondary;
   font-size: 18px;
 }
 
 .sell-your-car__button-submit,
 .sell-your-car__button-submit:hover {
-  background: $the-color;
+  background: $color-secondary;
 }
 
 .sell-your-car__button,
@@ -61,7 +59,7 @@ $the-color: #FBBB68;
 .sell-your-car__button-active:hover,
 .sell-your-car__button-active:active,
 .sell-your-car__button-active:focus {
-  background: $the-color;
+  background: $color-secondary;
   margin: 0 10px 5px 10px;
   -webkit-appearance:none;
   outline: none;
@@ -88,7 +86,7 @@ $the-color: #FBBB68;
 .sell-your-car__circle-button-active:hover,
 .sell-your-car__circle-button-active:active,
 .sell-your-car__circle-button-active:focus{
-  background: $the-color;
+  background: $color-secondary;
   border-radius: 30px;
   margin-right: 5px;
   -webkit-appearance:none;

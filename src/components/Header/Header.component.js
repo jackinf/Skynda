@@ -57,6 +57,11 @@ class Header extends React.Component {
                     </Link>
                   </li>
                   <li className='sk_menu__about'>
+                    <Link to="/how-it-works">
+                      <Translate value="components.header.how_it_works"/>
+                    </Link>
+                  </li>
+                  <li className='sk_menu__about'>
                     <Link to="/about">
                       <Translate value="components.header.about_us"/>
                     </Link>
