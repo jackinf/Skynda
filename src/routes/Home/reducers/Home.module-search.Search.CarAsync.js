@@ -1,7 +1,7 @@
 import fetch from "isomorphic-fetch";
 import remoteConfig from "../../../store/remoteConfig";
 import {setIsSearching, setSearchResults} from './../actions';
-
+import NProgress from "react-nprogress";
 
 /***
  * Async Search for cars. Use redux-thunk
@@ -10,6 +10,7 @@ import {setIsSearching, setSearchResults} from './../actions';
 export const searchCarAsync = () => (dispatch, getState) => {
   var searchValues = {...getState().searchValues};
   dispatch(setIsSearching(true));
+  NProgress.start();
   return fetch(`${remoteConfig.remote}/api/vehicle/search`, {
     method: "POST",
     credentials: "include",
@@ -20,8 +21,10 @@ export const searchCarAsync = () => (dispatch, getState) => {
     .then(resp => {
       dispatch(setSearchResults(resp.vehicles));
       dispatch(setIsSearching(false));
+      NProgress.done();
     }).catch(err => {
-      console.log("Car Search failed =>", err)
+      console.log("Car Search failed =>", err);
       dispatch(setIsSearching(false));
+      NProgress.done();
   });
 };

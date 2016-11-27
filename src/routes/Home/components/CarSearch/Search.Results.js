@@ -7,7 +7,7 @@ class ResultsComponent extends React.Component {
 
   render() {
     return (
-      <Col md={12}>
+      <Col md={12} style={{minHeight: "400px"}}>
         {
           this.props.isSearching
             ? (
@@ -19,7 +19,7 @@ class ResultsComponent extends React.Component {
             <Row>
               <Col sm={12}>
                 <h2 className='primary-header-2 text-center'>
-                  <Translate value="home_page.found"/> : {this.props.searchResults[0].length}
+                  <Translate value="home_page.found"/>: {this.props.searchResults[0].length}
                 </h2>
               </Col>
               <br />
