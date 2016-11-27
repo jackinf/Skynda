@@ -46,9 +46,9 @@ class PetrolConsumption extends React.Component {
 
 PetrolConsumption.propTypes = {
   petrolConsumption: React.PropTypes.shape({
-    city: React.PropTypes.string.isRequired,
-    highway: React.PropTypes.string,  // isRequired
-    average: React.PropTypes.string,   // isRequired
+    city: React.PropTypes.number.isRequired,
+    highway: React.PropTypes.number,  // isRequired
+    average: React.PropTypes.number,   // isRequired
     fuelType: React.PropTypes.string
   })
 };

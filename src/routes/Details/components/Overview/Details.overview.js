@@ -29,7 +29,7 @@ class Overview extends React.Component {
       colorOutside: React.PropTypes.string.isRequired,
       colorInside: React.PropTypes.string.isRequired,
       doors: React.PropTypes.number.isRequired,
-      seats: React.PropTypes.string.isRequired  // TODO: To nunmber
+      seats: React.PropTypes.number.isRequired
     })
   };
 

@@ -5,14 +5,12 @@ import ResultsComponent from '../../components/CarSearch/Search.Results'
 const mapStateToProps = (state) => {
   return {
     searchResults: state.searchResults,
-    recentlyAdded: state.recentlyAdded
+    recentlyAdded: state.recentlyAdded, //TODO redux recentlyAdded
+    isSearching: state.isSearching
   };
 };
 
-
-const mapDispatchToProps =  {
-
-};
+const mapDispatchToProps =  {};
 
 const SearchResultsContainer = connect(
   mapStateToProps,

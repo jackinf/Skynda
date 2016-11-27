@@ -1,54 +1,8 @@
 import React from "react";
 import {Translate} from 'react-redux-i18n';
 import CarPreview from "./../../../../components/CarPreview";
-import imageTestcar from "../../../../static/images/cars/accord/accord.jpg";
 import {Row, Col} from "react-bootstrap";
 
-// TODO: redux
-const cars = {
-  searchResults: [],
-  recentlyAdded: [
-    {
-      src: imageTestcar,
-      href: "/details/1",
-      year: 2012,
-      brand: "Audi",
-      price: 12100,
-      mileage: 85000,
-      engine: "3.0",
-      power: "225 kW",
-      doors: 4,
-      seats: 5,
-      comment: "Comes with winter tires"
-    },
-    {
-      src: imageTestcar,
-      href: "/details/2",
-      year: 2012,
-      brand: "Audi",
-      price: 12100,
-      mileage: 85000,
-      engine: "3.0",
-      power: "225 kW",
-      doors: 4,
-      seats: 5,
-      comment: "Comes with winter tires"
-    },
-    {
-      src: imageTestcar,
-      href: "/details/3",
-      year: 2012,
-      brand: "Audi",
-      price: 12100,
-      mileage: 85000,
-      engine: "3.0",
-      power: "225 kW",
-      doors: 4,
-      seats: 5,
-      comment: "Comes with winter tires"
-    }
-  ]
-};
 class ResultsComponent extends React.Component {
 
   render() {
@@ -71,7 +25,7 @@ class ResultsComponent extends React.Component {
               <br />
               <Row>
                 <Col md={12}>
-                  <CarPreview.Grid cars={this.props.searchResults}/>
+                  <CarPreview.Grid vehicles={this.props.searchResults}/>
                 </Col>
               </Row>
             </Row>)
@@ -94,7 +48,7 @@ class ResultsComponent extends React.Component {
             <br />
             <Row>
               <Col md={12}>
-                <CarPreview.Grid cars={cars.recentlyAdded}/>
+                {/*<CarPreview.Grid vehicles={this.props.recentlyAdded}/>*/}
               </Col>
             </Row>
           </Row>
