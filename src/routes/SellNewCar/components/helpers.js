@@ -10,12 +10,12 @@ import {Row, Col} from "react-bootstrap";
  * @param block
  */
 export const rowWrapper = (block) =>
-  (<Row style={{"margin": "2px", "padding": "2px"}}>
+  (<Row style={{"margin": "4px", "padding": "4px"}}>
     <Col xs={12} >{block}</Col>
   </Row>);
 
 export const rowWrapperCentered = (block) =>
-  (<Row style={{"margin": "2px", "padding": "2px"}}>
-    <Col xs={12} sm={4} smOffset={4}>{block}</Col>
-    <Col sm={4}></Col>
+  (<Row style={{"margin": "4px", "padding": "4px"}}>
+    <Col xs={12} sm={6} smOffset={3}>{block}</Col>
+    <Col sm={3}></Col>
   </Row>);

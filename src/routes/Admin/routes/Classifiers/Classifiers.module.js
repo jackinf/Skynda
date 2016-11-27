@@ -48,6 +48,7 @@ function getList(actionType, classificationTypeName = "") {
     })
       .then(resp => resp.json())
       .then(resp => {
+        console.info("Classifications response", resp);
         dispatch(setItems(actionType, resp, false));
       })
       .catch(err => {
@@ -110,16 +111,17 @@ const ACTION_HANDLERS = {
 // ------------------------------------
 // Reducer
 // ------------------------------------
+const itemsDefaultObject = {items: [], isFetching: false};
 const initialState = {
-  feature: {},
-  paymentType: {},
-  drivetrain: {},
-  transmission: {},
-  paymentStatus: {},
-  manufacturer: {},
-  color: {},
-  fuel: {},
-  vehicleBody: {}
+  feature: {...itemsDefaultObject},
+  paymentType: {...itemsDefaultObject},
+  drivetrain: {...itemsDefaultObject},
+  transmission: {...itemsDefaultObject},
+  paymentStatus: {...itemsDefaultObject},
+  manufacturer: {...itemsDefaultObject},
+  color: {...itemsDefaultObject},
+  fuel: {...itemsDefaultObject},
+  vehicleBody: {...itemsDefaultObject}
 };
 
 export default function reducer(state = initialState, action) {

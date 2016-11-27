@@ -3,8 +3,16 @@
 
 $the-color: #FBBB68;
 
+.sell-your-car {
+  margin-bottom: 200px;
+}
+
 .sell-your-car__centered {
   text-align: center;
+}
+
+.sell-your-car__label {
+  font-weight: 500;
 }
 
 .sell-your-car__main-image {
@@ -43,13 +51,44 @@ $the-color: #FBBB68;
 .sell-your-car__button:hover,
 .sell-your-car__button:active,
 .sell-your-car__button:focus {
-  background: $the-color;
-  margin: 0 10px;
+  margin: 0 10px 5px 10px;
+  -webkit-appearance:none;
+  outline: none;
 }
 
 .sell-your-car__button-active,
 .sell-your-car__button-active:hover,
 .sell-your-car__button-active:active,
 .sell-your-car__button-active:focus {
-  margin: 0 10px;
+  background: $the-color;
+  margin: 0 10px 5px 10px;
+  -webkit-appearance:none;
+  outline: none;
+}
+
+.sell-your-car__color-renderer-display {
+  border-radius: 20px;
+  min-height: 30px;
+  margin: 10px;
+}
+
+.sell-your-car__circle-button,
+.sell-your-car__circle-button:hover,
+.sell-your-car__circle-button:active,
+.sell-your-car__circle-button:focus{
+  border-radius: 30px;
+  margin-right: 5px;
+  -webkit-appearance:none;
+  outline: none;
+}
+
+.sell-your-car__circle-button-active,
+.sell-your-car__circle-button-active:hover,
+.sell-your-car__circle-button-active:active,
+.sell-your-car__circle-button-active:focus{
+  background: $the-color;
+  border-radius: 30px;
+  margin-right: 5px;
+  -webkit-appearance:none;
+  outline: none;
 }
