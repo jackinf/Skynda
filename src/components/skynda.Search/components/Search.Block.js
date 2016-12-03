@@ -4,7 +4,7 @@ import ButtonGroupContainer from "../containers/SelectBtnContainer";
 import SliderContainer from "../containers/SliderContainer";
 import ToggleBtnContainer from "../containers/ToggleBtnContainer";
 import SearchBtnContainer from "../containers/SearchBtnContainer";
-import SearchResultsContainer from "../../../components/Search/containers/ResultsContainer"
+import SearchResultsContainer from "..//containers/ResultsContainer"
 import "./Search.Block.scss";
 import {Translate} from 'react-redux-i18n';
 import Plus from 'react-icons/lib/fa/plus'

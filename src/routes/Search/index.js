@@ -7,7 +7,7 @@ export default (store) => ({
   path : "search",
   getComponent(nextState, cb) {
     require.ensure([], (require) => {
-      require("../../components/Search/reducers").defaultInject(store, injectReducer);
+      require("../../components/skynda.Search/reducers").defaultInject(store, injectReducer);
       cb(null, require("./Containers/SearchPage.container.js").default);
     }, "search");
   }

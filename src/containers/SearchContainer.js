@@ -1,3 +1,3 @@
-import SearchContainer from '../components/Search'
+import SearchContainer from '../components/skynda.Search'
 
 export default SearchContainer;
