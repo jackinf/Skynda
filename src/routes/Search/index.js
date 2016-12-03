@@ -8,14 +8,19 @@ export default (store) => ({
   getComponent(nextState, cb) {
     require.ensure([], (require) => {
 
-      const {setValues, onSliderChange, searchBtn, toggleBtn} = require("../Home/reducers");
+      const {
+        setIsSearching,
+        toggleAdvanced,
+        setBaseValues,
+        changeSearchValues
+      } = require("../../components/Search/reducers");
 
-      injectReducer(store, {key: "isSearching", reducer: searchBtn});
-      injectReducer(store, {key: "showAdvancedSearch", reducer: toggleBtn});
-      injectReducer(store, {key: "base", reducer: setValues});
-      injectReducer(store, {key: "searchValues", reducer: onSliderChange});
+      injectReducer(store, {key: "isSearching", reducer: setIsSearching});
+      injectReducer(store, {key: "showAdvancedSearch", reducer: toggleAdvanced});
+      injectReducer(store, {key: "base", reducer: setBaseValues});
+      injectReducer(store, {key: "searchValues", reducer: changeSearchValues});
 
-      cb(null, require("./SearchPage.container").default);
+      cb(null, require("./Containers/SearchPage.container.js").default);
     }, "search");
   }
 });

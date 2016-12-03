@@ -1,7 +1,10 @@
+/**
+ * Created by ardi-pc on 2016-12-03.
+ */
 import React from 'react';
 import {connect} from 'react-redux'
-import SearchComponent from '../../components/CarSearch/Search.Block'
-import {getClassificationsAsync} from '../../reducers'
+import SearchComponent from '../components/Search.Block'
+import {getClassificationsAsync} from '../reducers'
 
 const mapStateToProps = (state) => {
   return {

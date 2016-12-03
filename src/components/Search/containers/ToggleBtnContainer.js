@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux'
-import {toggleAdvanced} from '../../actions'
-import ButtonSkynda from '../../components/CarSearch/Button'
+import {toggleAdvanced} from '../actions'
+import ButtonSkynda from '../../Button/Button'
 
 const mapStateToProps = (state, ownProps) => {
   return {

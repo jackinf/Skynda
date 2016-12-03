@@ -2,7 +2,7 @@ import React from "react";
 import Slider from "rc-slider";
 import {Row, Col} from "react-bootstrap";
 import reactMixin from "react-mixin";
-import settimeoutMixin from "../../../../mixins/settimeout";
+import setTimeoutMixin from "../../mixins/settimeout";
 import {Localize} from 'react-redux-i18n';
 
 class SliderWrapper extends React.Component {
@@ -31,7 +31,7 @@ class SliderWrapper extends React.Component {
           <span className='pull-right'>
             {
               max.toString().length > 4
-                ? <Localize value={max} />
+                ? <Localize value={max}/>
                 : max
             } {units}
           </span>
@@ -41,12 +41,12 @@ class SliderWrapper extends React.Component {
       <Row>
         <Col sm={12}>
           <Slider range
-            allowCross={false}
-            defaultValue={[min, max]}
-            min={min}
-            max={max}
-            step={step}
-            onChange={this.onSliderChange} />
+                  allowCross={false}
+                  defaultValue={[min, max]}
+                  min={min}
+                  max={max}
+                  step={step}
+                  onChange={this.onSliderChange}/>
         </Col>
       </Row>
     </div>);
@@ -61,6 +61,6 @@ SliderWrapper.propTypes = {
   step: React.PropTypes.number.isRequired
 };
 
-reactMixin(SliderWrapper.prototype, settimeoutMixin);
+reactMixin(SliderWrapper.prototype, setTimeoutMixin);
 
 export default SliderWrapper;

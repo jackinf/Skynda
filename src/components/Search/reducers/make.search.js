@@ -4,7 +4,7 @@ import {setIsSearching, setSearchResults} from './../actions';
 import NProgress from "react-nprogress";
 
 /***
- * Async Search for cars. Use redux-thunk
+ * Async Search for vehicles. Use redux-thunk
  * Set isSearching & searchResults
  */
 export const searchCarAsync = () => (dispatch, getState) => {

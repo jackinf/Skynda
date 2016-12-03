@@ -1,14 +1,4 @@
-import Home from "../components/Home";
 import {connect} from "react-redux";
+import Home from "../components/Home";
 
-//Object of action creators
-const mapDispatchToProps = {
-
-};
-
-//STATE PROPS
-const mapStateToProps = (state) => ({
-
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect((state) => ({}), {})(Home);

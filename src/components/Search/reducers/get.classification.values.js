@@ -25,9 +25,6 @@ export const getClassificationsAsync =  () => {
   return (dispatch) => {
     return new Promise((resolve) => {
       setTimeout(async() => {
-        // TODO: temporary data. Use API data.
-        // TODO: REPLACE with api data
-
         const respBrand = await getClassificationList("MANUFACTURER");
         const brandsInit = [{id: -1, name: <Translate value="all"/>}];
         const brands = brandsInit.concat(respBrand.items);
@@ -47,6 +44,8 @@ export const getClassificationsAsync =  () => {
           return returnObj;
         });
 
+        // TODO: temporary data. Use API data.
+        // TODO: REPLACE with api data
         const doors = [
           {id: -1, name: <Translate value="all"/>},
           {id: 0, name: "2"},

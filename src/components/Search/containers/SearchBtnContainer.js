@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux'
-import {searchCarAsync} from '../../reducers/Home.module-search.Search.CarAsync'
-import ButtonSkynda from '../../components/CarSearch/Button'
+import {searchCarAsync} from '../reducers/make.search'
+import ButtonSkynda from '../../Button/Button'
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -16,9 +16,9 @@ const mapDispatchToProps = {
   }
 };
 
-const SearchButton = connect(
+const SearchBtnContainer = connect(
   mapStateToProps,
   mapDispatchToProps
 )(ButtonSkynda);
 
-export default SearchButton
+export default SearchBtnContainer

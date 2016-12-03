@@ -1,4 +1,24 @@
-import ACTIONS from "./../actions/constants";
+import ACTIONS from '../actions/constants';
+
+export const setIsSearching = (state = false, action) => {
+  switch (action.type) {
+    case ACTIONS.SET_IS_SEARCHING:
+      return action.value;
+
+    default:
+      return state;
+  }
+};
+
+export const toggleAdvanced = (state = false, action) => {
+  switch (action.type) {
+    case ACTIONS.TOGGLE_ADVANCED_SEARCH:
+      return !action.value;
+
+    default:
+      return state;
+  }
+};
 
 export const setBaseValues = (state = [], action) => {
   switch (action.type) {
@@ -32,4 +52,3 @@ export const setSearchResults = (state = false, action) => {
       return state;
   }
 };
-

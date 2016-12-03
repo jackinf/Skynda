@@ -1,9 +1,5 @@
-/**
- * Created by jevgenir on 24/09/2016.
- */
-
 import React from "react";
-import CarPreviewItem from "./CarPreviewItem";
+import CarPreviewItem from "./PreviewItem";
 
 import {Row, Col} from "react-bootstrap";
 

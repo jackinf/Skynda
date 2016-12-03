@@ -1,9 +1,5 @@
-/**
- * Created by jevgenir on 24/09/2016.
- */
-
 import React from "react";
-import "./CarPreviewItem.scss";
+import "./PreviewItem.scss";
 import {Translate, Localize} from 'react-redux-i18n';
 import {Row, Col} from "react-bootstrap";
 

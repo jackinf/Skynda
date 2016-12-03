@@ -1,9 +1,10 @@
 import React, {PropTypes} from 'react'
 import {Row, Col} from "react-bootstrap";
-import ButtonGroupContainer from "../../containers/CarSearch/Search.Block-Container.Btn.Group";
-import SliderContainer from "../../containers/CarSearch/Search.Block-Container.Slider";
-import ToggleButton from "../../containers/CarSearch/Search.Block-Container.Btn.Advanced.Search";
-import SearchButton from "../../containers/CarSearch/Search.Block-Container.Btn.Search";
+import ButtonGroupContainer from "../containers/SelectBtnContainer";
+import SliderContainer from "../containers/SliderContainer";
+import ToggleBtnContainer from "../containers/ToggleBtnContainer";
+import SearchBtnContainer from "../containers/SearchBtnContainer";
+import SearchResultsContainer from "../../../components/Search/containers/ResultsContainer"
 import "./Search.Block.scss";
 import {Translate} from 'react-redux-i18n';
 import Plus from 'react-icons/lib/fa/plus'
@@ -200,7 +201,7 @@ class SearchComponent extends React.Component {
                 <Row>
                   <Col md={12}>
                     <div className='text-right'>
-                      <ToggleButton className='btn btn-link fk-filter-advance'>
+                      <ToggleBtnContainer className='btn btn-link fk-filter-advance'>
                         {
                           this.props.showAdvancedSearch
                             ? <Minus/>
@@ -208,12 +209,12 @@ class SearchComponent extends React.Component {
                         }
                         &nbsp;&nbsp;
                         <Translate value="components.car_search.advanced_txt"/>
-                      </ToggleButton>
+                      </ToggleBtnContainer>
 
-                      <SearchButton className='btn btn-info sk-btn--search'>
+                      <SearchBtnContainer className='btn btn-info sk-btn--search'>
                         <span className='glyphicon glyphicon-search'/>
                         <Translate value="components.car_search.btn_search"/>
-                      </SearchButton>
+                      </SearchBtnContainer>
 
                     </div>
                   </Col>
@@ -222,6 +223,8 @@ class SearchComponent extends React.Component {
             </div>
           </Col>
         </Row>
+        <br/>
+        <SearchResultsContainer />
       </div>
     );
   }

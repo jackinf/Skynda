@@ -1,6 +1,6 @@
 import React from "react";
 import {Translate} from 'react-redux-i18n';
-import CarPreview from "./../../../../components/CarPreview";
+import CarPreview from "./../../ItemPreview";
 import {Row, Col} from "react-bootstrap";
 
 class ResultsComponent extends React.Component {

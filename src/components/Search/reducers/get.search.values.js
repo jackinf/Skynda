@@ -1,4 +1,4 @@
-import ACTIONS from './../actions/constants';
+import ACTIONS from '../actions/constants';
 
 const findWithAttr = (array, attr, value) =>{
   for(var i = 0; i < array.length; i++){

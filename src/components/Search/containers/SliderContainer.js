@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux'
-import {updateSliderValue} from '../../actions'
-import SliderWrapper from "../../components/CarSearch/Slider";
+import {updateSliderValue} from '../actions'
+import SliderWrapper from "../../Slider/Slider";
 
 const mapStateToProps = (state, ownProps) => {
   return {

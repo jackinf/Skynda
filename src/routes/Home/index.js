@@ -11,7 +11,13 @@ export default (store) => ({
     require.ensure([], (require) => {
       const Home = require("./containers/HomeContainer").default;
 
-      const {setBaseValues, changeSearchValues, setIsSearching, toggleAdvanced, setSearchResults} = require("./reducers");
+      const {
+        setBaseValues,
+        changeSearchValues,
+        setIsSearching,
+        toggleAdvanced,
+        setSearchResults
+      } = require("../../components/Search/reducers");
 
       injectReducer(store, {key: "isSearching", reducer: setIsSearching});
       injectReducer(store, {key: "showAdvancedSearch", reducer: toggleAdvanced});

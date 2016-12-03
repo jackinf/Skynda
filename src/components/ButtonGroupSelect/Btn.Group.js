@@ -1,7 +1,3 @@
-/**
- * Created by jevgenir on 24/09/2016.
- */
-
 import React from "react";
 import "./Btn.Group.scss";
 import {Button, Col} from "react-bootstrap";
