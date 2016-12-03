@@ -2,10 +2,12 @@ import {injectReducer} from '../../../../store/reducers';
 import {reducer as formReducer} from 'redux-form';
 import {ROUTE_PARAMS, FORM_MODE, FORMS, REDUCER_KEYS} from "./constants/Vehicle.constant";
 import {setFormMode} from "./reducers/SetFormMode.reducer";
+import NProgress from "react-nprogress";
 
 export default (store) => ({
   path: `vehicle(/:${ROUTE_PARAMS.VEHICLE_ID})`,
   getComponent(nextState, cb) {
+    NProgress.start();
     require.ensure([], (require) => {
       const param = nextState.params[ROUTE_PARAMS.VEHICLE_ID];
       const isAdd = param === ROUTE_PARAMS.values.NEW;
@@ -20,12 +22,14 @@ export default (store) => ({
         injectReducer(store, {key: "classificators", reducer: require("./../Classifiers/Classifiers.module").default});
 
         store.dispatch(setFormMode(isUpdate ? FORM_MODE.UPDATING : FORM_MODE.ADDING));
+        NProgress.done();
         cb(null, Container);
       }
       else {
         const Container = require("./containers/Vehicles.container.js").default;
         injectReducer(store, {key: REDUCER_KEYS.VEHICLES_DATA, reducer: require("./reducers/SetVehicles.reducer.js").default});
         cb(null, Container);
+        NProgress.done();
       }
     })
   }

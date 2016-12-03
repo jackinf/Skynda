@@ -9,6 +9,8 @@ injectTapEventPlugin();
 import "./main.scss";
 import "rc-slider/assets/index.css";
 import "react-select/dist/react-select.css";
+import "nprogress/nprogress.js";
+import "nprogress/nprogress.css";
 
 // ========================================================
 // Store Instantiation

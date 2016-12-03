@@ -26,7 +26,8 @@
     },
     "header": {
       "sell_car_txt": "Sell Your Car",
-      "buy_car_txt": "Buy Your Car"
+      "buy_car_txt": "Buy Your Car",
+      "how_it_works": "How It Works?"
     },
     "navigation": {
       "about": "About",

@@ -4,6 +4,7 @@ import Home from "./Home";
 import Search from "./Search";
 import Details from "./Details";
 import About from "./About";
+import HowItWorks from "./HowItWorks";
 import Examples from "./Examples";
 import Admin from "./Admin";
 import {LoginRoute, RegisterRoute} from "./Auth";
@@ -42,6 +43,7 @@ export const createRoutes = (store) => {
     childRoutes: [
       Details(store),
       About(store),
+      HowItWorks(store),
       Examples(store),
       Admin(store),
       LoginRoute(store),
