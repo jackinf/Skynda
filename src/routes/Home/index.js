@@ -10,21 +10,7 @@ export default (store) => ({
     NProgress.start();
     require.ensure([], (require) => {
       const Home = require("./containers/HomeContainer").default;
-
-      const {
-        setBaseValues,
-        changeSearchValues,
-        setIsSearching,
-        toggleAdvanced,
-        setSearchResults
-      } = require("../../components/Search/reducers");
-
-      injectReducer(store, {key: "isSearching", reducer: setIsSearching});
-      injectReducer(store, {key: "showAdvancedSearch", reducer: toggleAdvanced});
-      injectReducer(store, {key: "base", reducer: setBaseValues});
-      injectReducer(store, {key: "searchValues", reducer: changeSearchValues});
-      injectReducer(store, {key: "searchResults", reducer: setSearchResults});
-
+      require("../../components/Search/reducers").defaultInject(store, injectReducer);
       NProgress.done();
       cb(null, Home);
     }, "");

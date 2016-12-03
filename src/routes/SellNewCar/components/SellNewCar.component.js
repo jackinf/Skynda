@@ -80,7 +80,7 @@ export default class extends React.Component {
                   {rowWrapper(<Field name="user_email" component={TextField} hintText="Sinu e-posti aadress *" type="email"/>)}
                   {rowWrapper(<Field name="user_phone" component={TextField} hintText="Sinu telefoninumber *"/>)}
                 </CardText>
-              </Card>
+            </Card>
 
               <br/>
 

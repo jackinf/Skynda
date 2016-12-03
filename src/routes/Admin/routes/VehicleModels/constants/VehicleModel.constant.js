@@ -10,6 +10,17 @@ export const REDUCER_KEYS = {
   VEHICLE_MODELS_DATA: "vehicleModelsData"
 };
 
+export const FORM_MODE = {
+  NONE: "NONE",
+  READING: "READING",
+  ADDING: "ADDING",
+  UPDATING: "UPDATING"
+};
+
 export const ROUTE_PARAMS = {
-  VEHICLE_MODEL_ID: "vehicleModelId"
+  VEHICLE_MODEL_ID: "vehicleModelId",
+
+  values: {
+    NEW: "new"
+  }
 };
