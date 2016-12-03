@@ -199,10 +199,7 @@ public class VehicleServiceImpl implements VehicleService {
     @Override
     public DeleteResponseDto deleteVehicle(Integer id) {
         vehicleDao.delete(id);  // TODO: make somehow sure that the item has been deleted.
-
-        DeleteResponseDto response = new DeleteResponseDto();
-        response.setSuccess(true);
-        return response;
+        return DeleteResponseDto.Factory.success();
     }
 
     @Override

@@ -53,7 +53,7 @@ public class VehicleModelServiceImplTest {
         when(vehicleModelDao.getAll()).thenReturn(prepared);
 
         // Act
-        List<VehicleModelResponseDto> response = service.get(new ModelRequestDto());
+        List<VehicleModelResponseDto> response = service.getAll(new ModelRequestDto());
 
         // Assert
         assertEquals(3, response.size());
