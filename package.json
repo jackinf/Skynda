@@ -138,6 +138,7 @@
     "react-notification-system": "^0.2.10",
     "react-nprogress": "^0.1.6",
     "react-owl-carousel": "^0.14.0",
+    "react-parallax": "^1.1.0",
     "react-redux": "^4.4.5",
     "react-redux-i18n": "^0.1.0",
     "react-redux-toastr": "^3.9.1",

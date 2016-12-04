@@ -5,12 +5,16 @@ import {browserHistory} from "react-router";
 import heroImageUrl from "../../../../static/images/standard/hero-01-2.jpg";
 import {Translate} from 'react-redux-i18n';
 import {Row, Col, Grid} from "react-bootstrap";
+import {Parallax} from 'react-parallax';
 
 class Hero extends React.Component {
   render() {
     return (
       <div className='sk_hero'>
-        <img className='sk_hero__image' src={heroImageUrl} alt='image'/>
+        <Parallax bgImage={heroImageUrl} strength={400} bgHeight={500}>
+          <div style={{height: "650px"}}></div>
+        </Parallax>
+        {/*<img className='sk_hero__image' src={heroImageUrl} alt='image'/>*/}
         <div className='sk_hero__text'>
           <div className='container'>
             <Row className="aligner grid">
