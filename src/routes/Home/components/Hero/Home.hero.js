@@ -21,7 +21,7 @@ class Hero extends React.Component {
               </Col>
               <Col md={3}>
                 {/*<h2>*/}
-                <Button className='primary-button read-more-btn' onClick={e => browserHistory.push("details/1")}>
+                <Button className='primary-button read-more-btn' onClick={e => browserHistory.push("/how-it-works")}>
                   <Translate value="home_page.hero.read_more"/>
                 </Button>
                 {/*</h2>*/}

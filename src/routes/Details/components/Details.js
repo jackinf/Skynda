@@ -25,7 +25,7 @@ class VehicleDetails extends React.Component {
   render() {
     const vehicleData = this.props.car_data;
     if (this.props.isLoading) {
-      return (<div><RefreshIndicator size={100} left={20} top={0} status="loading"/></div>);
+      return (<div><RefreshIndicator size={100} left={200} top={200} status="loading"/></div>);
     }
 
     return (

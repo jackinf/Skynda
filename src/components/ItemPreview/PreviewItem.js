@@ -2,15 +2,16 @@ import React from "react";
 import "./PreviewItem.scss";
 import {Translate, Localize} from 'react-redux-i18n';
 import {Row, Col} from "react-bootstrap";
+import {Link} from "react-router";
 
 class CarPreview extends React.Component {
   render() {
     const {id, mainImage, model, price, mileage, comment} = this.props.vehicle;
 
     return (<div className='car-preview'>
-      <a href={"/details/" + id}>
+      <Link to={"/details/" + id}>
         <img src={mainImage.url} className='car-preview__image'/>
-      </a>
+      </Link>
 
       <div className='car-preview__info-panel-bg'/>
 
