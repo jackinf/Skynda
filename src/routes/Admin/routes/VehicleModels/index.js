@@ -18,7 +18,7 @@ export default (store) => ({
 
       if (formMode == FORM_MODE.ADDING || formMode == FORM_MODE.UPDATING) {
         injectReducer(store, {key: "form", reducer: formReducer});
-        injectReducer(store, {key: "vehicleModelInfo", reducer: require("./reducers/VehicleModel.reducer.js").default});
+        injectReducer(store, {key: "formInfo", reducer: require("./reducers/VehicleModel.reducer.js").default});
         injectReducer(store, {key: "classificators", reducer: require("./../Classifiers/Classifiers.module").default});
         cb(null, require("./containers/VehicleModel.container.js").default);
         store.dispatch(require("./reducers/VehicleModel.reducer.js").load(formMode, id));

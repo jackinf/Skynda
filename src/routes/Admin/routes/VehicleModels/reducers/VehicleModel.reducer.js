@@ -3,16 +3,17 @@
  */
 import {FORM_MODE, REDUCER_KEYS} from "../constants/VehicleModel.constant";
 import remoteConfig from "../../../../../store/remoteConfig";
-import {SubmissionError} from "redux-form";
+import {SubmissionError, initialize} from "redux-form";
 import fromSpringToReduxFormError from "../../../../../utils/formUtils/fromSpringToReduxFormError";
 
 // ------------------------------------
 // Actions
 // ------------------------------------
-const SET_FORM_INFO = "VEHICLE_MODEL/SET_FORM_INFO";
-const SET_IS_SUBMITTING = "VEHICLE_MODEL/SET_IS_SUBMITTING";
-const SET_SUBMISSION_SUCCESSFUL = "VEHICLE_MODEL/SET_SUBMISSION_SUCCESSFUL";
-const SET_SUBMISSION_FAILED = "VEHICLE_MODEL/SET_SUBMISSION_FAILED";
+const SET_FORM_MODE = "VEHICLE_MODEL/SET_FORM_MODE";
+const SET_ITEM = "VEHICLE_MODEL/SET_ITEM";
+const IS_FETCHING = "VEHICLE_MODEL/SET_IS_SUBMITTING";
+const FETCH_SUCCESSFUL = "VEHICLE_MODEL/SET_SUBMISSION_SUCCESSFUL";
+const FETCH_FAILED = "VEHICLE_MODEL/SET_SUBMISSION_FAILED";
 
 // ------------------------------------
 // Async Action Creators (Redux thunk)
@@ -21,131 +22,124 @@ const SET_SUBMISSION_FAILED = "VEHICLE_MODEL/SET_SUBMISSION_FAILED";
 export const load = (formMode, id) => {
   return (dispatch, getState) => {
     if (formMode === FORM_MODE.ADDING) {
-      dispatch(loadCreateForm());
+      dispatch(setFormMode(FORM_MODE.ADDING));
+
+      // const fake = {
+      //   "title": "1",
+      //   "description": "2",
+      //   "doors": 3,
+      //   "drivetrain": {id: {value: 3, label: 'test'}
+      //   },
+      //   "engine": "4",
+      //   "fuelType": {id: {value: 1}
+      //   },
+      //   "horsePower": 5,
+      //   "modelCode": "6",
+      //   "seats": 7,
+      //   "transmission": {id: 1  },
+      //   "vehicleBody": null,
+      //   "vehicleManufacturer": {id: 1   },
+      //   "year": 2000
+      // };
+      // dispatch(initialize("vehicleModelForm", fake, false));
+
     } else if (formMode == FORM_MODE.UPDATING) {
-      dispatch(loadUpdateForm(id));
+      dispatch(fetchItem(id));
     } else {
       console.error("Invalid form mode");
     }
+
+
   }
 };
 
-/**
- * Private. Initializes a create form.
- */
-const loadCreateForm = () => (dispatch) => {
-  dispatch(setFormMode(FORM_MODE.ADDING));
+export const randomize = () => (dispatch) => {
+  const fake = {
+    "title": "1",
+    "description": "2",
+    "doors": 3,
+    "drivetrain": {id: 3
+    },
+    "engine": "4",
+    "fuelType": {id: 43
+    },
+    "horsePower": 5,
+    "modelCode": "6",
+    "seats": 7,
+    "transmission": {id: 7  },
+    "vehicleBody": null,
+    "vehicleManufacturer": {id: 16   },
+    "year": 2000
+  };
+  dispatch(setItem(fake));
 };
 
-const loadUpdateForm = (id) => (dispatch) => {
-  dispatch(setIsSubmitting());
+export const onHandleSubmitFinished = (resp) => (dispatch) => {
+  console.log(resp);
+};
+
+/**
+ * Private. Initializes an update form.
+ */
+const fetchItem = (id) => (dispatch) => {
+  dispatch(isFetching());
   return fetch(`${remoteConfig.remote}/api/vehicle-model/${id}`, {
     method: "GET",
     credentials: "include",
     headers: {"Accept": "application/json", "Content-Type": "application/x-www-form-urlencoded"}
   })
     .then(resp => resp.json())
-    .then(data => {
-      dispatch(submissionSuccessful(data));
+    .then(item => {
+      dispatch(fetchSuccessful(item));
     })
     .catch((error) => {
       console.error("ERROR: ", error);
-      dispatch(submissionFailed(error));
+      dispatch(fetchFailed(error));
     });
 };
 
-export function submitAsync(data, formMode) {
-  return (dispatch, getState) => {
-    dispatch(formMode == FORM_MODE.ADDING ? createAsync(data) : updateAsync(data));
-
-    setTimeout(() => {
-      dispatch(submissionSuccessful());
-    }, 1000);
-  }
-}
-
-/**
- *
- * @param data - vehicle input fields sent to the server
- * @returns {*|Promise.<TResult>|Promise<U>|Thenable<U>}
- */
-function createAsync(data) {
-  return (dispatch) => {
-    dispatch(setIsSubmitting());
-    return fetch(`${remoteConfig.remote}/api/vehicle-model`, {
-      method: "POST",
-      credentials: "include",
-      headers: {"Accept": "application/json", "Content-Type": "application/json"},
-      body: JSON.stringify(data)
-    })
-      .then(resp => resp.json())
-      .then(resp => {
-        console.log(resp);
-        if (!resp.success) {
-          throw new SubmissionError(fromSpringToReduxFormError(resp.errors));
-        }
-        return resp;
-      });
-  }
-}
-
-/**
- * Private. Updates vehicle
- * @param id - vehicle id
- * @param data - vehicle input fields sent to the server
- */
-function updateAsync(data) {
-  return (dispatch) => {
-    dispatch(setIsSubmitting());
-    return fetch(`${remoteConfig.remote}/api/vehicle-model/${data.id}`, {
-      method: "PUT",
-      credentials: "include",
-      headers: {"Accept": "application/json", "Content-Type": "application/json"},
-      body: JSON.stringify(data)
-    })
-      .then(resp => resp.json())
-      .then(resp => {
-        if (!resp.success) {
-          dispatch(submissionFailed(resp.errors));
-          throw new SubmissionError(fromSpringToReduxFormError(resp.errors));
-        }
-      })
-  };
-}
 
 // ------------------------------------
 // Action Creators
 // ------------------------------------
 
-function setFormMode(formMode = FORM_MODE.NONE) {
+function setFormMode(formMode = FORM_MODE.NONE, isSubmitting = false) {
   return {
-    type: SET_FORM_INFO,
+    type: SET_FORM_MODE,
     formMode,
-    isSubmitting: false
+    isSubmitting: isSubmitting
   }
 }
 
-function setIsSubmitting() {
+function setItem(item) {
   return {
-    type: SET_IS_SUBMITTING,
+    type: SET_ITEM,
+    item
+  }
+}
+
+function isFetching() {
+  return {
+    type: IS_FETCHING,
     isSubmitting: true
   }
 }
 
-function submissionSuccessful(data, formMode = FORM_MODE.UPDATING) {
+function fetchSuccessful(item, formMode = FORM_MODE.UPDATING) {
   return {
-    type: SET_SUBMISSION_SUCCESSFUL,
-    isSubmitting: true,
+    type: FETCH_SUCCESSFUL,
+    isSubmitting: false,
+    item,
     formMode,
-    data
+    errors: []
   }
 }
 
-function submissionFailed(errors) {
+function fetchFailed(errors) {
   return {
-    type: SET_SUBMISSION_FAILED,
+    type: FETCH_FAILED,
     isSubmitting: false,
-    data: {},
+    item: {},
     errors
   }
 }
@@ -156,26 +150,40 @@ function submissionFailed(errors) {
 const initialState = {isSubmitting: false};
 export default function reducer(state = initialState, action) {
   switch (action.type) {
-    case SET_FORM_INFO:
+    case SET_FORM_MODE:
       return {
         ...state,
+        type: action.type,
         formMode: action.formMode,
-        isSubmitting: false
-      };
-    case SET_IS_SUBMITTING:
-      return {
-        ...state,
         isSubmitting: action.isSubmitting
       };
-    case SET_SUBMISSION_SUCCESSFUL:
+    case SET_ITEM:
       return {
         ...state,
-        formMode: action.formMode,
-        data: action.data
+        type: action.type,
+        item: action.item
       };
-    case SET_SUBMISSION_FAILED:
+    case IS_FETCHING:
       return {
         ...state,
+        type: action.type,
+        isSubmitting: action.isSubmitting
+      };
+    case FETCH_SUCCESSFUL:
+      return {
+        ...state,
+        type: action.type,
+        isSubmitting: action.isSubmitting,
+        item: action.item,
+        formMode: action.formMode,
+        errors: action.errors
+      };
+    case FETCH_FAILED:
+      return {
+        ...state,
+        type: action.type,
+        isSubmitting: action.isSubmitting,
+        item: action.item,
         errors: action.errors
       };
     default:

@@ -4,16 +4,28 @@
 import React from "react";
 import {Field} from "redux-form";
 import {TextField} from "redux-form-material-ui";
-import {rowWrapper, selectRenderer} from "./helpers";
 import {Button} from "react-bootstrap";
+import {reduxForm, change} from "redux-form";
 
-export default class VehicleModel extends React.Component {
+import {rowWrapper, selectRenderer} from "./VehicleModel.redux-form.renderers";
+import {onHandleSubmit} from "./VehicleModel.redux-form.actions";
+
+class VehicleModel extends React.Component {
   componentDidMount() {
     this.props.getDrivetrains();
     this.props.getFuels();
     this.props.getTransmissions();
     // this.props.getVehicleBodies();
     this.props.getManufacturers();
+  }
+
+  setField = (name, value) => {
+    this.props.dispatch(change("vehicleModelForm", name, value));
+  };
+
+  async onSubmit(e) {
+    let resp = await this.props.handleSubmit(data => onHandleSubmit(data, this.props.formInfo))(e);
+    this.props.dispatch(this.props.onHandleSubmitFinished(resp));
   }
 
   render() {
@@ -33,15 +45,20 @@ export default class VehicleModel extends React.Component {
       ? this.props.manufacturer.items.map(item => ({label: item.name, value: item.id}))
       : [];
 
-    console.log(this.props.vehicleModelInfo);
+    console.log("VehicleModel component", this.props);
 
     return (<div>
-      <form>
+      <div className="vehicle-model__form-info__helper-block">
+        <h4>Form info: {JSON.stringify(this.props.formInfo)}</h4>
+        <button onClick={this.props.randomize}>Random</button>
+      </div>
+
+      <form onSubmit={this.onSubmit.bind(this)}>
         {rowWrapper(<Field name="modelCode" component={TextField} hintText="Model Code"/>)}
         {rowWrapper(<Field name="title" component={TextField} hintText="Title"/>)}
         {rowWrapper(<Field name="description" component={TextField} hintText="Description"/>)}
         {rowWrapper(<Field name="doors" component={TextField} type="number" hintText="Doors"/>)}
-        {rowWrapper(<Field name="horsepower" component={TextField} hintText="Horse Power"/>)}
+        {rowWrapper(<Field name="horsePower" component={TextField} hintText="Horse Power"/>)}
         {rowWrapper(<Field name="engine" component={TextField} hintText="Engine"/>)}
         {rowWrapper(<Field name="seats" component={TextField} type="number" hintText="Seats"/>)}
         {rowWrapper(<Field name="year" component={TextField} type="number" hintText="Year"/>)}
@@ -54,13 +71,13 @@ export default class VehicleModel extends React.Component {
 
         {this.props.fuel.isFetching
           ? "Fetching"
-          : rowWrapper(<Field name="fuel.id"
+          : rowWrapper(<Field name="fuelType.id"
                               label="Fuel type *"
                               component={selectRenderer(fuels, this.setField)}/>, 4)}
 
         {this.props.transmission.isFetching
           ? "Fetching"
-          : rowWrapper(<Field name="transmissions.id"
+          : rowWrapper(<Field name="transmission.id"
                               label="Transmission *"
                               component={selectRenderer(transmissions, this.setField)}/>, 4)}
 
@@ -72,12 +89,15 @@ export default class VehicleModel extends React.Component {
 
         {this.props.manufacturer.isFetching
           ? "Fetching"
-          : rowWrapper(<Field name="manufacturer.id"
+          : rowWrapper(<Field name="vehicleManufacturer.id"
                               label="Manufacturer *"
                               component={selectRenderer(manufacturers, this.setField)}/>, 4)}
 
-        {rowWrapper(<Button onClick={e => this.props.submitAsync(e)}>Submit</Button>)}
+        <input type="submit" disabled={this.props.submitting} value={"Submit"}/>
+        {/*{rowWrapper(<Button onClick={e => this.props.handleSubmit(this.props.submitAsync(e))}>Submit</Button>)}*/}
       </form>
     </div>)
   }
 }
+
+export default reduxForm({form: "vehicleModelForm"})(VehicleModel);

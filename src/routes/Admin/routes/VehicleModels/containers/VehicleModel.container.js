@@ -2,10 +2,9 @@
  * Created by jevgenir on 12/3/2016.
  */
 import {connect} from "react-redux";
-import {reduxForm} from "redux-form";
 
 import VehicleModel from "../components/VehicleModel.component";
-import {submitAsync} from "../reducers/VehicleModel.reducer";
+import {onHandleSubmitFinished, randomize} from "../reducers/VehicleModel.reducer";
 import {
   getManufacturers,
   getFuels,
@@ -17,7 +16,8 @@ const stateToProps = (state) => {
   const classificators = state.classificators;
 
   return {
-    vehicleModelInfo: state.vehicleModelInfo,
+    formInfo: state.formInfo,
+    initialValues: state.formInfo ? state.formInfo.item : {},
 
     // Classifiers
     manufacturer: classificators ? classificators.manufacturer : null,
@@ -28,12 +28,12 @@ const stateToProps = (state) => {
 };
 
 const dispatchToProps = {
-  submitAsync,
-
   getManufacturers,
   getFuels,
   getTransmissions,
-  getDrivetrains
+  getDrivetrains,
+
+  onHandleSubmitFinished,
+  randomize
 };
-const ReduxForm = reduxForm({form: "vehicleModelForm"})(VehicleModel);
-export default connect(stateToProps, dispatchToProps)(ReduxForm);
+export default connect(stateToProps, dispatchToProps)(VehicleModel);
