@@ -27,23 +27,18 @@ public class VehicleModelController {
         return vehicleModelService.getAll(searchDto);
     }
 
-    @RequestMapping(value = "/vehicle/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/vehicle-model/{id}", method = RequestMethod.GET)
     public VehicleModelAdminDto get(@PathVariable("id") Integer id) {
         return vehicleModelService.get(id);
     }
 
-    @RequestMapping(value = "/vehicle-model", method = RequestMethod.POST, consumes =  "application/json")
-    public VehicleModel save(@RequestBody VehicleModelDto vehicleModelDto) {
-        return vehicleModelService.save(vehicleModelDto);
-    }
-
-    @RequestMapping(value = "/vehicle", method = RequestMethod.POST)
+    @RequestMapping(value = "/vehicle-model", method = RequestMethod.POST)
     public CreateOrUpdateResponseDto add(@RequestBody VehicleModelAdminDto vehicleModelAdminDto, BindingResult bindingResult) {
         vehicleModelAdminDto.setId(null);
         return vehicleModelService.createOrUpdate(vehicleModelAdminDto, bindingResult);
     }
 
-    @RequestMapping(value = "/vehicle/{id}", method = RequestMethod.PUT, consumes = "application/json")
+    @RequestMapping(value = "/vehicle-model/{id}", method = RequestMethod.PUT, consumes = "application/json")
     public CreateOrUpdateResponseDto update(@PathVariable("id") Integer id,
                                             @RequestBody VehicleModelAdminDto vehicleModelAdminDto,
                                             BindingResult bindingResult) {
@@ -51,7 +46,7 @@ public class VehicleModelController {
         return vehicleModelService.createOrUpdate(vehicleModelAdminDto, bindingResult);
     }
 
-    @RequestMapping(value = "/vehicle/{id}", method = RequestMethod.DELETE, consumes = "application/json")
+    @RequestMapping(value = "/vehicle-model/{id}", method = RequestMethod.DELETE, consumes = "application/json")
     public DeleteResponseDto delete(@PathVariable("id") Integer id) {
         return vehicleModelService.delete(id);
     }

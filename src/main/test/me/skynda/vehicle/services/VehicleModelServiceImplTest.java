@@ -3,6 +3,7 @@ package me.skynda.vehicle.services;
 import me.skynda.common.interfaces.daos.ClassificationDao;
 import me.skynda.common.interfaces.daos.VehicleModelDao;
 import me.skynda.common.interfaces.services.VehicleModelService;
+import me.skynda.vehicle.dto.VehicleModelAdminDto;
 import me.skynda.vehicle.dto.VehicleModelDto;
 import me.skynda.vehicle.dto.request.ModelRequestDto;
 import me.skynda.vehicle.dto.response.VehicleModelResponseDto;
@@ -66,7 +67,7 @@ public class VehicleModelServiceImplTest {
     @Test
     public void save() throws Exception {
         // Act
-        service.save(new VehicleModelDto());
+        service.createOrUpdate(new VehicleModelAdminDto(), null);
 
         // Assert
         verify(vehicleModelDao, times(1)).saveOrUpdate(any(VehicleModel.class));

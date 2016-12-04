@@ -20,14 +20,6 @@ public interface VehicleModelService {
 
     VehicleModelAdminDto get(Integer id);
 
-    /**
-     * Adds new vehicle model
-     * E.g. BMW
-     * @param vehicleModelDto Added vehicle model's dto
-     * @return Added vehicle model's db model
-     */
-    VehicleModel save(VehicleModelDto vehicleModelDto);
-
     CreateOrUpdateResponseDto createOrUpdate(VehicleModelAdminDto vehicleModelAdminDto, BindingResult bindingResult);
 
     DeleteResponseDto delete(Integer id);
