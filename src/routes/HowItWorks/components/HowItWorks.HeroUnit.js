@@ -33,6 +33,10 @@ const old = (<div className="how-it-works__centered how-it-works__main-image-bac
 
 
 export default class extends React.Component {
+  componentDidMount() {
+    setTimeout(() => {window.scrollBy(0, 1);}, 100);  // hack to fix parallax image
+  }
+
   render() {
     return (<div>
       <Parallax bgImage={heroImageUrl} strength={300}>

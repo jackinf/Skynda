@@ -8,6 +8,7 @@ import {TextField} from "redux-form-material-ui";
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 import {Row, Col, Button} from "react-bootstrap";
 import {change} from "redux-form";
+import {Parallax} from 'react-parallax';
 import {
   rowWrapper,
   rowWrapperCentered,
@@ -16,9 +17,11 @@ import {
   circleButtonRenderer,
   ColorRenderer
 } from "./helpers";
+import heroImageUrl from "../assets/sellyourcar.png";
 
 export default class extends React.Component {
   componentDidMount() {
+    setTimeout(() => {window.scrollBy(0, 1);}, 100);  // hack to fix parallax image
     this.props.getManufacturers();
     this.props.getFeatures();
     this.props.getFuels();
@@ -60,10 +63,18 @@ export default class extends React.Component {
       : [];
 
     return (<div className="sell-your-car">
-      <div className="sell-your-car__centered sell-your-car__main-image-background">
-        <h3 className="sell-your-car__main-image-background__title">Skynda aitab sinu autole ostja leida</h3>
-        <Button className="sell-your-car__main-image-background__button">Panen auto müüki</Button>
-      </div>
+
+      <Parallax bgImage={heroImageUrl} strength={250}>
+        <div className="sell-your-car__centered sell-your-car__main-image-background2">
+          <h3 className="sell-your-car__main-image-background__title">Skynda aitab sinu autole ostja leida</h3>
+          <Button className="sell-your-car__main-image-background__button">Panen auto müüki</Button>
+        </div>
+      </Parallax>
+
+      {/*<div className="sell-your-car__centered sell-your-car__main-image-background">*/}
+        {/*<h3 className="sell-your-car__main-image-background__title">Skynda aitab sinu autole ostja leida</h3>*/}
+        {/*<Button className="sell-your-car__main-image-background__button">Panen auto müüki</Button>*/}
+      {/*</div>*/}
 
       <div className="container">
         <Row>
