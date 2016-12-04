@@ -4,13 +4,17 @@ import Footer from "../../components/Footer";
 import "./CoreLayout.scss";
 import "../../styles/core.scss";
 
-export const CoreLayout = ({children}) => (
-  <div>
-    <Header />
-    {children}
-    <Footer />
-  </div>
-);
+export class CoreLayout extends React.Component {
+  render() {
+    return (
+      <div>
+        <Header />
+        {this.props.children}
+        <Footer />
+      </div>
+    );
+  }
+}
 
 CoreLayout.propTypes = {
   children : React.PropTypes.element.isRequired

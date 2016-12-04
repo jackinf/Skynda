@@ -16,8 +16,9 @@ import {
   buttonRenderer,
   circleButtonRenderer,
   ColorRenderer
-} from "./helpers";
+} from "./SellNewCar.react-redux.renderers";
 import heroImageUrl from "../assets/sellyourcar.png";
+import {toastr, actions as toastrActions} from 'react-redux-toastr';
 
 export default class extends React.Component {
   componentDidMount() {
@@ -41,6 +42,14 @@ export default class extends React.Component {
   handleColorChangeComplete = (name, color, event) => {
     this.props.dispatch(change("sellNewCarForm", name, color.hex))
   };
+
+  componentWillUnmount() {
+    toastr.clean(); // hack. Clean toasts so that they would not reappear on next page.
+  }
+
+  onSubmit = () => {
+    toastr.success('The title', 'The message');
+} ;
 
   render() {
     const vehicleManufacturers = !this.props.manufacturer.isFetching
@@ -67,7 +76,7 @@ export default class extends React.Component {
       <Parallax bgImage={heroImageUrl} strength={250}>
         <div className="sell-your-car__centered sell-your-car__main-image-background2">
           <h3 className="sell-your-car__main-image-background__title">Skynda aitab sinu autole ostja leida</h3>
-          <Button className="sell-your-car__main-image-background__button">Panen auto müüki</Button>
+          <Button className="sell-your-car__main-image-background__button" onClick={this.onSubmit1}>Panen auto müüki</Button>
         </div>
       </Parallax>
 
@@ -162,7 +171,7 @@ export default class extends React.Component {
                                                 component={selectRenderer(fuels, this.setField)}/>, 4)}
 
                   {rowWrapper(<Button className="sell-your-car__button-submit"
-                                      onClick={e => this.props.submitAsync(e)}>Saadan Skyndale</Button>)}
+                                      onClick={e => this.onSubmit()}>Saadan Skyndale</Button>)}
                 </CardText>
 
               </Card>

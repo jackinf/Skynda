@@ -20,7 +20,13 @@ class AppContainer extends Component {
       <Provider store={store}>
         <div style={{height: "100%"}}>
           <Router history={browserHistory} children={routes} />
-          <ReduxToastr/>
+          <ReduxToastr timeOut={4000}
+                       newestOnTop={false}
+                       preventDuplicates={true}
+                       position="top-left"
+                       transitionIn="fadeIn"
+                       transitionOut="fadeOut"
+                       progressBar />
         </div>
       </Provider>
     );

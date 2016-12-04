@@ -11,6 +11,7 @@ import "rc-slider/assets/index.css";
 import "react-select/dist/react-select.css";
 import "nprogress/nprogress.js";
 import "nprogress/nprogress.css";
+import 'react-redux-toastr/lib/css/react-redux-toastr.css';
 
 // ========================================================
 // Store Instantiation
