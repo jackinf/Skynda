@@ -10,7 +10,8 @@ export default (store) => ({
     NProgress.start();
     require.ensure([], (require) => {
       const Home = require("./containers/HomeContainer").default;
-      require("../../components/Search/reducers").defaultInject(store, injectReducer);
+      require("../../components/skynda.Search/reducers").defaultInject(store, injectReducer);
+      require("../../components/skynda.Subscribe/reducers").defaultInject(store, injectReducer);
       NProgress.done();
       cb(null, Home);
     }, "");

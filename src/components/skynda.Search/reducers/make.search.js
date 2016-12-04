@@ -4,7 +4,7 @@ import {setIsSearching, setSearchResults} from './../actions';
 import NProgress from "react-nprogress";
 
 /***
- * Async Search for vehicles. Use redux-thunk
+ * Async skynda.Search for vehicles. Use redux-thunk
  * Set isSearching & searchResults
  */
 export const searchCarAsync = () => (dispatch, getState) => {
@@ -23,7 +23,7 @@ export const searchCarAsync = () => (dispatch, getState) => {
       dispatch(setIsSearching(false));
       NProgress.done();
     }).catch(err => {
-      console.log("Car Search failed =>", err);
+      console.log("Car skynda.Search failed =>", err);
       dispatch(setIsSearching(false));
       NProgress.done();
   });
