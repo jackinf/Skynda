@@ -1,74 +1,70 @@
 /**
  * Created by jevgenir on 12/3/2016.
  */
-import {FORM_MODE, REDUCER_KEYS} from "../constants/VehicleModel.constant";
+import {FORM_MODE, ROUTE_PARAMS} from "../constants/VehicleModel.constant";
 import remoteConfig from "../../../../../store/remoteConfig";
-import {SubmissionError, initialize} from "redux-form";
-import fromSpringToReduxFormError from "../../../../../utils/formUtils/fromSpringToReduxFormError";
+import {reset, destroy} from "redux-form";
 
 // ------------------------------------
 // Actions
 // ------------------------------------
 const SET_FORM_MODE = "VEHICLE_MODEL/SET_FORM_MODE";
 const SET_ITEM = "VEHICLE_MODEL/SET_ITEM";
-const IS_FETCHING = "VEHICLE_MODEL/SET_IS_SUBMITTING";
-const FETCH_SUCCESSFUL = "VEHICLE_MODEL/SET_SUBMISSION_SUCCESSFUL";
-const FETCH_FAILED = "VEHICLE_MODEL/SET_SUBMISSION_FAILED";
+const CLEAR_ITEM = "VEHICLE_MODEL/CLEAR_ITEM";
+const IS_FETCHING = "VEHICLE_MODEL/IS_FETCHING";
+const FETCH_SUCCESSFUL = "VEHICLE_MODEL/FETCH_SUCCESSFUL";
+const FETCH_FAILED = "VEHICLE_MODEL/FETCH_FAILED";
 
 // ------------------------------------
 // Async Action Creators (Redux thunk)
 // ------------------------------------
 
-export const load = (formMode, id) => {
-  return (dispatch, getState) => {
+// export const load1 = (formMode, id) => {
+//   return (dispatch, getState) => {
+//     if (formMode === FORM_MODE.ADDING) {
+//       dispatch(setFormMode(FORM_MODE.ADDING));
+//       dispatch(clearItem());
+//     } else if (formMode == FORM_MODE.UPDATING) {
+//       dispatch(fetchItem(id));
+//     } else {
+//       console.error("Invalid form mode");
+//     }
+//   }
+// };
+
+export const load = (id) => {
+  return (dispatch) => {
+    dispatch(destroy("vehicleModelForm"));
+    const formMode = id === ROUTE_PARAMS.values.NEW
+      ? FORM_MODE.ADDING : !isNaN(parseInt(id))
+      ? FORM_MODE.UPDATING : FORM_MODE.NONE;
+
     if (formMode === FORM_MODE.ADDING) {
       dispatch(setFormMode(FORM_MODE.ADDING));
-
-      // const fake = {
-      //   "title": "1",
-      //   "description": "2",
-      //   "doors": 3,
-      //   "drivetrain": {id: {value: 3, label: 'test'}
-      //   },
-      //   "engine": "4",
-      //   "fuelType": {id: {value: 1}
-      //   },
-      //   "horsePower": 5,
-      //   "modelCode": "6",
-      //   "seats": 7,
-      //   "transmission": {id: 1  },
-      //   "vehicleBody": null,
-      //   "vehicleManufacturer": {id: 1   },
-      //   "year": 2000
-      // };
-      // dispatch(initialize("vehicleModelForm", fake, false));
-
+      dispatch(clearItem());
     } else if (formMode == FORM_MODE.UPDATING) {
       dispatch(fetchItem(id));
     } else {
       console.error("Invalid form mode");
     }
-
-
   }
 };
 
 export const randomize = () => (dispatch) => {
+  dispatch(destroy("vehicleModelForm"));
   const fake = {
-    "title": "1",
-    "description": "2",
+    "title": Math.random(),
+    "description": Math.random(),
     "doors": 3,
-    "drivetrain": {id: 3
-    },
-    "engine": "4",
-    "fuelType": {id: 43
-    },
+    "drivetrain": {id: 3},
+    "engine": Math.random(),
+    "fuelType": {id: 43},
+    "vehicleBody": {id: 52},
     "horsePower": 5,
-    "modelCode": "6",
+    "modelCode": Math.random(),
     "seats": 7,
-    "transmission": {id: 7  },
-    "vehicleBody": null,
-    "vehicleManufacturer": {id: 16   },
+    "transmission": {id: 7},
+    "vehicleManufacturer": {id: 16},
     "year": 2000
   };
   dispatch(setItem(fake));
@@ -90,11 +86,15 @@ const fetchItem = (id) => (dispatch) => {
   })
     .then(resp => resp.json())
     .then(item => {
-      dispatch(fetchSuccessful(item));
+      dispatch(fetchSuccessful());
+      dispatch(setFormMode(FORM_MODE.UPDATING));
+      dispatch(setItem(item));
     })
     .catch((error) => {
       console.error("ERROR: ", error);
       dispatch(fetchFailed(error));
+      dispatch(setFormMode(FORM_MODE.NONE));
+      dispatch(clearItem());
     });
 };
 
@@ -103,11 +103,10 @@ const fetchItem = (id) => (dispatch) => {
 // Action Creators
 // ------------------------------------
 
-function setFormMode(formMode = FORM_MODE.NONE, isSubmitting = false) {
+function setFormMode(formMode = FORM_MODE.NONE) {
   return {
     type: SET_FORM_MODE,
-    formMode,
-    isSubmitting: isSubmitting
+    formMode
   }
 }
 
@@ -118,28 +117,32 @@ function setItem(item) {
   }
 }
 
-function isFetching() {
+export function clearItem() {
   return {
-    type: IS_FETCHING,
-    isSubmitting: true
+    type: CLEAR_ITEM,
+    item: {}
   }
 }
 
-function fetchSuccessful(item, formMode = FORM_MODE.UPDATING) {
+function isFetching() {
+  return {
+    type: IS_FETCHING,
+    isFetching: true
+  }
+}
+
+function fetchSuccessful() {
   return {
     type: FETCH_SUCCESSFUL,
-    isSubmitting: false,
-    item,
-    formMode,
-    errors: []
+    isFetching: false,
+    errors: []  // no errors
   }
 }
 
 function fetchFailed(errors) {
   return {
     type: FETCH_FAILED,
-    isSubmitting: false,
-    item: {},
+    isFetching: false,
     errors
   }
 }
@@ -154,10 +157,10 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         type: action.type,
-        formMode: action.formMode,
-        isSubmitting: action.isSubmitting
+        formMode: action.formMode
       };
     case SET_ITEM:
+    case CLEAR_ITEM:
       return {
         ...state,
         type: action.type,
@@ -167,22 +170,20 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         type: action.type,
-        isSubmitting: action.isSubmitting
+        isFetching: action.isFetching
       };
     case FETCH_SUCCESSFUL:
       return {
         ...state,
         type: action.type,
-        isSubmitting: action.isSubmitting,
-        item: action.item,
-        formMode: action.formMode,
+        isFetching: action.isFetching,
         errors: action.errors
       };
     case FETCH_FAILED:
       return {
         ...state,
         type: action.type,
-        isSubmitting: action.isSubmitting,
+        isFetching: action.isFetching,
         item: action.item,
         errors: action.errors
       };

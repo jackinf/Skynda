@@ -4,28 +4,38 @@
 import React from "react";
 import {Field} from "redux-form";
 import {TextField} from "redux-form-material-ui";
-import {Button} from "react-bootstrap";
-import {reduxForm, change} from "redux-form";
+import {reduxForm, change, destroy} from "redux-form";
+import {ROUTE_PARAMS, FORM_MODE} from "./../constants/VehicleModel.constant";
 
 import {rowWrapper, selectRenderer} from "./VehicleModel.redux-form.renderers";
 import {onHandleSubmit} from "./VehicleModel.redux-form.actions";
 
 class VehicleModel extends React.Component {
   componentDidMount() {
+    this.props.load(this.props.params[ROUTE_PARAMS.VEHICLE_MODEL_ID]);
     this.props.getDrivetrains();
     this.props.getFuels();
     this.props.getTransmissions();
-    // this.props.getVehicleBodies();
+    this.props.getVehicleBodies();
     this.props.getManufacturers();
   }
 
-  setField = (name, value) => {
-    this.props.dispatch(change("vehicleModelForm", name, value));
+  componentWillUnmount() {
+    this.props.dispatch(destroy("vehicleModelForm"));
+    this.props.clearItem();
+  }
+
+  setField = (name, selectedItem) => {
+    console.log(name);
+    this.props.dispatch(change("vehicleModelForm", name, {id: selectedItem.value}));
   };
 
-  async onSubmit(e) {
-    let resp = await this.props.handleSubmit(data => onHandleSubmit(data, this.props.formInfo))(e);
-    this.props.dispatch(this.props.onHandleSubmitFinished(resp));
+  onSubmit(e) {
+    let promise = this.props.handleSubmit(data => onHandleSubmit(data, this.props.formInfo))(e);
+    promise && promise.then(() => {
+      console.log("done");
+      // this.props.dispatch(this.props.onHandleSubmitFinished(resp));
+    })
   }
 
   render() {
@@ -38,14 +48,12 @@ class VehicleModel extends React.Component {
     const transmissions = !this.props.transmission.isFetching
       ? this.props.transmission.items.map(item => ({label: item.name, value: item.id}))
       : [];
-    // const vehicleBodies = !this.props.vehicleBody.isFetching
-    //   ? this.props.vehicleBody.items.map(item => ({label: item.name, value: item.id}))
-    //   : [];
+    const vehicleBodies = !this.props.vehicleBody.isFetching
+      ? this.props.vehicleBody.items.map(item => ({label: item.name, value: item.id}))
+      : [];
     const manufacturers = !this.props.manufacturer.isFetching
       ? this.props.manufacturer.items.map(item => ({label: item.name, value: item.id}))
       : [];
-
-    console.log("VehicleModel component", this.props);
 
     return (<div>
       <div className="vehicle-model__form-info__helper-block">
@@ -54,7 +62,7 @@ class VehicleModel extends React.Component {
       </div>
 
       <form onSubmit={this.onSubmit.bind(this)}>
-        {rowWrapper(<Field name="modelCode" component={TextField} hintText="Model Code"/>)}
+        {rowWrapper(<Field name="modelCode" label="Model Code" component={TextField} hintText="Model Code"/>)}
         {rowWrapper(<Field name="title" component={TextField} hintText="Title"/>)}
         {rowWrapper(<Field name="description" component={TextField} hintText="Description"/>)}
         {rowWrapper(<Field name="doors" component={TextField} type="number" hintText="Doors"/>)}
@@ -67,31 +75,31 @@ class VehicleModel extends React.Component {
           ? "Fetching"
           : rowWrapper(<Field name="drivetrain.id"
                               label="Drivetrain *"
-                              component={selectRenderer(drivetrains, this.setField)}/>, 4)}
+                              component={selectRenderer(drivetrains, this.setField, "drivetrain")}/>, 4)}
 
         {this.props.fuel.isFetching
           ? "Fetching"
           : rowWrapper(<Field name="fuelType.id"
                               label="Fuel type *"
-                              component={selectRenderer(fuels, this.setField)}/>, 4)}
+                              component={selectRenderer(fuels, this.setField, "fuelType")}/>, 4)}
 
         {this.props.transmission.isFetching
           ? "Fetching"
           : rowWrapper(<Field name="transmission.id"
                               label="Transmission *"
-                              component={selectRenderer(transmissions, this.setField)}/>, 4)}
+                              component={selectRenderer(transmissions, this.setField, "transmission")}/>, 4)}
 
-        {/*{this.props.vehicleBody.isFetching*/}
-          {/*? "Fetching"*/}
-          {/*: rowWrapper(<Field name="vehicleBody.id"*/}
-                              {/*label="Auto mark *"*/}
-                              {/*component={selectRenderer(vehicleBodies, this.setField)}/>, 4)}*/}
+        {this.props.vehicleBody.isFetching
+          ? "Fetching"
+          : rowWrapper(<Field name="vehicleBody.id"
+                              label="Vehicle body *"
+                              component={selectRenderer(vehicleBodies, this.setField, "vehicleBody")}/>, 4)}
 
         {this.props.manufacturer.isFetching
           ? "Fetching"
           : rowWrapper(<Field name="vehicleManufacturer.id"
                               label="Manufacturer *"
-                              component={selectRenderer(manufacturers, this.setField)}/>, 4)}
+                              component={selectRenderer(manufacturers, this.setField, "vehicleManufacturer")}/>, 4)}
 
         <input type="submit" disabled={this.props.submitting} value={"Submit"}/>
         {/*{rowWrapper(<Button onClick={e => this.props.handleSubmit(this.props.submitAsync(e))}>Submit</Button>)}*/}

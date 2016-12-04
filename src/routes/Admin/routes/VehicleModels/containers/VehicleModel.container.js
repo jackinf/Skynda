@@ -4,12 +4,13 @@
 import {connect} from "react-redux";
 
 import VehicleModel from "../components/VehicleModel.component";
-import {onHandleSubmitFinished, randomize} from "../reducers/VehicleModel.reducer";
+import {load, onHandleSubmitFinished, randomize, clearItem} from "../reducers/VehicleModel.reducer";
 import {
   getManufacturers,
   getFuels,
   getTransmissions,
-  getDrivetrains
+  getDrivetrains,
+  getVehicleBodies
 } from "./../../Classifiers/Classifiers.module";
 
 const stateToProps = (state) => {
@@ -17,13 +18,14 @@ const stateToProps = (state) => {
 
   return {
     formInfo: state.formInfo,
-    initialValues: state.formInfo ? state.formInfo.item : {},
+    initialValues: state.formInfo ? state.formInfo.item : {modelCode: ""},
 
     // Classifiers
     manufacturer: classificators ? classificators.manufacturer : null,
     fuel: classificators ? classificators.fuel : null,
     transmission: classificators ? classificators.transmission : null,
-    drivetrain: classificators ? classificators.drivetrain : null
+    drivetrain: classificators ? classificators.drivetrain : null,
+    vehicleBody: classificators ? classificators.vehicleBody : null
   }
 };
 
@@ -32,8 +34,11 @@ const dispatchToProps = {
   getFuels,
   getTransmissions,
   getDrivetrains,
+  getVehicleBodies,
 
+  load,
   onHandleSubmitFinished,
-  randomize
+  randomize,
+  clearItem
 };
 export default connect(stateToProps, dispatchToProps)(VehicleModel);

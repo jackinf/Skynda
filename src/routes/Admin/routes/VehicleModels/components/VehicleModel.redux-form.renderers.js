@@ -15,11 +15,14 @@ export const rowWrapper = (block) =>
     <Col xs={12} >{block}</Col>
   </Row>);
 
-export const selectRenderer = (items, onChange, isMulti = false) => ({input, label, meta: {touched, error}, ...custom}) => (
+export const selectRenderer = (items, onChange, targetName, isMulti = false) => ({input, label, meta: {touched, error}, ...custom}) => (
   <Row style={{marginBottom: "10px"}}>
     <Col sm={12}>
       <label className="sell-your-car__label" htmlFor={input.name}>{label}</label>
-      <Select name={input.name} value={input.value} options={items} onChange={value => onChange(input.name, value)}
+      <Select name={input.name}
+              value={input.value}
+              options={items}
+              onChange={value => onChange(targetName || input.name, value)}
               multi={isMulti}
       />
     </Col>
