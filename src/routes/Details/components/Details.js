@@ -1,5 +1,6 @@
 import React from "react";
 import "./Details.scss";
+import RefreshIndicator from 'material-ui/RefreshIndicator';
 
 // Local components
 import Skblock from "./BlockContainer";
@@ -12,7 +13,6 @@ import InspectorsReport from "./InspectorsReport/Details.inspectors-report";
 import Reviews from "./Reviews";
 import VehicleDetailsMainImage from "./MainImage";
 import Checkout from "./CheckoutPanel/Details.checkout";
-import ItemPreview from "./../../../components/ItemPreview";
 import {Translate} from 'react-redux-i18n';
 import {StickyContainer, Sticky} from "react-sticky";
 
@@ -25,7 +25,7 @@ class VehicleDetails extends React.Component {
   render() {
     const vehicleData = this.props.car_data;
     if (this.props.isLoading) {
-      return <div>Loading...</div>;
+      return (<div><RefreshIndicator size={100} left={20} top={0} status="loading"/></div>);
     }
 
     return (

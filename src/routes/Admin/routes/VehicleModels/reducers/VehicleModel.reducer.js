@@ -3,7 +3,8 @@
  */
 import {FORM_MODE, ROUTE_PARAMS} from "../constants/VehicleModel.constant";
 import remoteConfig from "../../../../../store/remoteConfig";
-import {reset, destroy} from "redux-form";
+import {change, destroy} from "redux-form";
+import {browserHistory} from "react-router";
 
 // ------------------------------------
 // Actions
@@ -70,8 +71,12 @@ export const randomize = () => (dispatch) => {
   dispatch(setItem(fake));
 };
 
-export const onHandleSubmitFinished = (resp) => (dispatch) => {
-  console.log(resp);
+export const onHandleSubmitFinished = (resp) => (dispatch, getState) => {
+  if (resp && resp.success && !isNaN(parseInt(resp.id))) {
+    dispatch(change("vehicleModelForm", "id", resp.id));
+    dispatch(setFormMode(FORM_MODE.UPDATING));
+    browserHistory.replace("/admin/vehicle-model/" + resp.id);
+  }
 };
 
 /**
