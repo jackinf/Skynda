@@ -12,9 +12,9 @@ class Home extends React.Component {
         <Hero/>
         <br/>
         <div className='container'>
+          <SearchContainer />
           <SubscribeContainer/>
           <br/>
-          <SearchContainer />
         </div>
       </div>
     );

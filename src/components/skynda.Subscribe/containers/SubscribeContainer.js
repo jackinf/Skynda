@@ -1,19 +1,17 @@
 import React from 'react';
 import {connect} from 'react-redux'
 import SubscribeComponent from '../components/Subscribe'
-import {subscribe} from "../reducers"
-import {reduxForm} from "redux-form";
+import {onHandleSubmitFinished} from "../reducers"
 
 const mapStateToProps = (state) => {
   return {
     isSubscribed: state.isSubscribed,
-    subscriptionEmail: state.subscriptionEmail
+    formInfo: state.form.subscribeModelForm
   };
 };
 
 const mapDispatchToProps = {
-  subscribe
+  onHandleSubmitFinished
 };
 
-const ReduxForm = reduxForm({form: "subscribeModelForm"})(SubscribeComponent);
-export default connect(mapStateToProps,mapDispatchToProps)(ReduxForm);
+export default connect(mapStateToProps,mapDispatchToProps)(SubscribeComponent);

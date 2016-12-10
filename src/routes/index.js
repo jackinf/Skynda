@@ -9,6 +9,7 @@ import Examples from "./Examples";
 import Admin from "./Admin";
 import {LoginRoute, RegisterRoute} from "./Auth";
 import SellNewCar from "./SellNewCar";
+import {reducer as formReducer} from 'redux-form';
 
 import {loadTranslations, setLocale, syncTranslationWithStore, i18nReducer} from 'react-redux-i18n';
 import {injectReducer} from "../store/reducers";
@@ -31,6 +32,8 @@ export const createRoutes = (store) => {
     en: require("./../store/translations/en.json")
   }));
   store.dispatch(setLocale('et'));
+
+  injectReducer(store, {key: "form", reducer: formReducer});
 
   // ========================================================
   // Logged in user setup

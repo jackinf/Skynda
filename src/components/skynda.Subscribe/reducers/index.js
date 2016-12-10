@@ -1,13 +1,11 @@
-import {setIsSubscribed} from "./set.values";
-import {subscribe} from "./send.email";
+import {subscribeReducers, onHandleSubmitFinished} from "./set.values";
 
 
 export function defaultInject(store, injectReducer) {
-  injectReducer(store, {key: "isSubscribed", reducer: setIsSubscribed});
-  injectReducer(store, {key: "subscriptionEmail", reducer: subscribe});
+  injectReducer(store, {key: "isSubscribed", reducer: subscribeReducers});
 }
 
 export {
-  setIsSubscribed,
-  subscribe
+  subscribeReducers,
+  onHandleSubmitFinished
 };

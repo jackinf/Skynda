@@ -2,7 +2,6 @@
  * Created by jevgenir on 10/26/2016.
  */
 import {injectReducer} from '../../../../store/reducers';
-import {reducer as formReducer} from 'redux-form';
 import {ROUTE_PARAMS, REDUCER_KEYS, FORM_MODE} from "./constants/VehicleModel.constant";
 import NProgress from "react-nprogress";
 
@@ -17,7 +16,6 @@ export default (store) => ({
         ? FORM_MODE.UPDATING : FORM_MODE.NONE;
 
       if (formMode == FORM_MODE.ADDING || formMode == FORM_MODE.UPDATING) {
-        injectReducer(store, {key: "form", reducer: formReducer});
         injectReducer(store, {key: "formInfo", reducer: require("./reducers/VehicleModel.reducer.js").default});
         injectReducer(store, {key: "classificators", reducer: require("./../Classifiers/Classifiers.module").default});
         cb(null, require("./containers/VehicleModel.container.js").default);
