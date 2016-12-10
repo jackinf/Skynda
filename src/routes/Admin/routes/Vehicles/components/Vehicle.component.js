@@ -3,6 +3,8 @@
  */
 import React from 'react';
 import {Field, FieldArray, change, reduxForm} from 'redux-form';
+import {toastr} from "react-redux-toastr";
+
 import {ROUTE_PARAMS, FORM_MODE, FORMS} from "./../constants/Vehicle.constant";
 import {
   renderTextField,
@@ -14,20 +16,16 @@ import {
   ImagesField,
   selectRenderer
 } from "./Vehicle.redux-form.renderers";
+import {onHandleSubmit} from "./Vehicle.redux-form.actions";
 import {renderCheckbox, renderSelectField} from "../../../components/FormRenderers";
-import {submitVehicleForm} from "../actions/Vehicle";
-import MenuItem from 'material-ui/MenuItem';
 import {Row, Col} from "react-bootstrap";
-import {browserHistory} from "react-router";
 import RefreshIndicator from 'material-ui/RefreshIndicator';
 
 class Vehicle extends React.Component {
   static propTypes = {
     isFetching: React.PropTypes.bool.isRequired,
-    submitVehicleForm: React.PropTypes.func.isRequired,
     load: React.PropTypes.func.isRequired,
     clear: React.PropTypes.func.isRequired,
-    fillWithFakeData: React.PropTypes.func.isRequired,
     getVehicleModelsList: React.PropTypes.func.isRequired,
 
     // vehicle models data for combobox
@@ -112,6 +110,7 @@ class Vehicle extends React.Component {
   }
 
   componentWillUnmount() {
+    toastr.clean();
     this.props.clear();
   }
 
@@ -119,14 +118,10 @@ class Vehicle extends React.Component {
     this.props.dispatch(change(FORMS.VEHICLE_FORM, name, value));
   };
 
-  /*
-   *  Form submit logic. Saves or updates
-   */
   onSubmit(e) {
-    this.props.handleSubmit(data => submitVehicleForm(data, this.props.formMode1))(e)
-      .then(
-        () => this.props.submitSucceeded || browserHistory.push(`/admin/vehicle`),
-        () => (console.log("error")));
+    let promise = this.props.handleSubmit(data => onHandleSubmit(data, this.props.formMode1))(e);
+    console.log(promise);
+    promise && promise.then(resp => {this.props.onHandleSubmitFinished(resp)});
   };
 
   render() {
@@ -144,10 +139,9 @@ class Vehicle extends React.Component {
 
             <Row>
               <Col xs={12}>
-                <h3><span className="label label-primary">ID: {this.state.id}</span> {this.props.formMode1}</h3>
-                {this.props.formMode1 === FORM_MODE.ADDING
-                  ? (<a onClick={this.props.fillWithFakeData}>Fill with fake data</a>)
-                  : ""}
+                {this.props.formMode1 === FORM_MODE.UPDATING
+                  ? <h3><span className="label label-primary">ID: {this.state.id}</span></h3>
+                  : <h3><span className="label label-success">{this.props.formMode1}</span></h3>}
               </Col>
             </Row>
 
@@ -210,7 +204,6 @@ class Vehicle extends React.Component {
                     style={{padding: "10px", fontSize: "20px", marginBottom: "20px"}}
                     type="submit"
                     disabled={this.props.submitting}>Submit</button>
-            {/*<RaisedButton label="Submit" />*/}
           </form>
 
         )}

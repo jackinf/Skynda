@@ -19,8 +19,6 @@ export default (store) => ({
         injectReducer(store, {key: "formInfo", reducer: require("./reducers/VehicleModel.reducer.js").default});
         injectReducer(store, {key: "classificators", reducer: require("./../Classifiers/Classifiers.module").default});
         cb(null, require("./containers/VehicleModel.container.js").default);
-        // require("./reducers/VehicleModel.reducer.js").load(formMode, id);
-        // store.dispatch(require("./reducers/VehicleModel.reducer.js").load(formMode, id));
         NProgress.done();
       } else {
         injectReducer(store, {key: REDUCER_KEYS.VEHICLE_MODELS_DATA, reducer: require("./reducers/VehicleModels.reducer.js").default});

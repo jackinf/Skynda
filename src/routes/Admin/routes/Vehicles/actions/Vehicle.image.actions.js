@@ -1,10 +1,13 @@
 /**
- * Created by jevgenir on 11/2/2016.
+ * Created by jevgenir on 12/10/2016.
  */
-
-import {FORMS} from "../../constants/Vehicle.constant";
-import {arrayPush, arrayRemove, change} from "redux-form";
+import {FORMS} from "../constants/Vehicle.constant";
+import {arrayPush, arrayRemove, change} from 'redux-form';
 import {imageUtil} from "utils/allUtils";
+
+// ------------------------------------
+// Image Helpers
+// ------------------------------------
 
 export function onMainImageUpload(e) {
   return (dispatch) => {
@@ -51,4 +54,13 @@ export function onFaultRemove(e, index) {
     dispatch(arrayRemove(FORMS.VEHICLE_FORM, "faults", index));
     // TODO: use arrayPop and push the item into filesToDelete {blobName, containerName}
   }
+}
+
+export default {
+  onMainImageUpload,
+  onMainImageRemove,
+  onImageFileUpload,
+  onImageFileRemove,
+  onFaultFileUpload,
+  onFaultRemove
 }

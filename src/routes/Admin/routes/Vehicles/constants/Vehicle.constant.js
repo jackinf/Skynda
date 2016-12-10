@@ -30,7 +30,7 @@ export const FORM_MODE = {
 };
 
 export const REDUCER_KEYS = {
-  VEHICLE_DATA: "vehicleData",
+  VEHICLE_DATA: "vehicleFormInfo",
   VEHICLE_MODELS_DATA: "vehicleModelsData",
   VEHICLES_DATA: "vehiclesData",
   FORM_MODE: "formMode1"

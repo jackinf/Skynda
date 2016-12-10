@@ -1,19 +1,24 @@
 /**
- * Created by zekar on 10/23/2016.
+ * Created by jevgenir on 12/10/2016.
  */
-import {FORM_MODE} from "../../constants/Vehicle.constant";
 import remoteConfig from "store/remoteConfig";
-import {fromSpringToReduxFormError} from "../../../../../../utils/formUtils";
+import {fromSpringToReduxFormError} from "../../../../../utils/formUtils";
 import {SubmissionError} from 'redux-form';
+import {FORM_MODE} from "../constants/Vehicle.constant";
+import {toastr} from "react-redux-toastr";
+
+// ------------------------------------
+// Form submission
+// ------------------------------------
 
 /**
  * Is executed on form submit. Not a redux action.
  * @returns {any}
  */
-export default function submitVehicleForm(data, formMode) {
+export function onHandleSubmit(data, formMode) {
   return formMode == FORM_MODE.ADDING
-    ? createVehicleAsync(data)
-    : updateVehicleAsync(data);
+    ? createItem(data)
+    : updateItem(data);
 }
 
 /**
@@ -21,7 +26,8 @@ export default function submitVehicleForm(data, formMode) {
  * @param data - vehicle input fields sent to the server
  * @returns {*|Promise.<TResult>|Promise<U>|Thenable<U>}
  */
-function createVehicleAsync(data) {
+function createItem(data) {
+  console.info("Creating");
   return fetch(`${remoteConfig.remote}/api/vehicle`, {
     method: "POST",
     credentials: "include",
@@ -32,6 +38,7 @@ function createVehicleAsync(data) {
     .then(resp => {
       console.log(resp);
       if (!resp.success) {
+        toastr.error('Error', resp.message);
         throw new SubmissionError(fromSpringToReduxFormError(resp.errors));
       }
       return resp;
@@ -43,7 +50,8 @@ function createVehicleAsync(data) {
  * @param id - vehicle id
  * @param data - vehicle input fields sent to the server
  */
-function updateVehicleAsync(data) {
+function updateItem(data) {
+  console.info("Updating");
   return fetch(`${remoteConfig.remote}/api/vehicle/${data.id}`, {
     method: "PUT",
     credentials: "include",
@@ -53,7 +61,9 @@ function updateVehicleAsync(data) {
     .then(resp => resp.json())
     .then(resp => {
       if (!resp.success) {
+        toastr.error('Error', resp.message);
         throw new SubmissionError(fromSpringToReduxFormError(resp.errors));
       }
+      return resp;
     })
 }

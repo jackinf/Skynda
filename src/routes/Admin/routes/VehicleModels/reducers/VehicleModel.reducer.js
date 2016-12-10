@@ -12,7 +12,7 @@ import {browserHistory} from "react-router";
 const SET_FORM_MODE = "VEHICLE_MODEL/SET_FORM_MODE";
 const SET_ITEM = "VEHICLE_MODEL/SET_ITEM";
 const CLEAR_ITEM = "VEHICLE_MODEL/CLEAR_ITEM";
-const IS_FETCHING = "VEHICLE_MODEL/IS_FETCHING";
+const FETCHING = "VEHICLE_MODEL/FETCHING";
 const FETCH_SUCCESSFUL = "VEHICLE_MODEL/FETCH_SUCCESSFUL";
 const FETCH_FAILED = "VEHICLE_MODEL/FETCH_FAILED";
 
@@ -71,7 +71,7 @@ export const onHandleSubmitFinished = (resp) => (dispatch, getState) => {
  * Private. Initializes an update form.
  */
 const fetchItem = (id) => (dispatch) => {
-  dispatch(isFetching());
+  dispatch(fetching());
   return fetch(`${remoteConfig.remote}/api/vehicle-model/${id}`, {
     method: "GET",
     credentials: "include",
@@ -79,13 +79,13 @@ const fetchItem = (id) => (dispatch) => {
   })
     .then(resp => resp.json())
     .then(item => {
-      dispatch(fetchSuccessful());
+      dispatch(setFetchSuccessful());
       dispatch(setFormMode(FORM_MODE.UPDATING));
       dispatch(setItem(item));
     })
     .catch((error) => {
       console.error("ERROR: ", error);
-      dispatch(fetchFailed(error));
+      dispatch(setFetchFailed(error));
       dispatch(setFormMode(FORM_MODE.NONE));
       dispatch(clearItem());
     });
@@ -117,14 +117,14 @@ export function clearItem() {
   }
 }
 
-function isFetching() {
+function fetching(isFetching = true) {
   return {
-    type: IS_FETCHING,
-    isFetching: true
+    type: FETCHING,
+    isFetching
   }
 }
 
-function fetchSuccessful() {
+function setFetchSuccessful() {
   return {
     type: FETCH_SUCCESSFUL,
     isFetching: false,
@@ -132,7 +132,7 @@ function fetchSuccessful() {
   }
 }
 
-function fetchFailed(errors) {
+function setFetchFailed(errors) {
   return {
     type: FETCH_FAILED,
     isFetching: false,
@@ -159,7 +159,7 @@ export default function reducer(state = initialState, action) {
         type: action.type,
         item: action.item
       };
-    case IS_FETCHING:
+    case FETCHING:
       return {
         ...state,
         type: action.type,
