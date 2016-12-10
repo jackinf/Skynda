@@ -3,7 +3,7 @@
  */
 import {FORM_MODE, REDUCER_KEYS} from "../../constants/Vehicle.constant";
 import remoteConfig from "store/remoteConfig";
-import {setVehicleData} from "./../../reducers/SetVehicle.reducer";
+import {setVehicleData} from "../../reducers/Vehicle.reducer";
 import {setFormMode} from "./../../reducers/SetFormMode.reducer";
 
 /**

@@ -3,7 +3,7 @@
  */
 import fetch from "isomorphic-fetch";
 import remoteConfig from "store/remoteConfig";
-import {setVehicles} from "../../reducers/SetVehicles.reducer";
+import {setVehicles} from "../../reducers/Vehicles.list.reducer";
 import {REDUCER_KEYS} from "../../constants/Vehicle.constant";
 
 export default function deleteItem(id) {
