@@ -11,7 +11,7 @@ class Hero extends React.Component {
   render() {
     return (
       <div className='sk_hero'>
-        <Parallax bgImage={heroImageUrl} strength={200}>
+        <Parallax bgImage={heroImageUrl} strength={100}>
           <div style={{height: "650px"}}></div>
         </Parallax>
         {/*<img className='sk_hero__image' src={heroImageUrl} alt='image'/>*/}
