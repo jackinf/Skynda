@@ -2,8 +2,8 @@
  * Created by jevgenir on 10/21/2016.
  */
 import React from 'react';
-import {Field, FieldArray} from 'redux-form';
-import {ROUTE_PARAMS, FORM_MODE} from "./../constants/Vehicle.constant";
+import {Field, FieldArray, change, reduxForm} from 'redux-form';
+import {ROUTE_PARAMS, FORM_MODE, FORMS} from "./../constants/Vehicle.constant";
 import {
   renderTextField,
   renderDescriptions,
@@ -11,14 +11,15 @@ import {
   renderFeatures,
   renderFaults,
   MainImageField,
-  ImagesField
-} from "./Vehicle.component.renderers";
+  ImagesField,
+  selectRenderer
+} from "./Vehicle.redux-form.renderers";
 import {renderCheckbox, renderSelectField} from "../../../components/FormRenderers";
 import {submitVehicleForm} from "../actions/Vehicle";
 import MenuItem from 'material-ui/MenuItem';
 import {Row, Col} from "react-bootstrap";
 import {browserHistory} from "react-router";
-import NotificationSystem from "react-notification-system";
+import RefreshIndicator from 'material-ui/RefreshIndicator';
 
 class Vehicle extends React.Component {
   static propTypes = {
@@ -62,8 +63,8 @@ class Vehicle extends React.Component {
           text: React.PropTypes.string
         })
       ),
-      fuelCity: React.PropTypes.string,
-      fuelHighway: React.PropTypes.string,
+      fuelCity: React.PropTypes.number,
+      fuelHighway: React.PropTypes.number,
       id: React.PropTypes.number,
       images: React.PropTypes.arrayOf(
         React.PropTypes.shape({
@@ -114,33 +115,36 @@ class Vehicle extends React.Component {
     this.props.clear();
   }
 
+  setField = (name, value) => {
+    this.props.dispatch(change(FORMS.VEHICLE_FORM, name, value));
+  };
+
   /*
    *  Form submit logic. Saves or updates
    */
   onSubmit(e) {
     this.props.handleSubmit(data => submitVehicleForm(data, this.props.formMode1))(e)
-      .then(() => {
-          if (!!this.props.submitSucceeded) {
-            this.refs.notificationSystem.addNotification({
-              message: 'Notification message',
-              level: 'success'
-            });
-            browserHistory.push(`/admin/vehicle`);
-          }
-        },
+      .then(
+        () => this.props.submitSucceeded || browserHistory.push(`/admin/vehicle`),
         () => (console.log("error")));
   };
 
   render() {
-    return (<div>
-        <NotificationSystem ref="notificationSystem"/>
+    const vehicleModels = !this.props.vehicleModels.isFetching
+      ? this.props.vehicleModels.items.map(item => ({label: item.title + " " + item.modelCode, value: item.id}))
+      : [];
+    const colors = !this.props.colors.isFetching
+      ? this.props.colors.items.map(item => ({label: item.name, value: item.id}))
+      : [];
 
-        {this.props.isFetching || this.props.submitting ? "Loading..." : (
-          <form onSubmit={this.onSubmit.bind(this)}>
+    return (<div>
+        {this.props.isFetching || this.props.submitting
+          ? <div><RefreshIndicator size={100} left={200} top={200} status="loading"/></div>
+          : (<form onSubmit={this.onSubmit.bind(this)}>
 
             <Row>
               <Col xs={12}>
-                <h3>{this.props.formMode1} (ID: {this.state.id})</h3>
+                <h3><span className="label label-primary">ID: {this.state.id}</span> {this.props.formMode1}</h3>
                 {this.props.formMode1 === FORM_MODE.ADDING
                   ? (<a onClick={this.props.fillWithFakeData}>Fill with fake data</a>)
                   : ""}
@@ -151,33 +155,19 @@ class Vehicle extends React.Component {
               <Col md={6} xs={12}>
                 <h4>General data</h4>
 
-                {this.props.vehicleModels.isFetching ? "Fetching vehicle models" : (
-                  <Field name="model.id" label="Model Code *" component={renderSelectField}>
-                    {this.props.vehicleModels.items.map((item, i) => (
-                      <MenuItem key={i} value={item.id} primaryText={`${item.title} ${item.modelCode}`}/>
-                    ))}
-                  </Field>
-                )}
+                <Field name="model.id" label="Model Code *" component={selectRenderer(vehicleModels, this.setField)}/>
 
                 <MainImageField title="Main image"
                                 onMainImageRemove={this.props.onMainImageRemove}
-                                onMainImageUpload={this.props.onMainImageUpload} />
+                                onMainImageUpload={this.props.onMainImageUpload}/>
 
-                {this.props.colors.isFetching ? "Fetching colors" : (
-                  <Field name="colorInside.id" label="Color Inside *" component={renderSelectField}>
-                    {this.props.colors.items.map((item, i) => (
-                      <MenuItem key={i} value={item.id} primaryText={`${item.name}`}/>
-                    ))}
-                  </Field>
-                )}
+                <Field name="colorInside.id"
+                       label="Color Inside *"
+                       component={selectRenderer(colors, this.setField)}/>
 
-                {this.props.colors.isFetching ? "Fetching colors" : (
-                  <Field name="colorOutside.id" label="Color Outside *" component={renderSelectField}>
-                    {this.props.colors.items.map((item, i) => (
-                      <MenuItem key={i} value={item.id} primaryText={`${item.name}`}/>
-                    ))}
-                  </Field>
-                )}
+                <Field name="colorOutside.id"
+                       label="Color Outside *"
+                       component={selectRenderer(colors, this.setField)}/>
 
                 <FieldArray name="descriptions" label="Descriptions" component={renderDescriptions}/>
                 <FieldArray name="reportItems" label="Report Items" component={renderReportItems}/>
@@ -190,7 +180,7 @@ class Vehicle extends React.Component {
                 <Field name="fuelHighway" label="Fuel Highway" component={renderTextField}/>
 
                 <ImagesField onImageFileUpload={this.props.onImageFileUpload}
-                             onImageFileRemove={this.props.onImageFileRemove} />
+                             onImageFileRemove={this.props.onImageFileRemove}/>
                 <br/>
 
                 <Field name="isSold" label="Is Sold" component={renderCheckbox}/>
@@ -216,7 +206,10 @@ class Vehicle extends React.Component {
 
             <br />
 
-            <button type="submit" disabled={this.props.submitting}>Submit</button>
+            <button className="btn btn-success"
+                    style={{padding: "10px", fontSize: "20px", marginBottom: "20px"}}
+                    type="submit"
+                    disabled={this.props.submitting}>Submit</button>
             {/*<RaisedButton label="Submit" />*/}
           </form>
 
@@ -226,4 +219,4 @@ class Vehicle extends React.Component {
   }
 }
 
-export default Vehicle;
+export default reduxForm({form: FORMS.VEHICLE_FORM})(Vehicle);

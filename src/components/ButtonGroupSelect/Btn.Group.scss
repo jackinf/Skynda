@@ -1,5 +1,7 @@
 
-$default-color: #019BFF;
+@import "../../styles/variables";
+
+$default-color: $color-primary; // old value: #019BFF
 $default-border-color: #E8E5E5;
 
 .btn-group {
@@ -27,7 +29,14 @@ $default-border-color: #E8E5E5;
       color:whitesmoke;
     }
   }
+}
 
+.skynda-primary,
+.skynda-primary:hover,
+.skynda-primary:active,
+.skynda-primary:focus,
+.skynda-primary:visited{
+  background: $color-primary !important;
 }
 
 // React slider override. TODO: (Wrap react slider into own component?..) and override styles there?

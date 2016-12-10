@@ -15,7 +15,7 @@ export default (store) => ({
 
       if (isAdd || isUpdate) {
         const Container = require("./containers/Vehicle.container.js").default;
-        injectReducer(store, {key: REDUCER_KEYS.VEHICLE_DATA, reducer: require("./reducers/SetVehicle.reducer.js").default});
+        injectReducer(store, {key: REDUCER_KEYS.VEHICLE_DATA, reducer: require("./reducers/Vehicle.reducer.js").default});
         injectReducer(store, {key: REDUCER_KEYS.FORM_MODE, reducer: require("./reducers/SetFormMode.reducer.js").default});
         injectReducer(store, {key: FORMS.DEFAULT_REDUX_FORM_KEY, reducer: formReducer});
         injectReducer(store, {key: REDUCER_KEYS.VEHICLE_MODELS_DATA, reducer: require("./../VehicleModels/reducers/VehicleModels.reducer.js").default});
@@ -26,8 +26,8 @@ export default (store) => ({
         cb(null, Container);
       }
       else {
-        const Container = require("./containers/Vehicles.container.js").default;
-        injectReducer(store, {key: REDUCER_KEYS.VEHICLES_DATA, reducer: require("./reducers/SetVehicles.reducer.js").default});
+        const Container = require("./containers/Vehicle.list.container.js").default;
+        injectReducer(store, {key: REDUCER_KEYS.VEHICLES_DATA, reducer: require("./reducers/Vehicles.list.reducer.js").default});
         cb(null, Container);
         NProgress.done();
       }

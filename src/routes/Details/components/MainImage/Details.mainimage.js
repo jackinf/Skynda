@@ -7,6 +7,7 @@ import "./Details.mainimage.scss";
 import "./Details.mainimage.modal.scss";
 
 import {Row, Col} from "react-bootstrap";
+import {Parallax} from 'react-parallax';
 
 // Local components
 import ModalBtnCarousel from "./components/ModalBtnCarousel";
@@ -17,6 +18,14 @@ class VehicleDetailsMainImage extends React.Component {
     super();
     this.state = {isShowModal: false};
   }
+
+  onShowModal = () => {
+    this.setState({isShowModal: true});
+  };
+
+  onHideModal = () => {
+    this.setState({isShowModal: false});
+  };
 
   render() {
     const {src, year, brand, model, engine, horsepower, price} = this.props.vehicleDetailsMainImage;
@@ -29,9 +38,9 @@ class VehicleDetailsMainImage extends React.Component {
       <div classID='car_detail_image' className='car-details-main-image'>
 
         <div className='image-preview'>
-          <a>
-            <img src={src} className='main-image'/>
-          </a>
+          <Parallax bgImage={src} strength={100}>
+            <div style={{height: "520px", cursor: "pointer"}} onClick={this.onShowModal}></div>
+          </Parallax>
 
           <div className='info-panel-bg'/>
 
@@ -49,12 +58,15 @@ class VehicleDetailsMainImage extends React.Component {
             <Row className='image-buttons'>
               <Col sm={12}>
                 <span style={{margin: "0 25px 0 0"}}>
-                  <ModalBtnCarousel images={images}/>
+                  <ModalBtnCarousel images={images}
+                                    isShowModal={this.state.isShowModal}
+                                    onShowModal={this.onShowModal}
+                                    onHideModal={this.onHideModal}
+                  />
                 </span>
                 <span style={{margin: "0 25px 0 0"}}>
                   <ModalBtn360 src={source360}/>
                 </span>
-
               </Col>
             </Row>
           </div>

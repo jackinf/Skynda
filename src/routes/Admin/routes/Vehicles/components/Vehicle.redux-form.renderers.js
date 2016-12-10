@@ -8,8 +8,9 @@ import {Row, Col} from "react-bootstrap";
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentRemove from 'material-ui/svg-icons/content/remove';
 import Dropzone from "react-dropzone";
-
+import Select from "react-select";
 import ReactIconDelete from 'react-icons/lib/md/delete';
+
 import {fieldListWrapper, renderImage} from "../../../components/FormRenderers/index";
 
 const styleDeleteIcon = {
@@ -190,3 +191,14 @@ export const ImagesField = (props) => (<Row style={imageBlockStyle}>
       })}</div>)}/>
   </Col>
 </Row>);
+
+export const selectRenderer = (items, onChange, isMulti = false) => ({input, label, meta: {touched, error}, ...custom}) => (
+  <Row style={{marginBottom: "10px"}}>
+    <Col sm={12}>
+      <label className="sell-your-car__label" htmlFor={input.name}>{label}</label>
+      <Select name={input.name} value={input.value} options={items} onChange={value => onChange(input.name, value)}
+              multi={isMulti}
+      />
+    </Col>
+  </Row>
+);

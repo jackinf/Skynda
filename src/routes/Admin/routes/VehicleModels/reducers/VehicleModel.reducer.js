@@ -20,19 +20,6 @@ const FETCH_FAILED = "VEHICLE_MODEL/FETCH_FAILED";
 // Async Action Creators (Redux thunk)
 // ------------------------------------
 
-// export const load1 = (formMode, id) => {
-//   return (dispatch, getState) => {
-//     if (formMode === FORM_MODE.ADDING) {
-//       dispatch(setFormMode(FORM_MODE.ADDING));
-//       dispatch(clearItem());
-//     } else if (formMode == FORM_MODE.UPDATING) {
-//       dispatch(fetchItem(id));
-//     } else {
-//       console.error("Invalid form mode");
-//     }
-//   }
-// };
-
 export const load = (id) => {
   return (dispatch) => {
     dispatch(destroy("vehicleModelForm"));
@@ -51,9 +38,10 @@ export const load = (id) => {
   }
 };
 
-export const randomize = () => (dispatch) => {
+export const randomize = (prevItem) => (dispatch) => {
   dispatch(destroy("vehicleModelForm"));
   const fake = {
+    ...prevItem,
     "title": Math.random(),
     "description": Math.random(),
     "doors": 3,

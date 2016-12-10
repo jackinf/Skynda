@@ -11,22 +11,10 @@ import {Button, Carousel, Modal} from "react-bootstrap";
 import { Translate } from 'react-redux-i18n';
 
 class ModalBtnCarousel extends React.Component {
-  constructor() {
-    super();
-    this.state = {isShowModal: false};
-  }
-
-  onShowModal = () => {
-    this.setState({isShowModal: true});
-  };
-
-  onHideModal = () => {
-    this.setState({isShowModal: false});
-  };
 
   render() {
     return (<span>
-      <Button onClick={this.onShowModal}>
+      <Button onClick={this.props.onShowModal}>
         <div className='image-btn-content-wrapper'>
           <img src={imageCam}/>
           <span><Translate value="details.components.main_image.btn_txt_view_photos"/></span>
@@ -35,17 +23,12 @@ class ModalBtnCarousel extends React.Component {
 
       <Modal
         bsClass='modal2'
-        show={this.state.isShowModal}
-        onHide={this.onHideModal}
+        show={this.props.isShowModal}
+        onHide={this.props.onHideModal}
         bsSize='lg'
       >
-        <Modal.Header
-          closeButton
-          bsClass='modal2-header'
-        />
-        <Modal.Body
-          bsClass='modal2-body'
-        >
+        <Modal.Header closeButton bsClass='modal2-header' />
+        <Modal.Body bsClass='modal2-body'>
           <div>
             <Carousel>
               {this.props.images.map(function(row, i) {
@@ -59,9 +42,7 @@ class ModalBtnCarousel extends React.Component {
             </Carousel>
           </div>
         </Modal.Body>
-        <Modal.Footer
-          bsClass='modal2-footer'
-        />
+        <Modal.Footer bsClass='modal2-footer'/>
       </Modal>
     </span>);
   }
@@ -70,7 +51,10 @@ class ModalBtnCarousel extends React.Component {
 ModalBtnCarousel.propTypes = {
   images: React.PropTypes.arrayOf(React.PropTypes.shape({
     original: React.PropTypes.string
-  })).isRequired
+  })).isRequired,
+  isShowModal: React.PropTypes.bool.isRequired,
+  onShowModal: React.PropTypes.func.isRequired,
+  onHideModal: React.PropTypes.func.isRequired
 };
 
 export default ModalBtnCarousel;

@@ -7,7 +7,7 @@
       "price": "Price",
       "year": "Year",
       "colors": "Colors",
-      "petrol_consumption": "Petrol consumption",
+      "petrol_consumption": "Petrol Consumption",
       "features": "Features",
       "power": "Horsepower",
       "doors": "Doors",
@@ -40,7 +40,7 @@
   "home_page": {
     "search": "Search",
     "searching": "Searching",
-    "found": "Found",
+    "choose_your_favorite": "Choose Your Favorite",
     "recently_added": "Recently Added",
     "hero": {
       "main_text": "Buying a pre-used car has never been so fun, easy and secure",

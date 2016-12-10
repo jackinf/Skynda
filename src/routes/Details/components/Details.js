@@ -41,16 +41,12 @@ class VehicleDetails extends React.Component {
                 <Overview overview={vehicleData.overview}/>
 
                 {vehicleData.descriptions.map((description, i) =>
-                  <Skblock key={i} header={description.title}>
-                    {description.content}
-                  </Skblock>)
+                  <Skblock key={i} header={description.title}>{description.content}</Skblock>)
                 }
 
                 <Fetaures features={vehicleData.features}/>
                 <History history={vehicleData.history}/>
-                <PetrolConsumption
-                  petrolConsumption={vehicleData.petrolConsumption}
-                />
+                <PetrolConsumption petrolConsumption={vehicleData.petrolConsumption}/>
                 <Safety stars={vehicleData.safetyStars}/>
                 <InspectorsReport
                   report={vehicleData.report}
@@ -59,7 +55,6 @@ class VehicleDetails extends React.Component {
                 <Skblock header={<Translate value="details.components.additional_info.header"/>}>
                   {vehicleData.additional}
                 </Skblock>
-
               </div>
               <div className='col col-md-5'>
                 <Sticky>
@@ -69,11 +64,11 @@ class VehicleDetails extends React.Component {
             </div>
           </StickyContainer>
 
-          <div className='row'>
-            <Skblock header={<Translate value="details.other_txt"/>}>
+          {/*<div className='row'>*/}
+            {/*<Skblock header={<Translate value="details.other_txt"/>}>*/}
               {/*<CarPreview.Grid vehicles={vehicles.other}/>*/}
-            </Skblock>
-          </div>
+            {/*</Skblock>*/}
+          {/*</div>*/}
         </div>
       </div>
     );

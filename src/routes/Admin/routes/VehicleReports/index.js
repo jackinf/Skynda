@@ -18,7 +18,7 @@ export default (store) => ({
         injectReducer(store, {key: REDUCER_KEYS.VEHICLE_DATA, reducer: require("./reducers/SetVehicleReport.reducer.js").default});
         injectReducer(store, {key: REDUCER_KEYS.FORM_MODE, reducer: require("./reducers/SetFormMode.reducer.js").default});
         injectReducer(store, {key: FORMS.DEFAULT_REDUX_FORM_KEY, reducer: formReducer});
-        injectReducer(store, {key: "vehicles", reducer: require("./../Vehicles/reducers/SetVehicles.reducer").default});
+        injectReducer(store, {key: "vehicles", reducer: require("./../Vehicles/reducers/Vehicles.list.reducer.js").default});
 
         store.dispatch(setFormMode(isUpdate ? FORM_MODE.UPDATING : FORM_MODE.ADDING));
         NProgress.done();

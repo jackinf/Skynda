@@ -4,7 +4,6 @@ import Hero from "./Hero/Home.hero";
 import SearchContainer from "../../../containers/SearchContainer"
 import SubscribeContainer from "../../../containers/SubscribeContainer"
 
-
 class Home extends React.Component {
   render() {
     return (

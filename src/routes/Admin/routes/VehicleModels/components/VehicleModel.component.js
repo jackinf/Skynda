@@ -59,18 +59,18 @@ class VehicleModel extends React.Component {
       : (<div>
       <div className="well vehicle-model__form-info__helper-block">
         <h4>Form info: {JSON.stringify(this.props.formInfo)}</h4>
-        <button onClick={this.props.randomize}>Random</button>
+        <button onClick={e => this.props.randomize(this.props.formInfo.item)}>Random</button>
       </div>
 
       <form onSubmit={this.onSubmit.bind(this)}>
-        {rowWrapper(<Field name="modelCode" label="Model Code" component={TextField} hintText="Model Code"/>)}
-        {rowWrapper(<Field name="title" component={TextField} hintText="Title"/>)}
-        {rowWrapper(<Field name="description" component={TextField} hintText="Description"/>)}
-        {rowWrapper(<Field name="doors" component={TextField} type="number" hintText="Doors"/>)}
-        {rowWrapper(<Field name="horsePower" component={TextField} hintText="Horse Power"/>)}
-        {rowWrapper(<Field name="engine" component={TextField} hintText="Engine"/>)}
-        {rowWrapper(<Field name="seats" component={TextField} type="number" hintText="Seats"/>)}
-        {rowWrapper(<Field name="year" component={TextField} type="number" hintText="Year"/>)}
+        {rowWrapper(<Field name="modelCode" label="Model Code" component={TextField} floatingLabelText="Model Code *"/>)}
+        {rowWrapper(<Field name="title" component={TextField} floatingLabelText="Title *"/>)}
+        {rowWrapper(<Field name="description" component={TextField} floatingLabelText="Description *"/>)}
+        {rowWrapper(<Field name="doors" component={TextField} type="number" floatingLabelText="Doors *"/>)}
+        {rowWrapper(<Field name="horsePower" component={TextField} floatingLabelText="Horse Power *"/>)}
+        {rowWrapper(<Field name="engine" component={TextField} floatingLabelText="Engine *"/>)}
+        {rowWrapper(<Field name="seats" component={TextField} type="number" floatingLabelText="Seats *"/>)}
+        {rowWrapper(<Field name="year" component={TextField} type="number" floatingLabelText="Year *"/>)}
 
         {this.props.drivetrain.isFetching
           ? <div>{loadingIcon}</div>

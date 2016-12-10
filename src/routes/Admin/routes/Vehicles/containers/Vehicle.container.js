@@ -2,7 +2,7 @@
  * Created by zekar on 10/23/2016.
  */
 import {connect} from "react-redux";
-import {reduxForm} from 'redux-form';
+import {} from 'redux-form';
 import {
   clear,
   load,
@@ -19,12 +19,7 @@ import {getList as getVehicleModelsList} from "../../VehicleModels/reducers/Vehi
 import {getColors} from "../../Classifiers/Classifiers.module";
 import {setFormMode} from "../reducers/SetFormMode.reducer";
 import VehicleComponent from "../components/Vehicle.component";
-import {FORMS, REDUCER_KEYS} from "../constants/Vehicle.constant";
-
-// Decorate the form component
-const DecoratedVehicleComponent = reduxForm({
-  form: FORMS.VEHICLE_FORM
-})(VehicleComponent);
+import {REDUCER_KEYS} from "../constants/Vehicle.constant";
 
 const mapDispatchToProps = {
   load,
@@ -54,4 +49,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(DecoratedVehicleComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(VehicleComponent);

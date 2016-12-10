@@ -3,7 +3,7 @@
  */
 import {connect} from "react-redux";
 import {getList, deleteItem} from "../actions/Vehicles";
-import VehiclesComponent from "../components/Vehicles.component";
+import VehiclesComponent from "../components/Vehicle.list.component";
 import {REDUCER_KEYS} from "../constants/Vehicle.constant";
 
 const mapDispatchToProps = {

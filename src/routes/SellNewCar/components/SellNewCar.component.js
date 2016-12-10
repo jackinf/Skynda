@@ -16,7 +16,7 @@ import {
   buttonRenderer,
   circleButtonRenderer,
   ColorRenderer
-} from "./SellNewCar.react-redux.renderers";
+} from "./SellNewCar.redux-form.renderers";
 import heroImageUrl from "../assets/sellyourcar.png";
 import {toastr, actions as toastrActions} from 'react-redux-toastr';
 

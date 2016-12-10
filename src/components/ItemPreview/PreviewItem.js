@@ -16,20 +16,20 @@ class CarPreview extends React.Component {
       <div className='car-preview__info-panel-bg'/>
 
       <div className='car-preview__info-panel'>
-        <Row className='car-preview__info-panel-primary-row '>
+        <Row className='car-preview__info-panel-primary-row'>
           <Col sm={7}>{model.year} {model.vehicleManufacturer.name}</Col>
-          <Col sm={5}>{price} EUR</Col>
+          <Col sm={5}><span style={{margin: "0 0 0 12px"}}>{price} EUR</span></Col>
         </Row>
         <Row>
           <Col sm={7}><span style={{margin: "0 25px 0 0"}}>{"2.0"} ({model.horsePower} kW)</span></Col>
-          <Col sm={5}><span style={{margin: "0 25px 0 0"}}><Localize value={mileage}/> km</span></Col>
+          <Col sm={5}><span style={{margin: "0 25px 0 12px"}}><Localize value={mileage}/> km</span></Col>
         </Row>
         <Row>
-          <Col sm={7}> <span style={{margin: "0 25px 0 0"}}>{model.doors} <Translate value="components.car_preview.doors"/></span></Col>
-          <Col sm={5}><span>{model.seats} <Translate value="components.car_preview.seats"/></span></Col>
+          <Col sm={7}> <span style={{margin: "0 25px 0 0"}}>{model.doors} <Translate
+            value="components.car_preview.doors"/></span></Col>
+          <Col sm={5}><span style={{margin: "0 0 0 12px"}}>{model.seats} <Translate
+            value="components.car_preview.seats"/></span></Col>
         </Row>
-
-
 
         <Row>
           <Col sm={12}>{comment}</Col>
