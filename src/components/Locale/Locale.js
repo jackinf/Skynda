@@ -11,25 +11,18 @@ const languages = [
 
 class LocaleChanger extends React.Component {
 
+  onLocaleChange = (e, language) => {
+    e.preventDefault();
+    this.props.onLocaleChange(language.value)
+  };
+
   render() {
     return (
       <div id="localeChanger">
         {languages.map((language, i) => {
           return (
-            <Button key={i} className={this.props.activeLocale == language.value ? "active" : ""}
-                    onClick={ e => {
-                      e.preventDefault();
-                      this.props.onLocaleChange(language.value)
-                    }}
-            >
-              {language.value === "et"
-                ? <img
-                src={est}
-              />
-                : <img
-                src={eng}
-              />
-              }
+            <Button key={i} onClick={e => this.onLocaleChange(e, language)}>
+              {language.value === "et" ? <img src={est}/> : <img src={eng}/>}
             </Button>
           );
         })}

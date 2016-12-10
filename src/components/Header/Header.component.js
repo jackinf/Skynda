@@ -21,17 +21,25 @@ import LocaleContainer from "../Locale/LocaleContainer";
 import image1 from "./../../static/images/standard/skynda logo 4-mask-4@2x.png";
 import image2 from "./../../static/images/standard/SKYNDA@2x.png";
 
+const headerUsernameBlockFn = (props) => {
+  const adminOptions = isLoggedInAs(["admin"])
+    ? [<MenuItem key={1} eventKey={3.2} onClick={e => browserHistory.push("/admin")}>Admin</MenuItem>]
+    : [];
+
+  return props.auth.isLoggedIn ? (
+      <NavDropdown eventKey={3} title={`Hello, ${props.auth.user.firstName}!`} id="nav-user-name">
+        <MenuItem eventKey={3.1}>Settings</MenuItem>
+        {adminOptions}
+        <MenuItem divider/>
+        <MenuItem eventKey={3.3} onClick={props.submitLogout}>Logout</MenuItem>
+      </NavDropdown>): (
+      <NavDropdown eventKey={3} title={`Hello, guest!`} id="nav-user-name">
+        <MenuItem eventKey={3.1} onClick={e => browserHistory.push("/login")}>Login</MenuItem>
+      </NavDropdown>);
+};
+
 class Header extends React.Component {
-  sellCar = (e) => {
-
-    alert("Not implemented");
-  };
-
   render() {
-    const adminOptions = isLoggedInAs(["admin"])
-      ? [<MenuItem key={1} eventKey={3.2} onClick={e => browserHistory.push("/admin")}>Admin</MenuItem>]
-      : [];
-
     return (
       <div className='container header-container'>
         <LocaleContainer/>
@@ -66,17 +74,7 @@ class Header extends React.Component {
                       <Translate value="components.header.about_us"/>
                     </Link>
                   </li>
-
-                  {this.props.auth.isLoggedIn ? (
-                    <NavDropdown eventKey={3} title={`Hello, ${this.props.auth.user.firstName}!`} id="nav-user-name">
-                      <MenuItem eventKey={3.1}>Settings</MenuItem>
-                      {adminOptions}
-                      <MenuItem divider/>
-                      <MenuItem eventKey={3.3} onClick={this.props.submitLogout}>Logout</MenuItem>
-                    </NavDropdown>): (
-                    <NavDropdown eventKey={3} title={`Hello, guest!`} id="nav-user-name">
-                      <MenuItem eventKey={3.1} onClick={e => browserHistory.push("/login")}>Login</MenuItem>
-                    </NavDropdown>)}
+                  {/*{headerUsernameBlockFn(this.props)}*/}
                 </ul>
               </div>
             </Col>
