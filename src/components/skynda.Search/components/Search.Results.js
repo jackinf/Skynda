@@ -22,7 +22,7 @@ class ResultsComponent extends React.Component {
             <Row>
               <Col sm={12}>
                 <h2 className='primary-header-2 text-center'>
-                  <Translate value="home_page.found"/>: {this.props.searchResults[0].length}
+                  <Translate value="home_page.choose_your_favorite"/>: {this.props.searchResults[0].length}
                 </h2>
               </Col>
               <br />

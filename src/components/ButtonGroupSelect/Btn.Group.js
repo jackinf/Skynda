@@ -59,13 +59,13 @@ class ButtonGroup extends React.Component {
           <Button
             style={style}
             className={`btn-group__element-button ${classNameToggle} ${classNameShape}`}
-            bsStyle={(!option.toggled ? "default" : "primary")}
+            bsStyle={(!option.toggled ? "default" : "primary skynda-primary")}
             onClick={e => this.toggle(option)}>
+
             {option.hideName && option.toggled
-              ? <MdDone style={ option.name === "white"
-                ? {color: "black"}
-                : {}} />
+              ? <MdDone style={ option.name === "white" ? {color: "black"} : {}} />
               : option.hideName ? "" : option.name}
+
           </Button>
         </Col>);
       })}

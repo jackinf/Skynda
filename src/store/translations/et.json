@@ -9,7 +9,7 @@
       "colors": "Värvid",
       "petrol_consumption": "Kütusekulu",
       "features": "Lisad",
-      "power": "Auto Võimsus",
+      "power": "Auto võimsus",
       "doors": "Uksed",
       "seats": "Istekohad",
       "transmission": "Käigukast",
@@ -47,7 +47,7 @@
   "home_page": {
     "search": "Oma uue auto leiad siit",
     "searching": "Otsin",
-    "found": "Leiti",
+    "choose_your_favorite": "Vali oma lemmik",
     "populars": "Viimase aja popimad mudelid",
     "recently_added": "Hiljuti valikusse lisandunud",
     "hero": {

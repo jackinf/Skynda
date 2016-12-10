@@ -44,7 +44,7 @@ class SearchComponent extends React.Component {
       <div>
         <Row>
           <Col xs={12}>
-            <h2 className='primary-header-2 text-center'><Translate value="home_page.search"/></h2>
+            <h2 className='primary-header-2 text-center'><Translate value="home_page.search"/>:</h2>
           </Col>
         </Row>
         <Row>
@@ -126,7 +126,7 @@ class SearchComponent extends React.Component {
                             <Row>
                               <Col md={12} className='range-slider-wrapper'>
                                 <SliderContainer
-                                  title={<Translate value="components.car_search.petrolConsumption"/>}
+                                  title={<Translate value="components.car_search.petrol_consumption"/>}
                                   step={0.1}
                                   min={this.props.sliderValues.petrolConsumption.min}
                                   max={this.props.sliderValues.petrolConsumption.max}
