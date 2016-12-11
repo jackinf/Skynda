@@ -24,8 +24,6 @@ public class VehicleDaoImpl extends SkyndaBaseEntityDaoImpl<Vehicle> implements 
 
     @Override
     public List<Vehicle> search(SearchRequestDto params) {
-
-
         try{
             Session session = getSession();
             Criteria vehicleCriteria = session

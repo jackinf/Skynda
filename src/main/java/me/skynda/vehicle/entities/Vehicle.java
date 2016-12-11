@@ -26,23 +26,23 @@ public class Vehicle implements Serializable, ImageStorable<Image> {
     private Integer id;
 
     @NotEmpty
-    @Column(name="vin_code")
+    @Column(name = "vin_code")
     private String vinCode;
 
     @NotNull
-    @Column(name="price")
+    @Column(name = "price")
     private BigDecimal price;
 
     @NotNull
-    @Column(name="created")
+    @Column(name = "created")
     private Date created;
 
     @NotNull
-    @Column(name="registration_number")
+    @Column(name = "registration_number")
     private String registrationNumber;
 
     @NotNull
-    @Column(name="mileage")
+    @Column(name = "mileage")
     private BigDecimal mileage;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -53,49 +53,49 @@ public class Vehicle implements Serializable, ImageStorable<Image> {
     @JoinColumn(name = "color_inside_id", nullable = false)
     private Classification colorInside;
 
-    @Column(name="fuel_city")
+    @Column(name = "fuel_city")
     private BigDecimal fuelCity;
 
-    @Column(name="fuel_highway")
+    @Column(name = "fuel_highway")
     private BigDecimal fuelHighway;
 
-    @Column(name="problems")
+    @Column(name = "problems")
     private String problems;
 
-    @Column(name="compression_ratio")
+    @Column(name = "compression_ratio")
     private Integer compressionRatio;
 
-    @Column(name="compression_type")
+    @Column(name = "compression_type")
     private String compressionType;
 
-    @Column(name="configuration")
+    @Column(name = "configuration")
     private String configuration;
 
-    @Column(name="cylinders")
+    @Column(name = "cylinders")
     private String cylinders;
 
-    @Column(name="displacement")
+    @Column(name = "displacement")
     private String displacement;
 
-    @Column(name="size")
+    @Column(name = "size")
     private Integer size;
 
-    @Column(name="torque")
+    @Column(name = "torque")
     private Integer torque;
 
-    @Column(name="total_valves")
+    @Column(name = "total_valves")
     private Integer totalValves;
 
-    @Column(name="safety_stars")
+    @Column(name = "safety_stars")
     private Integer safetyStars;
 
-    @Column(name="additional")
+    @Column(name = "additional")
     private String additional;
 
-    @Column(name="archived")
+    @Column(name = "archived")
     private Date archived;
 
-    @Column(name="owner_id")
+    @Column(name = "owner_id")
     private Integer ownerId;
 
     @OneToOne(fetch = FetchType.EAGER)
@@ -129,7 +129,7 @@ public class Vehicle implements Serializable, ImageStorable<Image> {
     @OneToMany(mappedBy = "vehicleId", fetch = FetchType.LAZY)
     private List<VehicleReportItem> reportItems;
 
-    @Column(name="report_title")
+    @Column(name = "report_title")
     private String reportTitle;
 
     @Override
