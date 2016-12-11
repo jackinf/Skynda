@@ -33,6 +33,7 @@ const mapStateToProps = (state) => {
     isFetching: formInfo.isFetching,
     initialValues: formInfo.item,
     formMode1: formInfo.formMode,
+    errors: formInfo.errors || [],
 
     vehicleModels: state[REDUCER_KEYS.VEHICLE_MODELS_DATA],
     colors: classificators ? classificators.color : {}

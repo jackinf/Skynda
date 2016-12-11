@@ -29,10 +29,10 @@ const ReactIconDeleteWrapped = (props) => (<ReactIconDelete {...props} width="32
  ====================================
  */
 
-export const renderTextField = ({input, label, meta: {touched, error}, ...custom}) => (
+export const renderTextField = ({input, label, errors, meta: {touched, error}, ...custom}) => (
   <Row style={{marginBottom: "10px"}}>
     <Col sm={12}>
-      <TextField hintText={label} floatingLabelText={label} errorText={touched && error} {...input} {...custom} />
+      <TextField hintText={label} floatingLabelText={label} errorText={errors && errors[input.name] || touched && error} {...input} {...custom} />
     </Col>
   </Row>
 );
@@ -145,10 +145,9 @@ export const MainImageField = (props) => (<div style={imageBlockStyle}>
   <h4>{props.title} *</h4>
   <span>Currently stored in database:</span>
   <Field name="mainImage.url" component={({input, i}) => (<div>
-    {input.value ? (<div>
-      <img src={input.value} width={400}/>
-    </div>) : "-NONE-"}
+    {input.value ? (<div><img src={input.value} width={400}/></div>) : "-NONE-"}
   </div>)}/>
+  <Field name="mainImage.url" type="text" component={renderTextField} />
 
   <br/>
 
@@ -202,3 +201,19 @@ export const selectRenderer = (items, onChange, isMulti = false) => ({input, lab
     </Col>
   </Row>
 );
+
+export const ErrorBlockRenderer = ({errors}) => {
+  return errors.length > 0 ? (
+    <Row>
+      <Col xs={12}>
+        <div className="panel panel-danger">
+          <div className="panel-heading">Panel heading</div>
+          <ul className="list-group">
+            {errors.map(error => (
+              <li className="list-group-item"><b>{error.code}</b>: {error.defaultMessage}</li>
+            ))}
+          </ul>
+        </div>
+      </Col>
+    </Row>) : <div></div>;
+};

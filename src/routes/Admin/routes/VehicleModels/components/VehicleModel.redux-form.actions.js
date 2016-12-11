@@ -29,11 +29,8 @@ function createItem(item) {
   })
     .then(resp => resp.json())
     .then(resp => {
-      console.log(resp);
       if (!resp.success) {
-        const errors = fromSpringToReduxFormError(resp.errors);
-        // dispatch(fetchFailed(errors));
-        throw new SubmissionError(errors);
+        throw new SubmissionError(fromSpringToReduxFormError(resp.errors));
       }
       return resp;
     });

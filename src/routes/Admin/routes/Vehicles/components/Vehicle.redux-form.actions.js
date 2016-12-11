@@ -3,9 +3,8 @@
  */
 import remoteConfig from "store/remoteConfig";
 import {fromSpringToReduxFormError} from "../../../../../utils/formUtils";
-import {SubmissionError} from 'redux-form';
+// import {SubmissionError} from 'redux-form';
 import {FORM_MODE} from "../constants/Vehicle.constant";
-import {toastr} from "react-redux-toastr";
 
 // ------------------------------------
 // Form submission
@@ -36,11 +35,9 @@ function createItem(data) {
   })
     .then(resp => resp.json())
     .then(resp => {
-      console.log(resp);
-      if (!resp.success) {
-        toastr.error('Error', resp.message);
-        throw new SubmissionError(fromSpringToReduxFormError(resp.errors));
-      }
+      // if (!resp.success) {
+      //   throw new SubmissionError(fromSpringToReduxFormError(resp.errors));
+      // }
       return resp;
     })
 }
@@ -60,10 +57,9 @@ function updateItem(data) {
   })
     .then(resp => resp.json())
     .then(resp => {
-      if (!resp.success) {
-        toastr.error('Error', resp.message);
-        throw new SubmissionError(fromSpringToReduxFormError(resp.errors));
-      }
+      // if (!resp.success) {
+      //   throw new SubmissionError(fromSpringToReduxFormError(resp.errors));
+      // }
       return resp;
     })
 }

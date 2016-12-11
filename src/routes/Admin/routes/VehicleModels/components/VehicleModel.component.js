@@ -6,6 +6,7 @@ import {Field} from "redux-form";
 import {TextField} from "redux-form-material-ui";
 import {reduxForm, change, destroy} from "redux-form";
 import RefreshIndicator from 'material-ui/RefreshIndicator';
+import {toastr} from "react-redux-toastr";
 
 import {ROUTE_PARAMS, FORM_MODE} from "./../constants/VehicleModel.constant";
 import {rowWrapper, selectRenderer} from "./VehicleModel.redux-form.renderers";
@@ -32,7 +33,7 @@ class VehicleModel extends React.Component {
 
   onSubmit(e) {
     let promise = this.props.handleSubmit(data => onHandleSubmit(data, this.props.formInfo))(e);
-    promise && promise.then(resp => {this.props.onHandleSubmitFinished(resp)})
+    promise && promise.then(resp => {this.props.onHandleSubmitFinished(resp)});
   }
 
   render() {

@@ -7,6 +7,7 @@ import {toastr} from 'react-redux-toastr';
 
 import remoteConfig from "store/remoteConfig";
 import {ACTIONS, FORM_MODE, FORMS, ROUTE_PARAMS} from "../constants/Vehicle.constant";
+import fromSpringToReduxFormError from "../../../../../utils/formUtils/fromSpringToReduxFormError";
 
 // ------------------------------------
 // Actions
@@ -78,6 +79,9 @@ export const onHandleSubmitFinished = (resp) => (dispatch) => {
       dispatch(setFormMode(FORM_MODE.UPDATING));
       browserHistory.replace("/admin/vehicle/" + resp.id);
       toastr.success('Success', resp.message);
+    } else {
+      const errors = fromSpringToReduxFormError(resp.errors);
+      dispatch(setFetchFailed(resp.errors));
     }
   }
 };
