@@ -20,6 +20,8 @@ public interface BlobStorageService {
     List<ListBlobItem> list(ListBlobsDto dto);
     void download(DownloadBlobDto dto);
     boolean delete(DeleteBlobDto dto);
+
+    Image handleMedia(ImageDto mediaDto, Image existingMedia, boolean urlChanged);
     Image handleMedia(ImageDto mediaDto, Image existingMedia);
 
 }

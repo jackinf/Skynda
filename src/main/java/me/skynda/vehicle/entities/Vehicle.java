@@ -10,6 +10,7 @@ import javax.persistence.*;
 import lombok.Data;
 import me.skynda.classification.entities.Classification;
 import me.skynda.image.entities.Image;
+import me.skynda.vehicle.dto.ImageStorable;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.NotNull;
@@ -17,7 +18,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "vehicle")
 @Data
-public class Vehicle implements Serializable {
+public class Vehicle implements Serializable, ImageStorable<Image> {
 
     @Id
     @Column(name = "id", columnDefinition = "serial")
@@ -99,6 +100,7 @@ public class Vehicle implements Serializable {
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "image_id", nullable = false)
+    @NotNull
     private Image mainImage;
 
     @OneToMany(mappedBy = "vehicleId", fetch = FetchType.LAZY)
@@ -130,4 +132,8 @@ public class Vehicle implements Serializable {
     @Column(name="report_title")
     private String reportTitle;
 
+    @Override
+    public Image getImage() {
+        return mainImage;
+    }
 }

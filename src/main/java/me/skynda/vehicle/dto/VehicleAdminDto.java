@@ -8,10 +8,11 @@ import lombok.Data;
 import lombok.ToString;
 import me.skynda.classification.dto.ClassificationDto;
 import me.skynda.common.dto.BaseDto;
+import org.dozer.Mapping;
 
 @Data
 @ToString(callSuper = false)
-public class VehicleAdminDto extends BaseDto {
+public class VehicleAdminDto extends BaseDto implements ImageStorable<ImageDto> {
     public VehicleAdminDto() {
         this.filesToDelete = new ArrayList<>();
     }
@@ -61,4 +62,8 @@ public class VehicleAdminDto extends BaseDto {
      * We delete files by blobName and blobContainer
      */
 	private List<VehicleDtoImageFileToDelete> filesToDelete;
+
+	public ImageDto getImage() {
+		return getMainImage();
+	}
 }

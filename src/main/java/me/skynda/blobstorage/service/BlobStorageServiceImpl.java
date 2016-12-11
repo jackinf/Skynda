@@ -57,8 +57,7 @@ public class BlobStorageServiceImpl implements BlobStorageService {
             } catch (InvalidKeyException e) {
                 e.printStackTrace();
             }
-        }
-        else {
+        } else {
             // For using this, install and run Azure Storage Emulator
             // Download Link: https://go.microsoft.com/fwlink/?linkid=717179&clcid=0x409
             storageAccount = CloudStorageAccount.getDevelopmentStorageAccount();
@@ -66,8 +65,7 @@ public class BlobStorageServiceImpl implements BlobStorageService {
     }
 
     public boolean createContainer(CreateContainerDto dto) {
-        try
-        {
+        try {
             // Create the blob client.
             CloudBlobClient blobClient = storageAccount.createCloudBlobClient();
 
@@ -77,9 +75,7 @@ public class BlobStorageServiceImpl implements BlobStorageService {
 
             // Create the container if it does not exist.
             return container.createIfNotExists();
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             // Output the stack trace.
             e.printStackTrace();
         }
@@ -87,8 +83,7 @@ public class BlobStorageServiceImpl implements BlobStorageService {
     }
 
     public boolean deleteContainer(DeleteContainerDto dto) {
-        try
-        {
+        try {
             // Create the blob client.
             CloudBlobClient blobClient = storageAccount.createCloudBlobClient();
 
@@ -98,9 +93,7 @@ public class BlobStorageServiceImpl implements BlobStorageService {
 
             // Delete the container if it exists.
             return container.deleteIfExists();
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             // Output the stack trace.
             e.printStackTrace();
         }
@@ -109,8 +102,7 @@ public class BlobStorageServiceImpl implements BlobStorageService {
 
     @Override
     public boolean upload(UploadBlobDto dto) {
-        try
-        {
+        try {
             // Create the blob client.
             CloudBlobClient blobClient = storageAccount.createCloudBlobClient();
 
@@ -119,13 +111,11 @@ public class BlobStorageServiceImpl implements BlobStorageService {
 
             // Get the file's stream or define the path to a local file.
             File fileSource = dto.getFileSource();  // e.g. new File("C:\\myimages\\myimage.jpg")
-            
+
             // Create or overwrite the "myimage.jpg" blob with contents from a local file.
             CloudBlockBlob blob = container.getBlockBlobReference(dto.getBlobName());   // e.g. "myimage.jpg"
             blob.upload(new FileInputStream(fileSource), fileSource.length());
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             // Output the stack trace.
             e.printStackTrace();
             return false;
@@ -135,8 +125,7 @@ public class BlobStorageServiceImpl implements BlobStorageService {
 
     @Override
     public BlobStorageUploadStreamResponseDto uploadStream(UploadBlobDto dto) {
-        try
-        {
+        try {
             // Create the blob client.
             CloudBlobClient blobClient = storageAccount.createCloudBlobClient();
 
@@ -151,9 +140,7 @@ public class BlobStorageServiceImpl implements BlobStorageService {
             CloudBlockBlob blob = container.getBlockBlobReference(dto.getBlobName());   // e.g. "myimage.jpg"
             blob.upload(bis, byteArray.length);
             return BlobStorageUploadStreamResponseDto.Factory.succeed(blob.getUri().toString());
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             // Output the stack trace.
             e.printStackTrace();
             return BlobStorageUploadStreamResponseDto.Factory.fail();
@@ -163,8 +150,7 @@ public class BlobStorageServiceImpl implements BlobStorageService {
     @Override
     public List<ListBlobItem> list(ListBlobsDto dto) {
         List<ListBlobItem> list = new ArrayList<>();
-        try
-        {
+        try {
             // Create the blob client.
             CloudBlobClient blobClient = storageAccount.createCloudBlobClient();
 
@@ -176,9 +162,7 @@ public class BlobStorageServiceImpl implements BlobStorageService {
                 list.add(blobItem);
 //                System.out.println(blobItem.getUri());
             }
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             // Output the stack trace.
             e.printStackTrace();
         }
@@ -187,8 +171,7 @@ public class BlobStorageServiceImpl implements BlobStorageService {
 
     @Override
     public void download(DownloadBlobDto dto) {
-        try
-        {
+        try {
             // Create the blob client.
             CloudBlobClient blobClient = storageAccount.createCloudBlobClient();
 
@@ -206,9 +189,7 @@ public class BlobStorageServiceImpl implements BlobStorageService {
                     blob.download(new FileOutputStream("C:\\mydownloads\\" + blob.getName()));
                 }
             }
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             // Output the stack trace.
             e.printStackTrace();
         }
@@ -216,8 +197,7 @@ public class BlobStorageServiceImpl implements BlobStorageService {
 
     @Override
     public boolean delete(DeleteBlobDto dto) {
-        try
-        {
+        try {
             // Create the blob client.
             CloudBlobClient blobClient = storageAccount.createCloudBlobClient();
 
@@ -229,24 +209,31 @@ public class BlobStorageServiceImpl implements BlobStorageService {
 
             // Delete the blob.
             return blob.deleteIfExists();
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             // Output the stack trace.
             e.printStackTrace();
         }
         return false;
     }
 
+    public Image handleMedia(ImageDto mediaDto, Image existingMedia) {
+        // Check if url has changed. If not, then presumably the image is the same.
+        boolean urlHasChanged = existingMedia != null && !existingMedia.getUrl().trim().isEmpty()
+                && Objects.equals(existingMedia.getUrl(), mediaDto.getUrl());
+
+        return handleMedia(mediaDto, existingMedia, urlHasChanged);
+    }
+
     /**
      * If image container has base64, then upload to cloud, get new url and save an image. Return new image.
      * If image has only a url, then check if it has changed from previous time, and upload a new one.
      * TODO: Create MediaService and move this method there
-     * @param mediaDto - new media file
+     *
+     * @param mediaDto      - new media file
      * @param existingMedia - already persisted media file
      * @return newly added image to the database or existing image
      */
-    public Image handleMedia(ImageDto mediaDto, Image existingMedia) {
+    public Image handleMedia(ImageDto mediaDto, Image existingMedia, boolean urlChanged) {
         if (mediaDto == null) {
             return null;
         }
@@ -263,7 +250,7 @@ public class BlobStorageServiceImpl implements BlobStorageService {
             // Was upload successful?
             if (response.isSuccess()) {
                 return imageDao.save(Image.Factory.create(response.getUri(), blobName, VehicleServiceImpl.DEFAULT_CONTAINER_NAME));
-            } else  {
+            } else {
                 return existingMedia;   // fail
             }
         }
@@ -273,11 +260,8 @@ public class BlobStorageServiceImpl implements BlobStorageService {
             return null;    // otherwise assume that the file is deleted
         }
 
-        // Check if url has changed. If not, then presumably the image is the same.
-        if (existingMedia != null && !existingMedia.getUrl().trim().isEmpty()) {
-            if (Objects.equals(existingMedia.getUrl(), mediaDto.getUrl())) {
-                return existingMedia;    // Url is same. Presumably image did not change. Exit.
-            }
+        if (urlChanged) {
+            return existingMedia;    // Url is same. Presumably image did not change. Exit.
         }
 
         // Save the new file

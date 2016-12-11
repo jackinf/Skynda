@@ -100,19 +100,28 @@ public class VehicleServiceImpl implements VehicleService {
             Create new or load existing
          */
         Vehicle vehicle;
+        boolean mainImageUrlChanged;    // did the image change?
         if (vehicleAdminDto.getId() != null) {
             vehicle = vehicleDao.get(vehicleAdminDto.getId());
+            vehicle.setModel(null); // hack, unset value or there will be error: "org.hibernate.HibernateException: identifier of an instance of me.skynda.vehicle.entities.VehicleModel was altered from 3 to 7". This is because automapper maps only an id of a persisted object, which id should not be changed.
+            vehicle.setColorInside(null);
+            vehicle.setColorOutside(null);
+            mainImageUrlChanged = ImageDto.Helper.isUrlChanged(vehicle, vehicleAdminDto);   // do the check before mapping
             mapper.map(vehicleAdminDto, vehicle);
 //            vehicle.setUpdated(new Date());   // TODO
         } else {
             vehicle = mapper.map(vehicleAdminDto, Vehicle.class);
             vehicle.setCreated(new Date());
+            mainImageUrlChanged = ImageDto.Helper.isUrlChanged(null, vehicleAdminDto);   // do the check before mapping
         }
+
         /*
             Find car model
          */
-        VehicleModel vehicleModel = vehicleModelDao.get(vehicleAdminDto.getModel().getId());
-        vehicle.setModel(vehicleModel);
+        if (vehicleAdminDto.getModel() != null) {
+            VehicleModel vehicleModel = vehicleModelDao.get(vehicleAdminDto.getModel().getId());
+            vehicle.setModel(vehicleModel);
+        }
 
         /*
             Get a new creator
@@ -135,22 +144,8 @@ public class VehicleServiceImpl implements VehicleService {
          */
 
         // Upload main image
-        ImageDto base64File = vehicleAdminDto.getMainImage();
-        if (base64File != null && base64File.getBase64File() != null) {
-            // Please, upload the fucking file!!!
-            UploadBlobDto uploadBlobDto1 = new UploadBlobDto();
-            uploadBlobDto1.setContainerName(DEFAULT_CONTAINER_NAME);
-            String blobName = UUID.randomUUID().toString();
-            uploadBlobDto1.setBlobName(blobName);
-            uploadBlobDto1.setByteArray(SkyndaUtility.toBytearray(base64File.getBase64File()));
-            BlobStorageUploadStreamResponseDto responseDto1 = blobStorageService.uploadStream(uploadBlobDto1);
-
-            // Was upload successful?
-            if (responseDto1.isSuccess()) {
-                Image image = imageDao.save(Image.Factory.create(responseDto1.getUri(), blobName, DEFAULT_CONTAINER_NAME));
-                vehicle.setMainImage(image);
-            }
-        }
+        Image mainImage = blobStorageService.handleMedia(vehicleAdminDto.getMainImage(), vehicle.getMainImage(), mainImageUrlChanged);
+        vehicle.setMainImage(mainImage);
 
         // Upload image gallery
         List<ImageContainerDto> imageDtos = vehicleAdminDto.getImages() != null ? vehicleAdminDto.getImages() : new ArrayList<>();
