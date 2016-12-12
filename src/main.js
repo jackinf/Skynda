@@ -12,6 +12,7 @@ import "react-select/dist/react-select.css";
 import "nprogress/nprogress.js";
 import "nprogress/nprogress.css";
 import 'react-redux-toastr/lib/css/react-redux-toastr.css';
+import "react-bootstrap-table/dist/react-bootstrap-table.min.css";
 
 // ========================================================
 // Store Instantiation

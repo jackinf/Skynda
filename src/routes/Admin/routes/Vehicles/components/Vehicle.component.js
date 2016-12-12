@@ -125,7 +125,8 @@ class Vehicle extends React.Component {
    * @param chosenOption - object {label: string (visible text), value: int (ID)}
    */
   setField = (name, chosenOption) => {
-    this.props.dispatch(change(FORMS.VEHICLE_FORM, name, chosenOption.value));
+    const hackName = name.replace(".id", "");
+    this.props.dispatch(change(FORMS.VEHICLE_FORM, hackName, {id: chosenOption.value}));
   };
 
   /**

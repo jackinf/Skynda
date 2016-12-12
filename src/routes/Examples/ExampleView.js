@@ -17,6 +17,9 @@ class ExampleComponent extends React.Component {
         <Breadcrumb.Item onClick={e => browserHistory.push("/examples/file-upload")}>
           File upload
         </Breadcrumb.Item>
+        <Breadcrumb.Item onClick={e => browserHistory.push("/examples/pipedrive")}>
+          Pipedrive
+        </Breadcrumb.Item>
       </Breadcrumb>
 
       <Row>
