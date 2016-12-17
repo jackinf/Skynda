@@ -21,7 +21,7 @@ public class ClassificationDaoImpl extends SkyndaBaseEntityDaoImpl<Classificatio
     private final String CLASSIFIER_REF_NAME_TRANSMISSION = "transmission";
     private final String CLASSIFIER_REF_NAME_DRIVETRAIN = "drivetrain";
     private final String CLASSIFIER_REF_NAME_VEHICLE_MANUFACTURER = "vehicleManufacturer";
-    private final String CLASSIFIER_REF_NAME_FUEL_TYPE = "fuelType";it
+    private final String CLASSIFIER_REF_NAME_FUEL_TYPE = "fuelType";
     private final String CLASSIFIER_REF_NAME_VEHICLE_BODY = "vehicleBody";
 
     @Override
