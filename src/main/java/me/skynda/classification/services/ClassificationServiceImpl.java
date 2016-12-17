@@ -31,4 +31,14 @@ public class ClassificationServiceImpl implements ClassificationService {
         });
         return dtos;
     }
+
+    @Override
+    public List<ClassificationResponseDto> getByTypeAndVehicleBound(String type) {
+        ArrayList<ClassificationResponseDto> dtos = new ArrayList<>();
+        dao.getByTypeAndVehicleBound(type).forEach(classificationEntity -> {
+            ClassificationResponseDto dto = mapper.map(classificationEntity, ClassificationResponseDto.class);
+            dtos.add(dto);
+        });
+        return dtos;
+    }
 }
