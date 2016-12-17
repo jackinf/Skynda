@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import {connect} from 'react-redux'
-import SearchComponent from '../components/Search.Block'
+import SearchComponent from '../components/Search.component'
 import {getClassificationsAsync} from '../reducers'
 
 const mapStateToProps = (state) => {

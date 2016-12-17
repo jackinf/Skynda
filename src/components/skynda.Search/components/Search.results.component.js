@@ -9,7 +9,7 @@ class ResultsComponent extends React.Component {
 
   render() {
     return (
-      <Col md={12} style={{minHeight: "400px"}}>
+      <Col md={12}>
         {
           this.props.isSearching
             ? (

@@ -1,3 +1,3 @@
-import SearchComponent from "./Search.Block";
+import SearchComponent from "./Search.component";
 
 export default SearchComponent;

@@ -6,10 +6,10 @@ import remoteConfig from "store/remoteConfig";
 import fetch from "isomorphic-fetch";
 
 async function getClassificationList(type){
-  return await fetch(`${remoteConfig.remote}/api/classifications/${type}`, {
+  return await fetch(`${remoteConfig.remote}/api/classifications/${type}/vehicle-bound`, {
     method: "GET",
     credentials: "include",
-    headers: {"Accept": "application/json", "Content-Type": "application/x-www-form-urlencoded"}
+    headers: {"Accept": "application/json", "Content-Type": "application/json"}
   })
     .then(resp => resp.json())
     .then(resp => {

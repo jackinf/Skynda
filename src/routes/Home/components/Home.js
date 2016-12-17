@@ -1,8 +1,8 @@
 import React from "react";
 import "./Home.scss";
 import Hero from "./Hero/Home.hero";
-import SearchContainer from "../../../containers/SearchContainer"
-import SubscribeContainer from "../../../containers/SubscribeContainer"
+import Search from "../../../containers/SearchContainer"
+import Subscribe from "../../../containers/SubscribeContainer"
 
 class Home extends React.Component {
   render() {
@@ -11,8 +11,8 @@ class Home extends React.Component {
         <Hero/>
         <br/>
         <div className='container'>
-          <SearchContainer />
-          <SubscribeContainer/>
+          <Search />
+          <Subscribe/>
           <br/>
         </div>
       </div>

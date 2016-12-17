@@ -1,14 +1,16 @@
 import React, {PropTypes} from 'react'
 import {Row, Col} from "react-bootstrap";
-import ButtonGroupContainer from "../containers/SelectBtnContainer";
-import SliderContainer from "../containers/SliderContainer";
-import ToggleBtnContainer from "../containers/ToggleBtnContainer";
-import SearchBtnContainer from "../containers/SearchBtnContainer";
-import SearchResultsContainer from "../containers/ResultsContainer"
-import "./Search.Block.scss";
 import {Translate} from 'react-redux-i18n';
 import Plus from 'react-icons/lib/fa/plus'
 import Minus from 'react-icons/lib/fa/minus'
+import RefreshIndicator from 'material-ui/RefreshIndicator';
+
+import "./Search.component.scss";
+import ButtonGroupContainer from "../containers/Select.button.container";
+import SliderContainer from "../containers/Search.slider.container";
+import ToggleBtnContainer from "../containers/Search.toggle.button.container";
+import SearchBtnContainer from "../containers/Search.button.container";
+import SearchResultsContainer from "../containers/Search.results.container"
 
 const colors = [
   {id: -1, name: "Kõik"},
@@ -29,6 +31,16 @@ const colors = [
   {id: 8, name: "black", style: {"backgroundColor": "#000000"}, hideName: true}
 ];
 
+// Temporarily not used.
+function ColorsComponent() {
+  return (<Row>
+    <Col md={12} className='range-slider-wrapper'>
+      <label><Translate value="components.car_search.colors"/></label><br />
+      <ButtonGroupContainer type={"colors"} md={1} xs={2} options={colors} shape='circle'/>
+    </Col>
+  </Row>)
+}
+
 class SearchComponent extends React.Component {
   async componentWillMount() {
     await this.props.getClassificationsAsync();
@@ -37,7 +49,7 @@ class SearchComponent extends React.Component {
   render() {
     const data = this.props.seats;
     if (data === undefined) {
-      return <div>Loading...</div>;
+      return <div><RefreshIndicator size={100} left={200} top={200} status="loading"/></div>;
     }
 
     return (
@@ -61,7 +73,6 @@ class SearchComponent extends React.Component {
                   <Col md={4}>
                     <Row>
                       <Col md={12}>
-
                         <SliderContainer
                           title={<Translate value="components.car_search.mileage"/>}
                           step={100}
@@ -70,14 +81,12 @@ class SearchComponent extends React.Component {
                           units={this.props.sliderValues.mileage.units}
                           type={"mileage"}
                         />
-
                       </Col>
                     </Row>
                   </Col>
                   <Col md={4}>
                     <Row>
                       <Col md={12} className='range-slider-wrapper'>
-
                         <SliderContainer
                           title={<Translate value="components.car_search.price"/>}
                           step={100}
@@ -86,7 +95,6 @@ class SearchComponent extends React.Component {
                           units={this.props.sliderValues.price.units}
                           type={"price"}
                         />
-
                       </Col>
                     </Row>
                   </Col>
@@ -117,8 +125,8 @@ class SearchComponent extends React.Component {
                           <Col md={8}>
                             <Row>
                               <Col md={12} className='range-slider-wrapper'>
-                                <label><Translate value="components.car_search.colors"/></label><br />
-                                <ButtonGroupContainer type={"colors"} md={1} xs={2} options={colors} shape='circle'/>
+                                <label><Translate value="components.car_search.features"/></label>
+                                <ButtonGroupContainer type={"features"} md={3} options={this.props.features}/>
                               </Col>
                             </Row>
                           </Col>
@@ -135,19 +143,7 @@ class SearchComponent extends React.Component {
                                 />
                               </Col>
                             </Row>
-                          </Col>
-                        </Row>
 
-                        <Row>
-                          <Col md={8}>
-                            <Row>
-                              <Col md={12} className='range-slider-wrapper'>
-                                <label><Translate value="components.car_search.features"/></label>
-                                <ButtonGroupContainer type={"features"} md={3} options={this.props.features}/>
-                              </Col>
-                            </Row>
-                          </Col>
-                          <Col md={4}>
                             <Row>
                               <Col md={12} className='range-slider-wrapper'>
                                 <SliderContainer
@@ -202,11 +198,7 @@ class SearchComponent extends React.Component {
                   <Col md={12}>
                     <div className='text-right'>
                       <ToggleBtnContainer className='btn btn-link fk-filter-advance'>
-                        {
-                          this.props.showAdvancedSearch
-                            ? <Minus/>
-                            : <Plus />
-                        }
+                        {this.props.showAdvancedSearch ? <Minus/> : <Plus />}
                         &nbsp;&nbsp;
                         <Translate value="components.car_search.advanced_txt"/>
                       </ToggleBtnContainer>
