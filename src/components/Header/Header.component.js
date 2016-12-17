@@ -42,13 +42,14 @@ class Header extends React.Component {
   render() {
     return (
       <div className='container header-container'>
-        <LocaleContainer/>
+        {/*<LocaleContainer/>*/}
         <Row>
           <nav className='sk-navbar navbar navbar_default aligner'>
             <Col md={4}>
               <Link className='sk_logo' to='/'>
                 <img className='pull-left' src={image1}/>
                 <img src={image2}/>
+                {/*<h1>Triven.io</h1>*/}
               </Link>
             </Col>
             <Col md={8}>
