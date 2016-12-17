@@ -1,15 +1,19 @@
 import React from 'react';
 import {connect} from 'react-redux'
-import {updateSliderValue} from '../actions'
-import SliderWrapper from "../../Slider/Slider";
+import {updateSliderValue} from '../skynda.Search/actions'
+import SliderWrapper from "./Slider.component";
 
 const mapStateToProps = (state, ownProps) => {
+  const min = state.searchValues[ownProps.type] ? state.searchValues[ownProps.type].min : ownProps.min;
+  const max = state.searchValues[ownProps.type] ? state.searchValues[ownProps.type].max : ownProps.max;
+
   return {
     classes: ownProps.className,
     title: ownProps.title,
     step: ownProps.step,
-    min: ownProps.min,
-    max: ownProps.max,
+
+    min: min,
+    max: max,
     units: ownProps.units,
     type: ownProps.type
   };
@@ -17,9 +21,7 @@ const mapStateToProps = (state, ownProps) => {
 
 
 const mapDispatchToProps =   {
-  onSliderChange: (value) => (dispatch, getState) => {
-    dispatch(updateSliderValue(getState().sliderValues, value));
-  }
+  onSliderChange: updateSliderValue
 };
 
 const SliderContainer = connect(

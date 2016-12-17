@@ -7,7 +7,7 @@ import RefreshIndicator from 'material-ui/RefreshIndicator';
 
 import "./Search.component.scss";
 import ButtonGroupContainer from "../containers/Select.button.container";
-import SliderContainer from "../containers/Search.slider.container";
+import SliderContainer from "../../Slider/Slider.container";
 import ToggleBtnContainer from "../containers/Search.toggle.button.container";
 import SearchBtnContainer from "../containers/Search.button.container";
 import SearchResultsContainer from "../containers/Search.results.container"
@@ -42,11 +42,20 @@ function ColorsComponent() {
 }
 
 class SearchComponent extends React.Component {
+  defaultSliderValues = {
+    mileage: {min: 0, max: 500000},
+    price: {min: 0, max: 500000},
+    year: {min: 2007, max: 2017},
+    petrolConsumption: {min: 0, max: 20},
+    power: {min: 0, max: 1000}
+  };
+
   async componentWillMount() {
     await this.props.getClassificationsAsync();
   }
 
   render() {
+    const {sliderValues} = this.props;
     const data = this.props.seats;
     if (data === undefined) {
       return <div><RefreshIndicator size={100} left={200} top={200} status="loading"/></div>;
@@ -76,9 +85,11 @@ class SearchComponent extends React.Component {
                         <SliderContainer
                           title={<Translate value="components.car_search.mileage"/>}
                           step={100}
-                          min={this.props.sliderValues.mileage.min}
-                          max={this.props.sliderValues.mileage.max}
-                          units={this.props.sliderValues.mileage.units}
+                          defaultMin={this.defaultSliderValues.mileage.min}
+                          defaultMax={this.defaultSliderValues.mileage.max}
+                          min={sliderValues.mileage.min}
+                          max={sliderValues.mileage.max}
+                          units={sliderValues.mileage.units}
                           type={"mileage"}
                         />
                       </Col>
@@ -90,9 +101,11 @@ class SearchComponent extends React.Component {
                         <SliderContainer
                           title={<Translate value="components.car_search.price"/>}
                           step={100}
-                          min={this.props.sliderValues.price.min}
-                          max={this.props.sliderValues.price.max}
-                          units={this.props.sliderValues.price.units}
+                          defaultMin={this.defaultSliderValues.price.min}
+                          defaultMax={this.defaultSliderValues.price.max}
+                          min={sliderValues.price.min}
+                          max={sliderValues.price.max}
+                          units={sliderValues.price.units}
                           type={"price"}
                         />
                       </Col>
@@ -105,9 +118,11 @@ class SearchComponent extends React.Component {
                         <SliderContainer
                           title={<Translate value="components.car_search.year"/>}
                           step={1}
-                          min={this.props.sliderValues.year.min}
-                          max={this.props.sliderValues.year.max}
-                          units={this.props.sliderValues.year.units}
+                          defaultMin={this.defaultSliderValues.year.min}
+                          defaultMax={this.defaultSliderValues.year.max}
+                          min={sliderValues.year.min}
+                          max={sliderValues.year.max}
+                          units={sliderValues.year.units}
                           type={"year"}
                         />
 
@@ -136,9 +151,11 @@ class SearchComponent extends React.Component {
                                 <SliderContainer
                                   title={<Translate value="components.car_search.petrol_consumption"/>}
                                   step={0.1}
-                                  min={this.props.sliderValues.petrolConsumption.min}
-                                  max={this.props.sliderValues.petrolConsumption.max}
-                                  units={this.props.sliderValues.petrolConsumption.units}
+                                  defaultMin={this.defaultSliderValues.petrolConsumption.min}
+                                  defaultMax={this.defaultSliderValues.petrolConsumption.max}
+                                  min={sliderValues.petrolConsumption.min}
+                                  max={sliderValues.petrolConsumption.max}
+                                  units={sliderValues.petrolConsumption.units}
                                   type={"petrolConsumption"}
                                 />
                               </Col>
@@ -149,9 +166,11 @@ class SearchComponent extends React.Component {
                                 <SliderContainer
                                   title={<Translate value="components.car_search.power"/>}
                                   step={1}
-                                  min={this.props.sliderValues.power.min}
-                                  max={this.props.sliderValues.power.max}
-                                  units={this.props.sliderValues.power.units}
+                                  defaultMin={this.defaultSliderValues.power.min}
+                                  defaultMax={this.defaultSliderValues.power.max}
+                                  min={sliderValues.power.min}
+                                  max={sliderValues.power.max}
+                                  units={sliderValues.power.units}
                                   type={"power"}
                                 />
                               </Col>

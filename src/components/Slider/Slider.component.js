@@ -19,7 +19,8 @@ class SliderWrapper extends React.Component {
   };
 
   render() {
-    const {min, max, units, step} = this.props;
+    const {min, max, units, step, defaultMin, defaultMax} = this.props;
+
     return (<div className='range-slider-wrapper'>
       <label>{this.props.title}</label>
 
@@ -43,8 +44,8 @@ class SliderWrapper extends React.Component {
           <Slider range
                   allowCross={false}
                   defaultValue={[min, max]}
-                  min={min}
-                  max={max}
+                  min={defaultMin}
+                  max={defaultMax}
                   step={step}
                   onChange={this.onSliderChange}/>
         </Col>

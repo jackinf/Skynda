@@ -1,7 +1,7 @@
 import ACTIONS from '../actions/constants';
 
 const findWithAttr = (array, attr, value) =>{
-  for(var i = 0; i < array.length; i++){
+  for(let i = 0; i < array.length; i++){
     if(array[i][attr] === value){
       return i;
     }
@@ -9,27 +9,28 @@ const findWithAttr = (array, attr, value) =>{
   return -1;
 };
 
-export const changeSearchValues = (state = [], action) => {
+const initialState =  []; // TODO: Why?
+export const changeSearchValues = (state = initialState, action) => {
   switch (action.type) {
     case ACTIONS.TOGGLE_BUTTON_GROUP_VALUE: {
-      var newState = {...state};
+      const newState = {...state};
 
       if (newState[action.payload.type] === undefined) {
         newState[action.payload.type] = [];
       }
 
-      var index = findWithAttr(newState[action.payload.type], "value", action.payload.value);
+      const index = findWithAttr(newState[action.payload.type], "value", action.payload.value);
 
-      if (index === -1) { //NOT FOUND
+      if (index === -1) { // NOT FOUND
         newState[action.payload.type] = [...newState[action.payload.type], action.payload];
       } else {
         if (!action.payload.isToggled) {
-          var items = [
+          let items = [
             ...newState[action.payload.type].slice(0, index),
             ...newState[action.payload.type].slice(index + 1)
           ];
 
-          var allBtnIndex = findWithAttr(items, "value", -1);
+          const allBtnIndex = findWithAttr(items, "value", -1);
           if (allBtnIndex !== -1) {
             items = [
               ...items.slice(0, allBtnIndex),
@@ -47,7 +48,7 @@ export const changeSearchValues = (state = [], action) => {
 
 
     case ACTIONS.SET_SLIDER_VALUE: {
-      var newState = {...state};
+      const newState = {...state};
 
       if (newState[action.payload.type] === undefined) {
         newState[action.payload.type] = []

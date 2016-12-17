@@ -1,8 +1,8 @@
 import React from "react";
 import "./Home.scss";
 import Hero from "./Hero/Home.hero";
-import Search from "../../../containers/SearchContainer"
-import Subscribe from "../../../containers/SubscribeContainer"
+import Search from "../../../components/skynda.Search"
+import Subscribe from "../../../components/skynda.Subscribe"
 
 class Home extends React.Component {
   render() {

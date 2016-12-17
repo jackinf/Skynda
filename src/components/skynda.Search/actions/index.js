@@ -15,12 +15,12 @@ export const setBaseValues = (value) => ({
   payload: value
 });
 
-export const updateSliderValue = (state , value) => ({
+export const updateSliderValue = (value) => ({
   type: ACTIONS.SET_SLIDER_VALUE,
   payload: value
 });
 
-export const toggleButtonGroupValue = (state, value) => ({
+export const toggleButtonGroupValue = (value) => ({
   type: ACTIONS.TOGGLE_BUTTON_GROUP_VALUE,
   payload: value
 });
