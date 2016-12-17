@@ -124,6 +124,7 @@
     "path": "^0.12.7",
     "pmx": "^0.6.8",
     "postcss-loader": "^0.13.0",
+    "rc-collapse": "^1.6.11",
     "rc-slider": "^5.1.1",
     "react": "^15.0.0",
     "react-addons-transition-group": "^15.3.2",

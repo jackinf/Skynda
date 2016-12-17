@@ -39,7 +39,7 @@ export class About extends React.Component {
       <Row>
         <Col md={8}>
           <AboutSkblock header='Skynda muudab auto ostmise ja müümise kogemust'>
-            <Col md={12}>
+            <Col md={12} style={{marginLeft: "-14px"}}>
               {this.props.description}
             </Col>
           </AboutSkblock>
