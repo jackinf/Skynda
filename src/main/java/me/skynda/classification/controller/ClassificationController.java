@@ -22,4 +22,9 @@ public class ClassificationController extends BaseController {
         return classificationService.getByType(type);
     }
 
+    @RequestMapping(value = "/classifications/{type}/vehicle-bound", method = RequestMethod.GET)
+    public List<ClassificationResponseDto> getVehicleBound(@PathVariable String type) {
+        return classificationService.getByTypeAndVehicleBound(type);
+    }
+
 }
