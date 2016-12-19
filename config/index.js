@@ -11,6 +11,7 @@ debug("Creating default configuration.");
 const config = {
   env : process.env.NODE_ENV || "development",
 
+
   // ----------------------------------
   // Project Structure
   // ----------------------------------
@@ -24,10 +25,11 @@ const config = {
   // Server Configuration
   // ----------------------------------
   server_host : ip.address(), // use string 'localhost' to prevent exposure on local network
-  // server_host_production: "138.68.71.198",
-  server_host_production: "skynda.me",
+  server_host_production: "207.154.192.200",
   server_port : process.env.PORT || 3000,
   server_port_production : 80,
+  // production_remote_address: "http://207.154.192.200:8888", // for in-application usage when LIVE
+  // development_remote_address: "http://localhost:8888",      // for in-application usage while in localhost
 
   // ----------------------------------
   // Compiler Configuration
@@ -86,6 +88,14 @@ config.globals = {
   "__TEST__"     : config.env === "test",
   "__COVERAGE__" : !argv.watch && config.env === "test",
   "__BASENAME__" : JSON.stringify(process.env.BASENAME || "")
+};
+
+config.pipeDrive = {
+  api_token_key_value: "api_token=a8f71712cc3853b6bbe9d496a2025af2083d468b",
+    api_token_value: "a8f71712cc3853b6bbe9d496a2025af2083d468b", // Jevgeni R. token
+
+    deals_api: "https://api.pipedrive.com/v1/deals",
+    stages_api: "https://api.pipedrive.com/v1/stages",
 };
 
 // ------------------------------------
