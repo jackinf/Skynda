@@ -14,6 +14,14 @@ import imageVunk from "./../assets/group@2x.png.png";
 import AboutSkblock from "./AboutSkblock";
 
 export class About extends React.Component {
+  propTypes = {
+    loadDescription: React.PropTypes.func.isRequired,
+    loadPeople: React.PropTypes.func.isRequired,
+
+    people: React.PropTypes.array,
+    description: React.PropTypes.string,
+  };
+
   componentWillMount() {
     this.props.loadDescription();
     this.props.loadPeople();

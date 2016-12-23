@@ -6,13 +6,14 @@ import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import injectTapEventPlugin from "react-tap-event-plugin";
 injectTapEventPlugin();
 
-import "./main.scss";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "rc-slider/assets/index.css";
 import "react-select/dist/react-select.css";
 import "nprogress/nprogress.js";
 import "nprogress/nprogress.css";
 import 'react-redux-toastr/lib/css/react-redux-toastr.css';
 import "react-bootstrap-table/dist/react-bootstrap-table.min.css";
+import "./main.scss";
 
 // ========================================================
 // Store Instantiation

@@ -59,7 +59,7 @@ export const renderDescriptions = ({fields, ...custom}) => fieldListWrapper({
         </Col>
         <Col md={10}>
           <Field name={`${name}.title`} type="text" component={renderTextField} placeholder={`Title #${index + 1}`}/>
-          <Field name={`${name}.content`} type="text" component={renderTextField}
+          <Field name={`${name}.content`} type="text" component={renderTextField} multiLine={true} rows={4}
                  placeholder={`Description #${index + 1}`}/>
         </Col>
       </Row>
@@ -81,7 +81,7 @@ export const renderReportItems = ({fields, ...custom}) => fieldListWrapper({
         </Col>
         <Col md={10}>
           <Field name={`${name}.title`} type="text" component={renderTextField} placeholder={`Title #${index + 1}`}/>
-          <Field name={`${name}.description`} type="text" component={renderTextField}
+          <Field name={`${name}.description`} type="text" component={renderTextField} multiLine={true} rows={4}
                  placeholder={`Description #${index + 1}`}/>
         </Col>
       </Row>
@@ -142,23 +142,29 @@ export const renderFaults = ({fields, ...custom}) => fieldListWrapper({
 const imageBlockStyle = {border: "1px solid #dedede", backgroundColor: "#efefef", padding: "10px"};
 
 export const MainImageField = (props) => (<div style={imageBlockStyle}>
-  <h4>{props.title} *</h4>
-  <span>Currently stored in database:</span>
+  <h3>{props.title} *</h3>
+
   <Field name="mainImage.url" component={({input, i}) => (<div>
-    {input.value ? (<div><img src={input.value} width={400}/></div>) : "-NONE-"}
+    {input.value ? (<div>
+        <span>Currently stored in database:</span>
+        <img src={input.value} width={400}/>
+      </div>) : ""}
   </div>)}/>
-  <Field name="mainImage.url" type="text" component={renderTextField} />
+
+  <br/>
+  <span>a) Specify image url:</span>
+  <Field name="mainImage.url" type="text" component={renderTextField} label="URL" />
 
   <br/>
 
-  <span>New:</span>
+  <span>b) ...or upload using image uploader:</span>
   <Field name="mainImage.base64File" component={({input, i}) => (<div>
     {input.value
       ? (<div>
       <img src={input.value} width={400}/>
       <ReactIconDeleteWrapped onClick={e => props.onMainImageRemove(e)}/>
     </div>)
-      : <input type="file" onChange={e => props.onMainImageUpload(e)}/>}
+      : <input className="btn btn-default" type="file" onChange={e => props.onMainImageUpload(e)}/>}
   </div>)}/>
 </div>);
 
@@ -209,8 +215,8 @@ export const ErrorBlockRenderer = ({errors}) => {
         <div className="panel panel-danger">
           <div className="panel-heading">Panel heading</div>
           <ul className="list-group">
-            {errors.map(error => (
-              <li className="list-group-item"><b>{error.code}</b>: {error.defaultMessage}</li>
+            {errors.map((error, i) => (
+              <li key={i} className="list-group-item"><b>{error.code}</b>: {error.defaultMessage}</li>
             ))}
           </ul>
         </div>

@@ -2,7 +2,7 @@ import moment from "moment";
 import {setBaseValues} from "./../actions"
 import {Translate} from 'react-redux-i18n';
 import React from "react";
-import remoteConfig from "store/remoteConfig";
+import remoteConfig from "../../../store/remoteConfig";
 import fetch from "isomorphic-fetch";
 
 async function getClassificationList(type){
