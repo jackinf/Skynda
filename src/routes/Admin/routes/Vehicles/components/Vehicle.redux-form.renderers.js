@@ -22,6 +22,9 @@ const styleDeleteIcon = {
 };
 const ReactIconDeleteWrapped = (props) => (<ReactIconDelete {...props} width="32" height="32"
                                                             style={styleDeleteIcon}/>);
+import ReactCrop from 'react-image-crop';
+import "react-image-crop/dist/ReactCrop.css";
+const crop = {width: 90, aspect: 16/9};
 
 /*
  ====================================
@@ -125,11 +128,12 @@ export const renderFaults = ({fields, ...custom}) => fieldListWrapper({
               </FloatingActionButton>
             </Col>
             <Col sm={10}>
-              <Field name={`${field}.file`} type="file" component="input"
+              <Field className="btn btn-default" name={`${field}.file`} type="file" component="input"
                      onChange={e => custom.onFaultFileAdd(e, index)}/>
               <Field name={`${field}.text`} type="text" component={renderTextField} placeholder={`Text #${index + 1}`}/>
-              Persisted: <Field name={`${field}.imageContainer.imageUrl`} type="text" component={renderImage}/>
-              New: <Field name={`${field}.imageContainer.base64File`} type="text" component={renderImage}/>
+              Persisted: <Field name={`${field}.image.url`} type="text" component={renderImage}/>
+              <br/>
+              New: <Field name={`${field}.image.base64File`} type="text" component={renderImage}/>
             </Col>
           </Row>
         );
@@ -161,7 +165,8 @@ export const MainImageField = (props) => (<div style={imageBlockStyle}>
   <Field name="mainImage.base64File" component={({input, i}) => (<div>
     {input.value
       ? (<div>
-      <img src={input.value} width={400}/>
+        <ReactCrop src={input.value} crop={crop} onComplete={props.onMainImageCropComplete} />
+      {/*<img src={input.value} width={400}/>*/}
       <ReactIconDeleteWrapped onClick={e => props.onMainImageRemove(e)}/>
     </div>)
       : <input className="btn btn-default" type="file" onChange={e => props.onMainImageUpload(e)}/>}

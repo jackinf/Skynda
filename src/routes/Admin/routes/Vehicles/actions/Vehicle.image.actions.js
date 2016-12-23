@@ -24,6 +24,23 @@ export function onMainImageRemove(e) {
   }
 }
 
+export function onMainImageCropComplete(crop, pixelCrop) {
+  return (dispatch) => {
+    console.log("onMainImageCropComplete", crop, pixelCrop);
+    dispatch(change(FORMS.VEHICLE_FORM, "mainImage.cropInfo", {
+      width: crop.width,
+      height: crop.height,
+      x: crop.x,
+      y: crop.y,
+      crop: false
+    }));
+  }
+}
+
+// Ideas to crop image in client
+// 1. https://gist.github.com/DominicTobias/b1fb501349893922ec7f
+// 2. https://gist.github.com/DominicTobias/6aa43d03bc12232ef723
+
 export function onImageFileUpload(acceptedFiles) {
   return (dispatch, getState) => {
     acceptedFiles.forEach(file => {
@@ -43,6 +60,7 @@ export function onImageFileRemove(e, index) {
 
 export function onFaultFileUpload(e, index) {
   return (dispatch) => {
+    console.log("onFaultFileUpload");
     imageUtil.imageFileToBase64(e.target.files[0], (base64File) => {
       dispatch(change(FORMS.VEHICLE_FORM, `faults[${index}].image.base64File`, base64File));
     });

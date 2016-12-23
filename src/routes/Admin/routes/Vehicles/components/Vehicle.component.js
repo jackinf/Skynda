@@ -160,7 +160,7 @@ class Vehicle extends React.Component {
             <Row>
               <Col xs={12}>
                 {this.props.formMode1 === FORM_MODE.UPDATING
-                  ? <h3><span className="label label-primary">ID: {this.state.id}</span></h3>
+                  ? <h3><span className="label label-primary">ID: {this.props.id || this.state.id}</span></h3>
                   : <h3><span className="label label-success">{this.props.formMode1}</span></h3>}
               </Col>
             </Row>
@@ -174,7 +174,9 @@ class Vehicle extends React.Component {
                 <MainImageField title="Main image"
                                 errors={errors}
                                 onMainImageRemove={this.props.onMainImageRemove}
-                                onMainImageUpload={this.props.onMainImageUpload}/>
+                                onMainImageUpload={this.props.onMainImageUpload}
+                                onMainImageCropComplete={this.props.onMainImageCropComplete}
+                />
 
                 <Field name="colorInside.id"
                        label="Color Inside *"
@@ -188,7 +190,7 @@ class Vehicle extends React.Component {
 
                 <FieldArray name="descriptions" label="Descriptions" component={renderDescriptions} errors={errors}/>
                 <FieldArray name="reportItems" label="Report Items" component={renderReportItems} errors={errors}/>
-                <FieldArray name="features" label="Features" component={renderFeatures} errors={errors}/>
+                {/*<FieldArray name="features" label="Features" component={renderFeatures} errors={errors}/>*/}
                 <FieldArray name="faults" label="Faults" component={renderFaults}
                             onFaultFileAdd={this.props.onFaultFileUpload}
                             onFaultRemove={this.props.onFaultRemove}
