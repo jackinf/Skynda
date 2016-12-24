@@ -38,6 +38,7 @@ public class VehicleDetailedDto {
 
 	private Boolean isSold;
 	private Integer safetyStars;
+	private String safetyUrl;
 
 	private List<FeatureDto> features;
 	private List<FaultBaseDto> faults;

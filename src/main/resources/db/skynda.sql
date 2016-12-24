@@ -5,7 +5,7 @@
 -- Dumped from database version 9.5.3
 -- Dumped by pg_dump version 9.5.3
 
--- Started on 2016-12-10 17:07:38
+-- Started on 2016-12-24 14:38:11
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -415,7 +415,8 @@ CREATE TABLE vehicle (
     color_inside_id integer,
     report_title character varying(50),
     fuel_city numeric(5,2),
-    fuel_highway numeric(5,2)
+    fuel_highway numeric(5,2),
+    safety_url character varying(200)
 );
 
 
@@ -1993,7 +1994,7 @@ GRANT ALL ON SCHEMA public TO postgres;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
--- Completed on 2016-12-10 17:07:39
+-- Completed on 2016-12-24 14:38:12
 
 --
 -- PostgreSQL database dump complete

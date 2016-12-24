@@ -41,6 +41,7 @@ public class VehicleAdminDto extends BaseDto implements ImageStorable<ImageDto> 
 
 	private PerformanceDto performance;
 	private Integer safetyStars;
+	private String safetyUrl;
 
 	private List<FeatureDto> features;
 	private List<FaultBaseDto> faults;

@@ -89,6 +89,9 @@ public class Vehicle implements Serializable, ImageStorable<Image> {
     @Column(name = "safety_stars")
     private Integer safetyStars;
 
+    @Column(name = "safety_url")
+    private String safetyUrl;
+
     @Column(name = "additional")
     private String additional;
 

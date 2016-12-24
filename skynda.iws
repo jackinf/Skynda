@@ -2,9 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="475affeb-34c7-4d40-a790-fd1401c1b6a0" name="Default" comment="Merge branch 'develop' of https://bitbucket.org/mruskin/skynda_backend into develop&#10;&#10;# Conflicts:&#10;#&#9;src/main/java/me/skynda/vehicle/controller/VehicleManufacturer.java&#10;">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/skynda.iml" afterPath="$PROJECT_DIR$/skynda.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/skynda.ipr" afterPath="$PROJECT_DIR$/skynda.ipr" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/db/migration/V1/V1_1_13_201612241438__safety_url_ddl.sql" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/skynda.iws" afterPath="$PROJECT_DIR$/skynda.iws" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/me/skynda/vehicle/dto/VehicleAdminDto.java" afterPath="$PROJECT_DIR$/src/main/java/me/skynda/vehicle/dto/VehicleAdminDto.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/me/skynda/vehicle/dto/VehicleDetailedDto.java" afterPath="$PROJECT_DIR$/src/main/java/me/skynda/vehicle/dto/VehicleDetailedDto.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/me/skynda/vehicle/entities/Vehicle.java" afterPath="$PROJECT_DIR$/src/main/java/me/skynda/vehicle/entities/Vehicle.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/db/skynda.sql" afterPath="$PROJECT_DIR$/src/main/resources/db/skynda.sql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/db/skynda_diff.sql" afterPath="$PROJECT_DIR$/src/main/resources/db/skynda_diff.sql" />
     </list>
     <ignored path="skynda.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -39,28 +43,7 @@
     <favorites_list name="skynda" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="VehicleDaoImpl.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/me/skynda/vehicle/dao/VehicleDaoImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-187">
-              <caret line="39" column="13" lean-forward="false" selection-start-line="39" selection-start-column="13" selection-end-line="39" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="VehicleModel.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/me/skynda/vehicle/entities/VehicleModel.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="799">
-              <caret line="53" column="39" lean-forward="false" selection-start-line="53" selection-start-column="27" selection-end-line="53" selection-end-column="39" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -69,6 +52,13 @@
         <option value="Interface" />
       </list>
     </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>safet</find>
+      <find>stars</find>
+      <find>detailed</find>
+    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -81,7 +71,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/me/skynda/classification/ClassificationController.java" />
         <option value="$PROJECT_DIR$/src/main/java/me/skynda/classification/dao/ClassificationDaoImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/me/skynda/image/controller/dao/ImageDaoImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/me/skynda/image/dao/ImageDaoImpl.java" />
@@ -109,8 +98,6 @@
         <option value="$PROJECT_DIR$/src/main/java/me/skynda/vehicle/dao/VehicleFeatureDaoImpl.java" />
         <option value="$PROJECT_DIR$/src/main/resources/db/migration/V1/V1_1_9_201611191813__vehicle_feature_ddl.sql" />
         <option value="$PROJECT_DIR$/src/main/java/me/skynda/vehicle/dto/request/SearchRequestDto.java" />
-        <option value="$PROJECT_DIR$/src/main/java/me/skynda/vehicle/dto/VehicleAdminDto.java" />
-        <option value="$PROJECT_DIR$/src/main/java/me/skynda/vehicle/dto/VehicleDetailedDto.java" />
         <option value="$PROJECT_DIR$/src/main/resources/db/migration/V1/V1_1_11_201611261447__vehicle_fuel_to_decimal_ddl.sql" />
         <option value="$PROJECT_DIR$/src/main/java/me/skynda/common/helper/StringHelper.java" />
         <option value="$PROJECT_DIR$/src/main/java/me/skynda/common/helper/SkyndaUtility.java" />
@@ -122,7 +109,6 @@
         <option value="$PROJECT_DIR$/src/main/java/me/skynda/vehicle/dto/VehicleSearchDto.java" />
         <option value="$PROJECT_DIR$/application.properties" />
         <option value="$PROJECT_DIR$/src/main/java/me/skynda/subscription/SubscriptionController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/me/skynda/vehicle/entities/Vehicle.java" />
         <option value="$PROJECT_DIR$/src/main/java/me/skynda/common/interfaces/services/ISubscriptionService.java" />
         <option value="$PROJECT_DIR$/src/main/java/me/skynda/subscription/controller/SubscriptionController.java" />
         <option value="$PROJECT_DIR$/src/main/java/me/skynda/common/interfaces/daos/SubscriptionDao.java" />
@@ -132,6 +118,10 @@
         <option value="$PROJECT_DIR$/src/main/java/me/skynda/subscription/service/SubscriptionService.java" />
         <option value="$PROJECT_DIR$/src/main/resources/db/migration/V1/V1_1_12_201612101710__subscription_tbl_ddl.sql" />
         <option value="$PROJECT_DIR$/src/main/java/me/skynda/vehicle/dao/VehicleDaoImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/db/migration/V1/V1_1_13_201612241438__safety_url_ddl.sql" />
+        <option value="$PROJECT_DIR$/src/main/java/me/skynda/vehicle/entities/Vehicle.java" />
+        <option value="$PROJECT_DIR$/src/main/java/me/skynda/vehicle/dto/VehicleAdminDto.java" />
+        <option value="$PROJECT_DIR$/src/main/java/me/skynda/vehicle/dto/VehicleDetailedDto.java" />
       </list>
     </option>
   </component>
@@ -223,41 +213,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
+              <option name="myItemId" value="java" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="db" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
             <PATH_ELEMENT>
               <option name="myItemId" value="skynda" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="skynda_backend" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="db" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="V1" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -286,6 +246,44 @@
               <option name="myItemId" value="skynda" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vehicle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="skynda" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="skynda_backend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="skynda" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vehicle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dto" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
@@ -298,7 +296,7 @@
     <property name="js-jscs-nodeInterpreter" value="D:\Programs\NodeJS\node.exe" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="SearchEverywhereHistoryKey" value="vehiclesear&#9;FILE&#9;file://D:/Projects/Skynda/skynda_backend/src/main/java/me/skynda/vehicle/dto/VehicleSearchDto.java&#10;vehiclemodel&#9;FILE&#9;file://D:/Projects/Skynda/skynda_backend/src/main/java/me/skynda/vehicle/entities/VehicleModel.java&#10;vehicle&#9;FILE&#9;file://D:/Projects/Skynda/skynda_backend/src/main/java/me/skynda/vehicle/entities/Vehicle.java&#10;vehicle.java&#9;FILE&#9;file://D:/Projects/Skynda/skynda_backend/src/main/java/me/skynda/vehicle/entities/Vehicle.java&#10;vehicledto&#9;PSI&#9;JAVA://me.skynda.vehicle.dto.VehicleAdminDto&#10;classificationty&#9;PSI&#9;JAVA://me.skynda.classification.entities.ClassificationType&#10;vehicledao&#9;FILE&#9;file://D:/Projects/Skynda/skynda_backend/src/main/java/me/skynda/vehicle/dao/VehicleDaoImpl.java&#10;model&#9;FILE&#9;file://D:/Projects/Skynda/skynda_backend/src/main/java/me/skynda/vehicle/entity/VehicleModel.java&#10;vehiclemode&#9;FILE&#9;file://D:/Projects/Skynda/skynda_backend/src/main/java/me/skynda/vehicle/entity/VehicleModel.java&#10;vehiclemodeldto&#9;FILE&#9;file://D:/Projects/Skynda/skynda_backend/src/main/java/me/skynda/vehicle/dto/VehicleModelDto.java&#10;vehicledispla&#9;FILE&#9;file://D:/Projects/Skynda/skynda_backend/src/main/java/me/skynda/vehicle/dto/VehicleDisplayDto.java" />
+    <property name="SearchEverywhereHistoryKey" value="vehiclecontr&#9;FILE&#9;file://D:/Projects/Skynda/skynda_backend/src/main/java/me/skynda/vehicle/controller/VehicleController.java&#10;vehicleadmindto&#9;PSI&#9;JAVA://me.skynda.vehicle.dto.VehicleAdminDto&#10;vehicle.java&#9;FILE&#9;file://D:/Projects/Skynda/skynda_backend/src/main/java/me/skynda/vehicle/entities/Vehicle.java&#10;vehiclesear&#9;FILE&#9;file://D:/Projects/Skynda/skynda_backend/src/main/java/me/skynda/vehicle/dto/VehicleSearchDto.java&#10;vehiclemodel&#9;FILE&#9;file://D:/Projects/Skynda/skynda_backend/src/main/java/me/skynda/vehicle/entities/VehicleModel.java&#10;vehicle&#9;FILE&#9;file://D:/Projects/Skynda/skynda_backend/src/main/java/me/skynda/vehicle/entities/Vehicle.java&#10;vehicledto&#9;PSI&#9;JAVA://me.skynda.vehicle.dto.VehicleAdminDto&#10;classificationty&#9;PSI&#9;JAVA://me.skynda.classification.entities.ClassificationType&#10;vehicledao&#9;FILE&#9;file://D:/Projects/Skynda/skynda_backend/src/main/java/me/skynda/vehicle/dao/VehicleDaoImpl.java&#10;model&#9;FILE&#9;file://D:/Projects/Skynda/skynda_backend/src/main/java/me/skynda/vehicle/entity/VehicleModel.java&#10;vehiclemode&#9;FILE&#9;file://D:/Projects/Skynda/skynda_backend/src/main/java/me/skynda/vehicle/entity/VehicleModel.java&#10;vehiclemodeldto&#9;FILE&#9;file://D:/Projects/Skynda/skynda_backend/src/main/java/me/skynda/vehicle/dto/VehicleModelDto.java&#10;vehicledispla&#9;FILE&#9;file://D:/Projects/Skynda/skynda_backend/src/main/java/me/skynda/vehicle/dto/VehicleDisplayDto.java" />
     <property name="extract.method.default.visibility" value="private" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
@@ -855,7 +853,7 @@
       <workItem from="1482574761182" duration="2524000" />
       <workItem from="1482579788632" duration="267000" />
       <workItem from="1482580080387" duration="13000" />
-      <workItem from="1482580100811" duration="399000" />
+      <workItem from="1482580100811" duration="2166000" />
     </task>
     <task id="LOCAL-00001" summary="renamings and huuuuge hibernate fix">
       <created>1478795813253</created>
@@ -899,7 +897,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="96213000" />
+    <option name="totallyTimeSpent" value="97980000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -911,8 +909,8 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1928" y="-8" width="1936" height="1056" extended-state="1" />
-    <editor active="true" />
+    <frame x="-1928" y="-8" width="1936" height="1056" extended-state="0" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -925,7 +923,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39869988" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.39869988" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -933,7 +931,7 @@
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32827735" sideWeight="0.4978678" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32827735" sideWeight="0.4978678" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2553305" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -983,7 +981,7 @@
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="63" />
+      <option name="time" value="65" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
@@ -996,27 +994,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/me/skynda/auth/controller/LoginController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="17" column="13" lean-forward="false" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/me/skynda/image/entities/Image.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="15" column="13" lean-forward="false" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/me/skynda/vehicle/dto/ImageDto.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/me/skynda/common/dto/BaseDto.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
@@ -1087,13 +1064,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/me/skynda/vehicle/entities/Vehicle.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="799">
-          <caret line="131" column="0" lean-forward="false" selection-start-line="131" selection-start-column="0" selection-end-line="131" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/me/skynda/common/interfaces/daos/VehicleModelDao.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
@@ -1129,31 +1099,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/me/skynda/common/db/SkyndaBaseEntityDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="8" column="17" lean-forward="false" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/me/skynda/common/interfaces/services/VehicleService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="197">
           <caret line="27" column="30" lean-forward="false" selection-start-line="27" selection-start-column="30" selection-end-line="27" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/me/skynda/vehicle/controller/VehicleController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="24" column="22" lean-forward="false" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/me/skynda/vehicle/services/VehicleServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="193" column="35" lean-forward="false" selection-start-line="193" selection-start-column="23" selection-end-line="193" selection-end-column="35" />
         </state>
       </provider>
     </entry>
@@ -1257,13 +1206,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-aop/4.3.3.RELEASE/spring-aop-4.3.3.RELEASE.jar!/org/springframework/aop/framework/CglibAopProxy.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="509" column="0" lean-forward="false" selection-start-line="509" selection-start-column="0" selection-end-line="509" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/me/skynda/subscription/entities/Subscription.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
@@ -1299,13 +1241,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-core/4.3.3.RELEASE/spring-core-4.3.3.RELEASE.jar!/org/springframework/cglib/proxy/MethodProxy.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="158">
-          <caret line="105" column="0" lean-forward="false" selection-start-line="105" selection-start-column="0" selection-end-line="105" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/me/skynda/subscription/controller/SubscriptionController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
@@ -1335,18 +1270,90 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/me/skynda/vehicle/dao/VehicleDaoImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="39" column="13" lean-forward="false" selection-start-line="39" selection-start-column="13" selection-end-line="39" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/db/migration/V1/V1_1_13_201612241438__safety_url_ddl.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="11" column="25" lean-forward="true" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/db/migration/V1/V1_1_12_201612101710__subscription_tbl_ddl.sql">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="833">
+        <state relative-caret-position="493">
           <caret line="49" column="0" lean-forward="false" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/me/skynda/vehicle/dao/VehicleDaoImpl.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/me/skynda/vehicle/dto/VehicleAdminDto.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-187">
-          <caret line="39" column="13" lean-forward="false" selection-start-line="39" selection-start-column="13" selection-end-line="39" selection-end-column="13" />
+        <state relative-caret-position="174">
+          <caret line="43" column="28" lean-forward="false" selection-start-line="43" selection-start-column="28" selection-end-line="43" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/me/skynda/vehicle/dto/VehicleDetailedDto.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="174">
+          <caret line="40" column="28" lean-forward="false" selection-start-line="40" selection-start-column="28" selection-end-line="40" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/me/skynda/vehicle/entities/Vehicle.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="92" column="18" lean-forward="false" selection-start-line="92" selection-start-column="18" selection-end-line="92" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/me/skynda/common/db/SkyndaBaseEntityDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="10" column="6" lean-forward="false" selection-start-line="10" selection-start-column="6" selection-end-line="10" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-core/4.3.3.RELEASE/spring-core-4.3.3.RELEASE.jar!/org/springframework/cglib/proxy/MethodProxy.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="158">
+          <caret line="105" column="0" lean-forward="false" selection-start-line="105" selection-start-column="0" selection-end-line="105" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-aop/4.3.3.RELEASE/spring-aop-4.3.3.RELEASE.jar!/org/springframework/aop/framework/CglibAopProxy.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="463" column="0" lean-forward="false" selection-start-line="463" selection-start-column="0" selection-end-line="463" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/me/skynda/vehicle/services/VehicleServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="92" column="0" lean-forward="false" selection-start-line="92" selection-start-column="0" selection-end-line="92" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/me/skynda/vehicle/controller/VehicleController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="191">
+          <caret line="32" column="0" lean-forward="false" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
           <folding />
         </state>
       </provider>
