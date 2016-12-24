@@ -3,7 +3,7 @@ import React from "react";
 import Skblock from "../BlockContainer";
 import "../Details.scss";  // todo: remove?
 import "./Details.inspectors-report.scss";
-
+import SimpleCarousel from "../../../../components/SlickCarousel";
 // 3rd party
 import {Dialog, TextField} from "material-ui";
 import {Button, Row, Col, Carousel, Thumbnail} from "react-bootstrap";
@@ -74,6 +74,7 @@ class InspectorsReport extends React.Component {
 
   render() {
     const {reportItems, faults} = this.props.report;
+
     let categories = this.state.categories;
 
     return (
@@ -97,29 +98,10 @@ class InspectorsReport extends React.Component {
         </Col>
 
         <Row>
-          <Col xs={12} className="sk_details__overview_flex-container">
-            {faults.map((item, i) => (<div key={i} className="sk_details__overview_flex-container-item">
-              <Thumbnail href="#" alt="" style={{width: "200px"}} src={item.img}/>
-              <span className='overview__overview-label'>{item.text}</span>
-            </div>))}
+          <Col xs={12} className="">
+            <SimpleCarousel images={faults} />
           </Col>
         </Row>
-        {/*<Col sm={12} style={{marginTop: "20px"}}>*/}
-        {/*<Carousel>*/}
-        {/*{faults.map(fault => (<Carousel.Item>*/}
-        {/*<img width={300} height={200} alt={fault.text} src={fault.img}/>*/}
-        {/*<Carousel.Caption>*/}
-        {/*<h3>{fault.text}</h3>*/}
-        {/*</Carousel.Caption>*/}
-        {/*</Carousel.Item>))}*/}
-        {/*</Carousel>*/}
-        {/*</Col>*/}
-
-        {/*{faults && faults.length ? (<Col sm={12} style={{marginTop: "20px"}}>*/}
-        {/*<NukaCarousel autoplay={false} wrapAround={true} style={{minHeight: "150px"}}>*/}
-        {/*{faults.map(fault =>  <img src={fault.img} width={150} height={150}/>)}*/}
-        {/*</NukaCarousel>*/}
-        {/*</Col>): ""}*/}
 
         <Col sm={12}>
           {categories.map((categoryWrapper, i) => {
