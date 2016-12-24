@@ -1,11 +1,29 @@
 @import '../../styles/variables';
 
+.skynda-logo-separator {
+  display: none;
+}
+
+@media screen and (max-width: 750px) {
+  .skynda-logo-image-1 {
+    height: 48px !important;
+    width: 48px;
+    //display: none;
+  }
+  .skynda-logo-separator {
+    display: block;
+    margin: 5px;
+  }
+}
+
+
 .header-container{
   align-items: center;
   justify-content: center;
+  max-height: inherit;
 
   .sk-navbar{
-    height: 70px;
+    //height: 70px;
     .sk-menu{
       display: flex;
       font-size: 24px;

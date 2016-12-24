@@ -28,10 +28,10 @@ class VehicleDetailsMainImage extends React.Component {
   };
 
   render() {
-    const {src, year, brand, model, engine, horsepower, price} = this.props.vehicleDetailsMainImage;
-    const images = this.props.images ? this.props.images
-      .filter(imageItem => imageItem.image)
-      .map(imageItem => ({original: imageItem.image.url})) : [];
+    const {src, year, brand, model, engine, horsepower, price, images} = this.props.vehicleDetailsMainImage;
+    const imageUrls = images
+      ? images.filter(imageItem => imageItem.image)
+      .map(imageItem => imageItem.image.url) : [];
     const source360 = "https://www.panono.com/p/jmr7n52eIbDn/embed?autorotate=false";
 
     return (
@@ -58,7 +58,7 @@ class VehicleDetailsMainImage extends React.Component {
             <Row className='image-buttons'>
               <Col sm={12}>
                 <span style={{margin: "0 25px 0 0"}}>
-                  <ModalBtnCarousel images={images}
+                  <ModalBtnCarousel images={imageUrls}
                                     isShowModal={this.state.isShowModal}
                                     onShowModal={this.onShowModal}
                                     onHideModal={this.onHideModal}

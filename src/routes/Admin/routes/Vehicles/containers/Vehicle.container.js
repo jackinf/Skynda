@@ -39,6 +39,7 @@ const mapStateToProps = (state) => {
   let classificators = state.classificators;
 
   return {
+    id: formInfo.id,
     isFetching: formInfo.isFetching,
     initialValues: formInfo.item,
     formMode1: formInfo.formMode,
