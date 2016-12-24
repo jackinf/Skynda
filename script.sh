@@ -1,0 +1,1 @@
+cd /root/dev/skynda-backend && mvn package && java -jar /root/dev/skynda-backend/target/skynda-0.0.1-SNAPSHOT.jar

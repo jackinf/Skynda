@@ -16,21 +16,23 @@ public class VehicleFeatureDaoImpl extends SkyndaBaseEntityDaoImpl<VehicleFeatur
     @Override
     public void addMultipleToVehicle(Vehicle vehicle, List<FeatureDto> features) {
 
-        Session session = getSession();
-        String id = vehicle.getId().toString();
-        session.createSQLQuery("DELETE FROM vehicle_feature WHERE vehicle_id = "  + id)   // TODO: avoid SQL injection
-//                .setParameter("xxx", id)
-                .executeUpdate();
+        // TODO: Is feature a classifier or dynamic thing?
 
-        if (features == null)
-            return;
-
-        for (FeatureDto feature : features) {
-            VehicleFeature vehicleFeature = new VehicleFeature();
-            vehicleFeature.setVehicleId(vehicle.getId());
-//            vehicleFeature.setText(feature.getText());
-            session.save(vehicleFeature);
-        }
+//        Session session = getSession();
+//        String id = vehicle.getId().toString();
+//        session.createSQLQuery("DELETE FROM vehicle_feature WHERE vehicle_id = "  + id)   // TODO: avoid SQL injection
+////                .setParameter("xxx", id)
+//                .executeUpdate();
+//
+//        if (features == null)
+//            return;
+//
+//        for (FeatureDto feature : features) {
+//            VehicleFeature vehicleFeature = new VehicleFeature();
+//            vehicleFeature.setVehicleId(vehicle.getId());
+////            vehicleFeature.setText(feature.getText());
+//            session.save(vehicleFeature);
+//        }
     }
 
 }

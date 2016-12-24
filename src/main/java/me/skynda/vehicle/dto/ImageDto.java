@@ -12,6 +12,8 @@ public class ImageDto {
     private String blobName;
     private String containerName;
 
+    private ImageCropInfoDto cropInfo;
+
     public static class Factory {
         public static ImageDto create(String url, String blobName, String containerName) {
             ImageDto dto = new ImageDto();
@@ -48,9 +50,9 @@ public class ImageDto {
          */
         public static boolean isUrlChanged(ImageStorable<Image> entity, ImageStorable<ImageDto> dto) {
             if (entity == null) {
-                return dto.getImage() != null && dto.getImage().getUrl().trim().isEmpty();
+                return dto.getImage() != null && dto.getImage().getUrl() != null && dto.getImage().getUrl().trim().isEmpty();
             } else {
-                return (entity.getImage() != null && dto.getImage() != null)
+                return (entity.getImage() != null && dto.getImage() != null && entity.getImage().getUrl() != null)
                         && (!entity.getImage().getUrl().trim().isEmpty())
                         && (!dto.getImage().getUrl().trim().isEmpty())
                         && entity.getImage().getUrl().equals(dto.getImage().getUrl());

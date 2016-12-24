@@ -10,16 +10,16 @@ import me.skynda.blobstorage.dto.response.BlobStorageUploadStreamResponseDto;
 import me.skynda.common.helper.SkyndaUtility;
 import me.skynda.common.interfaces.daos.ImageDao;
 import me.skynda.image.entities.Image;
+import me.skynda.vehicle.dto.ImageCropInfoDto;
 import me.skynda.vehicle.dto.ImageDto;
 import me.skynda.vehicle.services.VehicleServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.*;
 import java.net.URISyntaxException;
 import java.security.InvalidKeyException;
 import java.util.ArrayList;
@@ -244,7 +244,10 @@ public class BlobStorageServiceImpl implements BlobStorageService {
             uploadBlob.setContainerName(VehicleServiceImpl.DEFAULT_CONTAINER_NAME);
             String blobName = UUID.randomUUID().toString();
             uploadBlob.setBlobName(blobName);
-            uploadBlob.setByteArray(SkyndaUtility.toBytearray(mediaDto.getBase64File()));
+
+            byte[] bytes = SkyndaUtility.toBytearray(mediaDto.getBase64File());
+            bytes = cropImage(bytes, mediaDto.getCropInfo());
+            uploadBlob.setByteArray(bytes);
             BlobStorageUploadStreamResponseDto response = uploadStream(uploadBlob);
 
             // Was upload successful?
@@ -290,4 +293,38 @@ public class BlobStorageServiceImpl implements BlobStorageService {
         }
         return newImage;  // save new image and return
     }
+
+    public byte[] cropImage(byte[] imageInByte, ImageCropInfoDto cropInfo) {
+        return cropImage(imageInByte, cropInfo, "jpg");
+    }
+
+    /**
+     * Crops the image
+     * @param imageInByte
+     * @param cropInfo
+     * @param formatName
+     * @return
+     */
+    @SneakyThrows(IOException.class)
+    public byte[] cropImage(byte[] imageInByte, ImageCropInfoDto cropInfo, String formatName) {
+        if (cropInfo == null || !cropInfo.isCrop())
+            return imageInByte; // do not crop the image
+
+        // Convert bytes to Buffered image
+        InputStream in = new ByteArrayInputStream(imageInByte);
+        BufferedImage bImageFromConvert = ImageIO.read(in);
+
+        // Actual crop
+        BufferedImage subImage = bImageFromConvert.getSubimage(300, 150, 200, 200);
+
+        // Convert back buffered image to bytes
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ImageIO.write(subImage, formatName, baos );
+        baos.flush();
+        byte[] subimageInByte = baos.toByteArray();
+        baos.close();
+
+        return subimageInByte;
+    }
+
 }
