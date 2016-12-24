@@ -10,7 +10,7 @@
 import React from "react";
 import {Translate} from 'react-redux-i18n';
 import {Row, Col, Navbar, Nav, NavItem, NavDropdown, MenuItem} from "react-bootstrap";
-import {Link, browserHistory} from "react-router";
+import {Link, NavLink, browserHistory} from "react-router";
 import {isLoggedInAs} from "../../utils/userUtils";
 
 // Local imports
@@ -47,25 +47,33 @@ const LogoComponent = (props) => (<Link className={`${props.className || ""} sk_
 class Header extends React.Component {
   render() {
 
-    const items = [(<li className='sk_menu__sell'>
-      <Link to="/sell-new-car">
-        <Translate value="components.header.sell_car_txt"/>
-      </Link>
+    // console.log(this.props);
+    const activePathname = this.props.activePathname;
+    const activeStyle = { borderBottom: '3px solid black', boxShadow: "10px 20px 5px 0px rgba(0,0,0,0.75);" };
+    const activeStyleContainer = {[activePathname]: activeStyle};
+
+    console.log(activePathname);
+
+    let i = 0;
+    const items = [(<li key={++i}  className='sk_menu__buy'>
+      <Link  to="/search" style={activeStyleContainer["/search"]}>
+        <Translate value="components.header.buy_car_txt"/>
+      </Link >
     </li>),
-      (<li className='sk_menu__buy'>
-        <Link to="/search">
-          <Translate value="components.header.buy_car_txt"/>
-        </Link>
-      </li>),
-      (<li className='sk_menu__about'>
-        <Link to="/how-it-works">
+      (<li key={++i} className='sk_menu__sell'>
+      <Link  to="/sell-new-car" style={activeStyleContainer["/sell-new-car"]}>
+        <Translate value="components.header.sell_car_txt"/>
+      </Link >
+    </li>),
+      (<li key={++i}  className='sk_menu__about'>
+        <Link  to="/how-it-works" style={activeStyleContainer["/how-it-works"]}>
           <Translate value="components.header.how_it_works"/>
-        </Link>
+        </Link >
       </li>),
-      (<li className='sk_menu__about'>
-        <Link to="/about">
+      (<li key={++i}  className='sk_menu__about'>
+        <Link  to="/about" style={activeStyleContainer["/about"]}>
           <Translate value="components.header.about_us"/>
-        </Link>
+        </Link >
       </li>)];
 
     return (
@@ -94,40 +102,9 @@ class Header extends React.Component {
               </div>
             </Col>
           </nav>
-
-          {/*<nav className="visible-xs">*/}
-          {/*<Col xs={12}>*/}
-
-          {/*<Row>*/}
-          {/*<LogoComponent />*/}
-          {/*</Row>*/}
-
-          {/*<ul className="nav navbar_nav sk-menu ">*/}
-          {/*<li className='sk_menu__sell'>*/}
-          {/*<Link to="/sell-new-car">*/}
-          {/*<Translate value="components.header.sell_car_txt"/>*/}
-          {/*</Link>*/}
-          {/*</li>*/}
-          {/*<li className='sk_menu__buy'>*/}
-          {/*<Link to="/search">*/}
-          {/*<Translate value="components.header.buy_car_txt"/>*/}
-          {/*</Link>*/}
-          {/*</li>*/}
-          {/*<li className='sk_menu__about'>*/}
-          {/*<Link to="/how-it-works">*/}
-          {/*<Translate value="components.header.how_it_works"/>*/}
-          {/*</Link>*/}
-          {/*</li>*/}
-          {/*<li className='sk_menu__about'>*/}
-          {/*<Link to="/about">*/}
-          {/*<Translate value="components.header.about_us"/>*/}
-          {/*</Link>*/}
-          {/*</li>*/}
-          {/*</ul>*/}
-          {/*</Col>*/}
-
-          {/*</nav>*/}
         </Row>
+
+        {/*<hr className="hidden-xs" style={{margin: "0 0 5px 0"}}/>*/}
 
       </div>);
   }

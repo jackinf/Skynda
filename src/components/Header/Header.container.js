@@ -4,4 +4,6 @@
 import {connect} from "react-redux";
 import Header from "./Header.component";
 import submitLogout from "./../../routes/Auth/actions/submitLogout.action";
-export default connect((state) => ({auth: state.auth}), {submitLogout})(Header);
+
+const mapStateToProps = (state) => ({auth: state.auth, activePathname: state.location ? state.location.pathname : "/"});
+export default connect(mapStateToProps, {submitLogout})(Header);
