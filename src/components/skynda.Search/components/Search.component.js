@@ -141,10 +141,11 @@ class SearchComponent extends React.Component {
                             <Row>
                               <Col md={12} className='range-slider-wrapper'>
                                 <label><Translate value="components.car_search.features"/></label>
-                                <ButtonGroupContainer type={"features"} md={3} options={this.props.features}/>
+                                <ButtonGroupContainer type={"features"} md={4} options={this.props.features}/>
                               </Col>
                             </Row>
                           </Col>
+
                           <Col md={4}>
                             <Row>
                               <Col md={12} className='range-slider-wrapper'>
