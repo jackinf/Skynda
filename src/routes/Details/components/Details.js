@@ -24,6 +24,7 @@ class VehicleDetails extends React.Component {
 
   render() {
     const vehicleData = this.props.car_data;
+    console.log(vehicleData);
     if (this.props.isLoading) {
       return (<div><RefreshIndicator size={100} left={200} top={200} status="loading"/></div>);
     }
@@ -37,7 +38,7 @@ class VehicleDetails extends React.Component {
         <div className='container'>
           <StickyContainer>
             <div className='row'>
-              <div className='col col-md-7'>
+              <div className='col col-md-8'>
                 <Overview overview={vehicleData.overview}/>
 
                 {vehicleData.descriptions.map((description, i) =>
@@ -47,7 +48,9 @@ class VehicleDetails extends React.Component {
                 <Fetaures features={vehicleData.features}/>
                 <History history={vehicleData.history}/>
                 <PetrolConsumption petrolConsumption={vehicleData.petrolConsumption}/>
-                <Safety stars={vehicleData.safetyStars}/>
+                <Safety stars={vehicleData.safetyStars}
+                        safetyUrl={vehicleData.safetyUrl} />
+
                 <InspectorsReport
                   report={vehicleData.report}
                   sendQuestionByEmailAsync={this.props.sendQuestionByEmailAsync}/>
@@ -56,7 +59,7 @@ class VehicleDetails extends React.Component {
                   {vehicleData.additional}
                 </Skblock>
               </div>
-              <div className='col col-md-5'>
+              <div className='col col-md-4'>
                 <Sticky>
                   <Checkout sendEmailAsync={this.props.sendEmailAsync}/>
                 </Sticky>

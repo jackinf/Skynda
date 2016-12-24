@@ -1,11 +1,5 @@
-/**
- * Created by zekar on 9/15/2016.
- */
-
 import React from "react";
 import "./Details.checkout.scss";
-
-// Material-UI
 import Dialog from "material-ui/Dialog";
 import RaisedButton from "material-ui/RaisedButton";
 import TextField from "material-ui/TextField";
@@ -48,7 +42,7 @@ const PersonInfoTab = (props) => (<li className='tab-pane fade active in' id='ht
         </Col>
       </Row>
       <Row>
-        <Col md={6}>
+        <Col md={12}>
           <TextField
             type='email'
             floatingLabelText={<Translate value="details.components.checkout_panel.email"/>}
@@ -60,7 +54,9 @@ const PersonInfoTab = (props) => (<li className='tab-pane fade active in' id='ht
             }}
           />
         </Col>
-        <Col md={6}>
+      </Row>
+      <Row>
+        <Col md={12}>
           <TextField
             floatingLabelText={<Translate value="details.components.checkout_panel.phone"/>}
             fullWidth
@@ -68,6 +64,21 @@ const PersonInfoTab = (props) => (<li className='tab-pane fade active in' id='ht
             underlineFocusStyle={styles.underlineFocusStyle}
             onChange={e => {
               props.person.phone = e.target.value;
+            }}
+          />
+        </Col>
+      </Row>
+      <Row>
+        <Col md={12}>
+          <TextField
+            multiLine={true}
+            rows={2}
+            floatingLabelText={<Translate value="details.components.checkout_panel.add_comment"/>}
+            fullWidth
+            floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
+            underlineFocusStyle={styles.underlineFocusStyle}
+            onChange={e => {
+              props.person.comment = e.target.value;
             }}
           />
         </Col>
@@ -82,7 +93,6 @@ const PersonInfoTab = (props) => (<li className='tab-pane fade active in' id='ht
             onTouchTap={props.displaySuccessPopup}
           />
         </Col>
-
       </Row>
     </Col>
   </Row>
@@ -92,7 +102,8 @@ PersonInfoTab.propTypes = {
   person: React.PropTypes.shape({
     firstName: React.PropTypes.string.isRequired,
     email: React.PropTypes.string.isRequired,
-    phone: React.PropTypes.string.isRequired
+    phone: React.PropTypes.string.isRequired,
+    comment: React.PropTypes.string
   }),
   displaySuccessPopup: React.PropTypes.func.isRequired
 };
