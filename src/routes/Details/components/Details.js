@@ -1,8 +1,6 @@
 import React from "react";
 import "./Details.scss";
 import RefreshIndicator from 'material-ui/RefreshIndicator';
-
-// Local components
 import Skblock from "./BlockContainer";
 import Overview from "./Overview";
 import Fetaures from "./Features";
@@ -24,7 +22,7 @@ class VehicleDetails extends React.Component {
 
   render() {
     const vehicleData = this.props.car_data;
-    console.log(vehicleData);
+
     if (this.props.isLoading) {
       return (<div><RefreshIndicator size={100} left={200} top={200} status="loading"/></div>);
     }

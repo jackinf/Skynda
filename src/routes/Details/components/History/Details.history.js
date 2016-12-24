@@ -1,16 +1,8 @@
-/**
- * Created by jevgenir on 10/1/2016.
- */
-
 import React from "react";
-import {Col} from "react-bootstrap";
+import {Col, Row} from "react-bootstrap";
 import "./Details.history.scss";
-
 import Skblock from "../BlockContainer";
 import {Translate} from 'react-redux-i18n';
-
-// Images
-import imageDiploma1 from "./../../../../static/images/standard/diploma_1@2x.png";
 
 class History extends React.Component {
   render() {
@@ -24,17 +16,40 @@ class History extends React.Component {
     const statusClass = isAnyProblems ? "sk_details__history_status-red" : "sk_details__history_status-green";
 
     return (<Skblock className="sk_details__history" header={<Translate value="details.components.history.header"/>}>
-      <Col md={6}>
-        <div className={statusClass}>
-          <img src={imageDiploma1} width='24' className='sk_details__history_icon-list-image' />
-          {problems}
-        </div>
-      </Col>
-      <Col md={6}>
-        <label className="sk_details__label">
-          <Translate value="details.components.history.vin"/>:
-        </label> {this.props.history.vinCode}
-      </Col>
+      <div className="form-horizontal">
+        <Row>
+          <Col md={12}>
+            <label className="sk_details__label">
+              <Translate value="details.components.history.found_txt"/>:
+            </label>
+            <span>  {problems}</span>
+          </Col>
+        </Row>
+        <Row>
+          <Col md={12}>
+              <label className="sk_details__label">
+                <Translate value="details.components.history.vin"/>:
+              </label>
+              <span>  {this.props.history.vinCode}</span>
+          </Col>
+        </Row>
+        <Row>
+          <Col md={12}>
+            <label className="sk_details__label">
+              <Translate value="details.components.history.registration_plate"/>:
+            </label>
+            <span>  {this.props.history.registrationPlate}</span>
+          </Col>
+        </Row>
+        <Row>
+          <Col md={12}>
+            <span><Translate value="details.components.history.check_history_from" /></span>
+            <span> <a target='_blank' href="https://eteenindus.mnt.ee/public/soidukTaustakontroll.jsf">
+              <Translate value="details.components.history.original_registry" /></a>.</span>
+          </Col>
+        </Row>
+      </div>
+
     </Skblock>);
   }
 }

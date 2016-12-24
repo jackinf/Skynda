@@ -36,4 +36,9 @@ body {
     padding: 20px 15px;
     text-align: center;
   }
+  a{
+    color: $color-primary;
+    cursor: pointer;
+    text-decoration: none;
+  }
  }

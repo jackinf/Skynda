@@ -187,7 +187,8 @@ function map(vehicleData) {
     : [];
   const history = {
     problems: [],
-    vinCode: vehicleData.vinCode
+    vinCode: vehicleData.vinCode,
+    numberPlate: vehicleData.registrationNumber
   };
   const petrolConsumption = {
     city: vehicleData.fuelCity,
@@ -198,21 +199,17 @@ function map(vehicleData) {
   const safetyStars = vehicleData.safetyStars;
   const safetyUrl = vehicleData.safetyUrl;
   const report = {
-    reportItems: vehicleData.reportItems ? vehicleData.reportItems.map(reportItem => ({
-      title: reportItem.title,
-      description: reportItem.description
-    })) : [],
-    categories: vehicleData.reports ? vehicleData.reports.map(reportCategory => ({
-      title: reportCategory.title,
-      points: reportCategory.items ? reportCategory.items.map(reportCategoryItem => ({
-        text: reportCategoryItem.text,
-        pass: reportCategoryItem.isPass
-      })) : [],
-    })) : [],
+    // reportItems: vehicleData.reportItems ? vehicleData.reportItems.map(reportItem => ({
+    //   title: reportItem.title,
+    //   description: reportItem.description
+    // })) : [],
+    reportCategories: vehicleData.reportCategories,
     faults: vehicleData.faults ? vehicleData.faults.map(fault => ({
       text: fault.text,
       img: fault.image ? fault.image.url : ""
-    })) : []
+    })) : [],
+    inspector: vehicleData.reportCategories ? vehicleData.reportCategories[0].inspector : ""
+
   };
   const reviews = vehicleData.reviews.map(review => {
     return {

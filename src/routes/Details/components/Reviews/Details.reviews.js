@@ -31,6 +31,9 @@ class Reviews extends React.Component {
     const selectedReview = this.state.selectedReview;
 
     return (<Skblock header={<Translate value="details.components.reviews.header"/>}>
+      <div className="reviews">
+
+      </div>
       {reviews.map((review, i) => {
         if (!review.text) {
           return <div></div>
@@ -65,10 +68,10 @@ class Reviews extends React.Component {
               </Row>) : ""}
               <Row className='sk_details__reviews__footer'>
                 <Col md={12}>
-                  <Button className='pull-right sk_details__reviews__button-read-more'
+                  <a className='pull-right'
                           onClick={e => this.openModal(review)}>
                     <Translate value="details.components.reviews.btn_read_more"/>
-                  </Button>
+                  </a>
                 </Col>
               </Row>
             </div>

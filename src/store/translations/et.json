@@ -70,7 +70,8 @@
         "header": "Sertifitseeritud Inspektori Raport",
         "question": "Kas on küsimusi?",
         "show_all": "Näita rohkem",
-        "send_question": "Saada"
+        "send_question": "Saada",
+        "pic_dents_txt": "Vead, kriimud jne"
       },
       "checkout_panel": {
         "your_name": "Sinu nimi",
@@ -87,8 +88,12 @@
       "history": {
         "header": "Auto ajalugu",
         "problems_found": "Leitud probleemid",
-        "no_problems_found": "Probleeme ei ole",
-        "vin": "VIN kood"
+        "no_problems_found": "Ajalugu kontrollitud, probleeme ei leitud",
+        "vin": "VIN kood",
+        "found_txt": "Leiud",
+        "registration_plate": "Numbrimärk",
+        "check_history_from": "Soovi korral kontrolli sõiduki tausta",
+        "original_registry": "Maanteametist"
       },
       "performance": {
         "header": "Tehnilised Andmed",

@@ -59,7 +59,8 @@
       "inspector_report": {
         "header": "Our Certified Inspector's Report",
         "question": "Have a question?",
-        "show_all": "Show all"
+        "show_all": "Show all",
+        "pic_dents_txt": "Faults, scratches etc"
       },
       "checkout_panel": {
         "your_name": "Your Name",
@@ -76,7 +77,11 @@
         "header": "Car History",
         "problems_found": "Problems found",
         "no_problems_found": "No problems found",
-        "vin": "VIN code"
+        "vin": "VIN code",
+        "found_txt": "Leitud",
+        "registration_plate": "Numbrimärk",
+        "check_history_from": "Soovi korral kontrolli sõiduki tausta",
+        "original_registry": "Maanteametist"
       },
       "performance": {
         "wheel_drive": "Wheels Driven",
