@@ -1,10 +1,6 @@
-// import Home from "./Home";
 import {injectReducer} from "../../store/reducers";
 import NProgress from "react-nprogress";
 
-// export default {
-//   component: Home
-// };
 export default (store) => ({
   getComponent(nextState, cb) {
     NProgress.start();

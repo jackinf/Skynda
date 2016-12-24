@@ -163,13 +163,16 @@ function map(vehicleData) {
     images: vehicleData.images,
     price: vehicleData.price
   };
+
+  console.log("vehicleData.drivetrain", vehicleData.drivetrain);
+
   const overview = {
     manufacturer: vehicleData.model.vehicleManufacturer.name,
     engine: vehicleData.model.engine,
     horsePower: parseInt(vehicleData.model.horsePower),
     mileage: vehicleData.mileage,
-    transmission: vehicleData.transmission ? vehicleData.transmission.name : "",
-    drive: "",
+    transmission: vehicleData.model.transmission ? vehicleData.model.transmission.name : "",
+    drive: vehicleData.model.drivetrain ? vehicleData.model.drivetrain.name : "",
     colorOutside: vehicleData.colorInside.name,
     colorInside: vehicleData.colorOutside.name,
     doors: parseInt(vehicleData.model.doors),

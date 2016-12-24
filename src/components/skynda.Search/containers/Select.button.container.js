@@ -13,9 +13,7 @@ const mapStateToProps = (state, ownProps) => {
 
 
 const mapDispatchToProps =   {
-  onToggle: (value) => (dispatch, getState) => {
-    dispatch(toggleButtonGroupValue(getState().buttonGroupValues, value));
-  }
+  onToggle: toggleButtonGroupValue
 };
 
 const SelectBtnContainer = connect(

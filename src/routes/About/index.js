@@ -8,7 +8,7 @@ export default (store) => ({
     require.ensure([], (require) => { // NB!!! Seda on sul vaja rakendusjuppide asünkroonseks juurdelaadimiseks
       injectReducer(store, {key: "people", reducer: require("./modules/About.people").default});
       injectReducer(store, {key: "description", reducer: require("./modules/About.description").default});
-      cb(null, require("./containers/AboutContainer").default); // react-router-i asi, et initsialiseerid komponenti
+      cb(null, require("./containers/About.container").default); // react-router-i asi, et initsialiseerid komponenti
       NProgress.done();
     }, "about");  // paned nimeks mida tahad
   }

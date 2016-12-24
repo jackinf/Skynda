@@ -4,6 +4,7 @@
 import remoteConfig from "store/remoteConfig";
 import {authSetUser} from "../modules/auth.module";
 import _ from "underscore";
+import * as jQuery from "jquery";
 
 export default function submitLogin(data) {
   return (dispatch, getState) => {

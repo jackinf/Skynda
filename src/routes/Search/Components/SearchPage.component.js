@@ -1,6 +1,6 @@
 import React from "react";
 import "../../Home/components/Home.scss";
-import SearchContainer from "../../../containers/SearchContainer"
+import SearchContainer from "../../../components/skynda.Search"
 
 export default class SearchPage extends React.Component {
   render() {

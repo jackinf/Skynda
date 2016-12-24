@@ -2,7 +2,15 @@
  * Created by zekar on 10/23/2016.
  */
 import {connect} from "react-redux";
-import reduxFormHelperActions from "../actions/Vehicle.image.actions";
+import {
+  onMainImageUpload,
+  onMainImageRemove,
+  onMainImageCropComplete,
+  onImageFileUpload,
+  onImageFileRemove,
+  onFaultFileUpload,
+  onFaultRemove
+} from "../actions/Vehicle.image.actions";
 import {load, clear, onHandleSubmitFinished} from "../reducers/Vehicle.reducer";
 import {getList as getVehicleModelsList} from "../../VehicleModels/reducers/VehicleModels.reducer";
 import {getColors} from "../../Classifiers/Classifiers.module";
@@ -15,12 +23,13 @@ const mapDispatchToProps = {
   getVehicleModelsList,
   getColors,
 
-  onMainImageUpload: reduxFormHelperActions.onMainImageUpload,
-  onMainImageRemove: reduxFormHelperActions.onMainImageRemove,
-  onImageFileUpload: reduxFormHelperActions.onImageFileUpload,
-  onImageFileRemove: reduxFormHelperActions.onImageFileRemove,
-  onFaultFileUpload: reduxFormHelperActions.onFaultFileUpload,
-  onFaultRemove: reduxFormHelperActions.onFaultRemove,
+  onMainImageUpload: onMainImageUpload,
+  onMainImageRemove: onMainImageRemove,
+  onMainImageCropComplete: onMainImageCropComplete,
+  onImageFileUpload: onImageFileUpload,
+  onImageFileRemove: onImageFileRemove,
+  onFaultFileUpload: onFaultFileUpload,
+  onFaultRemove: onFaultRemove,
 
   onHandleSubmitFinished: onHandleSubmitFinished
 };

@@ -23,7 +23,7 @@ export const toggleAdvanced = (state = false, action) => {
 export const setBaseValues = (state = [], action) => {
   switch (action.type) {
     case ACTIONS.SET_BASE_VALUES:
-      var newState = {...state};
+      const newState = {...state};
 
       newState[action.payload.sliderValues.key] = action.payload.sliderValues.value;
       newState[action.payload.brands.key] = action.payload.brands.value;
@@ -32,22 +32,17 @@ export const setBaseValues = (state = [], action) => {
       newState[action.payload.doors.key] = action.payload.doors.value;
       newState[action.payload.seats.key] = action.payload.seats.value;
 
-      return {
-        ...newState
-      };
-
+      return newState;
     default:
       return state;
   }
 };
-
 
 export const setSearchResults = (state = false, action) => {
   switch (action.type) {
     case ACTIONS.SET_SEARCH_RESULTS: {
       return action.payload;
     }
-
     default:
       return state;
   }

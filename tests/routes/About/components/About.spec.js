@@ -1,6 +1,6 @@
 import React from "react";
 import {bindActionCreators} from "redux";
-import {About} from "../../../../src/routes/About/components/About";
+import {About} from "../../../../src/routes/About/components/About.component";
 import {shallow, mount} from "enzyme";
 
 describe("(Component) Counter", () => {

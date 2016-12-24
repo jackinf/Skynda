@@ -17,7 +17,7 @@ import SelectField from 'material-ui/SelectField';
  * @param isRequired - is the field required for submission?
  */
 export const fieldListWrapper = ({fields, title, block, isRequired = false}) => (
-  <Row style={{marginBottom: "20px", border: "1px solid #cdcdcd", background: "#efefef"}}>
+  <Row style={{marginBottom: "20px", border: "1px solid #cdcdcd", background: "#fafafa"}}>
     <Col sm={12}>
       <Row>
         <Col sm={12}>

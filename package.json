@@ -20,8 +20,9 @@
     "deploy:dev": "better-npm-run deploy:dev",
     "deploy:prod": "better-npm-run deploy:prod",
     "codecov": "cat coverage/*/lcov.info | codecov",
-    "zip": "rimraf dist.zip && jar -cMf dist.zip dist",
-    "send-zip": "pscp1 -pw skyndar00t ./dist.zip root@138.68.71.198:/root/dev/skynda-frontend/"
+    "zip-pack": "rimraf dist.zip && jar -cMf dist.zip dist",
+    "zip-send": "pscp -pw skyndar00t ./dist.zip root@207.154.192.200:/root/dev/skynda-frontend/",
+    "zip-remote-deploy": "plink -pw skyndar00t root@207.154.192.200 /root/dev/skynda-frontend/deploy.sh"
   },
   "betterScripts": {
     "compile": {
@@ -57,7 +58,7 @@
       }
     },
     "deploy:prod": {
-      "command": "npm run deploy && npm run zip && npm run send-zip",
+      "command": "npm run deploy && npm run zip-pack && npm run zip-send && npm run zip-remote-deploy",
       "env": {
         "NODE_ENV": "production",
         "DEBUG": "app:*"
@@ -99,6 +100,7 @@
     "babel-preset-stage-0": "^6.3.13",
     "babel-runtime": "^6.11.6",
     "better-npm-run": "0.0.11",
+    "bootstrap": "^3.3.7",
     "css-loader": "^0.25.0",
     "cssnano": "^3.7.4",
     "debug": "^2.2.0",
@@ -124,6 +126,7 @@
     "path": "^0.12.7",
     "pmx": "^0.6.8",
     "postcss-loader": "^0.13.0",
+    "rc-collapse": "^1.6.11",
     "rc-slider": "^5.1.1",
     "react": "^15.0.0",
     "react-addons-transition-group": "^15.3.2",
@@ -134,6 +137,7 @@
     "react-dropzone": "^3.6.0",
     "react-flags": "^0.1.12",
     "react-icons": "^2.2.1",
+    "react-image-crop": "^1.0.4",
     "react-image-gallery": "^0.7.1",
     "react-mixin": "^2.0.2",
     "react-notification-system": "^0.2.10",
@@ -144,6 +148,7 @@
     "react-redux-i18n": "^0.1.0",
     "react-redux-toastr": "^3.9.1",
     "react-router": "^2.8.0",
+    "react-scroll": "^1.4.4",
     "react-select": "^1.0.0-rc.2",
     "react-slick": "^0.14.5",
     "react-sticky": "^5.0.5",

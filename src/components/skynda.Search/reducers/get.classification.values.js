@@ -2,14 +2,14 @@ import moment from "moment";
 import {setBaseValues} from "./../actions"
 import {Translate} from 'react-redux-i18n';
 import React from "react";
-import remoteConfig from "store/remoteConfig";
+import remoteConfig from "../../../store/remoteConfig";
 import fetch from "isomorphic-fetch";
 
 async function getClassificationList(type){
-  return await fetch(`${remoteConfig.remote}/api/classifications/${type}`, {
+  return await fetch(`${remoteConfig.remote}/api/classifications/${type}/vehicle-bound`, {
     method: "GET",
     credentials: "include",
-    headers: {"Accept": "application/json", "Content-Type": "application/x-www-form-urlencoded"}
+    headers: {"Accept": "application/json", "Content-Type": "application/json"}
   })
     .then(resp => resp.json())
     .then(resp => {

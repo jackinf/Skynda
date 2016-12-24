@@ -3,7 +3,10 @@
  */
 
 import React from "react";
-import {Well, Row, Col, Accordion, Panel} from "react-bootstrap";
+import Collapse, {Panel} from "rc-collapse";
+import {Well, Row, Col} from "react-bootstrap";
+import "rc-collapse/assets/index.css";
+import FaBeer from 'react-icons/lib/fa/beer';
 
 export default class extends React.Component {
   render() {
@@ -53,15 +56,16 @@ export default class extends React.Component {
       </Row>
       <Row>
         <Col sm={8} smOffset={2}>
-          <Accordion>
+          <Collapse accordion={true}>
             {panels.map((panel, i) => (
-              <Panel key={i} className="how-it-works__faq-panel" header={panel.questionText} eventKey={i+1}>
+              <Panel key={i} className="how-it-works__faq-panel" header={panel.questionText}>
+                {/*<FaBeer style={{position: "absolute", right: "25px", top: "11px"}} />*/}
                 <Well>
                   {panel.answerText}
                 </Well>
               </Panel>
             ))}
-          </Accordion>
+          </Collapse>
         </Col>
       </Row>
     </div>)

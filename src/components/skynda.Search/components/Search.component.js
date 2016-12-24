@@ -1,14 +1,16 @@
 import React, {PropTypes} from 'react'
 import {Row, Col} from "react-bootstrap";
-import ButtonGroupContainer from "../containers/SelectBtnContainer";
-import SliderContainer from "../containers/SliderContainer";
-import ToggleBtnContainer from "../containers/ToggleBtnContainer";
-import SearchBtnContainer from "../containers/SearchBtnContainer";
-import SearchResultsContainer from "../containers/ResultsContainer"
-import "./Search.Block.scss";
 import {Translate} from 'react-redux-i18n';
 import Plus from 'react-icons/lib/fa/plus'
 import Minus from 'react-icons/lib/fa/minus'
+import RefreshIndicator from 'material-ui/RefreshIndicator';
+
+import "./Search.component.scss";
+import ButtonGroupContainer from "../containers/Select.button.container";
+import SliderContainer from "../../Slider/Slider.container";
+import ToggleBtnContainer from "../containers/Search.toggle.button.container";
+import SearchBtnContainer from "../containers/Search.button.container";
+import SearchResultsContainer from "../containers/Search.results.container"
 
 const colors = [
   {id: -1, name: "Kõik"},
@@ -29,15 +31,34 @@ const colors = [
   {id: 8, name: "black", style: {"backgroundColor": "#000000"}, hideName: true}
 ];
 
+// Temporarily not used.
+function ColorsComponent() {
+  return (<Row>
+    <Col md={12} className='range-slider-wrapper'>
+      <label><Translate value="components.car_search.colors"/></label><br />
+      <ButtonGroupContainer type={"colors"} md={1} xs={2} options={colors} shape='circle'/>
+    </Col>
+  </Row>)
+}
+
 class SearchComponent extends React.Component {
+  defaultSliderValues = {
+    mileage: {min: 0, max: 500000},
+    price: {min: 0, max: 500000},
+    year: {min: 2007, max: 2017},
+    petrolConsumption: {min: 0, max: 20},
+    power: {min: 0, max: 1000}
+  };
+
   async componentWillMount() {
     await this.props.getClassificationsAsync();
   }
 
   render() {
+    const {sliderValues} = this.props;
     const data = this.props.seats;
     if (data === undefined) {
-      return <div>Loading...</div>;
+      return <div><RefreshIndicator size={100} left={200} top={200} status="loading"/></div>;
     }
 
     return (
@@ -61,32 +82,32 @@ class SearchComponent extends React.Component {
                   <Col md={4}>
                     <Row>
                       <Col md={12}>
-
                         <SliderContainer
                           title={<Translate value="components.car_search.mileage"/>}
                           step={100}
-                          min={this.props.sliderValues.mileage.min}
-                          max={this.props.sliderValues.mileage.max}
-                          units={this.props.sliderValues.mileage.units}
+                          defaultMin={this.defaultSliderValues.mileage.min}
+                          defaultMax={this.defaultSliderValues.mileage.max}
+                          min={sliderValues.mileage.min}
+                          max={sliderValues.mileage.max}
+                          units={sliderValues.mileage.units}
                           type={"mileage"}
                         />
-
                       </Col>
                     </Row>
                   </Col>
                   <Col md={4}>
                     <Row>
                       <Col md={12} className='range-slider-wrapper'>
-
                         <SliderContainer
                           title={<Translate value="components.car_search.price"/>}
                           step={100}
-                          min={this.props.sliderValues.price.min}
-                          max={this.props.sliderValues.price.max}
-                          units={this.props.sliderValues.price.units}
+                          defaultMin={this.defaultSliderValues.price.min}
+                          defaultMax={this.defaultSliderValues.price.max}
+                          min={sliderValues.price.min}
+                          max={sliderValues.price.max}
+                          units={sliderValues.price.units}
                           type={"price"}
                         />
-
                       </Col>
                     </Row>
                   </Col>
@@ -97,9 +118,11 @@ class SearchComponent extends React.Component {
                         <SliderContainer
                           title={<Translate value="components.car_search.year"/>}
                           step={1}
-                          min={this.props.sliderValues.year.min}
-                          max={this.props.sliderValues.year.max}
-                          units={this.props.sliderValues.year.units}
+                          defaultMin={this.defaultSliderValues.year.min}
+                          defaultMax={this.defaultSliderValues.year.max}
+                          min={sliderValues.year.min}
+                          max={sliderValues.year.max}
+                          units={sliderValues.year.units}
                           type={"year"}
                         />
 
@@ -117,31 +140,6 @@ class SearchComponent extends React.Component {
                           <Col md={8}>
                             <Row>
                               <Col md={12} className='range-slider-wrapper'>
-                                <label><Translate value="components.car_search.colors"/></label><br />
-                                <ButtonGroupContainer type={"colors"} md={1} xs={2} options={colors} shape='circle'/>
-                              </Col>
-                            </Row>
-                          </Col>
-                          <Col md={4}>
-                            <Row>
-                              <Col md={12} className='range-slider-wrapper'>
-                                <SliderContainer
-                                  title={<Translate value="components.car_search.petrol_consumption"/>}
-                                  step={0.1}
-                                  min={this.props.sliderValues.petrolConsumption.min}
-                                  max={this.props.sliderValues.petrolConsumption.max}
-                                  units={this.props.sliderValues.petrolConsumption.units}
-                                  type={"petrolConsumption"}
-                                />
-                              </Col>
-                            </Row>
-                          </Col>
-                        </Row>
-
-                        <Row>
-                          <Col md={8}>
-                            <Row>
-                              <Col md={12} className='range-slider-wrapper'>
                                 <label><Translate value="components.car_search.features"/></label>
                                 <ButtonGroupContainer type={"features"} md={3} options={this.props.features}/>
                               </Col>
@@ -151,11 +149,28 @@ class SearchComponent extends React.Component {
                             <Row>
                               <Col md={12} className='range-slider-wrapper'>
                                 <SliderContainer
+                                  title={<Translate value="components.car_search.petrol_consumption"/>}
+                                  step={0.1}
+                                  defaultMin={this.defaultSliderValues.petrolConsumption.min}
+                                  defaultMax={this.defaultSliderValues.petrolConsumption.max}
+                                  min={sliderValues.petrolConsumption.min}
+                                  max={sliderValues.petrolConsumption.max}
+                                  units={sliderValues.petrolConsumption.units}
+                                  type={"petrolConsumption"}
+                                />
+                              </Col>
+                            </Row>
+
+                            <Row>
+                              <Col md={12} className='range-slider-wrapper'>
+                                <SliderContainer
                                   title={<Translate value="components.car_search.power"/>}
                                   step={1}
-                                  min={this.props.sliderValues.power.min}
-                                  max={this.props.sliderValues.power.max}
-                                  units={this.props.sliderValues.power.units}
+                                  defaultMin={this.defaultSliderValues.power.min}
+                                  defaultMax={this.defaultSliderValues.power.max}
+                                  min={sliderValues.power.min}
+                                  max={sliderValues.power.max}
+                                  units={sliderValues.power.units}
                                   type={"power"}
                                 />
                               </Col>
@@ -202,11 +217,7 @@ class SearchComponent extends React.Component {
                   <Col md={12}>
                     <div className='text-right'>
                       <ToggleBtnContainer className='btn btn-link fk-filter-advance'>
-                        {
-                          this.props.showAdvancedSearch
-                            ? <Minus/>
-                            : <Plus />
-                        }
+                        {this.props.showAdvancedSearch ? <Minus/> : <Plus />}
                         &nbsp;&nbsp;
                         <Translate value="components.car_search.advanced_txt"/>
                       </ToggleBtnContainer>

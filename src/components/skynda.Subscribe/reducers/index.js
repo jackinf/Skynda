@@ -1,11 +1,11 @@
-import {subscribeReducers, onHandleSubmitFinished} from "./set.values";
-
+import {subscribeReducers, onHandleSubmitFinished, onHandleDialogClose} from "./Subscribe.reducer";
 
 export function defaultInject(store, injectReducer) {
-  injectReducer(store, {key: "isSubscribed", reducer: subscribeReducers});
+  injectReducer(store, {key: "subscribeInfo", reducer: subscribeReducers});
 }
 
 export {
   subscribeReducers,
-  onHandleSubmitFinished
+  onHandleSubmitFinished,
+  onHandleDialogClose
 };

@@ -14,6 +14,14 @@ import imageVunk from "./../assets/group@2x.png.png";
 import AboutSkblock from "./AboutSkblock";
 
 export class About extends React.Component {
+  propTypes = {
+    loadDescription: React.PropTypes.func.isRequired,
+    loadPeople: React.PropTypes.func.isRequired,
+
+    people: React.PropTypes.array,
+    description: React.PropTypes.string,
+  };
+
   componentWillMount() {
     this.props.loadDescription();
     this.props.loadPeople();
@@ -39,7 +47,7 @@ export class About extends React.Component {
       <Row>
         <Col md={8}>
           <AboutSkblock header='Skynda muudab auto ostmise ja müümise kogemust'>
-            <Col md={12}>
+            <Col md={12} style={{marginLeft: "-14px"}}>
               {this.props.description}
             </Col>
           </AboutSkblock>

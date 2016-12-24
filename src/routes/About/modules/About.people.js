@@ -49,20 +49,15 @@ const ACTION_HANDLERS = {
         name: "Ardi Aver",
         position: "Arendaja"
       },
-      {
-        imageUrl: imageFace5,
-        name: "Mihhail Marenkov",
-        position: "Arendaja"
-      },
+      // {
+      //   imageUrl: imageFace5,
+      //   name: "Mihhail Marenkov",
+      //   position: "Arendaja"
+      // },
       {
         imageUrl: imageFace7,
         name: "Artur Puiste",
         position: "UX Disainer"
-      },
-      {
-        imageUrl: imageFace8,
-        name: "Tähtis Nimi",
-        position: "Investor"
       }
     ];
 

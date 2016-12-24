@@ -1,3 +1,3 @@
-import SubscribeContainer from "./containers/SubscribeContainer"
+import SubscribeContainer from "./containers/Subscribe.container"
 
 export default SubscribeContainer;
