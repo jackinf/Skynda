@@ -2,8 +2,8 @@
  * Created by jevgenir on 10/2/2016.
  */
 
+const env = process.env.NODE_ENV || "development";
 const config = {
-  // remote: "http://skynda.me:8888",
   remote: "http://localhost:8888",
 
   pipeDrive: {
@@ -14,5 +14,9 @@ const config = {
     stages_api: "https://api.pipedrive.com/v1/stages",
   }
 };
+
+if (env === "production") {
+  config.remote = "http://skynda.me:8888";
+}
 
 export default config;

@@ -203,7 +203,7 @@ class Vehicle extends React.Component {
               <Col md={6} xs={12}>
                 <h4>General data</h4>
 
-                <Field name="model.id" label="Model Code *" component={selectRenderer(vehicleModels, this.setField)}/>
+                <Field name="model.id" label="Vehicle model *" component={selectRenderer(vehicleModels, this.setField)}/>
 
                 {/*<button className="btn btn-success" onClick={e => this.openVehicleModalDialog(e)}>Add new vehicle model</button>*/}
 
