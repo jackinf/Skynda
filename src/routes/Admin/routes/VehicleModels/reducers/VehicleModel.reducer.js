@@ -5,6 +5,7 @@ import {FORM_MODE, ROUTE_PARAMS} from "../constants/VehicleModel.constant";
 import remoteConfig from "../../../../../store/remoteConfig";
 import {change, destroy} from "redux-form";
 import {browserHistory} from "react-router";
+import _ from "underscore";
 
 // ------------------------------------
 // Actions
@@ -59,11 +60,20 @@ export const randomize = (prevItem) => (dispatch) => {
   dispatch(setItem(fake));
 };
 
-export const onHandleSubmitFinished = (resp) => (dispatch, getState) => {
+/**
+ *
+ * @param resp
+ * @param onSubmitCustom - custom callback function
+ */
+export const onHandleSubmitFinished = (resp, onSubmitCustom = null) => (dispatch) => {
   if (resp && resp.success && !isNaN(parseInt(resp.id))) {
-    dispatch(change("vehicleModelForm", "id", resp.id));
-    dispatch(setFormMode(FORM_MODE.UPDATING));
-    browserHistory.replace("/admin/vehicle-model/" + resp.id);
+    if (onSubmitCustom && _.isFunction(onSubmitCustom)) {
+      onSubmitCustom(null, resp.id);
+    } else {
+      dispatch(change("vehicleModelForm", "id", resp.id));
+      dispatch(setFormMode(FORM_MODE.UPDATING));
+      browserHistory.replace("/admin/vehicle-model/" + resp.id);
+    }
   }
 };
 

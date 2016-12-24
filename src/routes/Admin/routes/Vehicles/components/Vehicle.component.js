@@ -23,6 +23,12 @@ import {Row, Col} from "react-bootstrap";
 import RefreshIndicator from 'material-ui/RefreshIndicator';
 import fromSpringToReduxFormError from "../../../../../utils/formUtils/fromSpringToReduxFormError";
 
+import VehicleModel from "../../VehicleModels/containers/VehicleModel.container";
+// import Dialog from "material-ui/Dialog";
+import {Modal} from "react-bootstrap";
+import {ROUTE_PARAMS as VEHICLE_MODEL_ROUTE_PARAMS} from "../../VehicleModels/constants/VehicleModel.constant";
+import _ from "underscore";
+
 class Vehicle extends React.Component {
   static propTypes = {
     isFetching: React.PropTypes.bool.isRequired,
@@ -101,7 +107,8 @@ class Vehicle extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: this.props.params[ROUTE_PARAMS.VEHICLE_ID]
+      id: this.props.params[ROUTE_PARAMS.VEHICLE_ID],
+      isVehicleModelDialogOpen: false
     };
   }
 
@@ -125,8 +132,35 @@ class Vehicle extends React.Component {
    * @param chosenOption - object {label: string (visible text), value: int (ID)}
    */
   setField = (name, chosenOption) => {
+    console.log("setField", name, chosenOption);
     const hackName = name.replace(".id", "");
-    this.props.dispatch(change(FORMS.VEHICLE_FORM, hackName, {id: chosenOption.value}));
+    if (chosenOption.value !== chosenOption.label) {
+      this.props.dispatch(change(FORMS.VEHICLE_FORM, hackName, {id: chosenOption.value}));
+    } else if (hackName === "model") {
+      this.openVehicleModelDialog(null);
+    }
+  };
+
+  openVehicleModelDialog = (e) => {
+    if (e && e.hasOwnProperty("preventDefault") && _.isFunction(e.preventDefault))
+      e.preventDefault(); // stop event propagation to avoid form submission.
+    this.setState({isVehicleModelDialogOpen: true});
+  };
+
+  /**
+   *
+   * @param e - event, if exists. E.g. button click event.
+   * @param value - vehicle model id
+   */
+  closeVehicleModelDialog = (e, value) => {
+    if (e && e.hasOwnProperty("preventDefault") && _.isFunction(e.preventDefault))
+      e.preventDefault(); // stop event propagation to avoid form submission.
+    this.setState({isVehicleModelDialogOpen: false});
+
+    const promise = this.props.getVehicleModelsList();
+    if (value && promise) {
+      promise.then(() => { this.setField("model", {value}) });
+    }
   };
 
   /**
@@ -170,6 +204,22 @@ class Vehicle extends React.Component {
                 <h4>General data</h4>
 
                 <Field name="model.id" label="Model Code *" component={selectRenderer(vehicleModels, this.setField)}/>
+
+                {/*<button className="btn btn-success" onClick={e => this.openVehicleModalDialog(e)}>Add new vehicle model</button>*/}
+
+                {/*<Dialog open={this.state.isVehicleModelDialogOpen} >*/}
+                  {/*<VehicleModel params={{"vehicleModelId": "new"}} />*/}
+                {/*</Dialog>*/}
+
+                <Modal show={this.state.isVehicleModelDialogOpen} onHide={this.closeVehicleModelDialog}>
+                  <Modal.Header closeButton>
+                    <Modal.Title>Modal heading</Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>
+                    <VehicleModel params={{[VEHICLE_MODEL_ROUTE_PARAMS.VEHICLE_MODEL_ID]: "new"}}
+                                  onSubmitCustom={this.closeVehicleModelDialog} />
+                  </Modal.Body>
+                </Modal>
 
                 <MainImageField title="Main image"
                                 errors={errors}

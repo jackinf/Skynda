@@ -33,7 +33,7 @@ class VehicleModel extends React.Component {
 
   onSubmit(e) {
     let promise = this.props.handleSubmit(data => onHandleSubmit(data, this.props.formInfo))(e);
-    promise && promise.then(resp => {this.props.onHandleSubmitFinished(resp)});
+    promise && promise.then(resp => {this.props.onHandleSubmitFinished(resp, this.props.onSubmitCustom)});
   }
 
   render() {
@@ -60,6 +60,7 @@ class VehicleModel extends React.Component {
       : (<div>
       <div className="well vehicle-model__form-info__helper-block">
         <h4>Form info: {JSON.stringify(this.props.formInfo)}</h4>
+        <h5>Is modal: {this.props.isModal ? "yes" : "no"}</h5>
         <button onClick={e => this.props.randomize(this.props.formInfo.item)}>Random</button>
       </div>
 
