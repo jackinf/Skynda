@@ -194,6 +194,7 @@ function map(vehicleData) {
     fuelType: vehicleData.model.fuelType ? vehicleData.model.fuelType.name : ""
   };
   const safetyStars = vehicleData.safetyStars;
+  const safetyUrl = vehicleData.safetyUrl;
   const report = {
     reportItems: vehicleData.reportItems ? vehicleData.reportItems.map(reportItem => ({
       title: reportItem.title,
@@ -229,6 +230,7 @@ function map(vehicleData) {
     history,
     petrolConsumption,
     safetyStars,
+    safetyUrl,
     report,
     reviews,
     additional
@@ -251,12 +253,6 @@ export const getDataAsync = (id) => (dispatch, getState) => {
         dispatch(setCarData(mappedData));
         dispatch(toggleLoading(false));
       });
-      // .catch((error) => {
-      //   console.log("ERROR: ", error);
-      //   dispatch(setVehicleReportData(fakeCarData));
-      //   dispatch(toggleLoading(false));
-      // });
-
 };
 
 export function setCarData(value) {

@@ -73,12 +73,13 @@
         "send_question": "Saada"
       },
       "checkout_panel": {
-        "your_name": "Sinu Nimi",
-        "email": "E-Posti Aadress",
+        "your_name": "Sinu nimi",
+        "email": "E-posti aadress",
         "phone": "Mobiiltelefoni number",
         "btn_send": "Saada",
         "contact_24h_txt": "Võtame sinuga ühendust 24h jooksul.",
-        "contact_us_txt": "Kirjuta meile"
+        "contact_us_txt": "Tekkis küsimus? Kirjuta meile",
+        "add_comment": "Soovi korral lisa kommentaar/küsimus"
       },
       "features": {
         "header": "Mugavusvarustus"
