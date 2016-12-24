@@ -42,8 +42,7 @@ public class VehicleDetailedDto {
 
 	private List<FeatureDto> features;
 	private List<FaultBaseDto> faults;
-	private List<CategoriesDto> reportsCategories;
-	private List<VehicleReportItemDto> reportItems;
+	private List<CategoriesDto> reportCategories;
 
 	private List<ImageContainerDto> images;
 	private List<DescriptionDto> descriptions;

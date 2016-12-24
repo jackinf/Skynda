@@ -6,14 +6,11 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
-/**
- * Created by jevgenir on 11/19/2016.
- */
+
 @Entity
 @Data
 @Table(name = "vehicle_report_category_item")
 public class VehicleReportCategoryItem  implements Serializable {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

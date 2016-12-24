@@ -4,17 +4,14 @@ import me.skynda.common.db.SkyndaBaseEntityDaoImpl;
 import me.skynda.common.interfaces.daos.VehicleReportItemDao;
 import me.skynda.vehicle.dto.VehicleReportItemDto;
 import me.skynda.vehicle.entities.Vehicle;
-import me.skynda.vehicle.entities.VehicleReportItem;
+import me.skynda.vehicle.entities.VehicleReportCategory;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-/**
- * Created by jevgenir on 11/20/2016.
- */
 @Repository
-public class VehicleReportItemDaoImpl extends SkyndaBaseEntityDaoImpl<VehicleReportItem> implements VehicleReportItemDao {
+public class VehicleReportItemDaoImpl extends SkyndaBaseEntityDaoImpl<VehicleReportCategory> implements VehicleReportItemDao {
 
     @Override
     public void addMultipleToVehicle(Vehicle vehicle, List<VehicleReportItemDto> descriptions) {
@@ -29,7 +26,7 @@ public class VehicleReportItemDaoImpl extends SkyndaBaseEntityDaoImpl<VehicleRep
             return;
 
         for (VehicleReportItemDto reportItem : descriptions) {
-            VehicleReportItem vehicleDescription = new VehicleReportItem();
+            VehicleReportCategory vehicleDescription = new VehicleReportCategory();
             vehicleDescription.setVehicleId(vehicle.getId());
             vehicleDescription.setTitle(reportItem.getTitle());
             vehicleDescription.setDescription(reportItem.getDescription());

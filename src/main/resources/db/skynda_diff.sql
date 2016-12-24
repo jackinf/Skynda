@@ -1,3 +1,3 @@
 
-ALTER TABLE vehicle
-	ADD COLUMN safety_url character varying(200);
+ALTER TABLE vehicle_report_category
+	ADD COLUMN inspector_name character varying(100);

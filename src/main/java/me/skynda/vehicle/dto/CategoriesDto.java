@@ -10,6 +10,7 @@ import lombok.ToString;
 public class CategoriesDto {
 	
 	private String title;
+	private String description;
 	private List<PointsDto> items;
-
+	private String inspector;
 }

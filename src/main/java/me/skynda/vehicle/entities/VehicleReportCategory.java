@@ -19,10 +19,15 @@ public class VehicleReportCategory implements Serializable {
     @Column(name = "title")
     private String title;
 
+    @Column(name = "description")
+    private String description;
+
     @Column(name = "vehicle_id", nullable = false)
     private Integer vehicleId;
 
     @OneToMany(mappedBy = "vehicleReportCategoryId", fetch = FetchType.LAZY)
     private List<VehicleReportCategoryItem> items;
 
+    @Column(name = "inspector_name")
+    private String inspector;
 }
