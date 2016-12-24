@@ -13,8 +13,10 @@ import { Translate } from 'react-redux-i18n';
 class ModalBtnCarousel extends React.Component {
 
   render() {
+    const {onShowModal, onHideModal, isShowModal, images} = this.props;
+
     return (<span>
-      <Button onClick={this.props.onShowModal}>
+      <Button onClick={onShowModal}>
         <div className='image-btn-content-wrapper'>
           <img src={imageCam}/>
           <span><Translate value="details.components.main_image.btn_txt_view_photos"/></span>
@@ -23,18 +25,18 @@ class ModalBtnCarousel extends React.Component {
 
       <Modal
         bsClass='modal2'
-        show={this.props.isShowModal}
-        onHide={this.props.onHideModal}
+        show={isShowModal}
+        onHide={onHideModal}
         bsSize='lg'
       >
         <Modal.Header closeButton bsClass='modal2-header' />
         <Modal.Body bsClass='modal2-body'>
           <div>
             <Carousel>
-              {this.props.images.map(function(row, i) {
+              {images.map(function(image, i) {
                 return (
                   <Carousel.Item className='modal-2-minimal-item-height' key={i}>
-                    <img width={900} height={500} alt='900x500' src={row.original}/>
+                    <img width={900} height={500} alt='900x500' src={image}/>
                     <Carousel.Caption />
                   </Carousel.Item>
                 );
@@ -49,9 +51,7 @@ class ModalBtnCarousel extends React.Component {
 }
 
 ModalBtnCarousel.propTypes = {
-  images: React.PropTypes.arrayOf(React.PropTypes.shape({
-    original: React.PropTypes.string
-  })).isRequired,
+  images: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
   isShowModal: React.PropTypes.bool.isRequired,
   onShowModal: React.PropTypes.func.isRequired,
   onHideModal: React.PropTypes.func.isRequired

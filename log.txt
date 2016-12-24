@@ -1,0 +1,1 @@
+/root/dev/skynda-backend/script.sh: line 1: mvn: command not found

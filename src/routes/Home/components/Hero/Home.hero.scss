@@ -53,3 +53,25 @@
   align-items: center;
   justify-content: center;
 }
+
+.sk-hero__parallax-container {
+  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3));
+  background-size:cover;
+  text-align: center;
+  height: 650px;
+  padding: 200px 0;
+
+  @media screen and (max-width: 400px) {
+    padding: 100px 0 !important;
+  }
+
+  & > h2 {
+    color: whitesmoke;
+    max-width: 1024px;
+    margin: 0 auto;
+    padding: 50px;
+    font-size: 2em;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  }
+}
+

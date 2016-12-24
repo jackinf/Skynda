@@ -164,8 +164,6 @@ function map(vehicleData) {
     price: vehicleData.price
   };
 
-  console.log("vehicleData.drivetrain", vehicleData.drivetrain);
-
   const overview = {
     manufacturer: vehicleData.model.vehicleManufacturer.name,
     engine: vehicleData.model.engine,
@@ -173,8 +171,8 @@ function map(vehicleData) {
     mileage: vehicleData.mileage,
     transmission: vehicleData.model.transmission ? vehicleData.model.transmission.name : "",
     drive: vehicleData.model.drivetrain ? vehicleData.model.drivetrain.name : "",
-    colorOutside: vehicleData.colorInside.name,
-    colorInside: vehicleData.colorOutside.name,
+    colorOutside: vehicleData.colorInside != null ? vehicleData.colorInside.name : "",
+    colorInside: vehicleData.colorOutside != null ? vehicleData.colorOutside.name : "",
     doors: parseInt(vehicleData.model.doors),
     seats: vehicleData.model.seats
   };

@@ -56,7 +56,7 @@ const fetchItem = (id) => (dispatch) => {
   })
     .then(resp => resp.json())
     .then(data => {
-      dispatch(setFetchSuccessful());
+      dispatch(setFetchSuccessful(data.id));
       dispatch(setVehicleData(data));
       dispatch(setFormMode(FORM_MODE.UPDATING));
     })
@@ -75,8 +75,8 @@ export const onHandleSubmitFinished = (resp) => (dispatch) => {
   console.log("onHandleSubmitFinished", resp);
   if (resp) {
     if (resp.success && !isNaN(parseInt(resp.id))) {
-      dispatch(change(FORMS.VEHICLE_FORM, "id", resp.id));
       dispatch(setFormMode(FORM_MODE.UPDATING));
+      dispatch(setFetchSuccessful(resp.id));
       browserHistory.replace("/admin/vehicle/" + resp.id);
       toastr.success('Success', resp.message);
     } else {
@@ -119,8 +119,9 @@ function setFetching(isFetching = true) {
   }
 }
 
-function setFetchSuccessful() {
+function setFetchSuccessful(id) {
   return {
+    id: id,
     type: FETCH_SUCCESSFUL,
     isFetching: false,
     errors: []  // no errors
@@ -144,13 +145,13 @@ const ACTION_HANDLERS = {
   [CLEAR_VEHICLE_DATA]: (state, action) => ({...state, item: action.item}),
   [FETCHING]: (state, action) => ({...state, isFetching: action.isFetching, errors: action.errors}),
   [FETCH_SUCCESSFUL]: (state, action) => ({...state, isFetching: action.isFetching, errors: action.errors}),
-  [FETCH_FAILED]: (state, action) => ({...state, isFetching: action.isFetching, errors: action.errors}),
+  [FETCH_FAILED]: (state, action) => ({...state, isFetching: action.isFetching, errors: action.errors})
 };
 
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState = {isFetching: false, item: null};
+const initialState = {isFetching: false, item: null, errors: []};
 export default function reducer(state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type];
   return handler ? handler(state, action) : state;

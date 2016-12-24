@@ -40,8 +40,8 @@ class Reviews extends React.Component {
         }
 
         const truncatedTextMaxLength = 100;
-        const dots = review.text.length > truncatedTextMaxLength ? "..." : "";
-        let trumcatedText = review.text.substring(0, Math.min(truncatedTextMaxLength, review.text.length)) + dots;
+        const suffix = review.text.length > truncatedTextMaxLength ? "..." : "";
+        let trumcatedText = review.text.substring(0, Math.min(truncatedTextMaxLength, review.text.length)) + suffix;
         return ((<div key={i} className='panel panel-default'>
             <div className='panel-body'>
               <Row className='sk_details__reviews__header'>
