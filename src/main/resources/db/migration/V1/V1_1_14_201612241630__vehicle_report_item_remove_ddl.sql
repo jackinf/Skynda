@@ -9,8 +9,6 @@ BEGIN
 
 DROP TABLE vehicle_report_item;
 
-DROP SEQUENCE vehicle_report_item_id_seq;
-
 ALTER TABLE vehicle_report_category
 	ADD COLUMN description character varying;
 
