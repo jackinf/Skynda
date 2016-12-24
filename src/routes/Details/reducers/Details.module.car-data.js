@@ -206,7 +206,7 @@ function map(vehicleData) {
       text: fault.text,
       img: fault.image ? fault.image.url : ""
     })) : [],
-    inspector: vehicleData.reportCategories ? vehicleData.reportCategories[0].inspector : ""
+    inspector: vehicleData.reportCategories && vehicleData.reportCategories[0] ? vehicleData.reportCategories[0].inspector : ""
 
   };
   const reviews = vehicleData.reviews.map(review => {

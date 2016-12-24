@@ -5,15 +5,14 @@ import "slick-carousel/slick/slick-theme.scss"
 import "slick-carousel/slick/slick.min.js"
 import "./simplecarousel.scss"
 
-
 export class SimpleCarousel extends React.Component{
 
   render() {
     function NextButton({ onClick }) {
-      return <button onClick={onClick} data-role="none" className="slick-arrow slick-custom glyphicon glyphicon-chevron-right"/>;
+      return <button onClick={onClick} className="slick-arrow slick-custom glyphicon glyphicon-chevron-right"/>;
     }
     function PrevButton({ onClick }) {
-      return <button onClick={onClick} data-role="none" className="slick-arrow slick-custom glyphicon glyphicon-chevron-left"/>;
+      return <button onClick={onClick} className="slick-arrow slick-custom glyphicon glyphicon-chevron-left"/>;
     }
 
     const initialSlide = this.props.images.length > 0 ?
@@ -30,26 +29,25 @@ export class SimpleCarousel extends React.Component{
       prevArrow: <PrevButton/>,
       initialSlide:initialSlide,
       focusOnSelect: true,
-      draggable: false
+      draggable: true
     };
     let content = [];
     if(this.props.images.length > 0 ){
       content  = this.props.images.map(function(row, i) {
         return (
           <div key={i}>
-            <img width={250} alt='300xpic' src={row.img}/>
+            <img width={250} alt='300xpic' src={row.img} className="skynda-slick-container-image"/>
           </div>
         );
       });
     }else {
       for (let i = 0; i < 5; i++) {
-        content.push(<div key={i}><img width={250} src='http://placekitten.com/g/400/200'/></div>);
+        content.push(<div key={i}><img width={250}  src='http://placekitten.com/g/400/200' className="skynda-slick-container-image"/></div>);
       }
     }
 
     return (
       <div className="slickContainer">
-
           <Slider {...settings} >
             {content}
           </Slider>
@@ -57,6 +55,6 @@ export class SimpleCarousel extends React.Component{
     );
   }
 
-};
+}
 
 export default SimpleCarousel
