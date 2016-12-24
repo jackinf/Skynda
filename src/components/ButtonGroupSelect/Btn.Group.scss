@@ -5,6 +5,10 @@ $default-color: $color-primary; // old value: #019BFF
 $default-border-color: #E8E5E5;
 
 .btn-group {
+  button{
+    white-space: normal;
+  }
+
   .btn-group__circle {
     border-radius: 50%;
     border-color: $default-border-color;
