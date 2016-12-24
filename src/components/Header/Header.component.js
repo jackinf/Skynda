@@ -56,22 +56,22 @@ class Header extends React.Component {
 
     let i = 0;
     const items = [(<li key={++i}  className='sk_menu__buy'>
-      <Link  to="/search" style={activeStyleContainer["/search"]}>
+      <Link className="skynda-nav-link" to="/search" style={activeStyleContainer["/search"]}>
         <Translate value="components.header.buy_car_txt"/>
       </Link >
     </li>),
-      (<li key={++i} className='sk_menu__sell'>
-      <Link  to="/sell-new-car" style={activeStyleContainer["/sell-new-car"]}>
+      (<li key={++i} className='skynda-nav-link sk_menu__sell'>
+      <Link className="skynda-nav-link" to="/sell-new-car" style={activeStyleContainer["/sell-new-car"]}>
         <Translate value="components.header.sell_car_txt"/>
       </Link >
     </li>),
-      (<li key={++i}  className='sk_menu__about'>
-        <Link  to="/how-it-works" style={activeStyleContainer["/how-it-works"]}>
+      (<li key={++i}  className='skynda-nav-link sk_menu__about'>
+        <Link className="skynda-nav-link" to="/how-it-works" style={activeStyleContainer["/how-it-works"]}>
           <Translate value="components.header.how_it_works"/>
         </Link >
       </li>),
-      (<li key={++i}  className='sk_menu__about'>
-        <Link  to="/about" style={activeStyleContainer["/about"]}>
+      (<li key={++i}  className='skynda-nav-link sk_menu__about'>
+        <Link to="/about" style={activeStyleContainer["/about"]}>
           <Translate value="components.header.about_us"/>
         </Link >
       </li>)];

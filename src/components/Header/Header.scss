@@ -16,6 +16,16 @@
   }
 }
 
+@media screen and (min-width: 750px) and (max-width: 1024px) {
+  .skynda-nav-link {
+    font-size: 22px;
+    padding-left: 5px !important;
+    padding-right: 0px !important;
+  }
+  .skynda-logo-image-1 {
+    display: none;  // lol xD - hide the fucking bee :D
+  }
+}
 
 .header-container{
   align-items: center;
