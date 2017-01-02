@@ -4,6 +4,7 @@
 import React from 'react';
 import {Field, FieldArray, change, reduxForm} from 'redux-form';
 import {toastr} from "react-redux-toastr";
+import {Card, CardActions, CardTitle, CardText} from 'material-ui/Card';
 
 import {ROUTE_PARAMS, FORM_MODE, FORMS} from "./../constants/Vehicle.constant";
 import {
@@ -12,8 +13,8 @@ import {
   renderReportItems,
   renderFeatures,
   renderFaults,
-  MainImageField,
-  ImagesField,
+  MainImageCardField,
+  ImagesCardField,
   selectRenderer,
   ErrorBlockRenderer
 } from "./Vehicle.redux-form.renderers";
@@ -29,6 +30,10 @@ import VehicleModel from "../../VehicleModels/containers/VehicleModel.container"
 import {Modal} from "react-bootstrap";
 import {ROUTE_PARAMS as VEHICLE_MODEL_ROUTE_PARAMS} from "../../VehicleModels/constants/VehicleModel.constant";
 import _ from "underscore";
+
+const SubmitCardActions = ({disabled}) => (<CardActions>
+  <button className="btn btn-success vehicle-component--button-success" type="submit" disabled={disabled}>Save</button>
+</CardActions>);
 
 class Vehicle extends React.Component {
   static propTypes = {
@@ -202,82 +207,88 @@ class Vehicle extends React.Component {
             <Row>
               <Col md={6} xs={12}>
 
-                <MainImageField title="Main image"
-                                errors={errors}
-                                onMainImageRemove={this.props.onMainImageRemove}
-                                onMainImageUpload={this.props.onMainImageUpload}
-                                onMainImageCropComplete={this.props.onMainImageCropComplete}
-                />
-
-                <h4>General data</h4>
-
-                <Field name="model.id" label="Vehicle model *" component={selectRenderer(vehicleModels, this.setField)}/>
-
-                <Modal show={this.state.isVehicleModelDialogOpen} onHide={this.closeVehicleModelDialog}>
-                  <Modal.Header closeButton>
-                    <Modal.Title>Modal heading</Modal.Title>
-                  </Modal.Header>
-                  <Modal.Body>
-                    <VehicleModel params={{[VEHICLE_MODEL_ROUTE_PARAMS.VEHICLE_MODEL_ID]: "new"}}
-                                  onSubmitCustom={this.closeVehicleModelDialog} />
-                  </Modal.Body>
-                </Modal>
-
-
-                <Field name="colorInside.id"
-                       label="Color Inside *"
-                       errors={errors}
-                       component={selectRenderer(colors, this.setField)}/>
-
-                <Field name="colorOutside.id"
-                       label="Color Outside *"
-                       errors={errors}
-                       component={selectRenderer(colors, this.setField)}/>
-
-                <FieldArray name="descriptions" label="Descriptions" component={descriptionRenderer} errors={errors}/>
-                <FieldArray name="reportItems" label="Report Items" component={renderReportItems} errors={errors}/>
-                <FieldArray name="faults" label="Faults" component={renderFaults}
-                            onFaultFileAdd={this.props.onFaultFileUpload}
-                            onFaultRemove={this.props.onFaultRemove}
-                            errors={errors}
-                />
-                <Field name="fuelCity" label="Fuel City" component={renderTextField} errors={errors}/>
-                <Field name="fuelHighway" label="Fuel Highway" component={renderTextField} errors={errors}/>
-
-
-                <h4>Performance</h4>
-                <Field name="compressionRatio" label="Compression Ratio" component={renderTextField} errors={errors}/>
-                <Field name="compressionType" label="Compression Type" component={renderTextField} errors={errors}/>
-                <Field name="configuration" label="Configuration" component={renderTextField} errors={errors}/>
-                <Field name="cylinders" label="Cylinders" component={renderTextField} errors={errors}/>
-                <Field name="displacement" label="Displacement" component={renderTextField} errors={errors}/>
-                <Field name="size" label="Size" component={renderTextField} type="number" errors={errors}/>
-                <Field name="torque" label="Torque" component={renderTextField} type="number" errors={errors}/>
-                <Field name="totalValves" label="Total Valves" component={renderTextField} type="number" errors={errors}/>
+                <MainImageCardField title="Main image"
+                                    errors={errors}
+                                    onMainImageRemove={this.props.onMainImageRemove}
+                                    onMainImageUpload={this.props.onMainImageUpload}
+                                    onMainImageCropComplete={this.props.onMainImageCropComplete}
+                >
+                  <SubmitCardActions disabled={this.props.submitting} />
+                </MainImageCardField>
 
                 <br/>
 
-                <Field name="isSold" label="Is Sold" component={renderCheckbox} errors={errors}/>
-                <Field name="mileage" label="Mileage *" component={renderTextField} type="number" errors={errors}/>
-                <Field name="price" label="Price *" component={renderTextField} type="number" errors={errors}/>
-                <Field name="registrationNumber" label="Registration Number *" component={renderTextField} errors={errors}/>
-                <Field name="safetyStars" label="Safety Stars" component={renderTextField} type="number" errors={errors}/>
-                <Field name="vinCode" label="Vin Code *" component={renderTextField} errors={errors}/>
-                <Field name="additional" label="Additional info" component={renderTextField} errors={errors}/>
+                <Card>
+                  <CardTitle title={<h3>General</h3>} />
+                  <CardText>
+                    <Field name="model.id" label="Vehicle model *" component={selectRenderer(vehicleModels, this.setField)}/>
+
+                    <Modal show={this.state.isVehicleModelDialogOpen} onHide={this.closeVehicleModelDialog}>
+                      <Modal.Header closeButton>
+                        <Modal.Title>Modal heading</Modal.Title>
+                      </Modal.Header>
+                      <Modal.Body>
+                        <VehicleModel params={{[VEHICLE_MODEL_ROUTE_PARAMS.VEHICLE_MODEL_ID]: "new"}}
+                                      onSubmitCustom={this.closeVehicleModelDialog} />
+                      </Modal.Body>
+                    </Modal>
+
+                    <Field name="colorInside.id"
+                           label="Color Inside *"
+                           errors={errors}
+                           component={selectRenderer(colors, this.setField)}/>
+
+                    <Field name="colorOutside.id"
+                           label="Color Outside *"
+                           errors={errors}
+                           component={selectRenderer(colors, this.setField)}/>
+
+                    <FieldArray name="descriptions" label="Descriptions" component={descriptionRenderer} errors={errors}/>
+                    <FieldArray name="reportItems" label="Report Items" component={renderReportItems} errors={errors}/>
+                    <FieldArray name="faults" label="Faults" component={renderFaults}
+                                onFaultFileAdd={this.props.onFaultFileUpload}
+                                onFaultRemove={this.props.onFaultRemove}
+                                errors={errors}
+                    />
+                    <Field name="fuelCity" label="Fuel City" component={renderTextField} errors={errors}/>
+                    <Field name="fuelHighway" label="Fuel Highway" component={renderTextField} errors={errors}/>
+                    <Field name="isSold" label="Is Sold" component={renderCheckbox} errors={errors}/>
+                    <Field name="mileage" label="Mileage *" component={renderTextField} type="number" errors={errors}/>
+                    <Field name="price" label="Price *" component={renderTextField} type="number" errors={errors}/>
+                    <Field name="registrationNumber" label="Registration Number *" component={renderTextField} errors={errors}/>
+                    <Field name="safetyStars" label="Safety Stars" component={renderTextField} type="number" errors={errors}/>
+                    <Field name="vinCode" label="Vin Code *" component={renderTextField} errors={errors}/>
+                    <Field name="additional" label="Additional info" component={renderTextField} errors={errors}/>
+                  </CardText>
+                  <SubmitCardActions disabled={this.props.submitting} />
+                </Card>
+
+                <br/>
+
+                <Card>
+                  <CardTitle title={<h3>Performance</h3>} />
+                  <CardText>
+                    <Field name="compressionRatio" label="Compression Ratio" component={renderTextField} errors={errors}/>
+                    <Field name="compressionType" label="Compression Type" component={renderTextField} errors={errors}/>
+                    <Field name="configuration" label="Configuration" component={renderTextField} errors={errors}/>
+                    <Field name="cylinders" label="Cylinders" component={renderTextField} errors={errors}/>
+                    <Field name="displacement" label="Displacement" component={renderTextField} errors={errors}/>
+                    <Field name="size" label="Size" component={renderTextField} type="number" errors={errors}/>
+                    <Field name="torque" label="Torque" component={renderTextField} type="number" errors={errors}/>
+                    <Field name="totalValves" label="Total Valves" component={renderTextField} type="number" errors={errors}/>
+                  </CardText>
+
+                  <SubmitCardActions disabled={this.props.submitting} />
+                </Card>
               </Col>
               <Col md={6} xs={12}>
-                <ImagesField onImageFileUpload={this.props.onImageFileUpload}
-                             onImageFileRemove={this.props.onImageFileRemove}
-                             errors={errors}/>
+                <ImagesCardField onImageFileUpload={this.props.onImageFileUpload}
+                                 onImageFileRemove={this.props.onImageFileRemove}
+                                 errors={errors}>
+                  <SubmitCardActions disabled={this.props.submitting} />
+                </ImagesCardField>
               </Col>
             </Row>
-
-            <br />
-
-            <button className="btn btn-success"
-                    style={{padding: "10px", fontSize: "20px", marginBottom: "20px"}}
-                    type="submit"
-                    disabled={this.props.submitting}>Submit</button>
           </form>
 
         )}

@@ -150,7 +150,7 @@ export const renderFaults = ({fields, ...custom}) => fieldListWrapper({
   </div>)
 });
 
-export const MainImageField = (props) => (<Card className="vehicle-component--card-background">
+export const MainImageCardField = (props) => (<Card className="vehicle-component--card-background">
   <CardHeader title={<h2>{props.title}</h2>} />
   <CardMedia>
     <Field name="mainImage.url" component={({input, i}) => (<div>
@@ -174,9 +174,10 @@ export const MainImageField = (props) => (<Card className="vehicle-component--ca
         : <input className="btn btn-default" type="file" onChange={e => props.onMainImageUpload(e)}/>}
     </div>)}/>
   </CardText>
+  {props.children}
 </Card>);
 
-export const ImagesField = (props) => (<Card className="vehicle-component--card-background">
+export const ImagesCardField = (props) => (<Card className="vehicle-component--card-background">
   <CardHeader title={<h2>Images</h2>} />
   <CardText>
     <Row>
@@ -207,6 +208,7 @@ export const ImagesField = (props) => (<Card className="vehicle-component--card-
       </Col>
     </Row>
   </CardText>
+  {props.children}
 </Card>);
 
 export const selectRenderer = (items, onChange, isMulti = false) => ({input, label, meta: {touched, error}, ...custom}) => (
