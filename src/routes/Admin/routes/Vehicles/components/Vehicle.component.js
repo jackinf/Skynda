@@ -8,7 +8,7 @@ import {toastr} from "react-redux-toastr";
 import {ROUTE_PARAMS, FORM_MODE, FORMS} from "./../constants/Vehicle.constant";
 import {
   renderTextField,
-  renderDescriptions,
+  descriptionRenderer,
   renderReportItems,
   renderFeatures,
   renderFaults,
@@ -22,6 +22,7 @@ import {renderCheckbox, renderSelectField} from "../../../components/FormRendere
 import {Row, Col} from "react-bootstrap";
 import RefreshIndicator from 'material-ui/RefreshIndicator';
 import fromSpringToReduxFormError from "../../../../../utils/formUtils/fromSpringToReduxFormError";
+import "./Vehicle.component.scss";
 
 import VehicleModel from "../../VehicleModels/containers/VehicleModel.container";
 // import Dialog from "material-ui/Dialog";
@@ -132,7 +133,6 @@ class Vehicle extends React.Component {
    * @param chosenOption - object {label: string (visible text), value: int (ID)}
    */
   setField = (name, chosenOption) => {
-    console.log("setField", name, chosenOption);
     const hackName = name.replace(".id", "");
     if (chosenOption.value !== chosenOption.label) {
       this.props.dispatch(change(FORMS.VEHICLE_FORM, hackName, {id: chosenOption.value}));
@@ -201,15 +201,17 @@ class Vehicle extends React.Component {
 
             <Row>
               <Col md={6} xs={12}>
+
+                <MainImageField title="Main image"
+                                errors={errors}
+                                onMainImageRemove={this.props.onMainImageRemove}
+                                onMainImageUpload={this.props.onMainImageUpload}
+                                onMainImageCropComplete={this.props.onMainImageCropComplete}
+                />
+
                 <h4>General data</h4>
 
                 <Field name="model.id" label="Vehicle model *" component={selectRenderer(vehicleModels, this.setField)}/>
-
-                {/*<button className="btn btn-success" onClick={e => this.openVehicleModalDialog(e)}>Add new vehicle model</button>*/}
-
-                {/*<Dialog open={this.state.isVehicleModelDialogOpen} >*/}
-                  {/*<VehicleModel params={{"vehicleModelId": "new"}} />*/}
-                {/*</Dialog>*/}
 
                 <Modal show={this.state.isVehicleModelDialogOpen} onHide={this.closeVehicleModelDialog}>
                   <Modal.Header closeButton>
@@ -221,12 +223,6 @@ class Vehicle extends React.Component {
                   </Modal.Body>
                 </Modal>
 
-                <MainImageField title="Main image"
-                                errors={errors}
-                                onMainImageRemove={this.props.onMainImageRemove}
-                                onMainImageUpload={this.props.onMainImageUpload}
-                                onMainImageCropComplete={this.props.onMainImageCropComplete}
-                />
 
                 <Field name="colorInside.id"
                        label="Color Inside *"
@@ -238,9 +234,8 @@ class Vehicle extends React.Component {
                        errors={errors}
                        component={selectRenderer(colors, this.setField)}/>
 
-                <FieldArray name="descriptions" label="Descriptions" component={renderDescriptions} errors={errors}/>
+                <FieldArray name="descriptions" label="Descriptions" component={descriptionRenderer} errors={errors}/>
                 <FieldArray name="reportItems" label="Report Items" component={renderReportItems} errors={errors}/>
-                {/*<FieldArray name="features" label="Features" component={renderFeatures} errors={errors}/>*/}
                 <FieldArray name="faults" label="Faults" component={renderFaults}
                             onFaultFileAdd={this.props.onFaultFileUpload}
                             onFaultRemove={this.props.onFaultRemove}
@@ -249,9 +244,17 @@ class Vehicle extends React.Component {
                 <Field name="fuelCity" label="Fuel City" component={renderTextField} errors={errors}/>
                 <Field name="fuelHighway" label="Fuel Highway" component={renderTextField} errors={errors}/>
 
-                <ImagesField onImageFileUpload={this.props.onImageFileUpload}
-                             onImageFileRemove={this.props.onImageFileRemove}
-                             errors={errors}/>
+
+                <h4>Performance</h4>
+                <Field name="compressionRatio" label="Compression Ratio" component={renderTextField} errors={errors}/>
+                <Field name="compressionType" label="Compression Type" component={renderTextField} errors={errors}/>
+                <Field name="configuration" label="Configuration" component={renderTextField} errors={errors}/>
+                <Field name="cylinders" label="Cylinders" component={renderTextField} errors={errors}/>
+                <Field name="displacement" label="Displacement" component={renderTextField} errors={errors}/>
+                <Field name="size" label="Size" component={renderTextField} type="number" errors={errors}/>
+                <Field name="torque" label="Torque" component={renderTextField} type="number" errors={errors}/>
+                <Field name="totalValves" label="Total Valves" component={renderTextField} type="number" errors={errors}/>
+
                 <br/>
 
                 <Field name="isSold" label="Is Sold" component={renderCheckbox} errors={errors}/>
@@ -263,15 +266,9 @@ class Vehicle extends React.Component {
                 <Field name="additional" label="Additional info" component={renderTextField} errors={errors}/>
               </Col>
               <Col md={6} xs={12}>
-                <h4>Performance</h4>
-                <Field name="compressionRatio" label="Compression Ratio" component={renderTextField} errors={errors}/>
-                <Field name="compressionType" label="Compression Type" component={renderTextField} errors={errors}/>
-                <Field name="configuration" label="Configuration" component={renderTextField} errors={errors}/>
-                <Field name="cylinders" label="Cylinders" component={renderTextField} errors={errors}/>
-                <Field name="displacement" label="Displacement" component={renderTextField} errors={errors}/>
-                <Field name="size" label="Size" component={renderTextField} type="number" errors={errors}/>
-                <Field name="torque" label="Torque" component={renderTextField} type="number" errors={errors}/>
-                <Field name="totalValves" label="Total Valves" component={renderTextField} type="number" errors={errors}/>
+                <ImagesField onImageFileUpload={this.props.onImageFileUpload}
+                             onImageFileRemove={this.props.onImageFileRemove}
+                             errors={errors}/>
               </Col>
             </Row>
 
