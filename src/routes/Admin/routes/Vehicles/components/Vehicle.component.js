@@ -5,6 +5,7 @@ import React from 'react';
 import {Field, FieldArray, change, reduxForm} from 'redux-form';
 import {toastr} from "react-redux-toastr";
 import {Card, CardActions, CardTitle, CardText} from 'material-ui/Card';
+import FlatButton from 'material-ui/FlatButton';
 
 import {ROUTE_PARAMS, FORM_MODE, FORMS} from "./../constants/Vehicle.constant";
 import {
@@ -32,6 +33,7 @@ import {ROUTE_PARAMS as VEHICLE_MODEL_ROUTE_PARAMS} from "../../VehicleModels/co
 import _ from "underscore";
 
 const SubmitCardActions = ({disabled}) => (<CardActions>
+  <hr/>
   <button className="btn btn-success vehicle-component--button-success" type="submit" disabled={disabled}>Save</button>
 </CardActions>);
 
