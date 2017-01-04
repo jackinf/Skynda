@@ -22,8 +22,8 @@ public class VehicleValidator implements Validator {
     public void validate(Object object, Errors errors) {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         javax.validation.Validator validator = factory.getValidator();
-        Vehicle car = (Vehicle) object;
-        Set<ConstraintViolation<Vehicle>> constraintViolations = validator.validate(car);
+        Vehicle vehicle = (Vehicle) object;
+        Set<ConstraintViolation<Vehicle>> constraintViolations = validator.validate(vehicle);
         for (ConstraintViolation<Vehicle> constraintViolation : constraintViolations) {
             String errorKey = constraintViolation.getPropertyPath().toString();
             String errorMessage = constraintViolation.getMessage();

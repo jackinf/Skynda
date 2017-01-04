@@ -12,6 +12,7 @@ import me.skynda.classification.entities.Classification;
 import me.skynda.image.entities.Image;
 import me.skynda.vehicle.dto.ImageStorable;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.Range;
 
 import javax.validation.constraints.NotNull;
 
@@ -87,6 +88,7 @@ public class Vehicle implements Serializable, ImageStorable<Image> {
     private Integer totalValves;
 
     @Column(name = "safety_stars")
+    @Range(min = 1, max = 5)
     private Integer safetyStars;
 
     @Column(name = "safety_url")
