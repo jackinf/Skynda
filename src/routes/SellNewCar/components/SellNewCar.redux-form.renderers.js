@@ -96,17 +96,3 @@ export class ColorRenderer extends React.Component {
     );
   }
 }
-
-// export const colorRenderer1 = (onChangeComplete, onToggleColorPickerExpand) => ({input, label, expanded, meta: {touched, error}, ...custom}) => (
-//   <Row style={{marginBottom: "10px"}}>
-//     <Col sm={12}>
-//       <label className="sell-your-car__label"  htmlFor={input.name}>{label}</label>
-//       <div style={{background: input.value || "black"}}
-//            className="sell-your-car__color-renderer-display"
-//            onClick={e => onToggleColorPickerExpand(input.name)}>&nbsp;</div>
-//       <TwitterPicker onChangeComplete={(color, event) => onChangeComplete(input.name, color, event) }
-//                      color={input.value}
-//                      triangle="hide"/>
-//     </Col>
-//   </Row>
-// );

@@ -10,9 +10,10 @@ import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentRemove from 'material-ui/svg-icons/content/remove';
 import Dropzone from "react-dropzone";
 import Select from "react-select";
-// import ReactIconDelete from 'react-icons/lib/md/delete';
+import ReactIconDelete from 'react-icons/lib/md/delete';
 import ReactCrop from 'react-image-crop';
 import "react-image-crop/dist/ReactCrop.css";
+import {TwitterPicker} from 'react-color';
 
 import {fieldListWrapper, renderImage} from "../../../components/FormRenderers/index";
 import imagesClose from "./../assets/cancel@2x.png";
@@ -24,9 +25,9 @@ const styleDeleteIcon = {
   right: "40px",
   background: "white"
 };
-// const ReactIconDeleteWrapped = (props) => (<ReactIconDelete {...props} width="32" height="32"
-//                                                             style={styleDeleteIcon}/>);
-const ReactIconDeleteWrapped = (props) => (<img src={imagesClose} style={styleDeleteIcon} alt="Close" width={32} height={32}/>);
+const ReactIconDeleteWrapped = (props) => (<ReactIconDelete {...props} width="32" height="32"
+                                                            style={styleDeleteIcon}/>);
+// const ReactIconDeleteWrapped = (props) => (<img src={imagesClose} style={styleDeleteIcon} alt="Close" width={32} height={32}/>);
 const crop = {width: 90, aspect: 16/9};
 
 /*
@@ -237,3 +238,38 @@ export const ErrorBlockRenderer = ({errors}) => {
       </Col>
     </Row>) : <div></div>;
 };
+
+export class ColorRenderer extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {expanded: false};
+  }
+
+  onToggle = () => {
+    this.setState({expanded: !this.state.expanded})
+  };
+
+  onChangeComplete = (color, event) => {
+    this.onToggle({expanded: false});
+    this.props.onChangeComplete(this.props.input.name, color.hex, event);
+  };
+
+  render() {
+    const {input, label} = this.props;
+
+    return (
+      <Row style={{marginBottom: "10px"}}>
+        <Col sm={12}>
+          <label className="sell-your-car__label"  htmlFor={input.name}>{label}</label>
+          <div style={{background: input.value || "black"}}
+               className="sell-your-car__color-renderer-display"
+               onClick={e => this.onToggle()}>&nbsp;</div>
+
+          {this.state.expanded
+            ? (<TwitterPicker onChangeComplete={this.onChangeComplete} color={input.value} triangle="hide"/>)
+            : ""}
+        </Col>
+      </Row>
+    );
+  }
+}

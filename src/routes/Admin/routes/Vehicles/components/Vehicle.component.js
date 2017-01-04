@@ -17,7 +17,8 @@ import {
   MainImageCardField,
   ImagesCardField,
   selectRenderer,
-  ErrorBlockRenderer
+  ErrorBlockRenderer,
+  ColorRenderer
 } from "./Vehicle.redux-form.renderers";
 import {onHandleSubmit} from "./Vehicle.redux-form.actions";
 import {renderCheckbox, renderSelectField} from "../../../components/FormRenderers";
@@ -123,23 +124,35 @@ class Vehicle extends React.Component {
   componentDidMount() {
     this.props.load(this.props.params[ROUTE_PARAMS.VEHICLE_ID]);
     this.props.getVehicleModelsList();
-    this.props.getColors();
+    // this.props.getColors();
   }
 
   /**
-   * For cleanup in order to avoid bugs.
+   * We need to clean toastr's already shown messages.
+   * We also clear the form (I am not sure if this is necessary).
    */
   componentWillUnmount() {
     toastr.clean();
     this.props.clear();
   }
 
+
+  /**
+   * Simple wrapper, which changes value using redux-form.
+   * @param name - value type variable, e.g. "colorInside"
+   * @param value - value type variable, e.g. "blue" or "#faf"
+   * @param event
+   */
+  onSetField = (name, value, event) => {
+    this.props.dispatch(change(FORMS.VEHICLE_FORM, name, value))
+  };
+
   /**
    * Select2 on change option
    * @param name - field name, like transmission.id, or firstname
    * @param chosenOption - object {label: string (visible text), value: int (ID)}
    */
-  setField = (name, chosenOption) => {
+  onSelectItemChange = (name, chosenOption) => {
     const hackName = name.replace(".id", "");
     if (chosenOption.value !== chosenOption.label) {
       this.props.dispatch(change(FORMS.VEHICLE_FORM, hackName, {id: chosenOption.value}));
@@ -147,6 +160,8 @@ class Vehicle extends React.Component {
       this.openVehicleModelDialog(null);
     }
   };
+
+
 
   openVehicleModelDialog = (e) => {
     if (e && e.hasOwnProperty("preventDefault") && _.isFunction(e.preventDefault))
@@ -166,7 +181,7 @@ class Vehicle extends React.Component {
 
     const promise = this.props.getVehicleModelsList();
     if (value && promise) {
-      promise.then(() => { this.setField("model", {value}) });
+      promise.then(() => { this.onSelectItemChange("model", {value}) });
     }
   };
 
@@ -223,7 +238,7 @@ class Vehicle extends React.Component {
                 <Card>
                   <CardTitle title={<h3>General</h3>} />
                   <CardText>
-                    <Field name="model.id" label="Vehicle model *" component={selectRenderer(vehicleModels, this.setField)}/>
+                    <Field name="model.id" label="Vehicle model *" component={selectRenderer(vehicleModels, this.onSelectItemChange)}/>
 
                     <Modal show={this.state.isVehicleModelDialogOpen} onHide={this.closeVehicleModelDialog}>
                       <Modal.Header closeButton>
@@ -235,19 +250,31 @@ class Vehicle extends React.Component {
                       </Modal.Body>
                     </Modal>
 
-                    <Field name="colorInside.id"
-                           label="Color Inside *"
+                    <Field name="colorInsideHex"
+                           label="Color inside *"
                            errors={errors}
-                           component={selectRenderer(colors, this.setField)}/>
+                           onChangeComplete={this.onSetField}
+                           component={ColorRenderer} />
+
+                    <Field name="colorInside.id"
+                           label="Color Inside * (Obsolete)"
+                           errors={errors}
+                           component={selectRenderer(colors, this.onSelectItemChange)}/>
+
+                    <Field name="colorOutsideHex"
+                           label="Color outside *"
+                           errors={errors}
+                           onChangeComplete={this.onSetField}
+                           component={ColorRenderer} />
 
                     <Field name="colorOutside.id"
-                           label="Color Outside *"
+                           label="Color Outside *  (Obsolete)"
                            errors={errors}
-                           component={selectRenderer(colors, this.setField)}/>
+                           component={selectRenderer(colors, this.onSelectItemChange)}/>
 
                     <FieldArray name="descriptions" label="Descriptions" component={descriptionRenderer} errors={errors}/>
-                    <FieldArray name="reportItems" label="Report Items" component={renderReportItems} errors={errors}/>
-                    <FieldArray name="faults" label="Faults" component={renderFaults}
+                    {/*<FieldArray name="reportItems" label="Report Items" component={renderReportItems} errors={errors}/>*/}
+                    <FieldArray name="faults" label="Faults " component={renderFaults}
                                 onFaultFileAdd={this.props.onFaultFileUpload}
                                 onFaultRemove={this.props.onFaultRemove}
                                 errors={errors}
