@@ -129,9 +129,9 @@ export const renderFaults = ({fields, ...custom}) => fieldListWrapper({
             <Field className="btn btn-default" name={`${field}.file`} type="file" component="input"
                    onChange={e => custom.onFaultFileAdd(e, index)}/>
             <Field name={`${field}.text`} type="text" component={renderTextField} placeholder={`Text #${index + 1}`}/>
-            Persisted: <Field name={`${field}.image.url`} type="text" component={renderImage}/>
+            <Field name={`${field}.image.url`} type="text" component={obj => renderImage(obj, "PIC IN DATABASE")}/>
             <br/>
-            New: <Field name={`${field}.image.base64File`} type="text" component={renderImage}/>
+            <Field name={`${field}.image.base64File`} type="text" component={obj => renderImage(obj, "UPLOADED PIC")}/>
           </Col>
           <Col sm={2}>
             <FloatingActionButton mini={true} secondary={true} onClick={(e) => {

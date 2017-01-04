@@ -37,10 +37,13 @@ export const fieldListWrapper = ({fields, title, block, isRequired = false}) => 
   </Row>
 );
 
-export function renderImage({input}) {
-  return input.value
-    ? <img src={input.value} width={100}/>
-    : <div>-NONE-</div>;
+export function renderImage({input}, title, fallbackLabel) {
+  return (<span>
+    <label className="label-info">{title}:</label>&nbsp;
+    {input.value
+      ? <img src={input.value} width={300}/>
+      : <label>{fallbackLabel || "NONE"}</label>}
+  </span>);
 }
 
 export const renderCheckbox = ({input, label, ...custom}) => (
