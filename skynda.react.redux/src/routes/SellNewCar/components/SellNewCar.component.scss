@@ -1,0 +1,102 @@
+
+@import "../../../styles/variables";
+
+.sell-your-car {
+  margin-top: 30px;
+  margin-bottom: 200px;
+}
+
+.sell-your-car__centered {
+  text-align: center;
+}
+
+.sell-your-car__label {
+  font-weight: 500;
+}
+
+.sell-your-car__main-image {
+  width: 100%;
+}
+
+.sell-your-car__main-image-background {
+  background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url(../assets/sellyourcar.png);
+  background-size:cover;
+  min-height: 400px;
+  width: 100%;
+  padding-top: 160px;
+}
+
+.sell-your-car__main-image-background2 {
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4));
+  background-size:cover;
+  min-height: 500px;
+  padding-top: 200px;
+  margin-bottom: 0;
+}
+
+.sell-your-car__main-image-background__title {
+  color: whitesmoke;
+}
+
+.sell-your-car__main-image-background__button,
+.sell-your-car__main-image-background__button:hover{
+  background: $color-secondary;
+  border-radius: 5px;
+}
+
+.sell-your-car__block-header {
+  color: $color-secondary;
+  font-size: 18px;
+}
+
+.sell-your-car__button-submit,
+.sell-your-car__button-submit:hover {
+  background: $color-secondary;
+}
+
+.sell-your-car__button,
+.sell-your-car__button:hover,
+.sell-your-car__button:active,
+.sell-your-car__button:focus {
+  margin: 0 10px 5px 10px;
+  -webkit-appearance:none;
+  outline: none;
+}
+
+.sell-your-car__button-active,
+.sell-your-car__button-active:hover,
+.sell-your-car__button-active:active,
+.sell-your-car__button-active:focus {
+  background: $color-secondary;
+  margin: 0 10px 5px 10px;
+  -webkit-appearance:none;
+  outline: none;
+}
+
+.sell-your-car__color-renderer-display {
+  border-radius: 20px;
+  min-height: 30px;
+  margin: 10px;
+  cursor: pointer;
+}
+
+.sell-your-car__circle-button,
+.sell-your-car__circle-button:hover,
+.sell-your-car__circle-button:active,
+.sell-your-car__circle-button:focus{
+  border-radius: 30px;
+  margin-right: 5px;
+  -webkit-appearance:none;
+  outline: none;
+}
+
+.sell-your-car__circle-button-active,
+.sell-your-car__circle-button-active:hover,
+.sell-your-car__circle-button-active:active,
+.sell-your-car__circle-button-active:focus{
+  background: $color-secondary;
+  border-radius: 30px;
+  margin-right: 5px;
+  -webkit-appearance:none;
+  outline: none;
+}

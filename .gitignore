@@ -39,3 +39,7 @@ skynda.react.redux/coverage
 skynda.react.redux/.idea/
 skynda.react.redux/*.json.gzip
 skynda.react.redux/dist.zip
+
+# Except this file
+!.gitignore skynda.react.redux/
+!.gitignore skynda_backend/
