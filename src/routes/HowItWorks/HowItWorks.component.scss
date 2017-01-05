@@ -1,0 +1,159 @@
+
+@import "../../styles/variables";
+
+/**
+  ====================
+  == HERO UNIT
+  ====================
+ */
+
+.how-it-works__main-image {
+  width: 100%;
+}
+
+.how-it-works__centered {
+  text-align: center;
+}
+
+.how-it-works__main-image-background {
+  background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url(./assets/heroimage.png);
+  background-size:cover;
+  min-height: 400px;
+  width: 100%;
+  padding-top: 100px;
+}
+
+.how-it-works__main-image-background__title {
+  color: whitesmoke;
+  line-height: 150%;
+}
+
+.how-it-works__main-image-background__primary-button,
+.how-it-works__main-image-background__primary-button:hover,
+.how-it-works__main-image-background__primary-button:active,
+.how-it-works__main-image-background__primary-button:focus {
+  background: $color-primary;
+  border-color: $color-primary;
+  color: whitesmoke;
+  font-weight: bold;
+  border-radius: 5px;
+  margin: 10px;
+}
+
+.how-it-works__main-image-background__secondary-button,
+.how-it-works__main-image-background__secondary-button:hover,
+.how-it-works__main-image-background__secondary-button:active,
+.how-it-works__main-image-background__secondary-button:focus {
+  background: $color-secondary;
+  border-color: $color-secondary;
+  font-weight: bold;
+  border-radius: 5px;
+  margin: 10px;
+}
+
+/**
+  ====================
+  == ICON FEATURES
+  ====================
+ */
+
+.how-it-works__icon-features {
+  margin: 40px 0;
+}
+
+.how-it-works__feature-icon {
+  width: 128px;
+  height: 128px;
+}
+
+.how-it-works__primary-header {
+  color: $color-primary;
+  font-size: 18px;
+}
+
+.how-it-works__description {
+  font-size: 16px;
+}
+
+/**
+  ====================
+  == 3 STEPS
+  ====================
+ */
+
+.how-it-works__three-steps__step-circle {
+  background: $color-primary;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  border-radius: 30px;
+  width: 40px;
+  height: 40px;
+  color: whitesmoke;
+  font-weight: bold;
+  text-align: center;
+  padding-top: 7px;
+  margin: 0 auto;
+}
+
+.how-it-works__three-steps__step-text {
+  margin: 0 auto;
+  text-align: center;
+  font-size: 16px;
+}
+
+.how-it-works__line {
+  border-bottom: 3px solid $color-primary;
+  position: absolute;
+  width: 100%;
+}
+
+/**
+  ====================
+  == DESCRIPTION TEXT
+  ====================
+ */
+
+.how-it-works__description-text__text {
+  font-size: 20px;
+  font-style: italic;
+  margin: 40px 0;
+}
+
+.how-it-works__faq-panel .panel-heading {
+  background: white !important;
+  cursor: pointer;
+}
+
+.rc-collapse-header {
+  background-color: white !important;
+}
+
+#grow {
+  -moz-transition: height .5s;
+  -ms-transition: height .5s;
+  -o-transition: height .5s;
+  -webkit-transition: height .5s;
+  transition: height .5s;
+  height: 0;
+  overflow: hidden;
+}
+
+// Override
+
+.rc-collapse > .rc-collapse-item > .rc-collapse-header .arrow {
+  border-top: 10px solid transparent !important;
+  border-bottom: 10px solid transparent !important;;
+  border-left: 0  !important;
+  border-right: 15px solid $color-primary !important;;
+  vertical-align: middle !important;
+  margin-right: 17px !important;
+  float: right !important;
+  margin-top: 9px !important;
+}
+
+.rc-collapse > .rc-collapse-item-active > .rc-collapse-header .arrow {
+  border-left: 10px solid transparent !important;
+  border-right: 10px solid transparent !important;
+  border-top: 15px solid $color-primary !important;
+  margin-right: 13px !important;
+}

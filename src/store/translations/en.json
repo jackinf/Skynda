@@ -1,0 +1,119 @@
+{
+  "all": "All",
+  "components": {
+    "car_search": {
+      "brand": "Brand",
+      "mileage": "Mileage",
+      "price": "Price",
+      "year": "Year",
+      "colors": "Colors",
+      "petrol_consumption": "Petrol Consumption",
+      "features": "Features",
+      "power": "Horsepower",
+      "doors": "Doors",
+      "seats": "Seats",
+      "transmission": "Transmission"
+    },
+    "car_preview": {
+      "doors": "doors",
+      "seats": "seats"
+    },
+    "footer": {
+      "your_company": "Skynda AS",
+      "address": "Valge 16, Tallinn 19095 Estonia",
+      "email": "hello@skynda.me",
+      "phone": "+372 5144 750"
+    },
+    "header": {
+      "sell_car_txt": "Sell Your Car",
+      "buy_car_txt": "Buy Your Car",
+      "how_it_works": "How It Works?"
+    },
+    "navigation": {
+      "about": "About",
+      "contact": "Contact",
+      "log_in": "Log In",
+      "sign_up": "Sign Up",
+      "log_out": "Log Out"
+    }
+  },
+  "home_page": {
+    "search": "Search",
+    "searching": "Searching",
+    "choose_your_favorite": "Choose Your Favorite",
+    "recently_added": "Recently Added",
+    "hero": {
+      "main_text": "Buying a pre-used car has never been so fun, easy and secure",
+      "read_more": "Read more"
+    }
+  },
+  "details": {
+    "components": {
+      "main_image": {
+        "btn_txt_view_photos": "View Photos",
+        "btn_txt_360": "360 View"
+      },
+      "overview": {
+        "header": "Overview"
+      },
+      "inspector_report": {
+        "header": "Our Certified Inspector's Report",
+        "question": "Have a question?",
+        "show_all": "Show all",
+        "pic_dents_txt": "Faults, scratches etc"
+      },
+      "checkout_panel": {
+        "your_name": "Your Name",
+        "email": "E-Mail",
+        "phone": "Phone Number",
+        "btn_send": "Send",
+        "contact_24h_txt": "We will contact you in 24h.",
+        "contact_us_txt": "Write To Us"
+      },
+      "features": {
+        "header": "Nice features"
+      },
+      "history": {
+        "header": "Car History",
+        "problems_found": "Problems found",
+        "no_problems_found": "No problems found",
+        "vin": "VIN code",
+        "found_txt": "Leitud",
+        "registration_plate": "Numbrimärk",
+        "check_history_from": "Soovi korral kontrolli sõiduki tausta",
+        "original_registry": "Maanteametist"
+      },
+      "performance": {
+        "wheel_drive": "Wheels Driven",
+        "fuel_type": "Fuel Type",
+        "horsepower": "Horsepower",
+        "compression": "Compression Ratio",
+        "engine_size": "Engine Size",
+        "compressor_type": "Compressor Type",
+        "torque": "Torque",
+        "config": "Configuration",
+        "valves": "Total valves",
+        "cylinders": "Cylinders",
+        "powertrain": "Powertrain",
+        "displacement": "Displacement"
+      },
+      "petrol": {
+        "header": "Petrol Consumption",
+        "city": "City",
+        "highway": "Highway",
+        "average": "Average",
+        "fuel_type": "Fuel Type"
+      },
+      "reviews": {
+        "header": "Reviews",
+        "btn_read_more": "Read More"
+      },
+      "safety": {
+        "header": "Safety"
+      },
+      "additional_info": {
+        "header": "Additional info"
+      }
+    }
+  }
+}
