@@ -1,11 +1,41 @@
-.DS_STORE
-*.log
+# Compiled source #
+###################
+skynda_backend/*.com
+skynda_backend/*.class
+skynda_backend/*.dll
+skynda_backend/*.exe
+skynda_backend/*.o
+skynda_backend/*.so
+skynda_backend/application.properties
 
-node_modules
+# Folders #
+###################
+skynda_backend/.idea/
+skynda_backend/.mvn/
+skynda_backend/.settings/
+skynda_backend/target/
 
-dist
-coverage
+# Packages #
+############
+# it's better to unpack these filesToUpload and commit the raw source
+# git has its own built in compression methods
+skynda_backend/*.7z
+skynda_backend/*.dmg
+skynda_backend/*.gz
+skynda_backend/*.iso
+skynda_backend/*.jar
+skynda_backend/*.rar
+skynda_backend/*.tar
+skynda_backend/*.zip
+skynda_backend/lib/
+skynda_backend/*.iws
 
-.idea/
-*.json.gzip
-dist.zip
+
+skynda.react.redux/.DS_STORE
+skynda.react.redux/*.log
+skynda.react.redux/node_modules
+skynda.react.redux/dist
+skynda.react.redux/coverage
+skynda.react.redux/.idea/
+skynda.react.redux/*.json.gzip
+skynda.react.redux/dist.zip

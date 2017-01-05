@@ -1,3 +1,45 @@
+# README  JAVA#
+## SOFTWARE ##
+1. https://spring.io/tools/sts
+2. jdk8
+3. maven latest
+4. lombok fix. Add following code to your ".ini" file. Also you need to start lombok.jar and your IDE location. (for STS users)
+
+```
+-Xmx1200m
+-javaagent:lombok.jar
+-javaagent:C:\Users\mihha\Desktop\sts-bundle\sts-3.8.1.RELEASE\lombok.jar
+-Xbootclasspath/a:C:\Users\mihha\Desktop\sts-bundle\sts-3.8.1.RELEASE\lombok.jar
+```
+
+
+## BUILD ##
+~~~~
+mvn clean package
+~~~~
+
+## RUN ##
+1. Run As -> Spring Boot App
+2. API available here: http://localhost:8080/vehicle
+
+## DATABASE MIGRATION ##
+1. All database scripts put under resource/db/migration  
+Follow syntax: version_timestamp_name_ddl/dml.sql  
+example: V1_1_1_201412031225__initial schema_ddl.sql
+
+## EA model location ##
+1. https://mruskin@bitbucket.org/mruskin/skyndaea.git
+  
+## DATA Generation ##  
+Scripts can be found under resources/generated/skynda_test_data.sql  
+For data generation was used: Datanamic Data Generator (.dtp file at the same directory)
+
+
+
+
+
+
+## REACT REDUX README#
 # Skynda project's descipriton
 
 ### Deployment
@@ -96,36 +138,36 @@ The application structure presented in this boilerplate is **fractal**, where fu
 
 ```
 .
-├── bin                      # Build/Start scripts
-├── blueprints               # Blueprint files for redux-cli
-├── build                    # All build-related configuration
-│   └── webpack              # Environment-specific configuration files for webpack
-├── config                   # Project configuration settings
-├── server                   # Express application that provides webpack middleware
-│   └── main.js              # Server application entry point
-├── src                      # Application source code
-│   ├── index.html           # Main HTML page container for app
-│   ├── main.js              # Application bootstrap and rendering
-│   ├── components           # Global Reusable Presentational Components
-│   ├── containers           # Global Reusable Container Components
-│   ├── layouts              # Components that dictate major page structure
-│   ├── redux                # "Ducks" location...
-│   │   └── modules          # reducer, action, creators not part of a route
-│   ├── routes               # Main route definitions and async split points
-│   │   ├── index.js         # Bootstrap main application routes with store
-│   │   └── Home             # Fractal route
-│   │       ├── index.js     # Route definitions and async split points
-│   │       ├── assets       # Assets required to render components
-│   │       ├── components   # Presentational React Components
-│   │       ├── container    # Connect components to actions and store
-│   │       ├── modules      # Collections of reducers/constants/actions
-│   │       └── routes **    # Fractal sub-routes (** optional)
-│   ├── static               # Static assets (not imported anywhere in source code)
-│   ├── store                # Redux-specific pieces
-│   │   ├── createStore.js   # Create and instrument redux store
-│   │   └── reducers.js      # Reducer registry and injection
-│   └── styles               # Application-wide styles (generally settings)
-└── tests                    # Unit tests
+??? bin                      # Build/Start scripts
+??? blueprints               # Blueprint files for redux-cli
+??? build                    # All build-related configuration
+?   ??? webpack              # Environment-specific configuration files for webpack
+??? config                   # Project configuration settings
+??? server                   # Express application that provides webpack middleware
+?   ??? main.js              # Server application entry point
+??? src                      # Application source code
+?   ??? index.html           # Main HTML page container for app
+?   ??? main.js              # Application bootstrap and rendering
+?   ??? components           # Global Reusable Presentational Components
+?   ??? containers           # Global Reusable Container Components
+?   ??? layouts              # Components that dictate major page structure
+?   ??? redux                # "Ducks" location...
+?   ?   ??? modules          # reducer, action, creators not part of a route
+?   ??? routes               # Main route definitions and async split points
+?   ?   ??? index.js         # Bootstrap main application routes with store
+?   ?   ??? Home             # Fractal route
+?   ?       ??? index.js     # Route definitions and async split points
+?   ?       ??? assets       # Assets required to render components
+?   ?       ??? components   # Presentational React Components
+?   ?       ??? container    # Connect components to actions and store
+?   ?       ??? modules      # Collections of reducers/constants/actions
+?   ?       ??? routes **    # Fractal sub-routes (** optional)
+?   ??? static               # Static assets (not imported anywhere in source code)
+?   ??? store                # Redux-specific pieces
+?   ?   ??? createStore.js   # Create and instrument redux store
+?   ?   ??? reducers.js      # Reducer registry and injection
+?   ??? styles               # Application-wide styles (generally settings)
+??? tests                    # Unit tests
 ```
 
 ## Development
@@ -133,7 +175,7 @@ The application structure presented in this boilerplate is **fractal**, where fu
 #### Developer Tools
 
 **We recommend using the [Redux DevTools Chrome Extension](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd).**
-Using the chrome extension allows your monitors to run on a separate thread and affords better performance and functionality. It comes with several of the most popular monitors, is easy to configure, filters actions, and doesn’t require installing any packages.
+Using the chrome extension allows your monitors to run on a separate thread and affords better performance and functionality. It comes with several of the most popular monitors, is easy to configure, filters actions, and doesn�t require installing any packages.
 
 However, adding the DevTools components to your project is simple. First, grab the packages from npm:
 
