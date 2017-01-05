@@ -10,7 +10,7 @@ skynda_backend/application.properties
 
 # Folders #
 ###################
-skynda_backend/.idea/
+.idea/
 skynda_backend/.mvn/
 skynda_backend/.settings/
 skynda_backend/target/
@@ -29,6 +29,7 @@ skynda_backend/*.tar
 skynda_backend/*.zip
 skynda_backend/lib/
 skynda_backend/*.iws
+skynda_backend/*.ipr
 
 
 skynda.react.redux/.DS_STORE

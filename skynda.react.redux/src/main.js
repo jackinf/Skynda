@@ -3,8 +3,8 @@ import ReactDOM from "react-dom";
 import createStore from "./store/createStore";
 import AppContainer from "./containers/AppContainer";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
-import injectTapEventPlugin from "react-tap-event-plugin";
-injectTapEventPlugin();
+// import injectTapEventPlugin from "react-tap-event-plugin";
+// injectTapEventPlugin();
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "rc-slider/assets/index.css";
