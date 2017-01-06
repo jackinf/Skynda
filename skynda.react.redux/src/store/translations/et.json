@@ -1,6 +1,14 @@
 {
   "all": "Kõik",
+  "buttontexts": {
+   "save" : "Salvesta"
+  },
   "components": {
+    "subscribe": {
+      "main_txt": "Soovid teada kui uus auto müüki lisandub? Jäta oma kontakt",
+      "hint_txt": "Sisesta e-posti aadress",
+      "thank_you": "Täname"
+    },
     "car_search": {
       "brand": "Automark",
       "mileage": "Läbisõit",
@@ -43,7 +51,6 @@
       "log_out": "Logi Välja"
     }
   },
-
   "home_page": {
     "search": "Oma uue auto leiad siit",
     "searching": "Otsin",
@@ -54,7 +61,6 @@
       "main_text": "Kasutatud auto ostmine pole kunagi olnud nii lihtne, turvaline ja glamuurne.",
       "read_more": "Kuidas nii?"
     }
-
   },
   "details": {
     "other_txt": "Veel Pakkumisi",
