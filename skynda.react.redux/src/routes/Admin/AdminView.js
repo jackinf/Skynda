@@ -34,6 +34,9 @@ class AdminView extends React.Component {
         <Breadcrumb.Item onClick={e => this.goTo("/admin/classifier")}>
           Classifiers
         </Breadcrumb.Item>
+        <Breadcrumb.Item onClick={e => this.goTo("/admin/images")}>
+          Images
+        </Breadcrumb.Item>
       </Breadcrumb>
 
       <Row>
