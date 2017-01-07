@@ -7,12 +7,15 @@ import lombok.SneakyThrows;
 import me.skynda.blobstorage.dto.*;
 
 import me.skynda.blobstorage.dto.response.BlobStorageUploadStreamResponseDto;
+import me.skynda.blobstorage.dto.response.BlobDto;
+import me.skynda.common.interfaces.services.BlobStorageService;
 import me.skynda.common.helper.SkyndaUtility;
 import me.skynda.common.interfaces.daos.ImageDao;
 import me.skynda.image.entities.Image;
 import me.skynda.vehicle.dto.ImageCropInfoDto;
 import me.skynda.vehicle.dto.ImageDto;
 import me.skynda.vehicle.services.VehicleServiceImpl;
+import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -42,6 +45,9 @@ public class BlobStorageServiceImpl implements BlobStorageService {
 
     @Autowired
     ImageDao imageDao;
+
+    @Autowired
+    private Mapper mapper;
 
     public BlobStorageServiceImpl() {
         this(false);
@@ -148,8 +154,8 @@ public class BlobStorageServiceImpl implements BlobStorageService {
     }
 
     @Override
-    public List<ListBlobItem> list(ListBlobsDto dto) {
-        List<ListBlobItem> list = new ArrayList<>();
+    public List<BlobDto> list(ListBlobsDto dto) {
+        List<BlobDto> list = new ArrayList<>();
         try {
             // Create the blob client.
             CloudBlobClient blobClient = storageAccount.createCloudBlobClient();
@@ -159,13 +165,14 @@ public class BlobStorageServiceImpl implements BlobStorageService {
 
             // Loop over blobs within the container and output the URI to each of them.
             for (ListBlobItem blobItem : container.listBlobs()) {
-                list.add(blobItem);
+                list.add(mapper.map(blobItem, BlobDto.class));
 //                System.out.println(blobItem.getUri());
             }
         } catch (Exception e) {
             // Output the stack trace.
             e.printStackTrace();
         }
+
         return list;
     }
 

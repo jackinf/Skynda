@@ -4,7 +4,7 @@ import me.skynda.auth.service.UserService;
 import me.skynda.blobstorage.dto.DeleteBlobDto;
 import me.skynda.blobstorage.dto.UploadBlobDto;
 import me.skynda.blobstorage.dto.response.BlobStorageUploadStreamResponseDto;
-import me.skynda.blobstorage.service.BlobStorageService;
+import me.skynda.common.interfaces.services.BlobStorageService;
 import me.skynda.common.interfaces.daos.ImageDao;
 import me.skynda.common.dto.SearchResponseDto;
 import me.skynda.common.dto.CreateOrUpdateResponseDto;

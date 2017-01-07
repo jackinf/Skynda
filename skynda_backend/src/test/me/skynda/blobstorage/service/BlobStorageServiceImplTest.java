@@ -1,8 +1,8 @@
 package me.skynda.blobstorage.service;
 
-import com.microsoft.azure.storage.blob.ListBlobItem;
 import lombok.SneakyThrows;
 import me.skynda.blobstorage.dto.*;
+import me.skynda.blobstorage.dto.response.BlobDto;
 
 import java.nio.file.Paths;
 import java.util.List;
@@ -110,7 +110,7 @@ public class BlobStorageServiceImplTest {
          */
         ListBlobsDto listBlobsDto = new ListBlobsDto();
         listBlobsDto.setContainerName(TEST_CONTAINER_NAME);
-        List<ListBlobItem> list = service.list(listBlobsDto);
+        List<BlobDto> list = service.list(listBlobsDto);
 
         /*
          * ASSERT

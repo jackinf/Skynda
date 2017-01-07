@@ -1,6 +1,6 @@
 package me.skynda.vehicle.services;
 
-import me.skynda.blobstorage.service.BlobStorageService;
+import me.skynda.common.interfaces.services.BlobStorageService;
 import me.skynda.common.dto.CreateOrUpdateResponseDto;
 import me.skynda.common.dto.DeleteResponseDto;
 import me.skynda.common.interfaces.daos.ImageDao;
