@@ -1,20 +1,19 @@
 package me.skynda.email.service;
 
 import javax.mail.*;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 
-import me.skynda.common.interfaces.services.EmailService;
+import me.skynda.common.abstracts.services.EmailService;
 import me.skynda.email.dto.EmailBaseDto;
+import org.springframework.context.annotation.Primary;
 
-import java.util.Date;
 import java.util.Properties;
 
+@Primary // http://stackoverflow.com/questions/10534053/autowiring-two-beans-implementing-same-interface-how-to-set-default-bean-to-au
 @org.springframework.stereotype.Service
-public class EmailServiceImpl implements EmailService {
+public class EmailServiceImpl extends EmailService {
 
     private final String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
-    private final String MAIL_TO = "zeka.rum@gmail.com";    // use hello@skynda.com
+    private final String MAIL_TO = "hello@skynda.me";    // use hello@skynda.com
 
     /**
      * Sends email using GMAIL settings.
@@ -39,30 +38,7 @@ public class EmailServiceImpl implements EmailService {
         props.put("mail.transport.protocol", "smtp");
         final String username = "zeka.rum@gmail.com";   // real email used as a server to send emails
         final String password = "krmp dehy lixe ihwq";  // real password (generated app password)
-        try {
-            Session session = Session.getDefaultInstance(props,
-                    new Authenticator() {
-                        protected PasswordAuthentication getPasswordAuthentication() {
-                            return new PasswordAuthentication(username, password);
-                        }
-                    });
-
-            // -- Create a new message --
-            Message msg = new MimeMessage(session);
-
-            // -- Set the FROM and TO fields --
-            msg.setFrom(new InternetAddress(dto.getSender()));
-            msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(MAIL_TO, false));
-            msg.setSubject("Message from skynda app");
-            msg.setText(dto.getContent());
-            msg.setSentDate(new Date());
-            Transport.send(msg);
-            System.out.println("Message sent.");
-        } catch (MessagingException e) {
-            e.printStackTrace();
-            return false;
-        }
-
-        return true;
+        Session session = getMailSession(props, username, password);
+        return innerSendMessage(dto, session, MAIL_TO);
     }
 }
