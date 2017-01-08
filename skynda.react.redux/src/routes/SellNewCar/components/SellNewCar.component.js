@@ -145,6 +145,7 @@ export default class extends React.Component {
     // const drivetrains = !this.props.drivetrain.isFetching
     //   ? this.props.drivetrain.items.map(item => ({label: item.name, value: item.id}))
     //   : [];
+    const {errors} = this.props;
 
     return (<div className="sell-your-car">
 
@@ -170,10 +171,10 @@ export default class extends React.Component {
                 <CardHeader title={<h3 className="sell-your-car__block-header">Palun jäta oma kontakt, et saaksime sinuga ühendust võtta.</h3>} />
                 <CardText>
                   <Scroll.Element name="fill-form-scroll-to" />
-                  {rowWrapper(<Field name="fullName" component={TextField} hintText="Sinu nimi *"/>)}
-                  {rowWrapper(<Field name="email" component={TextField} hintText="Sinu e-posti aadress *" type="email"/>)}
-                  {rowWrapper(<Field name="phone" component={TextField} hintText="Sinu telefoninumber *"/>)}
-                  {rowWrapper(<Field name="vehicleRegistrationMark" component={TextField} hintText="Auto registreerimismärk"/>)}
+                  {rowWrapper(<Field name="fullName" component={TextField} hintText="Sinu nimi *" errorText={errors && errors["fullName"]}/>)}
+                  {rowWrapper(<Field name="email" component={TextField} hintText="Sinu e-posti aadress *" type="email" errorText={errors && errors["email"]}/>)}
+                  {rowWrapper(<Field name="phone" component={TextField} hintText="Sinu telefoninumber *" errorText={errors && errors["phone"]}/>)}
+                  {rowWrapper(<Field name="vehicleRegistrationMark" component={TextField} hintText="Auto registreerimismärk" errorText={errors && errors["vehicleRegistrationMark"]}/>)}
 
                   {rowWrapper(<input type="submit" className="btn sell-your-car__button-submit" value={"Saadan"} />)}
                 </CardText>

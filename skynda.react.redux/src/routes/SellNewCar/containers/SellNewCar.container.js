@@ -23,6 +23,7 @@ const statesToProps = (state) => {
 
   return {
     isSubmitting: sellNewCarInfo ? sellNewCarInfo.isSubmitting : false,
+    errors: sellNewCarInfo.errors,
 
     // Classifiers
     manufacturer: classificators ? classificators.manufacturer : null,
