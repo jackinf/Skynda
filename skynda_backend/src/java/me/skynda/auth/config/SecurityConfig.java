@@ -78,7 +78,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 /*
                     Subscription controller
                  */
-                .antMatchers(HttpMethod.POST, "/api/subscribe").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/email/subscribe", "/api/email/sell-vehicle", "/api//email/question").permitAll()
 
                 /*
                     BlobStorage controller

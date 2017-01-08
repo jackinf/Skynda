@@ -11,7 +11,7 @@ public class EmailSellVehicleDto implements EmailBaseDto {
     /**
      * Seller's name
      */
-    private String name;
+    private String fullName;
 
     /**
      * Seller's email
@@ -26,7 +26,7 @@ public class EmailSellVehicleDto implements EmailBaseDto {
     /**
      * Seller's vehicle registration number
      */
-    private String vehicleRegistrationNumber;
+    private String vehicleRegistrationMark;
 
     @Override
     public String getSender() {
@@ -36,10 +36,10 @@ public class EmailSellVehicleDto implements EmailBaseDto {
     @Override
     public String getContent() {
         return "Client is interested in selling a vehicle. " +
-                "Name: " + this.getName() +
-                "Email: " + this.getEmail() +
-                "Phone: " + this.getPhone() +
-                "Vehicle registration number: " + this.getVehicleRegistrationNumber();
+                "\nName: " + this.getFullName() +
+                "\nEmail: " + this.getEmail() +
+                "\nPhone: " + this.getPhone() +
+                "\nVehicle registration number: " + this.getVehicleRegistrationMark();
 
     }
 }

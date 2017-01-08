@@ -39,8 +39,8 @@ public class EmailSubscribeDto implements EmailBaseDto {
     @Override
     public String getContent() {
         return "Client is interested in buying a vehicle. " +
-                "First name: " + this.getFirstName() +
-                ", Last name: " + this.getLastName() +
-                ", Car he/she is interested in: http://skynda.me/details/" + this.getCarPk();
+                "\nFirst name: " + this.getFirstName() +
+                "\nLast name: " + this.getLastName() +
+                "\nCar he/she is interested in: http://skynda.me/details/" + this.getCarPk();
     }
 }

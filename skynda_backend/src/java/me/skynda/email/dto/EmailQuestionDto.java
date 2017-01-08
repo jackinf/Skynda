@@ -16,6 +16,6 @@ public class EmailQuestionDto implements EmailBaseDto {
 
     @Override
     public String getContent() {
-        return "User has a question: " + this.getHowCanWeHelp();
+        return "User " + this.getName() + " (" + this.getEmail() + ") a question: " + this.getHowCanWeHelp();
     }
 }

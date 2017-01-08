@@ -3,15 +3,28 @@
  */
 
 const SET_INFO = "SELL_YOUR_CAR/SET_INFO";
+import remoteConfig from "../../../store/remoteConfig";
+import {toastr} from 'react-redux-toastr';
 
-export function submitAsync() {
-  return (dispatch, getState) => {
-      dispatch(setSubmittingStatus(true));
-      setTimeout(() => {
-        dispatch(setSubmittingStatus(false));
-      }, 1000);
-  }
-}
+export const submitAsync = (info) => (dispatch) => {
+  console.log(info);
+  dispatch(setSubmittingStatus(true));
+
+  return fetch(`${remoteConfig.remote}/api/email/sell-vehicle`, {
+    method: "POST",
+    headers: {"Accept": "application/json", "Content-Type": "application/json"},
+    body: JSON.stringify(info)
+  })
+    .then(resp => resp.json())
+    .then(data => {
+      console.info(data);
+      dispatch(setSubmittingStatus(false));
+      toastr.success("Täname!", "Võtame sinuga 2 tööpäeva jooksul ühendust.");
+    })
+    .catch((error) => {
+      dispatch(setSubmittingStatus(false));
+    });
+};
 
 function setSubmittingStatus(value) {
   return {
