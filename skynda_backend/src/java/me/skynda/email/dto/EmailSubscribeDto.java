@@ -41,6 +41,6 @@ public class EmailSubscribeDto implements EmailBaseDto {
         return "Client is interested in buying a vehicle. " +
                 "First name: " + this.getFirstName() +
                 ", Last name: " + this.getLastName() +
-                ", Car he/she is interested in: " + this.getCarPk();
+                ", Car he/she is interested in: http://skynda.me/details/" + this.getCarPk();
     }
 }

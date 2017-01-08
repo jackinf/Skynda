@@ -2,6 +2,7 @@ package me.skynda.email.controller;
 
 import me.skynda.common.controller.BaseController;
 import me.skynda.email.dto.EmailQuestionDto;
+import me.skynda.email.dto.EmailSellVehicleDto;
 import me.skynda.email.dto.EmailSubscribeDto;
 import me.skynda.common.abstracts.services.EmailService;
 
@@ -22,8 +23,15 @@ public class EmailController extends BaseController {
         return emailService.sendEmail(dto);
     }
 
+    @RequestMapping(value = "/email/sell-vehicle", method = RequestMethod.POST, produces = "application/json", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public boolean postEmailSellVehicle(@RequestBody EmailSellVehicleDto dto) {
+        return emailService.sendEmail(dto);
+    }
+
     @RequestMapping(value = "/email/question", method = RequestMethod.POST, produces = "application/json", consumes = MediaType.APPLICATION_JSON_VALUE)
     public boolean postEmailQuestion(@RequestBody EmailQuestionDto dto) {
         return emailService.sendEmail(dto);
     }
+
+
 }
