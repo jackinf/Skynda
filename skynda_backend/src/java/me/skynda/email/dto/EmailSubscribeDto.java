@@ -1,6 +1,10 @@
 package me.skynda.email.dto;
 
 import lombok.Data;
+import org.hibernate.validator.constraints.Email;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Data
 public class EmailSubscribeDto implements EmailBaseDto {
@@ -8,16 +12,22 @@ public class EmailSubscribeDto implements EmailBaseDto {
     /**
      * Person's first name
      * */
+    @NotNull
+    @Size(min = 2, max =100)
     private String firstName;
 
     /**
      * Person's last name
      */
+    @NotNull
+    @Size(min = 2, max =100)
     private String lastName;
 
     /**
      * Person's email
      */
+    @NotNull
+    @Email
     private String email;
 
     /**
@@ -29,6 +39,7 @@ public class EmailSubscribeDto implements EmailBaseDto {
      * Primary key of vehicle to know from which page was the info sent.
      * This helps to identify, in which vehicle the user is interested in.
      */
+    @NotNull
     private String carPk;
 
     @Override

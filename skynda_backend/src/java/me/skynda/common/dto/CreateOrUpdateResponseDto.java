@@ -12,9 +12,10 @@ public class CreateOrUpdateResponseDto {
     private List<ObjectError> errors;
 
     public static class Factory {
-        public static CreateOrUpdateResponseDto fail() {
+        public static CreateOrUpdateResponseDto fail(List<ObjectError> errors) {
             CreateOrUpdateResponseDto dto = new CreateOrUpdateResponseDto();
             dto.setSuccess(false);
+            dto.setErrors(errors);
             return dto;
         }
 

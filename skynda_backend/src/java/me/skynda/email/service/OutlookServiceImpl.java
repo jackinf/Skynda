@@ -5,6 +5,7 @@
 package me.skynda.email.service;
 
 import me.skynda.common.abstracts.services.EmailService;
+import me.skynda.common.dto.SimpleResponseDto;
 import me.skynda.email.dto.EmailBaseDto;
 import org.springframework.context.annotation.Primary;
 
@@ -27,7 +28,7 @@ public class OutlookServiceImpl extends EmailService {
      * @return Successfully sent or not
      */
     @Override
-    public boolean sendEmail(EmailBaseDto dto) {
+    public SimpleResponseDto sendEmail(EmailBaseDto dto) {
 
         // Get a Properties object
 //        Properties props = System.getProperties();

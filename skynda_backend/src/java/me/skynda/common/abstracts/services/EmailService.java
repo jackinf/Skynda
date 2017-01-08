@@ -1,10 +1,13 @@
 package me.skynda.common.abstracts.services;
 
+import me.skynda.common.dto.SimpleResponseDto;
 import me.skynda.email.dto.EmailBaseDto;
+import org.springframework.validation.ObjectError;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Properties;
 
@@ -15,9 +18,9 @@ public abstract class EmailService {
      * @param dto Email message settings e.g. receiver, content, server...
      * @return Is message successfully sent
      */
-    public abstract boolean sendEmail(EmailBaseDto dto);
+    public abstract SimpleResponseDto sendEmail(EmailBaseDto dto);
 
-    protected boolean innerSendMessage(EmailBaseDto dto, Session session, String mailTo) {
+    protected SimpleResponseDto innerSendMessage(EmailBaseDto dto, Session session, String mailTo) {
         try {
             // -- Create a new message --
             Message msg = new MimeMessage(session);
@@ -32,9 +35,11 @@ public abstract class EmailService {
             System.out.println("Message sent.");
         } catch (MessagingException e) {
             e.printStackTrace();
-            return false;
+            ArrayList<ObjectError> errors = new ArrayList<>();
+            errors.add(new ObjectError("email", "failed to send: " + e.getMessage()));
+            return SimpleResponseDto.Factory.fail(errors);
         }
-        return true;
+        return SimpleResponseDto.Factory.success();
     }
 
     protected Session getMailSession(Properties props, final String username, final String password) {

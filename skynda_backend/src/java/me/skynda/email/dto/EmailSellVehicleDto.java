@@ -1,6 +1,10 @@
 package me.skynda.email.dto;
 
 import lombok.Data;
+import org.hibernate.validator.constraints.Email;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  * Created by zekar on 1/8/2017.
@@ -11,16 +15,21 @@ public class EmailSellVehicleDto implements EmailBaseDto {
     /**
      * Seller's name
      */
+    @NotNull
+    @Size(min = 2, max = 50)
     private String fullName;
 
     /**
      * Seller's email
      */
+    @NotNull
+    @Email
     private String email;
 
     /**
      * Seller's phone number
      */
+    @NotNull
     private String phone;
 
     /**
