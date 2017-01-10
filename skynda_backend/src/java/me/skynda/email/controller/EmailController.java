@@ -2,11 +2,13 @@ package me.skynda.email.controller;
 
 import me.skynda.common.controller.BaseController;
 import me.skynda.common.dto.SimpleResponseDto;
+import me.skynda.email.dto.EmailBuyVehicleDto;
 import me.skynda.email.dto.EmailQuestionDto;
 import me.skynda.email.dto.EmailSellVehicleDto;
 import me.skynda.email.dto.EmailSubscribeDto;
 import me.skynda.common.abstracts.services.EmailService;
 
+import me.skynda.email.validators.EmailBuyVehicleDtoValidator;
 import me.skynda.email.validators.EmailQuestionDtoValidator;
 import me.skynda.email.validators.EmailSellVehicleDtoValidator;
 import me.skynda.email.validators.EmailSubscribeDtoValidator;
@@ -26,6 +28,14 @@ public class EmailController extends BaseController {
     @RequestMapping(value = "/email/subscribe", method = RequestMethod.POST, produces = "application/json", consumes = MediaType.APPLICATION_JSON_VALUE)
     public SimpleResponseDto postEmailSubscribe(@RequestBody EmailSubscribeDto dto, BindingResult bindingResult) {
         new EmailSubscribeDtoValidator().validate(dto, bindingResult);
+        if (bindingResult.hasErrors())
+            return SimpleResponseDto.Factory.fail(bindingResult.getAllErrors());
+        return emailService.sendEmail(dto);
+    }
+
+    @RequestMapping(value = "/email/buy-vehicle", method = RequestMethod.POST, produces = "application/json", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public SimpleResponseDto postEmailBuyVehicle(@RequestBody EmailBuyVehicleDto dto, BindingResult bindingResult) {
+        new EmailBuyVehicleDtoValidator().validate(dto, bindingResult);
         if (bindingResult.hasErrors())
             return SimpleResponseDto.Factory.fail(bindingResult.getAllErrors());
         return emailService.sendEmail(dto);

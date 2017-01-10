@@ -59,7 +59,7 @@ class VehicleDetails extends React.Component {
               </div>
               <div className='col col-md-4'>
                 <Sticky>
-                  <Checkout sendEmailAsync={this.props.sendEmailAsync}/>
+                  <Checkout sendEmailAsync={this.props.sendEmailAsync} id={this.props.params["id"]}/>
                 </Sticky>
               </div>
             </div>

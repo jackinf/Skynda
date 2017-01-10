@@ -12,7 +12,7 @@ export const submitAsync = (info) => (dispatch) => {
   dispatch(setSubmittingStatus(true));
   dispatch(setErrors(null));
 
-  return fetch(`${remoteConfig.remote}/api/email/subscribe`, {
+  return fetch(`${remoteConfig.remote}/api/email/buy-vehicle`, {
     method: "POST",
     headers: {"Accept": "application/json", "Content-Type": "application/json"},
     body: JSON.stringify(info)

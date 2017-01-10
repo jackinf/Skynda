@@ -33,10 +33,11 @@ const PersonInfoTab = (props) => (<li className='tab-pane fade active in' id='ht
           <TextField
             floatingLabelText={<Translate value="details.components.checkout_panel.your_name"/>}
             fullWidth
+            errorText={props.errors ? props.errors["fullName"] : ""}
             floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
             underlineFocusStyle={styles.underlineFocusStyle}
             onChange={e => {
-              props.person.firstName = e.target.value;
+              props.person.fullName = e.target.value;
             }}
           />
         </Col>
@@ -47,6 +48,7 @@ const PersonInfoTab = (props) => (<li className='tab-pane fade active in' id='ht
             type='email'
             floatingLabelText={<Translate value="details.components.checkout_panel.email"/>}
             fullWidth
+            errorText={props.errors ? props.errors["email"] : ""}
             floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
             underlineFocusStyle={styles.underlineFocusStyle}
             onChange={e => {
@@ -60,6 +62,7 @@ const PersonInfoTab = (props) => (<li className='tab-pane fade active in' id='ht
           <TextField
             floatingLabelText={<Translate value="details.components.checkout_panel.phone"/>}
             fullWidth
+            errorText={props.errors ? props.errors["phone"] : ""}
             floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
             underlineFocusStyle={styles.underlineFocusStyle}
             onChange={e => {
@@ -75,6 +78,7 @@ const PersonInfoTab = (props) => (<li className='tab-pane fade active in' id='ht
             rows={2}
             floatingLabelText={<Translate value="details.components.checkout_panel.add_comment"/>}
             fullWidth
+            errorText={props.errors ? props.errors["comment"] : ""}
             floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
             underlineFocusStyle={styles.underlineFocusStyle}
             onChange={e => {
@@ -100,7 +104,7 @@ const PersonInfoTab = (props) => (<li className='tab-pane fade active in' id='ht
 
 PersonInfoTab.propTypes = {
   person: React.PropTypes.shape({
-    firstName: React.PropTypes.string.isRequired,
+    fullName: React.PropTypes.string.isRequired,
     email: React.PropTypes.string.isRequired,
     phone: React.PropTypes.string.isRequired,
     comment: React.PropTypes.string
@@ -113,14 +117,19 @@ class Checkout extends React.Component {
   constructor(props) {
     super(props);
 
+    // console.info("Checkout, vehicle id", props.id);
+
     // TODO: Redux
     this.state = {
       tab: 1,
+      id: props.id,
       openSentMsg: false,
       personDetails: {
-        firstName: "",
+        fullName: "",
         email: "",
-        phone: ""
+        phone: "",
+        comment: "",
+        carPk: props.id
       }
     };
   }
@@ -130,15 +139,27 @@ class Checkout extends React.Component {
   };
 
   displaySuccessPopup = async() => {
-    await this.props.sendEmailAsync(this.state.personDetails);
-    this.setState({openSentMsg: true});
+    await this.props.submitAsync(this.state.personDetails);
+    setTimeout(() => {
+      location.reload();  // It is easier this way right now
+    }, 4000);
+    // this.setState({
+    //   personDetails: {
+    //     fullName: "",
+    //     email: "",
+    //     phone: "",
+    //     comment: "",
+    //     carPk: this.state.id
+    // }});
+    // this.setState({openSentMsg: true});
   };
 
   render() {
     return (<div className='sk_details__checkout_container'>
 
+      {/* TODO: Dialog not needed. Remove. */}
       <Dialog
-        title={"Aitäh " + this.state.personDetails.firstName + "!"}
+        title={"Aitäh " + this.state.personDetails.fullName + "!"}
         modal={false}
         open={this.state.openSentMsg}
         onRequestClose={this.handleClose}
@@ -150,7 +171,10 @@ class Checkout extends React.Component {
         <Tab label={<Translate value="details.components.checkout_panel.contact_us_txt"/>}
              className='sk_details__checkout_tab'>
           <div className='sk_details__checkout_tab_inner'>
-            <PersonInfoTab displaySuccessPopup={this.displaySuccessPopup} person={this.state.personDetails}/>
+            <PersonInfoTab displaySuccessPopup={this.displaySuccessPopup}
+                           person={this.state.personDetails}
+                           errors={this.props.errors}
+            />
           </div>
         </Tab>
       </Tabs>
