@@ -8,6 +8,7 @@ export default (store) => ({
     require.ensure([], (require) => {
       const Details = require("./containers/DetailsContainer").default;
 
+      injectReducer(store, {key: "checkoutInfo", reducer: require("./components/CheckoutPanel/Details.checkout.reducer").default});
       injectReducer(store, {key: "isLoading", reducer: require("./reducers/Details.module.toggle-loading").default});
       injectReducer(store, {key: "carData", reducer: require("./reducers/Details.module.car-data.js").default});
 

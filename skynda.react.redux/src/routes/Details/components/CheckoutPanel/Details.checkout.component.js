@@ -1,5 +1,5 @@
 import React from "react";
-import "./Details.checkout.scss";
+import "./Details.checkout.component.scss";
 import Dialog from "material-ui/Dialog";
 import RaisedButton from "material-ui/RaisedButton";
 import TextField from "material-ui/TextField";

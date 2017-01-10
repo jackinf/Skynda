@@ -10,7 +10,7 @@ import Safety from "./Safety";
 import InspectorsReport from "./InspectorsReport/Details.inspectors-report";
 import Reviews from "./Reviews";
 import VehicleDetailsMainImage from "./MainImage";
-import Checkout from "./CheckoutPanel/Details.checkout";
+import Checkout from "./CheckoutPanel";
 import {Translate} from 'react-redux-i18n';
 import {StickyContainer, Sticky} from "react-sticky";
 
