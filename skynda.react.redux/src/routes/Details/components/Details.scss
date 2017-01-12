@@ -72,8 +72,11 @@
     list-style: none;
   }
 
-  .sk_details__checkout_tab_action_button {
+  .tab_action_button {
     margin: 0 auto;
+    button span{
+      text-transform: none !important;
+    }
   }
 
   .customInkBar{

@@ -6,15 +6,17 @@ import _ from "underscore";
 import RefreshIndicator from 'material-ui/RefreshIndicator';
 
 class ResultsComponent extends React.Component {
-
   render() {
+    const searchingTxt = <Translate value="home_page.searching"/>;
+    const chooseFavTxt = <Translate value="home_page.choose_your_favorite"/>;
+    const recentlyAddedTxt = <Translate value="home_page.recently_added"/>;
     return (
       <Col md={12}>
         {
           this.props.isSearching
             ? (
             <Row>
-              <Translate value="home_page.searching"/>
+              {searchingTxt}
               <div><RefreshIndicator size={100} left={0} top={50} status="loading"/></div>
             </Row>)
             : _.isArray(this.props.searchResults) && this.props.searchResults.length > 0
@@ -22,7 +24,7 @@ class ResultsComponent extends React.Component {
             <Row>
               <Col sm={12}>
                 <h2 className='primary-header-2 text-center'>
-                  <Translate value="home_page.choose_your_favorite"/>: {this.props.searchResults[0].length}
+                  {chooseFavTxt}: {this.props.searchResults[0].length}
                 </h2>
               </Col>
               <br />
@@ -47,7 +49,7 @@ class ResultsComponent extends React.Component {
           ? (<Row>
               <Col sm={12}>
                 <h2 className='primary-header-2 text-center'>
-                  <Translate value="home_page.recently_added"/>
+                  {recentlyAddedTxt}
                 </h2>
               </Col>
               <br />

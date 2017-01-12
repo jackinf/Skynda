@@ -7,7 +7,9 @@ import {Link} from "react-router";
 class CarPreview extends React.Component {
   render() {
     const {id, mainImage, model, price, mileage, comment} = this.props.vehicle;
-
+    const localizedMileage = <Localize value={mileage}/>;
+    const doorsText = <Translate value="components.car_preview.doors"/>;
+    const seatsText = <Translate value="components.car_preview.seats"/>;
     return (<div className='car-preview'>
       <Link to={"/details/" + id}>
         <img src={mainImage.url} className='car-preview__image'/>
@@ -18,17 +20,15 @@ class CarPreview extends React.Component {
       <div className='car-preview__info-panel'>
         <Row className='car-preview__info-panel-primary-row'>
           <Col sm={7}>{model.year} {model.vehicleManufacturer.name}</Col>
-          <Col sm={5}><span style={{margin: "0 0 0 12px"}}>{price} EUR</span></Col>
+          <Col sm={5} className="align-right">{price} EUR</Col>
         </Row>
         <Row>
-          <Col sm={7}><span style={{margin: "0 25px 0 0"}}>{"2.0"} ({model.horsePower} kW)</span></Col>
-          <Col sm={5}><span style={{margin: "0 25px 0 12px"}}><Localize value={mileage}/> km</span></Col>
+          <Col sm={7}><span >{"2.0"} ({model.horsePower} kW)</span></Col>
+          <Col sm={5} className="align-right">{localizedMileage} km</Col>
         </Row>
         <Row>
-          <Col sm={7}> <span style={{margin: "0 25px 0 0"}}>{model.doors} <Translate
-            value="components.car_preview.doors"/></span></Col>
-          <Col sm={5}><span style={{margin: "0 0 0 12px"}}>{model.seats} <Translate
-            value="components.car_preview.seats"/></span></Col>
+          <Col sm={7}> {model.doors} {doorsText}</Col>
+          <Col sm={5} className="align-right">{model.seats} {seatsText}</Col>
         </Row>
 
         <Row>

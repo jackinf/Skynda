@@ -47,6 +47,7 @@ const PersonInfoTab = (props) => (<li className='tab-pane fade active in' id='ht
             type='email'
             floatingLabelText={<Translate value="details.components.checkout_panel.email"/>}
             fullWidth
+            errorText=""
             floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
             underlineFocusStyle={styles.underlineFocusStyle}
             onChange={e => {
@@ -87,7 +88,7 @@ const PersonInfoTab = (props) => (<li className='tab-pane fade active in' id='ht
         <Col md={12}>
           <RaisedButton
             label={<Translate value="details.components.checkout_panel.btn_send"/>}
-            className='sk_details__checkout_tab_action_button pull-right'
+            className='tab_action_button pull-right'
             backgroundColor={styles.backgroundDefault}
             labelStyle={{color: "white", weight: 600}}
             onTouchTap={props.displaySuccessPopup}
@@ -135,19 +136,22 @@ class Checkout extends React.Component {
   };
 
   render() {
-    return (<div className='sk_details__checkout_container'>
+    const contactText = <Translate value="details.components.checkout_panel.contact_24h_txt"/>;
+    const contactUsText = <Translate value="details.components.checkout_panel.contact_us_txt"/>;
+    const thankYouText = "Aitäh";
 
+    return (<div className='sk_details__checkout_container'>
       <Dialog
-        title={"Aitäh " + this.state.personDetails.firstName + "!"}
+        title={thankYouText + this.state.personDetails.firstName + "!"}
         modal={false}
         open={this.state.openSentMsg}
         onRequestClose={this.handleClose}
       >
-        <Translate value="details.components.checkout_panel.contact_24h_txt"/>
+        {contactText}
       </Dialog>
 
       <Tabs inkBarStyle={styles.backgroundInkBar}>
-        <Tab label={<Translate value="details.components.checkout_panel.contact_us_txt"/>}
+        <Tab label={contactUsText}
              className='sk_details__checkout_tab'>
           <div className='sk_details__checkout_tab_inner'>
             <PersonInfoTab displaySuccessPopup={this.displaySuccessPopup} person={this.state.personDetails}/>
