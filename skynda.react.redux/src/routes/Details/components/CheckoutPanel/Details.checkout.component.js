@@ -1,5 +1,5 @@
 import React from "react";
-import "./Details.checkout.scss";
+import "./Details.checkout.component.scss";
 import Dialog from "material-ui/Dialog";
 import RaisedButton from "material-ui/RaisedButton";
 import TextField from "material-ui/TextField";
@@ -36,9 +36,7 @@ const PersonInfoTab = (props) => (<li className='tab-pane fade active in' id='ht
             errorText={props.errors ? props.errors["fullName"] : ""}
             floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
             underlineFocusStyle={styles.underlineFocusStyle}
-            onChange={e => {
-              props.person.fullName = e.target.value;
-            }}
+            onChange={e => {props.person.fullName = e.target.value;}}
           />
         </Col>
       </Row>
