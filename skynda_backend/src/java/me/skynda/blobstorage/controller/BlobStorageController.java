@@ -1,12 +1,12 @@
 package me.skynda.blobstorage.controller;
 
-import com.microsoft.azure.storage.blob.ListBlobItem;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import me.skynda.blobstorage.dto.*;
+import me.skynda.blobstorage.dto.response.BlobDto;
 import me.skynda.blobstorage.dto.temp.FileTestUpload3;
-import me.skynda.blobstorage.service.BlobStorageService;
+import me.skynda.common.interfaces.services.BlobStorageService;
 import me.skynda.common.controller.BaseController;
 import me.skynda.common.helper.FileHelper;
 
@@ -23,7 +23,7 @@ import java.util.List;
 /**
  * Controller for managing media filesToUpload (blobs)
  */
-//@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/blob")
 public class BlobStorageController extends BaseController {
@@ -67,12 +67,15 @@ public class BlobStorageController extends BaseController {
     /**
      * Action for listing all the filesToUpload in the storage
      *
-     * @param dto Settings
+     * @param containerName String
      * @return All the filesToUpload in the container
      */
     @RequestMapping(value = "/list", method = RequestMethod.GET, produces = "application/json")
-    public List<ListBlobItem> list(@RequestBody ListBlobsDto dto) {
-        return blobStorageService.list(dto);
+    @ApiOperation(value = "List files", notes = "List all the files", consumes = "application/json")
+    public List<BlobDto> list(@RequestParam(name = "containerName") String containerName) {
+        ListBlobsDto listBlobsDto = new ListBlobsDto();
+        listBlobsDto.setContainerName(containerName);
+        return blobStorageService.list(listBlobsDto);
     }
 
     /**

@@ -1,8 +1,8 @@
-package me.skynda.blobstorage.service;
+package me.skynda.common.interfaces.services;
 
-import com.microsoft.azure.storage.blob.ListBlobItem;
 import me.skynda.blobstorage.dto.*;
 import me.skynda.blobstorage.dto.response.BlobStorageUploadStreamResponseDto;
+import me.skynda.blobstorage.dto.response.BlobDto;
 import me.skynda.image.entities.Image;
 import me.skynda.vehicle.dto.ImageCropInfoDto;
 import me.skynda.vehicle.dto.ImageDto;
@@ -18,7 +18,7 @@ public interface BlobStorageService {
     boolean deleteContainer(DeleteContainerDto dto);
     boolean upload(UploadBlobDto dto);
     BlobStorageUploadStreamResponseDto uploadStream(UploadBlobDto dto);
-    List<ListBlobItem> list(ListBlobsDto dto);
+    List<BlobDto> list(ListBlobsDto dto);
     void download(DownloadBlobDto dto);
     boolean delete(DeleteBlobDto dto);
 

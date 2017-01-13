@@ -4,6 +4,7 @@
 import VehiclesRoute from "./routes/Vehicles";
 import VehicleModelsRoute from "./routes/VehicleModels";
 import ClassifiersRoute from "./routes/Classifiers";
+import ImagesRoute from "./routes/Images";
 import VehicleReportsRoute from "./routes/VehicleReports";
 import VehicleReviewsRoute from "./routes/VehicleReviews";
 import {isLoggedInAs} from "../../utils/userUtils";
@@ -19,6 +20,7 @@ export default (store) => ({
     VehiclesRoute(store),
     VehicleModelsRoute(store),
     ClassifiersRoute(store),
+    ImagesRoute(store),
     VehicleReportsRoute(store),
     VehicleReviewsRoute(store)
   ],

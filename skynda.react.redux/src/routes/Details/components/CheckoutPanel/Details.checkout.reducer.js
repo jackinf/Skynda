@@ -1,10 +1,10 @@
 /**
- * Created by jevgenir on 11/26/2016.
+ * Created by zekar on 1/10/2017.
  */
 
-const SET_INFO = "SELL_YOUR_CAR/SET_INFO";
-const SET_ERRORS = "SELL_YOUR_CAR/SET_ERRORS";
-import remoteConfig from "../../../store/remoteConfig";
+const SET_INFO = "CHECKOUT/SET_INFO";
+const SET_ERRORS = "CHECKOUT/SET_ERRORS";
+import remoteConfig from "../../../../store/remoteConfig";
 import {toastr} from 'react-redux-toastr';
 
 export const submitAsync = (info) => (dispatch) => {
@@ -12,7 +12,7 @@ export const submitAsync = (info) => (dispatch) => {
   dispatch(setSubmittingStatus(true));
   dispatch(setErrors(null));
 
-  return fetch(`${remoteConfig.remote}/api/email/sell-vehicle`, {
+  return fetch(`${remoteConfig.remote}/api/email/buy-vehicle`, {
     method: "POST",
     headers: {"Accept": "application/json", "Content-Type": "application/json"},
     body: JSON.stringify(info)
@@ -54,7 +54,7 @@ export default function reducer(state = initialState, action) {
         ...state,
         isSubmitting: action.isSubmitting
       };
-      case SET_ERRORS:
+    case SET_ERRORS:
       return {
         ...state,
         errors: action.errors

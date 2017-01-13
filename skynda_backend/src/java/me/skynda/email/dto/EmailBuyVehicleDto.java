@@ -2,38 +2,31 @@ package me.skynda.email.dto;
 
 import lombok.Data;
 import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+/**
+ * Created by zekar on 1/10/2017.
+ */
 @Data
-public class EmailSubscribeDto implements EmailBaseDto {
+public class EmailBuyVehicleDto implements EmailBaseDto {
 
-    /**
-     * Person's first name
-     * */
     @NotNull
-    @Size(min = 2, max =100)
-    private String firstName;
+    @Size(min = 2, max = 10)
+    private String fullName;   // TODO: this is full name
 
-    /**
-     * Person's last name
-     */
     @NotNull
-    @Size(min = 2, max =100)
-    private String lastName;
-
-    /**
-     * Person's email
-     */
-    @NotNull
+    @NotEmpty
     @Email
     private String email;
 
-    /**
-     * Person's mobile phone
-     */
-    private String mobilePhone;
+    @NotNull
+    @NotEmpty
+    private String phone;
+
+    private String comment;
 
     /**
      * Primary key of vehicle to know from which page was the info sent.
@@ -50,8 +43,8 @@ public class EmailSubscribeDto implements EmailBaseDto {
     @Override
     public String getContent() {
         return "Client is interested in buying a vehicle. " +
-                "\nFirst name: " + this.getFirstName() +
-                "\nLast name: " + this.getLastName() +
-                "\nCar he/she is interested in: http://skynda.me/details/" + this.getCarPk();
-    }
+                "\nName: " + this.getFullName() +
+                "\nEmail: " + this.getEmail() +
+                "\nPhone: " + this.getPhone() +
+                "\nCar he/she is interested in: http://skynda.me/details/" + this.getCarPk();    }
 }
