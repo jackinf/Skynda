@@ -28,10 +28,10 @@ import fromSpringToReduxFormError from "../../../../../utils/formUtils/fromSprin
 import "./Vehicle.component.scss";
 
 import VehicleModel from "../../VehicleModels/containers/VehicleModel.container";
-// import Dialog from "material-ui/Dialog";
 import {Modal} from "react-bootstrap";
 import {ROUTE_PARAMS as VEHICLE_MODEL_ROUTE_PARAMS} from "../../VehicleModels/constants/VehicleModel.constant";
 import _ from "underscore";
+import {CropToolCard, CropToolSimple} from "../../../../../components/ReduxForm/CropTool";
 
 const SubmitCardActions = ({disabled}) => (<CardActions>
   <hr/>
@@ -224,14 +224,23 @@ class Vehicle extends React.Component {
             <Row>
               <Col md={6} xs={12}>
 
-                <MainImageCardField title="Main image"
-                                    errors={errors}
-                                    onMainImageRemove={this.props.onMainImageRemove}
-                                    onMainImageUpload={this.props.onMainImageUpload}
-                                    onMainImageCropComplete={this.props.onMainImageCropComplete}
+                {/*<MainImageCardField title="Main image"*/}
+                                    {/*errors={errors}*/}
+                                    {/*onMainImageRemove={this.props.onMainImageRemove}*/}
+                                    {/*onMainImageUpload={this.props.onMainImageUpload}*/}
+                                    {/*onMainImageCropComplete={this.props.onMainImageCropComplete}*/}
+                {/*>*/}
+                  {/*<SubmitCardActions disabled={this.props.submitting} />*/}
+                {/*</MainImageCardField>*/}
+
+                <CropToolCard
+                  name="mainImage"
+                  reduxFormName={FORMS.VEHICLE_FORM}
+                  title="Main image"
+                  errors={errors}
                 >
                   <SubmitCardActions disabled={this.props.submitting} />
-                </MainImageCardField>
+                </CropToolCard>
 
                 <br/>
 
