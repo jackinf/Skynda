@@ -27,9 +27,13 @@ export const createRoutes = (store) => {
   injectReducer(store, {key: "toastr", reducer: require("react-redux-toastr").reducer});
   injectReducer(store, {key: "auth", reducer: require("./Auth/modules/auth.module").default});
   syncTranslationWithStore(store);
+  // store.dispatch(loadTranslations({
+  //   et: {}
+  //   en: {}
+  // }));
   store.dispatch(loadTranslations({
-    et: {},//require("./../store/translations/et.json"),
-    en: {}//require("./../store/translations/en.json")
+    et: require("./../store/translations/et.json"),
+    en: require("./../store/translations/en.json")
   }));
   store.dispatch(setLocale('et'));
 
