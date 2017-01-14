@@ -1,7 +1,7 @@
 import {connect} from "react-redux";
 import {reduxForm} from 'redux-form';
 import {submitMyForm} from '../actions/actions';
-import ReduxFormView from "../components/ReduxFormView";
+import ReduxFormView from "../components/ReduxForm.component";
 
 // Decorate the form component
 const DecoratedReduxFormView = reduxForm({

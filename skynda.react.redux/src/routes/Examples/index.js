@@ -2,6 +2,7 @@ import ReduxFormRoute from "./routes/ReduxForm";
 import FileUploadRoute from "./routes/FileUpload";
 import ToastrRoute from "./routes/Toastr";
 import PipeDriveRoute from "./routes/Pipedrive";
+import CropToolRoute from "./routes/CropTool";
 
 export default (store) => ({
   path: "examples",
@@ -15,6 +16,7 @@ export default (store) => ({
     ReduxFormRoute(store),
     ToastrRoute(store),
     FileUploadRoute(store),
-    PipeDriveRoute(store)
+    PipeDriveRoute(store),
+    CropToolRoute(store)
   ]
 })

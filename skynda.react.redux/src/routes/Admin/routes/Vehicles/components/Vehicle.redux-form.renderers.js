@@ -16,7 +16,6 @@ import "react-image-crop/dist/ReactCrop.css";
 import {TwitterPicker} from 'react-color';
 
 import {fieldListWrapper, renderImage} from "../../../components/FormRenderers/index";
-import imagesClose from "./../assets/cancel@2x.png";
 
 const styleDeleteIcon = {
   position: "absolute",
@@ -25,9 +24,7 @@ const styleDeleteIcon = {
   right: "40px",
   background: "white"
 };
-const ReactIconDeleteWrapped = (props) => (<ReactIconDelete {...props} width="32" height="32"
-                                                            style={styleDeleteIcon}/>);
-// const ReactIconDeleteWrapped = (props) => (<img src={imagesClose} style={styleDeleteIcon} alt="Close" width={32} height={32}/>);
+const ReactIconDeleteWrapped = (props) => (<ReactIconDelete {...props} width="32" height="32" style={styleDeleteIcon}/>);
 const crop = {width: 90, aspect: 16/9};
 
 /*
