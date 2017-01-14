@@ -8,6 +8,21 @@ import imageUtil from "../../../utils/allUtils/imageUtil";
 import Component from "./ReduxForm.CropTool.component";
 import {BASE64FILE, CROP_INFO} from "./ReduxForm.CropTool.constants";
 
+function resizeCrop(image, cb) {
+  const cropInfo = image.cropInfo;
+  const canvas = document.createElement("canvas");
+  canvas.width = cropInfo.width;
+  canvas.height = cropInfo.height;
+  const context =  canvas.getContext('2d');
+  const imageObj = new Image();
+  imageObj.onload = function() {
+    context.drawImage(imageObj, -cropInfo.x, -cropInfo.y);
+    const newBase64 = canvas.toDataURL('image/jpg', 90);
+    cb(newBase64);
+  };
+  imageObj.src = image.base64File;
+}
+
 const mapStateToProps = (state, ownProps) => ({
   reduxFormName: ownProps.reduxFormName
 });
@@ -26,16 +41,21 @@ const mapDispatchToProps = {
   onCropChange: (crop, pixelCrop, name, reduxFormName) => (dispatch) => {
     console.log("onCropChange", crop, pixelCrop);
     dispatch(change(reduxFormName, `${name}.${CROP_INFO}`, {
-      width: crop.width,
-      height: crop.height,
-      x: crop.x,
-      y: crop.y,
+      width: pixelCrop.width,
+      height: pixelCrop.height,
+      x: pixelCrop.x,
+      y: pixelCrop.y,
       crop: false
     }));
   },
 
-  onCropDone: (name, reduxFormName) => (dispatch) => {
-    dispatch(change(reduxFormName, `${name}.${CROP_INFO}.crop`, true));
+  onCropDone: (name, reduxFormName, file) => (dispatch, getState) => {
+    const state = getState();
+    const image = state.form[reduxFormName] ? state.form[reduxFormName].values.image : null;
+    resizeCrop(image, (newBase64) => {
+      // dispatch(change(reduxFormName, `${name}.${CROP_INFO}.crop`, true));
+      dispatch(change(reduxFormName, `${name}.${BASE64FILE}`, newBase64));
+    });
   }
 };
 

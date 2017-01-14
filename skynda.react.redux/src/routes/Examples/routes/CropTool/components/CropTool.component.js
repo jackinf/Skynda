@@ -25,12 +25,6 @@ class CropToolComponent extends React.Component {
         <form onSubmit={this.onSubmit}>
           <Row className="spacefix">
             <Col xs={12}>
-              <label htmlFor="firstName">First Name</label>
-              <Field name="firstName" component="input" type="text"/>
-            </Col>
-          </Row>
-          <Row className="spacefix">
-            <Col xs={12}>
               <ReduxFormCropTool
                 name="image"
                 reduxFormName={reduxFormName}

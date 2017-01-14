@@ -26,7 +26,7 @@ export const renderTextField = ({input, label, errors, meta: {touched, error}, .
 export default class ReduxFormCropToolComponent extends React.Component {
   constructor() {
     super();
-    this.state = {showCrop: false};
+    this.state = {showCrop: false, crop: null};
   }
 
   static propTypes = {
@@ -44,13 +44,17 @@ export default class ReduxFormCropToolComponent extends React.Component {
     this.props.onImageUpload(e, name, reduxFormName);
   };
 
+  onCropChange = (crop, pixelCrop, name, reduxFormName) => {
+    this.props.onCropChange(crop, pixelCrop, name, reduxFormName);
+  };
+
   onCropDone = (name, reduxFormName) => {
+    this.props.onCropDone(name, reduxFormName, this.state.originalFile);
     this.setState({showCrop: false});
-    this.props.onCropDone(name, reduxFormName);
   };
 
   render() {
-    const {title, name, reduxFormName, onImageRemove, onCropChange, className} = this.props;
+    const {title, name, reduxFormName, onImageRemove, className} = this.props;
 
     return (<Card className={className}>
       <CardHeader title={<h2>{title}</h2>} />
@@ -69,8 +73,9 @@ export default class ReduxFormCropToolComponent extends React.Component {
         <Field name={`${name}.${BASE64FILE}`} component={({input, i}) => (<div>
           {input.value
             ? (this.state.showCrop ? (<span>
-              <ReactCrop src={input.value} crop={{width: 90, aspect: 16/9}}
-                         onComplete={(crop, pixelCrop) => onCropChange(crop, pixelCrop, name, reduxFormName)} />
+              <ReactCrop src={input.value}
+                         crop={{width: 90, aspect: 16/9}}
+                         onComplete={(crop, pixelCrop) => this.onCropChange(crop, pixelCrop, name, reduxFormName)} />
               <button className="btn btn-success" onClick={e => this.onCropDone(name, reduxFormName)}>Accept</button>
               <ReactIconDeleteWrapped onClick={e => onImageRemove(e, name, reduxFormName)}/>
             </span>) : (<img src={input.value} />))
