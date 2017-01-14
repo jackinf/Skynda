@@ -12,26 +12,30 @@ const mapStateToProps = (state, ownProps) => ({
   reduxFormName: ownProps.reduxFormName
 });
 const mapDispatchToProps = {
-  onImageUpload: (e, name, reduxFormName) => (dispatch, getState) => {
+  onImageUpload: (e, name, reduxFormName) => (dispatch) => {
     imageUtil.imageFileToBase64(e.target.files[0], (base64File) => {
       console.info("onImageUpload", reduxFormName, `${name}.${BASE64FILE}`);
       dispatch(change(reduxFormName, `${name}.${BASE64FILE}`, base64File));
     });
   },
 
-  onImageRemove: (e, name, reduxFormName) => (dispatch, getState) => {
+  onImageRemove: (e, name, reduxFormName) => (dispatch) => {
     dispatch(change(reduxFormName, `${name}.${BASE64FILE}`, null));
   },
 
-  onCropComplete: (crop, pixelCrop, name, reduxFormName) => (dispatch, getState) => {
-    console.log("onCropComplete", crop, pixelCrop);
+  onCropChange: (crop, pixelCrop, name, reduxFormName) => (dispatch) => {
+    console.log("onCropChange", crop, pixelCrop);
     dispatch(change(reduxFormName, `${name}.${CROP_INFO}`, {
       width: crop.width,
       height: crop.height,
       x: crop.x,
       y: crop.y,
-      crop: true
+      crop: false
     }));
+  },
+
+  onCropDone: (name, reduxFormName) => (dispatch) => {
+    dispatch(change(reduxFormName, `${name}.${CROP_INFO}.crop`, true));
   }
 };
 

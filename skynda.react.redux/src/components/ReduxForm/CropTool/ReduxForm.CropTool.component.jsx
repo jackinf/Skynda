@@ -11,7 +11,7 @@ import {Field} from "redux-form";
 import TextField from 'material-ui/TextField';
 import {Row, Col} from "react-bootstrap";
 import "./ReduxForm.CropTool.component.scss";
-import {URL, BASE64FILE} from "./ReduxForm.CropTool.constants";
+import {URL, BASE64FILE, CROP_INFO} from "./ReduxForm.CropTool.constants";
 
 const ReactIconDeleteWrapped = (props) => (<ReactIconDelete {...props} width="32" height="32" className="crop-tool__delete-icon"/>);
 
@@ -24,18 +24,33 @@ export const renderTextField = ({input, label, errors, meta: {touched, error}, .
 );
 
 export default class ReduxFormCropToolComponent extends React.Component {
+  constructor() {
+    super();
+    this.state = {showCrop: false};
+  }
+
   static propTypes = {
     title: React.PropTypes.string,
     name: React.PropTypes.string.isRequired,
     reduxFormName: React.PropTypes.string.isRequired,
     onImageUpload: React.PropTypes.func.isRequired,
     onImageRemove: React.PropTypes.func.isRequired,
-    onCropComplete: React.PropTypes.func.isRequired,
+    onCropChange: React.PropTypes.func.isRequired,
     className: React.PropTypes.string
   };
 
+  onImageUpload = (e, name, reduxFormName) => {
+    this.setState({showCrop: true});
+    this.props.onImageUpload(e, name, reduxFormName);
+  };
+
+  onCropDone = (name, reduxFormName) => {
+    this.setState({showCrop: false});
+    this.props.onCropDone(name, reduxFormName);
+  };
+
   render() {
-    const {title, name, reduxFormName, onImageUpload, onImageRemove, onCropComplete, className} = this.props;
+    const {title, name, reduxFormName, onImageRemove, onCropChange, className} = this.props;
 
     return (<Card className={className}>
       <CardHeader title={<h2>{title}</h2>} />
@@ -53,12 +68,13 @@ export default class ReduxFormCropToolComponent extends React.Component {
         <span>b) ...or upload using image uploader:</span>
         <Field name={`${name}.${BASE64FILE}`} component={({input, i}) => (<div>
           {input.value
-            ? (<div>
+            ? (this.state.showCrop ? (<span>
               <ReactCrop src={input.value} crop={{width: 90, aspect: 16/9}}
-                         onComplete={(crop, pixelCrop) => onCropComplete(crop, pixelCrop, name, reduxFormName)} />
+                         onComplete={(crop, pixelCrop) => onCropChange(crop, pixelCrop, name, reduxFormName)} />
+              <button className="btn btn-success" onClick={e => this.onCropDone(name, reduxFormName)}>Accept</button>
               <ReactIconDeleteWrapped onClick={e => onImageRemove(e, name, reduxFormName)}/>
-            </div>)
-            : <input className="btn btn-default" type="file" onChange={e => onImageUpload(e, name, reduxFormName)}/>}
+            </span>) : (<img src={input.value} />))
+            : <input className="btn btn-default" type="file" onChange={e => this.onImageUpload(e, name, reduxFormName)}/>}
         </div>)}/>
       </CardText>
       {this.props.children}
