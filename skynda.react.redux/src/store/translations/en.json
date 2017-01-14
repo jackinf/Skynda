@@ -125,5 +125,27 @@
         }
       }
     }
+  },
+  "how_it_works": {
+    "banner_text": "Triven is a peer-to-peer car market with extra comfort and safety features that you don't get anywhere else. ",
+    "why_bubble_1": "Triven is CONVENIENT",
+    "why_bubble_1_description_1": "osta või müü auto arvuti tagant tõusmata",
+    "why_bubble_1_description_2": "auto toome või viime just sinna, kus asud",
+    "why_bubble_2": "Triven is SAFE",
+    "why_bubble_2_description_1": "autode kvaliteet garanteeritud",
+    "why_bubble_2_description_2": "14 päeva tagastusõigus",
+    "why_bubble_3": "Triven is FUN",
+    "why_bubble_3_description_1": "kõik paberid ajab korda Triven",
+    "why_bubble_3_description_2": "tehniline kontroll hinna sees",
+    "buyer_intro": "Triven makes sure you never have to visit muddy car lots or meet shady sellers for dozens of test-drives again. Our process is fully online and all you have to worry about is picking up your phone so we can give your keys. ",
+    "buy_process_step_1": "Select the coolest car you can find",
+    "buy_process_step_2": "Insert your data & pick up place",
+    "buy_process_step_3": "In a couple of days your cool new ride will arrive ",
+    "sell_intro": "Triven makes sure you never have to meet shady potential buyers on dark mall parking lots again. We inspect your car and guarantee you a fair price.  ",
+    "sell_process_step_1": "Sisesta oma auto andmed ",
+    "sell_process_step_2": "Viime auto tehnokontrolli ja teeme hinnapakkumise",
+    "sell_process_step_3": "Kui hind sobib, paneme auto müüki kuni leiame ostja",
+    "sell_process_step_4": "Kõik dokumendid ajame korda e-posti teel",
+    "sell_process_step_5": "Ja ongi aeg autoga hüvasti jätta "
   }
 }

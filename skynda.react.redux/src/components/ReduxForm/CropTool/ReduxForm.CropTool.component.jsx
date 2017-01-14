@@ -11,7 +11,7 @@ import {Field} from "redux-form";
 import TextField from 'material-ui/TextField';
 import {Row, Col} from "react-bootstrap";
 import "./ReduxForm.CropTool.component.scss";
-import {URL, BASE64FILE, CROP_INFO} from "./ReduxForm.CropTool.constants";
+import {URL, BASE64FILE} from "./ReduxForm.CropTool.constants";
 
 const ReactIconDeleteWrapped = (props) => (<ReactIconDelete {...props} width="32" height="32" className="crop-tool__delete-icon"/>);
 
