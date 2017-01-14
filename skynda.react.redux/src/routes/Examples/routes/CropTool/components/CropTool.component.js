@@ -2,8 +2,7 @@
  * Created by jevgenir on 1/14/2017.
  */
 import React from "react";
-import {Field} from "redux-form";
-import ReduxFormCropTool from "../../../../../components/ReduxForm/CropTool";
+import {CropToolCard, CropToolSimple} from "../../../../../components/ReduxForm/CropTool";
 import "./CropTool.component.scss";
 import {Row, Col} from "react-bootstrap";
 import {reduxForm} from "redux-form";
@@ -25,8 +24,14 @@ class CropToolComponent extends React.Component {
         <form onSubmit={this.onSubmit}>
           <Row className="spacefix">
             <Col xs={12}>
-              <ReduxFormCropTool
-                name="image"
+              <CropToolCard
+                name="image1"
+                reduxFormName={reduxFormName}
+                title="Image"
+                errors={errors}
+              />
+              <CropToolSimple
+                name="image2"
                 reduxFormName={reduxFormName}
                 title="Image"
                 errors={errors}
