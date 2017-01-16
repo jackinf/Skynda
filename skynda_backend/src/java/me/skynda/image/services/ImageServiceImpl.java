@@ -1,7 +1,7 @@
 package me.skynda.image.services;
 
+import me.skynda.common.interfaces.daos.IImageDao;
 import me.skynda.common.interfaces.services.ImageService;
-import me.skynda.common.interfaces.daos.ImageDao;
 import me.skynda.image.dto.ImageDto;
 import me.skynda.image.entities.Image;
 import org.dozer.Mapper;
@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -22,7 +21,7 @@ import java.util.stream.Stream;
 public class ImageServiceImpl implements ImageService {
 
     @Autowired
-    ImageDao imageDao;
+    IImageDao imageDao;
 
     @Autowired
     private Mapper mapper;

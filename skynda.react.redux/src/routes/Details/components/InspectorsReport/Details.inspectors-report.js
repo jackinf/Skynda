@@ -87,10 +87,15 @@ class InspectorsReport extends React.Component {
           <Col sm={12}>
             {reportCategories.map((category, i) =>  (
               <Row key={i} className="line-item">
-              <div>{category.title}</div>
-              <p>
-                {category.description}
-              </p>
+              <h3>{category.title}</h3>
+                {category.items.map((item, i ) => (
+                  <Row key={i}>
+                    <div>{item.title}</div>
+                    <p>
+                      {item.text}
+                    </p>
+                  </Row>
+                ))}
             </Row>))}
           </Col>
 
@@ -192,8 +197,9 @@ InspectorsReport.propTypes = {
     reportCategories: React.PropTypes.arrayOf(React.PropTypes.shape({
       title: React.PropTypes.string.isRequired,
       description: React.PropTypes.string,
-      points: React.PropTypes.arrayOf(React.PropTypes.shape({
-        text: React.PropTypes.string.isRequired,
+      items: React.PropTypes.arrayOf(React.PropTypes.shape({
+        title: React.PropTypes.string,
+        text: React.PropTypes.string,
         pass: React.PropTypes.bool
       }))
     })),

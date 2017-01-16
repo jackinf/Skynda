@@ -6,7 +6,7 @@ import io.swagger.annotations.ApiResponses;
 import me.skynda.blobstorage.dto.*;
 import me.skynda.blobstorage.dto.response.BlobDto;
 import me.skynda.blobstorage.dto.temp.FileTestUpload3;
-import me.skynda.common.interfaces.services.BlobStorageService;
+import me.skynda.common.interfaces.services.IBlobStorageService;
 import me.skynda.common.controller.BaseController;
 import me.skynda.common.helper.FileHelper;
 
@@ -28,8 +28,12 @@ import java.util.List;
 @RequestMapping("/api/blob")
 public class BlobStorageController extends BaseController {
 
+    private final IBlobStorageService blobStorageService;
+
     @Autowired
-    private BlobStorageService blobStorageService;
+    public BlobStorageController(IBlobStorageService blobStorageService) {
+        this.blobStorageService = blobStorageService;
+    }
 
     /**
      * Action for creating blob containers

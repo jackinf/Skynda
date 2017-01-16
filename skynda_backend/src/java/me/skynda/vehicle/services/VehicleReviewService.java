@@ -1,11 +1,10 @@
 package me.skynda.vehicle.services;
 
-import me.skynda.common.interfaces.services.BlobStorageService;
 import me.skynda.common.dto.CreateOrUpdateResponseDto;
 import me.skynda.common.dto.DeleteResponseDto;
-import me.skynda.common.interfaces.daos.ImageDao;
 import me.skynda.common.interfaces.daos.VehicleReviewDao;
-import me.skynda.common.interfaces.services.VehicleReviewService;
+import me.skynda.common.interfaces.services.IBlobStorageService;
+import me.skynda.common.interfaces.services.IVehicleReviewService;
 import me.skynda.image.entities.Image;
 import me.skynda.vehicle.dto.VehicleReviewAdminDto;
 import me.skynda.vehicle.entities.VehicleReview;
@@ -18,24 +17,23 @@ import org.springframework.validation.BindingResult;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * Created by jevgenir on 11/14/2016.
- */
 @Service
 @Transactional
-public class VehicleReviewServiceImpl implements VehicleReviewService {
+public class VehicleReviewService implements IVehicleReviewService {
+
+    private final VehicleReviewDao vehicleReviewDao;
+    private final Mapper mapper;
+    private final IBlobStorageService blobStorageService;
 
     @Autowired
-    VehicleReviewDao vehicleReviewDao;
-
-    @Autowired
-    ImageDao imageDao;
-
-    @Autowired
-    private Mapper mapper;
-
-    @Autowired
-    BlobStorageService blobStorageService;
+    public VehicleReviewService(
+            IBlobStorageService blobStorageService,
+            VehicleReviewDao vehicleReviewDao,
+            Mapper mapper) {
+        this.blobStorageService = blobStorageService;
+        this.vehicleReviewDao = vehicleReviewDao;
+        this.mapper = mapper;
+    }
 
     @Override
     public List<VehicleReviewAdminDto> getAll() {

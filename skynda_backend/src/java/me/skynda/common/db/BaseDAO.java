@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 /**
  * Base data access object implementation for SKYNDA backend project.
  */
-public abstract class SkyndaBaseDAO {
+public abstract class BaseDAO {
 
     /**
      * Session creator object.
@@ -21,6 +21,14 @@ public abstract class SkyndaBaseDAO {
      */
     protected Session getSession() {
         return sessionFactory.getCurrentSession();
+    }
+
+    /**
+     * Gets database session
+     * @return Hibernate's session
+     */
+    protected Session openSession() {
+        return sessionFactory.openSession();
     }
 
     /**

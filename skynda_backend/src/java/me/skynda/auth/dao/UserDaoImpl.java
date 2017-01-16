@@ -5,10 +5,10 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import me.skynda.auth.model.User;
-import me.skynda.common.db.SkyndaBaseEntityDaoImpl;
+import me.skynda.common.db.BaseEntityDaoImpl;
 
 @Repository
-public class UserDaoImpl extends SkyndaBaseEntityDaoImpl<User> implements UserDao{
+public class UserDaoImpl extends BaseEntityDaoImpl<User> implements UserDao{
 
 	@Override
 	public User getByEmail(String email) {

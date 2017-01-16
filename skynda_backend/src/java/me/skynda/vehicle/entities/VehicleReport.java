@@ -5,12 +5,13 @@ import javax.persistence.*;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 @Entity
 @Data
 @Table(name = "vehicle_report_category")
-public class VehicleReportCategory implements Serializable {
+public class VehicleReport implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,9 +26,12 @@ public class VehicleReportCategory implements Serializable {
     @Column(name = "vehicle_id", nullable = false)
     private Integer vehicleId;
 
-    @OneToMany(mappedBy = "vehicleReportCategoryId", fetch = FetchType.LAZY)
-    private List<VehicleReportCategoryItem> items;
+    @OneToMany(mappedBy = "parentId", fetch = FetchType.LAZY)
+    private List<VehicleReportItem> items;
 
     @Column(name = "inspector_name")
     private String inspector;
+
+    @Column(name = "archived")
+    private Date archived;
 }

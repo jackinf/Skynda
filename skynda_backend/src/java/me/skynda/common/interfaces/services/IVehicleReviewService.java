@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by jevgenir on 11/14/2016.
  */
-public interface VehicleReviewService {
+public interface IVehicleReviewService {
     List<VehicleReviewAdminDto> getAll();
 
     VehicleReviewAdminDto getSingleBy(Integer id);

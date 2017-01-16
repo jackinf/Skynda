@@ -15,6 +15,7 @@ import ViewComponent from "../components/VehicleReport.component";
 import {FORMS, REDUCER_KEYS} from "../constants/VehicleReport.constant";
 import {setFormMode} from "../reducers/SetFormMode.reducer";
 import {getList as getVehiclesList} from "../../Vehicles/actions/Vehicles";
+import {onFaultFileUpload, onFaultRemove} from "../../Vehicles/actions/Vehicle.image.actions";
 
 // Decorate the form component
 const DecoratedViewComponent = reduxForm({
@@ -29,7 +30,9 @@ const mapDispatchToProps = {
   onFormSubmitSuccess,
   onFormSubmitError,
   setFormMode,
-  fillWithFakeData
+  fillWithFakeData,
+  onFaultFileUpload: onFaultFileUpload,
+  onFaultRemove: onFaultRemove,
 };
 
 const mapStateToProps = (state) => {

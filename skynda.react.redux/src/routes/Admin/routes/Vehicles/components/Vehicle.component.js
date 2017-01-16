@@ -28,7 +28,7 @@ import fromSpringToReduxFormError from "../../../../../utils/formUtils/fromSprin
 import "./Vehicle.component.scss";
 
 import VehicleModel from "../../VehicleModels/containers/VehicleModel.container";
-// import Dialog from "material-ui/Dialog";
+
 import {Modal} from "react-bootstrap";
 import {ROUTE_PARAMS as VEHICLE_MODEL_ROUTE_PARAMS} from "../../VehicleModels/constants/VehicleModel.constant";
 import _ from "underscore";
@@ -238,8 +238,9 @@ class Vehicle extends React.Component {
                 <Card>
                   <CardTitle title={<h3>General</h3>} />
                   <CardText>
-                    <Field name="model.id" label="Vehicle model *" component={selectRenderer(vehicleModels, this.onSelectItemChange)}/>
+                    <Field name="isSold" label="Is Sold" component={renderCheckbox} errors={errors}/>
 
+                    <Field name="model.id" label="Vehicle model *" component={selectRenderer(vehicleModels, this.onSelectItemChange)}/>
                     <Modal show={this.state.isVehicleModelDialogOpen} onHide={this.closeVehicleModelDialog}>
                       <Modal.Header closeButton>
                         <Modal.Title>Modal heading</Modal.Title>
@@ -249,45 +250,39 @@ class Vehicle extends React.Component {
                                       onSubmitCustom={this.closeVehicleModelDialog} />
                       </Modal.Body>
                     </Modal>
+                    <Field name="price" label="Price *" component={renderTextField} type="number" errors={errors}/>
+                    <Field name="mileage" label="Mileage *" component={renderTextField} type="number" errors={errors}/>
 
-                    <Field name="colorInsideHex"
+                    <label>Fuel:</label>
+                    <Field name="fuelCity" label="Fuel City" component={renderTextField} errors={errors}/>
+                    <Field name="fuelHighway" label="Fuel Highway" component={renderTextField} errors={errors}/>
+
+                    <label>History:</label>
+                    <Field name="vinCode" label="Vin Code *" component={renderTextField} errors={errors}/>
+                    <Field name="registrationNumber" label="Registration Number *" component={renderTextField} errors={errors}/>
+
+                    <label>Safety:</label>
+                    <Field name="safetyStars" label="Safety Stars" component={renderTextField} type="number" errors={errors}/>
+
+                    <Field name="colorInside"
                            label="Color inside *"
                            errors={errors}
                            onChangeComplete={this.onSetField}
                            component={ColorRenderer} />
 
-                    <Field name="colorInside.id"
-                           label="Color Inside * (Obsolete)"
-                           errors={errors}
-                           component={selectRenderer(colors, this.onSelectItemChange)}/>
-
-                    <Field name="colorOutsideHex"
+                    <Field name="colorOutside"
                            label="Color outside *"
                            errors={errors}
                            onChangeComplete={this.onSetField}
                            component={ColorRenderer} />
 
-                    <Field name="colorOutside.id"
-                           label="Color Outside *  (Obsolete)"
-                           errors={errors}
-                           component={selectRenderer(colors, this.onSelectItemChange)}/>
-
-                    <FieldArray name="descriptions" label="Descriptions" component={descriptionRenderer} errors={errors}/>
                     {/*<FieldArray name="reportItems" label="Report Items" component={renderReportItems} errors={errors}/>*/}
+
                     <FieldArray name="faults" label="Faults " component={renderFaults}
                                 onFaultFileAdd={this.props.onFaultFileUpload}
                                 onFaultRemove={this.props.onFaultRemove}
                                 errors={errors}
                     />
-                    <Field name="fuelCity" label="Fuel City" component={renderTextField} errors={errors}/>
-                    <Field name="fuelHighway" label="Fuel Highway" component={renderTextField} errors={errors}/>
-                    <Field name="isSold" label="Is Sold" component={renderCheckbox} errors={errors}/>
-                    <Field name="mileage" label="Mileage *" component={renderTextField} type="number" errors={errors}/>
-                    <Field name="price" label="Price *" component={renderTextField} type="number" errors={errors}/>
-                    <Field name="registrationNumber" label="Registration Number *" component={renderTextField} errors={errors}/>
-                    <Field name="safetyStars" label="Safety Stars" component={renderTextField} type="number" errors={errors}/>
-                    <Field name="vinCode" label="Vin Code *" component={renderTextField} errors={errors}/>
-                    <Field name="additional" label="Additional info" component={renderTextField} errors={errors}/>
                   </CardText>
                   <SubmitCardActions disabled={this.props.submitting} />
                 </Card>
@@ -295,20 +290,29 @@ class Vehicle extends React.Component {
                 <br/>
 
                 <Card>
-                  <CardTitle title={<h3>Performance</h3>} />
+                  <CardTitle title={<h3>Descriptions & addition info</h3>} />
                   <CardText>
-                    <Field name="compressionRatio" label="Compression Ratio" component={renderTextField} errors={errors}/>
-                    <Field name="compressionType" label="Compression Type" component={renderTextField} errors={errors}/>
-                    <Field name="configuration" label="Configuration" component={renderTextField} errors={errors}/>
-                    <Field name="cylinders" label="Cylinders" component={renderTextField} errors={errors}/>
-                    <Field name="displacement" label="Displacement" component={renderTextField} errors={errors}/>
-                    <Field name="size" label="Size" component={renderTextField} type="number" errors={errors}/>
-                    <Field name="torque" label="Torque" component={renderTextField} type="number" errors={errors}/>
-                    <Field name="totalValves" label="Total Valves" component={renderTextField} type="number" errors={errors}/>
+                    <FieldArray name="descriptions" label="Descriptions" component={descriptionRenderer} errors={errors}/>
+                    <Field name="additional" label="Additional info" component={renderTextField} errors={errors}/>
                   </CardText>
-
                   <SubmitCardActions disabled={this.props.submitting} />
                 </Card>
+                {/*UNCOMMENTED FOR MVP*/}
+                {/*<Card>*/}
+                  {/*<CardTitle title={<h3>Performance</h3>} />*/}
+                  {/*<CardText>*/}
+                    {/*<Field name="compressionRatio" label="Compression Ratio" component={renderTextField} errors={errors}/>*/}
+                    {/*<Field name="compressionType" label="Compression Type" component={renderTextField} errors={errors}/>*/}
+                    {/*<Field name="configuration" label="Configuration" component={renderTextField} errors={errors}/>*/}
+                    {/*<Field name="cylinders" label="Cylinders" component={renderTextField} errors={errors}/>*/}
+                    {/*<Field name="displacement" label="Displacement" component={renderTextField} errors={errors}/>*/}
+                    {/*<Field name="size" label="Size" component={renderTextField} type="number" errors={errors}/>*/}
+                    {/*<Field name="torque" label="Torque" component={renderTextField} type="number" errors={errors}/>*/}
+                    {/*<Field name="totalValves" label="Total Valves" component={renderTextField} type="number" errors={errors}/>*/}
+                  {/*</CardText>*/}
+
+                  {/*<SubmitCardActions disabled={this.props.submitting} />*/}
+                {/*</Card>*/}
               </Col>
               <Col md={6} xs={12}>
                 <ImagesCardField onImageFileUpload={this.props.onImageFileUpload}

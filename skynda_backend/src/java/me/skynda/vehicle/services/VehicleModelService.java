@@ -4,7 +4,7 @@ import me.skynda.common.dto.CreateOrUpdateResponseDto;
 import me.skynda.common.dto.DeleteResponseDto;
 import me.skynda.common.interfaces.daos.ClassificationDao;
 import me.skynda.common.interfaces.daos.VehicleModelDao;
-import me.skynda.common.interfaces.services.VehicleModelService;
+import me.skynda.common.interfaces.services.IVehicleModelService;
 import me.skynda.vehicle.dto.VehicleModelAdminDto;
 import me.skynda.vehicle.dto.request.ModelRequestDto;
 import me.skynda.vehicle.dto.response.VehicleModelResponseDto;
@@ -20,16 +20,16 @@ import java.util.List;
 
 @Service
 @Transactional
-public class VehicleModelServiceImpl implements VehicleModelService {
+public class VehicleModelService implements IVehicleModelService {
+
+    private final VehicleModelDao vehicleModelDao;
+    private final Mapper mapper;
 
     @Autowired
-    ClassificationDao classificationDao;
-
-    @Autowired
-    VehicleModelDao vehicleModelDao;
-
-    @Autowired
-    private Mapper mapper;
+    public VehicleModelService(VehicleModelDao vehicleModelDao, Mapper mapper) {
+        this.vehicleModelDao = vehicleModelDao;
+        this.mapper = mapper;
+    }
 
     @Override
     public List<VehicleModelResponseDto> getAll(ModelRequestDto dto) { // TODO: use dto to search

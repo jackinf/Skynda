@@ -5,7 +5,7 @@
 -- Dumped from database version 9.5.3
 -- Dumped by pg_dump version 9.5.3
 
--- Started on 2016-12-24 17:49:15
+-- Started on 2017-01-16 14:08:14
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -39,7 +39,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- TOC entry 182 (class 1259 OID 103566)
+-- TOC entry 182 (class 1259 OID 104089)
 -- Name: address; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -58,7 +58,7 @@ CREATE TABLE address (
 ALTER TABLE address OWNER TO postgres;
 
 --
--- TOC entry 183 (class 1259 OID 103572)
+-- TOC entry 183 (class 1259 OID 104095)
 -- Name: addresses_address_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -82,7 +82,7 @@ ALTER SEQUENCE addresses_address_id_seq OWNED BY address.id;
 
 
 --
--- TOC entry 184 (class 1259 OID 103574)
+-- TOC entry 184 (class 1259 OID 104097)
 -- Name: authority; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -96,7 +96,7 @@ CREATE TABLE authority (
 ALTER TABLE authority OWNER TO postgres;
 
 --
--- TOC entry 185 (class 1259 OID 103577)
+-- TOC entry 185 (class 1259 OID 104100)
 -- Name: authority_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -120,7 +120,7 @@ ALTER SEQUENCE authority_id_seq OWNED BY authority.id;
 
 
 --
--- TOC entry 186 (class 1259 OID 103579)
+-- TOC entry 186 (class 1259 OID 104102)
 -- Name: vehicle_description; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -136,7 +136,7 @@ CREATE TABLE vehicle_description (
 ALTER TABLE vehicle_description OWNER TO postgres;
 
 --
--- TOC entry 187 (class 1259 OID 103585)
+-- TOC entry 187 (class 1259 OID 104108)
 -- Name: car_description_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -160,7 +160,7 @@ ALTER SEQUENCE car_description_id_seq OWNED BY vehicle_description.id;
 
 
 --
--- TOC entry 188 (class 1259 OID 103587)
+-- TOC entry 188 (class 1259 OID 104110)
 -- Name: vehicle_fault; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -176,7 +176,7 @@ CREATE TABLE vehicle_fault (
 ALTER TABLE vehicle_fault OWNER TO postgres;
 
 --
--- TOC entry 189 (class 1259 OID 103590)
+-- TOC entry 189 (class 1259 OID 104113)
 -- Name: car_fault_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -200,7 +200,7 @@ ALTER SEQUENCE car_fault_id_seq OWNED BY vehicle_fault.id;
 
 
 --
--- TOC entry 190 (class 1259 OID 103592)
+-- TOC entry 190 (class 1259 OID 104115)
 -- Name: vehicle_feature; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -215,7 +215,7 @@ CREATE TABLE vehicle_feature (
 ALTER TABLE vehicle_feature OWNER TO postgres;
 
 --
--- TOC entry 191 (class 1259 OID 103595)
+-- TOC entry 191 (class 1259 OID 104118)
 -- Name: car_feature_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -239,7 +239,7 @@ ALTER SEQUENCE car_feature_id_seq OWNED BY vehicle_feature.id;
 
 
 --
--- TOC entry 192 (class 1259 OID 103597)
+-- TOC entry 192 (class 1259 OID 104120)
 -- Name: vehicle_image; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -254,7 +254,7 @@ CREATE TABLE vehicle_image (
 ALTER TABLE vehicle_image OWNER TO postgres;
 
 --
--- TOC entry 193 (class 1259 OID 103600)
+-- TOC entry 193 (class 1259 OID 104123)
 -- Name: car_image_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -278,7 +278,7 @@ ALTER SEQUENCE car_image_id_seq OWNED BY vehicle_image.id;
 
 
 --
--- TOC entry 194 (class 1259 OID 103602)
+-- TOC entry 194 (class 1259 OID 104125)
 -- Name: vehicle_model; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -304,7 +304,7 @@ CREATE TABLE vehicle_model (
 ALTER TABLE vehicle_model OWNER TO postgres;
 
 --
--- TOC entry 195 (class 1259 OID 103608)
+-- TOC entry 195 (class 1259 OID 104131)
 -- Name: car_model_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -328,7 +328,7 @@ ALTER SEQUENCE car_model_id_seq OWNED BY vehicle_model.id;
 
 
 --
--- TOC entry 220 (class 1259 OID 103972)
+-- TOC entry 220 (class 1259 OID 104495)
 -- Name: car_report_report_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -343,7 +343,7 @@ CREATE SEQUENCE car_report_report_id_seq
 ALTER TABLE car_report_report_id_seq OWNER TO postgres;
 
 --
--- TOC entry 196 (class 1259 OID 103618)
+-- TOC entry 196 (class 1259 OID 104141)
 -- Name: vehicle_review; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -361,7 +361,7 @@ CREATE TABLE vehicle_review (
 ALTER TABLE vehicle_review OWNER TO postgres;
 
 --
--- TOC entry 197 (class 1259 OID 103624)
+-- TOC entry 197 (class 1259 OID 104147)
 -- Name: car_review_review_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -385,7 +385,7 @@ ALTER SEQUENCE car_review_review_id_seq OWNED BY vehicle_review.id;
 
 
 --
--- TOC entry 198 (class 1259 OID 103626)
+-- TOC entry 198 (class 1259 OID 104149)
 -- Name: vehicle; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -423,7 +423,7 @@ CREATE TABLE vehicle (
 ALTER TABLE vehicle OWNER TO postgres;
 
 --
--- TOC entry 199 (class 1259 OID 103632)
+-- TOC entry 199 (class 1259 OID 104155)
 -- Name: cars_for_sale_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -447,7 +447,7 @@ ALTER SEQUENCE cars_for_sale_id_seq OWNED BY vehicle.id;
 
 
 --
--- TOC entry 200 (class 1259 OID 103634)
+-- TOC entry 200 (class 1259 OID 104157)
 -- Name: payment; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -471,7 +471,7 @@ CREATE TABLE payment (
 ALTER TABLE payment OWNER TO postgres;
 
 --
--- TOC entry 201 (class 1259 OID 103637)
+-- TOC entry 201 (class 1259 OID 104160)
 -- Name: cars_sold_car_sold_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -495,7 +495,7 @@ ALTER SEQUENCE cars_sold_car_sold_id_seq OWNED BY payment.id;
 
 
 --
--- TOC entry 202 (class 1259 OID 103639)
+-- TOC entry 202 (class 1259 OID 104162)
 -- Name: classification; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -518,7 +518,7 @@ CREATE TABLE classification (
 ALTER TABLE classification OWNER TO postgres;
 
 --
--- TOC entry 203 (class 1259 OID 103646)
+-- TOC entry 203 (class 1259 OID 104169)
 -- Name: classification_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -542,7 +542,7 @@ ALTER SEQUENCE classification_id_seq OWNED BY classification.id;
 
 
 --
--- TOC entry 204 (class 1259 OID 103648)
+-- TOC entry 204 (class 1259 OID 104171)
 -- Name: classification_type; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -559,7 +559,7 @@ CREATE TABLE classification_type (
 ALTER TABLE classification_type OWNER TO postgres;
 
 --
--- TOC entry 205 (class 1259 OID 103654)
+-- TOC entry 205 (class 1259 OID 104177)
 -- Name: classification_type_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -583,7 +583,7 @@ ALTER SEQUENCE classification_type_id_seq OWNED BY classification_type.id;
 
 
 --
--- TOC entry 206 (class 1259 OID 103656)
+-- TOC entry 206 (class 1259 OID 104179)
 -- Name: finance_company; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -598,7 +598,7 @@ CREATE TABLE finance_company (
 ALTER TABLE finance_company OWNER TO postgres;
 
 --
--- TOC entry 207 (class 1259 OID 103659)
+-- TOC entry 207 (class 1259 OID 104182)
 -- Name: finance_company_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -622,7 +622,7 @@ ALTER SEQUENCE finance_company_id_seq OWNED BY finance_company.id;
 
 
 --
--- TOC entry 218 (class 1259 OID 103926)
+-- TOC entry 218 (class 1259 OID 104449)
 -- Name: image; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -638,7 +638,7 @@ CREATE TABLE image (
 ALTER TABLE image OWNER TO postgres;
 
 --
--- TOC entry 217 (class 1259 OID 103924)
+-- TOC entry 217 (class 1259 OID 104447)
 -- Name: image_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -662,7 +662,7 @@ ALTER SEQUENCE image_id_seq OWNED BY image.id;
 
 
 --
--- TOC entry 208 (class 1259 OID 103661)
+-- TOC entry 208 (class 1259 OID 104184)
 -- Name: insurance_company; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -676,7 +676,7 @@ CREATE TABLE insurance_company (
 ALTER TABLE insurance_company OWNER TO postgres;
 
 --
--- TOC entry 209 (class 1259 OID 103664)
+-- TOC entry 209 (class 1259 OID 104187)
 -- Name: insurance_companies_insurance_company_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -700,7 +700,7 @@ ALTER SEQUENCE insurance_companies_insurance_company_id_seq OWNED BY insurance_c
 
 
 --
--- TOC entry 210 (class 1259 OID 103666)
+-- TOC entry 210 (class 1259 OID 104189)
 -- Name: insurance_policy; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -718,7 +718,7 @@ CREATE TABLE insurance_policy (
 ALTER TABLE insurance_policy OWNER TO postgres;
 
 --
--- TOC entry 211 (class 1259 OID 103669)
+-- TOC entry 211 (class 1259 OID 104192)
 -- Name: insurance_policies_policy_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -742,7 +742,7 @@ ALTER SEQUENCE insurance_policies_policy_id_seq OWNED BY insurance_policy.id;
 
 
 --
--- TOC entry 181 (class 1259 OID 103556)
+-- TOC entry 181 (class 1259 OID 104079)
 -- Name: schema_version; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -763,7 +763,7 @@ CREATE TABLE schema_version (
 ALTER TABLE schema_version OWNER TO postgres;
 
 --
--- TOC entry 223 (class 1259 OID 104053)
+-- TOC entry 224 (class 1259 OID 104577)
 -- Name: subscription; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -779,7 +779,7 @@ CREATE TABLE subscription (
 ALTER TABLE subscription OWNER TO postgres;
 
 --
--- TOC entry 224 (class 1259 OID 104056)
+-- TOC entry 223 (class 1259 OID 104575)
 -- Name: subscription_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -795,7 +795,7 @@ ALTER TABLE subscription_id_seq OWNER TO postgres;
 
 --
 -- TOC entry 2403 (class 0 OID 0)
--- Dependencies: 224
+-- Dependencies: 223
 -- Name: subscription_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -803,7 +803,7 @@ ALTER SEQUENCE subscription_id_seq OWNED BY subscription.id;
 
 
 --
--- TOC entry 212 (class 1259 OID 103671)
+-- TOC entry 212 (class 1259 OID 104194)
 -- Name: token; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -820,7 +820,7 @@ CREATE TABLE token (
 ALTER TABLE token OWNER TO postgres;
 
 --
--- TOC entry 213 (class 1259 OID 103680)
+-- TOC entry 213 (class 1259 OID 104203)
 -- Name: user_authority; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -835,7 +835,7 @@ CREATE TABLE user_authority (
 ALTER TABLE user_authority OWNER TO postgres;
 
 --
--- TOC entry 214 (class 1259 OID 103683)
+-- TOC entry 214 (class 1259 OID 104206)
 -- Name: user_authority_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -859,7 +859,7 @@ ALTER SEQUENCE user_authority_id_seq OWNED BY user_authority.id;
 
 
 --
--- TOC entry 216 (class 1259 OID 103890)
+-- TOC entry 216 (class 1259 OID 104413)
 -- Name: users; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -880,7 +880,7 @@ CREATE TABLE users (
 ALTER TABLE users OWNER TO postgres;
 
 --
--- TOC entry 215 (class 1259 OID 103888)
+-- TOC entry 215 (class 1259 OID 104411)
 -- Name: user_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -904,14 +904,14 @@ ALTER SEQUENCE user_id_seq OWNED BY users.id;
 
 
 --
--- TOC entry 221 (class 1259 OID 103974)
+-- TOC entry 221 (class 1259 OID 104497)
 -- Name: vehicle_report_category; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE vehicle_report_category (
     id integer DEFAULT nextval('car_report_report_id_seq'::regclass) NOT NULL,
     vehicle_id integer NOT NULL,
-    title character varying(50),
+    title character varying(255),
     archived time without time zone,
     description character varying,
     inspector_name character varying(100)
@@ -921,7 +921,7 @@ CREATE TABLE vehicle_report_category (
 ALTER TABLE vehicle_report_category OWNER TO postgres;
 
 --
--- TOC entry 222 (class 1259 OID 103978)
+-- TOC entry 222 (class 1259 OID 104501)
 -- Name: vehicle_report_category_item; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -930,14 +930,15 @@ CREATE TABLE vehicle_report_category_item (
     text character varying(50),
     is_pass boolean,
     vehicle_report_category_id integer,
-    archived time without time zone
+    archived time without time zone,
+    title character varying(255)
 );
 
 
 ALTER TABLE vehicle_report_category_item OWNER TO postgres;
 
 --
--- TOC entry 219 (class 1259 OID 103970)
+-- TOC entry 219 (class 1259 OID 104493)
 -- Name: vehicle_report_category_item_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -961,7 +962,7 @@ ALTER SEQUENCE vehicle_report_category_item_id_seq OWNED BY vehicle_report_categ
 
 
 --
--- TOC entry 2120 (class 2604 OID 103687)
+-- TOC entry 2120 (class 2604 OID 104210)
 -- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -969,7 +970,7 @@ ALTER TABLE ONLY address ALTER COLUMN id SET DEFAULT nextval('addresses_address_
 
 
 --
--- TOC entry 2121 (class 2604 OID 103688)
+-- TOC entry 2121 (class 2604 OID 104211)
 -- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -977,7 +978,7 @@ ALTER TABLE ONLY authority ALTER COLUMN id SET DEFAULT nextval('authority_id_seq
 
 
 --
--- TOC entry 2133 (class 2604 OID 103689)
+-- TOC entry 2133 (class 2604 OID 104212)
 -- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -985,7 +986,7 @@ ALTER TABLE ONLY classification ALTER COLUMN id SET DEFAULT nextval('classificat
 
 
 --
--- TOC entry 2134 (class 2604 OID 103690)
+-- TOC entry 2134 (class 2604 OID 104213)
 -- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -993,7 +994,7 @@ ALTER TABLE ONLY classification_type ALTER COLUMN id SET DEFAULT nextval('classi
 
 
 --
--- TOC entry 2135 (class 2604 OID 103691)
+-- TOC entry 2135 (class 2604 OID 104214)
 -- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1001,7 +1002,7 @@ ALTER TABLE ONLY finance_company ALTER COLUMN id SET DEFAULT nextval('finance_co
 
 
 --
--- TOC entry 2140 (class 2604 OID 103929)
+-- TOC entry 2140 (class 2604 OID 104452)
 -- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1009,7 +1010,7 @@ ALTER TABLE ONLY image ALTER COLUMN id SET DEFAULT nextval('image_id_seq'::regcl
 
 
 --
--- TOC entry 2136 (class 2604 OID 103692)
+-- TOC entry 2136 (class 2604 OID 104215)
 -- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1017,7 +1018,7 @@ ALTER TABLE ONLY insurance_company ALTER COLUMN id SET DEFAULT nextval('insuranc
 
 
 --
--- TOC entry 2137 (class 2604 OID 103693)
+-- TOC entry 2137 (class 2604 OID 104216)
 -- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1025,7 +1026,7 @@ ALTER TABLE ONLY insurance_policy ALTER COLUMN id SET DEFAULT nextval('insurance
 
 
 --
--- TOC entry 2131 (class 2604 OID 103694)
+-- TOC entry 2131 (class 2604 OID 104217)
 -- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1033,7 +1034,7 @@ ALTER TABLE ONLY payment ALTER COLUMN id SET DEFAULT nextval('cars_sold_car_sold
 
 
 --
--- TOC entry 2143 (class 2604 OID 104058)
+-- TOC entry 2143 (class 2604 OID 104580)
 -- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1041,7 +1042,7 @@ ALTER TABLE ONLY subscription ALTER COLUMN id SET DEFAULT nextval('subscription_
 
 
 --
--- TOC entry 2138 (class 2604 OID 103696)
+-- TOC entry 2138 (class 2604 OID 104219)
 -- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1049,7 +1050,7 @@ ALTER TABLE ONLY user_authority ALTER COLUMN id SET DEFAULT nextval('user_author
 
 
 --
--- TOC entry 2139 (class 2604 OID 103893)
+-- TOC entry 2139 (class 2604 OID 104416)
 -- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1057,7 +1058,7 @@ ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('user_id_seq'::regcla
 
 
 --
--- TOC entry 2130 (class 2604 OID 103697)
+-- TOC entry 2130 (class 2604 OID 104220)
 -- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1065,7 +1066,7 @@ ALTER TABLE ONLY vehicle ALTER COLUMN id SET DEFAULT nextval('cars_for_sale_id_s
 
 
 --
--- TOC entry 2122 (class 2604 OID 103698)
+-- TOC entry 2122 (class 2604 OID 104221)
 -- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1073,7 +1074,7 @@ ALTER TABLE ONLY vehicle_description ALTER COLUMN id SET DEFAULT nextval('car_de
 
 
 --
--- TOC entry 2123 (class 2604 OID 103699)
+-- TOC entry 2123 (class 2604 OID 104222)
 -- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1081,7 +1082,7 @@ ALTER TABLE ONLY vehicle_fault ALTER COLUMN id SET DEFAULT nextval('car_fault_id
 
 
 --
--- TOC entry 2124 (class 2604 OID 103700)
+-- TOC entry 2124 (class 2604 OID 104223)
 -- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1089,7 +1090,7 @@ ALTER TABLE ONLY vehicle_feature ALTER COLUMN id SET DEFAULT nextval('car_featur
 
 
 --
--- TOC entry 2126 (class 2604 OID 103701)
+-- TOC entry 2126 (class 2604 OID 104224)
 -- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1097,7 +1098,7 @@ ALTER TABLE ONLY vehicle_image ALTER COLUMN id SET DEFAULT nextval('car_image_id
 
 
 --
--- TOC entry 2127 (class 2604 OID 103702)
+-- TOC entry 2127 (class 2604 OID 104225)
 -- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1105,7 +1106,7 @@ ALTER TABLE ONLY vehicle_model ALTER COLUMN id SET DEFAULT nextval('car_model_id
 
 
 --
--- TOC entry 2142 (class 2604 OID 103981)
+-- TOC entry 2142 (class 2604 OID 104504)
 -- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1113,7 +1114,7 @@ ALTER TABLE ONLY vehicle_report_category_item ALTER COLUMN id SET DEFAULT nextva
 
 
 --
--- TOC entry 2129 (class 2604 OID 103704)
+-- TOC entry 2129 (class 2604 OID 104227)
 -- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1121,7 +1122,7 @@ ALTER TABLE ONLY vehicle_review ALTER COLUMN id SET DEFAULT nextval('car_review_
 
 
 --
--- TOC entry 2164 (class 2606 OID 103708)
+-- TOC entry 2164 (class 2606 OID 104231)
 -- Name: PK_car_feature; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1130,7 +1131,7 @@ ALTER TABLE ONLY vehicle_feature
 
 
 --
--- TOC entry 2198 (class 2606 OID 103714)
+-- TOC entry 2198 (class 2606 OID 104237)
 -- Name: PK_classification; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1139,7 +1140,7 @@ ALTER TABLE ONLY classification
 
 
 --
--- TOC entry 2204 (class 2606 OID 103716)
+-- TOC entry 2204 (class 2606 OID 104239)
 -- Name: PK_classification_type; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1148,7 +1149,7 @@ ALTER TABLE ONLY classification_type
 
 
 --
--- TOC entry 2208 (class 2606 OID 103718)
+-- TOC entry 2208 (class 2606 OID 104241)
 -- Name: PK_finance_company; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1157,7 +1158,7 @@ ALTER TABLE ONLY finance_company
 
 
 --
--- TOC entry 2228 (class 2606 OID 103939)
+-- TOC entry 2228 (class 2606 OID 104462)
 -- Name: PK_image; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1166,7 +1167,7 @@ ALTER TABLE ONLY image
 
 
 --
--- TOC entry 2210 (class 2606 OID 103720)
+-- TOC entry 2210 (class 2606 OID 104243)
 -- Name: PK_insurance_companies; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1175,7 +1176,7 @@ ALTER TABLE ONLY insurance_company
 
 
 --
--- TOC entry 2214 (class 2606 OID 103722)
+-- TOC entry 2214 (class 2606 OID 104245)
 -- Name: PK_insurance_policies; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1184,7 +1185,7 @@ ALTER TABLE ONLY insurance_policy
 
 
 --
--- TOC entry 2237 (class 2606 OID 104063)
+-- TOC entry 2237 (class 2606 OID 104583)
 -- Name: PK_subscription; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1193,7 +1194,7 @@ ALTER TABLE ONLY subscription
 
 
 --
--- TOC entry 2187 (class 2606 OID 103937)
+-- TOC entry 2187 (class 2606 OID 104460)
 -- Name: PK_vehicle; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1202,7 +1203,7 @@ ALTER TABLE ONLY vehicle
 
 
 --
--- TOC entry 2160 (class 2606 OID 103933)
+-- TOC entry 2160 (class 2606 OID 104456)
 -- Name: PK_vehicle_fault; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1211,7 +1212,7 @@ ALTER TABLE ONLY vehicle_fault
 
 
 --
--- TOC entry 2168 (class 2606 OID 103935)
+-- TOC entry 2168 (class 2606 OID 104458)
 -- Name: PK_vehicle_image; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1220,7 +1221,7 @@ ALTER TABLE ONLY vehicle_image
 
 
 --
--- TOC entry 2175 (class 2606 OID 103724)
+-- TOC entry 2175 (class 2606 OID 104247)
 -- Name: PK_vehicle_model; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1229,7 +1230,7 @@ ALTER TABLE ONLY vehicle_model
 
 
 --
--- TOC entry 2231 (class 2606 OID 103983)
+-- TOC entry 2231 (class 2606 OID 104506)
 -- Name: PK_vehicle_report; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1238,7 +1239,7 @@ ALTER TABLE ONLY vehicle_report_category
 
 
 --
--- TOC entry 2234 (class 2606 OID 103985)
+-- TOC entry 2234 (class 2606 OID 104508)
 -- Name: PK_vehicle_report_category_item_id; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1247,7 +1248,7 @@ ALTER TABLE ONLY vehicle_report_category_item
 
 
 --
--- TOC entry 2180 (class 2606 OID 103728)
+-- TOC entry 2180 (class 2606 OID 104251)
 -- Name: PK_vehicle_review; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1256,7 +1257,7 @@ ALTER TABLE ONLY vehicle_review
 
 
 --
--- TOC entry 2194 (class 2606 OID 103730)
+-- TOC entry 2194 (class 2606 OID 104253)
 -- Name: PK_vehicle_sold; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1265,7 +1266,7 @@ ALTER TABLE ONLY payment
 
 
 --
--- TOC entry 2151 (class 2606 OID 103732)
+-- TOC entry 2151 (class 2606 OID 104255)
 -- Name: UNIQUE_auth_name; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1274,7 +1275,7 @@ ALTER TABLE ONLY authority
 
 
 --
--- TOC entry 2206 (class 2606 OID 103734)
+-- TOC entry 2206 (class 2606 OID 104257)
 -- Name: UNIQUE_name; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1283,7 +1284,7 @@ ALTER TABLE ONLY classification_type
 
 
 --
--- TOC entry 2200 (class 2606 OID 103736)
+-- TOC entry 2200 (class 2606 OID 104259)
 -- Name: UNIQUE_row; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1292,7 +1293,7 @@ ALTER TABLE ONLY classification
 
 
 --
--- TOC entry 2149 (class 2606 OID 103738)
+-- TOC entry 2149 (class 2606 OID 104261)
 -- Name: address_pkey_id; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1301,7 +1302,7 @@ ALTER TABLE ONLY address
 
 
 --
--- TOC entry 2153 (class 2606 OID 103740)
+-- TOC entry 2153 (class 2606 OID 104263)
 -- Name: authority_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1310,7 +1311,7 @@ ALTER TABLE ONLY authority
 
 
 --
--- TOC entry 2146 (class 2606 OID 103564)
+-- TOC entry 2146 (class 2606 OID 104087)
 -- Name: schema_version_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1319,7 +1320,7 @@ ALTER TABLE ONLY schema_version
 
 
 --
--- TOC entry 2216 (class 2606 OID 103744)
+-- TOC entry 2216 (class 2606 OID 104267)
 -- Name: token_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1328,7 +1329,7 @@ ALTER TABLE ONLY token
 
 
 --
--- TOC entry 2220 (class 2606 OID 103746)
+-- TOC entry 2220 (class 2606 OID 104269)
 -- Name: user_authority_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1337,7 +1338,7 @@ ALTER TABLE ONLY user_authority
 
 
 --
--- TOC entry 2222 (class 2606 OID 103915)
+-- TOC entry 2222 (class 2606 OID 104438)
 -- Name: user_email_key; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1346,7 +1347,7 @@ ALTER TABLE ONLY users
 
 
 --
--- TOC entry 2224 (class 2606 OID 103917)
+-- TOC entry 2224 (class 2606 OID 104440)
 -- Name: user_login_key; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1355,7 +1356,7 @@ ALTER TABLE ONLY users
 
 
 --
--- TOC entry 2226 (class 2606 OID 103898)
+-- TOC entry 2226 (class 2606 OID 104421)
 -- Name: user_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1364,7 +1365,7 @@ ALTER TABLE ONLY users
 
 
 --
--- TOC entry 2156 (class 2606 OID 103931)
+-- TOC entry 2156 (class 2606 OID 104454)
 -- Name: vehicle_description_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1373,7 +1374,7 @@ ALTER TABLE ONLY vehicle_description
 
 
 --
--- TOC entry 2217 (class 1259 OID 103753)
+-- TOC entry 2217 (class 1259 OID 104276)
 -- Name: FKI_authority_id; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -1381,7 +1382,7 @@ CREATE INDEX "FKI_authority_id" ON user_authority USING btree (authority_id);
 
 
 --
--- TOC entry 2211 (class 1259 OID 103754)
+-- TOC entry 2211 (class 1259 OID 104277)
 -- Name: FKI_car_sold_id_insurance_policy; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -1389,7 +1390,7 @@ CREATE INDEX "FKI_car_sold_id_insurance_policy" ON insurance_policy USING btree 
 
 
 --
--- TOC entry 2195 (class 1259 OID 103755)
+-- TOC entry 2195 (class 1259 OID 104278)
 -- Name: FKI_classification_type_id; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -1397,7 +1398,7 @@ CREATE INDEX "FKI_classification_type_id" ON classification USING btree (classif
 
 
 --
--- TOC entry 2181 (class 1259 OID 103968)
+-- TOC entry 2181 (class 1259 OID 104491)
 -- Name: FKI_color_inside_id; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -1405,7 +1406,7 @@ CREATE INDEX "FKI_color_inside_id" ON vehicle USING btree (color_inside_id);
 
 
 --
--- TOC entry 2182 (class 1259 OID 103969)
+-- TOC entry 2182 (class 1259 OID 104492)
 -- Name: FKI_color_outside_id; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -1413,7 +1414,7 @@ CREATE INDEX "FKI_color_outside_id" ON vehicle USING btree (color_outside_id);
 
 
 --
--- TOC entry 2188 (class 1259 OID 103756)
+-- TOC entry 2188 (class 1259 OID 104279)
 -- Name: FKI_customer_id_car_sold; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -1421,7 +1422,7 @@ CREATE INDEX "FKI_customer_id_car_sold" ON payment USING btree (customer_id);
 
 
 --
--- TOC entry 2169 (class 1259 OID 103757)
+-- TOC entry 2169 (class 1259 OID 104280)
 -- Name: FKI_drivetrain_id; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -1429,7 +1430,7 @@ CREATE INDEX "FKI_drivetrain_id" ON vehicle_model USING btree (drivetrain_id);
 
 
 --
--- TOC entry 2161 (class 1259 OID 104021)
+-- TOC entry 2161 (class 1259 OID 104544)
 -- Name: FKI_feature_id; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -1437,7 +1438,7 @@ CREATE INDEX "FKI_feature_id" ON vehicle_feature USING btree (feature_id);
 
 
 --
--- TOC entry 2189 (class 1259 OID 103758)
+-- TOC entry 2189 (class 1259 OID 104281)
 -- Name: FKI_finance_company_id; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -1445,7 +1446,7 @@ CREATE INDEX "FKI_finance_company_id" ON payment USING btree (finance_company_id
 
 
 --
--- TOC entry 2170 (class 1259 OID 103759)
+-- TOC entry 2170 (class 1259 OID 104282)
 -- Name: FKI_fuel_type_id; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -1453,7 +1454,7 @@ CREATE INDEX "FKI_fuel_type_id" ON vehicle_model USING btree (fuel_type_id);
 
 
 --
--- TOC entry 2157 (class 1259 OID 103955)
+-- TOC entry 2157 (class 1259 OID 104478)
 -- Name: FKI_image_id; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -1461,7 +1462,7 @@ CREATE INDEX "FKI_image_id" ON vehicle_fault USING btree (image_id);
 
 
 --
--- TOC entry 2183 (class 1259 OID 103957)
+-- TOC entry 2183 (class 1259 OID 104480)
 -- Name: FKI_image_id_vehicle; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -1469,7 +1470,7 @@ CREATE INDEX "FKI_image_id_vehicle" ON vehicle USING btree (image_id);
 
 
 --
--- TOC entry 2165 (class 1259 OID 103956)
+-- TOC entry 2165 (class 1259 OID 104479)
 -- Name: FKI_image_id_vehicle_image; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -1477,7 +1478,7 @@ CREATE INDEX "FKI_image_id_vehicle_image" ON vehicle_image USING btree (image_id
 
 
 --
--- TOC entry 2212 (class 1259 OID 103760)
+-- TOC entry 2212 (class 1259 OID 104283)
 -- Name: FKI_insurance_company_id_insurance_policy; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -1485,7 +1486,7 @@ CREATE INDEX "FKI_insurance_company_id_insurance_policy" ON insurance_policy USI
 
 
 --
--- TOC entry 2176 (class 1259 OID 104002)
+-- TOC entry 2176 (class 1259 OID 104525)
 -- Name: FKI_logo_id; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -1493,7 +1494,7 @@ CREATE INDEX "FKI_logo_id" ON vehicle_review USING btree (logo_id);
 
 
 --
--- TOC entry 2184 (class 1259 OID 103761)
+-- TOC entry 2184 (class 1259 OID 104284)
 -- Name: FKI_owner_id; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -1501,7 +1502,7 @@ CREATE INDEX "FKI_owner_id" ON vehicle USING btree (owner_id);
 
 
 --
--- TOC entry 2190 (class 1259 OID 103762)
+-- TOC entry 2190 (class 1259 OID 104285)
 -- Name: FKI_payment_status_id; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -1509,7 +1510,7 @@ CREATE INDEX "FKI_payment_status_id" ON payment USING btree (payment_status_id);
 
 
 --
--- TOC entry 2191 (class 1259 OID 103763)
+-- TOC entry 2191 (class 1259 OID 104286)
 -- Name: FKI_payment_type_id; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -1517,7 +1518,7 @@ CREATE INDEX "FKI_payment_type_id" ON payment USING btree (payment_type_id);
 
 
 --
--- TOC entry 2171 (class 1259 OID 103764)
+-- TOC entry 2171 (class 1259 OID 104287)
 -- Name: FKI_transmission_id; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -1525,7 +1526,7 @@ CREATE INDEX "FKI_transmission_id" ON vehicle_model USING btree (transmission_id
 
 
 --
--- TOC entry 2218 (class 1259 OID 103765)
+-- TOC entry 2218 (class 1259 OID 104288)
 -- Name: FKI_user_id; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -1533,7 +1534,7 @@ CREATE INDEX "FKI_user_id" ON user_authority USING btree (user_id);
 
 
 --
--- TOC entry 2235 (class 1259 OID 104074)
+-- TOC entry 2235 (class 1259 OID 104589)
 -- Name: FKI_user_id_subscription; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -1541,7 +1542,7 @@ CREATE INDEX "FKI_user_id_subscription" ON subscription USING btree (user_id);
 
 
 --
--- TOC entry 2172 (class 1259 OID 103766)
+-- TOC entry 2172 (class 1259 OID 104289)
 -- Name: FKI_vehicle_body_id; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -1549,7 +1550,7 @@ CREATE INDEX "FKI_vehicle_body_id" ON vehicle_model USING btree (vehicle_body_id
 
 
 --
--- TOC entry 2154 (class 1259 OID 103923)
+-- TOC entry 2154 (class 1259 OID 104446)
 -- Name: FKI_vehicle_id; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -1557,7 +1558,7 @@ CREATE INDEX "FKI_vehicle_id" ON vehicle_description USING btree (vehicle_id);
 
 
 --
--- TOC entry 2158 (class 1259 OID 103767)
+-- TOC entry 2158 (class 1259 OID 104290)
 -- Name: FKI_vehicle_id_car_fault; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -1565,7 +1566,7 @@ CREATE INDEX "FKI_vehicle_id_car_fault" ON vehicle_fault USING btree (vehicle_id
 
 
 --
--- TOC entry 2162 (class 1259 OID 103768)
+-- TOC entry 2162 (class 1259 OID 104291)
 -- Name: FKI_vehicle_id_car_feature; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -1573,7 +1574,7 @@ CREATE INDEX "FKI_vehicle_id_car_feature" ON vehicle_feature USING btree (vehicl
 
 
 --
--- TOC entry 2166 (class 1259 OID 103769)
+-- TOC entry 2166 (class 1259 OID 104292)
 -- Name: FKI_vehicle_id_car_image; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -1581,7 +1582,7 @@ CREATE INDEX "FKI_vehicle_id_car_image" ON vehicle_image USING btree (vehicle_id
 
 
 --
--- TOC entry 2229 (class 1259 OID 104001)
+-- TOC entry 2229 (class 1259 OID 104524)
 -- Name: FKI_vehicle_id_car_report; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -1589,7 +1590,7 @@ CREATE INDEX "FKI_vehicle_id_car_report" ON vehicle_report_category USING btree 
 
 
 --
--- TOC entry 2177 (class 1259 OID 103771)
+-- TOC entry 2177 (class 1259 OID 104294)
 -- Name: FKI_vehicle_id_car_review; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -1597,7 +1598,7 @@ CREATE INDEX "FKI_vehicle_id_car_review" ON vehicle_review USING btree (vehicle_
 
 
 --
--- TOC entry 2192 (class 1259 OID 103772)
+-- TOC entry 2192 (class 1259 OID 104295)
 -- Name: FKI_vehicle_id_car_sold; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -1605,7 +1606,7 @@ CREATE INDEX "FKI_vehicle_id_car_sold" ON payment USING btree (vehicle_id);
 
 
 --
--- TOC entry 2173 (class 1259 OID 103773)
+-- TOC entry 2173 (class 1259 OID 104296)
 -- Name: FKI_vehicle_manufacturer_id; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -1613,7 +1614,7 @@ CREATE INDEX "FKI_vehicle_manufacturer_id" ON vehicle_model USING btree (vehicle
 
 
 --
--- TOC entry 2185 (class 1259 OID 103774)
+-- TOC entry 2185 (class 1259 OID 104297)
 -- Name: FKI_vehicle_model_id; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -1621,7 +1622,7 @@ CREATE INDEX "FKI_vehicle_model_id" ON vehicle USING btree (vehicle_model_id);
 
 
 --
--- TOC entry 2232 (class 1259 OID 104004)
+-- TOC entry 2232 (class 1259 OID 104527)
 -- Name: FKI_vehicle_report_category_id; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -1629,7 +1630,7 @@ CREATE INDEX "FKI_vehicle_report_category_id" ON vehicle_report_category_item US
 
 
 --
--- TOC entry 2178 (class 1259 OID 104003)
+-- TOC entry 2178 (class 1259 OID 104526)
 -- Name: FKI_video_id; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -1637,7 +1638,7 @@ CREATE INDEX "FKI_video_id" ON vehicle_review USING btree (video_id);
 
 
 --
--- TOC entry 2196 (class 1259 OID 103775)
+-- TOC entry 2196 (class 1259 OID 104298)
 -- Name: FK_modifier_user_id; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -1645,7 +1646,7 @@ CREATE INDEX "FK_modifier_user_id" ON classification USING btree (modifier_user_
 
 
 --
--- TOC entry 2202 (class 1259 OID 103776)
+-- TOC entry 2202 (class 1259 OID 104299)
 -- Name: I_name; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -1653,7 +1654,7 @@ CREATE INDEX "I_name" ON classification_type USING btree (name);
 
 
 --
--- TOC entry 2201 (class 1259 OID 103777)
+-- TOC entry 2201 (class 1259 OID 104300)
 -- Name: classification_value_idx; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -1661,7 +1662,7 @@ CREATE INDEX classification_value_idx ON classification USING hash (value);
 
 
 --
--- TOC entry 2147 (class 1259 OID 103565)
+-- TOC entry 2147 (class 1259 OID 104088)
 -- Name: schema_version_s_idx; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -1669,7 +1670,7 @@ CREATE INDEX schema_version_s_idx ON schema_version USING btree (success);
 
 
 --
--- TOC entry 2261 (class 2606 OID 103778)
+-- TOC entry 2261 (class 2606 OID 104301)
 -- Name: FK_authority_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1678,7 +1679,7 @@ ALTER TABLE ONLY user_authority
 
 
 --
--- TOC entry 2259 (class 2606 OID 103783)
+-- TOC entry 2259 (class 2606 OID 104306)
 -- Name: FK_car_sold_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1687,7 +1688,7 @@ ALTER TABLE ONLY insurance_policy
 
 
 --
--- TOC entry 2258 (class 2606 OID 103788)
+-- TOC entry 2258 (class 2606 OID 104311)
 -- Name: FK_classification_type_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1696,7 +1697,7 @@ ALTER TABLE ONLY classification
 
 
 --
--- TOC entry 2252 (class 2606 OID 103958)
+-- TOC entry 2252 (class 2606 OID 104481)
 -- Name: FK_color_inside_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1705,7 +1706,7 @@ ALTER TABLE ONLY vehicle
 
 
 --
--- TOC entry 2253 (class 2606 OID 103963)
+-- TOC entry 2253 (class 2606 OID 104486)
 -- Name: FK_color_outside_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1714,7 +1715,7 @@ ALTER TABLE ONLY vehicle
 
 
 --
--- TOC entry 2257 (class 2606 OID 103904)
+-- TOC entry 2257 (class 2606 OID 104427)
 -- Name: FK_customer_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1723,7 +1724,7 @@ ALTER TABLE ONLY payment
 
 
 --
--- TOC entry 2242 (class 2606 OID 103798)
+-- TOC entry 2242 (class 2606 OID 104321)
 -- Name: FK_drivetrain_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1732,7 +1733,7 @@ ALTER TABLE ONLY vehicle_model
 
 
 --
--- TOC entry 2239 (class 2606 OID 104011)
+-- TOC entry 2239 (class 2606 OID 104534)
 -- Name: FK_feature_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1741,7 +1742,7 @@ ALTER TABLE ONLY vehicle_feature
 
 
 --
--- TOC entry 2254 (class 2606 OID 103803)
+-- TOC entry 2254 (class 2606 OID 104326)
 -- Name: FK_finance_company_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1750,7 +1751,7 @@ ALTER TABLE ONLY payment
 
 
 --
--- TOC entry 2243 (class 2606 OID 103808)
+-- TOC entry 2243 (class 2606 OID 104331)
 -- Name: FK_fuel_type_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1759,7 +1760,7 @@ ALTER TABLE ONLY vehicle_model
 
 
 --
--- TOC entry 2238 (class 2606 OID 103940)
+-- TOC entry 2238 (class 2606 OID 104463)
 -- Name: FK_image_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1768,7 +1769,7 @@ ALTER TABLE ONLY vehicle_fault
 
 
 --
--- TOC entry 2241 (class 2606 OID 103945)
+-- TOC entry 2241 (class 2606 OID 104468)
 -- Name: FK_image_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1777,7 +1778,7 @@ ALTER TABLE ONLY vehicle_image
 
 
 --
--- TOC entry 2251 (class 2606 OID 103950)
+-- TOC entry 2251 (class 2606 OID 104473)
 -- Name: FK_image_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1786,7 +1787,7 @@ ALTER TABLE ONLY vehicle
 
 
 --
--- TOC entry 2260 (class 2606 OID 103813)
+-- TOC entry 2260 (class 2606 OID 104336)
 -- Name: FK_insurance_company_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1795,7 +1796,7 @@ ALTER TABLE ONLY insurance_policy
 
 
 --
--- TOC entry 2247 (class 2606 OID 103986)
+-- TOC entry 2247 (class 2606 OID 104509)
 -- Name: FK_logo_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1804,7 +1805,7 @@ ALTER TABLE ONLY vehicle_review
 
 
 --
--- TOC entry 2250 (class 2606 OID 103899)
+-- TOC entry 2250 (class 2606 OID 104422)
 -- Name: FK_owner_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1813,7 +1814,7 @@ ALTER TABLE ONLY vehicle
 
 
 --
--- TOC entry 2255 (class 2606 OID 103823)
+-- TOC entry 2255 (class 2606 OID 104346)
 -- Name: FK_payment_status_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1822,7 +1823,7 @@ ALTER TABLE ONLY payment
 
 
 --
--- TOC entry 2256 (class 2606 OID 103828)
+-- TOC entry 2256 (class 2606 OID 104351)
 -- Name: FK_payment_type_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1831,7 +1832,7 @@ ALTER TABLE ONLY payment
 
 
 --
--- TOC entry 2244 (class 2606 OID 103833)
+-- TOC entry 2244 (class 2606 OID 104356)
 -- Name: FK_transmission_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1840,7 +1841,7 @@ ALTER TABLE ONLY vehicle_model
 
 
 --
--- TOC entry 2262 (class 2606 OID 103909)
+-- TOC entry 2262 (class 2606 OID 104432)
 -- Name: FK_user_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1849,7 +1850,7 @@ ALTER TABLE ONLY user_authority
 
 
 --
--- TOC entry 2264 (class 2606 OID 104069)
+-- TOC entry 2264 (class 2606 OID 104584)
 -- Name: FK_user_id_subscription; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1858,7 +1859,7 @@ ALTER TABLE ONLY subscription
 
 
 --
--- TOC entry 2245 (class 2606 OID 103843)
+-- TOC entry 2245 (class 2606 OID 104366)
 -- Name: FK_vehicle_body_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1867,7 +1868,7 @@ ALTER TABLE ONLY vehicle_model
 
 
 --
--- TOC entry 2240 (class 2606 OID 104016)
+-- TOC entry 2240 (class 2606 OID 104539)
 -- Name: FK_vehicle_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1876,7 +1877,7 @@ ALTER TABLE ONLY vehicle_feature
 
 
 --
--- TOC entry 2246 (class 2606 OID 103878)
+-- TOC entry 2246 (class 2606 OID 104401)
 -- Name: FK_vehicle_manufacturer_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1885,7 +1886,7 @@ ALTER TABLE ONLY vehicle_model
 
 
 --
--- TOC entry 2249 (class 2606 OID 103883)
+-- TOC entry 2249 (class 2606 OID 104406)
 -- Name: FK_vehicle_model_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1894,7 +1895,7 @@ ALTER TABLE ONLY vehicle
 
 
 --
--- TOC entry 2263 (class 2606 OID 103996)
+-- TOC entry 2263 (class 2606 OID 104519)
 -- Name: FK_vehicle_report_category_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1903,7 +1904,7 @@ ALTER TABLE ONLY vehicle_report_category_item
 
 
 --
--- TOC entry 2248 (class 2606 OID 103991)
+-- TOC entry 2248 (class 2606 OID 104514)
 -- Name: FK_video_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1923,7 +1924,7 @@ GRANT ALL ON SCHEMA public TO postgres;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
--- Completed on 2016-12-24 17:49:16
+-- Completed on 2017-01-16 14:08:15
 
 --
 -- PostgreSQL database dump complete

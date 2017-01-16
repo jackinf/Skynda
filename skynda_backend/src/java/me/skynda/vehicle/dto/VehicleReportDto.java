@@ -6,17 +6,16 @@ import me.skynda.common.dto.BaseDto;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by jevgenir on 11/14/2016.
- */
 @Data
-public class VehicleReportCategoryAdminDto extends BaseDto {
-    public VehicleReportCategoryAdminDto() {
+public class VehicleReportDto extends BaseDto {
+    public VehicleReportDto() {
         items = new ArrayList<>();
     }
-
     private Integer id;
     private Integer VehicleId;
     private String title;
-    private List<VehicleReportCategoryItemAdminDto> items;
+    private String description;
+    private String inspector;
+    private List<VehicleReportItemDto> items;
+    private List<FaultBaseDto> faults;
 }

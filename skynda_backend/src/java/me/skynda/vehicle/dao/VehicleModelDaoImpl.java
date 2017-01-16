@@ -6,10 +6,10 @@ import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
-import me.skynda.common.db.SkyndaBaseEntityDaoImpl;
+import me.skynda.common.db.BaseEntityDaoImpl;
 
 @Repository
-public class VehicleModelDaoImpl extends SkyndaBaseEntityDaoImpl<VehicleModel> implements VehicleModelDao {
+public class VehicleModelDaoImpl extends BaseEntityDaoImpl<VehicleModel> implements VehicleModelDao {
 
 	@Override
 	public VehicleModel getByModelCode(String carModelsCode) {

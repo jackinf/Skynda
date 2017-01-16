@@ -1,6 +1,6 @@
 package me.skynda.vehicle.dao;
 
-import me.skynda.common.db.SkyndaBaseEntityDaoImpl;
+import me.skynda.common.db.BaseEntityDaoImpl;
 import me.skynda.common.helper.CastHelper;
 import me.skynda.common.interfaces.daos.VehicleDao;
 import me.skynda.vehicle.dto.request.SearchRequestDto;
@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Repository
-public class VehicleDaoImpl extends SkyndaBaseEntityDaoImpl<Vehicle> implements VehicleDao {
+public class VehicleDaoImpl extends BaseEntityDaoImpl<Vehicle> implements VehicleDao {
 
     @Override
     public List<Vehicle> search(SearchRequestDto params) {
