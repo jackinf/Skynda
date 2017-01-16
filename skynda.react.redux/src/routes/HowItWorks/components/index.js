@@ -8,7 +8,7 @@ import DescriptionText from "./HowItWorks.DescriptionText";
 import ThreeSteps from "./HowItWorks.ThreeSteps";
 import FAQ from "./HowItWorks.FAQ";
 
-export default {
+export {
   HeroUnit,
   IconFeatures,
   DescriptionText,

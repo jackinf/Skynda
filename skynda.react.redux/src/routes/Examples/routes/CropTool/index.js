@@ -4,11 +4,11 @@
 import {injectReducer} from '../../../../store/reducers';
 
 export default (store) => ({
-  path: "file-upload",
+  path: "crop-tool",
   getComponent(nextState, cb) {
     require.ensure([], (require) => {
-      const FileUploadContainer = require("./containers/FileUploadContainer").default;
-      cb(null, FileUploadContainer);
+      injectReducer(store, {key: "cropTool", reducer: require("./reducers/CropTool.reducer").default});
+      cb(null, require("./containers/CropTool.container").default);
     })
   }
 })

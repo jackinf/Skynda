@@ -5,16 +5,11 @@ import React from 'react';
 import {Field, FieldArray, change, reduxForm} from 'redux-form';
 import {toastr} from "react-redux-toastr";
 import {Card, CardActions, CardTitle, CardText} from 'material-ui/Card';
-import FlatButton from 'material-ui/FlatButton';
-
 import {ROUTE_PARAMS, FORM_MODE, FORMS} from "./../constants/Vehicle.constant";
 import {
   renderTextField,
   descriptionRenderer,
-  renderReportItems,
-  renderFeatures,
   renderFaults,
-  MainImageCardField,
   ImagesCardField,
   selectRenderer,
   ErrorBlockRenderer,
@@ -26,12 +21,11 @@ import {Row, Col} from "react-bootstrap";
 import RefreshIndicator from 'material-ui/RefreshIndicator';
 import fromSpringToReduxFormError from "../../../../../utils/formUtils/fromSpringToReduxFormError";
 import "./Vehicle.component.scss";
-
 import VehicleModel from "../../VehicleModels/containers/VehicleModel.container";
-
 import {Modal} from "react-bootstrap";
 import {ROUTE_PARAMS as VEHICLE_MODEL_ROUTE_PARAMS} from "../../VehicleModels/constants/VehicleModel.constant";
 import _ from "underscore";
+import {CropToolCard, CropToolSimple} from "../../../../../components/ReduxForm/CropTool";
 
 const SubmitCardActions = ({disabled}) => (<CardActions>
   <hr/>
@@ -224,14 +218,23 @@ class Vehicle extends React.Component {
             <Row>
               <Col md={6} xs={12}>
 
-                <MainImageCardField title="Main image"
-                                    errors={errors}
-                                    onMainImageRemove={this.props.onMainImageRemove}
-                                    onMainImageUpload={this.props.onMainImageUpload}
-                                    onMainImageCropComplete={this.props.onMainImageCropComplete}
+                {/*<MainImageCardField title="Main image"*/}
+                                    {/*errors={errors}*/}
+                                    {/*onMainImageRemove={this.props.onMainImageRemove}*/}
+                                    {/*onMainImageUpload={this.props.onMainImageUpload}*/}
+                                    {/*onMainImageCropComplete={this.props.onMainImageCropComplete}*/}
+                {/*>*/}
+                  {/*<SubmitCardActions disabled={this.props.submitting} />*/}
+                {/*</MainImageCardField>*/}
+
+                <CropToolCard
+                  name="mainImage"
+                  reduxFormName={FORMS.VEHICLE_FORM}
+                  title="Main image"
+                  errors={errors}
                 >
                   <SubmitCardActions disabled={this.props.submitting} />
-                </MainImageCardField>
+                </CropToolCard>
 
                 <br/>
 
