@@ -1,9 +1,8 @@
 package me.skynda.vehicle.entities;
 
-import javax.persistence.*;
-
 import lombok.Data;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -31,6 +30,7 @@ public class VehicleReport implements Serializable{
 
     @Column(name = "inspector_name")
     private String inspector;
+
 
     @Column(name = "archived")
     private Date archived;
