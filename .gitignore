@@ -30,6 +30,7 @@ skynda_backend/*.zip
 skynda_backend/lib/
 skynda_backend/*.iws
 skynda_backend/*.ipr
+skynda_backend/dataSources
 
 
 skynda.react.redux/.DS_STORE
