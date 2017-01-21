@@ -124,7 +124,7 @@ public class Vehicle implements Serializable, ImageStorable<Image> {
     private List<VehicleFeature> features;
 
     @OneToMany(mappedBy = "vehicleId", fetch = FetchType.LAZY)
-    private List<VehicleReportCategory> reportCategories;
+    private List<VehicleReport> reportCategories;
 
     @OneToMany(mappedBy = "vehicleId", fetch = FetchType.LAZY)
     private List<VehicleReview> reviews;

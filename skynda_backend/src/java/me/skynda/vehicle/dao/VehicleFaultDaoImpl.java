@@ -1,7 +1,7 @@
 package me.skynda.vehicle.dao;
 
-import me.skynda.common.interfaces.daos.ImageDao;
-import me.skynda.common.db.SkyndaBaseEntityDaoImpl;
+import me.skynda.common.interfaces.daos.IImageDao;
+import me.skynda.common.db.BaseEntityDaoImpl;
 import me.skynda.common.interfaces.daos.VehicleFaultDao;
 import me.skynda.vehicle.dto.FaultBaseDto;
 import me.skynda.vehicle.dto.ImageDto;
@@ -15,10 +15,10 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class VehicleFaultDaoImpl extends SkyndaBaseEntityDaoImpl<VehicleFault> implements VehicleFaultDao {
+public class VehicleFaultDaoImpl extends BaseEntityDaoImpl<VehicleFault> implements VehicleFaultDao {
 
     @Autowired
-    private ImageDao imageDao;
+    private IImageDao imageDao;
 
     @Override
     public void addMultipleToVehicle(Vehicle vehicle, List<FaultBaseDto> faults) {

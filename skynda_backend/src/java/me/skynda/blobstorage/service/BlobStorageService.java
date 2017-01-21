@@ -8,13 +8,14 @@ import me.skynda.blobstorage.dto.*;
 
 import me.skynda.blobstorage.dto.response.BlobStorageUploadStreamResponseDto;
 import me.skynda.blobstorage.dto.response.BlobDto;
-import me.skynda.common.interfaces.services.BlobStorageService;
 import me.skynda.common.helper.SkyndaUtility;
-import me.skynda.common.interfaces.daos.ImageDao;
+import me.skynda.common.interfaces.daos.IImageDao;
+import me.skynda.common.interfaces.services.IBlobStorageService;
 import me.skynda.image.entities.Image;
+import me.skynda.vehicle.dto.ImageContainerBaseDto;
 import me.skynda.vehicle.dto.ImageCropInfoDto;
 import me.skynda.vehicle.dto.ImageDto;
-import me.skynda.vehicle.services.VehicleServiceImpl;
+import me.skynda.vehicle.dto.VehicleDtoImageFileToDelete;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,32 +36,31 @@ import java.util.UUID;
  */
 @Service
 @Transactional
-public class BlobStorageServiceImpl implements BlobStorageService {
-
-    private final String STORAGE_CONNECTION_STRING = "DefaultEndpointsProtocol=https;" +
-            "AccountName=portalvhds37rpqq8py1thh;" +
-            "AccountKey=Fmwz4WFjCFQYxQesEQ6PVye/m+4OAIJiF6KARMzH3h7GfBUZDTG0U8U33J4kaQR4vP+OwLsZ8+WHN2D9KbX9UA==";
+public class BlobStorageService implements IBlobStorageService {
 
     private CloudStorageAccount storageAccount;
-
-    @Autowired
-    ImageDao imageDao;
-
-    @Autowired
+    private static String DEFAULT_CONTAINER_NAME = "skynda";
+    private IImageDao imageDao;
     private Mapper mapper;
 
-    public BlobStorageServiceImpl() {
-        this(false);
+    @Autowired
+    public BlobStorageService(Mapper mapper, IImageDao imageDao) {
+        this(false, mapper, imageDao);
     }
 
-    public BlobStorageServiceImpl(boolean isDevelopment) {
+    public BlobStorageService(boolean isDevelopment, Mapper mapper, IImageDao imageDao) {
+
+        this.mapper = mapper;
+        this.imageDao = imageDao;
+
         if (!isDevelopment) {
             try {
                 // Retrieve storage account from connection-string.
+                String STORAGE_CONNECTION_STRING = "DefaultEndpointsProtocol=https;" +
+                        "AccountName=portalvhds37rpqq8py1thh;" +
+                        "AccountKey=Fmwz4WFjCFQYxQesEQ6PVye/m+4OAIJiF6KARMzH3h7GfBUZDTG0U8U33J4kaQR4vP+OwLsZ8+WHN2D9KbX9UA==";
                 storageAccount = CloudStorageAccount.parse(STORAGE_CONNECTION_STRING);
-            } catch (URISyntaxException e) {
-                e.printStackTrace();
-            } catch (InvalidKeyException e) {
+            } catch (URISyntaxException | InvalidKeyException e) {
                 e.printStackTrace();
             }
         } else {
@@ -248,7 +248,7 @@ public class BlobStorageServiceImpl implements BlobStorageService {
         if (mediaDto.getBase64File() != null && !mediaDto.getBase64File().isEmpty()) {
             // Please, upload the media file
             UploadBlobDto uploadBlob = new UploadBlobDto();
-            uploadBlob.setContainerName(VehicleServiceImpl.DEFAULT_CONTAINER_NAME);
+            uploadBlob.setContainerName(DEFAULT_CONTAINER_NAME);
             String blobName = UUID.randomUUID().toString();
             uploadBlob.setBlobName(blobName);
 
@@ -259,7 +259,7 @@ public class BlobStorageServiceImpl implements BlobStorageService {
 
             // Was upload successful?
             if (response.isSuccess()) {
-                return imageDao.save(Image.Factory.create(response.getUri(), blobName, VehicleServiceImpl.DEFAULT_CONTAINER_NAME));
+                return imageDao.save(Image.Factory.create(response.getUri(), blobName, DEFAULT_CONTAINER_NAME));
             } else {
                 return existingMedia;   // fail
             }
@@ -305,12 +305,12 @@ public class BlobStorageServiceImpl implements BlobStorageService {
         return cropImage(imageInByte, cropInfo, "jpg");
     }
 
-    /**
+    /***
      * Crops the image
-     * @param imageInByte
-     * @param cropInfo
-     * @param formatName
-     * @return
+     * @param imageInByte image in bytes
+     * @param cropInfo crop information
+     * @param formatName format type
+     * @return Cropped image in bytes.
      */
     @SneakyThrows(IOException.class)
     public byte[] cropImage(byte[] imageInByte, ImageCropInfoDto cropInfo, String formatName) {
@@ -332,6 +332,51 @@ public class BlobStorageServiceImpl implements BlobStorageService {
         baos.close();
 
         return subimageInByte;
+    }
+
+    /***
+     * Upload faults' images.
+     * @param dto Images dto.
+     */
+    public void fromBase64ToUrl(ImageContainerBaseDto dto) {
+        String faultBase64File = dto.getImage() != null
+                ? dto.getImage().getBase64File()
+                : null;
+        if (faultBase64File == null || faultBase64File.isEmpty())
+            return;
+
+        // Upload the file, Jim!
+        UploadBlobDto uploadBlobDto = new UploadBlobDto();
+        uploadBlobDto.setContainerName(DEFAULT_CONTAINER_NAME);
+        String blobName = UUID.randomUUID().toString();
+        uploadBlobDto.setBlobName(blobName);
+        uploadBlobDto.setByteArray(SkyndaUtility.toBytearray(faultBase64File));
+        BlobStorageUploadStreamResponseDto responseDto = uploadStream(uploadBlobDto);
+
+        // File upload successful, Jim, isn't it?
+        if (responseDto.isSuccess()) {
+            dto.getImage().setUrl(responseDto.getUri());
+            dto.getImage().setBlobName(blobName);
+            dto.getImage().setContainerName(DEFAULT_CONTAINER_NAME);
+            dto.getImage().setBase64File(null);
+        }
+    }
+
+
+    public void tryDeleteBlob(VehicleDtoImageFileToDelete dto) {
+        if (dto == null || dto.getBlobName() == null || dto.getBlobName().isEmpty())
+            return;
+
+        String blobName = dto.getBlobName();
+        String containerName = dto.getContainerName() != null ? DEFAULT_CONTAINER_NAME : dto.getContainerName();
+
+        try {
+            DeleteBlobDto deleteBlobDto = new DeleteBlobDto();
+            deleteBlobDto.setBlobName(blobName);
+            deleteBlobDto.setContainerName(containerName);
+            delete(deleteBlobDto);
+        } catch (Exception ignored) {
+        }
     }
 
 }

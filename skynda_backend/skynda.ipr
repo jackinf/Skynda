@@ -176,13 +176,7 @@
   </component>
   <component name="dataSourceStorageLocal">
     <data-source name="skynda@localhost" uuid="bff89e92-2a07-426a-9e53-ca64bbfdfaa1">
-      <database-info product="PostgreSQL" version="9.5rc1" jdbc-version="4.0" driver-name="PostgreSQL Native Driver" driver-version="PostgreSQL 9.4 JDBC4 (build 1201)">
-        <identifier-quote-string>&quot;</identifier-quote-string>
-      </database-info>
-      <case-sensitivity plain-identifiers="lower" quoted-identifiers="exact" />
-      <secret-storage>master_key</secret-storage>
-      <user-name>postgres</user-name>
-      <resolve-scope>skynda:public,postgres</resolve-scope>
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" />
     </data-source>
   </component>
   <component name="libraryTable">

@@ -58,11 +58,12 @@ class VehicleModel extends React.Component {
     return this.props.formInfo.isFetching
       ? (loadingIcon)
       : (<div>
-      <div className="well vehicle-model__form-info__helper-block">
-        <h4>Form info: {JSON.stringify(this.props.formInfo)}</h4>
-        <h5>Is modal: {this.props.isModal ? "yes" : "no"}</h5>
-        <button onClick={e => this.props.randomize(this.props.formInfo.item)}>Random</button>
-      </div>
+        {/*COMMENTED BECAUSE IT's for debugging*/}
+      {/*<div className="well vehicle-model__form-info__helper-block">*/}
+        {/*<h4>Form info: {JSON.stringify(this.props.formInfo)}</h4>*/}
+        {/*<h5>Is modal: {this.props.isModal ? "yes" : "no"}</h5>*/}
+        {/*<button onClick={e => this.props.randomize(this.props.formInfo.item)}>Random</button>*/}
+      {/*</div>*/}
 
       <form onSubmit={this.onSubmit.bind(this)}>
         {rowWrapper(<Field name="modelCode" label="Model Code" component={TextField} floatingLabelText="Model Code *"/>)}

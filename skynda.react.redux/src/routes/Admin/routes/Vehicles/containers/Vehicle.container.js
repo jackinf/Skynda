@@ -13,7 +13,6 @@ import {
 } from "../actions/Vehicle.image.actions";
 import {load, clear, onHandleSubmitFinished} from "../reducers/Vehicle.reducer";
 import {getList as getVehicleModelsList} from "../../VehicleModels/reducers/VehicleModels.reducer";
-// import {getColors} from "../../Classifiers/Classifiers.module";
 import {REDUCER_KEYS} from "../constants/Vehicle.constant";
 import VehicleComponent from "../components/Vehicle.component";
 
@@ -21,8 +20,6 @@ const mapDispatchToProps = {
   load,
   clear,
   getVehicleModelsList,
-  // getColors,
-
   onMainImageUpload: onMainImageUpload,
   onMainImageRemove: onMainImageRemove,
   onMainImageCropComplete: onMainImageCropComplete,
@@ -30,7 +27,6 @@ const mapDispatchToProps = {
   onImageFileRemove: onImageFileRemove,
   onFaultFileUpload: onFaultFileUpload,
   onFaultRemove: onFaultRemove,
-
   onHandleSubmitFinished: onHandleSubmitFinished
 };
 

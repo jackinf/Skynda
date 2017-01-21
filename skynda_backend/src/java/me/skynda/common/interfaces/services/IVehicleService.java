@@ -10,7 +10,7 @@ import me.skynda.common.dto.DeleteResponseDto;
 import me.skynda.common.dto.SearchResponseDto;
 import org.springframework.validation.BindingResult;
 
-public interface VehicleService {
+public interface IVehicleService {
 
     /**
      * Gets all data from the database

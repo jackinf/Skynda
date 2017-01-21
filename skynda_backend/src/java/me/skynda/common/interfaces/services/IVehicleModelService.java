@@ -9,7 +9,7 @@ import org.springframework.validation.BindingResult;
 
 import java.util.List;
 
-public interface VehicleModelService {
+public interface IVehicleModelService {
     /**
      * Gets all data from the database
      * @return all vehicle models

@@ -1,6 +1,3 @@
-/**
- * Created by jevgenir on 11/20/2016.
- */
 import React from "react";
 import {Row, Col} from "react-bootstrap";
 import FloatingActionButton from 'material-ui/FloatingActionButton';
@@ -8,6 +5,7 @@ import ContentAdd from 'material-ui/svg-icons/content/add';
 import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
 import Checkbox from 'material-ui/Checkbox';
 import SelectField from 'material-ui/SelectField';
+import {TextField} from "redux-form-material-ui";
 
 /**
  * Wrapper for rendering list of items (for redux-form fields)
@@ -17,7 +15,7 @@ import SelectField from 'material-ui/SelectField';
  * @param isRequired - is the field required for submission?
  */
 export const fieldListWrapper = ({fields, title, block, isRequired = false}) => (
-  <Row style={{marginBottom: "20px", border: "1px solid #cdcdcd", background: "#fafafa"}}>
+  <Row style={{marginBottom: "20px"}}>
     <Col sm={12}>
       <Row>
         <Col sm={12}>
@@ -74,4 +72,12 @@ export const renderSelectField = ({input, label, meta: {touched, error}, childre
         {...custom}/>
     </Col>
   </Row>
+);
+
+export const renderTextField = ({label, meta: {touched, error}, children, ...custom}) => (
+      <TextField
+        floatingLabelText={label}
+        errorText={touched && error}
+        children={children}
+        {...custom}/>
 );

@@ -3,7 +3,7 @@ package me.skynda.vehicle.controller;
 import me.skynda.common.dto.CreateOrUpdateResponseDto;
 import me.skynda.common.dto.DeleteResponseDto;
 import me.skynda.vehicle.dto.VehicleReviewAdminDto;
-import me.skynda.common.interfaces.services.VehicleReviewService;
+import me.skynda.common.interfaces.services.IVehicleReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +19,7 @@ import java.util.List;
 public class VehicleReviewController {
 
     @Autowired
-    private VehicleReviewService service;
+    private IVehicleReviewService service;
 
     @RequestMapping(value = "/vehicle-reviews", method = RequestMethod.GET)
     public List<VehicleReviewAdminDto> getAll() {

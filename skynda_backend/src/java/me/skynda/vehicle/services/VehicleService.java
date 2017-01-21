@@ -1,19 +1,12 @@
 package me.skynda.vehicle.services;
 
-import me.skynda.auth.service.UserService;
-import me.skynda.blobstorage.dto.DeleteBlobDto;
-import me.skynda.blobstorage.dto.UploadBlobDto;
-import me.skynda.blobstorage.dto.response.BlobStorageUploadStreamResponseDto;
-import me.skynda.common.interfaces.services.BlobStorageService;
-import me.skynda.common.interfaces.daos.ImageDao;
-import me.skynda.common.dto.SearchResponseDto;
 import me.skynda.common.dto.CreateOrUpdateResponseDto;
 import me.skynda.common.dto.DeleteResponseDto;
-import me.skynda.image.entities.Image;
-import me.skynda.common.helper.SkyndaUtility;
+import me.skynda.common.dto.SearchResponseDto;
 import me.skynda.common.interfaces.daos.*;
-import me.skynda.vehicle.dto.ImageContainerBaseDto;
-import me.skynda.common.interfaces.services.VehicleService;
+import me.skynda.common.interfaces.services.IBlobStorageService;
+import me.skynda.common.interfaces.services.IVehicleService;
+import me.skynda.image.entities.Image;
 import me.skynda.vehicle.dto.*;
 import me.skynda.vehicle.dto.request.SearchRequestDto;
 import me.skynda.vehicle.entities.Vehicle;
@@ -28,49 +21,43 @@ import org.springframework.validation.BindingResult;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 @Service
 @Transactional
-public class VehicleServiceImpl implements VehicleService {
+public class VehicleService implements IVehicleService {
 
-    public static String DEFAULT_CONTAINER_NAME = "skynda";
-
-    @Autowired
-    VehicleDao vehicleDao;
-
-    @Autowired
-    VehicleModelDao vehicleModelDao;
-
-    @Autowired
-    VehicleReportItemDao vehicleReportItemDao;
-
-    @Autowired
-    VehicleDescriptionDao vehicleDescriptionDao;
-
-    @Autowired
-    VehicleFeatureDao vehicleFeatureDao;
-
-    @Autowired
-    VehicleFaultDao vehicleFaultDao;
-
-    @Autowired
-    VehicleImageDao vehicleImageDao;
-
-    @Autowired
-    private BlobStorageService blobStorageService;
-
-    @Autowired
-    private ImageDao imageDao;
-
-    @Autowired
-    private Mapper mapper;
-
-    @Autowired
-    UserService userService;
-
-    //    @Autowired
+    private final VehicleDao vehicleDao;
+    private final VehicleModelDao vehicleModelDao;
+    private final IVehicleReportItemDao vehicleReportItemDao;
+    private final VehicleDescriptionDao vehicleDescriptionDao;
+    private final VehicleFeatureDao vehicleFeatureDao;
+    private final VehicleFaultDao vehicleFaultDao;
+    private final VehicleImageDao vehicleImageDao;
+    private final Mapper mapper;
+    private final IBlobStorageService blobStorageService;
     private VehicleValidator validator = new VehicleValidator();
+
+    @Autowired
+    public VehicleService(
+            IVehicleReportItemDao vehicleReportItemDao,
+            VehicleDao vehicleDao,
+            VehicleModelDao vehicleModelDao,
+            VehicleDescriptionDao vehicleDescriptionDao,
+            VehicleFeatureDao vehicleFeatureDao,
+            VehicleFaultDao vehicleFaultDao,
+            VehicleImageDao vehicleImageDao,
+            Mapper mapper,
+            IBlobStorageService blobStorageService) {
+        this.vehicleReportItemDao = vehicleReportItemDao;
+        this.vehicleDao = vehicleDao;
+        this.vehicleModelDao = vehicleModelDao;
+        this.vehicleDescriptionDao = vehicleDescriptionDao;
+        this.vehicleFeatureDao = vehicleFeatureDao;
+        this.vehicleFaultDao = vehicleFaultDao;
+        this.vehicleImageDao = vehicleImageDao;
+        this.mapper = mapper;
+        this.blobStorageService = blobStorageService;
+    }
 
     @Override
     public List<VehicleDetailedDto> getVehicles() {
@@ -150,13 +137,13 @@ public class VehicleServiceImpl implements VehicleService {
         // Upload image gallery
         List<ImageContainerDto> imageDtos = vehicleAdminDto.getImages() != null ? vehicleAdminDto.getImages() : new ArrayList<>();
         if (imageDtos != null) {
-            imageDtos.forEach(this::fromBase64ToUrl);
+            imageDtos.forEach(blobStorageService::fromBase64ToUrl);
         }
 
         // Upload faults images
         List<FaultBaseDto> faultDtos = vehicleAdminDto.getFaults();
         if (faultDtos != null) {
-            faultDtos.forEach(this::fromBase64ToUrl);
+            faultDtos.forEach(blobStorageService::fromBase64ToUrl);
         }
 
         /*
@@ -165,7 +152,7 @@ public class VehicleServiceImpl implements VehicleService {
 
         List<VehicleDtoImageFileToDelete> filesToDelete = vehicleAdminDto.getFilesToDelete();
         if (filesToDelete != null) {
-            filesToDelete.forEach(this::tryDeleteBlob);
+            filesToDelete.forEach(blobStorageService::tryDeleteBlob);
         }
 
         /*
@@ -179,7 +166,7 @@ public class VehicleServiceImpl implements VehicleService {
             Save all the one-2-many relations with vehicle-to-be-sold
          */
 
-        vehicleReportItemDao.addMultipleToVehicle(addedVehicle, vehicleAdminDto.getReportItems());
+//        vehicleReportItemDao.addMultipleToVehicle(addedVehicle, vehicleAdminDto.getReportItems());
         vehicleDescriptionDao.addMultipleToVehicle(addedVehicle, vehicleAdminDto.getDescriptions());
         vehicleFeatureDao.addMultipleToVehicle(addedVehicle, vehicleAdminDto.getFeatures());
         vehicleFaultDao.addMultipleToVehicle(addedVehicle, faultDtos);
@@ -203,53 +190,11 @@ public class VehicleServiceImpl implements VehicleService {
         List<VehicleSearchDto> searchResultsDto = new ArrayList<>();
         List<Vehicle> vehicles = vehicleDao.search(params);
 
-        vehicles.forEach(vehicle -> {
-            searchResultsDto.add(mapper.map(vehicle, VehicleSearchDto.class));
-        });
+        vehicles.forEach(vehicle -> searchResultsDto.add(mapper.map(vehicle, VehicleSearchDto.class)));
 
         response.setSuccess(!searchResultsDto.isEmpty());
         response.setVehicles(searchResultsDto);
 
         return response;
-    }
-
-    private void fromBase64ToUrl(ImageContainerBaseDto dto) {
-        String faultBase64File = dto.getImage() != null
-                ? dto.getImage().getBase64File()
-                : null;
-        if (faultBase64File == null || faultBase64File.isEmpty())
-            return;
-
-        // Upload the file, Jim!
-        UploadBlobDto uploadBlobDto = new UploadBlobDto();
-        uploadBlobDto.setContainerName(DEFAULT_CONTAINER_NAME);
-        String blobName = UUID.randomUUID().toString();
-        uploadBlobDto.setBlobName(blobName);
-        uploadBlobDto.setByteArray(SkyndaUtility.toBytearray(faultBase64File));
-        BlobStorageUploadStreamResponseDto responseDto = blobStorageService.uploadStream(uploadBlobDto);
-
-        // File upload successful, Jim, isn't it?
-        if (responseDto.isSuccess()) {
-            dto.getImage().setUrl(responseDto.getUri());
-            dto.getImage().setBlobName(blobName);
-            dto.getImage().setContainerName(DEFAULT_CONTAINER_NAME);
-            dto.getImage().setBase64File(null);
-        }
-    }
-
-    private void tryDeleteBlob(VehicleDtoImageFileToDelete dto) {
-        if (dto == null || dto.getBlobName() == null || dto.getBlobName().isEmpty())
-            return;
-
-        String blobName = dto.getBlobName();
-        String containerName = dto.getContainerName() != null ? DEFAULT_CONTAINER_NAME : dto.getContainerName();
-
-        try {
-            DeleteBlobDto deleteBlobDto = new DeleteBlobDto();
-            deleteBlobDto.setBlobName(blobName);
-            deleteBlobDto.setContainerName(containerName);
-            blobStorageService.delete(deleteBlobDto);
-        } catch (Exception ex) {
-        }
     }
 }

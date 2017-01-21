@@ -2,6 +2,7 @@ package me.skynda.vehicle.controller;
 
 import java.util.List;
 
+import me.skynda.common.interfaces.services.IVehicleService;
 import me.skynda.vehicle.dto.request.SearchRequestDto;
 import me.skynda.common.controller.BaseController;
 import me.skynda.common.dto.CreateOrUpdateResponseDto;
@@ -9,7 +10,6 @@ import me.skynda.common.dto.DeleteResponseDto;
 import me.skynda.common.dto.SearchResponseDto;
 import me.skynda.vehicle.dto.VehicleAdminDto;
 import me.skynda.vehicle.dto.VehicleDetailedDto;
-import me.skynda.common.interfaces.services.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -24,8 +24,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/api")
 public class VehicleController extends BaseController {
 
+    private final IVehicleService vehicleService;
+
     @Autowired
-    private VehicleService vehicleService;
+    public VehicleController(IVehicleService vehicleService) {
+        this.vehicleService = vehicleService;
+    }
 
     @RequestMapping(value = "/vehicles", method = RequestMethod.GET)
     public List<VehicleDetailedDto> getAll(@RequestBody(required = false) SearchRequestDto dto) {

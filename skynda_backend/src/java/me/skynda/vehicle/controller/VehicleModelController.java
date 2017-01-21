@@ -2,10 +2,10 @@ package me.skynda.vehicle.controller;
 
 import me.skynda.common.dto.CreateOrUpdateResponseDto;
 import me.skynda.common.dto.DeleteResponseDto;
+import me.skynda.common.interfaces.services.IVehicleModelService;
 import me.skynda.vehicle.dto.VehicleModelAdminDto;
 import me.skynda.vehicle.dto.request.ModelRequestDto;
 import me.skynda.vehicle.dto.response.VehicleModelResponseDto;
-import me.skynda.common.interfaces.services.VehicleModelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -17,8 +17,12 @@ import java.util.List;
 @RequestMapping(value = "/api", produces = "application/json")
 public class VehicleModelController {
 
+    private final IVehicleModelService vehicleModelService;
+
     @Autowired
-    private VehicleModelService vehicleModelService;
+    public VehicleModelController(IVehicleModelService vehicleModelService) {
+        this.vehicleModelService = vehicleModelService;
+    }
 
     @RequestMapping(value = "/vehicle-models", method = RequestMethod.GET)
     public List<VehicleModelResponseDto> getAll(@RequestBody(required = false) ModelRequestDto searchDto) {

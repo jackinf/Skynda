@@ -1,16 +1,16 @@
-/**
- * Created by jevgenir on 10/21/2016.
- */
 import React from 'react';
 import {Field, FieldArray} from 'redux-form';
 import {ROUTE_PARAMS} from "../constants/VehicleReport.constant";
 import {formSubmit, onFormSubmitSuccess, onFormSubmitError} from "../actions";
 import {Row, Col} from "react-bootstrap";
-import {TextField} from "redux-form-material-ui";
 import {
   renderReportCategoryItems,
-  VehiclesSelectField
+  VehiclesSelectField,
+  TextFieldForReport,
+  TextAreaForReport
 } from "./VehicleReportCategory.component.renderers";
+import {renderFaults} from "../../Vehicles/components/Vehicle.redux-form.renderers";
+import "./VehicleReport.Component.scss";
 
 class VehicleReportCategory extends React.Component {
   static propTypes = {
@@ -54,29 +54,29 @@ class VehicleReportCategory extends React.Component {
   render() {
     return (<div>
         {this.props.isFetching || this.props.submitting ? "Loading..." : (
-          <form onSubmit={this.onSubmit.bind(this)}>
+            <form onSubmit={this.onSubmit.bind(this)} className="vehicle-report">
 
-            <h3>{this.props.formMode1}</h3>
+              <h3>{this.props.formMode1}</h3>
 
-            <VehiclesSelectField name="vehicleId" label="Vehicle *" vehicles={this.props.vehicles} />
+              <VehiclesSelectField name="vehicleId" label="Vehicle *" vehicles={this.props.vehicles}/>
 
-            <Row>
-              <Col sm={12}>
-                <Field name="title" component={TextField} hintText="Title"/>
-              </Col>
-            </Row>
+              <TextFieldForReport name="inspector" label="Inspector Name *"/>
 
-            <FieldArray name="items" label="Category items" component={renderReportCategoryItems}
-                        onCategoryItemLogoUpload={this.props.onCategoryItemLogoUpload}
-                        onCategoryItemLogoRemove={this.props.onCategoryItemLogoRemove}
-                        onCategoryItemVideoUpload={this.props.onCategoryItemVideoUpload}
-                        onCategoryItemVideoRemove={this.props.onCategoryItemVideoRemove}
-            />
+              <TextFieldForReport name="title" label="Title"/>
 
-            <button type="submit" disabled={this.props.submitting}>Submit</button>
-          </form>
+              <TextAreaForReport name="description" label="Description"/>
 
-        )}
+              <FieldArray name="items" label="Category items" component={renderReportCategoryItems}/>
+
+              <FieldArray name="faults" label="Faults " component={renderFaults}
+                          onFaultFileAdd={this.props.onFaultFileUpload}
+                          onFaultRemove={this.props.onFaultRemove}
+              />
+
+              <button type="submit" disabled={this.props.submitting}>Submit</button>
+            </form>
+
+          )}
       </div>
     )
   }

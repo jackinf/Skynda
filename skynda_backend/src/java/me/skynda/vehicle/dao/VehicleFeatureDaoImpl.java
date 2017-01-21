@@ -4,13 +4,13 @@ import me.skynda.common.interfaces.daos.VehicleFeatureDao;
 import me.skynda.vehicle.dto.FeatureDto;
 import me.skynda.vehicle.entities.Vehicle;
 import me.skynda.vehicle.entities.VehicleFeature;
-import me.skynda.common.db.SkyndaBaseEntityDaoImpl;
+import me.skynda.common.db.BaseEntityDaoImpl;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public class VehicleFeatureDaoImpl extends SkyndaBaseEntityDaoImpl<VehicleFeature> implements VehicleFeatureDao {
+public class VehicleFeatureDaoImpl extends BaseEntityDaoImpl<VehicleFeature> implements VehicleFeatureDao {
 
     @Override
     public void addMultipleToVehicle(Vehicle vehicle, List<FeatureDto> features) {

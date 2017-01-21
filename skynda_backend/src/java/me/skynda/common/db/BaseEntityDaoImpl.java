@@ -1,14 +1,9 @@
 package me.skynda.common.db;
 
-//import com.nortal.spl.orm.hibernate4.qst.api.HibernateQuerySyntaxTest;
 import lombok.SneakyThrows;
-
 import org.hibernate.Hibernate;
 import org.hibernate.LockOptions;
 import org.hibernate.proxy.HibernateProxy;
-
-//import com.nortal.spl.orm.hibernate4.qst.api.HibernateQuerySyntaxTest;
-
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.Collection;
@@ -17,7 +12,7 @@ import java.util.List;
 /**
  * Entity specific DAO.
  */
-public abstract class SkyndaBaseEntityDaoImpl<T> extends SkyndaBaseDAO implements SkyndaBaseEntityDao<T> {
+public abstract class BaseEntityDaoImpl<T> extends BaseDAO implements SkyndaBaseEntityDao<T> {
 
 	@SuppressWarnings("unchecked")
 	@SneakyThrows(ClassNotFoundException.class)
