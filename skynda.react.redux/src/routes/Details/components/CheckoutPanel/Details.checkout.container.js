@@ -10,7 +10,8 @@ const mapStateToProps = (state) => {
   const checkoutInfo = state.checkoutInfo;
   return {
     isSubmitting: checkoutInfo ? checkoutInfo.isSubmitting : false,
-    errors: checkoutInfo.errors,
+    isSuccessfullySent: checkoutInfo ? checkoutInfo.isSuccessfullySent : false,
+    errors: checkoutInfo.errors
   }
 };
 

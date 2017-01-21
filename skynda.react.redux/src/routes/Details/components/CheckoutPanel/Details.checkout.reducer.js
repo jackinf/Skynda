@@ -9,7 +9,7 @@ import {toastr} from 'react-redux-toastr';
 
 export const submitAsync = (info) => (dispatch) => {
   console.log(info);
-  dispatch(setSubmittingStatus(true));
+  dispatch(setSubmittingStatus(true, false));
   dispatch(setErrors(null));
 
   return fetch(`${remoteConfig.remote}/api/email/buy-vehicle`, {
@@ -25,17 +25,18 @@ export const submitAsync = (info) => (dispatch) => {
       } else {
         toastr.success("Täname!", "Võtame sinuga 2 tööpäeva jooksul ühendust.");
       }
-      dispatch(setSubmittingStatus(false));
+      dispatch(setSubmittingStatus(false, true));
     })
     .catch((error) => {
-      dispatch(setSubmittingStatus(false));
+      dispatch(setSubmittingStatus(false, false));
     });
 };
 
-function setSubmittingStatus(value) {
+function setSubmittingStatus(value, isSuccessfullySent) {
   return {
     type: SET_INFO,
-    isSubmitting: !!value
+    isSubmitting: !!value,
+    isSuccessfullySent
   }
 }
 
@@ -52,7 +53,8 @@ export default function reducer(state = initialState, action) {
     case SET_INFO:
       return {
         ...state,
-        isSubmitting: action.isSubmitting
+        isSubmitting: action.isSubmitting,
+        isSuccessfullySent: action.isSuccessfullySent
       };
     case SET_ERRORS:
       return {

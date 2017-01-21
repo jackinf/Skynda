@@ -138,18 +138,6 @@ class Checkout extends React.Component {
 
   displaySuccessPopup = async() => {
     await this.props.submitAsync(this.state.personDetails);
-    setTimeout(() => {
-      location.reload();  // It is easier this way right now
-    }, 4000);
-    // this.setState({
-    //   personDetails: {
-    //     fullName: "",
-    //     email: "",
-    //     phone: "",
-    //     comment: "",
-    //     carPk: this.state.id
-    // }});
-    // this.setState({openSentMsg: true});
   };
 
   render() {
@@ -173,10 +161,17 @@ class Checkout extends React.Component {
         <Tab label={contactUsText}
              className='sk_details__checkout_tab'>
           <div className='sk_details__checkout_tab_inner'>
+            {this.props.isSuccessfullySent ? (
+                <Row>
+                  <Col sm={12}>
+                    <h3>Täname! Võtame sinuga 2 tööpäeva jooksul ühendust.</h3>
+                  </Col>
+                </Row>
+              ) : (
             <PersonInfoTab displaySuccessPopup={this.displaySuccessPopup}
                            person={this.state.personDetails}
                            errors={this.props.errors}
-            />
+            />)}
           </div>
         </Tab>
       </Tabs>
