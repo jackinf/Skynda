@@ -8,6 +8,7 @@ import image_icon1 from "../../../static/images/standard/happy@2x.png";
 import image_icon2 from "../../../static/images/standard/ok@2x.png";
 import image_icon3 from "../../../static/images/standard/clock@2x.png";
 import {Translate} from "react-redux-i18n";
+import Scroll from "react-scroll";
 
 export default class extends React.Component {
   static propTypes = {
@@ -16,6 +17,7 @@ export default class extends React.Component {
 
   render() {
     return (<div className="container">
+      <Scroll.Element name="how-it-works-icon-features" />
       <Row className="how-it-works__icon-features how-it-works__centered">
         <Col sm={4}>
           <img className="how-it-works__feature-icon" src={image_icon1} alt="Comfortable"/>

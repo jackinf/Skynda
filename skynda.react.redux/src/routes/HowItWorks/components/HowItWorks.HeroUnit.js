@@ -7,6 +7,8 @@ import {Button, Row, Col} from "react-bootstrap";
 import {Parallax} from 'react-parallax';
 import heroImageUrl from "../assets/heroimage.png";
 import {Translate} from "react-redux-i18n";
+import {DISPLAY_MODE} from "../HowItWorks.constants";
+import Scroll from "react-scroll";
 
 export default class extends React.Component {
   static propTypes = {
@@ -20,7 +22,8 @@ export default class extends React.Component {
   }
 
   render() {
-    const {onWantToBuyClick, onWantToSellClick} = this.props;
+    const {onWantToBuyClick, onWantToSellClick, displayMode} = this.props;
+
 
     return (<div>
       <Parallax bgImage={heroImageUrl} strength={300}>
@@ -39,14 +42,16 @@ export default class extends React.Component {
             </Row>
 
             <h3 className="how-it-works__main-image-background__title">Kas soovid autot osta või müüa?</h3>
-            <Button className="how-it-works__main-image-background__primary-button"
-                    onClick={e => onWantToBuyClick()}>
-              Soovin osta
-            </Button>
-            <Button className="how-it-works__main-image-background__secondary-button"
-                    onClick={e => onWantToSellClick()}>
-              Soovin müüa
-            </Button>
+            <Scroll.Link activeClass="active" to="how-it-works-icon-features" spy={true} smooth={true} offset={50} duration={500}>
+              <Button className={`how-it-works__main-image-background__primary-button ${displayMode == DISPLAY_MODE.WANT_TO_BUY ? "button-pressed-haha-first-button" : ""}`}
+                      onClick={e => onWantToBuyClick()}>
+                Soovin osta
+              </Button>
+              <Button className={`how-it-works__main-image-background__secondary-button ${displayMode == DISPLAY_MODE.WANT_TO_SELL ? "button-pressed-haha-second-button" : ""}`}
+                      onClick={e => onWantToSellClick()}>
+                Soovin müüa
+              </Button>
+            </Scroll.Link>
           </div>
         </div>
       </Parallax>

@@ -33,7 +33,8 @@ export default class extends React.Component {
     return (<div>
       <HeroUnit
         onWantToBuyClick={this.setDisplayModeToWantToBuy}
-        onWantToSellClick={this.setDisplayModeToWantToSell} />
+        onWantToSellClick={this.setDisplayModeToWantToSell}
+        displayMode={displayMode}/>
       <IconFeatures displayMode={displayMode} />
       <DescriptionText displayMode={displayMode} />
       <ThreeSteps displayMode={displayMode} />

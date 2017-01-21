@@ -56,8 +56,8 @@
 .primary-button:focus,
 .primary-button:visited,
 .read_more {
-  color: whitesmoke;
-  background: $color-primary;
+  color: whitesmoke !important;
+  background: $color-primary !important;
 }
 
 .primary-header {

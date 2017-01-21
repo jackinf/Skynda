@@ -31,10 +31,11 @@
 .how-it-works__main-image-background__primary-button,
 .how-it-works__main-image-background__primary-button:hover,
 .how-it-works__main-image-background__primary-button:active,
-.how-it-works__main-image-background__primary-button:focus {
-  background: $color-primary;
+.how-it-works__main-image-background__primary-button:focus,
+.how-it-works__main-image-background__primary-button:visited {
+  background: $color-primary !important;
   border-color: $color-primary;
-  color: whitesmoke;
+  color: whitesmoke !important;
   font-weight: bold;
   border-radius: 5px;
   margin: 10px;
@@ -43,13 +44,23 @@
   font-size: 20px;
 }
 
+.button-pressed-haha-first-button {
+  border-color: $color-primary;
+  box-shadow: 0 0 10px 10px lighten($color-primary, 10%);
+}
+.button-pressed-haha-second-button {
+  border-color: $color-secondary !important;
+  box-shadow: 0 0 10px 10px lighten($color-secondary, 10%);
+}
+
 .how-it-works__main-image-background__secondary-button,
 .how-it-works__main-image-background__secondary-button:hover,
 .how-it-works__main-image-background__secondary-button:active,
-.how-it-works__main-image-background__secondary-button:focus {
-  background: $color-secondary;
+.how-it-works__main-image-background__secondary-button:focus,
+.how-it-works__main-image-background__secondary-button:visited {
+  background: $color-secondary !important;
   border-color: $color-secondary;
-  color: whitesmoke;
+  color: whitesmoke !important;
   font-weight: bold;
   border-radius: 5px;
   margin: 10px;

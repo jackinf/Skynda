@@ -1,5 +1,7 @@
 $default-color: #019BFF;
 
+@import "../../../styles/variables.scss";
+
 .car-search {
   .search {
     background-color: #F8F8F8;
@@ -68,9 +70,15 @@ $default-color: #019BFF;
     display: none;
   }
 
-  .sk-btn--search {
-    background: transparent;
-    color: $default-color;
+  .sk-btn--search,
+  .sk-btn--search:hover,
+  .sk-btn--search:active,
+  .sk-btn--search:focus,
+  .sk-btn--search:visited {
+    //background: transparent;
+    background-color: $color-primary;
+    color: whitesmoke;
+    //color: $default-color;
     border-color: $default-color;
 
     span {
