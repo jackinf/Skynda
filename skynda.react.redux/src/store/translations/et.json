@@ -58,12 +58,13 @@
     "populars": "Viimase aja popimad mudelid",
     "recently_added": "Hiljuti valikusse lisandunud",
     "hero": {
-      "main_text": "Kasutatud auto ostmine pole kunagi olnud nii lihtne, turvaline ja glamuurne.",
+      "main_text": "Murevaba kasutatud autode ost ja müük",
       "read_more": "Kuidas nii?"
     }
   },
   "how_it_works": {
-    "banner_text": "Ainult Triveniga saad oma auto müüdud ja uue kasutatud auto ostetud arvuti tagant lahkumata. Kvaliteet ja mugavus tagatud.",
+    "banner_text": "Ainult Triveniga saad oma auto müüdud ja uue kasutatud auto ostetud arvuti tagant lahkumata.",
+    "banner_text1": "Kvaliteet ja mugavus tagatud.",
     "why_bubble_1": "Triven on MUGAVAM",
     "why_bubble_1_description_1": "osta või müü auto arvuti tagant tõusmata",
     "why_bubble_1_description_2": "auto toome või viime just sinna, kus asud",

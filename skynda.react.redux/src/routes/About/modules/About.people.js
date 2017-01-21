@@ -48,17 +48,17 @@ const ACTION_HANDLERS = {
         imageUrl: imageFace4,
         name: "Ardi Aver",
         position: "Arendaja"
-      },
+      }
       // {
       //   imageUrl: imageFace5,
       //   name: "Mihhail Marenkov",
       //   position: "Arendaja"
       // },
-      {
-        imageUrl: imageFace7,
-        name: "Artur Puiste",
-        position: "UX Disainer"
-      }
+      // {
+      //   imageUrl: imageFace7,
+      //   name: "Artur Puiste",
+      //   position: "UX Disainer"
+      // }
     ];
 
     action.payload = people;

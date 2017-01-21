@@ -19,9 +19,7 @@ export function loadDescription(value) {
 const ACTION_HANDLERS = {
   [LOAD_DESCRIPTION] : (state, action) => {
     action.payload = `
-      Siia kirjeldus, miks, mida ja kuidas me teeme Siia kirjeldus, miks, mida ja kuidas me teeme
-      Siia kirjeldus, miks, mida ja kuidas me teeme Siia kirjeldus, miks, mida ja kuidas me teeme
-      Siia kirjeldus, miks, mida ja kuidas me teeme Siia kirjeldus, miks, mida ja kuidas me teeme
+      Meil kõigil on vaja aega oluliste tegevuste ja inimeste jaoks ning me kõik teame, kui keeruline võib olla seda aega leida. Sellepärast lõimegi Triveni, kus toimetame iga päev selle nimel, et kasutatud auto ost või müük ei nõuaks Sinult liiga palju aega ega pingutust. Meie maailmaparandajate tiim teeb Sinu auto müümise ja ostmise mugavamaks kui eales varem.   
     `;
     return action.payload;
   }
