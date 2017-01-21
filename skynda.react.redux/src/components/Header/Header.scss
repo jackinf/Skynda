@@ -65,11 +65,11 @@
   //  color: #5A5B5C;
   //}
   .navbar_default .navbar_nav > .sk_menu__sell >a{
-    color: #FBBB68;
+    color: $color-secondary;
   }
 
   .navbar_default .navbar_nav > .sk_menu__buy > a{
-    color: #019BFF;
+    color: $color-primary;
   }
 
 }

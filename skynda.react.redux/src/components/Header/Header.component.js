@@ -18,8 +18,9 @@ import "./Header.scss";
 // import LocaleContainer from "../Locale/LocaleContainer";
 
 // Images
-import image1 from "./../../static/images/standard/skynda logo 4-mask-4@2x.png";
-import image2 from "./../../static/images/standard/SKYNDA@2x.png";
+// import image1 from "./../../static/images/standard/skynda logo 4-mask-4@2x.png";
+// import image2 from "./../../static/images/standard/SKYNDA@2x.png";
+import image1 from "./assets/triven_logo_sinine.png";
 
 const headerUsernameBlockFn = (props) => {
   const adminOptions = isLoggedInAs(["admin"])
@@ -39,8 +40,9 @@ const headerUsernameBlockFn = (props) => {
 };
 
 const LogoComponent = (props) => (<Link className={`${props.className || ""} sk_logo`} to='/'>
-  <img className="pull-left skynda-logo-image-1" src={image1}/>
-  <img src={image2}/>
+  {/*<img className="pull-left skynda-logo-image-1" src={image1}/>*/}
+  <img src={image1}/>
+  {/*<img src={image2}/>*/}
   {/*<h1>Triven.io</h1>*/}
 </Link>);
 

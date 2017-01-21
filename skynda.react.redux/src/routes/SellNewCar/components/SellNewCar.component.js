@@ -151,7 +151,7 @@ export default class extends React.Component {
 
       <Parallax bgImage={heroImageUrl} strength={250}>
         <div className="sell-your-car__centered sell-your-car__main-image-background2">
-          <h3 className="sell-your-car__main-image-background__title">Skynda aitab sinu autole ostja leida</h3>
+          <h3 className="sell-your-car__main-image-background__title">Triven aitab sinu autole ostja leida</h3>
 
           <Scroll.Link activeClass="active" to="fill-form-scroll-to" spy={true} smooth={true} offset={50} duration={500}>
             <Button className="sell-your-car__main-image-background__button">Panen auto müüki</Button>

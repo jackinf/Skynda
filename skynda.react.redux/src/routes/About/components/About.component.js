@@ -46,14 +46,14 @@ export class About extends React.Component {
     return (<div className='container'>
       <Row>
         <Col md={8}>
-          <AboutSkblock header='Skynda muudab auto ostmise ja müümise kogemust'>
+          <AboutSkblock header='Triven muudab auto ostmise ja müümise kogemust'>
             <Col md={12} style={{marginLeft: "-14px"}}>
               {this.props.description}
             </Col>
           </AboutSkblock>
 
           {this.props.people.length > 0
-            ? (<AboutSkblock header='Skynda Tiim'>
+            ? (<AboutSkblock header='Triveni Tiim'>
                   <Row>
                     {this.props.people.map((person, i) => personBlockFn(person, i))}
                   </Row>
@@ -88,7 +88,7 @@ export class About extends React.Component {
             </Row>
 
             <Row>
-              <span className='about__email'>hello@skynda.me</span>
+              <span className='about__email'>hello@triven.eu</span>
               <br />
             </Row>
 

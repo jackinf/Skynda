@@ -66,9 +66,9 @@ by its competitors. With refined driving dynamics and drop-dead gorgeous looks t
 match, this elegant sports coupe is truly an amazing driving machine`
   }, {
     title: "Meil on see suurepärases seisukorras!",
-    text: `Skynda seller Aju is switching things up with a new ride! Skynda Inspector Nicolas thought this
+    text: `Triven seller Aju is switching things up with a new ride! Triven Inspector Nicolas thought this
 car was in excellent condition. We would love to drop off this great BMW right in your
-driveway! Skynda bought this car from private seller Aju, and now Skyda is offering this car for
+driveway! Triven bought this car from private seller Aju, and now Skyda is offering this car for
 sale`
   }],
   features: [

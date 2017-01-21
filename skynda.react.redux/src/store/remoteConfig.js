@@ -16,7 +16,7 @@ const config = {
 };
 
 if (env === "production") {
-  config.remote = "http://skynda.me:8888";
+  config.remote = "http://triven.eu:8888";
 }
 
 export default config;
