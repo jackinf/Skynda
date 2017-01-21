@@ -17,6 +17,12 @@ export default class extends React.Component {
 
     const buyingSteps = (<span>
       <Row>
+        <Col sm={8} smOffset={2}>
+          <h3 className="how-it-works__centered how-it-works__primary-header">Auto ostmiseks on 3 lihtsat sammu</h3>
+        </Col>
+      </Row>
+      <br/>
+      <Row>
         <Col sm={4}/>
         <Col sm={4}>
           <div className="how-it-works__line">&nbsp;</div>
@@ -51,6 +57,12 @@ export default class extends React.Component {
     </span>);
 
     const sellingSteps = (<span>
+      <Row>
+        <Col sm={8} smOffset={2}>
+          <h3 className="how-it-works__centered how-it-works__primary-header">Auto müümiseks on 5 lihtsat sammu</h3>
+        </Col>
+      </Row>
+      <br/>
       <Row>
         <Col sm={2}/>
         <Col sm={8}>
@@ -100,12 +112,6 @@ export default class extends React.Component {
     </span>);
 
     return (<div>
-      <Row>
-        <Col sm={8} smOffset={2}>
-          <h3 className="how-it-works__centered how-it-works__primary-header">Auto ostmiseks on 3 lihtsat sammu</h3>
-        </Col>
-      </Row>
-      <br/>
       {displayMode === DISPLAY_MODE.WANT_TO_BUY ? buyingSteps
         : displayMode === DISPLAY_MODE.WANT_TO_SELL ? sellingSteps
           : ""

@@ -22,23 +22,6 @@ class Hero extends React.Component {
             </Button>
           </div>
         </Parallax>
-        {/*<img className='sk_hero__image' src={heroImageUrl} alt='image'/>*/}
-        {/*<div className='sk_hero__text'>*/}
-          {/*<div className='container'>*/}
-            {/*<Row className="aligner grid">*/}
-              {/*<Col md={9}>*/}
-                {/*<h2>*/}
-                  {/*<Translate value="home_page.hero.main_text"/>*/}
-                {/*</h2>*/}
-              {/*</Col>*/}
-              {/*<Col md={3}>*/}
-                {/*<Button className='primary-button read-more-btn' onClick={e => browserHistory.push("/how-it-works")}>*/}
-                  {/*<Translate value="home_page.hero.read_more"/>*/}
-                {/*</Button>*/}
-              {/*</Col>*/}
-            {/*</Row>*/}
-          {/*</div>*/}
-        {/*</div>*/}
       </div>);
   }
 }

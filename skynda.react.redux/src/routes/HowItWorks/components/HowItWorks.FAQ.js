@@ -47,10 +47,6 @@ export default class extends React.Component {
         answerText: <Translate value="how_it_works.buy_faq_a07" />
       },
       {
-        questionText: <Translate value="how_it_works.buy_faq_q07" />,
-        answerText: <Translate value="how_it_works.buy_faq_a07" />
-      },
-      {
         questionText: <Translate value="how_it_works.buy_faq_q08" />,
         answerText: <Translate value="how_it_works.buy_faq_a08" />
       },
@@ -99,10 +95,6 @@ export default class extends React.Component {
       {
         questionText: <Translate value="how_it_works.sell_faq_q06" />,
         answerText: <Translate value="how_it_works.sell_faq_a06" />
-      },
-      {
-        questionText: <Translate value="how_it_works.sell_faq_q07" />,
-        answerText: <Translate value="how_it_works.sell_faq_a07" />
       },
       {
         questionText: <Translate value="how_it_works.sell_faq_q07" />,

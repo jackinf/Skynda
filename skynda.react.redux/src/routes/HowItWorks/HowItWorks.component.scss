@@ -38,6 +38,9 @@
   font-weight: bold;
   border-radius: 5px;
   margin: 10px;
+
+  padding: 1.0em;
+  font-size: 20px;
 }
 
 .how-it-works__main-image-background__secondary-button,
@@ -46,9 +49,13 @@
 .how-it-works__main-image-background__secondary-button:focus {
   background: $color-secondary;
   border-color: $color-secondary;
+  color: whitesmoke;
   font-weight: bold;
   border-radius: 5px;
   margin: 10px;
+
+  padding: 1.0em;
+  font-size: 20px;
 }
 
 /**
@@ -62,8 +69,8 @@
 }
 
 .how-it-works__feature-icon {
-  width: 128px;
-  height: 128px;
+  width: 80px;
+  height: 80px;
 }
 
 .how-it-works__primary-header {
@@ -73,10 +80,13 @@
 
 .how-it-works__description {
   font-size: 16px;
+
 }
 
 .how-it-works__description > ul {
   font-size: 14px;
+  text-align: left;
+  margin-left: 30px;
 }
 
 /**
@@ -121,6 +131,7 @@
   font-size: 20px;
   font-style: italic;
   margin: 40px 0;
+  text-align: center;
 }
 
 .how-it-works__faq-panel .panel-heading {

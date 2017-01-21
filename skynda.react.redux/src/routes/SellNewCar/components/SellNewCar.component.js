@@ -98,11 +98,6 @@ const additionalInfoCard = (props, vehicleModels, drivetrains, transmissions, fe
 export default class extends React.Component {
   componentDidMount() {
     setTimeout(() => {window.scrollBy(0, 1);}, 100);  // hack to fix parallax image
-    // this.props.getManufacturers();
-    // this.props.getFeatures();
-    // this.props.getFuels();
-    // this.props.getTransmissions();
-    // this.props.getDrivetrains( );
   }
 
   setField = (name, value) => {
@@ -127,25 +122,7 @@ export default class extends React.Component {
   } ;
 
   render() {
-    // const vehicleManufacturers = !this.props.manufacturer.isFetching
-    //   ? this.props.manufacturer.items.map(item => ({label: item.name, value: item.id}))
-    //   : [];
-    // const vehicleModels = !this.props.vehicleModels.isFetching
-    //   ? this.props.vehicleModels.items.map(item => ({label: item.title + " " + item.modelCode, value: item.modelCode}))
-    //   : [];
-    // const features = !this.props.feature.isFetching
-    //   ? this.props.feature.items.map(item => ({label: item.name, value: item.id}))
-    //   : [];
-    // const fuels = !this.props.fuel.isFetching
-    //   ? this.props.fuel.items.map(item => ({label: item.name, value: item.id}))
-    //   : [];
-    // const transmissions = !this.props.transmission.isFetching
-    //   ? this.props.transmission.items.map(item => ({label: item.name, value: item.id}))
-    //   : [];
-    // const drivetrains = !this.props.drivetrain.isFetching
-    //   ? this.props.drivetrain.items.map(item => ({label: item.name, value: item.id}))
-    //   : [];
-    const {errors} = this.props;
+    const {errors, isSuccessfullySent} = this.props;
 
     return (<div className="sell-your-car">
 
@@ -160,6 +137,13 @@ export default class extends React.Component {
       </Parallax>
 
       <div className="container">
+        {isSuccessfullySent ? (
+          <Row>
+            <Col sm={12}>
+              <h3>Täname! Võtame sinuga 2 tööpäeva jooksul ühendust.</h3>
+            </Col>
+          </Row>
+          ) : (
         <Row>
           <Col sm={12}>
 
@@ -183,7 +167,7 @@ export default class extends React.Component {
               </form>
 
           </Col>
-        </Row>
+        </Row>)}
       </div>
 
     </div>);
