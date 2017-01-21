@@ -46,13 +46,11 @@ public class Vehicle implements Serializable, ImageStorable<Image> {
     @Column(name = "mileage")
     private BigDecimal mileage;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "color_outside_id", nullable = false)
-    private Classification colorOutside;
+    @Column(name = "color_outside_hex")
+    private String colorOutsideHex;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "color_inside_id", nullable = false)
-    private Classification colorInside;
+    @Column(name = "color_inside_hex")
+    private String colorInsideHex;
 
     @Column(name = "fuel_city")
     private BigDecimal fuelCity;

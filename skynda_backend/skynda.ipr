@@ -17,6 +17,14 @@
     </bytecodeTargetLevel>
   </component>
   <component name="CopyrightManager" default="" />
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="skynda@localhost" uuid="bff89e92-2a07-426a-9e53-ca64bbfdfaa1">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/skynda</jdbc-url>
+    </data-source>
+  </component>
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$" charset="UTF-8" />
   </component>
@@ -160,8 +168,22 @@
     </modules>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_3" project-jdk-name="1.8" project-jdk-type="JavaSDK" />
+  <component name="SqlDialectMappings">
+    <file url="file://$PROJECT_DIR$/src/resources/db/migration/V1/V1_1_16_201701211312__vehicle_color_ddl.sql" dialect="PostgreSQL" />
+  </component>
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$/.." vcs="Git" />
+  </component>
+  <component name="dataSourceStorageLocal">
+    <data-source name="skynda@localhost" uuid="bff89e92-2a07-426a-9e53-ca64bbfdfaa1">
+      <database-info product="PostgreSQL" version="9.5rc1" jdbc-version="4.0" driver-name="PostgreSQL Native Driver" driver-version="PostgreSQL 9.4 JDBC4 (build 1201)">
+        <identifier-quote-string>&quot;</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="lower" quoted-identifiers="exact" />
+      <secret-storage>master_key</secret-storage>
+      <user-name>postgres</user-name>
+      <resolve-scope>skynda:public,postgres</resolve-scope>
+    </data-source>
   </component>
   <component name="libraryTable">
     <library name="Maven: antlr:antlr:2.7.7">

@@ -224,15 +224,6 @@ class Vehicle extends React.Component {
             <Row>
               <Col md={6} xs={12}>
 
-                {/*<MainImageCardField title="Main image"*/}
-                                    {/*errors={errors}*/}
-                                    {/*onMainImageRemove={this.props.onMainImageRemove}*/}
-                                    {/*onMainImageUpload={this.props.onMainImageUpload}*/}
-                                    {/*onMainImageCropComplete={this.props.onMainImageCropComplete}*/}
-                {/*>*/}
-                  {/*<SubmitCardActions disabled={this.props.submitting} />*/}
-                {/*</MainImageCardField>*/}
-
                 <CropToolCard
                   name="mainImage"
                   reduxFormName={FORMS.VEHICLE_FORM}
@@ -265,24 +256,13 @@ class Vehicle extends React.Component {
                            onChangeComplete={this.onSetField}
                            component={ColorRenderer} />
 
-                    <Field name="colorInside.id"
-                           label="Color Inside * (Obsolete)"
-                           errors={errors}
-                           component={selectRenderer(colors, this.onSelectItemChange)}/>
-
                     <Field name="colorOutsideHex"
                            label="Color outside *"
                            errors={errors}
                            onChangeComplete={this.onSetField}
                            component={ColorRenderer} />
 
-                    <Field name="colorOutside.id"
-                           label="Color Outside *  (Obsolete)"
-                           errors={errors}
-                           component={selectRenderer(colors, this.onSelectItemChange)}/>
-
                     <FieldArray name="descriptions" label="Descriptions" component={descriptionRenderer} errors={errors}/>
-                    {/*<FieldArray name="reportItems" label="Report Items" component={renderReportItems} errors={errors}/>*/}
                     <FieldArray name="faults" label="Faults " component={renderFaults}
                                 onFaultFileAdd={this.props.onFaultFileUpload}
                                 onFaultRemove={this.props.onFaultRemove}

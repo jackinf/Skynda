@@ -13,7 +13,7 @@ import Select from "react-select";
 import ReactIconDelete from 'react-icons/lib/md/delete';
 import ReactCrop from 'react-image-crop';
 import "react-image-crop/dist/ReactCrop.css";
-import {TwitterPicker} from 'react-color';
+import {AlphaPicker, CirclePicker, TwitterPicker} from 'react-color';
 
 import {fieldListWrapper, renderImage} from "../../../components/FormRenderers/index";
 
@@ -263,7 +263,7 @@ export class ColorRenderer extends React.Component {
                onClick={e => this.onToggle()}>&nbsp;</div>
 
           {this.state.expanded
-            ? (<TwitterPicker onChangeComplete={this.onChangeComplete} color={input.value} triangle="hide"/>)
+            ? (<CirclePicker onChangeComplete={this.onChangeComplete} color={input.value} triangle="hide"/>)
             : ""}
         </Col>
       </Row>

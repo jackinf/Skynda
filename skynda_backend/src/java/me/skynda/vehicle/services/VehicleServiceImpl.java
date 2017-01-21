@@ -104,8 +104,8 @@ public class VehicleServiceImpl implements VehicleService {
         if (vehicleAdminDto.getId() != null) {
             vehicle = vehicleDao.get(vehicleAdminDto.getId());
             vehicle.setModel(null); // hack, unset value or there will be error: "org.hibernate.HibernateException: identifier of an instance of me.skynda.vehicle.entities.VehicleModel was altered from 3 to 7". This is because automapper maps only an id of a persisted object, which id should not be changed.
-            vehicle.setColorInside(null);
-            vehicle.setColorOutside(null);
+            vehicle.setColorInsideHex(null);
+            vehicle.setColorOutsideHex(null);
             mainImageUrlChanged = ImageDto.Helper.isUrlChanged(vehicle, vehicleAdminDto);   // do the check before mapping
             mapper.map(vehicleAdminDto, vehicle);
 //            vehicle.setUpdated(new Date());   // TODO

@@ -20,8 +20,8 @@ public class VehicleAdminDto extends BaseDto implements ImageStorable<ImageDto> 
 	private BigDecimal price;
 	private String registrationNumber;
 	private BigDecimal mileage;
-	private ClassificationDto colorOutside;
-	private ClassificationDto colorInside;
+	private String colorOutsideHex;
+	private String colorInsideHex;
 	private BigDecimal fuelCity;
 	private BigDecimal fuelHighway;
 	private String problems;

@@ -38,14 +38,15 @@ public class VehicleDaoImpl extends SkyndaBaseEntityDaoImpl<Vehicle> implements 
                 vehicleCriteria.createAlias("vehicle.model.vehicleManufacturer", "manufacturer");
                 vehicleCriteria.add(Restrictions.in("manufacturer.id", brandList));
             }
-            ////Vehicle outside color
-            if (params.Colors != null && !params.Colors.isEmpty()) {
-                Collection<Integer> colorList = params.Colors.stream()
-                        .map(x -> x.getValue())
-                        .collect(Collectors.toCollection(ArrayList::new));
-                vehicleCriteria.createAlias("vehicle.colorOutside", "color");
-                vehicleCriteria.add(Restrictions.in("color.id", colorList));
-            }
+            // TODO: Color outside search
+//            ////Vehicle outside color
+//            if (params.Colors != null && !params.Colors.isEmpty()) {
+//                Collection<Integer> colorList = params.Colors.stream()
+//                        .map(x -> x.getValue())
+//                        .collect(Collectors.toCollection(ArrayList::new));
+//                vehicleCriteria.createAlias("vehicle.colorOutsideHex", "color");
+//                vehicleCriteria.add(Restrictions.in("color.id", colorList));
+//            }
             ////Vehicle feature
             if (params.Features != null && !params.Features.isEmpty()) {
                 Collection<Integer> featureList = params.Features.stream()
