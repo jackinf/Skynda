@@ -14,7 +14,7 @@ import java.util.Properties;
 public class EmailServiceImpl extends EmailService {
 
     private final String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
-    private final String MAIL_TO = "hello@skynda.me";    // use hello@skynda.com
+    private final String MAIL_TO = "hello@triven.eu";
 
     /**
      * Sends email using GMAIL settings.
