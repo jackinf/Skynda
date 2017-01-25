@@ -28,10 +28,11 @@
         "seats": "seats"
       },
       "footer": {
-        "your_company": "Triven OÜ",
+        "your_company": "Triven",
         "address": "Valge 16, Tallinn 19095 Estonia",
-        "email": "hello@Triven.eu",
-        "phone": "+372 5144 750"
+        "email": "hello@triven.eu",
+        "phone": "+372 5884 1335",
+        "agreement": "Privacy"
       },
       "header": {
         "sell_car_txt": "Sell Your Car",

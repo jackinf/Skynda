@@ -9,6 +9,7 @@ import Examples from "./Examples";
 import Admin from "./Admin";
 import {LoginRoute, RegisterRoute} from "./Auth";
 import SellNewCar from "./SellNewCar";
+import Privacy from "./Privacy";
 import {reducer as formReducer} from 'redux-form';
 
 import {loadTranslations, setLocale, syncTranslationWithStore, i18nReducer} from 'react-redux-i18n';
@@ -57,7 +58,8 @@ export const createRoutes = (store) => {
       LoginRoute(store),
       RegisterRoute(store),
       Search(store),
-      SellNewCar(store)
+      SellNewCar(store),
+      Privacy(store)
     ]
   };
 

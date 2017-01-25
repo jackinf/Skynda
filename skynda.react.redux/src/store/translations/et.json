@@ -31,10 +31,13 @@
       "seats": "isekohta"
     },
     "footer": {
-      "your_company": "© Your Company",
+      "your_company": "Triven",
       "home": "Home",
       "privacy": "Privacy",
-      "not_found": "Not Found"
+      "not_found": "Not Found",
+      "email": "hello@triven.eu",
+      "phone": "5884 1335",
+      "agreement": "Kasutajatingimused"
     },
     "header": {
       "sell_car_txt": "Müün auto",
