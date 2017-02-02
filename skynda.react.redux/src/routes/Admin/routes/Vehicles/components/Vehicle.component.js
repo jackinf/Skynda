@@ -277,11 +277,12 @@ class Vehicle extends React.Component {
                            component={ColorRenderer} />
 
                     <FieldArray name="descriptions" label="Descriptions" component={descriptionRenderer} errors={errors}/>
-                    <FieldArray name="faults" label="Faults " component={renderFaults}
-                                onFaultFileAdd={this.props.onFaultFileUpload}
-                                onFaultRemove={this.props.onFaultRemove}
-                                errors={errors}
-                    />
+
+                    {/*<FieldArray name="faults" label="Faults " component={renderFaults}*/}
+                                {/*onFaultFileAdd={this.props.onFaultFileUpload}*/}
+                                {/*onFaultRemove={this.props.onFaultRemove}*/}
+                                {/*errors={errors}*/}
+                    {/*/>*/}
                     <Field name="fuelCity" label="Fuel City" component={renderTextField} errors={errors}/>
                     <Field name="fuelHighway" label="Fuel Highway" component={renderTextField} errors={errors}/>
                     <Field name="isSold" label="Is Sold" component={renderCheckbox} errors={errors}/>

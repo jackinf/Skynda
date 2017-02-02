@@ -1,6 +1,6 @@
 package me.skynda.vehicle.dao;
 
-import me.skynda.common.db.BaseEntityDaoImpl;
+import me.skynda.common.db.BaseEntityDao;
 import me.skynda.common.dto.DeleteResponseDto;
 import me.skynda.common.interfaces.daos.IVehicleReportDao;
 import me.skynda.vehicle.entities.VehicleReport;
@@ -16,7 +16,7 @@ import java.util.Date;
 import java.util.List;
 
 @Repository
-public class VehicleReportDao extends BaseEntityDaoImpl<VehicleReport> implements IVehicleReportDao {
+public class VehicleReportDao extends BaseEntityDao<VehicleReport> implements IVehicleReportDao {
 
     @Override
     public void deleteEntity(VehicleReport report, DeleteResponseDto response) {

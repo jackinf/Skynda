@@ -2,8 +2,8 @@ package me.skynda.classification.dao;
 
 import me.skynda.classification.entities.Classification;
 import me.skynda.classification.enums.ClassificationTypeEnum;
-import me.skynda.common.db.BaseEntityDaoImpl;
-import me.skynda.common.interfaces.daos.ClassificationDao;
+import me.skynda.common.db.BaseEntityDao;
+import me.skynda.common.interfaces.daos.IClassificationDao;
 import me.skynda.vehicle.entities.VehicleModel;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Projections;
@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Repository
-public class ClassificationDaoImpl extends BaseEntityDaoImpl<Classification> implements ClassificationDao {
+public class ClassificationDao extends BaseEntityDao<Classification> implements IClassificationDao {
 
     private final String CLASSIFIER_REF_NAME_CLASSIFICATION_TYPE = "classificationType";
     private final String CLASSIFIER_REF_NAME_TRANSMISSION = "transmission";

@@ -6,6 +6,6 @@ import me.skynda.vehicle.entities.Vehicle;
 
 import java.util.List;
 
-public interface VehicleDao extends SkyndaBaseEntityDao<Vehicle> {
+public interface IVehicleDao extends SkyndaBaseEntityDao<Vehicle> {
     List<Vehicle> search(SearchRequestDto dto);
 }

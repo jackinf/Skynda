@@ -1,8 +1,8 @@
 package me.skynda.classification.services;
 
-import me.skynda.common.interfaces.daos.ClassificationDao;
+import me.skynda.common.interfaces.daos.IClassificationDao;
 import me.skynda.classification.dto.ClassificationResponseDto;
-import me.skynda.common.interfaces.services.ClassificationService;
+import me.skynda.common.interfaces.services.IClassificationService;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,10 +13,10 @@ import java.util.List;
 
 @Service
 @Transactional
-public class ClassificationServiceImpl implements ClassificationService {
+public class ClassificationService implements IClassificationService {
 
     @Autowired
-    ClassificationDao dao;
+    IClassificationDao dao;
 
     @Autowired
     Mapper mapper;

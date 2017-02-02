@@ -1,6 +1,3 @@
-/**
- * Created by zekar on 10/23/2016.
- */
 import {connect} from "react-redux";
 import {reduxForm} from 'redux-form';
 import {
@@ -9,13 +6,13 @@ import {
   formSubmit,
   onFormSubmitSuccess,
   onFormSubmitError,
-  fillWithFakeData
+  onFaultFileUpload,
+  onFaultRemove
 } from "../actions";
 import ViewComponent from "../components/VehicleReport.component";
 import {FORMS, REDUCER_KEYS} from "../constants/VehicleReport.constant";
 import {setFormMode} from "../reducers/SetFormMode.reducer";
 import {getList as getVehiclesList} from "../../Vehicles/actions/Vehicles";
-import {onFaultFileUpload, onFaultRemove} from "../../Vehicles/actions/Vehicle.image.actions";
 
 // Decorate the form component
 const DecoratedViewComponent = reduxForm({
@@ -30,9 +27,8 @@ const mapDispatchToProps = {
   onFormSubmitSuccess,
   onFormSubmitError,
   setFormMode,
-  fillWithFakeData,
-  onFaultFileUpload: onFaultFileUpload,
-  onFaultRemove: onFaultRemove,
+  onFaultFileUpload,
+  onFaultRemove,
 };
 
 const mapStateToProps = (state) => {

@@ -26,13 +26,13 @@ import java.util.List;
 @Transactional
 public class VehicleService implements IVehicleService {
 
-    private final VehicleDao vehicleDao;
-    private final VehicleModelDao vehicleModelDao;
+    private final IVehicleDao vehicleDao;
+    private final IVehicleModelDao vehicleModelDao;
     private final IVehicleReportItemDao vehicleReportItemDao;
-    private final VehicleDescriptionDao vehicleDescriptionDao;
-    private final VehicleFeatureDao vehicleFeatureDao;
-    private final VehicleFaultDao vehicleFaultDao;
-    private final VehicleImageDao vehicleImageDao;
+    private final IVehicleDescriptionDao vehicleDescriptionDao;
+    private final IVehicleFeatureDao vehicleFeatureDao;
+    private final IVehicleFaultDao vehicleFaultDao;
+    private final IVehicleImageDao vehicleImageDao;
     private final Mapper mapper;
     private final IBlobStorageService blobStorageService;
     private VehicleValidator validator = new VehicleValidator();
@@ -40,12 +40,12 @@ public class VehicleService implements IVehicleService {
     @Autowired
     public VehicleService(
             IVehicleReportItemDao vehicleReportItemDao,
-            VehicleDao vehicleDao,
-            VehicleModelDao vehicleModelDao,
-            VehicleDescriptionDao vehicleDescriptionDao,
-            VehicleFeatureDao vehicleFeatureDao,
-            VehicleFaultDao vehicleFaultDao,
-            VehicleImageDao vehicleImageDao,
+            IVehicleDao vehicleDao,
+            IVehicleModelDao vehicleModelDao,
+            IVehicleDescriptionDao vehicleDescriptionDao,
+            IVehicleFeatureDao vehicleFeatureDao,
+            IVehicleFaultDao vehicleFaultDao,
+            IVehicleImageDao vehicleImageDao,
             Mapper mapper,
             IBlobStorageService blobStorageService) {
         this.vehicleReportItemDao = vehicleReportItemDao;
@@ -169,7 +169,6 @@ public class VehicleService implements IVehicleService {
 //        vehicleReportItemDao.addMultipleToVehicle(addedVehicle, vehicleAdminDto.getReportItems());
         vehicleDescriptionDao.addMultipleToVehicle(addedVehicle, vehicleAdminDto.getDescriptions());
         vehicleFeatureDao.addMultipleToVehicle(addedVehicle, vehicleAdminDto.getFeatures());
-        vehicleFaultDao.addMultipleToVehicle(addedVehicle, faultDtos);
         vehicleImageDao.addMultipleToVehicle(addedVehicle, imageDtos);
 
         CreateOrUpdateResponseDto response = new CreateOrUpdateResponseDto();

@@ -118,9 +118,6 @@ public class Vehicle implements Serializable, ImageStorable<Image> {
     private List<VehicleDescription> descriptions;
 
     @OneToMany(mappedBy = "vehicleId", fetch = FetchType.LAZY)
-    private List<VehicleFault> faults;
-
-    @OneToMany(mappedBy = "vehicleId", fetch = FetchType.LAZY)
     private List<VehicleFeature> features;
 
     @OneToMany(mappedBy = "vehicleId", fetch = FetchType.LAZY)

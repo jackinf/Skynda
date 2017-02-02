@@ -1,15 +1,15 @@
 package me.skynda.vehicle.dao;
 
-import me.skynda.common.interfaces.daos.VehicleModelDao;
+import me.skynda.common.interfaces.daos.IVehicleModelDao;
 import me.skynda.vehicle.entities.VehicleModel;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
-import me.skynda.common.db.BaseEntityDaoImpl;
+import me.skynda.common.db.BaseEntityDao;
 
 @Repository
-public class VehicleModelDaoImpl extends BaseEntityDaoImpl<VehicleModel> implements VehicleModelDao {
+public class VehicleModelDao extends BaseEntityDao<VehicleModel> implements IVehicleModelDao {
 
 	@Override
 	public VehicleModel getByModelCode(String carModelsCode) {
