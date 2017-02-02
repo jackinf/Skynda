@@ -139,7 +139,6 @@ export const renderFaults = ({fields, ...custom}) => fieldListWrapper({
           <Col sm={2}>
             <FloatingActionButton mini={true} secondary={true} onClick={(e) => {
               fields.remove(index);
-              custom.onFaultRemove(e, index);
             }}>
               <ContentRemove />
             </FloatingActionButton>

@@ -13,7 +13,8 @@ export function onFaultFileUpload(e, index) {
 
 export function onFaultRemove(e, index) {
   return (dispatch) => {
-    dispatch(arrayRemove(FORMS.VEHICLE_FORM, "faults", index));
+    console.log("remove from array", `faults`)
+    dispatch(arrayRemove(FORMS.VEHICLE_FORM, `faults`, index));
     // TODO: use arrayPop and push the item into filesToDelete {blobName, containerName}
   }
 }
