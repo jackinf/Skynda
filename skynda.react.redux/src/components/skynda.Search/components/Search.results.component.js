@@ -22,12 +22,6 @@ class ResultsComponent extends React.Component {
             : _.isArray(this.props.searchResults) && this.props.searchResults.length > 0
             ? (
             <Row>
-              <Col sm={12}>
-                <h2 className='primary-header-2 text-center'>
-                  {chooseFavTxt}: {this.props.searchResults[0].length}
-                </h2>
-              </Col>
-              <br />
               <Row>
                 <Col md={12}>
                   <CarPreview.Grid vehicles={this.props.searchResults}/>
