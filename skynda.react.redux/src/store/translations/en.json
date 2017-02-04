@@ -147,5 +147,9 @@
     "sell_process_step_3": "Kui hind sobib, paneme auto müüki kuni leiame ostja",
     "sell_process_step_4": "Kõik dokumendid ajame korda e-posti teel",
     "sell_process_step_5": "Ja ongi aeg autoga hüvasti jätta "
+  },
+  "about_us": {
+    "title_1": "Triven makes buying and selling vehicles very simple",
+    "our_team": "Triven Team"
   }
 }

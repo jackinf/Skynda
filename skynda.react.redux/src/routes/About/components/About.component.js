@@ -3,6 +3,7 @@ import "./About.scss";
 
 // 3rd party
 import {Row, Col} from "react-bootstrap";
+import {Translate} from "react-redux-i18n";
 
 // Images
 import imageLogo from "./../assets/skynda logo 4-mask-8@2x.png.png";
@@ -46,14 +47,14 @@ export class About extends React.Component {
     return (<div className='container'>
       <Row>
         <Col md={8}>
-          <AboutSkblock header='Triven muudab auto ostmise ja müümise kogemust'>
+          <AboutSkblock header={<Translate value="about_us.title_1" />}>
             <Col md={12} style={{marginLeft: "-14px"}}>
               {this.props.description}
             </Col>
           </AboutSkblock>
 
           {this.props.people.length > 0
-            ? (<AboutSkblock header='Triveni Tiim'>
+            ? (<AboutSkblock header={<Translate value="about_us.title_2_our_team" />}>
                   <Row>
                     {this.props.people.map((person, i) => personBlockFn(person, i))}
                   </Row>
