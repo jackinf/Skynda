@@ -18,8 +18,6 @@ import "./Header.scss";
 // import LocaleContainer from "../Locale/LocaleContainer";
 
 // Images
-// import image1 from "./../../static/images/standard/skynda logo 4-mask-4@2x.png";
-// import image2 from "./../../static/images/standard/SKYNDA@2x.png";
 import image1 from "./assets/triven_logo_sinine.png";
 
 const headerUsernameBlockFn = (props) => {
@@ -40,10 +38,7 @@ const headerUsernameBlockFn = (props) => {
 };
 
 const LogoComponent = (props) => (<Link className={`${props.className || ""} sk_logo`} to='/'>
-  {/*<img className="pull-left skynda-logo-image-1" src={image1}/>*/}
   <img src={image1}/>
-  {/*<img src={image2}/>*/}
-  {/*<h1>Triven.io</h1>*/}
 </Link>);
 
 class Header extends React.Component {
@@ -51,28 +46,28 @@ class Header extends React.Component {
 
     // console.log(this.props);
     const activePathname = this.props.activePathname;
-    const activeStyle = { borderBottom: '3px solid black', boxShadow: "10px 20px 5px 0px rgba(0,0,0,0.75);" };
+    const activeStyle = {borderBottom: '3px solid black'};
     const activeStyleContainer = {[activePathname]: activeStyle};
 
     console.log(activePathname);
 
     let i = 0;
-    const items = [(<li key={++i}  className='sk_menu__buy'>
+    const items = [(<li key={++i} className='sk_menu__buy'>
       <Link className="skynda-nav-link" to="/search" style={activeStyleContainer["/search"]}>
         <Translate value="components.header.buy_car_txt"/>
       </Link >
     </li>),
       (<li key={++i} className='skynda-nav-link sk_menu__sell'>
-      <Link className="skynda-nav-link" to="/sell-new-car" style={activeStyleContainer["/sell-new-car"]}>
-        <Translate value="components.header.sell_car_txt"/>
-      </Link >
-    </li>),
-      (<li key={++i}  className='skynda-nav-link sk_menu__about'>
+        <Link className="skynda-nav-link" to="/sell-new-car" style={activeStyleContainer["/sell-new-car"]}>
+          <Translate value="components.header.sell_car_txt"/>
+        </Link >
+      </li>),
+      (<li key={++i} className='skynda-nav-link sk_menu__about'>
         <Link className="skynda-nav-link" to="/how-it-works" style={activeStyleContainer["/how-it-works"]}>
           <Translate value="components.header.how_it_works"/>
         </Link >
       </li>),
-      (<li key={++i}  className='skynda-nav-link sk_menu__about'>
+      (<li key={++i} className='skynda-nav-link sk_menu__about'>
         <Link to="/about" style={activeStyleContainer["/about"]}>
           <Translate value="components.header.about_us"/>
         </Link >
