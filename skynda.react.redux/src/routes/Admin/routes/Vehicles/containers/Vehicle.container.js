@@ -25,8 +25,8 @@ const mapDispatchToProps = {
   onMainImageCropComplete: onMainImageCropComplete,
   onImageFileUpload: onImageFileUpload,
   onImageFileRemove: onImageFileRemove,
-  onFaultFileUpload: onFaultFileUpload,
-  onFaultRemove: onFaultRemove,
+  // onFaultFileUpload: onFaultFileUpload,
+  // onFaultRemove: onFaultRemove,
   onHandleSubmitFinished: onHandleSubmitFinished
 };
 

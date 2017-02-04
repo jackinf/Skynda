@@ -2,7 +2,7 @@ package me.skynda.vehicle.services;
 
 import me.skynda.common.dto.CreateOrUpdateResponseDto;
 import me.skynda.common.dto.DeleteResponseDto;
-import me.skynda.common.interfaces.daos.VehicleReviewDao;
+import me.skynda.common.interfaces.daos.IVehicleReviewDao;
 import me.skynda.common.interfaces.services.IBlobStorageService;
 import me.skynda.common.interfaces.services.IVehicleReviewService;
 import me.skynda.image.entities.Image;
@@ -21,14 +21,14 @@ import java.util.stream.Collectors;
 @Transactional
 public class VehicleReviewService implements IVehicleReviewService {
 
-    private final VehicleReviewDao vehicleReviewDao;
+    private final IVehicleReviewDao vehicleReviewDao;
     private final Mapper mapper;
     private final IBlobStorageService blobStorageService;
 
     @Autowired
     public VehicleReviewService(
             IBlobStorageService blobStorageService,
-            VehicleReviewDao vehicleReviewDao,
+            IVehicleReviewDao vehicleReviewDao,
             Mapper mapper) {
         this.blobStorageService = blobStorageService;
         this.vehicleReviewDao = vehicleReviewDao;

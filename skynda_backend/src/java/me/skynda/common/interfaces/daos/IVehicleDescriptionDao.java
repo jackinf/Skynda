@@ -10,6 +10,6 @@ import java.util.List;
 /**
  * Created by jevgenir on 11/19/2016.
  */
-public interface VehicleDescriptionDao extends SkyndaBaseEntityDao<VehicleDescription> {
+public interface IVehicleDescriptionDao extends SkyndaBaseEntityDao<VehicleDescription> {
     void addMultipleToVehicle(Vehicle vehicle, List<DescriptionDto> descriptions);
 }

@@ -1,0 +1,176 @@
+///* Font Definitions */
+//@font-face
+//{font-family:"Cambria Math";
+//  panose-1:2 4 5 3 5 4 6 3 2 4;}
+//@font-face
+//{font-family:Calibri;
+//  panose-1:2 15 5 2 2 2 4 3 2 4;}
+//@font-face
+//{font-family:Verdana;
+//  panose-1:2 11 6 4 3 5 4 4 2 4;}
+//@font-face
+//{font-family:"Lucida Grande CE";}
+///* Style Definitions */
+//p."MsoNormal", li."MsoNormal", div."MsoNormal"
+//{margin-top:0in;
+//  margin-right:0in;
+//  margin-bottom:10.0pt;
+//  margin-left:0in;
+//  line-height:115%;
+//  font-size:11.0pt;
+//  font-family:"Calibri",sans-serif;
+//  layout-grid-mode:line;}
+//p.MsoCommentText, li.MsoCommentText, div.MsoCommentText
+//{mso-style-link:"Comment Text Char";
+//  margin-top:0in;
+//  margin-right:0in;
+//  margin-bottom:10.0pt;
+//  margin-left:0in;
+//  font-size:12.0pt;
+//  font-family:"Calibri",sans-serif;
+//  layout-grid-mode:line;}
+//p.MsoHeader, li.MsoHeader, div.MsoHeader
+//{mso-style-link:"Header Char";
+//  margin:0in;
+//  margin-bottom:.0001pt;
+//  font-size:11.0pt;
+//  font-family:"Calibri",sans-serif;
+//  layout-grid-mode:line;}
+//p.MsoFooter, li.MsoFooter, div.MsoFooter
+//{mso-style-link:"Footer Char";
+//  margin:0in;
+//  margin-bottom:.0001pt;
+//  font-size:11.0pt;
+//  font-family:"Calibri",sans-serif;
+//  layout-grid-mode:line;}
+//a:link, span.MsoHyperlink
+//{font-family:"Times New Roman",serif;
+//  color:#0563C1;
+//  text-decoration:underline;}
+//a:visited, span.MsoHyperlinkFollowed
+//{color:purple;
+//  text-decoration:underline;}
+//p.MsoCommentSubject, li.MsoCommentSubject, div.MsoCommentSubject
+//{mso-style-link:"Comment Subject Char";
+//  margin-top:0in;
+//  margin-right:0in;
+//  margin-bottom:10.0pt;
+//  margin-left:0in;
+//  font-size:10.0pt;
+//  font-family:"Calibri",sans-serif;
+//  layout-grid-mode:line;
+//  font-weight:bold;}
+//p.MsoAcetate, li.MsoAcetate, div.MsoAcetate
+//{mso-style-link:"Balloon Text Char";
+//  margin:0in;
+//  margin-bottom:.0001pt;
+//  font-size:9.0pt;
+//  font-family:"Lucida Grande CE";
+//  layout-grid-mode:line;}
+//p.MsoListParagraph, li.MsoListParagraph, div.MsoListParagraph
+//{margin-top:0in;
+//  margin-right:0in;
+//  margin-bottom:10.0pt;
+//  margin-left:.5in;
+//  line-height:115%;
+//  font-size:11.0pt;
+//  font-family:"Calibri",sans-serif;
+//  layout-grid-mode:line;}
+//p.MsoListParagraphCxSpFirst, li.MsoListParagraphCxSpFirst, div.MsoListParagraphCxSpFirst
+//{margin-top:0in;
+//  margin-right:0in;
+//  margin-bottom:0in;
+//  margin-left:.5in;
+//  margin-bottom:.0001pt;
+//  line-height:115%;
+//  font-size:11.0pt;
+//  font-family:"Calibri",sans-serif;
+//  layout-grid-mode:line;}
+//p."MsoListParagraphCxSpMiddle", li."MsoListParagraphCxSpMiddle", div."MsoListParagraphCxSpMiddle"
+//{margin-top:0in;
+//  margin-right:0in;
+//  margin-bottom:0in;
+//  margin-left:.5in;
+//  margin-bottom:.0001pt;
+//  line-height:115%;
+//  font-size:11.0pt;
+//  font-family:"Calibri",sans-serif;
+//  layout-grid-mode:line;}
+//p.MsoListParagraphCxSpLast, li.MsoListParagraphCxSpLast, div.MsoListParagraphCxSpLast
+//{margin-top:0in;
+//  margin-right:0in;
+//  margin-bottom:10.0pt;
+//  margin-left:.5in;
+//  line-height:115%;
+//  font-size:11.0pt;
+//  font-family:"Calibri",sans-serif;
+//  layout-grid-mode:line;}
+//span.FooterChar
+//{mso-style-name:"Footer Char";
+//  mso-style-link:Footer;
+//  font-family:"Times New Roman",serif;}
+//span.HeaderChar
+//{mso-style-name:"Header Char";
+//  mso-style-link:Header;
+//  font-family:"Times New Roman",serif;}
+//span.tw4winMark
+//{mso-style-name:tw4winMark;
+//  font-family:"Courier New";
+//  color:purple;
+//  display:none;
+//  vertical-align:sub;}
+//span.tw4winError
+//{mso-style-name:tw4winError;
+//  font-family:"Courier New";
+//  color:lime;}
+//span.tw4winTerm
+//{mso-style-name:tw4winTerm;
+//  color:blue;}
+//span.tw4winPopup
+//{mso-style-name:tw4winPopup;
+//  font-family:"Courier New";
+//  color:green;}
+//span.tw4winJump
+//{mso-style-name:tw4winJump;
+//  font-family:"Courier New";
+//  color:teal;}
+//span.tw4winExternal
+//{mso-style-name:tw4winExternal;
+//  font-family:"Courier New";
+//  color:gray;}
+//span.tw4winInternal
+//{mso-style-name:tw4winInternal;
+//  font-family:"Courier New";
+//  color:red;}
+//span.DONOTTRANSLATE
+//{mso-style-name:DO_NOT_TRANSLATE;
+//  font-family:"Courier New";
+//  color:maroon;}
+//span.CommentTextChar
+//{mso-style-name:"Comment Text Char";
+//  mso-style-link:"Comment Text";
+//  layout-grid-mode:both;}
+//span.CommentSubjectChar
+//{mso-style-name:"Comment Subject Char";
+//  mso-style-link:"Comment Subject";
+//  layout-grid-mode:both;
+//  font-weight:bold;}
+//span.BalloonTextChar
+//{mso-style-name:"Balloon Text Char";
+//  mso-style-link:"Balloon Text";
+//  font-family:"Lucida Grande CE";
+//  layout-grid-mode:both;}
+//.MsoChpDefault
+//{font-size:10.0pt;
+//  font-family:"Calibri",sans-serif;}
+///* Page Definitions */
+//@page WordSection1
+//{size:595.3pt 841.9pt;
+//  margin:70.85pt 70.85pt 70.85pt 70.85pt;}
+//div.WordSection1
+//{page:WordSection1;}
+///* List Definitions */
+//ol
+//{margin-bottom:0in;}
+//ul
+//{margin-bottom:0in;}

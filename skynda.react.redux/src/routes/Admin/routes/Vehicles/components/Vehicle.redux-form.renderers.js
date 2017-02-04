@@ -124,8 +124,13 @@ export const renderFaults = ({fields, ...custom}) => fieldListWrapper({
       return (<Card key={index} className="vehicle-component--list-card">
         <Row>
           <Col smOffset={1} sm={9}>
-            <Field className="btn btn-default" name={`${field}.file`} type="file" component="input"
-                   onChange={e => custom.onFaultFileAdd(e, index)}/>
+            <Field name={`${field}.file`} component={({input, i}) => (
+              <input  className="btn btn-default" type="file"
+                 onChange={e => {
+                   custom.onFaultFileAdd(e, index);
+                 }}
+              />)}
+            />
             <Field name={`${field}.text`} type="text" component={renderTextField} placeholder={`Text #${index + 1}`}/>
             <Field name={`${field}.image.url`} type="text" component={obj => renderImage(obj, "PIC IN DATABASE")}/>
             <br/>
@@ -134,7 +139,6 @@ export const renderFaults = ({fields, ...custom}) => fieldListWrapper({
           <Col sm={2}>
             <FloatingActionButton mini={true} secondary={true} onClick={(e) => {
               fields.remove(index);
-              custom.onFaultRemove(e, index);
             }}>
               <ContentRemove />
             </FloatingActionButton>

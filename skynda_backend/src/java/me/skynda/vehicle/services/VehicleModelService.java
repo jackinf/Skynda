@@ -2,8 +2,7 @@ package me.skynda.vehicle.services;
 
 import me.skynda.common.dto.CreateOrUpdateResponseDto;
 import me.skynda.common.dto.DeleteResponseDto;
-import me.skynda.common.interfaces.daos.ClassificationDao;
-import me.skynda.common.interfaces.daos.VehicleModelDao;
+import me.skynda.common.interfaces.daos.IVehicleModelDao;
 import me.skynda.common.interfaces.services.IVehicleModelService;
 import me.skynda.vehicle.dto.VehicleModelAdminDto;
 import me.skynda.vehicle.dto.request.ModelRequestDto;
@@ -22,11 +21,11 @@ import java.util.List;
 @Transactional
 public class VehicleModelService implements IVehicleModelService {
 
-    private final VehicleModelDao vehicleModelDao;
+    private final IVehicleModelDao vehicleModelDao;
     private final Mapper mapper;
 
     @Autowired
-    public VehicleModelService(VehicleModelDao vehicleModelDao, Mapper mapper) {
+    public VehicleModelService(IVehicleModelDao vehicleModelDao, Mapper mapper) {
         this.vehicleModelDao = vehicleModelDao;
         this.mapper = mapper;
     }

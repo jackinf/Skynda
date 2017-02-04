@@ -60,7 +60,7 @@ export function onImageFileRemove(e, index) {
 
 export function onFaultFileUpload(e, index) {
   return (dispatch) => {
-    console.log("onFaultFileUpload");
+    console.log("onFaultFileUpload", e + " " + index);
     imageUtil.imageFileToBase64(e.target.files[0], (base64File) => {
       dispatch(change(FORMS.VEHICLE_FORM, `faults[${index}].image.base64File`, base64File));
     });

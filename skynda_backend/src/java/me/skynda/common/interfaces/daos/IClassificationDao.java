@@ -5,7 +5,7 @@ import me.skynda.classification.entities.Classification;
 
 import java.util.List;
 
-public interface ClassificationDao extends SkyndaBaseEntityDao<Classification> {
+public interface IClassificationDao extends SkyndaBaseEntityDao<Classification> {
     List getByType(String type);
     List getByTypeAndVehicleBound(String type);
 }

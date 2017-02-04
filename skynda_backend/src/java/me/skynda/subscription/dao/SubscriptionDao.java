@@ -1,7 +1,7 @@
 package me.skynda.subscription.dao;
 
-import me.skynda.common.db.BaseEntityDaoImpl;
-import me.skynda.common.interfaces.daos.SubscriptionDao;
+import me.skynda.common.db.BaseEntityDao;
+import me.skynda.common.interfaces.daos.ISubscriptionDao;
 import me.skynda.subscription.entities.Subscription;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -9,7 +9,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class SubscriptionDaoImpl extends BaseEntityDaoImpl<Subscription> implements SubscriptionDao {
+public class SubscriptionDao extends BaseEntityDao<Subscription> implements ISubscriptionDao {
 
     @Override
     public Subscription getByEmail(String email) {

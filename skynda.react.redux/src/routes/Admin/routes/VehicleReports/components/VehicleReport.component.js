@@ -2,7 +2,7 @@ import React from 'react';
 import {Field, FieldArray} from 'redux-form';
 import {ROUTE_PARAMS} from "../constants/VehicleReport.constant";
 import {formSubmit, onFormSubmitSuccess, onFormSubmitError} from "../actions";
-import {Row, Col} from "react-bootstrap";
+
 import {
   renderReportCategoryItems,
   VehiclesSelectField,
@@ -19,8 +19,9 @@ class VehicleReportCategory extends React.Component {
     load: React.PropTypes.func.isRequired,
     clear: React.PropTypes.func.isRequired,
     getVehiclesList: React.PropTypes.func.isRequired,
-    fillWithFakeData: React.PropTypes.func.isRequired,
-
+    // fillWithFakeData: React.PropTypes.func.isRequired,
+    onFaultFileUpload: React.PropTypes.func.isRequired,
+    onFaultRemove: React.PropTypes.func.isRequired,
     // vehicle review data
     initialValues: React.PropTypes.shape({
       // TODO

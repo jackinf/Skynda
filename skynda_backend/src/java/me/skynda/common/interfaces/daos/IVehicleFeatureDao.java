@@ -7,7 +7,7 @@ import me.skynda.common.db.SkyndaBaseEntityDao;
 
 import java.util.List;
 
-public interface VehicleFeatureDao extends SkyndaBaseEntityDao<VehicleFeature> {
+public interface IVehicleFeatureDao extends SkyndaBaseEntityDao<VehicleFeature> {
 
     void addMultipleToVehicle(Vehicle vehicle, List<FeatureDto> features);
 

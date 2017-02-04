@@ -7,6 +7,6 @@ import me.skynda.vehicle.entities.VehicleImage;
 
 import java.util.List;
 
-public interface VehicleImageDao extends SkyndaBaseEntityDao<VehicleImage> {
+public interface IVehicleImageDao extends SkyndaBaseEntityDao<VehicleImage> {
     void addMultipleToVehicle(Vehicle vehicle, List<ImageContainerDto> images);
 }

@@ -9,11 +9,11 @@ function Footer() {
       <div className='container footer-container'>
         <span className='text'><Translate value="components.footer.your_company"/></span>
         <span className='spacer'>·</span>
-        <span><Translate value="components.footer.address"/></span>
-        <span className='spacer'>·</span>
-        <Link className='link' to='/privacy'><Translate value="components.footer.email"/></Link>
+        <span className='link'><Translate value="components.footer.email"/></span>
         <span className='spacer'>·</span>
         <span className='text'><Translate value="components.footer.phone"/></span>
+        <span className='spacer'>·</span>
+        <Link className='link' to='/privacy'><Translate value="components.footer.agreement"/></Link>
       </div>
     </div>
   );

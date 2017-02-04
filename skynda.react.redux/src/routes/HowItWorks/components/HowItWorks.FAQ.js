@@ -115,6 +115,14 @@ export default class extends React.Component {
       {
         questionText: <Translate value="how_it_works.sell_faq_q11" />,
         answerText: <Translate value="how_it_works.sell_faq_a11" />
+      },
+      {
+        questionText: "Kui kauaks auto müüki pannakse?",
+        answerText: "Kuni auto müüdud saab, ajalist piirangut ei ole."
+      },
+      {
+        questionText: "Kui palju maksab auto müüki panemine?",
+        answerText: "Auto müüki panemine on tasuta."
       }];
 
     const displayPanels = displayMode === DISPLAY_MODE.WANT_TO_BUY ? buyFaqPanels
@@ -129,7 +137,7 @@ export default class extends React.Component {
       </Row>
       <Row>
         <Col sm={8} smOffset={2}>
-          <Collapse accordion={true}>
+          <Collapse accordion={false}>
             {displayPanels.map((panel, i) => (
               <Panel key={i} className="how-it-works__faq-panel" header={panel.questionText}>
                 <Well>

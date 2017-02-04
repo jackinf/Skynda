@@ -1,6 +1,7 @@
 package me.skynda.vehicle.entities;
 
 import lombok.Data;
+import me.skynda.vehicle.dto.FaultBaseDto;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -34,4 +35,7 @@ public class VehicleReport implements Serializable{
 
     @Column(name = "archived")
     private Date archived;
+
+    @OneToMany(mappedBy = "reportCategoryId", fetch = FetchType.LAZY)
+    private List<VehicleFault> faults;
 }

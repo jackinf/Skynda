@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Entity specific DAO.
  */
-public abstract class BaseEntityDaoImpl<T> extends BaseDAO implements SkyndaBaseEntityDao<T> {
+public abstract class BaseEntityDao<T> extends BaseDAO implements SkyndaBaseEntityDao<T> {
 
 	@SuppressWarnings("unchecked")
 	@SneakyThrows(ClassNotFoundException.class)

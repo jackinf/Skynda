@@ -23,10 +23,10 @@ public class VehicleFault implements Serializable{
     @JoinColumn(name = "image_id", nullable = false)
     private Image image;
 
-    @Column(name = "vehicle_id", nullable = false)
-    private Integer vehicleId;
-
     @Column(name="archived")
     private Date archived;
+
+    @Column(name= "vehicle_report_category_id", nullable = false)
+    private Integer reportCategoryId;
 
 }

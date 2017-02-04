@@ -16,7 +16,7 @@ export default function getList() {
     })
       .then(resp => resp.json())
       .then(resp => {
-        console.info("Got vehicles", resp);
+        // console.info("Got vehicles", resp);
         dispatch(setVehicles({isFetching: false, items: resp}));
       })
       .catch(err => {

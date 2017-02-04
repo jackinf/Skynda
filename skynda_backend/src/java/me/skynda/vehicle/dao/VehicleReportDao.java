@@ -1,8 +1,9 @@
 package me.skynda.vehicle.dao;
 
-import me.skynda.common.db.BaseEntityDaoImpl;
+import me.skynda.common.db.BaseEntityDao;
 import me.skynda.common.dto.DeleteResponseDto;
 import me.skynda.common.interfaces.daos.IVehicleReportDao;
+import me.skynda.vehicle.entities.VehicleFault;
 import me.skynda.vehicle.entities.VehicleReport;
 import me.skynda.vehicle.entities.VehicleReportItem;
 import org.hibernate.Criteria;
@@ -16,7 +17,7 @@ import java.util.Date;
 import java.util.List;
 
 @Repository
-public class VehicleReportDao extends BaseEntityDaoImpl<VehicleReport> implements IVehicleReportDao {
+public class VehicleReportDao extends BaseEntityDao<VehicleReport> implements IVehicleReportDao {
 
     @Override
     public void deleteEntity(VehicleReport report, DeleteResponseDto response) {
@@ -55,6 +56,7 @@ public class VehicleReportDao extends BaseEntityDaoImpl<VehicleReport> implement
         Session session = getSession();
         VehicleReport queryResponse = null;
         List itemsResult = null;
+        List faultsResult = null;
         try {
 
             Criteria vehicleCriteria = session
@@ -65,12 +67,14 @@ public class VehicleReportDao extends BaseEntityDaoImpl<VehicleReport> implement
             if(isActive){
                 vehicleCriteria.add(Restrictions.isNull("archived"));
                 itemsResult = getActiveItems(id);
+                faultsResult = getActiveFaults(id);
             }
 
             queryResponse = (VehicleReport) vehicleCriteria.uniqueResult();
             
             if(queryResponse != null && isActive){
                 queryResponse.setItems(itemsResult);
+                queryResponse.setFaults(faultsResult);
             }
 
         } catch (Exception e) {
@@ -130,6 +134,24 @@ public class VehicleReportDao extends BaseEntityDaoImpl<VehicleReport> implement
                     .add(Restrictions.isNull("archived"));
 
             return items.list();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    @Override
+    public List getActiveFaults(Serializable reportCategoryId) {
+        Session session = getSession();
+        try {
+
+            Criteria faults = session.createCriteria(VehicleFault.class, "item")
+                    .add(Restrictions.eq("reportCategoryId", reportCategoryId))
+                    .add(Restrictions.isNull("archived"));
+
+            return faults.list();
 
         } catch (Exception e) {
             e.printStackTrace();

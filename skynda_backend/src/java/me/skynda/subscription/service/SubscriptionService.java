@@ -1,7 +1,7 @@
 package me.skynda.subscription.service;
 
 import me.skynda.common.dto.CreateOrUpdateResponseDto;
-import me.skynda.common.interfaces.daos.SubscriptionDao;
+import me.skynda.common.interfaces.daos.ISubscriptionDao;
 import me.skynda.common.interfaces.services.ISubscriptionService;
 import me.skynda.subscription.dto.SubscribeDto;
 import me.skynda.subscription.entities.Subscription;
@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class SubscriptionService implements ISubscriptionService {
 
     @Autowired
-    SubscriptionDao subscriptionDao;
+    ISubscriptionDao subscriptionDao;
 
     @Autowired
     private Mapper mapper;

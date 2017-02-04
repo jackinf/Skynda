@@ -14,4 +14,5 @@ public interface IVehicleReportDao extends SkyndaBaseEntityDao<VehicleReport> {
     List<VehicleReport> getAll(Boolean isActive);
     List<VehicleReport> getAll();
     List getActiveItems(Serializable parentId);
+    List getActiveFaults(Serializable reportCategoryId);
 }

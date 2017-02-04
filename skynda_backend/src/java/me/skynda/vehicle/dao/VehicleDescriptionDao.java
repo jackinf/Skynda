@@ -1,7 +1,7 @@
 package me.skynda.vehicle.dao;
 
-import me.skynda.common.db.BaseEntityDaoImpl;
-import me.skynda.common.interfaces.daos.VehicleDescriptionDao;
+import me.skynda.common.db.BaseEntityDao;
+import me.skynda.common.interfaces.daos.IVehicleDescriptionDao;
 import me.skynda.vehicle.dto.DescriptionDto;
 import me.skynda.vehicle.entities.Vehicle;
 import me.skynda.vehicle.entities.VehicleDescription;
@@ -14,7 +14,7 @@ import java.util.List;
  * Created by jevgenir on 11/19/2016.
  */
 @Repository
-public class VehicleDescriptionDaoImpl extends BaseEntityDaoImpl<VehicleDescription> implements VehicleDescriptionDao {
+public class VehicleDescriptionDao extends BaseEntityDao<VehicleDescription> implements IVehicleDescriptionDao {
 
     @Override
     public void addMultipleToVehicle(Vehicle vehicle, List<DescriptionDto> descriptions) {

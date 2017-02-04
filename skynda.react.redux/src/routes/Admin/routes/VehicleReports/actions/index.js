@@ -8,6 +8,7 @@ import {formSubmit, onFormSubmitSuccess, onFormSubmitError} from "./VehicleRepor
 import fillWithFakeData from "./VehicleReport.fillWithFakeData.action";
 import getList from "./VehicleReports.getList.action";
 import deleteItem from "./VehicleReports.deleteItem.action";
+import {onFaultFileUpload, onFaultRemove} from "./VehicleReport.image.actions";
 
 export {
   clear,
@@ -17,5 +18,7 @@ export {
   onFormSubmitError,
   fillWithFakeData,
   getList,
-  deleteItem
+  deleteItem,
+  onFaultFileUpload,
+  onFaultRemove
 }

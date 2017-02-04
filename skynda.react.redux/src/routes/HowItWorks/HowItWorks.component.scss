@@ -46,11 +46,11 @@
 
 .button-pressed-haha-first-button {
   border-color: $color-primary;
-  box-shadow: 0 0 10px 10px lighten($color-primary, 10%);
+  box-shadow: 0 0 5px 5px lighten($color-primary, 10%);
 }
 .button-pressed-haha-second-button {
   border-color: $color-secondary !important;
-  box-shadow: 0 0 10px 10px lighten($color-secondary, 10%);
+  box-shadow: 0 0 5px 5px lighten($color-secondary, 10%);
 }
 
 .how-it-works__main-image-background__secondary-button,
