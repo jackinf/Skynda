@@ -158,7 +158,6 @@
         "email": "Sinu e-posti aadress",
         "phone": "Sinu telefoninumber",
         "btn_send": "Saada",
-        "contact_24h_txt": "Võtame sinuga ühendust 24h jooksul.",
         "contact_us_txt": "Soovid osta?",
         "add_comment": "Soovi korral lisa kommentaar/küsimus"
       },
@@ -208,5 +207,9 @@
         "header": "Lisainfo"
       }
     }
+  },
+  "about_us": {
+    "title_1": "Triven muudab auto ostmise ja müümise kogemuse imelihtsaks",
+    "title_2_our_team": "Triveni meeskond"
   }
 }

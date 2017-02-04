@@ -11,6 +11,7 @@ import SliderContainer from "../../Slider/Slider.container";
 import ToggleBtnContainer from "../containers/Search.toggle.button.container";
 import SearchBtnContainer from "../containers/Search.button.container";
 import SearchResultsContainer from "../containers/Search.results.container"
+import moment from "moment";
 
 const colors = [
   {id: -1, name: "Kõik"},
@@ -44,10 +45,10 @@ function ColorsComponent() {
 class SearchComponent extends React.Component {
   defaultSliderValues = {
     mileage: {min: 0, max: 500000},
-    price: {min: 0, max: 500000},
-    year: {min: 2007, max: 2017},
+    price: {min: 0, max: 100000},
+    year: {min: moment().year() - 10, max: moment().year()},
     petrolConsumption: {min: 0, max: 20},
-    power: {min: 0, max: 1000}
+    power: {min: 0, max: 500}
   };
 
   async componentWillMount() {

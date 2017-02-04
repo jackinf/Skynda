@@ -61,12 +61,13 @@ export const getClassificationsAsync =  () => {
           {id: 3, name: "6+"}
         ];
 
+        const yearDifference = 11;  // the age of the oldest car to be searched
         const sliderValues = {
           mileage: {min: 0, max: 500000, units: "KM"},
-          price: {min: 0, max: 500000, units: "EUR"},
-          year: {min: 2006, max: moment().year(), units: ""},
+          price: {min: 0, max: 100000, units: "EUR"},
+          year: {min: moment().year() - yearDifference, max: moment().year(), units: ""},
           petrolConsumption: {min: 0, max: 20, units: "L"},
-          power: {min: 0, max: 1000, units: "KW"}
+          power: {min: 0, max: 500, units: "KW"}
         };
 
         dispatch(setBaseValues({
