@@ -9,8 +9,12 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
+/*
+ * Color palette
+ * ======================================================================== */
+
 $color-primary: #019BFF;
-$color-secondary: #FBBB68;
+$color-secondary: #00CC00;
 $color-third: #5A5B5C;
 
 /*
@@ -33,13 +37,6 @@ $screen-xs-min: 480px;  /* Extra small screen / phone */
 $screen-sm-min: 768px;  /* Small screen / tablet */
 $screen-md-min: 992px;  /* Medium screen / desktop */
 $screen-lg-min: 1200px; /* Large screen / wide desktop */
-
-/*
- * Color palette
- * ======================================================================== */
-
-$color-primary: #019BFF;
-$color-secondary: #FBBB68;
 
 $zindex-modal2-background:  1040 !default;
 $zindex-modal2: 1050 !default;
