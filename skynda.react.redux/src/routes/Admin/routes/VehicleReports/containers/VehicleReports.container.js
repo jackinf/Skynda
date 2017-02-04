@@ -1,12 +1,17 @@
-/**
- * Created by jevgenir on 10/21/2016.
- */
 import {connect} from "react-redux";
-import {getList, deleteItem} from "../actions";
+import {getList, deleteItem} from "../reducers";
 import VehiclesComponent from "../components/VehicleReports.component";
 import {REDUCER_KEYS} from "../constants/VehicleReport.constant";
 
-export default connect((state) => ({data: state[REDUCER_KEYS.VEHICLES_DATA]}), {
+const mapStateToProps = (state) => {
+  return {
+    data: state[REDUCER_KEYS.VEHICLES_REPORTS_DATA]
+  };
+};
+
+const mapDispatchToProps = {
   getList,
   deleteItem
-})(VehiclesComponent);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(VehiclesComponent);

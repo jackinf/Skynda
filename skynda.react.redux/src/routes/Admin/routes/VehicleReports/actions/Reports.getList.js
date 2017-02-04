@@ -1,13 +1,10 @@
-/**
- * Created by jevgenir on 10/21/2016.
- */
 import fetch from "isomorphic-fetch";
 import remoteConfig from "store/remoteConfig";
-import {setVehicleReviews} from "../reducers/SetVehicleReports.reducer";
+import {setVehicleReports} from "../actions";
 
 export default function getList() {
   return (dispatch) => {
-    dispatch(setVehicleReviews({isFetching: true}));
+    dispatch(setVehicleReports({isFetching: true}));
 
     return fetch(`${remoteConfig.remote}/api/vehicle-reports`, {
       method: "GET",
@@ -16,10 +13,10 @@ export default function getList() {
     })
       .then(resp => resp.json())
       .then(resp => {
-        dispatch(setVehicleReviews({isFetching: false, items: resp}));
+        dispatch(setVehicleReports({isFetching: false, items: resp}));
       })
       .catch(err => {
-        dispatch(setVehicleReviews({isFetching: false, items: []}));
+        dispatch(setVehicleReports({isFetching: false, items: []}));
       });
   };
 }

@@ -1,11 +1,8 @@
-/**
- * Created by jevgenir on 10/21/2016.
- */
 import {ACTIONS} from "../constants/VehicleReview.constant";
 
 export function setVehicleReviews(value) {
   return {
-    type: ACTIONS.SET_VEHICLES_DATA,
+    type: ACTIONS.SET_VEHICLES_DATA_REVIEW,
     payload: value
   };
 }
@@ -18,7 +15,7 @@ export const actions = {
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
-  [ACTIONS.SET_VEHICLES_DATA]: (state, action) => action.payload
+  [ACTIONS.SET_VEHICLES_DATA_REVIEW]: (state, action) => action.payload
 };
 
 // ------------------------------------

@@ -1,6 +1,3 @@
-/**
- * Created by jevgenir on 10/28/2016.
- */
 import _ from "underscore";
 
 export default function fromSpringToReduxFormError(springErrors) {

@@ -4,11 +4,14 @@ import me.skynda.common.db.BaseEntityDao;
 import me.skynda.common.dto.DeleteResponseDto;
 import me.skynda.common.interfaces.daos.IVehicleReportItemDao;
 import me.skynda.vehicle.entities.VehicleReportItem;
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -111,5 +114,23 @@ public class VehicleReportItemDao extends BaseEntityDao<VehicleReportItem> imple
         }
 
         return items;
+    }
+
+    @Override
+    public List getActiveItems(Serializable parentId) {
+        Session session = getSession();
+        try {
+
+            Criteria items = session.createCriteria(VehicleReportItem.class, "item")
+                    .add(Restrictions.eq("parentId", parentId))
+                    .add(Restrictions.isNull("archived"));
+
+            return items.list();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 }

@@ -1,24 +1,16 @@
-/**
- * Created by zekar on 10/23/2016.
- */
+import {ACTIONS} from "../constants/VehicleReport.constant";
 
-import clear from "./VehicleReport.clear.action";
-import load from "./VehicleReport.load.action";
-import {formSubmit, onFormSubmitSuccess, onFormSubmitError} from "./VehicleReport.submitForm.action";
-import fillWithFakeData from "./VehicleReport.fillWithFakeData.action";
-import getList from "./VehicleReports.getList.action";
-import deleteItem from "./VehicleReports.deleteItem.action";
-import {onFaultFileUpload, onFaultRemove} from "./VehicleReport.image.actions";
+export const setFormMode = (value) => ({
+  type: ACTIONS.SET_FORM_MODE_REPORT,
+  payload: value
+});
 
-export {
-  clear,
-  load,
-  formSubmit,
-  onFormSubmitSuccess,
-  onFormSubmitError,
-  fillWithFakeData,
-  getList,
-  deleteItem,
-  onFaultFileUpload,
-  onFaultRemove
-}
+export const setVehicleReportData = (value) => ({
+  type: ACTIONS.SET_VEHICLE_DATA_REPORT,
+  payload: value
+});
+
+export const setVehicleReports = (value) => ({
+    type: ACTIONS.SET_VEHICLES_DATA_REPORT,
+    payload: value
+});

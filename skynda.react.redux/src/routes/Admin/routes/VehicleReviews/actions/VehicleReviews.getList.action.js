@@ -1,6 +1,3 @@
-/**
- * Created by jevgenir on 10/21/2016.
- */
 import fetch from "isomorphic-fetch";
 import remoteConfig from "store/remoteConfig";
 import {setVehicleReviews} from "../reducers/SetVehicleReviews.reducer";

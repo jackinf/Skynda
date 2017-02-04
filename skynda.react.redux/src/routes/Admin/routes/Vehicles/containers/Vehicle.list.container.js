@@ -1,6 +1,3 @@
-/**
- * Created by jevgenir on 10/21/2016.
- */
 import {connect} from "react-redux";
 import {getList, deleteItem} from "../actions/Vehicles";
 import VehiclesComponent from "../components/Vehicle.list.component";

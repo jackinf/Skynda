@@ -1,17 +1,23 @@
 package me.skynda.vehicle.dao;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import me.skynda.common.db.BaseEntityDao;
 import me.skynda.common.helper.CastHelper;
 import me.skynda.common.interfaces.daos.IVehicleDao;
+import me.skynda.common.interfaces.daos.IVehicleReportDao;
+import me.skynda.common.interfaces.daos.IVehicleReportItemDao;
 import me.skynda.vehicle.dto.request.SearchRequestDto;
 import me.skynda.vehicle.entities.Vehicle;
+import me.skynda.vehicle.entities.VehicleReport;
 import org.apache.commons.lang3.NotImplementedException;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -21,6 +27,49 @@ import java.util.stream.Collectors;
 
 @Repository
 public class VehicleDao extends BaseEntityDao<Vehicle> implements IVehicleDao {
+
+    private final IVehicleReportDao reportDao;
+
+    @Autowired
+    public VehicleDao(IVehicleReportDao reportDao) {
+        this.reportDao = reportDao;
+    }
+
+    @Override
+    public Vehicle get(Serializable id) {
+        return get(id, true);
+    }
+
+    @Override
+    public Vehicle get(Serializable id, Boolean isActive) {
+        Session session = getSession();
+        Vehicle queryResponse = null;
+        List reports = null;
+
+        try {
+
+            Criteria vehicleCriteria = session
+                    .createCriteria(Vehicle.class, "vehicle");
+
+            vehicleCriteria.add(Restrictions.eq("id", id));
+
+            if(isActive){
+                vehicleCriteria.add(Restrictions.isNull("archived"));
+                reports = reportDao.getAllBy(id);
+            }
+
+            queryResponse = (Vehicle) vehicleCriteria.uniqueResult();
+
+            if(queryResponse != null && isActive){
+                queryResponse.setReportCategories(reports);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return queryResponse;
+    }
 
     @Override
     public List<Vehicle> search(SearchRequestDto params) {

@@ -1,6 +1,3 @@
-/**
- * Created by jevgenir on 10/21/2016.
- */
 import React from 'react';
 import {Field, FieldArray} from 'redux-form';
 import {ROUTE_PARAMS, FORM_MODE} from "../constants/VehicleReview.constant";
@@ -48,7 +45,7 @@ class VehicleReview extends React.Component {
    *  Form submit logic. Saves or updates
    */
   onSubmit(e) {
-    this.props.handleSubmit(data => formSubmit(data, this.props.formMode1))(e)
+    this.props.handleSubmit(data => formSubmit(data, this.props.formModeReview))(e)
       .then(() => onFormSubmitSuccess(!!this.props.submitSucceeded), onFormSubmitError);
   };
 
@@ -56,7 +53,7 @@ class VehicleReview extends React.Component {
     return (<div>
         {this.props.isFetching || this.props.submitting ? "Loading..." : (
           <form onSubmit={this.onSubmit.bind(this)}>
-            <h3>{this.props.formMode1}</h3>
+            <h3>{this.props.formModeReview}</h3>
 
             <VehiclesSelectField name="vehicleId" label="Vehicle *" vehicles={this.props.vehicles} />
 

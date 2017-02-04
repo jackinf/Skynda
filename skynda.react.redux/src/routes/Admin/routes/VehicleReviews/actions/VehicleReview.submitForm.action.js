@@ -1,6 +1,3 @@
-/**
- * Created by zekar on 10/23/2016.
- */
 import {FORM_MODE} from "../constants/VehicleReview.constant";
 import remoteConfig from "store/remoteConfig";
 import {fromSpringToReduxFormError} from "../../../../../utils/formUtils";
@@ -11,7 +8,7 @@ import {SubmissionError} from 'redux-form';
  * @returns {any}
  */
 export function formSubmit(data, formMode) {
-  return formMode == FORM_MODE.ADDING
+  return formMode == FORM_MODE.ADDING_REVIEW
     ? createVehicleAsync(data)
     : updateVehicleAsync(data);
 }

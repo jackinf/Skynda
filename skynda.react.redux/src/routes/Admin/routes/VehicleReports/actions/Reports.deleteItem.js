@@ -1,14 +1,11 @@
-/**
- * Created by jevgenir on 10/26/2016.
- */
 import fetch from "isomorphic-fetch";
 import remoteConfig from "store/remoteConfig";
-import {setVehicleReviews} from "../reducers/SetVehicleReports.reducer";
+import {setVehicleReports} from "../actions";
 import {REDUCER_KEYS} from "../constants/VehicleReport.constant";
 
 export default function deleteItem(id) {
   return (dispatch, getState) => {
-    let items = getState()[REDUCER_KEYS.VEHICLES_DATA].items;
+    let items = getState()[REDUCER_KEYS.VEHICLES_REPORTS_DATA].items;
 
     return fetch(`${remoteConfig.remote}/api/vehicle-report/${id}`, {
       method: "DELETE",
@@ -18,7 +15,7 @@ export default function deleteItem(id) {
       .then(resp => resp.json())
       .then(resp => {
         items = items.filter(c => c.id !== id);
-        dispatch(setVehicleReviews({isFetching: false, items: items}));
+        dispatch(setVehicleReports({isFetching: false, items: items}));
       })
       .catch(err => {
         console.error(err);

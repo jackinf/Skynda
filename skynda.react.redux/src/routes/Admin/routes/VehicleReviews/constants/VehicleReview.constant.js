@@ -2,17 +2,17 @@
  * Created by jevgenir on 10/21/2016.
  */
 export const ACTIONS = {
-  // For Car
-  SET_VEHICLE_DATA: "VEHICLE/SET_VEHICLE_DATA",
-  SET_FORM_MODE: "VEHICLE/SET_FORM_MODE",
+  // For Vehicle
+  SET_VEHICLE_DATA_REVIEW: "VEHICLE/SET_VEHICLE_DATA_REVIEW",
+  SET_FORM_MODE_REVIEW: "VEHICLE/SET_FORM_MODE_REVIEW",
 
-  // For Cars
-  SET_VEHICLES_DATA: "VEHICLES/SET_VEHICLE_DATA"
+  // For Vehicles
+  SET_VEHICLES_DATA_REVIEW: "VEHICLES/SET_VEHICLES_DATA_REVIEW"
 };
 
 export const FORMS = {
   DEFAULT_REDUX_FORM_KEY: "form", // Do not change the value! redux-forms depends on it.
-  VEHICLE_FORM: "adminVehicleAddUpdateForm",
+  VEHICLE_FORM_REVIEW: "adminReviewAddUpdateForm",
 };
 
 export const ROUTE_PARAMS = {
@@ -24,14 +24,15 @@ export const ROUTE_PARAMS = {
 };
 
 export const FORM_MODE = {
-  READING: "READING",
-  ADDING: "ADDING",
-  UPDATING: "UPDATING"
+  READING_REVIEW: "READING_REVIEW",
+  ADDING_REVIEW: "ADDING_REVIEW",
+  UPDATING_REVIEW: "UPDATING_REVIEW"
 };
 
 export const REDUCER_KEYS = {
-  VEHICLE_DATA: "vehicleData",
+  VEHICLE_REVIEW_DATA: "vehicleReviewData",
   VEHICLE_MODELS_DATA: "vehicleModelsData",
-  VEHICLES_DATA: "vehiclesData",
-  FORM_MODE: "formMode1"
+  VEHICLES_REVIEWS_DATA: "vehiclesReviewsData",
+  FORM_MODE_VEHICLE_REVIEW: "formModeReview",
+  VEHICLES_REVIEW: "vehicles"
 };

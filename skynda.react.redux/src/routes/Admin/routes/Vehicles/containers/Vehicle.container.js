@@ -1,6 +1,3 @@
-/**
- * Created by zekar on 10/23/2016.
- */
 import {connect} from "react-redux";
 import {
   onMainImageUpload,
@@ -25,22 +22,18 @@ const mapDispatchToProps = {
   onMainImageCropComplete: onMainImageCropComplete,
   onImageFileUpload: onImageFileUpload,
   onImageFileRemove: onImageFileRemove,
-  // onFaultFileUpload: onFaultFileUpload,
-  // onFaultRemove: onFaultRemove,
   onHandleSubmitFinished: onHandleSubmitFinished
 };
 
 const mapStateToProps = (state) => {
   let formInfo = state[REDUCER_KEYS.VEHICLE_DATA];
   let classificators = state.classificators;
-
   return {
     id: formInfo.id,
     isFetching: formInfo.isFetching,
     initialValues: formInfo.item,
-    formMode1: formInfo.formMode,
+    formModeVehicle: formInfo.formMode,
     errors: formInfo.errors || [],
-
     vehicleModels: state[REDUCER_KEYS.VEHICLE_MODELS_DATA],
     colors: classificators ? classificators.color : {}
   };

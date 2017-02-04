@@ -1,6 +1,3 @@
-/**
- * Created by jevgenir on 10/21/2016.
- */
 export const ACTIONS = {
   // For Car
   SET_VEHICLE_DATA: "VEHICLE/SET_VEHICLE_DATA",
@@ -33,5 +30,5 @@ export const REDUCER_KEYS = {
   VEHICLE_DATA: "vehicleFormInfo",
   VEHICLE_MODELS_DATA: "vehicleModelsData",
   VEHICLES_DATA: "vehiclesData",
-  FORM_MODE: "formMode1"
+  FORM_MODE_VEHICLE: "formMode1"
 };

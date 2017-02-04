@@ -1,6 +1,3 @@
-/**
- * Created by zekar on 10/23/2016.
- */
 import {FORM_MODE, REDUCER_KEYS} from "../constants/VehicleReview.constant";
 import remoteConfig from "store/remoteConfig";
 import {setVehicleReviewData} from "../reducers/SetVehicleReview.reducer";
@@ -11,11 +8,11 @@ import {setFormMode} from "../reducers/SetFormMode.reducer";
  * @param param - vehicle review ID
  */
 export default (param) => (dispatch, getState) => {
-  const currentFormMode = getState()[REDUCER_KEYS.FORM_MODE];
+  const currentFormMode = getState()[REDUCER_KEYS.FORM_MODE_VEHICLE_REVIEW];
 
-  if (currentFormMode === FORM_MODE.ADDING) {
+  if (currentFormMode === FORM_MODE.ADDING_REVIEW) {
     dispatch(loadCreateForm());
-  } else if (currentFormMode == FORM_MODE.UPDATING && !isNaN(parseInt(param))) {
+  } else if (currentFormMode == FORM_MODE.UPDATING_REVIEW && !isNaN(parseInt(param))) {
     dispatch(loadUpdateForm(parseInt(param)));
   } else {
     console.error("Invalid form mode");
@@ -27,7 +24,7 @@ export default (param) => (dispatch, getState) => {
  */
 const loadCreateForm = () => (dispatch) => {
   dispatch(setVehicleReviewData({isFetching: false, data: null}));
-  dispatch(setFormMode(FORM_MODE.ADDING));
+  dispatch(setFormMode(FORM_MODE.ADDING_REVIEW));
 };
 
 /**
@@ -45,7 +42,7 @@ const loadUpdateForm = (id) => (dispatch) => {
     .then(resp => resp.json())
     .then(data => {
       dispatch(setVehicleReviewData({isFetching: false, data}));
-      dispatch(setFormMode(FORM_MODE.UPDATING));
+      dispatch(setFormMode(FORM_MODE.UPDATING_REVIEW));
     })
     .catch((error) => {
       console.error("ERROR: ", error);

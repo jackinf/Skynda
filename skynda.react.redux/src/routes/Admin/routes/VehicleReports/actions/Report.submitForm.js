@@ -1,6 +1,3 @@
-/**
- * Created by zekar on 10/23/2016.
- */
 import {FORM_MODE} from "../constants/VehicleReport.constant";
 import remoteConfig from "store/remoteConfig";
 import {fromSpringToReduxFormError} from "../../../../../utils/formUtils";
@@ -12,7 +9,7 @@ import {browserHistory} from "react-router";
  * @returns {any}
  */
 export function formSubmit(data, formMode) {
-  return formMode == FORM_MODE.ADDING
+  return formMode == FORM_MODE.ADDING_REPORT
     ? createVehicleAsync(data)
     : updateVehicleAsync(data);
 }
@@ -33,6 +30,7 @@ export function onFormSubmitError() {
  * @returns {*|Promise.<TResult>|Promise<U>|Thenable<U>}
  */
 function createVehicleAsync(data) {
+  console.log("createVehicleAsync", )
   return fetch(`${remoteConfig.remote}/api/vehicle-report`, {
     method: "POST",
     credentials: "include",

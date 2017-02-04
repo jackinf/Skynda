@@ -4,6 +4,7 @@ import me.skynda.common.db.SkyndaBaseEntityDao;
 import me.skynda.common.dto.DeleteResponseDto;
 import me.skynda.vehicle.entities.VehicleReportItem;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 
@@ -12,4 +13,5 @@ public interface IVehicleReportItemDao extends SkyndaBaseEntityDao<VehicleReport
     void saveOrUpdate(Collection<VehicleReportItem> items);
     void deleteEntity(VehicleReportItem vehicleReportItem, DeleteResponseDto response);
     List<VehicleReportItem> getAllChildren(Integer parentId);
+    List getActiveItems(Serializable parentId);
 }

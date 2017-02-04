@@ -132,7 +132,7 @@
     "react": "^15.4.1",
     "react-addons-transition-group": "^15.3.2",
     "react-bootstrap": "^0.30.3",
-    "react-bootstrap-table": "^2.6.0",
+    "react-bootstrap-table": "^2.11.0",
     "react-color": "^2.8.0",
     "react-dom": "^15.0.0",
     "react-dropzone": "^3.6.0",

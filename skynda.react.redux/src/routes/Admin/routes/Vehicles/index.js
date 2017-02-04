@@ -1,8 +1,7 @@
-/**
- * Created by jevgenir on 10/26/2016.
- */
 import {injectReducer} from '../../../../store/reducers';
 import {ROUTE_PARAMS, FORM_MODE, REDUCER_KEYS} from "./constants/Vehicle.constant";
+import {REDUCER_KEYS as REPORT_REDUCER_KEYS} from "../VehicleReports/constants/VehicleReport.constant";
+import {setVehicleReportData} from "../VehicleReports/reducers";
 import NProgress from "react-nprogress";
 
 export default (store) => ({
@@ -17,9 +16,12 @@ export default (store) => ({
 
       if (formMode == FORM_MODE.ADDING || formMode == FORM_MODE.UPDATING) {
         injectReducer(store, {key: REDUCER_KEYS.VEHICLE_DATA, reducer: require("./reducers/Vehicle.reducer.js").default});
-        injectReducer(store, {key: REDUCER_KEYS.VEHICLE_MODELS_DATA, reducer: require("./../VehicleModels/reducers/VehicleModels.reducer.js").default});
         injectReducer(store, {key: "classificators", reducer: require("./../Classifiers/Classifiers.module").default});
         injectReducer(store, {key: "formInfo", reducer: require("./../VehicleModels/reducers/VehicleModel.reducer.js").default});
+
+        injectReducer(store, {key: REDUCER_KEYS.VEHICLE_MODELS_DATA, reducer: require("./../VehicleModels/reducers/VehicleModels.reducer.js").default});
+        injectReducer(store, {key: REPORT_REDUCER_KEYS.VEHICLE_REPORT_DATA, reducer: setVehicleReportData});
+
 
         cb(null, require("./containers/Vehicle.container.js").default);
         NProgress.done();

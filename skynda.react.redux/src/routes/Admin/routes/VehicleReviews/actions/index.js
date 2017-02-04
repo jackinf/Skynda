@@ -1,7 +1,3 @@
-/**
- * Created by zekar on 10/23/2016.
- */
-
 import clear from "./VehicleReview.clear.action";
 import load from "./VehicleReview.load.action";
 import {formSubmit, onFormSubmitSuccess, onFormSubmitError} from "./VehicleReview.submitForm.action";

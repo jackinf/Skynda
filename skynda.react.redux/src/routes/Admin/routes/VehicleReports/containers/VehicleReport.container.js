@@ -8,15 +8,15 @@ import {
   onFormSubmitError,
   onFaultFileUpload,
   onFaultRemove
-} from "../actions";
+} from "../reducers";
 import ViewComponent from "../components/VehicleReport.component";
 import {FORMS, REDUCER_KEYS} from "../constants/VehicleReport.constant";
-import {setFormMode} from "../reducers/SetFormMode.reducer";
+import {setFormMode} from "../actions";
 import {getList as getVehiclesList} from "../../Vehicles/actions/Vehicles";
 
 // Decorate the form component
 const DecoratedViewComponent = reduxForm({
-  form: FORMS.VEHICLE_FORM
+  form: FORMS.VEHICLE_FORM_REPORT
 })(ViewComponent);
 
 const mapDispatchToProps = {
@@ -33,10 +33,10 @@ const mapDispatchToProps = {
 
 const mapStateToProps = (state) => {
   return {
-    isFetching: state[REDUCER_KEYS.VEHICLE_DATA].isFetching,
-    initialValues: state[REDUCER_KEYS.VEHICLE_DATA].data,
-    formMode1: state[REDUCER_KEYS.FORM_MODE],
-    vehicles: state["vehicles"]
+    isFetching: state[REDUCER_KEYS.VEHICLE_REPORT_DATA].isFetching,
+    initialValues: state[REDUCER_KEYS.VEHICLE_REPORT_DATA].data,
+    formModeReport: state[REDUCER_KEYS.FORM_MODE_VEHICLE_REPORT],
+    vehicles: state[REDUCER_KEYS.VEHICLES]
   };
 };
 
