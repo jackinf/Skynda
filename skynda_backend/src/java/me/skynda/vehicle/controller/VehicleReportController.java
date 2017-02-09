@@ -3,12 +3,14 @@ package me.skynda.vehicle.controller;
 import me.skynda.common.controller.BaseController;
 import me.skynda.common.dto.CreateOrUpdateResponseDto;
 import me.skynda.common.dto.DeleteResponseDto;
+import me.skynda.vehicle.dto.VehicleAdminDto;
 import me.skynda.vehicle.dto.VehicleReportDto;
 import me.skynda.common.interfaces.services.IVehicleReportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.Serializable;
 import java.util.List;
 
 @CrossOrigin(origins = "*")
@@ -26,6 +28,11 @@ public class VehicleReportController extends BaseController {
     @RequestMapping(value = "/vehicle-reports", method = RequestMethod.GET)
     public List<VehicleReportDto> getAll() {
         return service.getAll();
+    }
+
+    @RequestMapping(value = "/vehicle-reports/{id}", method = RequestMethod.GET, consumes = "application/json")
+    public List<VehicleReportDto> getAllByVehicle(@PathVariable("id") Integer id) {
+        return service.getAllBy(id);
     }
 
     @RequestMapping(value = "/vehicle-report/{id}", method = RequestMethod.GET)

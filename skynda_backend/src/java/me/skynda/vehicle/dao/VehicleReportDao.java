@@ -100,18 +100,17 @@ public class VehicleReportDao extends BaseEntityDao<VehicleReport> implements IV
     }
 
     @Override
-    public List getAllBy(Serializable vehicleId) {
-        return getAllBy(vehicleId, true);
+    public List<VehicleReport> getAll(){
+        return getAll(true);
     }
 
     @Override
-    public List getAllBy(Serializable vehicleId, Boolean isActive) {
+    public List<VehicleReport> getAll(Boolean isActive){
         Session session = getSession();
         try {
 
             Criteria vehicleCriteria = session
-                    .createCriteria(VehicleReport.class, "vehicleReport")
-                    .add(Restrictions.eq("vehicleId", vehicleId));
+                    .createCriteria(VehicleReport.class, "vehicleReport");
 
             if(isActive){
                 vehicleCriteria.add(Restrictions.isNull("archived"));
@@ -138,17 +137,18 @@ public class VehicleReportDao extends BaseEntityDao<VehicleReport> implements IV
     }
 
     @Override
-    public List<VehicleReport> getAll(){
-        return getAll(true);
+    public List getAllBy(Serializable vehicleId) {
+        return getAllBy(vehicleId, true);
     }
 
     @Override
-    public List<VehicleReport> getAll(Boolean isActive){
+    public List getAllBy(Serializable vehicleId, Boolean isActive) {
         Session session = getSession();
         try {
 
             Criteria vehicleCriteria = session
-                    .createCriteria(VehicleReport.class, "vehicleReport");
+                    .createCriteria(VehicleReport.class, "vehicleReport")
+                    .add(Restrictions.eq("vehicleId", vehicleId));
 
             if(isActive){
                 vehicleCriteria.add(Restrictions.isNull("archived"));

@@ -26,7 +26,6 @@ export function onMainImageRemove(e) {
 
 export function onMainImageCropComplete(crop, pixelCrop) {
   return (dispatch) => {
-    console.log("onMainImageCropComplete", crop, pixelCrop);
     dispatch(change(FORMS.VEHICLE_FORM, "mainImage.cropInfo", {
       width: crop.width,
       height: crop.height,
@@ -60,7 +59,6 @@ export function onImageFileRemove(e, index) {
 
 export function onFaultFileUpload(e, index) {
   return (dispatch) => {
-    console.log("onFaultFileUpload", e + " " + index);
     imageUtil.imageFileToBase64(e.target.files[0], (base64File) => {
       dispatch(change(FORMS.VEHICLE_FORM, `faults[${index}].image.base64File`, base64File));
     });

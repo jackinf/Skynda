@@ -12,12 +12,12 @@ export const ACTIONS = {
 
 export const FORMS = {
   DEFAULT_REDUX_FORM_KEY: "form", // Do not change the value! redux-forms depends on it.
-  VEHICLE_FORM_REVIEW: "adminReviewAddUpdateForm",
+  VEHICLE_FORM_REVIEW: "adminREVIEWForm",
 };
 
 export const ROUTE_PARAMS = {
+  VEHICLE_REVIEW_ID: "vehicleReviewId",
   VEHICLE_ID: "vehicleId",
-
   values: {
     NEW: "new"
   }
@@ -31,7 +31,6 @@ export const FORM_MODE = {
 
 export const REDUCER_KEYS = {
   VEHICLE_REVIEW_DATA: "vehicleReviewData",
-  VEHICLE_MODELS_DATA: "vehicleModelsData",
   VEHICLES_REVIEWS_DATA: "vehiclesReviewsData",
   FORM_MODE_VEHICLE_REVIEW: "formModeReview",
   VEHICLES_REVIEW: "vehicles"

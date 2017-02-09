@@ -43,8 +43,6 @@ const LogoComponent = (props) => (<Link className={`${props.className || ""} sk_
 
 class Header extends React.Component {
   render() {
-
-    // console.log(this.props);
     const activePathname = this.props.activePathname;
     const activeStyle = {borderBottom: '3px solid black'};
     const activeStyleContainer = {[activePathname]: activeStyle};

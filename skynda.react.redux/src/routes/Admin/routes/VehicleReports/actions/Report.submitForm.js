@@ -3,6 +3,7 @@ import remoteConfig from "store/remoteConfig";
 import {fromSpringToReduxFormError} from "../../../../../utils/formUtils";
 import {SubmissionError} from 'redux-form';
 import {browserHistory} from "react-router";
+import _ from "underscore";
 
 /**
  * Is executed on form submit. Not a redux action.
@@ -14,11 +15,15 @@ export function formSubmit(data, formMode) {
     : updateVehicleAsync(data);
 }
 
-export function onFormSubmitSuccess(isSuccess) {
-  if (!!isSuccess) {
-    browserHistory.push(`/admin/vehicle-reports`);
+export const onFormSubmitSuccess = (response, onSubmitCustom = null) => {
+  if (response && response.success && !isNaN(parseInt(response.id)) && !isNaN(parseInt(response.vehicleId))) {
+    if (onSubmitCustom && _.isFunction(onSubmitCustom)) {
+      onSubmitCustom(null, response.vehicleId);
+    } else {
+      browserHistory.push(`/admin/vehicle-reports`);
+    }
   }
-}
+};
 
 export function onFormSubmitError() {
   console.log("error");
@@ -30,7 +35,6 @@ export function onFormSubmitError() {
  * @returns {*|Promise.<TResult>|Promise<U>|Thenable<U>}
  */
 function createVehicleAsync(data) {
-  console.log("createVehicleAsync", )
   return fetch(`${remoteConfig.remote}/api/vehicle-report`, {
     method: "POST",
     credentials: "include",
@@ -39,7 +43,6 @@ function createVehicleAsync(data) {
   })
     .then(resp => resp.json())
     .then(resp => {
-      console.log(resp);
       if (!resp.success) {
         throw new SubmissionError(fromSpringToReduxFormError(resp.errors));
       }
@@ -63,5 +66,6 @@ function updateVehicleAsync(data) {
       if (!resp.success) {
         throw new SubmissionError(fromSpringToReduxFormError(resp.errors));
       }
+      return resp;
     })
 }

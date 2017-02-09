@@ -32,7 +32,6 @@ export const onImageRemove = (e, name, reduxFormName) => (dispatch) => {
 };
 
 export const onCropChange = (crop, pixelCrop, name, reduxFormName) => (dispatch) => {
-  console.log("onCropChange", crop, pixelCrop);
   dispatch(change(reduxFormName, `${name}.${CROP_INFO}`, {
     width: pixelCrop.width,
     height: pixelCrop.height,

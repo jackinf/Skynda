@@ -3,7 +3,6 @@ import fromSpringToReduxFormError from "../../../utils/formUtils/fromSpringToRed
 import {SubmissionError} from "redux-form";
 
 export function sendSubscriptionEmail(item) {
-  console.log("sendSubscriptionEmail reached", item);
   return fetch(`${remoteConfig.remote}/api/subscribe`, {
     method: "POST",
     credentials: "include",
@@ -12,7 +11,6 @@ export function sendSubscriptionEmail(item) {
   })
     .then(resp => resp.json())
     .then(resp => {
-      console.log(resp);
       if (!resp.success) {
         const errors = fromSpringToReduxFormError(resp.errors);
         // dispatch(fetchFailed(errors));

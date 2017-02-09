@@ -1,6 +1,6 @@
 import fetch from "isomorphic-fetch";
 import remoteConfig from "store/remoteConfig";
-import {setVehicleReviews} from "../reducers/SetVehicleReviews.reducer";
+import {setVehicleReviews} from "../actions";
 import {REDUCER_KEYS} from "../constants/VehicleReview.constant";
 
 export default function deleteItem(id) {

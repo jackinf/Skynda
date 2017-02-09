@@ -72,8 +72,6 @@ class InspectorsReport extends React.Component {
   render() {
     const {reportCategories, faults, inspector} = this.props.report;
 
-    console.log("report base", this.props.report);
-
     return (
       <Skblock header={<Translate value="details.components.inspector_report.header"/>}>
         <div className="inspectors-report">

@@ -12,10 +12,11 @@ public class VehicleReportDto extends BaseDto {
         items = new ArrayList<>();
     }
     private Integer id;
-    private Integer VehicleId;
+    private Integer vehicleId;
     private String title;
     private String description;
     private String inspector;
     private List<VehicleReportItemDto> items;
     private List<FaultBaseDto> faults;
+    private Boolean isModal;
 }

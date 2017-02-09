@@ -14,7 +14,6 @@ export default (store) => ({
       const isUpdate = !isNaN(parseInt(id));
 
       if (isAdd || isUpdate) {
-        console.log("check");
         const Container = require("./containers/VehicleReport.container.js").default;
         injectReducer(store, {key: REDUCER_KEYS.VEHICLE_REPORT_DATA, reducer: setVehicleReportData});
         injectReducer(store, {key: REDUCER_KEYS.FORM_MODE_VEHICLE_REPORT, reducer: setFormMode});

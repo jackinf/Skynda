@@ -165,8 +165,6 @@ public class VehicleService implements IVehicleService {
         /*
             Save all the one-2-many relations with vehicle-to-be-sold
          */
-
-//        vehicleReportItemDao.addMultipleToVehicle(addedVehicle, vehicleAdminDto.getReportItems());
         vehicleDescriptionDao.addMultipleToVehicle(addedVehicle, vehicleAdminDto.getDescriptions());
         vehicleFeatureDao.addMultipleToVehicle(addedVehicle, vehicleAdminDto.getFeatures());
         vehicleImageDao.addMultipleToVehicle(addedVehicle, imageDtos);

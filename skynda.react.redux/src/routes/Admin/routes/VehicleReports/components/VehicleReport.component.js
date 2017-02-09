@@ -1,5 +1,5 @@
 import React from 'react';
-import {FieldArray, change} from 'redux-form';
+import {FieldArray, change, Field} from 'redux-form';
 import {ROUTE_PARAMS,FORMS} from "../constants/VehicleReport.constant";
 import {formSubmit, onFormSubmitSuccess, onFormSubmitError} from "../reducers";
 
@@ -38,7 +38,8 @@ class VehicleReportCategory extends React.Component {
     this.props.load(this.props.params[ROUTE_PARAMS.VEHICLE_REPORT_ID]);
     this.props.getVehiclesList();
     if(this.props.params[ROUTE_PARAMS.VEHICLE_ID]){
-      change(FORMS.VEHICLE_FORM, "vehicleId", this.props.params[ROUTE_PARAMS.VEHICLE_ID]);
+      this.props.dispatch(change(FORMS.VEHICLE_FORM_REPORT, "vehicleId", this.props.params[ROUTE_PARAMS.VEHICLE_ID]));
+      this.props.dispatch(change(FORMS.VEHICLE_FORM_REPORT, "isModal", true));
     }
   }
 
@@ -50,8 +51,12 @@ class VehicleReportCategory extends React.Component {
    *  Form submit logic. Saves or updates
    */
   onSubmit(e) {
-    this.props.handleSubmit(data => formSubmit(data, this.props.formModeReport))(e)
-      .then(() => onFormSubmitSuccess(this.props.submitSucceeded), onFormSubmitError);
+    let promise = this.props.handleSubmit(data => formSubmit(data, this.props.formModeReport))(e);
+    promise && promise.then(response =>{
+        onFormSubmitSuccess(response, this.props.onSubmitCustom);
+        onFormSubmitError;
+      });
+
   };
 
   render() {
@@ -62,10 +67,9 @@ class VehicleReportCategory extends React.Component {
               <h3>{this.props.formModeReport}</h3>
 
               {this.props.params[ROUTE_PARAMS.VEHICLE_ID] ?
-                (<div>VehicleId: {this.props.params[ROUTE_PARAMS.VEHICLE_ID]}</div>)
+                <div>VehicleId: {this.props.params[ROUTE_PARAMS.VEHICLE_ID]}</div>
                   : <VehiclesSelectField name="vehicleId" label="Vehicle *" vehicles={this.props.vehicles}/>
               }
-
 
               <TextFieldForReport name="inspector" label="Inspector Name *"/>
 

@@ -1,4 +1,3 @@
-
 import {connect} from "react-redux";
 import {getList, deleteItem} from "../actions";
 import VehiclesComponent from "../components/VehicleReviews.component";

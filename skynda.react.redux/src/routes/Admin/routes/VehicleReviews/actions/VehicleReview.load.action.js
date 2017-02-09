@@ -1,14 +1,19 @@
-import {FORM_MODE, REDUCER_KEYS} from "../constants/VehicleReview.constant";
+import {FORM_MODE, REDUCER_KEYS, ROUTE_PARAMS} from "../constants/VehicleReview.constant";
 import remoteConfig from "store/remoteConfig";
-import {setVehicleReviewData} from "../reducers/SetVehicleReview.reducer";
-import {setFormMode} from "../reducers/SetFormMode.reducer";
+import {setFormMode, setVehicleReviewData} from "../actions";
 
 /**
  * Loads "Create new vehicle review" or "Update existing vehicle review" forms
  * @param param - vehicle review ID
  */
 export default (param) => (dispatch, getState) => {
-  const currentFormMode = getState()[REDUCER_KEYS.FORM_MODE_VEHICLE_REVIEW];
+  let currentFormMode = getState()[REDUCER_KEYS.FORM_MODE_VEHICLE_REVIEW] || FORM_MODE.ADDING_REVIEW;
+  //TODO bad hack for updating single item
+  if(!isNaN(parseInt(param))){
+    currentFormMode = FORM_MODE.UPDATING_REVIEW;  //What if user only wants to read data?
+  }else if(isNaN(parseInt(param) && param == ROUTE_PARAMS.values.NEW)){
+    currentFormMode = FORM_MODE.ADDING_REVIEW;
+  }
 
   if (currentFormMode === FORM_MODE.ADDING_REVIEW) {
     dispatch(loadCreateForm());
