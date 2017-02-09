@@ -203,7 +203,6 @@ class Vehicle extends React.Component {
     const springErrors = this.props.errors;
     const errors = fromSpringToReduxFormError(springErrors);
     const bootstrapTableOptionsReport = {
-      // afterInsertRow: this.openVehicleReportDialog,
       onRowClick: this.openVehicleReportDialog,
       onAdd: this.openVehicleReportDialog,
       handleConfirmDeleteRow: this.deleteReportItem,
@@ -211,7 +210,6 @@ class Vehicle extends React.Component {
       defaultSortOrder: 'asc',
     };
     const bootstrapTableOptionsReview = {
-      // afterInsertRow: this.openVehicleReviewDialog,
       onRowClick: this.openVehicleReviewDialog,
       onAdd: this.openVehicleReviewDialog,
       handleConfirmDeleteRow: this.deleteReviewItem,
@@ -359,7 +357,7 @@ class Vehicle extends React.Component {
               <CardText>
                 <Modal show={this.state.isVehicleReportDialogOpen} onHide={this.closeVehicleReportDialog}>
                   <Modal.Header closeButton>
-                    <Modal.Title>Add/update report</Modal.Title>
+                    <Modal.Title>REPORT CATEGORY</Modal.Title>
                   </Modal.Header>
                   <Modal.Body>
                     <VehicleReport params={{[VEHICLE_REPORT_ROUTE_PARAMS.VEHICLE_REPORT_ID]: this.state.vehicleReportId,
@@ -393,7 +391,7 @@ class Vehicle extends React.Component {
 
                 <Modal show={this.state.isVehicleReviewDialogOpen} onHide={this.closeVehicleReviewDialog}>
                   <Modal.Header closeButton>
-                    <Modal.Title>Add/update review</Modal.Title>
+                    <Modal.Title>REVIEW ITEM</Modal.Title>
                   </Modal.Header>
                   <Modal.Body>
                     <VehicleReview params={{[VEHICLE_REVIEW_ROUTE_PARAMS.VEHICLE_REVIEW_ID]: this.state.vehicleReviewId,
