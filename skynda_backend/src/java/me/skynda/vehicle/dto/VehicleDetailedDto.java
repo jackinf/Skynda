@@ -16,8 +16,8 @@ public class VehicleDetailedDto {
 	private BigDecimal price;
 	private String registrationNumber;
 	private BigDecimal mileage;
-	private ClassificationDto colorOutside;
-	private ClassificationDto colorInside;
+	private String colorOutsideHex;
+	private String colorInsideHex;
 	private BigDecimal fuelCity;
 	private BigDecimal fuelHighway;
 	private double fuelAverage;
@@ -42,6 +42,7 @@ public class VehicleDetailedDto {
 	private List<FeatureDto> features;
 	private List<FaultBaseDto> faults;
 	private List<CategoriesDto> reportCategories;
+	private String inspector;
 
 	private List<ImageContainerDto> images;
 	private List<DescriptionDto> descriptions;

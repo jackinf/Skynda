@@ -1,14 +1,12 @@
 package me.skynda.vehicle.dao;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import me.skynda.common.db.BaseEntityDao;
 import me.skynda.common.helper.CastHelper;
 import me.skynda.common.interfaces.daos.IVehicleDao;
 import me.skynda.common.interfaces.daos.IVehicleReportDao;
-import me.skynda.common.interfaces.daos.IVehicleReportItemDao;
+import me.skynda.common.interfaces.daos.IVehicleReviewDao;
 import me.skynda.vehicle.dto.request.SearchRequestDto;
 import me.skynda.vehicle.entities.Vehicle;
-import me.skynda.vehicle.entities.VehicleReport;
 import org.apache.commons.lang3.NotImplementedException;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -29,10 +27,12 @@ import java.util.stream.Collectors;
 public class VehicleDao extends BaseEntityDao<Vehicle> implements IVehicleDao {
 
     private final IVehicleReportDao reportDao;
+    private final IVehicleReviewDao reviewDao;
 
     @Autowired
-    public VehicleDao(IVehicleReportDao reportDao) {
+    public VehicleDao(IVehicleReportDao reportDao,IVehicleReviewDao reviewDao) {
         this.reportDao = reportDao;
+        this.reviewDao = reviewDao;
     }
 
     @Override
@@ -45,6 +45,7 @@ public class VehicleDao extends BaseEntityDao<Vehicle> implements IVehicleDao {
         Session session = getSession();
         Vehicle queryResponse = null;
         List reports = null;
+        List reviews = null;
 
         try {
 
@@ -56,12 +57,14 @@ public class VehicleDao extends BaseEntityDao<Vehicle> implements IVehicleDao {
             if(isActive){
                 vehicleCriteria.add(Restrictions.isNull("archived"));
                 reports = reportDao.getAllBy(id);
+                reviews = reviewDao.getAllBy(id);
             }
 
             queryResponse = (Vehicle) vehicleCriteria.uniqueResult();
 
             if(queryResponse != null && isActive){
                 queryResponse.setReportCategories(reports);
+                queryResponse.setReviews(reviews);
             }
 
         } catch (Exception e) {
