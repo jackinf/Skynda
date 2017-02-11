@@ -20,10 +20,7 @@ import org.springframework.stereotype.Repository;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Repository
@@ -96,15 +93,17 @@ public class VehicleDao extends BaseEntityDao<Vehicle> implements IVehicleDao {
                 vehicleCriteria.add(Restrictions.in("manufacturer.id", brandList));
             }
             // TODO: Color outside search
-//            ////Vehicle outside color
-//            if (params.Colors != null && !params.Colors.isEmpty()) {
-//                Collection<Integer> colorList = params.Colors.stream()
-//                        .map(x -> x.getValue())
-//                        .collect(Collectors.toCollection(ArrayList::new));
-//                vehicleCriteria.createAlias("vehicle.colorOutsideHex", "color");
-//                vehicleCriteria.add(Restrictions.in("color.id", colorList));
-//            }
-            ////Vehicle feature
+            ////Vehicle outside color
+            if (params.Colors != null && !params.Colors.isEmpty()) {
+                Collection<String> colorList = params.Colors.stream()
+                        .map(x -> x.getValue())
+                        .map(colorId -> mapColorIdToHex(colorId))
+                        .filter(hex -> !Objects.equals(hex, ""))
+                        .collect(Collectors.toCollection(ArrayList::new));
+                vehicleCriteria.add(Restrictions.in("vehicle.colorOutsideHex", colorList));
+            }
+
+            //Vehicle feature
             if (params.Features != null && !params.Features.isEmpty()) {
                 Collection<Integer> featureList = params.Features.stream()
                         .map(x -> x.getValue())
@@ -191,6 +190,30 @@ public class VehicleDao extends BaseEntityDao<Vehicle> implements IVehicleDao {
         }catch (Exception ex){
             logger.error("search failed. params: " + JsonHelper.toJson(params), ex);
             throw ex;
+        }
+    }
+
+    private String mapColorIdToHex(Integer colorId) {
+        switch (colorId) {
+            case 1:  return "#f44336";
+            case 2:  return "#e91e63";
+            case 3:  return "#9c27b0";
+            case 4:  return "#673ab7";
+            case 5:  return "#3f51b5";
+            case 6:  return "#2196f3";
+            case 7:  return "#03a9f4";
+            case 8:  return "#00bcd4";
+            case 9:  return "#009688";
+            case 10: return "#4caf50";
+            case 11: return "#8bc34a";
+            case 12: return "#cddc39";
+            case 13: return "#ffeb3b";
+            case 14: return "#ffc107";
+            case 15: return "#ff9800";
+            case 16: return "#ff5722";
+            case 17: return "#795548";
+            case 18: return "#607d8b";
+            default: return "";
         }
     }
 }
