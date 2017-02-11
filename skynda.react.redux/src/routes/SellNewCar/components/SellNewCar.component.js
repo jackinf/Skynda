@@ -128,7 +128,7 @@ export default class extends React.Component {
 
       <Parallax bgImage={heroImageUrl} strength={250}>
         <div className="sell-your-car__centered sell-your-car__main-image-background2">
-          <h3 className="sell-your-car__main-image-background__title">Triven aitab sinu autole ostja leida</h3>
+          <h3 className="sell-your-car__main-image-background__title">Saada meile enda ja oma auto andmed</h3>
 
           <Scroll.Link activeClass="active" to="fill-form-scroll-to" spy={true} smooth={true} offset={50} duration={500}>
             <Button className="sell-your-car__main-image-background__button">Panen auto müüki</Button>
@@ -140,7 +140,7 @@ export default class extends React.Component {
         {isSuccessfullySent ? (
           <Row>
             <Col sm={12}>
-              <h3>Täname! Võtame sinuga 2 tööpäeva jooksul ühendust.</h3>
+              <h3>Võtame Sinuga ühendust ühe tööpäeva jooksul, viime Sinu auto ise taustakontrolli, teeme pildid ja valmistame kõik müügiks ette. Peale seda saad meilt hinnapakkumise, millega teame, et saame Su auto müüdud. Kui Sulle pakutud hind sobib, hakkamegi kohe Sinu autole ostjat otsima.</h3>
             </Col>
           </Row>
           ) : (
