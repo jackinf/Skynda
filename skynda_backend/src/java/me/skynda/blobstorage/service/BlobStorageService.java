@@ -8,15 +8,19 @@ import me.skynda.blobstorage.dto.*;
 
 import me.skynda.blobstorage.dto.response.BlobStorageUploadStreamResponseDto;
 import me.skynda.blobstorage.dto.response.BlobDto;
+import me.skynda.common.helper.JsonHelper;
 import me.skynda.common.helper.SkyndaUtility;
 import me.skynda.common.interfaces.daos.IImageDao;
 import me.skynda.common.interfaces.services.IBlobStorageService;
 import me.skynda.image.entities.Image;
+import me.skynda.vehicle.dao.VehicleDao;
 import me.skynda.vehicle.dto.ImageContainerBaseDto;
 import me.skynda.vehicle.dto.ImageCropInfoDto;
 import me.skynda.vehicle.dto.ImageDto;
 import me.skynda.vehicle.dto.VehicleDtoImageFileToDelete;
 import org.dozer.Mapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -43,6 +47,8 @@ public class BlobStorageService implements IBlobStorageService {
     private IImageDao imageDao;
     private Mapper mapper;
 
+    private static Logger logger = LoggerFactory.getLogger(BlobStorageService.class);
+
     @Autowired
     public BlobStorageService(Mapper mapper, IImageDao imageDao) {
         this(false, mapper, imageDao);
@@ -61,6 +67,7 @@ public class BlobStorageService implements IBlobStorageService {
                         "AccountKey=Fmwz4WFjCFQYxQesEQ6PVye/m+4OAIJiF6KARMzH3h7GfBUZDTG0U8U33J4kaQR4vP+OwLsZ8+WHN2D9KbX9UA==";
                 storageAccount = CloudStorageAccount.parse(STORAGE_CONNECTION_STRING);
             } catch (URISyntaxException | InvalidKeyException e) {
+                logger.error("constructor", e);
                 e.printStackTrace();
             }
         } else {
@@ -83,6 +90,7 @@ public class BlobStorageService implements IBlobStorageService {
             return container.createIfNotExists();
         } catch (Exception e) {
             // Output the stack trace.
+            logger.error("createContainer, dto: " + JsonHelper.toJson(dto), e);
             e.printStackTrace();
         }
         return false;
@@ -101,6 +109,7 @@ public class BlobStorageService implements IBlobStorageService {
             return container.deleteIfExists();
         } catch (Exception e) {
             // Output the stack trace.
+            logger.error("deleteContainer, dto: " + JsonHelper.toJson(dto), e);
             e.printStackTrace();
         }
         return false;
@@ -123,6 +132,7 @@ public class BlobStorageService implements IBlobStorageService {
             blob.upload(new FileInputStream(fileSource), fileSource.length());
         } catch (Exception e) {
             // Output the stack trace.
+            logger.error("upload, dto: " + JsonHelper.toJson(dto), e);
             e.printStackTrace();
             return false;
         }
@@ -148,6 +158,7 @@ public class BlobStorageService implements IBlobStorageService {
             return BlobStorageUploadStreamResponseDto.Factory.succeed(blob.getUri().toString());
         } catch (Exception e) {
             // Output the stack trace.
+            logger.error("uploadStream, dto: " + JsonHelper.toJson(dto), e);
             e.printStackTrace();
             return BlobStorageUploadStreamResponseDto.Factory.fail();
         }
@@ -170,6 +181,7 @@ public class BlobStorageService implements IBlobStorageService {
             }
         } catch (Exception e) {
             // Output the stack trace.
+            logger.error("list, dto: " + JsonHelper.toJson(dto), e);
             e.printStackTrace();
         }
 
@@ -198,6 +210,7 @@ public class BlobStorageService implements IBlobStorageService {
             }
         } catch (Exception e) {
             // Output the stack trace.
+            logger.error("download, dto: " + JsonHelper.toJson(dto), e);
             e.printStackTrace();
         }
     }
@@ -218,6 +231,7 @@ public class BlobStorageService implements IBlobStorageService {
             return blob.deleteIfExists();
         } catch (Exception e) {
             // Output the stack trace.
+            logger.error("delete, dto: " + JsonHelper.toJson(dto), e);
             e.printStackTrace();
         }
         return false;
@@ -295,7 +309,7 @@ public class BlobStorageService implements IBlobStorageService {
 
                 // TODO: delete previous image and continue function execution -> imageDao.deleteByUrl
             } catch (Exception ex) {
-                // TODO: catch and log an exception
+                logger.error("handleMedia, mediaDto: " + JsonHelper.toJson(mediaDto) + ", existingMedia: " + JsonHelper.toJson(existingMedia), ex);
             }
         }
         return newImage;  // save new image and return
@@ -342,6 +356,7 @@ public class BlobStorageService implements IBlobStorageService {
         String faultBase64File = dto.getImage() != null
                 ? dto.getImage().getBase64File()
                 : null;
+
         if (faultBase64File == null || faultBase64File.isEmpty())
             return;
 
@@ -375,7 +390,8 @@ public class BlobStorageService implements IBlobStorageService {
             deleteBlobDto.setBlobName(blobName);
             deleteBlobDto.setContainerName(containerName);
             delete(deleteBlobDto);
-        } catch (Exception ignored) {
+        } catch (Exception ex) {
+            logger.error("handleMedia, dto: " + JsonHelper.toJson(dto), ex);
         }
     }
 
