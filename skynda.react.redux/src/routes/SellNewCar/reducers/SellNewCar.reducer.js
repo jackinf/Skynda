@@ -8,7 +8,6 @@ import remoteConfig from "../../../store/remoteConfig";
 import {toastr} from 'react-redux-toastr';
 
 export const submitAsync = (info) => (dispatch) => {
-  console.log(info);
   dispatch(setSubmittingStatus(true, false));
   dispatch(setErrors(null));
 

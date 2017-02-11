@@ -72,7 +72,6 @@ export const clear = () => (dispatch) => {
 };
 
 export const onHandleSubmitFinished = (resp) => (dispatch) => {
-  console.log("onHandleSubmitFinished", resp);
   if (resp) {
     if (resp.success && !isNaN(parseInt(resp.id))) {
       dispatch(setFormMode(FORM_MODE.UPDATING));

@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -45,6 +46,13 @@ public class VehicleReviewService implements IVehicleReviewService {
     }
 
     @Override
+    public List<VehicleReviewAdminDto> getAllBy(Serializable vehicleId){
+        List<VehicleReview> vehicleReportList = vehicleReviewDao.getAllBy(vehicleId);
+        return vehicleReportList.stream().map(entity -> mapper.map(entity, VehicleReviewAdminDto.class))
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public VehicleReviewAdminDto getSingleBy(Integer id) {
         VehicleReview vehicleReview = vehicleReviewDao.get(id);
         return mapper.map(vehicleReview, VehicleReviewAdminDto.class);
@@ -52,15 +60,12 @@ public class VehicleReviewService implements IVehicleReviewService {
 
     @Override
     public CreateOrUpdateResponseDto createOrUpdate(VehicleReviewAdminDto dto, BindingResult bindingResult) {
-        VehicleReview vehicleReview = dto.getId() != null
-                ? vehicleReviewDao.get(dto.getId())     // existing (UPDATE
-                : new VehicleReview();                  // new (ADD)
+        VehicleReview vehicleReview = mapper.map(dto, VehicleReview.class);
 
-        /*
-            Map
-         */
-        vehicleReview.setText(dto.getText());
-        vehicleReview.setRating(dto.getRating());
+        if (dto.getId() != null) {
+            vehicleReview = vehicleReviewDao.get(dto.getId());
+            mapper.map(dto, vehicleReview);
+        }
 
         /*
             Media upload/save.
@@ -74,14 +79,18 @@ public class VehicleReviewService implements IVehicleReviewService {
             Save
          */
         VehicleReview persistedVehicleReview = vehicleReviewDao.saveOrUpdate(vehicleReview);
-        return CreateOrUpdateResponseDto.Factory.success(persistedVehicleReview.getId(), true);
+        CreateOrUpdateResponseDto response = CreateOrUpdateResponseDto.Factory.success(persistedVehicleReview.getId(), true);
+        response.setIsModal(dto.getIsModal());
+        response.setVehicleId(persistedVehicleReview.getVehicleId());
+
+        return response;
     }
 
     @Override
     public DeleteResponseDto delete(Integer id) {
-        vehicleReviewDao.delete(id);  // TODO: make somehow sure that the item has been deleted.
-
         DeleteResponseDto response = new DeleteResponseDto();
+        VehicleReview review = vehicleReviewDao.get(id);
+        vehicleReviewDao.deleteEntity(review, response);
         response.setSuccess(true);
         return response;
     }

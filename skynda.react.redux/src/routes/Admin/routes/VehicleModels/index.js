@@ -12,10 +12,10 @@ export default (store) => ({
     require.ensure([], (require) => {
       const id = nextState.params[ROUTE_PARAMS.VEHICLE_MODEL_ID];
       const formMode = id === ROUTE_PARAMS.values.NEW
-        ? FORM_MODE.ADDING : !isNaN(parseInt(id))
-        ? FORM_MODE.UPDATING : FORM_MODE.NONE;
+        ? FORM_MODE.ADDING_MODEL : !isNaN(parseInt(id))
+        ? FORM_MODE.UPDATING_MODEL : FORM_MODE.NONE;
 
-      if (formMode == FORM_MODE.ADDING || formMode == FORM_MODE.UPDATING) {
+      if (formMode == FORM_MODE.ADDING_MODEL || formMode == FORM_MODE.UPDATING_MODEL) {
         injectReducer(store, {key: "formInfo", reducer: require("./reducers/VehicleModel.reducer.js").default});
         injectReducer(store, {key: "classificators", reducer: require("./../Classifiers/Classifiers.module").default});
         cb(null, require("./containers/VehicleModel.container.js").default);

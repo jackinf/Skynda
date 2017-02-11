@@ -1,14 +1,11 @@
-/**
- * Created by jevgenir on 10/26/2016.
- */
 import fetch from "isomorphic-fetch";
 import remoteConfig from "store/remoteConfig";
-import {setVehicleReviews} from "../reducers/SetVehicleReviews.reducer";
+import {setVehicleReviews} from "../actions";
 import {REDUCER_KEYS} from "../constants/VehicleReview.constant";
 
 export default function deleteItem(id) {
   return (dispatch, getState) => {
-    let items = getState()[REDUCER_KEYS.VEHICLES_DATA].items;
+    let items = getState()[REDUCER_KEYS.VEHICLES_REVIEWS_DATA].items;
 
     return fetch(`${remoteConfig.remote}/api/vehicle-review/${id}`, {
       method: "DELETE",

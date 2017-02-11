@@ -1,6 +1,3 @@
-/**
- * Created by jevgenir on 10/21/2016.
- */
 import React from "react";
 import {Table, Column, Cell} from 'fixed-data-table';
 import 'fixed-data-table/dist/fixed-data-table.css';
@@ -37,13 +34,13 @@ export default class VehicleList extends React.Component {
           width={50}
         />
         <Column
-          header={<Cell>ID</Cell>}
-          cell={({rowIndex, ...props}) => (<Cell {...props}>{rows[rowIndex].id}</Cell>)}
+          header={<Cell>Vehicle ID</Cell>}
+          cell={({rowIndex, ...props}) => (<Cell {...props}>{rows[rowIndex].vehicleId}</Cell>)}
           width={50}
         />
         <Column
-          header={<Cell>Vehicle ID</Cell>}
-          cell={({rowIndex, ...props}) => (<Cell {...props}>{rows[rowIndex].vehicleId}</Cell>)}
+          header={<Cell>ID</Cell>}
+          cell={({rowIndex, ...props}) => (<Cell {...props}>{rows[rowIndex].id}</Cell>)}
           width={50}
         />
         <Column

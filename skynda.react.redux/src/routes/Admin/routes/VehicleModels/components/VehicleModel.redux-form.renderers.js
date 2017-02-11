@@ -1,7 +1,3 @@
-/**
- * Created by jevgenir on 11/8/2016.
- */
-
 import React from "react";
 import {Row, Col} from "react-bootstrap";
 import Select from "react-select";

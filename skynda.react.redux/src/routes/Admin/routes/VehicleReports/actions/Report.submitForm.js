@@ -1,27 +1,29 @@
-/**
- * Created by zekar on 10/23/2016.
- */
 import {FORM_MODE} from "../constants/VehicleReport.constant";
 import remoteConfig from "store/remoteConfig";
 import {fromSpringToReduxFormError} from "../../../../../utils/formUtils";
 import {SubmissionError} from 'redux-form';
 import {browserHistory} from "react-router";
+import _ from "underscore";
 
 /**
  * Is executed on form submit. Not a redux action.
  * @returns {any}
  */
 export function formSubmit(data, formMode) {
-  return formMode == FORM_MODE.ADDING
+  return formMode == FORM_MODE.ADDING_REPORT
     ? createVehicleAsync(data)
     : updateVehicleAsync(data);
 }
 
-export function onFormSubmitSuccess(isSuccess) {
-  if (!!isSuccess) {
-    browserHistory.push(`/admin/vehicle-reports`);
+export const onFormSubmitSuccess = (response, onSubmitCustom = null) => {
+  if (response && response.success && !isNaN(parseInt(response.id)) && !isNaN(parseInt(response.vehicleId))) {
+    if (onSubmitCustom && _.isFunction(onSubmitCustom)) {
+      onSubmitCustom(null, response.vehicleId);
+    } else {
+      browserHistory.push(`/admin/vehicle-reports`);
+    }
   }
-}
+};
 
 export function onFormSubmitError() {
   console.log("error");
@@ -41,7 +43,6 @@ function createVehicleAsync(data) {
   })
     .then(resp => resp.json())
     .then(resp => {
-      console.log(resp);
       if (!resp.success) {
         throw new SubmissionError(fromSpringToReduxFormError(resp.errors));
       }
@@ -65,5 +66,6 @@ function updateVehicleAsync(data) {
       if (!resp.success) {
         throw new SubmissionError(fromSpringToReduxFormError(resp.errors));
       }
+      return resp;
     })
 }

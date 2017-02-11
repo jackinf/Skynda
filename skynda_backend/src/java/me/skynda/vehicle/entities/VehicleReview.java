@@ -6,6 +6,7 @@ import lombok.Data;
 import me.skynda.image.entities.Image;
 
 import java.io.Serializable;
+import java.util.Date;
 
 @Entity
 @Data
@@ -32,5 +33,8 @@ public class VehicleReview implements Serializable {
 
 	@Column(name = "vehicle_id", nullable = false)
 	private Integer vehicleId;
+
+	@Column(name = "archived")
+	private Date archived;
 
 }

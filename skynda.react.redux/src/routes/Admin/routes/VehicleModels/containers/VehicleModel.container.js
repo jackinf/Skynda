@@ -35,7 +35,6 @@ const dispatchToProps = {
   getTransmissions,
   getDrivetrains,
   getVehicleBodies,
-
   load,
   onHandleSubmitFinished,
   randomize,

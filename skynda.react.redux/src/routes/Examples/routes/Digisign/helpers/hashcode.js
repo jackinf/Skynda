@@ -101,7 +101,6 @@ setTimeout(function () {
         var idSignCreateHashReqParams = self.prepareSigningParameters(cert);
         //idSignCreateHashReqParams['sessionCode'] = sessionCode;
         idSignCreateHashReqParams['id'] = docId;
-        console.log(idSignCreateHashReqParams);
 
         var jqxhr = $.post(urlPrefix + '/PrepareSignature', {
           id: docId,
@@ -152,8 +151,6 @@ setTimeout(function () {
         // Tuleb hüpikaken, kus küsitakse PIN2; ID-kaart peab olema selleks ajaks sisestatud.
         window.hwcrypto.sign(cert, { hex: signatureDigest, type: signatureHashType }, { lang: lang })
           .then(function(signature) {
-            console.log("signature.hex");
-            console.log(signature.hex);
 
             var jqxhr = $.post(urlPrefix + '/FinalizeSignature', {
               requestAct: 'ID_SIGN_COMPLETE',
@@ -166,7 +163,6 @@ setTimeout(function () {
 
             jqxhr.done(function(result) {
               if (callback && typeof (callback) === "function") {
-                console.log(result);
                 callback(result.sessionCode);
               }
             });
@@ -238,7 +234,6 @@ setTimeout(function () {
 
       var longMessage = 'ID-card siging: ';
 
-      console.log('inside error handler');
       var hwcrypto = window.hwcrypto;
       switch (reason.message) {
 

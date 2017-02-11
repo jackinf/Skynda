@@ -13,4 +13,5 @@ public class CategoriesDto {
 	private String description;
 	private List<PointsDto> items;
 	private String inspector;
+	private List<FaultBaseDto> faults;
 }

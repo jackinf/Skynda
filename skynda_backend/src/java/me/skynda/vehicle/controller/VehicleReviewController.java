@@ -10,9 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-/**
- * Created by jevgenir on 11/14/2016.
- */
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(value = "/api")
@@ -24,6 +21,11 @@ public class VehicleReviewController {
     @RequestMapping(value = "/vehicle-reviews", method = RequestMethod.GET)
     public List<VehicleReviewAdminDto> getAll() {
         return service.getAll();
+    }
+
+    @RequestMapping(value = "/vehicle-reviews/{id}", method = RequestMethod.GET, consumes = "application/json")
+    public List<VehicleReviewAdminDto> getAllByVehicle(@PathVariable("id") Integer id) {
+        return service.getAllBy(id);
     }
 
     @RequestMapping(value = "/vehicle-review/{id}", method = RequestMethod.GET)

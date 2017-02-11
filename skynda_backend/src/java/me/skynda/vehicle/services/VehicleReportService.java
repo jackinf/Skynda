@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -55,6 +56,13 @@ public class VehicleReportService implements IVehicleReportService {
     }
 
     @Override
+    public List<VehicleReportDto> getAllBy(Serializable vehicleId){
+        List<VehicleReport> vehicleReportList = dao.getAllBy(vehicleId);
+        return vehicleReportList.stream().map(entity -> mapper.map(entity, VehicleReportDto.class))
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public VehicleReportDto getSingleBy(Integer id) {
         VehicleReport vehicleReport = dao.get(id);
         return mapper.map(vehicleReport, VehicleReportDto.class);
@@ -73,8 +81,11 @@ public class VehicleReportService implements IVehicleReportService {
         VehicleReport persistedVehicleReport = dao.saveOrUpdate(vehicleReport);
 
         UpdateReportItems(dto, persistedVehicleReport.getId());
+        CreateOrUpdateResponseDto response = CreateOrUpdateResponseDto.Factory.success(persistedVehicleReport.getId(), true);
+        response.setIsModal(dto.getIsModal());
+        response.setVehicleId(persistedVehicleReport.getVehicleId());
 
-        return CreateOrUpdateResponseDto.Factory.success(persistedVehicleReport.getId(), true);
+        return response;
     }
 
     private void UpdateReportItems(VehicleReportDto dto, Integer parentId ) {

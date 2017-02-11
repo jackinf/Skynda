@@ -1,6 +1,3 @@
-/**
- * Created by jevgenir on 10/26/2016.
- */
 //
 // export const ACTIONS = {
 //   SET_VEHICLE_MODELS_DATA: "VEHICLE_MODEL/SET_VEHICLE_MODELS_DATA"
@@ -11,10 +8,10 @@ export const REDUCER_KEYS = {
 };
 
 export const FORM_MODE = {
-  NONE: "NONE",
-  READING: "READING",
-  ADDING: "ADDING",
-  UPDATING: "UPDATING"
+  NONE_MODEL: "NONE",
+  READING_MODEL: "READING",
+  ADDING_MODEL: "ADDING",
+  UPDATING_MODEL: "UPDATING"
 };
 
 export const ROUTE_PARAMS = {

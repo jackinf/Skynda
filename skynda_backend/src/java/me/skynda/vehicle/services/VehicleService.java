@@ -78,7 +78,29 @@ public class VehicleService implements IVehicleService {
     @Override
     public VehicleDetailedDto getVehicleDetailed(Integer id) {
         Vehicle model = vehicleDao.get(id);
-        return mapper.map(model, VehicleDetailedDto.class);
+        VehicleDetailedDto detailedDto = mapper.map(model, VehicleDetailedDto.class);
+
+        if(!detailedDto.getReportCategories().isEmpty()){
+            CategoriesDto categoriesDto = detailedDto.getReportCategories()
+                    .stream().filter(x ->  x.getInspector() != null || !x.getInspector().isEmpty() )
+                    .findFirst().orElse(null);
+            if(categoriesDto != null && !categoriesDto.getInspector().isEmpty()){
+                detailedDto.setInspector(categoriesDto.getInspector());
+            }
+
+            List<FaultBaseDto> faults = new ArrayList<>();
+
+            for (CategoriesDto category: detailedDto.getReportCategories()) {
+                for (FaultBaseDto fault: category.getFaults()) {
+                    faults.add(fault);
+                }
+            }
+
+            detailedDto.setFaults(faults);
+        }
+
+
+        return detailedDto;
     }
 
     @Override
@@ -165,8 +187,6 @@ public class VehicleService implements IVehicleService {
         /*
             Save all the one-2-many relations with vehicle-to-be-sold
          */
-
-//        vehicleReportItemDao.addMultipleToVehicle(addedVehicle, vehicleAdminDto.getReportItems());
         vehicleDescriptionDao.addMultipleToVehicle(addedVehicle, vehicleAdminDto.getDescriptions());
         vehicleFeatureDao.addMultipleToVehicle(addedVehicle, vehicleAdminDto.getFeatures());
         vehicleImageDao.addMultipleToVehicle(addedVehicle, imageDtos);

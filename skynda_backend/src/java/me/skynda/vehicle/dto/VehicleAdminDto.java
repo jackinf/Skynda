@@ -44,7 +44,7 @@ public class VehicleAdminDto extends BaseDto implements ImageStorable<ImageDto> 
 
 	private List<FeatureDto> features;
 	private List<FaultBaseDto> faults;
-	private List<VehicleReportItemDto> reportItems;
+	private List<VehicleReportDto> reportCategories;
 	private List<ImageContainerDto> images;
 	private List<DescriptionDto> descriptions;
 	private List<ReviewDto> reviews;

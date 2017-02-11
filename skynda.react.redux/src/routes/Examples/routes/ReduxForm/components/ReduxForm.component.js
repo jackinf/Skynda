@@ -8,7 +8,6 @@ class ReduxFormView extends React.Component {
 
   onSubmit = (e, values) => {
     e.preventDefault();
-    console.log(values);
     this.props.submitMyForm();
     // this.props.submitUploadForm.bind(this);
   };

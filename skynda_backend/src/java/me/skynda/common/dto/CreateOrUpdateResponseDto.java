@@ -10,6 +10,8 @@ public class CreateOrUpdateResponseDto {
     private Integer id;
     private boolean success;
     private List<ObjectError> errors;
+    private Boolean isModal;
+    private Integer vehicleId;
 
     public static class Factory {
         public static CreateOrUpdateResponseDto fail(List<ObjectError> errors) {

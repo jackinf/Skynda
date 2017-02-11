@@ -32,7 +32,6 @@ public class VehicleReport implements Serializable{
     @Column(name = "inspector_name")
     private String inspector;
 
-
     @Column(name = "archived")
     private Date archived;
 

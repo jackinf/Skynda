@@ -1,6 +1,3 @@
-/**
- * Created by jevgenir on 10/22/2016.
- */
 import React from "react";
 import {Field, FieldArray} from 'redux-form';
 import TextField from 'material-ui/TextField';
@@ -14,7 +11,8 @@ import ReactIconDelete from 'react-icons/lib/md/delete';
 import ReactCrop from 'react-image-crop';
 import "react-image-crop/dist/ReactCrop.css";
 import {AlphaPicker, CirclePicker, TwitterPicker} from 'react-color';
-
+import ReactDOM from 'react-dom';
+import { BootstrapTable as bt, TableHeaderColumn } from 'react-bootstrap-table';
 import {fieldListWrapper, renderImage} from "../../../components/FormRenderers/index";
 
 const styleDeleteIcon = {
@@ -274,3 +272,28 @@ export class ColorRenderer extends React.Component {
     );
   }
 }
+
+class BootstrapTable extends bt {
+  componentDidMount() {
+    super.componentDidMount();
+    const { onAdd } = this.props.options || {};
+    const dom = ReactDOM.findDOMNode(this);
+    const addButton = dom.getElementsByClassName('react-bs-table-add-btn')[0];
+    if (addButton) {
+      addButton.onclick = function onclick(event) {
+        event.stopPropagation();
+        onAdd();
+      };
+    }
+  }
+
+  render() {
+    return super.render({ ...this.props });
+  }
+}
+
+
+export {
+  BootstrapTable,
+  TableHeaderColumn
+};

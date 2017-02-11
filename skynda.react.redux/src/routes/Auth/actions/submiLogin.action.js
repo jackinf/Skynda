@@ -34,7 +34,6 @@ export default function submitLogin(data) {
           })
             .then(resp => resp.json())
             .then(resp => {
-            console.log(resp);
             dispatch(authSetUser(resp));
           });
         } else {

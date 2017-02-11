@@ -1,6 +1,3 @@
-/**
- * Created by jevgenir on 10/21/2016.
- */
 import React from "react";
 import {Table, Column, Cell} from 'fixed-data-table';
 import 'fixed-data-table/dist/fixed-data-table.css';
@@ -37,6 +34,11 @@ export default class ListView extends React.Component {
           width={50}
         />
         <Column
+          header={<Cell>Vehicle ID</Cell>}
+          cell={({rowIndex, ...props}) => (<Cell {...props}>{rows[rowIndex].vehicleId}</Cell>)}
+          width={200}
+        />
+        <Column
           header={<Cell>ID</Cell>}
           cell={({rowIndex, ...props}) => (<Cell {...props}>{rows[rowIndex].id}</Cell>)}
           width={200}
@@ -44,11 +46,6 @@ export default class ListView extends React.Component {
         <Column
           header={<Cell>Title</Cell>}
           cell={({rowIndex, ...props}) => (<Cell {...props}>{rows[rowIndex].title}</Cell>)}
-          width={200}
-        />
-        <Column
-          header={<Cell>Vehicle ID</Cell>}
-          cell={({rowIndex, ...props}) => (<Cell {...props}>{rows[rowIndex].vehicleId}</Cell>)}
           width={200}
         />
         <Column

@@ -10,8 +10,8 @@ import {FORM_MODE} from "../constants/VehicleModel.constant";
 // Actions for redux-form
 // ------------------------------------
 export function onHandleSubmit(item, formInfo) {
-  return formInfo.formMode === FORM_MODE.ADDING
-    ? createItem(item) : formInfo.formMode === FORM_MODE.UPDATING
+  return formInfo.formMode === FORM_MODE.ADDING_MODEL
+    ? createItem(item) : formInfo.formMode === FORM_MODE.UPDATING_MODEL
     ? updateItem(item) : null;
 }
 

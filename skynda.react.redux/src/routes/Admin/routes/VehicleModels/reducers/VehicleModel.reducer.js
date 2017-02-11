@@ -25,13 +25,13 @@ export const load = (id) => {
   return (dispatch) => {
     dispatch(destroy("vehicleModelForm"));
     const formMode = id === ROUTE_PARAMS.values.NEW
-      ? FORM_MODE.ADDING : !isNaN(parseInt(id))
-      ? FORM_MODE.UPDATING : FORM_MODE.NONE;
+      ? FORM_MODE.ADDING_MODEL : !isNaN(parseInt(id))
+      ? FORM_MODE.UPDATING_MODEL : FORM_MODE.NONE_MODEL;
 
-    if (formMode === FORM_MODE.ADDING) {
-      dispatch(setFormMode(FORM_MODE.ADDING));
+    if (formMode === FORM_MODE.ADDING_MODEL) {
+      dispatch(setFormMode(FORM_MODE.ADDING_MODEL));
       dispatch(clearItem());
-    } else if (formMode == FORM_MODE.UPDATING) {
+    } else if (formMode == FORM_MODE.UPDATING_MODEL) {
       dispatch(fetchItem(id));
     } else {
       console.error("Invalid form mode");
@@ -71,7 +71,7 @@ export const onHandleSubmitFinished = (resp, onSubmitCustom = null) => (dispatch
       onSubmitCustom(null, resp.id);
     } else {
       dispatch(change("vehicleModelForm", "id", resp.id));
-      dispatch(setFormMode(FORM_MODE.UPDATING));
+      dispatch(setFormMode(FORM_MODE.UPDATING_MODEL));
       browserHistory.replace("/admin/vehicle-model/" + resp.id);
     }
   }
@@ -90,13 +90,13 @@ const fetchItem = (id) => (dispatch) => {
     .then(resp => resp.json())
     .then(item => {
       dispatch(setFetchSuccessful());
-      dispatch(setFormMode(FORM_MODE.UPDATING));
+      dispatch(setFormMode(FORM_MODE.UPDATING_MODEL));
       dispatch(setItem(item));
     })
     .catch((error) => {
       console.error("ERROR: ", error);
       dispatch(setFetchFailed(error));
-      dispatch(setFormMode(FORM_MODE.NONE));
+      dispatch(setFormMode(FORM_MODE.NONE_MODEL));
       dispatch(clearItem());
     });
 };

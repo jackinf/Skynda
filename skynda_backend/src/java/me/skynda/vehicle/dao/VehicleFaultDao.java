@@ -10,12 +10,15 @@ import me.skynda.image.entities.Image;
 import me.skynda.vehicle.entities.Vehicle;
 import me.skynda.vehicle.entities.VehicleFault;
 import me.skynda.vehicle.entities.VehicleReportItem;
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -25,32 +28,7 @@ public class VehicleFaultDao extends BaseEntityDao<VehicleFault> implements IVeh
     @Autowired
     private IImageDao imageDao;
 
-    @Override
-    public void addMultipleToVehicle(Vehicle vehicle, List<FaultBaseDto> faults) {
 
-        Session session = getSession();
-        String id = vehicle.getId().toString();
-        session.createSQLQuery("DELETE FROM vehicle_fault WHERE vehicle_id = " + id)  // TODO: avoid SQL injection
-//                .setParameter("xxx", id)
-                .executeUpdate();
-
-        if (faults == null)
-            return;
-
-        for (FaultBaseDto fault : faults) {
-            VehicleFault vehicleFault = new VehicleFault();
-            vehicleFault.setText(fault.getText());
-
-            if (fault.getImage() != null) {
-                ImageDto imageDto = fault.getImage();
-                Image image = imageDao.save(Image.Factory.create(imageDto.getUrl(),
-                    imageDto.getBlobName(),
-                    imageDto.getContainerName()));
-                vehicleFault.setImage(image);
-            }
-            session.save(vehicleFault);
-        }
-    }
 
     @Override
     public List<VehicleFault> getCategoryFaults(Integer categoryId) {
@@ -141,6 +119,24 @@ public class VehicleFaultDao extends BaseEntityDao<VehicleFault> implements IVeh
         }
 
         return vehicleFault;
+    }
+
+    @Override
+    public List getActiveFaults(Serializable reportCategoryId) {
+        Session session = getSession();
+        try {
+
+            Criteria faults = session.createCriteria(VehicleFault.class, "item")
+                    .add(Restrictions.eq("reportCategoryId", reportCategoryId))
+                    .add(Restrictions.isNull("archived"));
+
+            return faults.list();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
 }

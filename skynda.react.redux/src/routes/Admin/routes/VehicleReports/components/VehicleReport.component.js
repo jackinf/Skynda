@@ -1,7 +1,7 @@
 import React from 'react';
-import {Field, FieldArray} from 'redux-form';
-import {ROUTE_PARAMS} from "../constants/VehicleReport.constant";
-import {formSubmit, onFormSubmitSuccess, onFormSubmitError} from "../actions";
+import {FieldArray, change, Field} from 'redux-form';
+import {ROUTE_PARAMS,FORMS} from "../constants/VehicleReport.constant";
+import {formSubmit, onFormSubmitSuccess, onFormSubmitError} from "../reducers";
 
 import {
   renderReportCategoryItems,
@@ -19,7 +19,6 @@ class VehicleReportCategory extends React.Component {
     load: React.PropTypes.func.isRequired,
     clear: React.PropTypes.func.isRequired,
     getVehiclesList: React.PropTypes.func.isRequired,
-    // fillWithFakeData: React.PropTypes.func.isRequired,
     onFaultFileUpload: React.PropTypes.func.isRequired,
     onFaultRemove: React.PropTypes.func.isRequired,
     // vehicle review data
@@ -31,13 +30,17 @@ class VehicleReportCategory extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: this.props.params[ROUTE_PARAMS.VEHICLE_ID]
+      id: this.props.params[ROUTE_PARAMS.VEHICLE_REPORT_ID]
     };
   }
 
   componentDidMount() {
-    this.props.load(this.props.params[ROUTE_PARAMS.VEHICLE_ID]);
+    this.props.load(this.props.params[ROUTE_PARAMS.VEHICLE_REPORT_ID]);
     this.props.getVehiclesList();
+    if(this.props.params[ROUTE_PARAMS.VEHICLE_ID]){
+      this.props.dispatch(change(FORMS.VEHICLE_FORM_REPORT, "vehicleId", this.props.params[ROUTE_PARAMS.VEHICLE_ID]));
+      this.props.dispatch(change(FORMS.VEHICLE_FORM_REPORT, "isModal", true));
+    }
   }
 
   componentWillUnmount() {
@@ -48,8 +51,12 @@ class VehicleReportCategory extends React.Component {
    *  Form submit logic. Saves or updates
    */
   onSubmit(e) {
-    this.props.handleSubmit(data => formSubmit(data, this.props.formMode1))(e)
-      .then(() => onFormSubmitSuccess(this.props.submitSucceeded), onFormSubmitError);
+    let promise = this.props.handleSubmit(data => formSubmit(data, this.props.formModeReport))(e);
+    promise && promise.then(response =>{
+        onFormSubmitSuccess(response, this.props.onSubmitCustom);
+        onFormSubmitError;
+      });
+
   };
 
   render() {
@@ -57,9 +64,12 @@ class VehicleReportCategory extends React.Component {
         {this.props.isFetching || this.props.submitting ? "Loading..." : (
             <form onSubmit={this.onSubmit.bind(this)} className="vehicle-report">
 
-              <h3>{this.props.formMode1}</h3>
+              <h3>{this.props.formModeReport}</h3>
 
-              <VehiclesSelectField name="vehicleId" label="Vehicle *" vehicles={this.props.vehicles}/>
+              {this.props.params[ROUTE_PARAMS.VEHICLE_ID] ?
+                <div>VehicleId: {this.props.params[ROUTE_PARAMS.VEHICLE_ID]}</div>
+                  : <VehiclesSelectField name="vehicleId" label="Vehicle *" vehicles={this.props.vehicles}/>
+              }
 
               <TextFieldForReport name="inspector" label="Inspector Name *"/>
 
