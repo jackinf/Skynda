@@ -38,4 +38,7 @@ public class Feature {
 
     @Column(name = "is_active")
     private Boolean isActive;
+
+    @Column(name = "is_imported")
+    private Boolean isImported;
 }

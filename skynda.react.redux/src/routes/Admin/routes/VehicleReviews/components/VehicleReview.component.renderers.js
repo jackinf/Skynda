@@ -1,6 +1,3 @@
-/**
- * Created by jevgenir on 11/20/2016.
- */
 import React from "react";
 import {Field} from 'redux-form';
 import MenuItem from 'material-ui/MenuItem';
