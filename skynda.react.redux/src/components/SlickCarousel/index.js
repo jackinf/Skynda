@@ -6,6 +6,9 @@ import "slick-carousel/slick/slick.min.js"
 import "./simplecarousel.scss"
 
 export class SimpleCarousel extends React.Component{
+  static propTypes = {
+    title: React.PropTypes.any.isRequired
+  };
 
   render() {
     function NextButton({ onClick }) {
@@ -41,17 +44,20 @@ export class SimpleCarousel extends React.Component{
         );
       });
     }else {
-      for (let i = 0; i < 5; i++) {
-        content.push(<div key={i}><img width={250}  src='http://placekitten.com/g/400/200' className="skynda-slick-container-image"/></div>);
-      }
+      // for (let i = 0; i < 5; i++) {
+      //   content.push(<div key={i}><img width={250}  src='http://placekitten.com/g/400/200' className="skynda-slick-container-image"/></div>);
+      // }
     }
 
-    return (
-      <div className="slickContainer">
+    return (<span>
+      {content && content.length > 0 ? (<div className="slickContainer">
+          {this.props.title}
           <Slider {...settings} >
-            {content}
+            {content || <div></div>}
           </Slider>
-      </div>
+        </div>) : ""}
+    </span>
+
     );
   }
 

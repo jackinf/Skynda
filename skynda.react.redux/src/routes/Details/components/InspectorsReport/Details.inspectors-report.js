@@ -5,8 +5,9 @@ import "../Details.scss";
 import "./Details.inspectors-report.scss";
 import SimpleCarousel from "../../../../components/SlickCarousel";
 import {Row, Col} from "react-bootstrap";
-import imageCarInspector from "./assets/carinspector.png";
+import imageCarInspector from "./assets/carinspector2.jpg";
 import {Translate} from 'react-redux-i18n';
+import {Image} from "react-bootstrap";
 
 /**
  * Inspector's report
@@ -19,7 +20,9 @@ class InspectorsReport extends React.Component {
       <Skblock header={<Translate value="details.components.inspector_report.header"/>}>
         <div className="inspectors-report">
           <Row className="inspector-block">
-            <Col md={3}><img src={imageCarInspector} width='130' alt='happy'/></Col>
+            <Col md={3}>
+              <Image src={imageCarInspector} circle width={130} alt="happy" />
+            </Col>
             <Col md={9} className='sk_details__certified_developer'>
               {inspector}
             </Col>
@@ -42,8 +45,7 @@ class InspectorsReport extends React.Component {
 
           <Row>
             <Col xs={12}>
-              <Translate value="details.components.inspector_report.pic_dents_txt"/>
-              <SimpleCarousel images={faults} />
+              <SimpleCarousel images={faults} title={<Translate value="details.components.inspector_report.pic_dents_txt"/>} />
             </Col>
           </Row>
         </div>
