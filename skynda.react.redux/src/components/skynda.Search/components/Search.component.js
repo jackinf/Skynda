@@ -4,6 +4,7 @@ import {Translate} from 'react-redux-i18n';
 import Plus from 'react-icons/lib/fa/plus'
 import Minus from 'react-icons/lib/fa/minus'
 import RefreshIndicator from 'material-ui/RefreshIndicator';
+import {CirclePicker, CustomPicker} from "react-color";
 
 import "./Search.component.scss";
 import ButtonGroupContainer from "../containers/Select.button.container";
@@ -13,23 +14,28 @@ import SearchBtnContainer from "../containers/Search.button.container";
 import SearchResultsContainer from "../containers/Search.results.container"
 import moment from "moment";
 
+// Natuke laisk lahendus värvide otsingu osas
+// id-d ja hex-id peavad olema vastavuses backendiga, mis on klassis: me/skynda/vehicle/dao/VehicleDao.java meetodis mapColorIdToHex
 const colors = [
   {id: -1, name: "Kõik"},
-  {id: 0, name: "red", style: {"backgroundColor": "#EF1717"}, hideName: true},
-  {id: 1, name: "orange", style: {"backgroundColor": "#E87846"}, hideName: true},
-  {id: 2, name: "yellow", style: {"backgroundColor": "#DECC44"}, hideName: true},
-  {id: 3, name: "green", style: {"backgroundColor": "#91DD59"}, hideName: true},
-  {id: 4, name: "green", style: {"backgroundColor": "#3AC99D"}, hideName: true},
-  {id: 5, name: "green", style: {"backgroundColor": "#44DE62"}, hideName: true},
-  {id: 6, name: "blue", style: {"backgroundColor": "#15A6DB"}, hideName: true},
-  {
-    id: 7,
-    name: "white",
-    style: {"backgroundColor": "#FFFFFF"},
-    hideName: true,
-    extraClass: "btn-inverse"
-  },
-  {id: 8, name: "black", style: {"backgroundColor": "#000000"}, hideName: true}
+  {id: 1, style: {"backgroundColor":  "#f44336"}, hideName: true, isColored: true},
+  {id: 2, style: {"backgroundColor":  "#e91e63"}, hideName: true, isColored: true},
+  {id: 3, style: {"backgroundColor":  "#9c27b0"}, hideName: true, isColored: true},
+  {id: 4, style: {"backgroundColor":  "#673ab7"}, hideName: true, isColored: true},
+  {id: 5, style: {"backgroundColor":  "#3f51b5"}, hideName: true, isColored: true},
+  {id: 6, style: {"backgroundColor":  "#2196f3"}, hideName: true, isColored: true},
+  {id: 7, style: {"backgroundColor":  "#03a9f4"}, hideName: true, isColored: true},
+  {id: 8, style: {"backgroundColor":  "#00bcd4"}, hideName: true, isColored: true},
+  {id: 9, style: {"backgroundColor":  "#009688"}, hideName: true, isColored: true},
+  {id: 10, style: {"backgroundColor": "#4caf50"}, hideName: true, isColored: true},
+  {id: 11, style: {"backgroundColor": "#8bc34a"}, hideName: true, isColored: true},
+  {id: 12, style: {"backgroundColor": "#cddc39"}, hideName: true, isColored: true},
+  {id: 13, style: {"backgroundColor": "#ffeb3b"}, hideName: true, isColored: true},
+  {id: 14, style: {"backgroundColor": "#ffc107"}, hideName: true, isColored: true},
+  {id: 15, style: {"backgroundColor": "#ff9800"}, hideName: true, isColored: true},
+  {id: 16, style: {"backgroundColor": "#ff5722"}, hideName: true, isColored: true},
+  {id: 17, style: {"backgroundColor": "#795548"}, hideName: true, isColored: true},
+  {id: 18, style: {"backgroundColor": "#607d8b"}, hideName: true, isColored: true}
 ];
 
 // Temporarily not used.
@@ -41,6 +47,8 @@ function ColorsComponent() {
     </Col>
   </Row>)
 }
+
+
 
 class SearchComponent extends React.Component {
   defaultSliderValues = {
@@ -205,6 +213,17 @@ class SearchComponent extends React.Component {
                                 <label><Translate value="components.car_search.transmission"/></label><br />
                                 <ButtonGroupContainer type={"transmission"} md={8} xs={6}
                                                       options={this.props.transmissions}/>
+                              </Col>
+                            </Row>
+                          </Col>
+                        </Row>
+
+                        <Row>
+                          <Col md={12}>
+                            <Row>
+                              <Col md={8} className='range-slider-wrapper'>
+                                <ColorsComponent />
+                                {/*<CirclePicker onChangeComplete={e => console.log(e)}  triangle="hide"/>*/}
                               </Col>
                             </Row>
                           </Col>

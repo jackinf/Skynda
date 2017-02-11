@@ -14,13 +14,13 @@ import {reducer as formReducer} from 'redux-form';
 
 import {loadTranslations, setLocale, syncTranslationWithStore, i18nReducer} from 'react-redux-i18n';
 import {injectReducer} from "../store/reducers";
+// import {config as ravenConfig} from "raven-js"; // https://sentry.io
 
 // Bonus
 import {authSetUser} from "./Auth/modules/auth.module";
 import {getStoredUser} from "../utils/userUtils";
 
 export const createRoutes = (store) => {
-
   // ========================================================
   // Translation setup
   // ========================================================
