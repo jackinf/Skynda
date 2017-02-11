@@ -3,7 +3,7 @@ package me.skynda.vehicle.dao;
 import me.skynda.common.db.BaseEntityDao;
 import me.skynda.common.dto.DeleteResponseDto;
 import me.skynda.common.interfaces.daos.IVehicleReviewDao;
-import me.skynda.vehicle.entities.VehicleReview;
+import me.skynda.common.entities.VehicleReview;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;

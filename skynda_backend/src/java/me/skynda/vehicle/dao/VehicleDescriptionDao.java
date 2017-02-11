@@ -3,8 +3,8 @@ package me.skynda.vehicle.dao;
 import me.skynda.common.db.BaseEntityDao;
 import me.skynda.common.interfaces.daos.IVehicleDescriptionDao;
 import me.skynda.vehicle.dto.DescriptionDto;
-import me.skynda.vehicle.entities.Vehicle;
-import me.skynda.vehicle.entities.VehicleDescription;
+import me.skynda.common.entities.Vehicle;
+import me.skynda.common.entities.VehicleDescription;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 

@@ -46,6 +46,7 @@ class VehicleDetails extends React.Component {
                 <Fetaures features={vehicleData.features}/>
                 <History history={vehicleData.history}/>
                 <PetrolConsumption petrolConsumption={vehicleData.petrolConsumption}/>
+
                 <Safety stars={vehicleData.safetyStars}
                         safetyUrl={vehicleData.safetyUrl} />
 

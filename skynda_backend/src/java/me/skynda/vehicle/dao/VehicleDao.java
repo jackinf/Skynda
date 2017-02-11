@@ -6,7 +6,7 @@ import me.skynda.common.interfaces.daos.IVehicleDao;
 import me.skynda.common.interfaces.daos.IVehicleReportDao;
 import me.skynda.common.interfaces.daos.IVehicleReviewDao;
 import me.skynda.vehicle.dto.request.SearchRequestDto;
-import me.skynda.vehicle.entities.Vehicle;
+import me.skynda.common.entities.Vehicle;
 import org.apache.commons.lang3.NotImplementedException;
 import org.hibernate.Criteria;
 import org.hibernate.Session;

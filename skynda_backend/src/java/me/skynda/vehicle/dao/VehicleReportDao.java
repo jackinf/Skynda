@@ -5,7 +5,7 @@ import me.skynda.common.dto.DeleteResponseDto;
 import me.skynda.common.interfaces.daos.IVehicleFaultDao;
 import me.skynda.common.interfaces.daos.IVehicleReportDao;
 import me.skynda.common.interfaces.daos.IVehicleReportItemDao;
-import me.skynda.vehicle.entities.VehicleReport;
+import me.skynda.common.entities.VehicleReport;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;

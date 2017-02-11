@@ -7,7 +7,7 @@ import me.skynda.common.interfaces.services.IVehicleModelService;
 import me.skynda.vehicle.dto.VehicleModelAdminDto;
 import me.skynda.vehicle.dto.request.ModelRequestDto;
 import me.skynda.vehicle.dto.response.VehicleModelResponseDto;
-import me.skynda.vehicle.entities.VehicleModel;
+import me.skynda.common.entities.VehicleModel;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

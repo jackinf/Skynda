@@ -100,7 +100,7 @@ export const renderFeatures = ({fields, ...custom}) => fieldListWrapper({
       <Card key={index} className="vehicle-component--list-card">
         <Row>
           <Col smOffset={1} sm={9}>
-            <Field name={`${name}.text`} type="text" component={renderTextField} placeholder={`Feature #${index + 1}`}/>
+            <Field name={`${name}.name`} type="text" component={renderTextField} placeholder={`Feature #${index + 1}`}/>
           </Col>
           <Col sm={2}>
             <FloatingActionButton mini={true} secondary={true} onClick={() => fields.remove(index)}>

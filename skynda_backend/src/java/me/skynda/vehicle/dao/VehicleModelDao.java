@@ -1,7 +1,7 @@
 package me.skynda.vehicle.dao;
 
 import me.skynda.common.interfaces.daos.IVehicleModelDao;
-import me.skynda.vehicle.entities.VehicleModel;
+import me.skynda.common.entities.VehicleModel;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;

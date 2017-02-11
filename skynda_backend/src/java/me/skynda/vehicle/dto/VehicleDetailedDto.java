@@ -31,10 +31,8 @@ public class VehicleDetailedDto {
 	private Integer torque;
 	private Integer totalValves;
 	private String additional;
-
 	private ImageDto mainImage;
 	private VehicleModelDto model;
-
 	private Boolean isSold;
 	private Integer safetyStars;
 	private String safetyUrl;
@@ -42,17 +40,15 @@ public class VehicleDetailedDto {
 	private List<FeatureDto> features;
 	private List<FaultBaseDto> faults;
 	private List<CategoriesDto> reportCategories;
+	private List<ReviewDto> reviews;
 	private String inspector;
 
 	private List<ImageContainerDto> images;
 	private List<DescriptionDto> descriptions;
-	private List<ReviewDto> reviews;
 
-	private double average;
-
-	public void setAverage(BigDecimal fuelCity, BigDecimal fuelHigway) {
+	public void calculateFuelAverage() {
 		try {
-			double result = (fuelCity.add(fuelHigway).doubleValue()) / 2;
+			double result = (this.getFuelCity().add(this.getFuelHighway()).doubleValue()) / 2;
 			this.fuelAverage = result;
 		} catch (NumberFormatException e) {
 			this.fuelAverage = 0;

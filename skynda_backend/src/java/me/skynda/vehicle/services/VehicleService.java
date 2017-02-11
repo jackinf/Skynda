@@ -9,8 +9,8 @@ import me.skynda.common.interfaces.services.IVehicleService;
 import me.skynda.image.entities.Image;
 import me.skynda.vehicle.dto.*;
 import me.skynda.vehicle.dto.request.SearchRequestDto;
-import me.skynda.vehicle.entities.Vehicle;
-import me.skynda.vehicle.entities.VehicleModel;
+import me.skynda.common.entities.Vehicle;
+import me.skynda.common.entities.VehicleModel;
 import me.skynda.vehicle.validators.VehicleValidator;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,7 +79,7 @@ public class VehicleService implements IVehicleService {
     public VehicleDetailedDto getVehicleDetailed(Integer id) {
         Vehicle model = vehicleDao.get(id);
         VehicleDetailedDto detailedDto = mapper.map(model, VehicleDetailedDto.class);
-
+        detailedDto.calculateFuelAverage();
         if(!detailedDto.getReportCategories().isEmpty()){
             CategoriesDto categoriesDto = detailedDto.getReportCategories()
                     .stream().filter(x ->  x.getInspector() != null || !x.getInspector().isEmpty() )
@@ -112,7 +112,7 @@ public class VehicleService implements IVehicleService {
         boolean mainImageUrlChanged;    // did the image change?
         if (vehicleAdminDto.getId() != null) {
             vehicle = vehicleDao.get(vehicleAdminDto.getId());
-            vehicle.setModel(null); // hack, unset value or there will be error: "org.hibernate.HibernateException: identifier of an instance of me.skynda.vehicle.entities.VehicleModel was altered from 3 to 7". This is because automapper maps only an id of a persisted object, which id should not be changed.
+            vehicle.setModel(null); // hack, unset value or there will be error: "org.hibernate.HibernateException: identifier of an instance of me.skynda.common.entities.VehicleModel was altered from 3 to 7". This is because automapper maps only an id of a persisted object, which id should not be changed.
             vehicle.setColorInsideHex(null);
             vehicle.setColorOutsideHex(null);
             mainImageUrlChanged = ImageDto.Helper.isUrlChanged(vehicle, vehicleAdminDto);   // do the check before mapping

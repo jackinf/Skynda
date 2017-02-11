@@ -1,4 +1,4 @@
-package me.skynda.vehicle.entities;
+package me.skynda.common.entities;
 
 import javax.persistence.*;
 

@@ -9,7 +9,6 @@ import {
   renderTextField,
   descriptionRenderer,
   renderFeatures,
-  MainImageCardField,
   ImagesCardField,
   selectRenderer,
   ErrorBlockRenderer,
@@ -28,7 +27,7 @@ import {ROUTE_PARAMS as VEHICLE_REVIEW_ROUTE_PARAMS} from "../../VehicleReviews/
 import VehicleModel from "../../VehicleModels/containers/VehicleModel.container";
 import VehicleReport from "../../VehicleReports/containers/VehicleReport.container";
 import VehicleReview from "../../VehicleReviews/containers/VehicleReview.container";
-import {CropToolCard, CropToolSimple} from "../../../../../components/ReduxForm/CropTool";
+import {CropToolCard} from "../../../../../components/ReduxForm/CropTool";
 
 const SubmitCardActions = ({disabled}) => (<CardActions>
   <hr/>
@@ -221,6 +220,7 @@ class Vehicle extends React.Component {
       mode: 'checkbox',
       clickToSelect: true
     };
+    console.log("featuresData", this.props.features);
 
     return (<div>
         {this.props.isFetching || this.props.submitting
@@ -272,20 +272,33 @@ class Vehicle extends React.Component {
                       <Field name="price" label="Price *" component={renderTextField} type="number" errors={errors}/>
                       <Field name="mileage" label="Mileage *" component={renderTextField} type="number"
                              errors={errors}/>
-
-                      <label>Fuel:</label>
-                      <Field name="fuelCity" label="Fuel City" component={renderTextField} errors={errors}/>
-                      <Field name="fuelHighway" label="Fuel Highway" component={renderTextField} errors={errors}/>
-
-                      <label>History:</label>
-                      <Field name="vinCode" label="Vin Code *" component={renderTextField} errors={errors}/>
-                      <Field name="registrationNumber" label="Registration Number *" component={renderTextField}
-                             errors={errors}/>
-
-                      <label>Safety:</label>
-                      <Field name="safetyStars" label="Safety Stars" component={renderTextField} type="number"
-                             errors={errors}/>
-
+                      <Card>
+                        <CardText>
+                          <label>Fuel:</label>
+                          <Field name="fuelCity" label="Fuel City" component={renderTextField} errors={errors}/>
+                          <Field name="fuelHighway" label="Fuel Highway" component={renderTextField} errors={errors}/>
+                        </CardText>
+                      </Card>
+                      <br/>
+                      <Card>
+                        <CardText>
+                          <label>History:</label>
+                          <Field name="vinCode" label="Vin Code *" component={renderTextField} errors={errors}/>
+                          <Field name="registrationNumber" label="Registration Number *" component={renderTextField}
+                                 errors={errors}/>
+                        </CardText>
+                      </Card>
+                      <br/>
+                      <Card>
+                        <CardText>
+                          <label>Safety:</label>
+                          <Field name="safetyStars" label="Safety Stars" component={renderTextField} type="number"
+                                 errors={errors}/>
+                          <Field name="safetyUrl" label="Safety Url" component={renderTextField}
+                                 errors={errors}/>
+                        </CardText>
+                      </Card>
+                      <br/>
                       <Field name="colorInsideHex"
                              label="Color inside *"
                              errors={errors}
@@ -297,18 +310,21 @@ class Vehicle extends React.Component {
                              errors={errors}
                              onChangeComplete={this.onSetField}
                              component={ColorRenderer}/>
-                      <Field name="fuelCity" label="Fuel City" component={renderTextField} errors={errors}/>
-                      <Field name="fuelHighway" label="Fuel Highway" component={renderTextField} errors={errors}/>
-                      <Field name="isSold" label="Is Sold" component={renderCheckbox} errors={errors}/>
-                      <Field name="mileage" label="Mileage *" component={renderTextField} type="number"
-                             errors={errors}/>
-                      <Field name="price" label="Price *" component={renderTextField} type="number" errors={errors}/>
-                      <Field name="registrationNumber" label="Registration Number *" component={renderTextField}
-                             errors={errors}/>
-                      <Field name="safetyStars" label="Safety Stars" component={renderTextField} type="number"
-                             errors={errors}/>
-                      <Field name="vinCode" label="Vin Code *" component={renderTextField} errors={errors}/>
-                      <Field name="additional" label="Additional info" component={renderTextField} errors={errors}/>
+                    </CardText>
+
+
+
+                    <SubmitCardActions disabled={this.props.submitting}/>
+                  </Card>
+
+                  <br/>
+
+                  {/*TODO FEATURES CRUD*/}
+                  <Card>
+                    <CardTitle title={<h3>Descriptions & addition info</h3>}/>
+                    <CardText>
+                      <FieldArray name="features" label="Features" component={renderFeatures}
+                            errors={errors}/>
                     </CardText>
                     <SubmitCardActions disabled={this.props.submitting}/>
                   </Card>
@@ -464,6 +480,7 @@ Vehicle.propTypes = {
     ),
     fuelCity: React.PropTypes.number,
     fuelHighway: React.PropTypes.number,
+    fuelAverage: React.PropTypes.number,
     id: React.PropTypes.number,
     images: React.PropTypes.arrayOf(
       React.PropTypes.shape({

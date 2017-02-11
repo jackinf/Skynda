@@ -86,7 +86,7 @@ function map(vehicleData) {
   const history = {
     problems: [],
     vinCode: vehicleData.vinCode,
-    numberPlate: vehicleData.registrationNumber
+    registrationNumber: vehicleData.registrationNumber
   };
   const petrolConsumption = {
     city: vehicleData.fuelCity,

@@ -2,8 +2,8 @@ package me.skynda.common.interfaces.daos;
 
 import me.skynda.common.db.SkyndaBaseEntityDao;
 import me.skynda.vehicle.dto.DescriptionDto;
-import me.skynda.vehicle.entities.Vehicle;
-import me.skynda.vehicle.entities.VehicleDescription;
+import me.skynda.common.entities.Vehicle;
+import me.skynda.common.entities.VehicleDescription;
 
 import java.util.List;
 

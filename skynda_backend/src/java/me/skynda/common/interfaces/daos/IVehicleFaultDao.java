@@ -1,9 +1,7 @@
 package me.skynda.common.interfaces.daos;
 
 import me.skynda.common.dto.DeleteResponseDto;
-import me.skynda.vehicle.dto.FaultBaseDto;
-import me.skynda.vehicle.entities.Vehicle;
-import me.skynda.vehicle.entities.VehicleFault;
+import me.skynda.common.entities.VehicleFault;
 import me.skynda.common.db.SkyndaBaseEntityDao;
 
 import java.io.Serializable;
