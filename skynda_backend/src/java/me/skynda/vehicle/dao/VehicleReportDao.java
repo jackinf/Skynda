@@ -2,6 +2,7 @@ package me.skynda.vehicle.dao;
 
 import me.skynda.common.db.BaseEntityDao;
 import me.skynda.common.dto.DeleteResponseDto;
+import me.skynda.common.helper.JsonHelper;
 import me.skynda.common.interfaces.daos.IVehicleFaultDao;
 import me.skynda.common.interfaces.daos.IVehicleReportDao;
 import me.skynda.common.interfaces.daos.IVehicleReportItemDao;
@@ -10,6 +11,8 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -23,13 +26,13 @@ public class VehicleReportDao extends BaseEntityDao<VehicleReport> implements IV
     private final IVehicleReportItemDao itemDao;
     private final IVehicleFaultDao faultDao;
 
+    private static Logger logger = LoggerFactory.getLogger(VehicleReportDao.class);
+
     @Autowired
-    public VehicleReportDao(IVehicleReportItemDao vehicleReportItemDao,
-                            IVehicleFaultDao faultDao) {
+    public VehicleReportDao(IVehicleReportItemDao vehicleReportItemDao, IVehicleFaultDao faultDao) {
         itemDao = vehicleReportItemDao;
         this.faultDao = faultDao;
     }
-
 
     @Override
     public void deleteEntity(VehicleReport report, DeleteResponseDto response) {
@@ -49,17 +52,22 @@ public class VehicleReportDao extends BaseEntityDao<VehicleReport> implements IV
                     .executeUpdate();
 
             if (queryResponse < 1) {
-                throw new Exception("Vehicle Report Item Delete failed: No such item found.");
+                Exception exception = new Exception("Vehicle Report Item Delete failed: No such item found.");
+                logger.error("deleteEntity failed. report: " + JsonHelper.toJson(report), exception);
+                throw exception;
             }
 
             tx.commit();
             response.setSuccess(true);
 
         } catch (Exception e) {
+            logger.error("deleteEntity failed. report: " + JsonHelper.toJson(report), e);
             e.printStackTrace();
+
             response.setError(e.getMessage());
             response.setSuccess(false);
-            if(tx != null) tx.rollback();
+            if(tx != null)
+                tx.rollback();
         }
     }
 
@@ -93,6 +101,7 @@ public class VehicleReportDao extends BaseEntityDao<VehicleReport> implements IV
             }
 
         } catch (Exception e) {
+            logger.error("get failed. id: " + id + ", isActive: " + isActive, e);
             e.printStackTrace();
         }
 
@@ -130,6 +139,7 @@ public class VehicleReportDao extends BaseEntityDao<VehicleReport> implements IV
             return queryResponse;
 
         } catch (Exception e) {
+            logger.error("getAll failed. isActive: " + isActive, e);
             e.printStackTrace();
         }
 
@@ -168,6 +178,7 @@ public class VehicleReportDao extends BaseEntityDao<VehicleReport> implements IV
             return queryResponse;
 
         } catch (Exception e) {
+            logger.error("getAllBy failed. vehicleId: " + vehicleId + ", isActive: " + isActive, e);
             e.printStackTrace();
         }
 

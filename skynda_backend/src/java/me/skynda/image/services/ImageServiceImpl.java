@@ -5,6 +5,8 @@ import me.skynda.common.interfaces.services.ImageService;
 import me.skynda.image.dto.ImageDto;
 import me.skynda.image.entities.Image;
 import org.dozer.Mapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,14 +28,21 @@ public class ImageServiceImpl implements ImageService {
     @Autowired
     private Mapper mapper;
 
+    private static Logger logger = LoggerFactory.getLogger(ImageServiceImpl.class);
+
     @Override
     public List<ImageDto> list(String containerName) {
-        Stream<Image> imageStream = imageDao.getAll().parallelStream();
-        if (containerName != null && !containerName.equals(""))
-            imageStream = imageStream.filter(image -> {
-                String imageContainerName = image.getContainerName();
-                return imageContainerName != null && !imageContainerName.equals("") && image.getContainerName().equals(containerName);
-            });
-        return imageStream.map(image -> mapper.map(image, ImageDto.class)).collect(Collectors.toList());
+        try {
+            Stream<Image> imageStream = imageDao.getAll().parallelStream();
+            if (containerName != null && !containerName.equals(""))
+                imageStream = imageStream.filter(image -> {
+                    String imageContainerName = image.getContainerName();
+                    return imageContainerName != null && !imageContainerName.equals("") && image.getContainerName().equals(containerName);
+                });
+            return imageStream.map(image -> mapper.map(image, ImageDto.class)).collect(Collectors.toList());
+        } catch (Exception e) {
+            logger.error("list failed. containerName: " + containerName, e);
+            throw e;
+        }
     }
 }

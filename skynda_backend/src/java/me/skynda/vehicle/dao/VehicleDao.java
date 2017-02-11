@@ -2,6 +2,7 @@ package me.skynda.vehicle.dao;
 
 import me.skynda.common.db.BaseEntityDao;
 import me.skynda.common.helper.CastHelper;
+import me.skynda.common.helper.JsonHelper;
 import me.skynda.common.interfaces.daos.IVehicleDao;
 import me.skynda.common.interfaces.daos.IVehicleReportDao;
 import me.skynda.common.interfaces.daos.IVehicleReviewDao;
@@ -12,6 +13,8 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -28,6 +31,8 @@ public class VehicleDao extends BaseEntityDao<Vehicle> implements IVehicleDao {
 
     private final IVehicleReportDao reportDao;
     private final IVehicleReviewDao reviewDao;
+
+    private static Logger logger = LoggerFactory.getLogger(VehicleDao.class);
 
     @Autowired
     public VehicleDao(IVehicleReportDao reportDao,IVehicleReviewDao reviewDao) {
@@ -48,7 +53,6 @@ public class VehicleDao extends BaseEntityDao<Vehicle> implements IVehicleDao {
         List reviews = null;
 
         try {
-
             Criteria vehicleCriteria = session
                     .createCriteria(Vehicle.class, "vehicle");
 
@@ -68,6 +72,7 @@ public class VehicleDao extends BaseEntityDao<Vehicle> implements IVehicleDao {
             }
 
         } catch (Exception e) {
+            logger.error("get failed. id: " + JsonHelper.toJson(id) + ", isActive: " + isActive, e);
             e.printStackTrace();
         }
 
@@ -184,7 +189,8 @@ public class VehicleDao extends BaseEntityDao<Vehicle> implements IVehicleDao {
             return result;
 
         }catch (Exception ex){
-            throw new NotImplementedException("search() is corrupted", ex.getMessage());
+            logger.error("search failed. params: " + JsonHelper.toJson(params), ex);
+            throw ex;
         }
     }
 }

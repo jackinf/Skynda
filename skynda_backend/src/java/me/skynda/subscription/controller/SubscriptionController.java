@@ -17,6 +17,6 @@ public class SubscriptionController {
 
     @RequestMapping(value = "/subscribe", method = RequestMethod.POST, produces = "application/json", consumes = MediaType.APPLICATION_JSON_VALUE)
     public CreateOrUpdateResponseDto subscribeEmail(@RequestBody SubscribeDto dto) {
-        return subscribeService.Subscribe(dto);
+        return subscribeService.subscribe(dto);
     }
 }
