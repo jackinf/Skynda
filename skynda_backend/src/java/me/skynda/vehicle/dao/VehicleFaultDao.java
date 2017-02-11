@@ -1,6 +1,8 @@
 package me.skynda.vehicle.dao;
 
 import me.skynda.common.dto.DeleteResponseDto;
+import me.skynda.common.helper.JsonHelper;
+import me.skynda.common.interceptors.RequestProcessingTimeInterceptor;
 import me.skynda.common.interfaces.daos.IImageDao;
 import me.skynda.common.db.BaseEntityDao;
 import me.skynda.common.interfaces.daos.IVehicleFaultDao;
@@ -15,6 +17,8 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -28,7 +32,7 @@ public class VehicleFaultDao extends BaseEntityDao<VehicleFault> implements IVeh
     @Autowired
     private IImageDao imageDao;
 
-
+    private static Logger logger = LoggerFactory.getLogger(VehicleFaultDao.class);
 
     @Override
     public List<VehicleFault> getCategoryFaults(Integer categoryId) {
@@ -42,7 +46,7 @@ public class VehicleFaultDao extends BaseEntityDao<VehicleFault> implements IVeh
                     .setParameter("categoryId", categoryId);
             items = query.list();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("getCategoryFaults failed. categoryId: " + categoryId, e);
         }
 
         return items;
@@ -67,12 +71,15 @@ public class VehicleFaultDao extends BaseEntityDao<VehicleFault> implements IVeh
                     .executeUpdate();
 
             if (queryResponse < 1) {
-                throw new Exception("Vehicle Report Item Delete failed: No such item found.");
+                Exception exception = new Exception("Vehicle Report Item Delete failed: No such item found.");
+                logger.error("deleteEntity failed. fault: " + JsonHelper.toJson(fault), exception);
+                throw exception;
             }
 
             tx.commit();
             response.setSuccess(true);
         } catch (Exception e) {
+            logger.error("deleteEntity failed. fault: " + JsonHelper.toJson(fault), e);
             e.printStackTrace();
             response.setError(e.getMessage());
             response.setSuccess(false);
@@ -100,7 +107,9 @@ public class VehicleFaultDao extends BaseEntityDao<VehicleFault> implements IVeh
                                 .uniqueResult();
 
                 if (existingItem == null) {
-                    throw new Exception("Vehicle Fault is null");
+                    Exception exception = new Exception("Vehicle Fault is null");
+                    logger.error("saveOrUpdate failed. " + JsonHelper.toJson(vehicleFault), exception);
+                    throw exception;
                 }
 
                 existingItem.setText(vehicleFault.getText());
@@ -114,7 +123,9 @@ public class VehicleFaultDao extends BaseEntityDao<VehicleFault> implements IVeh
 
             tx.commit();
         } catch (Exception e) {
-            if(tx != null) tx.rollback();
+            if(tx != null)
+                tx.rollback();
+            logger.error("saveOrUpdate failed. vehicleFault: " + JsonHelper.toJson(vehicleFault), e);
             e.printStackTrace();
         }
 
@@ -125,7 +136,6 @@ public class VehicleFaultDao extends BaseEntityDao<VehicleFault> implements IVeh
     public List getActiveFaults(Serializable reportCategoryId) {
         Session session = getSession();
         try {
-
             Criteria faults = session.createCriteria(VehicleFault.class, "item")
                     .add(Restrictions.eq("reportCategoryId", reportCategoryId))
                     .add(Restrictions.isNull("archived"));
@@ -133,6 +143,7 @@ public class VehicleFaultDao extends BaseEntityDao<VehicleFault> implements IVeh
             return faults.list();
 
         } catch (Exception e) {
+            logger.error("getActiveFaults failed. reportCategoryId: " + reportCategoryId, e);
             e.printStackTrace();
         }
 

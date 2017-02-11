@@ -1,5 +1,6 @@
 package me.skynda.vehicle.dao;
 
+import me.skynda.common.helper.JsonHelper;
 import me.skynda.common.interfaces.daos.IImageDao;
 import me.skynda.common.db.BaseEntityDao;
 import me.skynda.common.interfaces.daos.IVehicleImageDao;
@@ -9,6 +10,8 @@ import me.skynda.image.entities.Image;
 import me.skynda.vehicle.entities.Vehicle;
 import me.skynda.vehicle.entities.VehicleImage;
 import org.hibernate.Session;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -20,14 +23,20 @@ public class VehicleImageDao extends BaseEntityDao<VehicleImage> implements IVeh
     @Autowired
     private IImageDao imageDao;
 
+    private static Logger logger = LoggerFactory.getLogger(VehicleImageDao.class);
+
     @Override
     public void addMultipleToVehicle(Vehicle vehicle, List<ImageContainerDto> images) {
 
         Session session = getSession();
         String id = vehicle.getId().toString();
-        session.createSQLQuery("DELETE FROM vehicle_image WHERE vehicle_id = " + id)  // TODO: avoid SQL injection
+        try {
+            session.createSQLQuery("DELETE FROM vehicle_image WHERE vehicle_id = " + id)  // TODO: avoid SQL injection
 //                .setParameter("xxx", id)
-                .executeUpdate();
+                    .executeUpdate();
+        } catch (Exception e) {
+            logger.error("addMultipleToVehicle failed. vehicle: " + JsonHelper.toJson(vehicle) + ", images: " + JsonHelper.toJson(images), e);
+        }
 
         if (images == null)
             return;

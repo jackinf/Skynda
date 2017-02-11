@@ -69,4 +69,9 @@ public class VehicleController extends BaseController {
     public SearchResponseDto search(@RequestBody SearchRequestDto searchParams){
         return vehicleService.search(searchParams);
     }
+
+    @RequestMapping(value = "/vehicle/bad", method = RequestMethod.GET, consumes = "application/json")
+    public SearchResponseDto bad() throws Exception {
+        throw new Exception("Lol");
+    }
 }

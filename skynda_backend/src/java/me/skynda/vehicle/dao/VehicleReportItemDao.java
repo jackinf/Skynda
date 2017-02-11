@@ -2,6 +2,7 @@ package me.skynda.vehicle.dao;
 
 import me.skynda.common.db.BaseEntityDao;
 import me.skynda.common.dto.DeleteResponseDto;
+import me.skynda.common.helper.JsonHelper;
 import me.skynda.common.interfaces.daos.IVehicleReportItemDao;
 import me.skynda.vehicle.entities.VehicleReportItem;
 import org.hibernate.Criteria;
@@ -9,6 +10,8 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import java.io.Serializable;
@@ -18,6 +21,8 @@ import java.util.List;
 
 @Repository
 public class VehicleReportItemDao extends BaseEntityDao<VehicleReportItem> implements IVehicleReportItemDao {
+
+    private static Logger logger = LoggerFactory.getLogger(VehicleReportItemDao.class);
 
     @Override
     public VehicleReportItem saveOrUpdate(VehicleReportItem vehicleReportItem) {
@@ -38,7 +43,9 @@ public class VehicleReportItemDao extends BaseEntityDao<VehicleReportItem> imple
                                 .uniqueResult();
 
                 if (existingItem == null) {
-                    throw new Exception("Vehicle Report Item is null");
+                    Exception exception = new Exception("Vehicle Report Item is null");
+                    logger.error("saveOrUpdate failed. vehicleReportItem: " + JsonHelper.toJson(vehicleReportItem), exception);
+                    throw exception;
                 }
 
                 existingItem.setIsPass(vehicleReportItem.getIsPass());
@@ -50,7 +57,9 @@ public class VehicleReportItemDao extends BaseEntityDao<VehicleReportItem> imple
 
             tx.commit();
         } catch (Exception e) {
-            if(tx != null) tx.rollback();
+            if(tx != null)
+                tx.rollback();
+            logger.error("saveOrUpdate failed. vehicleReportItem: " + JsonHelper.toJson(vehicleReportItem), e);
             e.printStackTrace();
         }
 
@@ -83,12 +92,15 @@ public class VehicleReportItemDao extends BaseEntityDao<VehicleReportItem> imple
                     .executeUpdate();
 
             if (queryResponse < 1) {
-                throw new Exception("Vehicle Report Item Delete failed: No such item found.");
+                Exception exception = new Exception("Vehicle Report Item Delete failed: No such item found.");
+                logger.error("deleteEntity failed. vehicleReportItem: " + JsonHelper.toJson(vehicleReportItem), exception);
+                throw exception;
             }
 
             tx.commit();
             response.setSuccess(true);
         } catch (Exception e) {
+            logger.error("deleteEntity failed. vehicleReportItem: " + JsonHelper.toJson(vehicleReportItem), e);
             e.printStackTrace();
             response.setError(e.getMessage());
             response.setSuccess(false);
@@ -110,6 +122,7 @@ public class VehicleReportItemDao extends BaseEntityDao<VehicleReportItem> imple
                                     .setParameter("parentId", parentId);
             items = query.list();
         } catch (Exception e) {
+            logger.error("getAllChildren failed. parentId: " + parentId, e);
             e.printStackTrace();
         }
 
@@ -128,6 +141,7 @@ public class VehicleReportItemDao extends BaseEntityDao<VehicleReportItem> imple
             return items.list();
 
         } catch (Exception e) {
+            logger.error("getActiveItems failed. parentId: " + parentId, e);
             e.printStackTrace();
         }
 

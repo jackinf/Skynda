@@ -2,12 +2,15 @@ package me.skynda.vehicle.dao;
 
 import me.skynda.common.db.BaseEntityDao;
 import me.skynda.common.dto.DeleteResponseDto;
+import me.skynda.common.helper.JsonHelper;
 import me.skynda.common.interfaces.daos.IVehicleReviewDao;
 import me.skynda.vehicle.entities.VehicleReview;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import java.io.Serializable;
@@ -16,6 +19,8 @@ import java.util.List;
 
 @Repository
 public class VehicleReviewDao extends BaseEntityDao<VehicleReview> implements IVehicleReviewDao {
+
+    private static Logger logger = LoggerFactory.getLogger(VehicleReviewDao.class);
 
     @Override
     public void deleteEntity(VehicleReview review, DeleteResponseDto response) {
@@ -35,7 +40,9 @@ public class VehicleReviewDao extends BaseEntityDao<VehicleReview> implements IV
                     .executeUpdate();
 
             if (queryResponse < 1) {
-                throw new Exception("Vehicle Report Item Delete failed: No such item found.");
+                Exception exception = new Exception("Vehicle Report Item Delete failed: No such item found.");
+                logger.error("deleteEntity failed. review: " + JsonHelper.toJson(review), exception);
+                throw exception;
             }
 
             tx.commit();
@@ -72,6 +79,7 @@ public class VehicleReviewDao extends BaseEntityDao<VehicleReview> implements IV
             queryResponse = (VehicleReview) vehicleCriteria.uniqueResult();
 
         } catch (Exception e) {
+            logger.error("get failed. id: " + id + ", isActive: " + isActive, e);
             e.printStackTrace();
         }
 
@@ -100,6 +108,7 @@ public class VehicleReviewDao extends BaseEntityDao<VehicleReview> implements IV
             return queryResponse;
 
         } catch (Exception e) {
+            logger.error("getAll failed. isActive: " + isActive, e);
             e.printStackTrace();
         }
 
@@ -129,6 +138,7 @@ public class VehicleReviewDao extends BaseEntityDao<VehicleReview> implements IV
             return queryResponse;
 
         } catch (Exception e) {
+            logger.error("getAllBy failed. vehicleId: " + vehicleId + " isActive: " + isActive, e);
             e.printStackTrace();
         }
 
@@ -167,7 +177,9 @@ public class VehicleReviewDao extends BaseEntityDao<VehicleReview> implements IV
 
             tx.commit();
         } catch (Exception e) {
-            if(tx != null) tx.rollback();
+            if(tx != null)
+                tx.rollback();
+            logger.error("saveOrUpdate failed. vehicleReview: " + JsonHelper.toJson(vehicleReview), e);
             e.printStackTrace();
         }
 
