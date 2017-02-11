@@ -1,7 +1,7 @@
 import fetch from "isomorphic-fetch";
 import remoteConfig from "store/remoteConfig";
 import {setVehicleReportsList} from "./index";
-import {REDUCER_KEYS} from "../constants/Vehicle.constant";
+import {REDUCER_KEYS} from "../../../constants/Vehicle.constant";
 
 export function getList(vehicleId) {
   return (dispatch) => {

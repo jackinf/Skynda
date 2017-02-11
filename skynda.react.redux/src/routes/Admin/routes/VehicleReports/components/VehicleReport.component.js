@@ -9,7 +9,7 @@ import {
   TextFieldForReport,
   TextAreaForReport
 } from "./VehicleReportCategory.component.renderers";
-import {renderFaults} from "../../Vehicles/components/Vehicle.redux-form.renderers";
+import {renderFaults} from "../../Vehicles/routes/Vehicle/components/Vehicle.redux-form.renderers";
 import "./VehicleReport.Component.scss";
 
 class VehicleReportCategory extends React.Component {

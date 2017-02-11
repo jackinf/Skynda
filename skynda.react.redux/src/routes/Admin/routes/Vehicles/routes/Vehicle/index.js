@@ -1,15 +1,11 @@
-/**
- * Created by jevgenir on 2/11/2017.
- */
-
 import {injectReducer} from '../../../../../../store/reducers';
-import {ROUTE_PARAMS, FORM_MODE, REDUCER_KEYS} from "./../../constants/Vehicle.constant";
+import {ROUTE_PARAMS, REDUCER_KEYS} from "./../../constants/Vehicle.constant";
 import {REDUCER_KEYS as REPORT_REDUCER_KEYS} from "../../../VehicleReports/constants/VehicleReport.constant";
 import {REDUCER_KEYS as REVIEW_REDUCER_KEYS} from "../../../VehicleReviews/constants/VehicleReview.constant";
 import {setVehicleReportData, setFormMode as setFormModeReport} from "../../../VehicleReports/reducers";
 import {setVehicleReviewData, setFormMode as setFormModeReview} from "../../../VehicleReviews/reducers";
-import {setVehicleReportsList} from "./../../reducers/Vehicle.Reports.reducer";
-import {setVehicleReviewsList} from "./../../reducers/Vehicle.Reviews.reducer";
+import {setVehicleReportsList} from "./reducers/Vehicle.Reports.reducer";
+import {setVehicleReviewsList} from "./reducers/Vehicle.Reviews.reducer";
 import NProgress from "react-nprogress";
 
 export default (store) => ({
@@ -17,7 +13,7 @@ export default (store) => ({
   getComponent(nextState, cb) {
     NProgress.start();
     require.ensure([], (require) => {
-      injectReducer(store, {key: REDUCER_KEYS.VEHICLE_DATA, reducer: require("./../../reducers/Vehicle.reducer.js").default});
+      injectReducer(store, {key: REDUCER_KEYS.VEHICLE_DATA, reducer: require("./reducers/Vehicle.reducer.js").default});
       injectReducer(store, {key: "classificators", reducer: require("./../../../Classifiers/Classifiers.module").default});
       injectReducer(store, {key: "formInfo", reducer: require("./../../../VehicleModels/reducers/VehicleModel.reducer.js").default});
 
@@ -33,7 +29,7 @@ export default (store) => ({
       injectReducer(store, {key: REVIEW_REDUCER_KEYS.VEHICLE_REVIEW_DATA, reducer: setVehicleReviewData});
       injectReducer(store, {key: REVIEW_REDUCER_KEYS.FORM_MODE_VEHICLE_REVIEW, reducer: setFormModeReview});
 
-      cb(null, require("./../../containers/Vehicle.container.js").default);
+      cb(null, require("./containers/Vehicle.container.js").default);
       NProgress.done();
     })
   }

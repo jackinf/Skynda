@@ -12,7 +12,7 @@ import {
 import ViewComponent from "../components/VehicleReport.component";
 import {FORMS, REDUCER_KEYS} from "../constants/VehicleReport.constant";
 import {setFormMode} from "../actions";
-import {getList as getVehiclesList} from "../../Vehicles/actions/Vehicles";
+import {getList as getVehiclesList} from "../../Vehicles/actions";
 
 // Decorate the form component
 const DecoratedViewComponent = reduxForm({

@@ -8,7 +8,7 @@ import {
 } from "../actions";
 import ViewComponent from "../components/VehicleReview.component";
 import {FORMS, REDUCER_KEYS} from "../constants/VehicleReview.constant";
-import getVehiclesList from "../../Vehicles/actions/Vehicles/Vehicles.getList.action";
+import getVehiclesList from "../../Vehicles/actions/Vehicles.getList.action";
 
 // Decorate the form component
 const DecoratedViewComponent = reduxForm({

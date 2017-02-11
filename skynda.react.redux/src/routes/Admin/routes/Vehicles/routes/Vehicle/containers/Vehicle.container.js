@@ -7,11 +7,11 @@ import {
   onImageFileRemove,
 } from "../actions/Vehicle.image.actions";
 import {load, clear, onHandleSubmitFinished} from "../reducers/Vehicle.reducer";
-import {getList as getVehicleModelsList} from "../../VehicleModels/reducers/VehicleModels.reducer";
+import {getList as getVehicleModelsList} from "../../../../VehicleModels/reducers/VehicleModels.reducer";
 import {getList as getVehicleReportsList, deleteItem as deleteReport} from "../actions/Vehicle.Reports.actions";
 import {getList as getVehicleReviewsList, deleteItem as deleteReview} from "../actions/Vehicle.Reviews.actions";
 
-import {REDUCER_KEYS} from "../constants/Vehicle.constant";
+import {REDUCER_KEYS} from "../../../constants/Vehicle.constant";
 import VehicleComponent from "../components/Vehicle.component";
 
 const mapDispatchToProps = {

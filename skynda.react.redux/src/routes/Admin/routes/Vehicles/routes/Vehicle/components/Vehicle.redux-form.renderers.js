@@ -13,7 +13,7 @@ import "react-image-crop/dist/ReactCrop.css";
 import {AlphaPicker, CirclePicker, TwitterPicker} from 'react-color';
 import ReactDOM from 'react-dom';
 import { BootstrapTable as bt, TableHeaderColumn } from 'react-bootstrap-table';
-import {fieldListWrapper, renderImage} from "../../../components/FormRenderers/index";
+import {fieldListWrapper, renderImage} from "../../../../../components/FormRenderers/index";
 
 const styleDeleteIcon = {
   position: "absolute",

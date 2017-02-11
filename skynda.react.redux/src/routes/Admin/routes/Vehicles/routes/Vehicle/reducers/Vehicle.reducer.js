@@ -6,8 +6,8 @@ import {change, destroy} from "redux-form";
 import {toastr} from 'react-redux-toastr';
 
 import remoteConfig from "store/remoteConfig";
-import {ACTIONS, FORM_MODE, FORMS, ROUTE_PARAMS} from "../constants/Vehicle.constant";
-import fromSpringToReduxFormError from "../../../../../utils/formUtils/fromSpringToReduxFormError";
+import {ACTIONS, FORM_MODE, FORMS, ROUTE_PARAMS} from "../../../constants/Vehicle.constant";
+import fromSpringToReduxFormError from "../../../../../../../utils/formUtils/fromSpringToReduxFormError";
 
 // ------------------------------------
 // Actions

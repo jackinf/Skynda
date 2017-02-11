@@ -4,7 +4,7 @@ import {toastr} from "react-redux-toastr";
 import {Card, CardActions, CardTitle, CardText} from 'material-ui/Card';
 import {Row, Col, Modal} from "react-bootstrap";
 import _ from "underscore";
-import {ROUTE_PARAMS, FORM_MODE, FORMS} from "./../constants/Vehicle.constant";
+import {ROUTE_PARAMS, FORM_MODE, FORMS} from "../../../constants/Vehicle.constant";
 import {
   renderTextField,
   descriptionRenderer,
@@ -17,17 +17,17 @@ import {
   TableHeaderColumn
 } from "./Vehicle.redux-form.renderers";
 import {onHandleSubmit} from "./Vehicle.redux-form.actions";
-import {renderCheckbox, renderSelectField} from "../../../components/FormRenderers";
+import {renderCheckbox, renderSelectField} from "../../../../../components/FormRenderers";
 import RefreshIndicator from 'material-ui/RefreshIndicator';
-import fromSpringToReduxFormError from "../../../../../utils/formUtils/fromSpringToReduxFormError";
+import fromSpringToReduxFormError from "../../../../../../../utils/formUtils/fromSpringToReduxFormError";
 import "./Vehicle.component.scss";
-import {ROUTE_PARAMS as VEHICLE_MODEL_ROUTE_PARAMS} from "../../VehicleModels/constants/VehicleModel.constant";
-import {ROUTE_PARAMS as VEHICLE_REPORT_ROUTE_PARAMS} from "../../VehicleReports/constants/VehicleReport.constant";
-import {ROUTE_PARAMS as VEHICLE_REVIEW_ROUTE_PARAMS} from "../../VehicleReviews/constants/VehicleReview.constant";
-import VehicleModel from "../../VehicleModels/containers/VehicleModel.container";
-import VehicleReport from "../../VehicleReports/containers/VehicleReport.container";
-import VehicleReview from "../../VehicleReviews/containers/VehicleReview.container";
-import {CropToolCard} from "../../../../../components/ReduxForm/CropTool";
+import {ROUTE_PARAMS as VEHICLE_MODEL_ROUTE_PARAMS} from "../../../../VehicleModels/constants/VehicleModel.constant";
+import {ROUTE_PARAMS as VEHICLE_REPORT_ROUTE_PARAMS} from "../../../../VehicleReports/constants/VehicleReport.constant";
+import {ROUTE_PARAMS as VEHICLE_REVIEW_ROUTE_PARAMS} from "../../../../VehicleReviews/constants/VehicleReview.constant";
+import VehicleModel from "../../../../VehicleModels/containers/VehicleModel.container";
+import VehicleReport from "../../../../VehicleReports/containers/VehicleReport.container";
+import VehicleReview from "../../../../VehicleReviews/containers/VehicleReview.container";
+import {CropToolCard} from "../../../../../../../components/ReduxForm/CropTool";
 
 const SubmitCardActions = ({disabled}) => (<CardActions>
   <hr/>

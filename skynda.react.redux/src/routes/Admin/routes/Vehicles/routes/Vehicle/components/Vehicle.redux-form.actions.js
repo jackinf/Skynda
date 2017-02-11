@@ -1,10 +1,7 @@
-/**
- * Created by jevgenir on 12/10/2016.
- */
 import remoteConfig from "store/remoteConfig";
-import {fromSpringToReduxFormError} from "../../../../../utils/formUtils";
+import {fromSpringToReduxFormError} from "utils/formUtils";
 // import {SubmissionError} from 'redux-form';
-import {FORM_MODE} from "../constants/Vehicle.constant";
+import {FORM_MODE} from "../../../constants/Vehicle.constant";
 
 // ------------------------------------
 // Form submission

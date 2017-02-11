@@ -1,7 +1,4 @@
-/**
- * Created by jevgenir on 12/10/2016.
- */
-import {FORMS} from "../constants/Vehicle.constant";
+import {FORMS} from "../../../constants/Vehicle.constant";
 import {arrayPush, arrayRemove, change} from 'redux-form';
 import {imageUtil} from "utils/allUtils";
 

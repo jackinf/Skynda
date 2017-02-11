@@ -1,9 +1,6 @@
-/**
- * Created by jevgenir on 10/21/2016.
- */
 import fetch from "isomorphic-fetch";
 import remoteConfig from "store/remoteConfig";
-import {setVehicles} from "../../reducers/Vehicles.list.reducer";
+import {setVehicles} from "../reducers/Vehicles.list.reducer";
 
 export default function getList() {
   return (dispatch) => {

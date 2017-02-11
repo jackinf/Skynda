@@ -1,10 +1,7 @@
-/**
- * Created by jevgenir on 10/26/2016.
- */
 import fetch from "isomorphic-fetch";
 import remoteConfig from "store/remoteConfig";
-import {setVehicles} from "../../reducers/Vehicles.list.reducer";
-import {REDUCER_KEYS} from "../../constants/Vehicle.constant";
+import {setVehicles} from "../reducers/Vehicles.list.reducer";
+import {REDUCER_KEYS} from "../constants/Vehicle.constant";
 
 export default function deleteItem(id) {
   return (dispatch, getState) => {
