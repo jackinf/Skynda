@@ -5,7 +5,6 @@ import java.util.List;
 
 import lombok.Data;
 import lombok.ToString;
-import me.skynda.classification.dto.ClassificationDto;
 
 @Data
 @ToString(callSuper = false)
@@ -37,7 +36,7 @@ public class VehicleDetailedDto {
 	private Integer safetyStars;
 	private String safetyUrl;
 
-	private List<FeatureDto> features;
+	private List<VehicleFeatureDto> features;
 	private List<FaultBaseDto> faults;
 	private List<CategoriesDto> reportCategories;
 	private List<ReviewDto> reviews;

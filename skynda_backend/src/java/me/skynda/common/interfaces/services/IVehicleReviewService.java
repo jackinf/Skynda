@@ -8,9 +8,7 @@ import org.springframework.validation.BindingResult;
 import java.io.Serializable;
 import java.util.List;
 
-/**
- * Created by jevgenir on 11/14/2016.
- */
+
 public interface IVehicleReviewService {
     List<VehicleReviewAdminDto> getAll();
 

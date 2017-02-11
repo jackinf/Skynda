@@ -6,7 +6,6 @@ import java.util.List;
 
 import lombok.Data;
 import lombok.ToString;
-import me.skynda.classification.dto.ClassificationDto;
 import me.skynda.common.dto.BaseDto;
 
 @Data
@@ -42,7 +41,7 @@ public class VehicleAdminDto extends BaseDto implements ImageStorable<ImageDto> 
 	private Integer safetyStars;
 	private String safetyUrl;
 
-	private List<FeatureDto> features;
+	private List<VehicleFeatureDto> features;
 	private List<FaultBaseDto> faults;
 	private List<VehicleReportDto> reportCategories;
 	private List<ImageContainerDto> images;

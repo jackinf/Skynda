@@ -11,7 +11,7 @@ export const setFormMode = (state = FORM_MODE.READING_REPORT, action) => {
   }
 };
 
-export const setVehicleReportData = (state = {isFetching: false, car: null}, action) => {
+export const setVehicleReportData = (state = {isFetching: false, vehicle: null}, action) => {
   switch (action.type) {
     case ACTIONS.SET_VEHICLE_DATA_REPORT: {
       return action.payload;

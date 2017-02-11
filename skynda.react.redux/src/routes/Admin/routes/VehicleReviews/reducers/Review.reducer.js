@@ -22,8 +22,6 @@ export const setVehicleReviewData = (state = {isFetching: false, car: null}, act
   }
 };
 
-
-
 export const setVehicleReviews = (state = {isFetching: false, items: []}, action) => {
   switch (action.type) {
     case ACTIONS.SET_VEHICLES_DATA_REVIEW: {

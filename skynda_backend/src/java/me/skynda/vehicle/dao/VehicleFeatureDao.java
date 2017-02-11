@@ -1,7 +1,7 @@
 package me.skynda.vehicle.dao;
 
 import me.skynda.common.interfaces.daos.IVehicleFeatureDao;
-import me.skynda.vehicle.dto.FeatureDto;
+import me.skynda.vehicle.dto.VehicleFeatureDto;
 import me.skynda.common.entities.Vehicle;
 import me.skynda.common.entities.VehicleFeature;
 import me.skynda.common.db.BaseEntityDao;
@@ -17,7 +17,7 @@ public class VehicleFeatureDao extends BaseEntityDao<VehicleFeature> implements 
     private static Logger logger = LoggerFactory.getLogger(VehicleFeatureDao.class);
 
     @Override
-    public void addMultipleToVehicle(Vehicle vehicle, List<FeatureDto> features) {
+    public void addMultipleToVehicle(Vehicle vehicle, List<VehicleFeatureDto> features) {
 
         // TODO: Is feature a classifier or dynamic thing?
 
@@ -30,7 +30,7 @@ public class VehicleFeatureDao extends BaseEntityDao<VehicleFeature> implements 
 //        if (features == null)
 //            return;
 //
-//        for (FeatureDto feature : features) {
+//        for (VehicleFeatureDto feature : features) {
 //            VehicleFeature vehicleFeature = new VehicleFeature();
 //            vehicleFeature.setVehicleId(vehicle.getId());
 ////            vehicleFeature.setText(feature.getText());

@@ -7,6 +7,7 @@ import ClassifiersRoute from "./routes/Classifiers";
 import ImagesRoute from "./routes/Images";
 import VehicleReportsRoute from "./routes/VehicleReports";
 import VehicleReviewsRoute from "./routes/VehicleReviews";
+import Features from "./routes/Features";
 import {isLoggedInAs} from "../../utils/userUtils";
 
 export default (store) => ({
@@ -22,7 +23,8 @@ export default (store) => ({
     ClassifiersRoute(store),
     ImagesRoute(store),
     VehicleReportsRoute(store),
-    VehicleReviewsRoute(store)
+    VehicleReviewsRoute(store),
+    Features(store)
   ],
 
   /**

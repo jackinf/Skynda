@@ -220,7 +220,6 @@ class Vehicle extends React.Component {
       mode: 'checkbox',
       clickToSelect: true
     };
-    console.log("featuresData", this.props.features);
 
     return (<div>
         {this.props.isFetching || this.props.submitting

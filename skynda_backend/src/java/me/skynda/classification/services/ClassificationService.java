@@ -15,11 +15,14 @@ import java.util.List;
 @Transactional
 public class ClassificationService implements IClassificationService {
 
-    @Autowired
-    IClassificationDao dao;
+    private final IClassificationDao dao;
+    private final Mapper mapper;
 
     @Autowired
-    Mapper mapper;
+    public ClassificationService(IClassificationDao dao, Mapper mapper) {
+        this.dao = dao;
+        this.mapper = mapper;
+    }
 
     @Override
     public List<ClassificationResponseDto> getByType(String type) {
