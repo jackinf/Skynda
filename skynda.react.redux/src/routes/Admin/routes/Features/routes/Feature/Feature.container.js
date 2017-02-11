@@ -10,8 +10,6 @@ import {
 } from "./actions";
 import ViewComponent from "./components/Feature.component";
 
-
-
 const mapDispatchToProps = {
   load,
   clear,
