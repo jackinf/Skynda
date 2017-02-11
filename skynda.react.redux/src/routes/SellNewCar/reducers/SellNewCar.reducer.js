@@ -18,7 +18,6 @@ export const submitAsync = (info) => (dispatch) => {
   })
     .then(resp => resp.json())
     .then(data => {
-      console.info(data);
       if (data.success === false) {
         dispatch(setErrors(data.friendlyErrors));
       } else {
@@ -28,6 +27,7 @@ export const submitAsync = (info) => (dispatch) => {
     })
     .catch((error) => {
       dispatch(setSubmittingStatus(false, false));
+      throw error;
     });
 };
 

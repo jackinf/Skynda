@@ -3,12 +3,19 @@ import thunk from "redux-thunk";
 import {browserHistory} from "react-router";
 import makeRootReducer from "./reducers";
 import {updateLocation} from "./location";
+import RavenMiddleware from "redux-raven-middleware";
+
+const RAVEN_API = "https://26a35ce1acca47edae3789ec628d257e@sentry.io/138096";
 
 export default (initialState = {}) => {
   // ======================================================
   // Middleware Configuration
   // ======================================================
+
   const middleware = [thunk];
+  if (__PROD__) {
+    middleware.push(RavenMiddleware(RAVEN_API));
+  }
 
   // ======================================================
   // Store Enhancers
