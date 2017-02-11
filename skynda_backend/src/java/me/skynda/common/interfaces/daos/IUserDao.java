@@ -1,4 +1,4 @@
-package me.skynda.auth.dao;
+package me.skynda.common.interfaces.daos;
 
 import me.skynda.auth.model.User;
 import me.skynda.common.db.SkyndaBaseEntityDao;

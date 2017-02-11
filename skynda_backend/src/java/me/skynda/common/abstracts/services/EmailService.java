@@ -1,7 +1,11 @@
 package me.skynda.common.abstracts.services;
 
+import me.skynda.classification.dao.ClassificationDao;
 import me.skynda.common.dto.SimpleResponseDto;
+import me.skynda.common.helper.JsonHelper;
 import me.skynda.email.dto.EmailBaseDto;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.validation.ObjectError;
 
 import javax.mail.*;
@@ -12,6 +16,8 @@ import java.util.Date;
 import java.util.Properties;
 
 public abstract class EmailService {
+
+    private static Logger logger = LoggerFactory.getLogger(EmailService.class);
 
     /**
      * Sends an email using the specified configuration like receiver, message content etc
@@ -34,6 +40,7 @@ public abstract class EmailService {
             Transport.send(msg);
             System.out.println("Message sent.");
         } catch (MessagingException e) {
+            logger.error("innerSendMessage failed. dto: " + JsonHelper.toJson(dto) + ", mailTo: " + mailTo, e);
             e.printStackTrace();
             ArrayList<ObjectError> errors = new ArrayList<>();
             errors.add(new ObjectError("email", "failed to send: " + e.getMessage()));
