@@ -1,9 +1,8 @@
-package me.skynda.vehicle.entities;
+package me.skynda.common.entities;
 
 import javax.persistence.*;
 
 import lombok.Data;
-import me.skynda.classification.entities.Classification;
 
 import java.io.Serializable;
 import java.util.Date;

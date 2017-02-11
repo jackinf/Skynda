@@ -2,8 +2,7 @@ package me.skynda.common.interfaces.daos;
 
 import me.skynda.common.db.SkyndaBaseEntityDao;
 import me.skynda.common.dto.DeleteResponseDto;
-import me.skynda.vehicle.entities.VehicleReportItem;
-import me.skynda.vehicle.entities.VehicleReview;
+import me.skynda.common.entities.VehicleReview;
 
 import java.io.Serializable;
 import java.util.List;

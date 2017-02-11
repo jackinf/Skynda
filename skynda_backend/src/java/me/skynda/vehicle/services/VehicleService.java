@@ -10,8 +10,8 @@ import me.skynda.common.interfaces.services.IVehicleService;
 import me.skynda.image.entities.Image;
 import me.skynda.vehicle.dto.*;
 import me.skynda.vehicle.dto.request.SearchRequestDto;
-import me.skynda.vehicle.entities.Vehicle;
-import me.skynda.vehicle.entities.VehicleModel;
+import me.skynda.common.entities.Vehicle;
+import me.skynda.common.entities.VehicleModel;
 import me.skynda.vehicle.validators.VehicleValidator;
 import org.dozer.Mapper;
 import org.slf4j.Logger;
@@ -95,7 +95,7 @@ public class VehicleService implements IVehicleService {
         try {
             Vehicle model = vehicleDao.get(id);
             VehicleDetailedDto detailedDto = mapper.map(model, VehicleDetailedDto.class);
-
+            detailedDto.calculateFuelAverage();
             if(!detailedDto.getReportCategories().isEmpty()){
                 CategoriesDto categoriesDto = detailedDto.getReportCategories()
                         .stream().filter(x ->  x.getInspector() != null || !x.getInspector().isEmpty() )

@@ -38,7 +38,7 @@ class History extends React.Component {
             <label className="sk_details__label">
               <Translate value="details.components.history.registration_plate"/>:
             </label>
-            <span>  {this.props.history.registrationPlate}</span>
+            <span>  {this.props.history.registrationNumber}</span>
           </Col>
         </Row>
         <Row>

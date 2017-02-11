@@ -8,7 +8,7 @@ import me.skynda.common.interfaces.services.IBlobStorageService;
 import me.skynda.common.interfaces.services.IVehicleReviewService;
 import me.skynda.image.entities.Image;
 import me.skynda.vehicle.dto.VehicleReviewAdminDto;
-import me.skynda.vehicle.entities.VehicleReview;
+import me.skynda.common.entities.VehicleReview;
 import org.dozer.Mapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

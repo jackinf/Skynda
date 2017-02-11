@@ -1,4 +1,4 @@
-package me.skynda.classification.entities;
+package me.skynda.common.entities;
 
 import lombok.Data;
 

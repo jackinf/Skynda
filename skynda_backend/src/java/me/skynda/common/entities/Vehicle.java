@@ -1,4 +1,4 @@
-package me.skynda.vehicle.entities;
+package me.skynda.common.entities;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -8,7 +8,6 @@ import java.util.List;
 import javax.persistence.*;
 
 import lombok.Data;
-import me.skynda.classification.entities.Classification;
 import me.skynda.image.entities.Image;
 import me.skynda.vehicle.dto.ImageStorable;
 import org.hibernate.validator.constraints.NotEmpty;

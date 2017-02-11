@@ -4,7 +4,7 @@ import me.skynda.common.db.BaseEntityDao;
 import me.skynda.common.dto.DeleteResponseDto;
 import me.skynda.common.helper.JsonHelper;
 import me.skynda.common.interfaces.daos.IVehicleReportItemDao;
-import me.skynda.vehicle.entities.VehicleReportItem;
+import me.skynda.common.entities.VehicleReportItem;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;

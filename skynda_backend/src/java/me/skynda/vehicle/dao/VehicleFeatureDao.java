@@ -2,8 +2,8 @@ package me.skynda.vehicle.dao;
 
 import me.skynda.common.interfaces.daos.IVehicleFeatureDao;
 import me.skynda.vehicle.dto.FeatureDto;
-import me.skynda.vehicle.entities.Vehicle;
-import me.skynda.vehicle.entities.VehicleFeature;
+import me.skynda.common.entities.Vehicle;
+import me.skynda.common.entities.VehicleFeature;
 import me.skynda.common.db.BaseEntityDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

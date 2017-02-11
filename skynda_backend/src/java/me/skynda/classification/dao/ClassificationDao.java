@@ -1,10 +1,8 @@
 package me.skynda.classification.dao;
 
-import me.skynda.blobstorage.service.BlobStorageService;
 import me.skynda.classification.entities.Classification;
 import me.skynda.classification.enums.ClassificationTypeEnum;
 import me.skynda.common.db.BaseEntityDao;
-import me.skynda.common.helper.JsonHelper;
 import me.skynda.common.interfaces.daos.IClassificationDao;
 import me.skynda.vehicle.entities.VehicleModel;
 import org.hibernate.Criteria;
