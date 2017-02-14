@@ -1,3 +1,5 @@
+@import "../../../../styles/variables";
+
 .sk_hero{
   display: block;
   padding-top:0;
@@ -59,7 +61,7 @@
   background-size:cover;
   text-align: center;
   height: 650px;
-  padding: 200px 0;
+  padding: 150px 0;
 
   @media screen and (max-width: 400px) {
     padding: 100px 0 !important;
@@ -70,8 +72,9 @@
     max-width: 1024px;
     margin: 0 auto;
     padding: 50px;
-    font-size: 2em;
-    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    font-size: 2.5em;
+    font-weight: bolder;
+    //text-shadow: -1px 0 black, 0 1px white, 1px 0 black, 0 -1px black;
   }
 }
 

@@ -62,6 +62,8 @@
     "recently_added": "Hiljuti valikusse lisandunud",
     "hero": {
       "main_text": "Murevaba kasutatud autode ost ja müük",
+      "main_text_line1": "Täiesti murevaba",
+      "main_text_line2": "kasutatud autode ost ja müük",
       "read_more": "Kuidas nii?"
     }
   },

@@ -27,11 +27,16 @@
 }
 
 .sell-your-car__main-image-background2 {
-  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4));
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4));
   background-size:cover;
+  background-position-y: -50px;
   min-height: 600px;
   padding-top: 200px;
   margin-bottom: 0;
+}
+
+.sell-your-car > .react-parallax > .react-parallax-bgimage {
+  top: -115px;
 }
 
 .sell-your-car__main-image-background__title {

@@ -15,7 +15,14 @@ class Hero extends React.Component {
         <Parallax bgImage={heroImageUrl} strength={100}>
           <div className="sk-hero__parallax-container">
             <h2>
-              <Translate value="home_page.hero.main_text"/>
+              <span>
+                <Translate value="home_page.hero.main_text_line1"/>
+              </span>
+              <br/>
+              <br/>
+              <span>
+                <Translate value="home_page.hero.main_text_line2"/>
+              </span>
             </h2>
 
             <Button className='primary-button read-more-btn' onClick={e => browserHistory.push("/how-it-works")}>
