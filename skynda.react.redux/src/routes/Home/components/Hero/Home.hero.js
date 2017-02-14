@@ -3,7 +3,7 @@ import "./Home.hero.scss";
 import {Button} from "react-bootstrap";
 import {browserHistory} from "react-router";
 // import heroImageUrl from "../../../../static/images/standard/hero-01-2.jpg";
-import heroImageUrl from "../../assets/heroimage.jpg";
+import heroImageUrl from "../../assets/heroimage2.jpg";
 import {Translate} from 'react-redux-i18n';
 import {Row, Col, Grid} from "react-bootstrap";
 import {Parallax} from 'react-parallax';

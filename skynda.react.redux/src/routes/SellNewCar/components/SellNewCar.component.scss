@@ -29,13 +29,18 @@
 .sell-your-car__main-image-background2 {
   background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4));
   background-size:cover;
-  min-height: 500px;
+  min-height: 600px;
   padding-top: 200px;
   margin-bottom: 0;
 }
 
 .sell-your-car__main-image-background__title {
   color: whitesmoke;
+}
+.sell-your-car__main-image-background__title__line {
+  color: whitesmoke;
+  margin: 0 !important;
+  margin-bottom: 10px !important;
 }
 
 .sell-your-car__main-image-background__button,
@@ -101,4 +106,20 @@
   margin-right: 5px;
   -webkit-appearance:none;
   outline: none;
+}
+
+.how-it-works__main-image-background__secondary-button,
+.how-it-works__main-image-background__secondary-button:hover,
+.how-it-works__main-image-background__secondary-button:active,
+.how-it-works__main-image-background__secondary-button:focus,
+.how-it-works__main-image-background__secondary-button:visited {
+  background: $color-secondary !important;
+  border-color: $color-secondary;
+  color: whitesmoke !important;
+  font-weight: bold;
+  border-radius: 5px;
+  margin: 10px;
+
+  padding: 1.0em;
+  font-size: 20px;
 }
