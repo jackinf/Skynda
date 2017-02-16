@@ -4,29 +4,41 @@
     <include resource="org/springframework/boot/logging/logback/defaults.xml" />
     <include resource="org/springframework/boot/logging/logback/file-appender.xml" />
     <include resource="org/springframework/boot/logging/logback/console-appender.xml" />
+    <property name="FILE_LOG_PATTERN" value="%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"/>
+    <property name="LOG_PATH" value="logs/triven" />
 
-    <appender name="SENTRY" class="com.getsentry.raven.logback.SentryAppender">
-        <dsn>https://26a35ce1acca47edae3789ec628d257e:dcf10526e4c9413081822ed359ba699e@sentry.io/138096</dsn>
-        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-            <level>ERROR</level>
-        </filter>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <Pattern>${FILE_LOG_PATTERN}</Pattern>
+        </encoder>
     </appender>
 
-    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
-        <file>/logs/triven-${byDay}.log</file>
+    <!--<appender name="SENTRY" class="com.getsentry.raven.logback.SentryAppender">-->
+        <!--<dsn>https://26a35ce1acca47edae3789ec628d257e:dcf10526e4c9413081822ed359ba699e@sentry.io/138096</dsn>-->
+        <!--<filter class="ch.qos.logback.classic.filter.ThresholdFilter">-->
+            <!--<level>ERROR</level>-->
+        <!--</filter>-->
+    <!--</appender>-->
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/triven-${byDay}.log</file>
         <append>true</append>
         <encoder>
-            <pattern>%-4relative [%thread] %-5level %logger{35} - %msg%n</pattern>
+            <pattern>${FILE_LOG_PATTERN}</pattern>
         </encoder>
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
             <level>ERROR</level>
         </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH}.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
     </appender>
 
     <root level="INFO">
         <appender-ref ref="CONSOLE" />
         <appender-ref ref="FILE" />
-        <appender-ref ref="SENTRY" />
+        <!--<appender-ref ref="SENTRY" />-->
     </root>
 
 </configuration>
