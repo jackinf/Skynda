@@ -9,3 +9,8 @@ export const setVehicleReviewsList = (value) => ({
   type: ACTIONS.SET_VEHICLE_REVIEWS_DATA,
   payload: value
 });
+
+export const setVehicleFeaturesList = (value) => ({
+  type: ACTIONS.SET_VEHICLE_FEATURES_DATA,
+  payload: value
+});

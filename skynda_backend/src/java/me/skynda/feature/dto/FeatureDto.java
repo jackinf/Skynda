@@ -11,7 +11,6 @@ public class FeatureDto extends BaseDto {
     private String description;
     private Integer weight;
     private String value;
-    private Date archived;
     private String name;
     private Boolean isActive;
     private Boolean isModal;

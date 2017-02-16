@@ -1,6 +1,7 @@
 import {connect} from "react-redux";
 import {reduxForm} from 'redux-form';
 import {FORMS, REDUCER_KEYS} from "./Feature.constant";
+import {getFeatures} from "../../actions";
 import {
   clear,
   load,
@@ -15,7 +16,8 @@ const mapDispatchToProps = {
   clear,
   formSubmit,
   onFormSubmitSuccess,
-  setFormMode
+  setFormMode,
+  getFeatures
 };
 
 const mapStateToProps = (state) => {

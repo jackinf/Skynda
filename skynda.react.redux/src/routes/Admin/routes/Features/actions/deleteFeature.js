@@ -5,7 +5,7 @@ import {REDUCER_KEYS} from "../Features.constant";
 
 export default function deleteFeature(id) {
   return (dispatch, getState) => {
-    let items = getState()[REDUCER_KEYS.VEHICLES_REPORTS_DATA].items;
+    let items = getState()[REDUCER_KEYS.FEATURES_LIST].items;
     dispatch(setFeaturesList({isFetching: true}));
 
     return fetch(`${remoteConfig.remote}/api/feature/${id}`, {

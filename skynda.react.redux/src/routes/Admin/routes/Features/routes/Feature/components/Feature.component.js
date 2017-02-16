@@ -11,7 +11,9 @@ class Feature extends React.Component {
     load: React.PropTypes.func.isRequired,
     clear: React.PropTypes.func.isRequired,
     onSubmitCustom: React.PropTypes.func,
-    formModeFeature: React.PropTypes.string.isRequired
+    formModeFeature: React.PropTypes.string.isRequired,
+    getFeatures: React.PropTypes.func.isRequired
+
   };
 
   constructor(props) {
@@ -40,7 +42,7 @@ class Feature extends React.Component {
   onSubmit(e) {
     let promise = this.props.handleSubmit(data => formSubmit(data, this.props.formModeFeature))(e);
     promise && promise.then(response => {
-      onFormSubmitSuccess(response, this.props.onSubmitCustom);
+      onFormSubmitSuccess(response, this.props.getFeatures, this.props.onSubmitCustom);
     });
   };
 
@@ -57,7 +59,7 @@ class Feature extends React.Component {
               <TextFieldForFeature name="value" label="Value *"/>
               <TextAreaForFeature name="description" label="Description"/>
               <TextFieldForFeature name="weight" label="Order weight"/>
-              <CheckboxForFeature name="isActive" label="Is Feature Visible?"/>
+              <CheckboxForFeature name="isActive" label="Is Active?"/>
 
               <button type="submit" disabled={this.props.submitting}>Submit</button>
             </form>

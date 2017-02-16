@@ -14,11 +14,12 @@ export function formSubmit(data, formMode) {
     : updateFeatureAsync(data);
 }
 
-export function onFormSubmitSuccess(response, onSubmitCustom = null) {
-  if (response && response.success && !isNaN(parseInt(response.id)) && !isNaN(parseInt(response.vehicleId))) {
-    if (onSubmitCustom && _.isFunction(onSubmitCustom)) {
+export function onFormSubmitSuccess(response, getFeatures, onSubmitCustom = null) {
+  if (response && response.success && !isNaN(parseInt(response.id))) {
+    if (onSubmitCustom && _.isFunction(onSubmitCustom) && !isNaN(parseInt(response.vehicleId))) {
       onSubmitCustom(null, response.vehicleId);
     } else {
+      getFeatures();
       browserHistory.push(`/admin/feature`);
     }
   }

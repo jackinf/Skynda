@@ -52,6 +52,7 @@ class Vehicle extends React.Component {
     this.props.getVehicleModelsList();
     this.props.getVehicleReportsList(this.props.params[ROUTE_PARAMS.VEHICLE_ID]);
     this.props.getVehicleReviewsList(this.props.params[ROUTE_PARAMS.VEHICLE_ID]);
+    this.props.getVehicleFeaturesList(this.props.params[ROUTE_PARAMS.VEHICLE_ID]);
     // this.props.getColors();
   }
 
@@ -450,6 +451,8 @@ Vehicle.propTypes = {
   deleteSingleReportItem: React.PropTypes.func.isRequired,
   getVehicleReviewsList: React.PropTypes.func.isRequired,
   deleteSingleReview: React.PropTypes.func.isRequired,
+  getVehicleFeaturesList: React.PropTypes.func.isRequired,
+  deleteSingleFeature: React.PropTypes.func.isRequired,
   // vehicle models data for combobox
   vehicleModels: React.PropTypes.shape({
     isFetching: React.PropTypes.bool,
