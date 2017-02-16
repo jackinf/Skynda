@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-    <timestamp key="byDay" datePattern="yyyyMMdd'T'HHmmss"/>
+    <timestamp key="byDay" datePattern="yyyyMMdd_HH-mm-ss"/>
     <include resource="org/springframework/boot/logging/logback/defaults.xml" />
     <include resource="org/springframework/boot/logging/logback/file-appender.xml" />
     <include resource="org/springframework/boot/logging/logback/console-appender.xml" />
     <property name="FILE_LOG_PATTERN" value="%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"/>
-    <property name="LOG_PATH" value="logs/triven" />
 
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
@@ -20,8 +19,8 @@
         <!--</filter>-->
     <!--</appender>-->
 
-    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>logs/triven-${byDay}.log</file>
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>logs/${byDay}.log</file>
         <append>true</append>
         <encoder>
             <pattern>${FILE_LOG_PATTERN}</pattern>
@@ -29,10 +28,6 @@
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
             <level>ERROR</level>
         </filter>
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOG_PATH}.%d{yyyy-MM-dd}.log</fileNamePattern>
-            <maxHistory>30</maxHistory>
-        </rollingPolicy>
     </appender>
 
     <root level="INFO">
