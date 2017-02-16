@@ -129,25 +129,42 @@ export default class extends React.Component {
       : displayMode === DISPLAY_MODE.WANT_TO_SELL ? sellFaqPanels
       : [];
 
+    const isBuy = displayMode === DISPLAY_MODE.WANT_TO_BUY;
+    const isSell = displayMode === DISPLAY_MODE.WANT_TO_SELL;
+
+    const titleClass = isSell ? "how-it-works__primary-header-sell" : "how-it-works__primary-header";
+
     return (<div>
       <Row>
         <Col sm={8} smOffset={2}>
-          <h3 className="how-it-works__centered how-it-works__primary-header">Küsimused ja vastused</h3>
+          <h3 className={`how-it-works__centered ${titleClass}`}>Küsimused ja vastused</h3>
         </Col>
       </Row>
-      <Row>
-        <Col sm={8} smOffset={2}>
-          <Collapse accordion={false}>
-            {displayPanels.map((panel, i) => (
-              <Panel key={i} className="how-it-works__faq-panel" header={panel.questionText}>
-                <Well>
-                  {panel.answerText}
-                </Well>
-              </Panel>
-            ))}
-          </Collapse>
-        </Col>
-      </Row>
+      <div className="container">
+        {displayPanels.map((panel, i) => {
+          return (<Row key={i}>
+            <Col sm={12}>
+              <h4>{panel.questionText}</h4>
+              <Well>{panel.answerText}</Well>
+              <hr/>
+            </Col>
+          </Row>)
+        })}
+      </div>
+
+      {/*<Row>*/}
+        {/*<Col sm={8} smOffset={2}>*/}
+          {/*<Collapse accordion={false}>*/}
+            {/*{displayPanels.map((panel, i) => (*/}
+              {/*<Panel key={i} className="how-it-works__faq-panel" header={panel.questionText}>*/}
+                {/*<Well>*/}
+                  {/*{panel.answerText}*/}
+                {/*</Well>*/}
+              {/*</Panel>*/}
+            {/*))}*/}
+          {/*</Collapse>*/}
+        {/*</Col>*/}
+      {/*</Row>*/}
     </div>)
   }
 }

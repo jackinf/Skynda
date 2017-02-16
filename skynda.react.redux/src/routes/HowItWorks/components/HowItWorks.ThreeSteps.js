@@ -59,49 +59,49 @@ export default class extends React.Component {
     const sellingSteps = (<span>
       <Row>
         <Col sm={8} smOffset={2}>
-          <h3 className="how-it-works__centered how-it-works__primary-header">Auto müümiseks on 5 lihtsat sammu</h3>
+          <h3 className="how-it-works__centered how-it-works__primary-header-sell">Auto müümiseks on 5 lihtsat sammu</h3>
         </Col>
       </Row>
       <br/>
       <Row>
         <Col sm={2}/>
         <Col sm={8}>
-          <div className="how-it-works__line">&nbsp;</div>
+          <div className="how-it-works__line-sell">&nbsp;</div>
         </Col>
         <Col sm={2}/>
       </Row>
       <Row>
         <Col sm={1}/>
         <Col sm={2}>
-          <div className="how-it-works__three-steps__step-circle">1</div>
+          <div className="how-it-works__three-steps__step-circle-sell">1</div>
           <br/>
           <div className="how-it-works__three-steps__step-text">
             <Translate value="how_it_works.sell_process_step_1"/>
           </div>
         </Col>
         <Col sm={2}>
-          <div className="how-it-works__three-steps__step-circle">2</div>
+          <div className="how-it-works__three-steps__step-circle-sell">2</div>
           <br/>
           <div className="how-it-works__three-steps__step-text">
             <Translate value="how_it_works.sell_process_step_2"/>
           </div>
         </Col>
         <Col sm={2}>
-          <div className="how-it-works__three-steps__step-circle">3</div>
+          <div className="how-it-works__three-steps__step-circle-sell">3</div>
           <br/>
           <div className="how-it-works__three-steps__step-text">
             <Translate value="how_it_works.sell_process_step_3"/>
           </div>
         </Col>
         <Col sm={2}>
-          <div className="how-it-works__three-steps__step-circle">4</div>
+          <div className="how-it-works__three-steps__step-circle-sell">4</div>
           <br/>
           <div className="how-it-works__three-steps__step-text">
             <Translate value="how_it_works.sell_process_step_4"/>
           </div>
         </Col>
         <Col sm={2}>
-          <div className="how-it-works__three-steps__step-circle">5</div>
+          <div className="how-it-works__three-steps__step-circle-sell">5</div>
           <br/>
           <div className="how-it-works__three-steps__step-text">
             <Translate value="how_it_works.sell_process_step_5"/>

@@ -46,11 +46,11 @@
 
 .button-pressed-haha-first-button {
   border-color: $color-primary;
-  box-shadow: 0 0 5px 5px lighten($color-primary, 10%);
+  box-shadow: 0 0 3px 3px lighten(white, 10%);
 }
 .button-pressed-haha-second-button {
   border-color: $color-secondary !important;
-  box-shadow: 0 0 5px 5px lighten($color-secondary, 10%);
+  box-shadow: 0 0 3px 3px lighten(white, 10%);
 }
 
 .how-it-works__main-image-background__secondary-button,
@@ -89,6 +89,11 @@
   font-size: 18px;
 }
 
+.how-it-works__primary-header-sell {
+  color: $color-secondary;
+  font-size: 18px;
+}
+
 .how-it-works__description {
   font-size: 16px;
 
@@ -120,6 +125,20 @@
   margin: 0 auto;
 }
 
+.how-it-works__three-steps__step-circle-sell {
+  background: $color-secondary;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  border-radius: 30px;
+  width: 40px;
+  height: 40px;
+  color: whitesmoke;
+  font-weight: bold;
+  text-align: center;
+  padding-top: 7px;
+  margin: 0 auto;
+}
+
 .how-it-works__three-steps__step-text {
   margin: 0 auto;
   text-align: center;
@@ -132,6 +151,12 @@
   width: 100%;
 }
 
+.how-it-works__line-sell {
+  border-bottom: 3px solid $color-secondary;
+  position: absolute;
+  width: 100%;
+}
+
 /**
   ====================
   == DESCRIPTION TEXT
@@ -140,7 +165,6 @@
 
 .how-it-works__description-text__text {
   font-size: 20px;
-  font-style: italic;
   margin: 40px 0;
   text-align: center;
 }
@@ -168,9 +192,9 @@
 
 .rc-collapse > .rc-collapse-item > .rc-collapse-header .arrow {
   border-top: 10px solid transparent !important;
-  border-bottom: 10px solid transparent !important;;
+  border-bottom: 10px solid transparent !important;
   border-left: 0  !important;
-  border-right: 15px solid $color-primary !important;;
+  border-right: 15px solid $color-primary !important;
   vertical-align: middle !important;
   margin-right: 17px !important;
   float: right !important;

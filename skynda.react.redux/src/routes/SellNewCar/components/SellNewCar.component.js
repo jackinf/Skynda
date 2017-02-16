@@ -17,7 +17,7 @@ import {
   circleButtonRenderer,
   ColorRenderer
 } from "./SellNewCar.redux-form.renderers";
-import heroImageUrl from "../assets/sellyourcar.png";
+import heroImageUrl from "../assets/heroimage.jpg";
 import {toastr, actions as toastrActions} from 'react-redux-toastr';
 import Scroll from "react-scroll";
 
@@ -126,12 +126,20 @@ export default class extends React.Component {
 
     return (<div className="sell-your-car">
 
-      <Parallax bgImage={heroImageUrl} strength={250}>
+      <Parallax bgImage={heroImageUrl} strength={250} >
         <div className="sell-your-car__centered sell-your-car__main-image-background2">
-          <h3 className="sell-your-car__main-image-background__title">Saada meile enda ja oma auto andmed</h3>
+          <Row>
+            <Col sm={3}></Col>
+            <Col sm={6}>
+              <h3 className="sell-your-car__main-image-background__title__line">Ainult Triveniga saad oma auto müüdud</h3>
+              <h3 className="sell-your-car__main-image-background__title__line">arvuti tagant lahkumata ja</h3>
+              <h3 className="sell-your-car__main-image-background__title__line">müügikuulutuse avaldamine on alati tasuta</h3>
+            </Col>
+            <Col sm={3}></Col>
+          </Row>
 
           <Scroll.Link activeClass="active" to="fill-form-scroll-to" spy={true} smooth={true} offset={50} duration={500}>
-            <Button className="sell-your-car__main-image-background__button">Panen auto müüki</Button>
+            <Button className="how-it-works__main-image-background__secondary-button">Panen auto müüki</Button>
           </Scroll.Link>
         </div>
       </Parallax>
