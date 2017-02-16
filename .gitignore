@@ -15,6 +15,7 @@ skynda_backend/.mvn/
 skynda_backend/.settings/
 skynda_backend/target/
 skynda_backend/dataSources/
+skynda_backend/logs/
 
 # Packages #
 ############
