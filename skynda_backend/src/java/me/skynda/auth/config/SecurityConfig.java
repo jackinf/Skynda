@@ -78,7 +78,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 /*
                     Vehicle model controller
                  */
-                .antMatchers(HttpMethod.GET, "/api/vehicle-models", "/api/vehicle-models-by-manufacturers", "/api/vehicle-model/{\\d+}").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/vehicle-models", "/api/vehicle-models-by-manufacturers/", "/api/vehicle-model/{\\d+}").permitAll()
 
                 /*
                     Email controller
