@@ -1,6 +1,7 @@
 package me.skynda.vehicle.dao;
 
 import me.skynda.common.db.BaseEntityDao;
+import me.skynda.common.dto.DeleteResponseDto;
 import me.skynda.common.entities.Vehicle;
 import me.skynda.common.helper.CastHelper;
 import me.skynda.common.helper.JsonHelper;
@@ -8,6 +9,7 @@ import me.skynda.common.interfaces.daos.*;
 import me.skynda.vehicle.dto.request.SearchRequestDto;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
@@ -77,6 +79,42 @@ public class VehicleDao extends BaseEntityDao<Vehicle> implements IVehicleDao {
         }
 
         return queryResponse;
+    }
+
+    @Override
+    public void deleteEntity(Vehicle vehicle, DeleteResponseDto response) {
+        Transaction tx = null;
+        Session session = getSession();
+        Date now = new Date();
+        try {
+            tx = session.beginTransaction();
+            int queryResponse = session
+                    .createSQLQuery(
+                            "UPDATE vehicle " +
+                                    "SET archived = :archived " +
+                                    "WHERE id = :id")
+                    .setParameter("archived", now)
+                    .setParameter("id", vehicle.getId())
+                    .executeUpdate();
+
+            if (queryResponse < 1) {
+                Exception exception = new Exception("Vehicle Delete failed: No such item found.");
+                logger.error("deleteEntity failed. ", exception);
+                throw exception;
+            }
+
+            tx.commit();
+            response.setSuccess(true);
+
+        } catch (Exception e) {
+            logger.error("deleteEntity failed. ", e);
+            e.printStackTrace();
+            response.setError(e.getMessage());
+            response.setSuccess(false);
+
+            assert tx != null;
+            tx.rollback();
+        }
     }
 
     @Override

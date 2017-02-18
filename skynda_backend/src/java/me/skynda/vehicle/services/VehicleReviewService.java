@@ -117,11 +117,10 @@ public class VehicleReviewService implements IVehicleReviewService {
             DeleteResponseDto response = new DeleteResponseDto();
             VehicleReview review = vehicleReviewDao.get(id);
             vehicleReviewDao.deleteEntity(review, response);
-            response.setSuccess(true);
             return response;
         } catch (Exception e) {
             logger.error("delete failed. id: " + id, e);
-            throw e;
+            return DeleteResponseDto.Factory.fail(e.getMessage());
         }
     }
 }

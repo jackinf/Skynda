@@ -2,6 +2,7 @@ package me.skynda.vehicle.services;
 
 import me.skynda.common.dto.CreateOrUpdateResponseDto;
 import me.skynda.common.dto.DeleteResponseDto;
+import me.skynda.common.entities.Feature;
 import me.skynda.common.entities.VehicleFeature;
 import me.skynda.common.entities.VehicleReview;
 import me.skynda.common.helper.JsonHelper;
@@ -55,30 +56,15 @@ public class VehicleFeatureService implements IVehicleFeatureService {
     }
 
     @Override
-    public CreateOrUpdateResponseDto createOrUpdate(VehicleFeatureDto dto, BindingResult bindingResult) {
-        try {
-
-//            VehicleReview persistedVehicleReview = vehicleFeatureDao.saveOrUpdate(null);
-//            CreateOrUpdateResponseDto response = CreateOrUpdateResponseDto.Factory.success(persistedVehicleReview.getId(), true);
-//            response.setVehicleId(persistedVehicleReview.getVehicleId());
-
-            return null;
-        } catch (Exception e) {
-            logger.error("createOrUpdate failed. dto: " + JsonHelper.toJson(dto), e);
-            throw e;
-        }
-    }
-
-    @Override
-    public DeleteResponseDto delete(Integer id, Integer vehicleId) {
+    public DeleteResponseDto delete(Integer id) {
         try {
             DeleteResponseDto response = new DeleteResponseDto();
-//            Feature feature =  dao.get(id);
-//            dao.deleteEntity(feature, response);
+            VehicleFeature feature =  vehicleFeatureDao.get(id);
+            vehicleFeatureDao.deleteEntity(feature, response);
             return response;
         } catch (Exception e) {
             logger.error("delete failed. id: " + id, e);
-            throw e;
+            return DeleteResponseDto.Factory.fail(e.getMessage());
         }
     }
 }

@@ -112,22 +112,6 @@ public class VehicleReportService implements IVehicleReportService {
         }
     }
 
-    @Override
-    public DeleteResponseDto delete(Integer id) {
-        try {
-            DeleteResponseDto response = new DeleteResponseDto();
-            VehicleReport report = dao.get(id);
-            VehicleReportDto dto = mapper.map(report, VehicleReportDto.class);
-            List<VehicleReportItem> existingItems = itemDao.getAllChildren(id);
-            RemoveReportItems(dto.getItems(), existingItems);
-            dao.deleteEntity(report, response);
-            return response;
-        } catch (Exception e) {
-            logger.error("delete failed. id: " + id, e);
-            throw e;
-        }
-    }
-
     private void UpdateReportItems(VehicleReportDto dto, Integer parentId ) {
         List<VehicleReportItemDto> reportItems = dto.getItems();
         List<FaultBaseDto> faultDtos = dto.getFaults();
@@ -180,9 +164,10 @@ public class VehicleReportService implements IVehicleReportService {
 
             for (VehicleReportItem item : existingItems) {
 
-                Boolean exists = !reportItems.isEmpty() && reportItems.stream()
-                        .map(VehicleReportItemDto::getId)
-                        .anyMatch(item.getId()::equals);
+                Boolean exists = reportItems != null &&
+                        !reportItems.isEmpty() &&
+                        reportItems.stream().map(VehicleReportItemDto::getId)
+                            .anyMatch(item.getId()::equals);
 
                 if(!exists) {
                     DeleteResponseDto response = new DeleteResponseDto();
@@ -197,15 +182,35 @@ public class VehicleReportService implements IVehicleReportService {
 
         if(existingFaults != null){
             for (VehicleFault fault : existingFaults){
-                Boolean exists = !faults.isEmpty() && faults.stream()
-                        .map(FaultBaseDto::getId)
-                        .anyMatch(fault.getId()::equals);
+                Boolean exists = faults != null &&
+                        !faults.isEmpty() &&
+                        faults.stream().map(FaultBaseDto::getId)
+                            .anyMatch(fault.getId()::equals);
 
                 if(!exists) {
                     DeleteResponseDto response = new DeleteResponseDto();
                     faultDao.deleteEntity(fault, response);
                 }
             }
+        }
+    }
+
+
+    @Override
+    public DeleteResponseDto delete(Integer id) {
+        try {
+            DeleteResponseDto response = new DeleteResponseDto();
+            VehicleReport report = dao.get(id);
+            VehicleReportDto dto = mapper.map(report, VehicleReportDto.class);
+            List<VehicleReportItem> existingItems = itemDao.getAllChildren(id);
+            List<VehicleFault> existingFaults = faultDao.getActiveFaults(id);
+            RemoveReportItems(null, existingItems);
+            RemoveFaults(null, existingFaults);
+            dao.deleteEntity(report, response);
+            return response;
+        } catch (Exception e) {
+            logger.error("delete failed. id: " + id, e);
+            return DeleteResponseDto.Factory.fail(e.getMessage());
         }
     }
 

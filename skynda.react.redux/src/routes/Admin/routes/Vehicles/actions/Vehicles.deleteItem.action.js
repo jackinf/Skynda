@@ -5,8 +5,7 @@ import {REDUCER_KEYS} from "../constants/Vehicle.constant";
 
 export default function deleteItem(id) {
   return (dispatch, getState) => {
-    let items = getState()[REDUCER_KEYS.VEHICLES_REPORTS_DATA].items;
-    // dispatch(setVehicleReviews({isFetching: true}));
+    let items = getState()[REDUCER_KEYS.VEHICLES_DATA].items;
 
     return fetch(`${remoteConfig.remote}/api/vehicle/${id}`, {
       method: "DELETE",

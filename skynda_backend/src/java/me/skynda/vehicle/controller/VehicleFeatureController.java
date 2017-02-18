@@ -27,22 +27,4 @@ public class VehicleFeatureController {
         return service.getAllBy(id);
     }
 
-    @RequestMapping(value = "/vehicle-feature", method = RequestMethod.POST)
-    public CreateOrUpdateResponseDto add(@RequestBody VehicleFeatureDto dto, BindingResult bindingResult) {
-        return service.createOrUpdate(dto, bindingResult);
-    }
-
-    @RequestMapping(value = "/vehicle-feature/{id}", method = RequestMethod.PUT, consumes = "application/json")
-    public CreateOrUpdateResponseDto update(@PathVariable("id") Integer id,
-                                            @RequestBody VehicleFeatureDto dto,
-                                            BindingResult bindingResult)
-    {
-        return service.createOrUpdate(dto, bindingResult);
-    }
-
-    @RequestMapping(value = "/vehicle-feature/{id}", method = RequestMethod.DELETE, consumes = "application/json")
-    public DeleteResponseDto delete(@PathVariable("id") Integer id, Integer vehicleId) {
-        return service.delete(id, vehicleId);
-    }
-
 }

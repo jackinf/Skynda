@@ -12,7 +12,6 @@ import java.util.List;
 
 
 public interface IVehicleFeatureService {
-    CreateOrUpdateResponseDto createOrUpdate(VehicleFeatureDto dto, BindingResult bindingResult);
     List<VehicleFeatureDto> getAllBy(Serializable vehicleId);
-    DeleteResponseDto delete(Integer id, Integer vehicleId);
+    DeleteResponseDto delete(Integer id);
 }
