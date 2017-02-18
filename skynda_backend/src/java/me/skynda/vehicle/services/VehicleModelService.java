@@ -7,6 +7,7 @@ import me.skynda.common.interfaces.daos.IVehicleModelDao;
 import me.skynda.common.interfaces.services.IVehicleModelService;
 import me.skynda.vehicle.dto.VehicleModelAdminDto;
 import me.skynda.vehicle.dto.request.ModelRequestDto;
+import me.skynda.vehicle.dto.request.VehicleModelSearchRequest;
 import me.skynda.vehicle.dto.response.VehicleModelResponseDto;
 import me.skynda.common.entities.VehicleModel;
 import org.dozer.Mapper;
@@ -98,6 +99,25 @@ public class VehicleModelService implements IVehicleModelService {
             return DeleteResponseDto.Factory.success();
         } catch (Exception e) {
             logger.error("delete failed. id: " + id, e);
+            throw e;
+        }
+    }
+
+    @Override
+    public List<VehicleModelResponseDto> search(VehicleModelSearchRequest dto) {
+        if (dto.getManufacturerIds().isEmpty())
+            return new ArrayList<>();
+
+        try {
+            List<VehicleModelResponseDto> responseDtos = new ArrayList<>();
+            vehicleModelDao.search(dto).forEach(vehicleModelEntity -> {
+                VehicleModelResponseDto responseDto = new VehicleModelResponseDto();
+                mapper.map(vehicleModelEntity, responseDto);
+                responseDtos.add(responseDto);
+            });
+            return responseDtos;
+        } catch (Exception e) {
+            logger.error("search failed. dto: " + JsonHelper.toJson(dto), e);
             throw e;
         }
     }

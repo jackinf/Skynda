@@ -4,6 +4,7 @@ import {Translate} from 'react-redux-i18n';
 import Plus from 'react-icons/lib/fa/plus'
 import Minus from 'react-icons/lib/fa/minus'
 import RefreshIndicator from 'material-ui/RefreshIndicator';
+import moment from "moment";
 
 import "./Search.component.scss";
 import ButtonGroupContainer from "../containers/Select.button.container";
@@ -12,7 +13,6 @@ import ToggleBtnContainer from "../containers/Search.toggle.button.container";
 import SearchBtnContainer from "../containers/Search.button.container";
 import SearchResultsContainer from "../containers/Search.results.container"
 import {colors} from "../../../utils/constants";
-import moment from "moment";
 
 
 
@@ -62,15 +62,20 @@ class SearchComponent extends React.Component {
                 <Row>
                   <Col md={12} className='range-slider-wrapper'>
                     <label><Translate value="components.car_search.brand"/></label>
-                    <ButtonGroupContainer type={"brands"} options={this.props.brands}/>
+                    <ButtonGroupContainer type={"brands"} options={this.props.brands}
+                      onToggleDone={() => {
+                        this.props.getModelsByManufacturerAsync();
+                      }}
+                    />
                   </Col>
                 </Row>
-                <Row>
-                  <Col md={12} className='range-slider-wrapper'>
-                    <label><Translate value="components.car_search.models"/></label>
-                    <ButtonGroupContainer type={"models"} options={this.props.models}/>
-                  </Col>
-                </Row>
+                {this.props.models && this.props.models.filter(model => model.id !== -1).length > 0 ?
+                  (<Row>
+                    <Col md={12} className='range-slider-wrapper'>
+                      <label><Translate value="components.car_search.models"/></label>
+                      <ButtonGroupContainer type={"models"} options={this.props.models}/>
+                    </Col>
+                  </Row>) : ""}
                 <Row>
                   <Col md={4}>
                     <Row>

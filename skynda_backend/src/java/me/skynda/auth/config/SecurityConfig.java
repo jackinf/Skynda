@@ -76,6 +76,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/api/vehicle/search").permitAll()
 
                 /*
+                    Vehicle model controller
+                 */
+                .antMatchers(HttpMethod.GET, "/api/vehicle-models", "/api/vehicle-models-by-manufacturers", "/api/vehicle-model/{\\d+}").permitAll()
+
+                /*
                     Email controller
                  */
                 .antMatchers(HttpMethod.POST, "/api/email/subscribe", "/api/email/sell-vehicle",

@@ -8,12 +8,14 @@ import java.util.List;
 
 @Data
 public class SearchRequestDto {
+    public List<ButtonAttributesDto> Models;
     public List<ButtonAttributesDto> Brands;
     public List<ButtonAttributesDto> Colors;
     public List<ButtonAttributesDto> Features;
     public List<ButtonAttributesDto> Doors;
     public List<ButtonAttributesDto> Seats;
     public List<ButtonAttributesDto> Transmission;
+    public List<ButtonAttributesDto> FuelType;
     public SliderAttributesDto Mileage;
     public SliderAttributesDto Price;
     public SliderAttributesDto Year;

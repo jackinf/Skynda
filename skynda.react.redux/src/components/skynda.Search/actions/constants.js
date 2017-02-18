@@ -7,4 +7,6 @@ export const ACTIONS = {
   SET_SEARCH_RESULTS: "SET_SEARCH_RESULTS"
 };
 
+export const SEARCH_REDUCER_KEY = "base";
+
 export default ACTIONS;

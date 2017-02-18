@@ -1,5 +1,6 @@
 package me.skynda.vehicle.dao;
 
+import me.skynda.classification.dto.ButtonAttributesDto;
 import me.skynda.common.db.BaseEntityDao;
 import me.skynda.common.helper.CastHelper;
 import me.skynda.common.helper.JsonHelper;
@@ -8,7 +9,6 @@ import me.skynda.common.interfaces.daos.IVehicleReportDao;
 import me.skynda.common.interfaces.daos.IVehicleReviewDao;
 import me.skynda.vehicle.dto.request.SearchRequestDto;
 import me.skynda.common.entities.Vehicle;
-import org.apache.commons.lang3.NotImplementedException;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Criterion;
@@ -85,13 +85,14 @@ public class VehicleDao extends BaseEntityDao<Vehicle> implements IVehicleDao {
                     .createAlias("model", "model");
 
             ////Manufacturer code / Brand
-            if (params.Brands != null && !params.Brands.isEmpty()) {
-                Collection<Integer> brandList = params.Brands.stream()
-                        .map(x -> x.getValue())
-                        .collect(Collectors.toCollection(ArrayList::new));
-                vehicleCriteria.createAlias("vehicle.model.vehicleManufacturer", "manufacturer");
-                vehicleCriteria.add(Restrictions.in("manufacturer.id", brandList));
-            }
+//            if (params.Brands != null && !params.Brands.isEmpty()) {
+//                Collection<Integer> brandList = params.Brands.stream()
+//                        .map(x -> x.getValue())
+//                        .collect(Collectors.toCollection(ArrayList::new));
+//                vehicleCriteria.createAlias("vehicle.model.vehicleManufacturer", "manufacturer");
+//                vehicleCriteria.add(Restrictions.in("manufacturer.id", brandList));
+//            }
+
             // TODO: Color outside search
             ////Vehicle outside color
             if (params.Colors != null && !params.Colors.isEmpty()) {
@@ -134,6 +135,21 @@ public class VehicleDao extends BaseEntityDao<Vehicle> implements IVehicleDao {
                         .collect(Collectors.toCollection(ArrayList::new));
                 vehicleCriteria.createAlias("vehicle.model.transmission", "transmission");
                 vehicleCriteria.add(Restrictions.in("transmission.id", transmissionList));
+            }
+
+            if (params.Models != null && !params.Models.isEmpty()) {
+                Collection<Integer> modelList = params.Models.stream()
+                        .map(ButtonAttributesDto::getValue)
+                        .collect(Collectors.toCollection(ArrayList::new));
+                vehicleCriteria.add(Restrictions.in("model.id", modelList));
+            }
+
+            if (params.FuelType != null && !params.FuelType.isEmpty()) {
+                Collection<Integer> fuelTypeList = params.FuelType.stream()
+                        .map(ButtonAttributesDto::getValue)
+                        .collect(Collectors.toCollection(ArrayList::new));
+                vehicleCriteria.createAlias("vehicle.model.fuelType", "fuelType");
+                vehicleCriteria.add(Restrictions.in("fuelType.id", fuelTypeList));
             }
 
             if (params.Mileage != null) {

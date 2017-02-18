@@ -4,6 +4,7 @@ import me.skynda.common.dto.CreateOrUpdateResponseDto;
 import me.skynda.common.dto.DeleteResponseDto;
 import me.skynda.vehicle.dto.VehicleModelAdminDto;
 import me.skynda.vehicle.dto.request.ModelRequestDto;
+import me.skynda.vehicle.dto.request.VehicleModelSearchRequest;
 import me.skynda.vehicle.dto.response.VehicleModelResponseDto;
 import org.springframework.validation.BindingResult;
 
@@ -21,5 +22,7 @@ public interface IVehicleModelService {
     CreateOrUpdateResponseDto createOrUpdate(VehicleModelAdminDto vehicleModelAdminDto, BindingResult bindingResult);
 
     DeleteResponseDto delete(Integer id);
+
+    List<VehicleModelResponseDto> search(VehicleModelSearchRequest dto);
 
 }

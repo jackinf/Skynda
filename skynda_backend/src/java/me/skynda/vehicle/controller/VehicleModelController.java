@@ -5,11 +5,14 @@ import me.skynda.common.dto.DeleteResponseDto;
 import me.skynda.common.interfaces.services.IVehicleModelService;
 import me.skynda.vehicle.dto.VehicleModelAdminDto;
 import me.skynda.vehicle.dto.request.ModelRequestDto;
+import me.skynda.vehicle.dto.request.VehicleModelSearchRequest;
 import me.skynda.vehicle.dto.response.VehicleModelResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @CrossOrigin(origins = "*")
@@ -25,8 +28,8 @@ public class VehicleModelController {
     }
 
     @RequestMapping(value = "/vehicle-models", method = RequestMethod.GET)
-    public List<VehicleModelResponseDto> getAll(@RequestBody(required = false) ModelRequestDto searchDto) {
-        return vehicleModelService.getAll(searchDto);
+    public List<VehicleModelResponseDto> getAll(@PathVariable(required = false) ModelRequestDto modelRequest) {
+        return vehicleModelService.getAll(modelRequest);
     }
 
     @RequestMapping(value = "/vehicle-model/{id}", method = RequestMethod.GET)
@@ -53,4 +56,10 @@ public class VehicleModelController {
         return vehicleModelService.delete(id);
     }
 
+    @RequestMapping(value = "/vehicle-models-by-manufacturers", method = RequestMethod.GET)
+    public List<VehicleModelResponseDto> getAllByManufacturers(@RequestParam(value = "ids", required = false) Integer[] ids) {
+        VehicleModelSearchRequest modelRequestDto = new VehicleModelSearchRequest();
+        modelRequestDto.setManufacturerIds(ids == null ? new ArrayList<>() : Arrays.asList(ids));
+        return vehicleModelService.search(modelRequestDto);
+    }
 }

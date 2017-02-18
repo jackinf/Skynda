@@ -5,7 +5,7 @@ import React from "react";
 import remoteConfig from "../../../store/remoteConfig";
 import fetch from "isomorphic-fetch";
 
-function getClassificationList(type){
+function getClassificationList(type) {
   return fetch(`${remoteConfig.remote}/api/classifications/${type}/vehicle-bound`, {
     method: "GET",
     credentials: "include",
@@ -21,23 +21,6 @@ function getClassificationList(type){
     });
 }
 
-function getModelsList(){
-  return fetch(`${remoteConfig.remote}/api/vehicle-models/`, {
-    method: "GET",
-    credentials: "include",
-    headers: {"Accept": "application/json", "Content-Type": "application/json"}
-  })
-    .then(resp => resp.json())
-    .then(resp => {
-      const items = resp.map(item => ({id: item.id, name: item.title, value: item.id}));
-      return { success: true, items };
-    })
-    .catch(err => {
-      console.error(err);
-      return {success: false, items: [], error: err};
-    });
-}
-
 export const getClassificationsAsync =  () => {
   return (dispatch) => {
 
@@ -45,7 +28,6 @@ export const getClassificationsAsync =  () => {
       getClassificationList("MANUFACTURER"),
       getClassificationList("FEATURE"),
       getClassificationList("TRANSMISSION"),
-      getModelsList(),
       getClassificationList("FUEL"),
     ];
 
@@ -53,8 +35,7 @@ export const getClassificationsAsync =  () => {
         const respBrand = responses[0];
         const respFeature = responses[1];
         const respTransmission = responses[2];
-        const respModel = responses[3];
-        const respFuels = responses[4];
+        const respFuels = responses[3];
 
         const brandsInit = [{id: -1, name: <Translate value="all"/>}];
         const brands = brandsInit.concat(respBrand.items);
@@ -66,9 +47,6 @@ export const getClassificationsAsync =  () => {
           const translation = `components.car_search.${obj.name.toString().toLowerCase()}`;
           return {id: obj.id, name: <Translate value={translation}/>, value: obj.value};
         });
-
-        const modelsInit = [{id: -1, name: <Translate value="all"/>}];
-        const models = modelsInit.concat(respModel.items);
 
         const fuels = respFuels.items.map((obj)=>{
           const translation = `components.car_search.${obj.name.toString().toLowerCase()}`;
@@ -101,40 +79,7 @@ export const getClassificationsAsync =  () => {
           power: {min: 0, max: 500, units: "KW"}
         };
 
-        dispatch(setBaseValues({
-          sliderValues: {
-            key: "sliderValues",
-            value: sliderValues
-          },
-          models: {
-            key: "models",
-            value: models
-          },
-          brands: {
-            key: "brands",
-            value: brands
-          },
-          transmissions: {
-            key: "transmissions",
-            value: transmissions
-          },
-          fuels: {
-            key: "fuels",
-            value: fuels
-          },
-          features: {
-            key: "features",
-            value: features
-          },
-          doors: {
-            key: "doors",
-            value: doors
-          },
-          seats: {
-            key: "seats",
-            value: seats
-          }
-        }));
+        dispatch(setBaseValues(sliderValues, [], brands, transmissions, fuels, features, doors, seats));
     });
   };
 };

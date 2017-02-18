@@ -24,12 +24,15 @@ class ButtonGroup extends React.Component {
     if (option.id === -1) {
       this.toggleAll(option.toggled);
     } else {
-      var all = this.props.options.find((item) => item.id === -1);
+      let all = this.props.options.find((item) => item.id === -1);
       if (all) {
         all.toggled = false;
       }
 
       this.updateButtonGroupValues(option);
+      if (!!this.props.onToggleDone) {
+        this.props.onToggleDone();
+      }
     }
 
     this.forceUpdate();
@@ -37,16 +40,19 @@ class ButtonGroup extends React.Component {
 
   toggleAll(value) {
     for (let i = 0; i < this.props.options.length; i++) {
-      var option = this.props.options[i];
+      let option = this.props.options[i];
       option.toggled = value;
       this.updateButtonGroupValues(option);
+    }
+    if (!!this.props.onToggleDone) {
+      this.props.onToggleDone();
     }
   }
 
   render() {
-    var mdCol = this.props.md ? this.props.md : 2;
-    var smCol = this.props.sm ? this.props.sm : 4;
-    var xsCol = this.props.xs ? this.props.xs : 4;
+    const mdCol = this.props.md ? this.props.md : 2;
+    const smCol = this.props.sm ? this.props.sm : 4;
+    const xsCol = this.props.xs ? this.props.xs : 4;
 
     return (<div className='list-inline'>
       {this.props.options.map((option, key) => {

@@ -5,6 +5,7 @@ import React from 'react';
 import {connect} from 'react-redux'
 import SearchComponent from '../components/Search.component'
 import {getClassificationsAsync} from '../reducers'
+import {getModelsByManufacturerAsync} from "../actions";
 
 const mapStateToProps = (state) => {
   return {
@@ -23,7 +24,8 @@ const mapStateToProps = (state) => {
 
 
 const mapDispatchToProps = {
-  getClassificationsAsync
+  getClassificationsAsync,
+  getModelsByManufacturerAsync
 };
 
 const SearchContainer = connect(
