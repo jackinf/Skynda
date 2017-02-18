@@ -127,21 +127,26 @@ public class VehicleDao extends BaseEntityDao<Vehicle> implements IVehicleDao {
                     .createCriteria(Vehicle.class, "vehicle")
                     .createAlias("model", "model");
 
-            ////Manufacturer code / Brand
-//            if (params.Brands != null && !params.Brands.isEmpty()) {
-//                Collection<Integer> brandList = params.Brands.stream()
-//                        .map(x -> x.getValue())
-//                        .collect(Collectors.toCollection(ArrayList::new));
-//                vehicleCriteria.createAlias("vehicle.model.vehicleManufacturer", "manufacturer");
-//                vehicleCriteria.add(Restrictions.in("manufacturer.id", brandList));
-//            }
+            if (params.Models != null && !params.Models.isEmpty()) {
+                Collection<Integer> modelList = params.Models.stream()
+                        .map(ButtonAttributesDto::getValue)
+                        .collect(Collectors.toCollection(ArrayList::new));
+                vehicleCriteria.add(Restrictions.in("model.id", modelList));
+            }
+            else if (params.Brands != null && !params.Brands.isEmpty()) {
+                Collection<Integer> brandList = params.Brands.stream()
+                        .map(ButtonAttributesDto::getValue)
+                        .collect(Collectors.toCollection(ArrayList::new));
+                vehicleCriteria.createAlias("vehicle.model.vehicleManufacturer", "manufacturer");
+                vehicleCriteria.add(Restrictions.in("manufacturer.id", brandList));
+            }
 
             // TODO: Color outside search
             ////Vehicle outside color
             if (params.Colors != null && !params.Colors.isEmpty()) {
                 Collection<String> colorList = params.Colors.stream()
-                        .map(x -> x.getValue())
-                        .map(colorId -> mapColorIdToHex(colorId))
+                        .map(ButtonAttributesDto::getValue)
+                        .map(this::mapColorIdToHex)
                         .filter(hex -> !Objects.equals(hex, ""))
                         .collect(Collectors.toCollection(ArrayList::new));
                 vehicleCriteria.add(Restrictions.in("vehicle.colorOutsideHex", colorList));
@@ -150,7 +155,7 @@ public class VehicleDao extends BaseEntityDao<Vehicle> implements IVehicleDao {
             //Vehicle feature
             if (params.Features != null && !params.Features.isEmpty()) {
                 Collection<Integer> featureList = params.Features.stream()
-                        .map(x -> x.getValue())
+                        .map(ButtonAttributesDto::getValue)
                         .collect(Collectors.toCollection(ArrayList::new));
                 vehicleCriteria.createAlias("vehicle.features", "vehicleFeature");
                 vehicleCriteria.add(Restrictions.in("vehicleFeature.feature.id", featureList));
@@ -158,7 +163,7 @@ public class VehicleDao extends BaseEntityDao<Vehicle> implements IVehicleDao {
             ////Doors
             if (params.Doors != null && !params.Doors.isEmpty()) {
                 ArrayList<Integer> doorValues = params.Doors.stream()
-                                .map(x -> x.getValue())
+                                .map(ButtonAttributesDto::getValue)
                                 .collect(Collectors.toCollection(ArrayList::new));
                 Integer doors = Collections.min(doorValues);
                 vehicleCriteria.add(Restrictions.ge("model.doors", doors));
@@ -166,7 +171,7 @@ public class VehicleDao extends BaseEntityDao<Vehicle> implements IVehicleDao {
 
             if (params.Seats != null && !params.Seats.isEmpty()) {
                 ArrayList<Integer> seatValues = params.Seats.stream()
-                        .map(x -> x.getValue())
+                        .map(ButtonAttributesDto::getValue)
                         .collect(Collectors.toCollection(ArrayList::new));
                 Integer seats = Collections.min(seatValues);
                 vehicleCriteria.add(Restrictions.ge("model.seats", seats));
@@ -174,17 +179,10 @@ public class VehicleDao extends BaseEntityDao<Vehicle> implements IVehicleDao {
             ////Transmission type(classification)
             if (params.Transmission != null && !params.Transmission.isEmpty()) {
                 Collection<Integer> transmissionList = params.Transmission.stream()
-                        .map(x -> x.getValue())
+                        .map(ButtonAttributesDto::getValue)
                         .collect(Collectors.toCollection(ArrayList::new));
                 vehicleCriteria.createAlias("vehicle.model.transmission", "transmission");
                 vehicleCriteria.add(Restrictions.in("transmission.id", transmissionList));
-            }
-
-            if (params.Models != null && !params.Models.isEmpty()) {
-                Collection<Integer> modelList = params.Models.stream()
-                        .map(ButtonAttributesDto::getValue)
-                        .collect(Collectors.toCollection(ArrayList::new));
-                vehicleCriteria.add(Restrictions.in("model.id", modelList));
             }
 
             if (params.FuelType != null && !params.FuelType.isEmpty()) {
