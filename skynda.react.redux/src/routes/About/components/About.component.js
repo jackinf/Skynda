@@ -6,7 +6,6 @@ import {Row, Col} from "react-bootstrap";
 import {Translate} from "react-redux-i18n";
 
 // Images
-import imageLogo from "./../assets/skynda logo 4-mask-8@2x.png.png";
 import imageGoogle from "./../assets/Google Maps@2x.png.png";
 import imageTelia from "./../assets/image-mask-6@2x.png.png";
 import imageVunk from "./../assets/group@2x.png.png";
@@ -66,16 +65,6 @@ export class About extends React.Component {
           <div className='well about__our-contacts'>
             <h4 className='about__our-contacts-header'>Meie kontaktid</h4>
 
-            <Row>
-              <img src={imageLogo} alt='logo'/>
-            </Row>
-
-            <br />
-
-            <Row>
-              Skynda AS
-            </Row>
-
             <br />
 
             <Row>
@@ -94,7 +83,7 @@ export class About extends React.Component {
             </Row>
 
             <Row>
-              +372 5144 750
+              +372 5884 1335
             </Row>
 
             <h4 className='about__our-contacts-header'>Partnerid</h4>
