@@ -14,6 +14,7 @@ import {AlphaPicker, CirclePicker, TwitterPicker} from 'react-color';
 import ReactDOM from 'react-dom';
 import { BootstrapTable as bt, TableHeaderColumn } from 'react-bootstrap-table';
 import {fieldListWrapper, renderImage} from "../../../../../components/FormRenderers/index";
+import {colorHashes} from "../../../../../../../utils/constants";
 
 const styleDeleteIcon = {
   position: "absolute",
@@ -277,7 +278,10 @@ export class ColorRenderer extends React.Component {
                onClick={e => this.onToggle()}>&nbsp;</div>
 
           {this.state.expanded
-            ? (<CirclePicker onChangeComplete={this.onChangeComplete} color={input.value} triangle="hide"/>)
+            ? (<CirclePicker colors={colorHashes}
+                             onChangeComplete={this.onChangeComplete}
+                             color={input.value}
+                             triangle="hide"/>)
             : ""}
         </Col>
       </Row>
