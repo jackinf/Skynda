@@ -21,7 +21,7 @@ function ColorsComponent() {
   return (<Row>
     <Col md={12} className='range-slider-wrapper'>
       <label><Translate value="components.car_search.colors"/></label><br />
-      <ButtonGroupContainer type={"colors"} md={1} xs={2} options={colors} shape='circle'/>
+      <ButtonGroupContainer type={"colors"} md={2} xs={2} options={colors} shape='circle'/>
     </Col>
   </Row>)
 }
@@ -63,6 +63,12 @@ class SearchComponent extends React.Component {
                   <Col md={12} className='range-slider-wrapper'>
                     <label><Translate value="components.car_search.brand"/></label>
                     <ButtonGroupContainer type={"brands"} options={this.props.brands}/>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col md={12} className='range-slider-wrapper'>
+                    <label><Translate value="components.car_search.models"/></label>
+                    <ButtonGroupContainer type={"models"} options={this.props.models}/>
                   </Col>
                 </Row>
                 <Row>
@@ -197,11 +203,20 @@ class SearchComponent extends React.Component {
                         </Row>
 
                         <Row>
-                          <Col md={12}>
+                          <Col md={8}>
                             <Row>
                               <Col md={8} className='range-slider-wrapper'>
                                 <ColorsComponent />
                                 {/*<CirclePicker onChangeComplete={e => console.log(e)}  triangle="hide"/>*/}
+                              </Col>
+                            </Row>
+                          </Col>
+                          <Col md={4}>
+                            <Row>
+                              <Col md={12} className='range-slider-wrapper'>
+                                <label><Translate value="components.car_search.fuels"/></label><br />
+                                <ButtonGroupContainer type={"fuelType"} md={8} xs={6}
+                                                      options={this.props.fuels}/>
                               </Col>
                             </Row>
                           </Col>

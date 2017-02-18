@@ -36,7 +36,7 @@ class ButtonGroup extends React.Component {
   };
 
   toggleAll(value) {
-    for (var i = 0; i < this.props.options.length; i++) {
+    for (let i = 0; i < this.props.options.length; i++) {
       var option = this.props.options[i];
       option.toggled = value;
       this.updateButtonGroupValues(option);

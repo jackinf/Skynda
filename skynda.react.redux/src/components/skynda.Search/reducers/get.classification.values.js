@@ -5,8 +5,8 @@ import React from "react";
 import remoteConfig from "../../../store/remoteConfig";
 import fetch from "isomorphic-fetch";
 
-async function getClassificationList(type){
-  return await fetch(`${remoteConfig.remote}/api/classifications/${type}/vehicle-bound`, {
+function getClassificationList(type){
+  return fetch(`${remoteConfig.remote}/api/classifications/${type}/vehicle-bound`, {
     method: "GET",
     credentials: "include",
     headers: {"Accept": "application/json", "Content-Type": "application/json"}
@@ -21,27 +21,58 @@ async function getClassificationList(type){
     });
 }
 
+function getModelsList(){
+  return fetch(`${remoteConfig.remote}/api/vehicle-models/`, {
+    method: "GET",
+    credentials: "include",
+    headers: {"Accept": "application/json", "Content-Type": "application/json"}
+  })
+    .then(resp => resp.json())
+    .then(resp => {
+      const items = resp.map(item => ({id: item.id, name: item.title, value: item.id}));
+      return { success: true, items };
+    })
+    .catch(err => {
+      console.error(err);
+      return {success: false, items: [], error: err};
+    });
+}
+
 export const getClassificationsAsync =  () => {
   return (dispatch) => {
-    return new Promise((resolve) => {
-      setTimeout(async() => {
-        const respBrand = await getClassificationList("MANUFACTURER");
+
+    const promises = [
+      getClassificationList("MANUFACTURER"),
+      getClassificationList("FEATURE"),
+      getClassificationList("TRANSMISSION"),
+      getModelsList(),
+      getClassificationList("FUEL"),
+    ];
+
+    return Promise.all(promises).then((responses) => {
+        const respBrand = responses[0];
+        const respFeature = responses[1];
+        const respTransmission = responses[2];
+        const respModel = responses[3];
+        const respFuels = responses[4];
+
         const brandsInit = [{id: -1, name: <Translate value="all"/>}];
         const brands = brandsInit.concat(respBrand.items);
 
-        const respFeature = await getClassificationList("FEATURE");
         const featuresInit = [{id: -1, name: <Translate value="all"/>}];
         const features = featuresInit.concat(respFeature.items);
 
-        const respTransmission = await getClassificationList("TRANSMISSION");
         const transmissions = respTransmission.items.map((obj)=>{
           const translation = `components.car_search.${obj.name.toString().toLowerCase()}`;
-          var returnObj = {
-            id: obj.id,
-            name: <Translate value={translation} />,
-            value: obj.value
-          };
-          return returnObj;
+          return {id: obj.id, name: <Translate value={translation}/>, value: obj.value};
+        });
+
+        const modelsInit = [{id: -1, name: <Translate value="all"/>}];
+        const models = modelsInit.concat(respModel.items);
+
+        const fuels = respFuels.items.map((obj)=>{
+          const translation = `components.car_search.${obj.name.toString().toLowerCase()}`;
+          return {id: obj.id, name: <Translate value={translation}/>, value: obj.value};
         });
 
         // TODO: temporary data. Use API data.
@@ -75,17 +106,25 @@ export const getClassificationsAsync =  () => {
             key: "sliderValues",
             value: sliderValues
           },
+          models: {
+            key: "models",
+            value: models
+          },
           brands: {
             key: "brands",
             value: brands
           },
-          features: {
-            key: "features",
-            value: features
-          },
           transmissions: {
             key: "transmissions",
             value: transmissions
+          },
+          fuels: {
+            key: "fuels",
+            value: fuels
+          },
+          features: {
+            key: "features",
+            value: features
           },
           doors: {
             key: "doors",
@@ -96,8 +135,6 @@ export const getClassificationsAsync =  () => {
             value: seats
           }
         }));
-        resolve();
-      }, 200);
     });
   };
 };

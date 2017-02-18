@@ -13,8 +13,10 @@ const mapStateToProps = (state) => {
     seats: state.base.seats,
     doors: state.base.doors,
     transmissions: state.base.transmissions,
+    fuels: state.base.fuels,
     features: state.base.features,
     brands: state.base.brands,
+    models: state.base.models,
     searchValues: state.searchValues
   };
 };
