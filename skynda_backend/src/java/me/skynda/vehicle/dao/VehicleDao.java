@@ -1,14 +1,11 @@
 package me.skynda.vehicle.dao;
 
 import me.skynda.common.db.BaseEntityDao;
+import me.skynda.common.entities.Vehicle;
 import me.skynda.common.helper.CastHelper;
 import me.skynda.common.helper.JsonHelper;
-import me.skynda.common.interfaces.daos.IVehicleDao;
-import me.skynda.common.interfaces.daos.IVehicleReportDao;
-import me.skynda.common.interfaces.daos.IVehicleReviewDao;
+import me.skynda.common.interfaces.daos.*;
 import me.skynda.vehicle.dto.request.SearchRequestDto;
-import me.skynda.common.entities.Vehicle;
-import org.apache.commons.lang3.NotImplementedException;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Criterion;
@@ -28,13 +25,16 @@ public class VehicleDao extends BaseEntityDao<Vehicle> implements IVehicleDao {
 
     private final IVehicleReportDao reportDao;
     private final IVehicleReviewDao reviewDao;
+    private final IVehicleFeatureDao vehicleFeatureDao;
 
     private static Logger logger = LoggerFactory.getLogger(VehicleDao.class);
 
     @Autowired
-    public VehicleDao(IVehicleReportDao reportDao,IVehicleReviewDao reviewDao) {
+    public VehicleDao(IVehicleReportDao reportDao,IVehicleReviewDao reviewDao,
+                      IVehicleFeatureDao vehicleFeatureDao) {
         this.reportDao = reportDao;
         this.reviewDao = reviewDao;
+        this.vehicleFeatureDao = vehicleFeatureDao;
     }
 
     @Override
@@ -48,6 +48,7 @@ public class VehicleDao extends BaseEntityDao<Vehicle> implements IVehicleDao {
         Vehicle queryResponse = null;
         List reports = null;
         List reviews = null;
+        List features = null;
 
         try {
             Criteria vehicleCriteria = session
@@ -59,6 +60,7 @@ public class VehicleDao extends BaseEntityDao<Vehicle> implements IVehicleDao {
                 vehicleCriteria.add(Restrictions.isNull("archived"));
                 reports = reportDao.getAllBy(id);
                 reviews = reviewDao.getAllBy(id);
+                features = vehicleFeatureDao.getAllBy(id);
             }
 
             queryResponse = (Vehicle) vehicleCriteria.uniqueResult();
@@ -66,6 +68,7 @@ public class VehicleDao extends BaseEntityDao<Vehicle> implements IVehicleDao {
             if(queryResponse != null && isActive){
                 queryResponse.setReportCategories(reports);
                 queryResponse.setReviews(reviews);
+                queryResponse.setVehicleFeatures(features);
             }
 
         } catch (Exception e) {

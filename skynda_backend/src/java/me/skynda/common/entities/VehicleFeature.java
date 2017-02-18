@@ -20,7 +20,7 @@ public class VehicleFeature implements Serializable{
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "feature_id", nullable = false)
-    private Classification feature;
+    private Feature feature;
 
     @Column(name = "vehicle_id", nullable = false)
     private Integer vehicleId;

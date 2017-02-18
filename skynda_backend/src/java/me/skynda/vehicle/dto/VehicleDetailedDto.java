@@ -43,7 +43,7 @@ public class VehicleDetailedDto {
 	private String inspector;
 
 	private List<ImageContainerDto> images;
-	private List<DescriptionDto> descriptions;
+	private List<VehicleDescriptionDto> descriptions;
 
 	public void calculateFuelAverage() {
 		try {

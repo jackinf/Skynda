@@ -14,7 +14,8 @@ import {
   ErrorBlockRenderer,
   ColorRenderer,
   BootstrapTable,
-  TableHeaderColumn
+  TableHeaderColumn,
+  selectFeaturesRenderer
 } from "./Vehicle.redux-form.renderers";
 import {onHandleSubmit} from "./Vehicle.redux-form.actions";
 import {renderCheckbox, renderSelectField} from "../../../../../components/FormRenderers";
@@ -52,7 +53,7 @@ class Vehicle extends React.Component {
     this.props.getVehicleModelsList();
     this.props.getVehicleReportsList(this.props.params[ROUTE_PARAMS.VEHICLE_ID]);
     this.props.getVehicleReviewsList(this.props.params[ROUTE_PARAMS.VEHICLE_ID]);
-    this.props.getVehicleFeaturesList(this.props.params[ROUTE_PARAMS.VEHICLE_ID]);
+    this.props.getFeaturesList();
     // this.props.getColors();
   }
 
@@ -73,6 +74,7 @@ class Vehicle extends React.Component {
    * @param event
    */
   onSetField = (name, value, event) => {
+    console.log("setvaklue", value);
     this.props.dispatch(change(FORMS.VEHICLE_FORM, name, value))
   };
 
@@ -89,7 +91,6 @@ class Vehicle extends React.Component {
       this.openVehicleModelDialog(null);
     }
   };
-
 
   openVehicleModelDialog = (e) => {
     if (e && e.hasOwnProperty("preventDefault") && _.isFunction(e.preventDefault))
@@ -118,7 +119,7 @@ class Vehicle extends React.Component {
   openVehicleReportDialog = (e) => {
     if (e && e.hasOwnProperty("preventDefault") && _.isFunction(e.preventDefault))
       e.preventDefault(); // stop event propagation to avoid form submission.
-    if(e && !!e.id){
+    if (e && !!e.id) {
       this.setState({vehicleReportId: e.id});
     }
     this.setState({isVehicleReportDialogOpen: true});
@@ -135,7 +136,7 @@ class Vehicle extends React.Component {
     const functionDeleteSingleReportItem = this.props.deleteSingleReportItem;
     if (confirm(`Are you sure you want to delete report with ID(s) ${dropRowKeysStr}?`)) {
       // If the confirmation is true, call the function that
-      _.each(dropRowKeys, function(i){
+      _.each(dropRowKeys, function (i) {
         functionDeleteSingleReportItem(i);
       });
       // continues the deletion of the record.
@@ -147,7 +148,7 @@ class Vehicle extends React.Component {
   openVehicleReviewDialog = (e) => {
     if (e && e.hasOwnProperty("preventDefault") && _.isFunction(e.preventDefault))
       e.preventDefault(); // stop event propagation to avoid form submission.
-    if(e && !!e.id){
+    if (e && !!e.id) {
       this.setState({vehicleReviewId: e.id});
     }
     this.setState({isVehicleReviewDialogOpen: true});
@@ -164,7 +165,7 @@ class Vehicle extends React.Component {
     const deleteSingleReview = this.props.deleteSingleReview;
     if (confirm(`Are you sure you want to delete report with ID(s) ${dropRowKeysStr}?`)) {
       // If the confirmation is true, call the function that
-      _.each(dropRowKeys, function(i){
+      _.each(dropRowKeys, function (i) {
         deleteSingleReview(i);
       });
       // continues the deletion of the record.
@@ -172,6 +173,10 @@ class Vehicle extends React.Component {
     }
   };
 
+  setField = (name, value) => {
+    console.log("name ", name);
+    this.props.dispatch(change(FORMS.VEHICLE_FORM, name, value));
+  };
 
 
   /**
@@ -190,7 +195,8 @@ class Vehicle extends React.Component {
       ? this.props.vehicleReports.items : [];
     const vehicleReviews = !this.props.vehicleReviews.isFetching
       ? this.props.vehicleReviews.items : [];
-
+    const featuresList = !this.props.featuresList.isFetching
+      ? this.props.featuresList.items : [];
     const vehicleModels = !this.props.vehicleModels.isFetching
       ? this.props.vehicleModels.items.map(item => ({label: item.title + " " + item.modelCode, value: item.id}))
       : [];
@@ -312,32 +318,26 @@ class Vehicle extends React.Component {
                              component={ColorRenderer}/>
                     </CardText>
 
-
-
-                    <SubmitCardActions disabled={this.props.submitting}/>
-                  </Card>
-
-                  <br/>
-
-                  {/*TODO FEATURES CRUD*/}
-                  <Card>
-                    <CardTitle title={<h3>Descriptions & addition info</h3>}/>
+                    <CardTitle title={<h3>Vehicle Features</h3>}/>
                     <CardText>
-                      <FieldArray name="features" label="Features" component={renderFeatures}
-                            errors={errors}/>
+                      {featuresList && featuresList != null
+                        ?
+                        (
+                          <Field name="featuresAdminSelect"
+                                 label="Features select"
+                                 component={selectFeaturesRenderer(featuresList, this.setField, true)}/>
+                        )
+                        : "Fetching..."}
+
                     </CardText>
-                    <SubmitCardActions disabled={this.props.submitting}/>
-                  </Card>
 
-                  <br/>
-
-                  <Card>
                     <CardTitle title={<h3>Descriptions & addition info</h3>}/>
                     <CardText>
                       <FieldArray name="descriptions" label="Descriptions" component={descriptionRenderer}
                                   errors={errors}/>
                       <Field name="additional" label="Additional info" component={renderTextField} errors={errors}/>
                     </CardText>
+
                     <SubmitCardActions disabled={this.props.submitting}/>
                   </Card>
                   {/*UNCOMMENTED FOR MVP*/}
@@ -376,25 +376,27 @@ class Vehicle extends React.Component {
                     <Modal.Title>REPORT CATEGORY</Modal.Title>
                   </Modal.Header>
                   <Modal.Body>
-                    <VehicleReport params={{[VEHICLE_REPORT_ROUTE_PARAMS.VEHICLE_REPORT_ID]: this.state.vehicleReportId,
-                      [VEHICLE_REPORT_ROUTE_PARAMS.VEHICLE_ID]: this.props.id || this.state.id}}
-                     onSubmitCustom={this.closeVehicleReportDialog}/>
+                    <VehicleReport params={{
+                      [VEHICLE_REPORT_ROUTE_PARAMS.VEHICLE_REPORT_ID]: this.state.vehicleReportId,
+                      [VEHICLE_REPORT_ROUTE_PARAMS.VEHICLE_ID]: this.props.id || this.state.id
+                    }}
+                                   onSubmitCustom={this.closeVehicleReportDialog}/>
                   </Modal.Body>
                 </Modal>
 
                 {vehicleReports && vehicleReports != null
                   ? (<div>
-                      <BootstrapTable ref="tableReport" data={vehicleReports}
-                                      options={bootstrapTableOptionsReport}
-                                      selectRow={selectRow}
-                                      deleteRow
-                                      insertRow
-                      >
-                        <TableHeaderColumn dataField="id" isKey={true} dataAlign="center" dataSort={true}>Report
-                          ID</TableHeaderColumn>
-                        <TableHeaderColumn dataField="title" dataSort={true}>Report Title</TableHeaderColumn>
-                      </BootstrapTable>
-                    </div>)
+                    <BootstrapTable ref="tableReport" data={vehicleReports}
+                                    options={bootstrapTableOptionsReport}
+                                    selectRow={selectRow}
+                                    deleteRow
+                                    insertRow
+                    >
+                      <TableHeaderColumn dataField="id" isKey={true} dataAlign="center" dataSort={true}>Report
+                        ID</TableHeaderColumn>
+                      <TableHeaderColumn dataField="title" dataSort={true}>Report Title</TableHeaderColumn>
+                    </BootstrapTable>
+                  </div>)
                   : ""}
 
               </CardText>
@@ -410,8 +412,10 @@ class Vehicle extends React.Component {
                     <Modal.Title>REVIEW ITEM</Modal.Title>
                   </Modal.Header>
                   <Modal.Body>
-                    <VehicleReview params={{[VEHICLE_REVIEW_ROUTE_PARAMS.VEHICLE_REVIEW_ID]: this.state.vehicleReviewId,
-                      [VEHICLE_REVIEW_ROUTE_PARAMS.VEHICLE_ID]: this.props.id || this.state.id}}
+                    <VehicleReview params={{
+                      [VEHICLE_REVIEW_ROUTE_PARAMS.VEHICLE_REVIEW_ID]: this.state.vehicleReviewId,
+                      [VEHICLE_REVIEW_ROUTE_PARAMS.VEHICLE_ID]: this.props.id || this.state.id
+                    }}
                                    onSubmitCustom={this.closeVehicleReviewDialog}/>
                   </Modal.Body>
                 </Modal>
@@ -451,7 +455,7 @@ Vehicle.propTypes = {
   deleteSingleReportItem: React.PropTypes.func.isRequired,
   getVehicleReviewsList: React.PropTypes.func.isRequired,
   deleteSingleReview: React.PropTypes.func.isRequired,
-  getVehicleFeaturesList: React.PropTypes.func.isRequired,
+  getFeaturesList: React.PropTypes.func.isRequired,
   deleteSingleFeature: React.PropTypes.func.isRequired,
   // vehicle models data for combobox
   vehicleModels: React.PropTypes.shape({
@@ -474,12 +478,6 @@ Vehicle.propTypes = {
   initialValues: React.PropTypes.shape({
     vehicleModelsCode: React.PropTypes.string,
     reportCategories: React.PropTypes.array,
-    features: React.PropTypes.arrayOf(
-      React.PropTypes.shape({
-        id: React.PropTypes.number,
-        text: React.PropTypes.string
-      })
-    ),
     fuelCity: React.PropTypes.number,
     fuelHighway: React.PropTypes.number,
     fuelAverage: React.PropTypes.number,

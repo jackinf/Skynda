@@ -15,8 +15,12 @@ import java.util.List;
 @RequestMapping(value = "/api")
 public class VehicleReviewController {
 
+    private final IVehicleReviewService service;
+
     @Autowired
-    private IVehicleReviewService service;
+    public VehicleReviewController(IVehicleReviewService service) {
+        this.service = service;
+    }
 
     @RequestMapping(value = "/vehicle-reviews", method = RequestMethod.GET)
     public List<VehicleReviewAdminDto> getAll() {

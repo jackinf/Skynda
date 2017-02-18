@@ -4,6 +4,7 @@ import me.skynda.common.controller.BaseController;
 import me.skynda.common.dto.CreateOrUpdateResponseDto;
 import me.skynda.common.dto.DeleteResponseDto;
 import me.skynda.common.interfaces.services.IFeatureService;
+import me.skynda.feature.dto.FeatureAdminSelectDto;
 import me.skynda.feature.dto.FeatureDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
@@ -28,9 +29,9 @@ public class FeatureController extends BaseController {
         return service.getAll();
     }
 
-    @RequestMapping(value = "/features/{id}", method = RequestMethod.GET, consumes = "application/json")
-    public List<FeatureDto> getAllByVehicle(@PathVariable("id") Integer id) {
-        return service.getAllBy(id);
+    @RequestMapping(value = "/adminSelectFeatures", method = RequestMethod.GET)
+    public List<FeatureAdminSelectDto> getAllForAdminSelect() {
+        return service.getAllForAdminSelect();
     }
 
     @RequestMapping(value = "/feature/{id}", method = RequestMethod.GET)

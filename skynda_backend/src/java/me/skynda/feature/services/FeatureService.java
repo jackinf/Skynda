@@ -6,6 +6,7 @@ import me.skynda.common.entities.Feature;
 import me.skynda.common.helper.JsonHelper;
 import me.skynda.common.interfaces.daos.IFeatureDao;
 import me.skynda.common.interfaces.services.IFeatureService;
+import me.skynda.feature.dto.FeatureAdminSelectDto;
 import me.skynda.feature.dto.FeatureDto;
 import me.skynda.vehicle.services.VehicleService;
 import org.dozer.Mapper;
@@ -16,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -49,6 +51,29 @@ public class FeatureService implements IFeatureService {
     }
 
     @Override
+    public List<FeatureAdminSelectDto> getAllForAdminSelect() {
+        List<FeatureAdminSelectDto> adminSelectFeatures = new ArrayList<>();
+        try {
+            List<Feature> features= dao.getAll();
+
+            if(features != null && !features.isEmpty()){
+                for (Feature feature: features ) {
+                    FeatureAdminSelectDto dto = new FeatureAdminSelectDto();
+                    dto.setValue(feature.getId());
+                    dto.setLabel(feature.getName());
+                    adminSelectFeatures.add(dto);
+                }
+            }
+        }
+        catch (Exception e) {
+            logger.error("getAllForAdminSelect failed.", e);
+            throw e;
+        }
+
+        return adminSelectFeatures;
+    }
+
+    @Override
     public FeatureDto getSingleBy(Integer id) {
         try {
             Feature vehicleReport = dao.get(id);
@@ -72,7 +97,6 @@ public class FeatureService implements IFeatureService {
             Feature persistedFeature = dao.saveOrUpdate(vehicleReport);
 
             CreateOrUpdateResponseDto response = CreateOrUpdateResponseDto.Factory.success(persistedFeature.getId(), true);
-            response.setIsModal(dto.getIsModal());
 
             return response;
         } catch (Exception e) {
@@ -95,16 +119,14 @@ public class FeatureService implements IFeatureService {
     }
 
     @Override
-    public List<FeatureDto> getAllBy(Serializable vehicleId){
+    public List<FeatureDto> getAllBy(Serializable vehicleId) {
         try {
-//            List<Feature> vehicleReportList = dao.getAllBy(vehicleId);
-//            return vehicleReportList.stream().map(entity -> mapper.map(entity, VehicleReportDto.class))
-//                    .collect(Collectors.toList());
+            List<Feature> vehicleFeatureList = dao.getAllBy(vehicleId);
+            return vehicleFeatureList.stream().map(entity -> mapper.map(entity, FeatureDto.class))
+                    .collect(Collectors.toList());
         } catch (Exception e) {
             logger.error("getAllBy failed. vehicleId: " + vehicleId, e);
             throw e;
         }
-        return null;
     }
-
 }
