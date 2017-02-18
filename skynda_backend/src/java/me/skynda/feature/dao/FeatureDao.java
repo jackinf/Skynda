@@ -4,6 +4,7 @@ import me.skynda.classification.dao.ClassificationDao;
 import me.skynda.common.db.BaseEntityDao;
 import me.skynda.common.dto.DeleteResponseDto;
 import me.skynda.common.entities.Feature;
+import me.skynda.common.entities.VehicleFeature;
 import me.skynda.common.helper.JsonHelper;
 import me.skynda.common.interfaces.daos.IFeatureDao;
 import org.hibernate.Criteria;
@@ -18,6 +19,7 @@ import java.io.Serializable;
 import java.net.InetAddress;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 public class FeatureDao extends BaseEntityDao<Feature> implements IFeatureDao{
@@ -117,36 +119,6 @@ public class FeatureDao extends BaseEntityDao<Feature> implements IFeatureDao{
     }
 
     @Override
-    public List getAllBy(Serializable vehicleId) {
-        return getAllBy(vehicleId, true);
-    }
-
-    @Override
-    public List getAllBy(Serializable vehicleId, Boolean isActive) {
-        Session session = getSession();
-        try {
-
-            Criteria featureCriteria = session
-                    .createCriteria(Feature.class, "feature")
-                    .add(Restrictions.eq("vehicleId", vehicleId));
-
-            if(isActive){
-                featureCriteria.add(Restrictions.isNull("archived"));
-            }
-
-            List<Feature> queryResponse = featureCriteria.list();
-
-            return queryResponse;
-
-        } catch (Exception e) {
-            logger.error("getAllBy failed. vehicleId: " + vehicleId + " isActive: " + isActive, e);
-            e.printStackTrace();
-        }
-
-        return null;
-    }
-
-    @Override
     public Feature saveOrUpdate(Feature feature) {
         Transaction tx = null;
         Session session = getSession();
@@ -188,5 +160,37 @@ public class FeatureDao extends BaseEntityDao<Feature> implements IFeatureDao{
         }
 
         return feature;
+    }
+
+    @Override
+    public List<Feature> getAllBy(Serializable vehicleId) {
+        return getAllBy(vehicleId, true);
+    }
+
+    @Override
+    public List<Feature> getAllBy(Serializable vehicleId, Boolean isActive) {
+        Session session = getSession();
+        try {
+
+            Criteria featureCriteria = session
+                    .createCriteria(VehicleFeature.class, "vehicleFeature")
+                    .add(Restrictions.eq("vehicleId", vehicleId));
+
+            if(isActive){
+                featureCriteria.add(Restrictions.isNull("archived"));
+                featureCriteria.createAlias("vehicleFeature.feature", "feature");
+                featureCriteria.add(Restrictions.isNull("feature.archived"));
+            }
+
+            List<VehicleFeature> queryResponse = featureCriteria.list();
+
+            return queryResponse.stream().map(x -> x.getFeature()).collect(Collectors.toList());
+
+        } catch (Exception e) {
+            logger.error("getAllBy failed. vehicleId: " + vehicleId + " isActive: " + isActive, e);
+            e.printStackTrace();
+        }
+
+        return null;
     }
 }

@@ -10,6 +10,7 @@ import RaisedButton from "material-ui/RaisedButton";
 export default class VehicleModels extends React.Component {
   static propTypes = {
     getList: React.PropTypes.func.isRequired,
+    deleteItem: React.PropTypes.func.isRequired,
     data: React.PropTypes.shape({
       isFetching: React.PropTypes.bool.isRequired,
       items: React.PropTypes.arrayOf(React.PropTypes.shape({

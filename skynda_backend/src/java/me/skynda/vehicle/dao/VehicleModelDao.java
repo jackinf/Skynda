@@ -1,17 +1,23 @@
 package me.skynda.vehicle.dao;
 
+import me.skynda.common.db.BaseEntityDao;
+import me.skynda.common.dto.DeleteResponseDto;
+import me.skynda.common.entities.VehicleModel;
 import me.skynda.common.helper.JsonHelper;
 import me.skynda.common.interfaces.daos.IVehicleModelDao;
 import me.skynda.common.entities.VehicleModel;
 import me.skynda.vehicle.dto.request.VehicleModelSearchRequest;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
-import me.skynda.common.db.BaseEntityDao;
+import java.util.Date;
+import java.util.List;
 
 import java.util.*;
 
@@ -30,6 +36,69 @@ public class VehicleModelDao extends BaseEntityDao<VehicleModel> implements IVeh
 			logger.error("getByModelCode failed. carModelsCode: " + JsonHelper.toJson(carModelsCode), e);
 			throw e;
 		}
+	}
+
+	@Override
+	public void deleteEntity(VehicleModel model, DeleteResponseDto response) {
+		Transaction tx = null;
+		Session session = getSession();
+		Date now = new Date();
+		try {
+			tx = session.beginTransaction();
+			int queryResponse = session
+					.createQuery(
+							"UPDATE VehicleModel " +
+									"SET archived = :archived " +
+									"WHERE id = :id")
+					.setParameter("archived", now)
+					.setParameter("id", model.getId())
+
+					.executeUpdate();
+
+			if (queryResponse < 1) {
+				Exception exception = new Exception("Vehicle Model Delete failed: No such item found.");
+				logger.error("deleteEntity failed. model: " + JsonHelper.toJson(model), exception);
+				throw exception;
+			}
+
+			tx.commit();
+			response.setSuccess(true);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			response.setError(e.getMessage());
+			response.setSuccess(false);
+			if(tx != null) tx.rollback();
+		}
+	}
+
+	@Override
+	public List<VehicleModel> getAll() {
+		return getAll(true);
+	}
+
+	@Override
+	public List<VehicleModel> getAll(Boolean isActive) {
+		Session session = getSession();
+		try {
+
+			Criteria vehicleCriteria = session
+					.createCriteria(VehicleModel.class, "model");
+
+			if(isActive){
+				vehicleCriteria.add(Restrictions.isNull("archived"));
+			}
+
+			List<VehicleModel> queryResponse = vehicleCriteria.list();
+
+			return queryResponse;
+
+		} catch (Exception e) {
+			logger.error("getAll failed. isActive: " + isActive, e);
+			e.printStackTrace();
+		}
+
+		return null;
 	}
 
 	public List<VehicleModel> search(VehicleModelSearchRequest params) {

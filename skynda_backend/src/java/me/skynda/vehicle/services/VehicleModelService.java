@@ -95,11 +95,13 @@ public class VehicleModelService implements IVehicleModelService {
     @Override
     public DeleteResponseDto delete(Integer id) {
         try {
-            vehicleModelDao.delete(id);
-            return DeleteResponseDto.Factory.success();
+            DeleteResponseDto response = new DeleteResponseDto();
+            VehicleModel model = vehicleModelDao.get(id);
+            vehicleModelDao.deleteEntity(model, response);
+            return response;
         } catch (Exception e) {
             logger.error("delete failed. id: " + id, e);
-            throw e;
+            return DeleteResponseDto.Factory.fail(e.getMessage());
         }
     }
 

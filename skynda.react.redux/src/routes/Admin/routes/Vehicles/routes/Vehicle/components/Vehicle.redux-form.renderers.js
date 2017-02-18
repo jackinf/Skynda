@@ -223,6 +223,18 @@ export const selectRenderer = (items, onChange, isMulti = false) => ({input, lab
   </Row>
 );
 
+export const selectFeaturesRenderer = (items, onChange, isMulti = false) => ({input, label, meta: {touched, error}, ...custom}) => (
+  <Row style={{marginBottom: "10px"}}>
+    <Col sm={12}>
+      <label className="sell-your-car__label" htmlFor={input.name}>{label}</label>
+      <Select name={input.name} value={input.value} options={items}
+              onChange={value => onChange(input.name, value)}
+                        multi={isMulti}
+      />
+    </Col>
+  </Row>
+);
+
 export const ErrorBlockRenderer = ({errors}) => {
   return errors.length > 0 ? (
     <Row>

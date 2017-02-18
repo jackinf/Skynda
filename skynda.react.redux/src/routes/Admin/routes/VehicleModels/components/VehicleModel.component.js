@@ -10,7 +10,7 @@ import {toastr} from "react-redux-toastr";
 
 import {ROUTE_PARAMS, FORM_MODE} from "./../constants/VehicleModel.constant";
 import {rowWrapper, selectRenderer} from "./VehicleModel.redux-form.renderers";
-import {onHandleSubmit} from "./VehicleModel.redux-form.actions";
+import {onHandleSubmit} from "../actions/VehicleModel.redux-form.actions";
 
 class VehicleModel extends React.Component {
   componentDidMount() {

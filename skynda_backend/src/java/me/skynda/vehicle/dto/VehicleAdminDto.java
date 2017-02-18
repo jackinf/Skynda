@@ -7,6 +7,7 @@ import java.util.List;
 import lombok.Data;
 import lombok.ToString;
 import me.skynda.common.dto.BaseDto;
+import me.skynda.feature.dto.FeatureAdminSelectDto;
 
 @Data
 @ToString(callSuper = false)
@@ -23,7 +24,6 @@ public class VehicleAdminDto extends BaseDto implements ImageStorable<ImageDto> 
 	private String colorInsideHex;
 	private BigDecimal fuelCity;
 	private BigDecimal fuelHighway;
-	private String problems;
 	private Integer compressionRatio;
 	private String compressionType;
 	private String configuration;
@@ -33,22 +33,15 @@ public class VehicleAdminDto extends BaseDto implements ImageStorable<ImageDto> 
 	private Integer torque;
 	private Integer totalValves;
 	private String additional;
-
 	private ImageDto mainImage;
 	private VehicleModelDto model;
-
 	private PerformanceDto performance;
 	private Integer safetyStars;
 	private String safetyUrl;
-
-	private List<VehicleFeatureDto> features;
+	private List<FeatureAdminSelectDto> featuresAdminSelect;
 	private List<FaultBaseDto> faults;
-	private List<VehicleReportDto> reportCategories;
 	private List<ImageContainerDto> images;
-	private List<DescriptionDto> descriptions;
-	private List<ReviewDto> reviews;
-
-//	private String vehicleModelCode;
+	private List<VehicleDescriptionDto> descriptions;
 
 //    /**
 //     * base64 files that are prepared to be uploaded to file cloud storage.

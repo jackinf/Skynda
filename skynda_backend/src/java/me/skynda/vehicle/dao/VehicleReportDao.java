@@ -42,8 +42,8 @@ public class VehicleReportDao extends BaseEntityDao<VehicleReport> implements IV
         try {
             tx = session.beginTransaction();
             int queryResponse = session
-                    .createQuery(
-                            "UPDATE VehicleReport " +
+                    .createSQLQuery(
+                            "UPDATE vehicle_report_category " +
                                     "SET archived = :archived " +
                                     "WHERE id = :id")
                     .setParameter("archived", now)

@@ -3,15 +3,14 @@ package me.skynda.vehicle.services;
 import me.skynda.common.dto.CreateOrUpdateResponseDto;
 import me.skynda.common.dto.DeleteResponseDto;
 import me.skynda.common.dto.SearchResponseDto;
+import me.skynda.common.entities.*;
 import me.skynda.common.helper.JsonHelper;
 import me.skynda.common.interfaces.daos.*;
-import me.skynda.common.interfaces.services.IBlobStorageService;
-import me.skynda.common.interfaces.services.IVehicleService;
+import me.skynda.common.interfaces.services.*;
+import me.skynda.feature.dto.FeatureAdminSelectDto;
 import me.skynda.image.entities.Image;
 import me.skynda.vehicle.dto.*;
 import me.skynda.vehicle.dto.request.SearchRequestDto;
-import me.skynda.common.entities.Vehicle;
-import me.skynda.common.entities.VehicleModel;
 import me.skynda.vehicle.validators.VehicleValidator;
 import org.dozer.Mapper;
 import org.slf4j.Logger;
@@ -31,11 +30,13 @@ public class VehicleService implements IVehicleService {
 
     private final IVehicleDao vehicleDao;
     private final IVehicleModelDao vehicleModelDao;
-    private final IVehicleReportItemDao vehicleReportItemDao;
     private final IVehicleDescriptionDao vehicleDescriptionDao;
     private final IVehicleFeatureDao vehicleFeatureDao;
-    private final IVehicleFaultDao vehicleFaultDao;
+    private final IFeatureDao featureDao;
     private final IVehicleImageDao vehicleImageDao;
+    private final IVehicleFeatureService vehicleFeatureService;
+    private final IVehicleReportService vehicleReportService;
+    private final IVehicleReviewService vehicleReviewService;
     private final Mapper mapper;
     private final IBlobStorageService blobStorageService;
     private VehicleValidator validator = new VehicleValidator();
@@ -44,24 +45,28 @@ public class VehicleService implements IVehicleService {
 
     @Autowired
     public VehicleService(
-            IVehicleReportItemDao vehicleReportItemDao,
             IVehicleDao vehicleDao,
             IVehicleModelDao vehicleModelDao,
             IVehicleDescriptionDao vehicleDescriptionDao,
             IVehicleFeatureDao vehicleFeatureDao,
-            IVehicleFaultDao vehicleFaultDao,
             IVehicleImageDao vehicleImageDao,
             Mapper mapper,
-            IBlobStorageService blobStorageService) {
-        this.vehicleReportItemDao = vehicleReportItemDao;
+            IBlobStorageService blobStorageService,
+            IFeatureDao featureDao,
+            IVehicleFeatureService vehicleFeatureService,
+            IVehicleReportService vehicleReportService,
+            IVehicleReviewService vehicleReviewService) {
         this.vehicleDao = vehicleDao;
         this.vehicleModelDao = vehicleModelDao;
         this.vehicleDescriptionDao = vehicleDescriptionDao;
         this.vehicleFeatureDao = vehicleFeatureDao;
-        this.vehicleFaultDao = vehicleFaultDao;
         this.vehicleImageDao = vehicleImageDao;
         this.mapper = mapper;
         this.blobStorageService = blobStorageService;
+        this.featureDao = featureDao;
+        this.vehicleFeatureService = vehicleFeatureService;
+        this.vehicleReportService = vehicleReportService;
+        this.vehicleReviewService= vehicleReviewService;
     }
 
     @Override
@@ -83,7 +88,22 @@ public class VehicleService implements IVehicleService {
     public VehicleAdminDto getVehicle(Integer id) {
         try {
             Vehicle model = vehicleDao.get(id);
-            return mapper.map(model, VehicleAdminDto.class);
+            VehicleAdminDto dto = mapper.map(model, VehicleAdminDto.class);
+
+            if(model.getVehicleFeatures() != null && !model.getVehicleFeatures().isEmpty()){
+                List<FeatureAdminSelectDto> adminSelectDtos = new ArrayList<>();
+
+                for (VehicleFeature vehicleFeature: model.getVehicleFeatures() ) {
+                    FeatureAdminSelectDto dtoSelect = new FeatureAdminSelectDto();
+                    dtoSelect.setValue(vehicleFeature.getFeature().getId());
+                    dtoSelect.setLabel(vehicleFeature.getFeature().getName());
+                    adminSelectDtos.add(dtoSelect);
+                }
+
+                dto.setFeaturesAdminSelect(adminSelectDtos);
+            }
+
+            return dto;
         } catch (Exception e) {
             logger.error("getVehicle failed. id: " + id, e);
             throw e;
@@ -125,42 +145,38 @@ public class VehicleService implements IVehicleService {
     @Override
     public CreateOrUpdateResponseDto createOrUpdateVehicle(VehicleAdminDto vehicleAdminDto, BindingResult bindingResult) {
         try {
-            /*
-                Create new or load existing
-             */
             Vehicle vehicle;
-            boolean mainImageUrlChanged;    // did the image change?
+            boolean isMainImageUrlChanged;
+
             if (vehicleAdminDto.getId() != null) {
                 vehicle = vehicleDao.get(vehicleAdminDto.getId());
-                vehicle.setModel(null); // hack, unset value or there will be error: "org.hibernate.HibernateException: identifier of an instance of me.skynda.vehicle.entities.VehicleModel was altered from 3 to 7". This is because automapper maps only an id of a persisted object, which id should not be changed.
+
+                // hack, unset value or there will be error: "org.hibernate.HibernateException:
+                // identifier of an instance of me.skynda.vehicle.entities.VehicleModel was altered from 3 to 7".
+                // This is because automapper maps only an id of a persisted object, which id should not be changed.
+                vehicle.setModel(null);
+
                 vehicle.setColorInsideHex(null);
                 vehicle.setColorOutsideHex(null);
-                mainImageUrlChanged = ImageDto.Helper.isUrlChanged(vehicle, vehicleAdminDto);   // do the check before mapping
+                // vehicle.setUpdated(new Date());   // TODO
+                // do the check before mapping
+                isMainImageUrlChanged = ImageDto.Helper.isUrlChanged(vehicle, vehicleAdminDto);
                 mapper.map(vehicleAdminDto, vehicle);
-//            vehicle.setUpdated(new Date());   // TODO
             } else {
                 vehicle = mapper.map(vehicleAdminDto, Vehicle.class);
                 vehicle.setCreated(new Date());
-                mainImageUrlChanged = ImageDto.Helper.isUrlChanged(null, vehicleAdminDto);   // do the check before mapping
+                isMainImageUrlChanged = ImageDto.Helper.isUrlChanged(null, vehicleAdminDto);   // do the check before mapping
             }
 
-            /*
-                Find car model
-             */
             if (vehicleAdminDto.getModel() != null) {
                 VehicleModel vehicleModel = vehicleModelDao.get(vehicleAdminDto.getModel().getId());
                 vehicle.setModel(vehicleModel);
             }
 
-            /*
-                Get a new creator
-             */
             vehicle.setOwnerId(1);  // TODO: use owner
 
-            /*
-                Get images
-             */
             validator.validate(vehicle, bindingResult);
+
             if (bindingResult.hasErrors()) {
                 CreateOrUpdateResponseDto response = new CreateOrUpdateResponseDto();
                 response.setSuccess(false);
@@ -171,11 +187,9 @@ public class VehicleService implements IVehicleService {
             /*
                 Upload filesToUpload and get uploaded url-s
              */
-
             // Upload main image
-            Image mainImage = blobStorageService.handleMedia(vehicleAdminDto.getMainImage(), vehicle.getMainImage(), mainImageUrlChanged);
+            Image mainImage = blobStorageService.handleMedia(vehicleAdminDto.getMainImage(), vehicle.getMainImage(), isMainImageUrlChanged);
             vehicle.setMainImage(mainImage);
-
             // Upload image gallery
             List<ImageContainerDto> imageDtos = vehicleAdminDto.getImages() != null ? vehicleAdminDto.getImages() : new ArrayList<>();
             if (imageDtos != null) {
@@ -187,33 +201,24 @@ public class VehicleService implements IVehicleService {
             if (faultDtos != null) {
                 faultDtos.forEach(blobStorageService::fromBase64ToUrl);
             }
-
             /*
                 Clean file could storage from uploaded files
              */
-
             List<VehicleDtoImageFileToDelete> filesToDelete = vehicleAdminDto.getFilesToDelete();
             if (filesToDelete != null) {
                 filesToDelete.forEach(blobStorageService::tryDeleteBlob);
             }
 
-            /*
-                Add Vehicle to the database TODO: If some logic fails after this code, then undo transaction
-             */
-
-            vehicle.setCreated(new Date());
             Vehicle addedVehicle = vehicleDao.saveOrUpdate(vehicle);    // TODO: Get success code
 
-            /*
-                Save all the one-2-many relations with vehicle-to-be-sold
-             */
-            vehicleDescriptionDao.addMultipleToVehicle(addedVehicle, vehicleAdminDto.getDescriptions());
-            vehicleFeatureDao.addMultipleToVehicle(addedVehicle, vehicleAdminDto.getFeatures());
-            vehicleImageDao.addMultipleToVehicle(addedVehicle, imageDtos);
+            UpdateDescriptions(addedVehicle.getId(), vehicleAdminDto.getDescriptions());
+            UpdateFeatures(addedVehicle, vehicleAdminDto.getFeaturesAdminSelect());
+            UpdateImages(addedVehicle, imageDtos);
 
             CreateOrUpdateResponseDto response = new CreateOrUpdateResponseDto();
             response.setId(addedVehicle.getId());
             response.setSuccess(true);
+
             return response;
         } catch (Exception e) {
             logger.error("createOrUpdateVehicle failed. vehicleAdminDto: " + JsonHelper.toJson(vehicleAdminDto), e);
@@ -221,14 +226,106 @@ public class VehicleService implements IVehicleService {
         }
     }
 
+    private void UpdateFeatures(Vehicle vehicle, List<FeatureAdminSelectDto> featuresAdminSelect) {
+        List<VehicleFeature> existingList = vehicleFeatureDao.getAllBy(vehicle.getId());
+        if(existingList != null ){
+            for (VehicleFeature item : existingList) {
+
+                Boolean exists = !featuresAdminSelect.isEmpty() && featuresAdminSelect.stream()
+                        .map(FeatureAdminSelectDto::getValue)
+                        .anyMatch(item.getFeature().getId()::equals);
+
+                if(!exists) {
+                    DeleteResponseDto response = new DeleteResponseDto();
+                    vehicleFeatureDao.deleteEntity(item, response);
+                }
+            }
+        }
+
+        if(featuresAdminSelect != null && !featuresAdminSelect.isEmpty()){
+
+            for (FeatureAdminSelectDto featureAdminSelectDto : featuresAdminSelect) {
+
+                Boolean exists = !existingList.isEmpty() && existingList.stream()
+                        .map(entity -> mapper.map(entity.getFeature(), Feature.class))
+                        .map(Feature::getId)
+                        .anyMatch(featureAdminSelectDto.getValue()::equals);
+
+                if(!exists){
+                    VehicleFeature vehicleFeature = new VehicleFeature();
+                    vehicleFeature.setVehicleId(vehicle.getId());
+                    Feature feature = featureDao.get(featureAdminSelectDto.getValue());
+                    vehicleFeature.setFeature(feature);
+                    vehicleFeatureDao.save(vehicleFeature);
+                }
+            }
+        }
+    }
+
+    private void UpdateImages(Vehicle addedVehicle, List<ImageContainerDto> imageDtos) {
+        vehicleImageDao.addMultipleToVehicle(addedVehicle, imageDtos); //TODO to archive images ? or....
+
+    }
+
+    private void UpdateDescriptions(Integer vehicleId, List<VehicleDescriptionDto> descriptions) {
+        List<VehicleDescription> existingList = vehicleDescriptionDao.getAllVehicleDescriptions(vehicleId);
+        if(existingList != null ){
+            for (VehicleDescription item : existingList) {
+
+                Boolean exists = !descriptions.isEmpty() && descriptions.stream()
+                        .map(VehicleDescriptionDto::getId)
+                        .anyMatch(item.getId()::equals);
+
+                if(!exists) {
+                    DeleteResponseDto response = new DeleteResponseDto();
+                    vehicleDescriptionDao.deleteEntity(item, response);
+                }
+            }
+        }
+
+        if(descriptions != null && !descriptions.isEmpty()){
+
+            for (VehicleDescriptionDto descriptionDto : descriptions) {
+                VehicleDescription vehicleDescription = mapper.map(descriptionDto, VehicleDescription.class);
+
+                if(vehicleDescription.getVehicleId() == null){
+                    vehicleDescription.setVehicleId(vehicleId);
+                }
+
+                vehicleDescriptionDao.saveOrUpdate(vehicleDescription);
+            }
+        }
+    }
+
     @Override
     public DeleteResponseDto deleteVehicle(Integer id) {
-        try {
-            vehicleDao.delete(id);  // TODO: make somehow sure that the item has been deleted.
-            return DeleteResponseDto.Factory.success();
+        DeleteResponseDto response = new DeleteResponseDto();
+        try {             
+            Vehicle vehicle = vehicleDao.get(id);
+            
+            if(vehicle.getReportCategories() != null){
+                for (VehicleReport report: vehicle.getReportCategories()) {
+                    vehicleReportService.delete(report.getId());
+                }
+            }
+
+            if(vehicle.getReviews() != null){
+                for (VehicleReview review: vehicle.getReviews()) {
+                    vehicleReviewService.delete(review.getId());
+                }
+            }
+
+            if(vehicle.getVehicleFeatures() != null){
+                for (VehicleFeature feature: vehicle.getVehicleFeatures()) {
+                    vehicleFeatureService.delete(feature.getId());
+                }
+            }
+            
+            vehicleDao.deleteEntity(vehicle, response);
+            return response;
         } catch (Exception e) {
             logger.error("deleteVehicle failed. id: " + id, e);
-            throw e;
+            return DeleteResponseDto.Factory.fail(e.getMessage());
         }
     }
 

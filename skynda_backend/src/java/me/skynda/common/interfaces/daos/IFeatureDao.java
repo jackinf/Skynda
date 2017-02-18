@@ -13,7 +13,7 @@ public interface IFeatureDao extends SkyndaBaseEntityDao<Feature>{
     void deleteEntity(Feature feature, DeleteResponseDto response);
     Feature get(Serializable id, Boolean isActive);
     Feature get(Serializable id);
-    List getAllBy(Serializable vehicleId);
-    List getAllBy(Serializable vehicleId, Boolean isActive);
     Feature saveOrUpdate(Feature feature);
+    List<Feature> getAllBy(Serializable vehicleId);
+    List<Feature> getAllBy(Serializable vehicleId, Boolean isActive);
 }

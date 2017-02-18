@@ -113,20 +113,19 @@ public class VehicleReportItemDao extends BaseEntityDao<VehicleReportItem> imple
     @Override
     public List<VehicleReportItem> getAllChildren(Integer parentId) {
         Session session = getSession();
-        List items = null;
 
         try {
-            Query query = session.createQuery("SELECT item FROM VehicleReportItem as item " +
-                                    "WHERE item.parentId = :parentId " +
-                                    "AND item.archived IS NULL")
-                                    .setParameter("parentId", parentId);
-            items = query.list();
+            Criteria items = session.createCriteria(VehicleReportItem.class, "item")
+                            .add(Restrictions.eq("parentId", parentId))
+                            .add(Restrictions.isNull("archived"));
+
+            return items.list();
         } catch (Exception e) {
             logger.error("getAllChildren failed. parentId: " + parentId, e);
             e.printStackTrace();
         }
 
-        return items;
+        return null;
     }
 
     @Override
