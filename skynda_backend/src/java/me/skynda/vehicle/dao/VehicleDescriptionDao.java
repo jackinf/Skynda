@@ -4,9 +4,11 @@ import me.skynda.common.db.BaseEntityDao;
 import me.skynda.common.dto.DeleteResponseDto;
 import me.skynda.common.entities.VehicleDescription;
 import me.skynda.common.interfaces.daos.IVehicleDescriptionDao;
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
@@ -26,12 +28,11 @@ public class VehicleDescriptionDao extends BaseEntityDao<VehicleDescription> imp
         List items = null;
 
         try {
-            Query query = session.createSQLQuery("SELECT item FROM vehicle_description as item " +
-                    "WHERE item.vehicle_id = :vehicleId " +
-                    "AND item.archived IS NULL")
-                    .setParameter("vehicleId", id);
+            Criteria criteria = session.createCriteria(VehicleDescription.class, "description")
+                    .add(Restrictions.eq("vehicleId", id))
+                    .add(Restrictions.isNull("archived"));
 
-            items = query.list();
+            items = criteria.list();
 
         } catch (Exception e) {
             logger.error("getAllVehicleDescriptions failed. vehicleId: " + id, e);
@@ -89,13 +90,13 @@ public class VehicleDescriptionDao extends BaseEntityDao<VehicleDescription> imp
             if (vehicleDescription.getId() == null) {
                 session.save(vehicleDescription);
             } else {
-                VehicleDescription existingItem =
-                        (VehicleDescription) session.createSQLQuery("SELECT item FROM vehicle_description as item " +
-                                "WHERE item.id = :id AND item.vehicle_id = :vehicleId " +
-                                "AND item.archived IS NULL")
-                                .setParameter("id", vehicleDescription.getId())
-                                .setParameter("vehicleId", vehicleDescription.getVehicleId())
-                                .uniqueResult();
+                Criteria criteria = session.createCriteria(VehicleDescription.class, "description")
+                        .add(Restrictions.eq("id", vehicleDescription.getId()))
+                        .add(Restrictions.eq("vehicleId", vehicleDescription.getVehicleId()))
+                        .add(Restrictions.isNull("archived"));
+
+
+                VehicleDescription existingItem = (VehicleDescription) criteria.uniqueResult();
 
                 if (existingItem == null) {
                     Exception exception = new Exception("Vehicle Description is null");
