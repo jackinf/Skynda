@@ -160,7 +160,7 @@ export default class extends React.Component {
   }
 
   componentDidMount() {
-    this.expandAllQARows();
+    // this.expandAllQARows();
   }
 
   toggleQARow(id) {
