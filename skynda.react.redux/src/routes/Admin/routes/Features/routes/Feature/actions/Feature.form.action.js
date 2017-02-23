@@ -1,9 +1,10 @@
 import {FORM_MODE} from "../Feature.constant";
-import remoteConfig from "store/remoteConfig";
 import {fromSpringToReduxFormError} from "../../../../../../../utils/formUtils";
 import {SubmissionError} from 'redux-form';
 import {browserHistory} from "react-router";
 import _ from "underscore";
+import {FeatureService} from "../../../../../../../webServices"
+
 /**
  * Is executed on form submit. Not a redux action.
  * @returns {any}
@@ -32,19 +33,15 @@ export function onFormSubmitSuccess(response, getFeatures, onSubmitCustom = null
  * @returns {*|Promise.<TResult>|Promise<U>|Thenable<U>}
  */
 function createFeatureAsync(data) {
-  return fetch(`${remoteConfig.remote}/api/feature`, {
-    method: "POST",
-    credentials: "include",
-    headers: {"Accept": "application/json", "Content-Type": "application/json"},
-    body: JSON.stringify(data)
+  const promise = FeatureService.createFeatureAsync(data);
+  promise.then(resp => {
+    if (!resp.success) {
+      throw new SubmissionError(fromSpringToReduxFormError(resp.errors));
+    }
+    return resp;
+  }).catch(err => {
+    throw err;
   })
-    .then(resp => resp.json())
-    .then(resp => {
-      if (!resp.success) {
-        throw new SubmissionError(fromSpringToReduxFormError(resp.errors));
-      }
-      return resp;
-    })
 }
 
 /**
@@ -52,17 +49,13 @@ function createFeatureAsync(data) {
  * @param data - feature input fields sent to the server
  */
 function updateFeatureAsync(data) {
-  return fetch(`${remoteConfig.remote}/api/feature/${data.id}`, {
-    method: "PUT",
-    credentials: "include",
-    headers: {"Accept": "application/json", "Content-Type": "application/json"},
-    body: JSON.stringify(data)
+  const promise = FeatureService.updateFeatureAsync(data);
+  promise.then(resp => {
+    if (!resp.success) {
+      throw new SubmissionError(fromSpringToReduxFormError(resp.errors));
+    }
+    return resp;
+  }).catch(err => {
+    throw err;
   })
-    .then(resp => resp.json())
-    .then(resp => {
-      if (!resp.success) {
-        throw new SubmissionError(fromSpringToReduxFormError(resp.errors));
-      }
-      return resp;
-    })
 }

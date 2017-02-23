@@ -1,9 +1,10 @@
 import {FORM_MODE} from "../constants/VehicleReview.constant";
-import remoteConfig from "store/remoteConfig";
 import {fromSpringToReduxFormError} from "../../../../../utils/formUtils";
 import {SubmissionError} from 'redux-form';
 import {browserHistory} from "react-router";
 import _ from "underscore";
+import {VehicleReviewService} from "../../../../../webServices"
+
 /**
  * Is executed on form submit. Not a redux action.
  * @returns {any}
@@ -34,19 +35,15 @@ export function onFormSubmitError() {
  * @returns {*|Promise.<TResult>|Promise<U>|Thenable<U>}
  */
 function createVehicleAsync(data) {
-  return fetch(`${remoteConfig.remote}/api/vehicle-review`, {
-    method: "POST",
-    credentials: "include",
-    headers: {"Accept": "application/json", "Content-Type": "application/json"},
-    body: JSON.stringify(data)
+  const promise = VehicleReviewService.createVehicleAsync(data);
+  promise.then(resp => {
+    if (!resp.success) {
+      throw new SubmissionError(fromSpringToReduxFormError(resp.errors));
+    }
+    return resp;
+  }).catch(error => {
+    throw error;
   })
-    .then(resp => resp.json())
-    .then(resp => {
-      if (!resp.success) {
-        throw new SubmissionError(fromSpringToReduxFormError(resp.errors));
-      }
-      return resp;
-    })
 }
 
 /**
@@ -54,17 +51,13 @@ function createVehicleAsync(data) {
  * @param data - vehicle-review input fields sent to the server
  */
 function updateVehicleAsync(data) {
-  return fetch(`${remoteConfig.remote}/api/vehicle-review/${data.id}`, {
-    method: "PUT",
-    credentials: "include",
-    headers: {"Accept": "application/json", "Content-Type": "application/json"},
-    body: JSON.stringify(data)
-  })
-    .then(resp => resp.json())
-    .then(resp => {
+    const promise = VehicleReviewService.updateVehicleAsync(data);
+    promise.then(resp => {
       if (!resp.success) {
         throw new SubmissionError(fromSpringToReduxFormError(resp.errors));
       }
       return resp;
+    }).catch(error => {
+      throw error;
     })
 }

@@ -1,8 +1,4 @@
-/**
- * Created by jevgenir on 11/13/2016.
- */
-import fetch from "isomorphic-fetch";
-import remoteConfig from "store/remoteConfig";
+import {ClassificationService} from "../../../../webServices"
 
 // ------------------------------------
 // Actions
@@ -40,21 +36,14 @@ export const getVehicleBodies = () => getList(SET_VEHICLE_BODIES, "VEHICLE_BODY"
 function getList(actionType, classificationTypeName = "") {
   return (dispatch) => {
     dispatch(setItems(actionType, [], true));
-
-    return fetch(`${remoteConfig.remote}/api/classifications/${classificationTypeName}`, {
-      method: "GET",
-      credentials: "include",
-      headers: {"Accept": "application/json", "Content-Type": "application/x-www-form-urlencoded"}
-    })
-      .then(resp => resp.json())
-      .then(resp => {
-        // console.info("Classifications response", resp);
-        dispatch(setItems(actionType, resp, false));
-      })
-      .catch(err => {
-        console.error(err);
-        dispatch(setItems(actionType, [], false));
-      });
+    const promise = ClassificationService.getClassificationList(classificationTypeName);
+    promise.then(resp => {
+      // console.info("Classifications response", resp);
+      dispatch(setItems(actionType, resp, false));
+    }).catch(err => {
+      dispatch(setItems(actionType, [], false));
+      throw err;
+    });
   };
 }
 
@@ -76,36 +65,40 @@ export function setItems(actionType, items, isFetching) {
 const ACTION_HANDLERS = {
   [SET_FEATURES]: (state, action) => ({
     ...state,
-    feature:        {items: action.items, isFetching: action.isFetching}
+    feature: {items: action.items, isFetching: action.isFetching}
   }),
   [SET_PAYMENT_TYPES]: (state, action) => ({
     ...state,
-    paymentType:    {items: action.items, isFetching: action.isFetching}
+    paymentType: {items: action.items, isFetching: action.isFetching}
   }),
   [SET_DRIVETRAINS]: (state, action) => ({
     ...state,
-    drivetrain:     {items: action.items, isFetching: action.isFetching}}),
+    drivetrain: {items: action.items, isFetching: action.isFetching}
+  }),
   [SET_TRANSMISSIONS]: (state, action) => ({
     ...state,
-    transmission:   {items: action.items, isFetching: action.isFetching}
+    transmission: {items: action.items, isFetching: action.isFetching}
   }),
   [SET_PAYMENT_STATUS]: (state, action) => ({
     ...state,
-    paymentStatus:  {items: action.items, isFetching: action.isFetching}
+    paymentStatus: {items: action.items, isFetching: action.isFetching}
   }),
   [SET_MANUFACTURERS]: (state, action) => ({
     ...state,
-    manufacturer:   {items: action.items, isFetching: action.isFetching}
+    manufacturer: {items: action.items, isFetching: action.isFetching}
   }),
   [SET_COLORS]: (state, action) => ({
     ...state,
-    color:          {items: action.items, isFetching: action.isFetching}}),
+    color: {items: action.items, isFetching: action.isFetching}
+  }),
   [SET_FUELS]: (state, action) => ({
     ...state,
-    fuel:           {items: action.items, isFetching: action.isFetching}}),
+    fuel: {items: action.items, isFetching: action.isFetching}
+  }),
   [SET_VEHICLE_BODIES]: (state, action) => ({
     ...state,
-    vehicleBody:    {items: action.items, isFetching: action.isFetching}}),
+    vehicleBody: {items: action.items, isFetching: action.isFetching}
+  }),
 };
 
 // ------------------------------------

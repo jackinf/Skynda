@@ -1,6 +1,6 @@
 import {FORM_MODE, REDUCER_KEYS, ROUTE_PARAMS} from "../constants/VehicleReport.constant";
-import remoteConfig from "store/remoteConfig";
 import {setVehicleReportData, setFormMode} from "../actions";
+import {VehicleReportService} from "../../../../../webServices"
 
 /**
  * Loads "Create new vehicle review" or "Update existing vehicle review" forms
@@ -10,9 +10,9 @@ export default (param) => (dispatch, getState) => {
   let currentFormMode = getState()[REDUCER_KEYS.FORM_MODE_VEHICLE_REPORT] || FORM_MODE.ADDING_REPORT;
 
   //TODO bad hack for updating single item
-  if(!isNaN(parseInt(param))){
+  if (!isNaN(parseInt(param))) {
     currentFormMode = FORM_MODE.UPDATING_REPORT;  //What if user only wants to read data?
-  }else if(isNaN(parseInt(param) && param == ROUTE_PARAMS.values.NEW)){
+  } else if (isNaN(parseInt(param) && param == ROUTE_PARAMS.values.NEW)) {
     currentFormMode = FORM_MODE.ADDING_REPORT;
   }
 
@@ -39,19 +39,12 @@ const loadCreateForm = () => (dispatch) => {
  */
 const loadUpdateForm = (id) => (dispatch) => {
   dispatch(setVehicleReportData({isFetching: true}));
-
-  return fetch(`${remoteConfig.remote}/api/vehicle-report/${id}`, {
-    method: "GET",
-    credentials: "include",
-    headers: {"Accept": "application/json", "Content-Type": "application/x-www-form-urlencoded"}
-  })
-    .then(resp => resp.json())
-    .then(data => {
-      dispatch(setVehicleReportData({isFetching: false, data}));
-      dispatch(setFormMode(FORM_MODE.UPDATING_REPORT));
-    })
-    .catch((error) => {
-      console.error("ERROR: ", error);
-      dispatch(setVehicleReportData({isFetching: false}));
-    });
+  const promise = VehicleReportService.loadUpdateForm(id);
+  promise.then(data => {
+    dispatch(setVehicleReportData({isFetching: false, data}));
+    dispatch(setFormMode(FORM_MODE.UPDATING_REPORT));
+  }).catch((error) => {
+    dispatch(setVehicleReportData({isFetching: false}));
+    throw error;
+  });
 };

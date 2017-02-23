@@ -1,34 +1,23 @@
-/**
- * Created by jevgenir on 11/26/2016.
- */
-
 const SET_INFO = "SELL_YOUR_CAR/SET_INFO";
 const SET_ERRORS = "SELL_YOUR_CAR/SET_ERRORS";
-import remoteConfig from "../../../store/remoteConfig";
 import {toastr} from 'react-redux-toastr';
+import {EmailService} from "../../../webServices"
 
 export const submitAsync = (info) => (dispatch) => {
   dispatch(setSubmittingStatus(true, false));
   dispatch(setErrors(null));
-
-  return fetch(`${remoteConfig.remote}/api/email/sell-vehicle`, {
-    method: "POST",
-    headers: {"Accept": "application/json", "Content-Type": "application/json"},
-    body: JSON.stringify(info)
-  })
-    .then(resp => resp.json())
-    .then(data => {
-      if (data.success === false) {
-        dispatch(setErrors(data.friendlyErrors));
-      } else {
-        toastr.success("Täname!", "Võtame sinuga 2 tööpäeva jooksul ühendust.");
-      }
-      dispatch(setSubmittingStatus(false, true));
-    })
-    .catch((error) => {
-      dispatch(setSubmittingStatus(false, false));
-      throw error;
-    });
+  const promise = EmailService.submitAsync(info);
+  promise.then(data => {
+    if (data.success === false) {
+      dispatch(setErrors(data.friendlyErrors));
+    } else {
+      toastr.success("Täname!", "Võtame sinuga 2 tööpäeva jooksul ühendust.");
+    }
+    dispatch(setSubmittingStatus(false, true));
+  }).catch((error) => {
+    dispatch(setSubmittingStatus(false, false));
+    throw error;
+  });
 };
 
 function setSubmittingStatus(value, isSuccessfullySent) {
@@ -55,7 +44,7 @@ export default function reducer(state = initialState, action) {
         isSubmitting: action.isSubmitting,
         isSuccessfullySent: action.isSuccessfullySent
       };
-      case SET_ERRORS:
+    case SET_ERRORS:
       return {
         ...state,
         errors: action.errors

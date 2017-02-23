@@ -1,11 +1,8 @@
-/**
- * Created by jevgenir on 12/3/2016.
- */
 import {FORM_MODE, ROUTE_PARAMS} from "../constants/VehicleModel.constant";
-import remoteConfig from "../../../../../store/remoteConfig";
 import {change, destroy} from "redux-form";
 import {browserHistory} from "react-router";
 import _ from "underscore";
+import {VehicleModelService} from "../../../../../webServices"
 
 // ------------------------------------
 // Actions
@@ -82,23 +79,17 @@ export const onHandleSubmitFinished = (resp, onSubmitCustom = null) => (dispatch
  */
 const fetchItem = (id) => (dispatch) => {
   dispatch(fetching());
-  return fetch(`${remoteConfig.remote}/api/vehicle-model/${id}`, {
-    method: "GET",
-    credentials: "include",
-    headers: {"Accept": "application/json", "Content-Type": "application/x-www-form-urlencoded"}
+  const promise = VehicleModelService.fetchItem(id);
+  promise.then(item => {
+    dispatch(setFetchSuccessful());
+    dispatch(setFormMode(FORM_MODE.UPDATING_MODEL));
+    dispatch(setItem(item));
   })
-    .then(resp => resp.json())
-    .then(item => {
-      dispatch(setFetchSuccessful());
-      dispatch(setFormMode(FORM_MODE.UPDATING_MODEL));
-      dispatch(setItem(item));
-    })
-    .catch((error) => {
-      console.error("ERROR: ", error);
-      dispatch(setFetchFailed(error));
-      dispatch(setFormMode(FORM_MODE.NONE_MODEL));
-      dispatch(clearItem());
-    });
+  .catch((error) => {
+    dispatch(setFetchFailed(error));
+    dispatch(setFormMode(FORM_MODE.NONE_MODEL));
+    dispatch(clearItem());
+  });
 };
 
 

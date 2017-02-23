@@ -29,7 +29,7 @@ public class FeatureController extends BaseController {
         return service.getAll();
     }
 
-    @RequestMapping(value = "/adminSelectFeatures", method = RequestMethod.GET)
+    @RequestMapping(value = "/feature/admin-select", method = RequestMethod.GET)
     public List<FeatureAdminSelectDto> getAllForAdminSelect() {
         return service.getAllForAdminSelect();
     }

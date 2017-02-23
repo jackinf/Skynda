@@ -1,8 +1,4 @@
-/**
- * Created by jevgenir on 11/13/2016.
- */
-import fetch from "isomorphic-fetch";
-import remoteConfig from "store/remoteConfig";
+import {ImageService, BlobService} from "../../../../webServices"
 
 // ------------------------------------
 // Actions
@@ -23,21 +19,13 @@ const DEFAULT_CONTAINER_NAME = "skynda";
 export function getImages(containerName = DEFAULT_CONTAINER_NAME) {
   return (dispatch) => {
     dispatch(setImages([], true));
-
-    return fetch(`${remoteConfig.remote}/api/image/list?containerName=${containerName}`, {
-      method: "GET",
-      credentials: "include",
-      headers: {"Accept": "application/json", "Content-Type": "application/x-www-form-urlencoded"}
-    })
-      .then(resp => resp.json())
-      .then(resp => {
-        console.info("Images response", resp);
-        dispatch(setImages(resp, false));
-      })
-      .catch(err => {
-        console.error(err);
-        dispatch(setImages([], false));
-      });
+    const promise = ImageService.getImagesInContainer(containerName);
+    promise.then(resp => {
+      dispatch(setImages(resp, false));
+    }).catch(err => {
+      dispatch(setImages([], false));
+      throw err;
+    });
   };
 }
 /**
@@ -48,21 +36,13 @@ export function getImages(containerName = DEFAULT_CONTAINER_NAME) {
 export function getBlobImages(containerName = DEFAULT_CONTAINER_NAME) {
   return (dispatch) => {
     dispatch(setBlobImages([], true));
-
-    return fetch(`${remoteConfig.remote}/api/blob/list?containerName=${containerName}`, {
-      method: "GET",
-      credentials: "include",
-      headers: {"Accept": "application/json", "Content-Type": "application/x-www-form-urlencoded"}
-    })
-      .then(resp => resp.json())
-      .then(resp => {
-        console.info("Images response", resp);
-        dispatch(setBlobImages(resp, false));
-      })
-      .catch(err => {
-        console.error(err);
-        dispatch(setBlobImages([], false));
-      });
+    const promise = BlobService.getBlobsInContainer(containerName);
+    promise.then(resp => {
+      dispatch(setBlobImages(resp, false));
+    }).catch(err => {
+      dispatch(setBlobImages([], false));
+      throw err;
+    });
   };
 }
 
@@ -92,11 +72,11 @@ function setBlobImages(items, isFetching) {
 const ACTION_HANDLERS = {
   [SET_IMAGES]: (state, action) => ({
     ...state,
-    imageData:        {items: action.items, isFetching: action.isFetching}
+    imageData: {items: action.items, isFetching: action.isFetching}
   }),
   [SET_BLOB_IMAGES]: (state, action) => ({
     ...state,
-    blobImageData:        {items: action.items, isFetching: action.isFetching}
+    blobImageData: {items: action.items, isFetching: action.isFetching}
   })
 };
 

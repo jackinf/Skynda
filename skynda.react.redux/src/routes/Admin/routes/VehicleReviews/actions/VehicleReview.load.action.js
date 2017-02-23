@@ -1,7 +1,6 @@
 import {FORM_MODE, REDUCER_KEYS, ROUTE_PARAMS} from "../constants/VehicleReview.constant";
-import remoteConfig from "store/remoteConfig";
 import {setFormMode, setVehicleReviewData} from "../actions";
-
+import {VehicleReviewService} from "../../../../../webServices"
 /**
  * Loads "Create new vehicle review" or "Update existing vehicle review" forms
  * @param param - vehicle review ID
@@ -9,9 +8,9 @@ import {setFormMode, setVehicleReviewData} from "../actions";
 export default (param) => (dispatch, getState) => {
   let currentFormMode = getState()[REDUCER_KEYS.FORM_MODE_VEHICLE_REVIEW] || FORM_MODE.ADDING_REVIEW;
   //TODO bad hack for updating single item
-  if(!isNaN(parseInt(param))){
+  if (!isNaN(parseInt(param))) {
     currentFormMode = FORM_MODE.UPDATING_REVIEW;  //What if user only wants to read data?
-  }else if(isNaN(parseInt(param) && param == ROUTE_PARAMS.values.NEW)){
+  } else if (isNaN(parseInt(param) && param == ROUTE_PARAMS.values.NEW)) {
     currentFormMode = FORM_MODE.ADDING_REVIEW;
   }
 
@@ -20,7 +19,7 @@ export default (param) => (dispatch, getState) => {
   } else if (currentFormMode == FORM_MODE.UPDATING_REVIEW && !isNaN(parseInt(param))) {
     dispatch(loadUpdateForm(parseInt(param)));
   } else {
-    console.error("Invalid form mode");
+    throw "Invalid form mode";
   }
 };
 
@@ -38,19 +37,12 @@ const loadCreateForm = () => (dispatch) => {
  */
 const loadUpdateForm = (id) => (dispatch) => {
   dispatch(setVehicleReviewData({isFetching: true}));
-
-  return fetch(`${remoteConfig.remote}/api/vehicle-review/${id}`, {
-    method: "GET",
-    credentials: "include",
-    headers: {"Accept": "application/json", "Content-Type": "application/x-www-form-urlencoded"}
-  })
-    .then(resp => resp.json())
-    .then(data => {
-      dispatch(setVehicleReviewData({isFetching: false, data}));
-      dispatch(setFormMode(FORM_MODE.UPDATING_REVIEW));
-    })
-    .catch((error) => {
-      console.error("ERROR: ", error);
+  const promise = VehicleReviewService.loadUpdateForm(id);
+  promise.then(data => {
+    dispatch(setVehicleReviewData({isFetching: false, data}));
+    dispatch(setFormMode(FORM_MODE.UPDATING_REVIEW));
+  }).catch((error) => {
       dispatch(setVehicleReviewData({isFetching: false}));
+      throw error;
     });
 };

@@ -1,23 +1,18 @@
-import fetch from "isomorphic-fetch";
-import remoteConfig from "../../../store/remoteConfig";
 import {toggleLoading} from "./Details.module.toggle-loading";
+import {VehicleService} from "../../../webServices"
 
 export const SET_VEHICLE_DATA = "SET_VEHICLE_DATA";
 
 export const getDataAsync = (id) => (dispatch, getState) => {
-    dispatch(toggleLoading(true));
-
-    return fetch(`${remoteConfig.remote}/api/vehicle/${id}/detailed`, {
-      method: "GET",
-      credentials: "include",
-      headers: {"Accept": "application/json", "Content-Type": "application/json"}
-    })
-      .then(resp => resp.json())
-      .then(data => {
-        const mappedData = map(data);
-        dispatch(setCarData(mappedData));
-        dispatch(toggleLoading(false));
-      });
+  dispatch(toggleLoading(true));
+  const promise = VehicleService.getDataAsync(id);
+  promise.then(data => {
+    const mappedData = map(data);
+    dispatch(setCarData(mappedData));
+    dispatch(toggleLoading(false));
+  }).catch(err => {
+    throw err;
+  })
 };
 
 export function setCarData(value) {

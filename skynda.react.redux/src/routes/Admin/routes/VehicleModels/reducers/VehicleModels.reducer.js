@@ -1,29 +1,19 @@
-/**
- * Created by jevgenir on 10/26/2016.
- */
-import fetch from "isomorphic-fetch";
-import remoteConfig from "store/remoteConfig";
-
+import {VehicleModelService} from "../../../../../webServices"
 const SET_VEHICLE_MODELS_DATA = "VEHICLE_MODEL/SET_VEHICLE_MODELS_DATA";
 
 export function getList() {
   return (dispatch) => {
     dispatch(setVehicleModels({isFetching: true}));
-
-    return fetch(`${remoteConfig.remote}/api/vehicle-models`, {
-      method: "GET",
-      credentials: "include",
-      headers: {"Accept": "application/json", "Content-Type": "application/x-www-form-urlencoded"}
+    const promise = VehicleModelService.getList();
+    promise.then(resp => {
+      dispatch(setVehicleModels({isFetching: false, items: resp}));
     })
-      .then(resp => resp.json())
-      .then(resp => {
-        dispatch(setVehicleModels({isFetching: false, items: resp}));
-      })
-      .catch(err => {
-        dispatch(setVehicleModels({isFetching: false, items: []}));
-      });
-  };
-}
+    .catch(err => {
+      dispatch(setVehicleModels({isFetching: false, items: []}));
+      throw err;
+    });
+  }
+};
 
 
 export function setVehicleModels(value) {

@@ -12,12 +12,14 @@ public class CreateOrUpdateResponseDto {
     private List<ObjectError> errors;
     private Boolean isModal;
     private Integer vehicleId;
+    private String errorMessage;
 
     public static class Factory {
-        public static CreateOrUpdateResponseDto fail(List<ObjectError> errors) {
+        public static CreateOrUpdateResponseDto fail(String errorMessage , List<ObjectError> errors) {
             CreateOrUpdateResponseDto dto = new CreateOrUpdateResponseDto();
             dto.setSuccess(false);
             dto.setErrors(errors);
+            dto.setErrorMessage(errorMessage);
             return dto;
         }
 

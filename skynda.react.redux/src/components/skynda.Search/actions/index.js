@@ -1,7 +1,7 @@
 import ACTIONS, {SEARCH_REDUCER_KEY} from "./constants"
-import remoteConfig from "../../../store/remoteConfig";
 import React from "react";
 import {Translate} from "react-redux-i18n";
+import {VehicleModelService} from "../../../webServices"
 
 export const setIsSearching = (value) => ({
   type: ACTIONS.SET_IS_SEARCHING,
@@ -68,20 +68,13 @@ export const setSearchResults = (value) => ({
 
 export function getModelsList(manufacturerIds = []) {
   const idsStr = manufacturerIds.length > 0 ? "?ids=" + manufacturerIds.join(",") : "";
-  return fetch(`${remoteConfig.remote}/api/vehicle-models-by-manufacturers/${idsStr}`, {
-    method: "GET",
-    credentials: "include",
-    headers: {"Accept": "application/json", "Content-Type": "application/json"}
-  })
-    .then(resp => resp.json())
-    .then(resp => {
-      const items = resp.map(item => ({id: item.id, name: item.title, value: item.id}));
-      return { success: true, items };
-    })
-    .catch(err => {
-      console.error(err);
-      return {success: false, items: [], error: err};
-    });
+  const promise = VehicleModelService.getModelsList(idsStr);
+  promise.then(resp => {
+    const items = resp.map(item => ({id: item.id, name: item.title, value: item.id}));
+    return {success: true, items};
+  }).catch(err => {
+    return {success: false, items: [], error: err};
+  });
 }
 
 export const getModelsByManufacturerAsync = () => (dispatch, getState) => {

@@ -1,11 +1,7 @@
-/**
- * Created by jevgenir on 10/21/2016.
- */
 import {browserHistory} from "react-router";
-import {change, destroy} from "redux-form";
+import {destroy} from "redux-form";
 import {toastr} from 'react-redux-toastr';
-
-import remoteConfig from "store/remoteConfig";
+import {VehicleService} from "../../../../../../../webServices"
 import {ACTIONS, FORM_MODE, FORMS, ROUTE_PARAMS} from "../../../constants/Vehicle.constant";
 import fromSpringToReduxFormError from "../../../../../../../utils/formUtils/fromSpringToReduxFormError";
 
@@ -30,7 +26,7 @@ export const load = (id) => (dispatch) => {
   dispatch(destroy(FORMS.VEHICLE_FORM));
   const formMode = id === ROUTE_PARAMS.values.NEW
     ? FORM_MODE.ADDING : !isNaN(parseInt(id))
-    ? FORM_MODE.UPDATING : FORM_MODE.NONE;
+      ? FORM_MODE.UPDATING : FORM_MODE.NONE;
 
   if (formMode === FORM_MODE.ADDING) {
     dispatch(clearVehicleData());
@@ -38,7 +34,7 @@ export const load = (id) => (dispatch) => {
   } else if (formMode == FORM_MODE.UPDATING && !isNaN(parseInt(id))) {
     dispatch(fetchItem(parseInt(id)));
   } else {
-    console.error("Invalid form mode");
+    throw "Invalid form mode";
   }
 };
 
@@ -48,22 +44,16 @@ export const load = (id) => (dispatch) => {
  */
 const fetchItem = (id) => (dispatch) => {
   dispatch(setFetching(true));
-
-  return fetch(`${remoteConfig.remote}/api/vehicle/${id}`, {
-    method: "GET",
-    credentials: "include",
-    headers: {"Accept": "application/json", "Content-Type": "application/x-www-form-urlencoded"}
-  })
-    .then(resp => resp.json())
-    .then(data => {
-      dispatch(setFetchSuccessful(data.id));
-      dispatch(setVehicleData(data));
-      dispatch(setFormMode(FORM_MODE.UPDATING));
-    })
-    .catch((error) => {
-      dispatch(setFetchFailed(error));
-      dispatch(clearVehicleData());
-    });
+  const promise = VehicleService.fetchItem(id);
+  promise.then(data => {
+    dispatch(setFetchSuccessful(data.id));
+    dispatch(setVehicleData(data));
+    dispatch(setFormMode(FORM_MODE.UPDATING));
+  }).catch((error) => {
+    dispatch(setFetchFailed(error));
+    dispatch(clearVehicleData());
+    throw error;
+  });
 };
 
 export const clear = () => (dispatch) => {

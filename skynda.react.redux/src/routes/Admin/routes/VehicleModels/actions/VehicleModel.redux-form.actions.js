@@ -1,10 +1,7 @@
-/**
- * Created by jevgenir on 12/4/2016.
- */
-import remoteConfig from "../../../../../store/remoteConfig";
 import fromSpringToReduxFormError from "../../../../../utils/formUtils/fromSpringToReduxFormError";
 import {SubmissionError} from "redux-form";
 import {FORM_MODE} from "../constants/VehicleModel.constant";
+import {VehicleModelService} from "../../../../../webServices"
 
 // ------------------------------------
 // Actions for redux-form
@@ -21,14 +18,8 @@ export function onHandleSubmit(item, formInfo) {
  * @returns {*|Promise.<TResult>|Promise<U>|Thenable<U>}
  */
 function createItem(item) {
-  return fetch(`${remoteConfig.remote}/api/vehicle-model`, {
-    method: "POST",
-    credentials: "include",
-    headers: {"Accept": "application/json", "Content-Type": "application/json"},
-    body: JSON.stringify(item)
-  })
-    .then(resp => resp.json())
-    .then(resp => {
+    const promise = VehicleModelService.createItem(item);
+    promise.then(resp => {
       if (!resp.success) {
         throw new SubmissionError(fromSpringToReduxFormError(resp.errors));
       }
@@ -42,14 +33,8 @@ function createItem(item) {
  * @param item - vehicle input fields sent to the server
  */
 function updateItem(item) {
-  return fetch(`${remoteConfig.remote}/api/vehicle-model/${item.id}`, {
-    method: "PUT",
-    credentials: "include",
-    headers: {"Accept": "application/json", "Content-Type": "application/json"},
-    body: JSON.stringify(item)
-  })
-    .then(resp => resp.json())
-    .then(resp => {
+    const promise = VehicleModelService.updateItem(item);
+    promise.then(resp => {
       if (!resp.success) {
         throw new SubmissionError(fromSpringToReduxFormError(resp.errors));
       }

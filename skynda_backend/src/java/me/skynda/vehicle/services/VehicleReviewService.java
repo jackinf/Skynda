@@ -99,12 +99,18 @@ public class VehicleReviewService implements IVehicleReviewService {
         /*
             Save
          */
-            VehicleReview persistedVehicleReview = vehicleReviewDao.saveOrUpdate(vehicleReview);
-            CreateOrUpdateResponseDto response = CreateOrUpdateResponseDto.Factory.success(persistedVehicleReview.getId(), true);
-            response.setIsModal(dto.getIsModal());
-            response.setVehicleId(persistedVehicleReview.getVehicleId());
+            try {
+                VehicleReview persistedVehicleReview = vehicleReviewDao.saveOrUpdate(vehicleReview);
+                CreateOrUpdateResponseDto response = CreateOrUpdateResponseDto.Factory.success(persistedVehicleReview.getId(), true);
+                response.setIsModal(dto.getIsModal());
+                response.setVehicleId(persistedVehicleReview.getVehicleId());
+                return response;
 
-            return response;
+            }catch (Exception e){
+                CreateOrUpdateResponseDto response = CreateOrUpdateResponseDto.Factory.fail(e.getMessage(), null);
+                return response;
+            }
+
         } catch (Exception e) {
             logger.error("createOrUpdate failed. dto: " + JsonHelper.toJson(dto), e);
             throw e;
