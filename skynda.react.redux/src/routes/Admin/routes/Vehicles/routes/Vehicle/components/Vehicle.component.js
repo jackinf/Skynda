@@ -66,7 +66,6 @@ class Vehicle extends React.Component {
     this.props.clear();
   }
 
-
   /**
    * Simple wrapper, which changes value using redux-form.
    * @param name - value type variable, e.g. "colorInside"
@@ -202,7 +201,6 @@ class Vehicle extends React.Component {
       ? this.props.colors.items.map(item => ({label: item.name, value: item.id}))
       : [];
 
-
     // Validation errors
     const springErrors = this.props.errors;
     const errors = fromSpringToReduxFormError(springErrors);
@@ -244,20 +242,15 @@ class Vehicle extends React.Component {
 
               <Row>
                 <Col md={6} xs={12}>
-
-                  <CropToolCard
-                    name="mainImage"
-                    reduxFormName={FORMS.VEHICLE_FORM}
-                    title="Main image"
-                    errors={errors}
-                  >
-                    <SubmitCardActions disabled={this.props.submitting}/>
-                  </CropToolCard>
-
-                  <br/>
-
                   <Card>
-                    <CardTitle title={<h3>General</h3>}/>
+                    <CropToolCard
+                      name="mainImage"
+                      reduxFormName={FORMS.VEHICLE_FORM}
+                      title="Main image"
+                      errors={errors}
+                    >
+                    </CropToolCard>
+
                     <CardText>
                       <Field name="isSold" label="Is Sold" component={renderCheckbox} errors={errors}/>
 
@@ -366,75 +359,82 @@ class Vehicle extends React.Component {
             </form>
 
             <br/>
-            <Card>
-              <CardTitle title="Vehicle reports"/>
-              <CardText>
-                <Modal show={this.state.isVehicleReportDialogOpen} onHide={this.closeVehicleReportDialog}>
-                  <Modal.Header closeButton>
-                    <Modal.Title>REPORT CATEGORY</Modal.Title>
-                  </Modal.Header>
-                  <Modal.Body>
-                    <VehicleReport params={{
-                      [VEHICLE_REPORT_ROUTE_PARAMS.VEHICLE_REPORT_ID]: this.state.vehicleReportId,
-                      [VEHICLE_REPORT_ROUTE_PARAMS.VEHICLE_ID]: this.props.id || this.state.id
-                    }}
-                                   onSubmitCustom={this.closeVehicleReportDialog}/>
-                  </Modal.Body>
-                </Modal>
+            {!isNaN(this.state.id)
+              ?
+              <div>
+                <Card>
+                  <CardTitle title="Vehicle reports"/>
+                  <CardText>
+                    <Modal show={this.state.isVehicleReportDialogOpen} onHide={this.closeVehicleReportDialog}>
+                      <Modal.Header closeButton>
+                        <Modal.Title>REPORT CATEGORY</Modal.Title>
+                      </Modal.Header>
+                      <Modal.Body>
+                        <VehicleReport params={{
+                          [VEHICLE_REPORT_ROUTE_PARAMS.VEHICLE_REPORT_ID]: this.state.vehicleReportId,
+                          [VEHICLE_REPORT_ROUTE_PARAMS.VEHICLE_ID]: this.props.id || this.state.id
+                        }}
+                                       onSubmitCustom={this.closeVehicleReportDialog}/>
+                      </Modal.Body>
+                    </Modal>
 
-                {vehicleReports && vehicleReports != null
-                  ? (<div>
-                    <BootstrapTable ref="tableReport" data={vehicleReports}
-                                    options={bootstrapTableOptionsReport}
-                                    selectRow={selectRow}
-                                    deleteRow
-                                    insertRow
-                    >
-                      <TableHeaderColumn dataField="id" isKey={true} dataAlign="center" dataSort={true}>Report
-                        ID</TableHeaderColumn>
-                      <TableHeaderColumn dataField="title" dataSort={true}>Report Title</TableHeaderColumn>
-                    </BootstrapTable>
-                  </div>)
-                  : ""}
+                    {vehicleReports && vehicleReports != null
+                      ? (<div>
+                        {/*<BootstrapTable ref="tableReport" data={vehicleReports}*/}
+                        {/*options={bootstrapTableOptionsReport}*/}
+                        {/*selectRow={selectRow}*/}
+                        {/*deleteRow*/}
+                        {/*insertRow*/}
+                        {/*>*/}
+                        {/*<TableHeaderColumn dataField="id" isKey={true} dataAlign="center" dataSort={true}>Report*/}
+                        {/*ID</TableHeaderColumn>*/}
+                        {/*<TableHeaderColumn dataField="title" dataSort={true}>Report Title</TableHeaderColumn>*/}
+                        {/*</BootstrapTable>*/}
+                      </div>)
+                      : ""}
 
-              </CardText>
-            </Card>
+                  </CardText>
+                </Card>
 
-            <br/>
-            <Card>
-              <CardTitle title="Vehicle reviews"/>
-              <CardText>
+                <br/>
+                <Card>
+                  <CardTitle title="Vehicle reviews"/>
+                  <CardText>
 
-                <Modal show={this.state.isVehicleReviewDialogOpen} onHide={this.closeVehicleReviewDialog}>
-                  <Modal.Header closeButton>
-                    <Modal.Title>REVIEW ITEM</Modal.Title>
-                  </Modal.Header>
-                  <Modal.Body>
-                    <VehicleReview params={{
-                      [VEHICLE_REVIEW_ROUTE_PARAMS.VEHICLE_REVIEW_ID]: this.state.vehicleReviewId,
-                      [VEHICLE_REVIEW_ROUTE_PARAMS.VEHICLE_ID]: this.props.id || this.state.id
-                    }}
-                                   onSubmitCustom={this.closeVehicleReviewDialog}/>
-                  </Modal.Body>
-                </Modal>
+                    <Modal show={this.state.isVehicleReviewDialogOpen} onHide={this.closeVehicleReviewDialog}>
+                      <Modal.Header closeButton>
+                        <Modal.Title>REVIEW ITEM</Modal.Title>
+                      </Modal.Header>
+                      <Modal.Body>
+                        <VehicleReview params={{
+                          [VEHICLE_REVIEW_ROUTE_PARAMS.VEHICLE_REVIEW_ID]: this.state.vehicleReviewId,
+                          [VEHICLE_REVIEW_ROUTE_PARAMS.VEHICLE_ID]: this.props.id || this.state.id
+                        }}
+                                       onSubmitCustom={this.closeVehicleReviewDialog}/>
+                      </Modal.Body>
+                    </Modal>
 
-                {vehicleReviews && vehicleReviews != null
-                  ? (<div>
-                    <BootstrapTable ref="tableReview" data={vehicleReviews}
-                                    options={bootstrapTableOptionsReview}
-                                    selectRow={selectRow}
-                                    deleteRow
-                                    insertRow>
-                      <TableHeaderColumn dataField="id" isKey={true} dataAlign="center" dataSort={true}>
-                        Review ID
-                      </TableHeaderColumn>
-                      <TableHeaderColumn dataField="text" dataSort={true}>Review Text</TableHeaderColumn>
-                    </BootstrapTable>
-                  </div>)
-                  : ""}
+                    {vehicleReviews && vehicleReviews != null
+                      ? (<div>
+                        <BootstrapTable ref="tableReview" data={vehicleReviews}
+                                        options={bootstrapTableOptionsReview}
+                                        selectRow={selectRow}
+                                        deleteRow
+                                        insertRow>
+                          <TableHeaderColumn dataField="id" isKey={true} dataAlign="center" dataSort={true}>
+                            Review ID
+                          </TableHeaderColumn>
+                          <TableHeaderColumn dataField="text" dataSort={true}>Review Text</TableHeaderColumn>
+                        </BootstrapTable>
+                      </div>)
+                      : ""}
 
-              </CardText>
-            </Card>
+                  </CardText>
+                </Card>
+              </div>
+            : ""
+            }
+
 
           </div>)}
       </div>

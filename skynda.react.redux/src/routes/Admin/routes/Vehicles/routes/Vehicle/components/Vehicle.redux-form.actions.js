@@ -41,7 +41,6 @@ function createItem(data) {
  * @param data - vehicle input fields sent to the server
  */
 function updateItem(data) {
-  console.info("Updating");
   const promise = VehicleService.updateItem(data);
   promise.then(resp => {
     // if (!resp.success) {

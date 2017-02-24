@@ -28,6 +28,8 @@ export const load = (id) => (dispatch) => {
     ? FORM_MODE.ADDING : !isNaN(parseInt(id))
       ? FORM_MODE.UPDATING : FORM_MODE.NONE;
 
+  console.log(formMode);
+
   if (formMode === FORM_MODE.ADDING) {
     dispatch(clearVehicleData());
     dispatch(setFormMode(FORM_MODE.ADDING));
