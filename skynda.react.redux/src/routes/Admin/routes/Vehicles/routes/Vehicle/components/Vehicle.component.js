@@ -378,18 +378,18 @@ class Vehicle extends React.Component {
                       </Modal.Body>
                     </Modal>
 
-                    {vehicleReports && vehicleReports != null
+                    {vehicleReports && vehicleReports != null && vehicleReports instanceof Array
                       ? (<div>
-                        {/*<BootstrapTable ref="tableReport" data={vehicleReports}*/}
-                        {/*options={bootstrapTableOptionsReport}*/}
-                        {/*selectRow={selectRow}*/}
-                        {/*deleteRow*/}
-                        {/*insertRow*/}
-                        {/*>*/}
-                        {/*<TableHeaderColumn dataField="id" isKey={true} dataAlign="center" dataSort={true}>Report*/}
-                        {/*ID</TableHeaderColumn>*/}
-                        {/*<TableHeaderColumn dataField="title" dataSort={true}>Report Title</TableHeaderColumn>*/}
-                        {/*</BootstrapTable>*/}
+                        <BootstrapTable ref="tableReport" data={vehicleReports}
+                        options={bootstrapTableOptionsReport}
+                        selectRow={selectRow}
+                        deleteRow
+                        insertRow
+                        >
+                        <TableHeaderColumn dataField="id" isKey={true} dataAlign="center" dataSort={true}>Report
+                        ID</TableHeaderColumn>
+                        <TableHeaderColumn dataField="title" dataSort={true}>Report Title</TableHeaderColumn>
+                        </BootstrapTable>
                       </div>)
                       : ""}
 
@@ -414,7 +414,7 @@ class Vehicle extends React.Component {
                       </Modal.Body>
                     </Modal>
 
-                    {vehicleReviews && vehicleReviews != null
+                    {vehicleReviews && vehicleReviews != null && vehicleReviews instanceof Array
                       ? (<div>
                         <BootstrapTable ref="tableReview" data={vehicleReviews}
                                         options={bootstrapTableOptionsReview}
