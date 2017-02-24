@@ -6,7 +6,7 @@ import {ClassificationService} from "../../../webServices";
 
 function getClassificationList(type) {
   const promise = ClassificationService.getVehicleBoundClassificationList(type);
-  promise.then(resp => {
+  return promise.then(resp => {
     return {success: true, items: resp};
   }).catch(err => {
     return {success: false, items: [], error: err};

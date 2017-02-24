@@ -14,7 +14,7 @@ export const ClassificationService = {
     return handle(fetch(`${remoteConfig.remote}/api/classifications/${type}/vehicle-bound`, {
       method: "GET",
       credentials: "include",
-      headers: {"Accept": "application/json", "Content-Type": "application/json"}
+      headers: getDefaultHeaders()
     }));
   }
 
