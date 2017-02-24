@@ -1,21 +1,17 @@
-import remoteConfig from "../../../store/remoteConfig";
 import fromSpringToReduxFormError from "../../../utils/formUtils/fromSpringToReduxFormError";
 import {SubmissionError} from "redux-form";
+import {SubscriptionService} from "../../../webServices";
 
 export function sendSubscriptionEmail(item) {
-  return fetch(`${remoteConfig.remote}/api/subscribe`, {
-    method: "POST",
-    credentials: "include",
-    headers: {"Accept": "application/json", "Content-Type": "application/json"},
-    body: JSON.stringify(item)
+  const promise = SubscriptionService.sendSubscriptionEmail(item);
+  promise.then(resp => {
+    if (!resp.success) {
+      const errors = fromSpringToReduxFormError(resp.errors);
+      // dispatch(fetchFailed(errors));
+      throw new SubmissionError(errors);
+    }
+    return resp;
+  }).catch(error => {
+    throw error;
   })
-    .then(resp => resp.json())
-    .then(resp => {
-      if (!resp.success) {
-        const errors = fromSpringToReduxFormError(resp.errors);
-        // dispatch(fetchFailed(errors));
-        throw new SubmissionError(errors);
-      }
-      return resp;
-    });
 }

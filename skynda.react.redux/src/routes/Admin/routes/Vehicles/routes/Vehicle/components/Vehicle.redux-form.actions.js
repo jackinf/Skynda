@@ -1,7 +1,7 @@
-import remoteConfig from "store/remoteConfig";
 import {fromSpringToReduxFormError} from "utils/formUtils";
 // import {SubmissionError} from 'redux-form';
 import {FORM_MODE} from "../../../constants/Vehicle.constant";
+import {VehicleService} from "../../../../../../../webServices"
 
 // ------------------------------------
 // Form submission
@@ -24,19 +24,15 @@ export function onHandleSubmit(data, formMode) {
  */
 function createItem(data) {
   console.info("Creating");
-  return fetch(`${remoteConfig.remote}/api/vehicle`, {
-    method: "POST",
-    credentials: "include",
-    headers: {"Accept": "application/json", "Content-Type": "application/json"},
-    body: JSON.stringify(data)
+  const promise = VehicleService.createItem(data);
+  promise.then(resp => {
+    // if (!resp.success) {
+    //   throw new SubmissionError(fromSpringToReduxFormError(resp.errors));
+    // }
+    return resp;
+  }).catch(error => {
+    throw error;
   })
-    .then(resp => resp.json())
-    .then(resp => {
-      // if (!resp.success) {
-      //   throw new SubmissionError(fromSpringToReduxFormError(resp.errors));
-      // }
-      return resp;
-    })
 }
 
 /**
@@ -46,17 +42,13 @@ function createItem(data) {
  */
 function updateItem(data) {
   console.info("Updating");
-  return fetch(`${remoteConfig.remote}/api/vehicle/${data.id}`, {
-    method: "PUT",
-    credentials: "include",
-    headers: {"Accept": "application/json", "Content-Type": "application/json"},
-    body: JSON.stringify(data)
+  const promise = VehicleService.updateItem(data);
+  promise.then(resp => {
+    // if (!resp.success) {
+    //   throw new SubmissionError(fromSpringToReduxFormError(resp.errors));
+    // }
+    return resp;
+  }).catch(error => {
+    throw error;
   })
-    .then(resp => resp.json())
-    .then(resp => {
-      // if (!resp.success) {
-      //   throw new SubmissionError(fromSpringToReduxFormError(resp.errors));
-      // }
-      return resp;
-    })
 }

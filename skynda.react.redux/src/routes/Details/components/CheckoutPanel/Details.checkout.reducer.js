@@ -1,33 +1,23 @@
-/**
- * Created by zekar on 1/10/2017.
- */
-
 const SET_INFO = "CHECKOUT/SET_INFO";
 const SET_ERRORS = "CHECKOUT/SET_ERRORS";
-import remoteConfig from "../../../../store/remoteConfig";
 import {toastr} from 'react-redux-toastr';
+import {EmailService} from "../../../../webServices"
 
 export const submitAsync = (info) => (dispatch) => {
   dispatch(setSubmittingStatus(true, false));
   dispatch(setErrors(null));
-
-  return fetch(`${remoteConfig.remote}/api/email/buy-vehicle`, {
-    method: "POST",
-    headers: {"Accept": "application/json", "Content-Type": "application/json"},
-    body: JSON.stringify(info)
-  })
-    .then(resp => resp.json())
-    .then(data => {
-      if (data.success === false) {
-        dispatch(setErrors(data.friendlyErrors));
-      } else {
-        toastr.success("Täname!", "Võtame sinuga 2 tööpäeva jooksul ühendust.");
-      }
-      dispatch(setSubmittingStatus(false, true));
-    })
-    .catch((error) => {
-      dispatch(setSubmittingStatus(false, false));
-    });
+  const promise = EmailService.submitAsyncBuyVehicle(info);
+  promise.then(data => {
+    if (data.success === false) {
+      dispatch(setErrors(data.friendlyErrors));
+    } else {
+      toastr.success("Täname!", "Võtame sinuga 2 tööpäeva jooksul ühendust.");
+    }
+    dispatch(setSubmittingStatus(false, true));
+  }).catch((error) => {
+    dispatch(setSubmittingStatus(false, false));
+    throw error;
+  });
 };
 
 function setSubmittingStatus(value, isSuccessfullySent) {

@@ -38,5 +38,21 @@ export const VehicleService = {
       headers: getDefaultHeaders(),
       body: JSON.stringify(searchValues)
     }));
+  },
+  createItem: function (data) {
+    return handle(fetch(`${remoteConfig.remote}/api/vehicle`, {
+      method: "POST",
+      credentials: "include",
+      headers: getDefaultHeaders(),
+      body: JSON.stringify(data)
+    }));
+  },
+  updateItem: function (data) {
+    return handle(fetch(`${remoteConfig.remote}/api/vehicle/${data.id}`, {
+      method: "PUT",
+      credentials: "include",
+      headers: getDefaultHeaders(),
+      body: JSON.stringify(data)
+    }));
   }
 };

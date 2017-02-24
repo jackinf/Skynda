@@ -6,7 +6,7 @@ import {EmailService} from "../../../webServices"
 export const submitAsync = (info) => (dispatch) => {
   dispatch(setSubmittingStatus(true, false));
   dispatch(setErrors(null));
-  const promise = EmailService.submitAsync(info);
+  const promise = EmailService.submitAsyncSellVehicle(info);
   promise.then(data => {
     if (data.success === false) {
       dispatch(setErrors(data.friendlyErrors));
