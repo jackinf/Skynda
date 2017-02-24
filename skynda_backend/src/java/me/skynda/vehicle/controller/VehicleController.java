@@ -52,7 +52,7 @@ public class VehicleController extends BaseController {
         return vehicleService.createOrUpdateVehicle(vehicleAdminDto, bindingResult);
     }
 
-    @RequestMapping(value = "/vehicle/{id}", method = RequestMethod.PUT, consumes = "application/json")
+    @RequestMapping(value = "/vehicle/{id}", method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
     public CreateOrUpdateResponseDto update(@PathVariable("id") Integer id,
                                             @RequestBody VehicleAdminDto vehicleAdminDto,
                                             BindingResult bindingResult) {

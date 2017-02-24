@@ -17,5 +17,5 @@ public interface IVehicleReviewDao extends SkyndaBaseEntityDao<VehicleReview> {
     List<VehicleReview> getAll();
     List getAllBy(Serializable vehicleId);
     List getAllBy(Serializable vehicleId, Boolean isActive);
-    VehicleReview saveOrUpdate(VehicleReview vehicleReportItem, Errors bindingResult);
+    VehicleReview saveOrUpdate(VehicleReview vehicleReview, Errors bindingResult);
 }

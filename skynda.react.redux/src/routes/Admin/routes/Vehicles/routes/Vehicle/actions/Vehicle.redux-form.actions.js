@@ -1,5 +1,5 @@
-import {fromSpringToReduxFormError} from "utils/formUtils";
-// import {SubmissionError} from 'redux-form';
+import {fromSpringToReduxFormError} from "../../../../../../../utils/formUtils";
+import {SubmissionError} from 'redux-form';
 import {FORM_MODE} from "../../../constants/Vehicle.constant";
 import {VehicleService} from "../../../../../../../webServices"
 
@@ -23,12 +23,11 @@ export function onHandleSubmit(data, formMode) {
  * @returns {*|Promise.<TResult>|Promise<U>|Thenable<U>}
  */
 function createItem(data) {
-  console.info("Creating");
   const promise = VehicleService.createItem(data);
-  promise.then(resp => {
-    // if (!resp.success) {
-    //   throw new SubmissionError(fromSpringToReduxFormError(resp.errors));
-    // }
+  return promise.then(resp => {
+    if (!resp.success) {
+      throw new SubmissionError(fromSpringToReduxFormError(resp.errors));
+    }
     return resp;
   }).catch(error => {
     throw error;
@@ -42,10 +41,11 @@ function createItem(data) {
  */
 function updateItem(data) {
   const promise = VehicleService.updateItem(data);
-  promise.then(resp => {
-    // if (!resp.success) {
-    //   throw new SubmissionError(fromSpringToReduxFormError(resp.errors));
-    // }
+  return promise.then(resp => {
+    console.log("updateItem fauked", resp);
+    if (!resp.success) {
+      throw new SubmissionError(fromSpringToReduxFormError(resp.errors));
+    }
     return resp;
   }).catch(error => {
     throw error;

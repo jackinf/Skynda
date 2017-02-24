@@ -11,7 +11,7 @@ import {getList as getVehicleModelsList} from "../../../../VehicleModels/reducer
 import {getList as getVehicleReportsList, deleteItem as deleteReport} from "../actions/Vehicle.Reports.actions";
 import {getList as getVehicleReviewsList, deleteItem as deleteReview} from "../actions/Vehicle.Reviews.actions";
 import {getList as getFeaturesList, deleteItem as deleteFeature} from "../actions/Vehicle.Features.actions";
-
+import {getList as getVehicles} from "../../../actions"
 import {REDUCER_KEYS} from "../../../constants/Vehicle.constant";
 import VehicleComponent from "../components/Vehicle.component";
 
@@ -31,6 +31,7 @@ const mapDispatchToProps = {
   onImageFileUpload: onImageFileUpload,
   onImageFileRemove: onImageFileRemove,
   onHandleSubmitFinished: onHandleSubmitFinished,
+  getVehicles
 };
 
 const mapStateToProps = (state) => {

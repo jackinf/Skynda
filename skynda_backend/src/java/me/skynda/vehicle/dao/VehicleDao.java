@@ -9,6 +9,7 @@ import me.skynda.common.helper.JsonHelper;
 import me.skynda.common.interfaces.daos.*;
 import me.skynda.vehicle.dto.request.SearchRequestDto;
 import me.skynda.common.entities.Vehicle;
+import org.dozer.Mapper;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -18,6 +19,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.validation.Errors;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -30,15 +32,17 @@ public class VehicleDao extends BaseEntityDao<Vehicle> implements IVehicleDao {
     private final IVehicleReportDao reportDao;
     private final IVehicleReviewDao reviewDao;
     private final IVehicleFeatureDao vehicleFeatureDao;
+    private final Mapper mapper;
 
     private static Logger logger = LoggerFactory.getLogger(VehicleDao.class);
 
     @Autowired
     public VehicleDao(IVehicleReportDao reportDao,IVehicleReviewDao reviewDao,
-                      IVehicleFeatureDao vehicleFeatureDao) {
+                      IVehicleFeatureDao vehicleFeatureDao, Mapper mapper) {
         this.reportDao = reportDao;
         this.reviewDao = reviewDao;
         this.vehicleFeatureDao = vehicleFeatureDao;
+        this.mapper = mapper;
     }
 
     @Override
@@ -249,6 +253,48 @@ public class VehicleDao extends BaseEntityDao<Vehicle> implements IVehicleDao {
             throw ex;
         }
     }
+
+    @Override
+    public Vehicle saveOrUpdate(Vehicle vehicle, Errors bindingResult) {
+        Transaction tx = null;
+        Session session = getSession();
+        try {
+            tx = session.beginTransaction();
+
+            if (vehicle.getId() == null) {
+                session.save(vehicle);
+            } else {
+                Criteria existingCriteria = session.createCriteria(Vehicle.class, "vehicle")
+                        .add(Restrictions.eq("id", vehicle.getId()))
+                        .add(Restrictions.isNull("archived"));
+
+                Vehicle existingItem = (Vehicle) existingCriteria.uniqueResult();
+
+                if (existingItem == null) {
+                    throw new Exception("Vehicle is null");
+                }
+
+                existingItem = mapper.map(vehicle, Vehicle.class);
+
+                session.update(existingItem);
+
+                vehicle = existingItem;
+            }
+
+            tx.commit();
+        } catch (Exception e) {
+            if(tx != null)
+                tx.rollback();
+
+            logger.error("saveOrUpdate failed. vehicle: " + JsonHelper.toJson(vehicle), e);
+            bindingResult.rejectValue("saveOrUpdateFailed", e.getMessage());
+            e.printStackTrace();
+            vehicle = null;
+        }
+
+        return vehicle;
+    }
+
 
     private String mapColorIdToHex(Integer colorId) {
         switch (colorId) {

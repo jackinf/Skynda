@@ -4,7 +4,7 @@ import {toastr} from 'react-redux-toastr';
 import {VehicleService} from "../../../../../../../webServices"
 import {ACTIONS, FORM_MODE, FORMS, ROUTE_PARAMS} from "../../../constants/Vehicle.constant";
 import fromSpringToReduxFormError from "../../../../../../../utils/formUtils/fromSpringToReduxFormError";
-
+import _ from "underscore";
 // ------------------------------------
 // Actions
 // ------------------------------------
@@ -61,13 +61,18 @@ export const clear = () => (dispatch) => {
   dispatch(setFetching(false));
 };
 
-export const onHandleSubmitFinished = (resp) => (dispatch) => {
+export const onHandleSubmitFinished = (resp, exFormMode, getVehicles) => (dispatch) => {
   if (resp) {
     if (resp.success && !isNaN(parseInt(resp.id))) {
+      if(exFormMode == FORM_MODE.ADDING && _.isFunction(getVehicles)){
+        getVehicles();
+      }
+
       dispatch(setFormMode(FORM_MODE.UPDATING));
       dispatch(setFetchSuccessful(resp.id));
       browserHistory.replace("/admin/vehicle/" + resp.id);
       toastr.success('Success', resp.message);
+
     } else {
       const errors = fromSpringToReduxFormError(resp.errors);
       dispatch(setFetchFailed(resp.errors));

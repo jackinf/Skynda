@@ -1,6 +1,7 @@
 import _ from "underscore";
 
 export default function fromSpringToReduxFormError(springErrors) {
+  console.log("fromSpringToReduxFormError", springErrors);
   if (!_.isArray(springErrors)) {
     return {};
   }

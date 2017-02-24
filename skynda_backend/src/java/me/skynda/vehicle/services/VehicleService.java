@@ -178,10 +178,8 @@ public class VehicleService implements IVehicleService {
             validator.validate(vehicle, bindingResult);
 
             if (bindingResult.hasErrors()) {
-                CreateOrUpdateResponseDto response = new CreateOrUpdateResponseDto();
-                response.setSuccess(false);
-                response.setErrors(bindingResult.getAllErrors());
-                return response;
+                CreateOrUpdateResponseDto as = CreateOrUpdateResponseDto.Factory.fail("Validation failed", bindingResult.getAllErrors());
+                return as;
             }
 
             /*
@@ -209,20 +207,22 @@ public class VehicleService implements IVehicleService {
                 filesToDelete.forEach(blobStorageService::tryDeleteBlob);
             }
 
-            Vehicle addedVehicle = vehicleDao.saveOrUpdate(vehicle);    // TODO: Get success code
+            Vehicle addedVehicle = vehicleDao.saveOrUpdate(vehicle);
+
+            if(bindingResult.hasErrors()){
+                return CreateOrUpdateResponseDto.Factory.fail("saveOrUpdateFailed",
+                        bindingResult.getAllErrors());
+            }
 
             UpdateDescriptions(addedVehicle.getId(), vehicleAdminDto.getDescriptions());
             UpdateFeatures(addedVehicle, vehicleAdminDto.getFeaturesAdminSelect());
             UpdateImages(addedVehicle, imageDtos);
 
-            CreateOrUpdateResponseDto response = new CreateOrUpdateResponseDto();
-            response.setId(addedVehicle.getId());
-            response.setSuccess(true);
-
-            return response;
+            return CreateOrUpdateResponseDto.Factory.success(addedVehicle.getId(), true);
         } catch (Exception e) {
             logger.error("createOrUpdateVehicle failed. vehicleAdminDto: " + JsonHelper.toJson(vehicleAdminDto), e);
-            throw e;
+            return CreateOrUpdateResponseDto.Factory.fail("unknown",
+                    bindingResult.getAllErrors());
         }
     }
 

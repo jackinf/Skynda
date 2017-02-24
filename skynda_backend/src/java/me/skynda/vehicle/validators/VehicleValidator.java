@@ -1,8 +1,10 @@
 package me.skynda.vehicle.validators;
 
 import me.skynda.common.entities.Vehicle;
+import me.skynda.common.helper.ValidationHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.Errors;
+import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 import javax.validation.ConstraintViolation;
@@ -20,14 +22,12 @@ public class VehicleValidator implements Validator {
 
     @Override
     public void validate(Object object, Errors errors) {
-        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-        javax.validation.Validator validator = factory.getValidator();
         Vehicle vehicle = (Vehicle) object;
-        Set<ConstraintViolation<Vehicle>> constraintViolations = validator.validate(vehicle);
-        for (ConstraintViolation<Vehicle> constraintViolation : constraintViolations) {
-            String errorKey = constraintViolation.getPropertyPath().toString();
-            String errorMessage = constraintViolation.getMessage();
-            errors.reject(errorKey, errorMessage);
-        }
+        ValidationHelper.validate(vehicle, errors);
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "model.id", "Model ID must be selected.", "Model ID must be selected.");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "price", "Price is not valid.", "Price is not valid.");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "mileage", "Mileage is not valid.", "Mileage is not valid.");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "vinCode", "Vin Code is not valid.", "Vin Code is not valid.");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "registrationNumber", "Registration Number is not valid.", "Registration Number is not valid.");
     }
 }

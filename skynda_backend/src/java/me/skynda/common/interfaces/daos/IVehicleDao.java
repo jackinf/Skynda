@@ -4,6 +4,7 @@ import me.skynda.common.db.SkyndaBaseEntityDao;
 import me.skynda.common.dto.DeleteResponseDto;
 import me.skynda.vehicle.dto.request.SearchRequestDto;
 import me.skynda.common.entities.Vehicle;
+import org.springframework.validation.Errors;
 
 import java.io.Serializable;
 import java.util.List;
@@ -13,4 +14,6 @@ public interface IVehicleDao extends SkyndaBaseEntityDao<Vehicle> {
     Vehicle get(Serializable id);
     Vehicle get(Serializable id, Boolean isActive);
     void deleteEntity(Vehicle vehicleDescription, DeleteResponseDto response);
+    Vehicle saveOrUpdate(Vehicle vehicle, Errors bindingResult);
+
 }

@@ -17,7 +17,7 @@ import {
   TableHeaderColumn,
   selectFeaturesRenderer
 } from "./Vehicle.redux-form.renderers";
-import {onHandleSubmit} from "./Vehicle.redux-form.actions";
+import {onHandleSubmit} from "../actions/Vehicle.redux-form.actions";
 import {renderCheckbox, renderSelectField} from "../../../../../components/FormRenderers";
 import RefreshIndicator from 'material-ui/RefreshIndicator';
 import fromSpringToReduxFormError from "../../../../../../../utils/formUtils/fromSpringToReduxFormError";
@@ -183,7 +183,7 @@ class Vehicle extends React.Component {
   onSubmit(e) {
     let promise = this.props.handleSubmit(data => onHandleSubmit(data, this.props.formModeVehicle))(e);
     promise && promise.then(resp => {
-      this.props.onHandleSubmitFinished(resp)
+      this.props.onHandleSubmitFinished(resp, this.props.formModeVehicle, this.props.getVehicles)
     });
   };
 
