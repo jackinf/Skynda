@@ -9,6 +9,7 @@ import me.skynda.common.interfaces.services.IVehicleReviewService;
 import me.skynda.image.entities.Image;
 import me.skynda.vehicle.dto.VehicleReviewAdminDto;
 import me.skynda.common.entities.VehicleReview;
+import me.skynda.vehicle.validators.VehicleReviewValidator;
 import org.dozer.Mapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -81,6 +82,13 @@ public class VehicleReviewService implements IVehicleReviewService {
     @Override
     public CreateOrUpdateResponseDto createOrUpdate(VehicleReviewAdminDto dto, BindingResult bindingResult) {
         try {
+            new VehicleReviewValidator().validate(dto, bindingResult);
+
+            if(bindingResult.hasErrors()){
+                return CreateOrUpdateResponseDto.Factory.fail("validationError",
+                        bindingResult.getAllErrors());
+            }
+
             VehicleReview vehicleReview = mapper.map(dto, VehicleReview.class);
 
             if (dto.getId() != null) {
@@ -88,32 +96,29 @@ public class VehicleReviewService implements IVehicleReviewService {
                 mapper.map(dto, vehicleReview);
             }
 
-        /*
-            Media upload/save.
-         */
             Image newLogo = blobStorageService.handleMedia(dto.getLogo(), vehicleReview.getLogo());
             Image newVideo = blobStorageService.handleMedia(dto.getVideo(), vehicleReview.getVideo());
             vehicleReview.setLogo(newLogo);
             vehicleReview.setVideo(newVideo);
 
-        /*
-            Save
-         */
-            try {
-                VehicleReview persistedVehicleReview = vehicleReviewDao.saveOrUpdate(vehicleReview);
-                CreateOrUpdateResponseDto response = CreateOrUpdateResponseDto.Factory.success(persistedVehicleReview.getId(), true);
-                response.setIsModal(dto.getIsModal());
-                response.setVehicleId(persistedVehicleReview.getVehicleId());
-                return response;
+            VehicleReview persistedVehicleReview = vehicleReviewDao.saveOrUpdate(vehicleReview, bindingResult);
 
-            }catch (Exception e){
-                CreateOrUpdateResponseDto response = CreateOrUpdateResponseDto.Factory.fail(e.getMessage(), null);
-                return response;
+            if(bindingResult.hasErrors()){
+                return CreateOrUpdateResponseDto.Factory.fail("validationError",
+                        bindingResult.getAllErrors());
             }
 
+            CreateOrUpdateResponseDto response =
+                    CreateOrUpdateResponseDto.Factory.success(persistedVehicleReview.getId(), true);
+
+            response.setIsModal(dto.getIsModal());
+            response.setVehicleId(persistedVehicleReview.getVehicleId());
+
+            return response;
         } catch (Exception e) {
             logger.error("createOrUpdate failed. dto: " + JsonHelper.toJson(dto), e);
-            throw e;
+            return CreateOrUpdateResponseDto.Factory.fail("validationError",
+                    bindingResult.getAllErrors());
         }
     }
 

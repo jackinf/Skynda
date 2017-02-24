@@ -12,6 +12,8 @@ import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -146,7 +148,7 @@ public class VehicleReviewDao extends BaseEntityDao<VehicleReview> implements IV
     }
 
     @Override
-    public VehicleReview saveOrUpdate(VehicleReview vehicleReview) {
+    public VehicleReview saveOrUpdate(VehicleReview vehicleReview, Errors bindingResult) {
         Transaction tx = null;
         Session session = getSession();
         try {
@@ -155,13 +157,12 @@ public class VehicleReviewDao extends BaseEntityDao<VehicleReview> implements IV
             if (vehicleReview.getId() == null) {
                 session.save(vehicleReview);
             } else {
-                VehicleReview existingItem =
-                        (VehicleReview) session.createQuery("SELECT item FROM VehicleReview as item " +
-                                "WHERE item.id = :id AND item.vehicleId = :parentId " +
-                                "AND item.archived IS NULL")
-                                .setParameter("id", vehicleReview.getId())
-                                .setParameter("parentId", vehicleReview.getVehicleId())
-                                .uniqueResult();
+                Criteria existingCrit = session.createCriteria(VehicleReview.class, "review")
+                    .add(Restrictions.eq("id", vehicleReview.getId()))
+                    .add(Restrictions.eq("vehicleId", vehicleReview.getVehicleId()))
+                    .add(Restrictions.isNull("archived"));
+
+                VehicleReview existingItem = (VehicleReview) existingCrit.uniqueResult();
 
                 if (existingItem == null) {
                     throw new Exception("Vehicle Report Item is null");
@@ -179,8 +180,11 @@ public class VehicleReviewDao extends BaseEntityDao<VehicleReview> implements IV
         } catch (Exception e) {
             if(tx != null)
                 tx.rollback();
+
             logger.error("saveOrUpdate failed. vehicleReview: " + JsonHelper.toJson(vehicleReview), e);
+            bindingResult.rejectValue("saveOrUpdateFailed", e.getMessage());
             e.printStackTrace();
+            vehicleReview = null;
         }
 
         return vehicleReview;

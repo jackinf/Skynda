@@ -74,7 +74,6 @@ class Vehicle extends React.Component {
    * @param event
    */
   onSetField = (name, value, event) => {
-    console.log("setvaklue", value);
     this.props.dispatch(change(FORMS.VEHICLE_FORM, name, value))
   };
 
@@ -174,7 +173,6 @@ class Vehicle extends React.Component {
   };
 
   setField = (name, value) => {
-    console.log("name ", name);
     this.props.dispatch(change(FORMS.VEHICLE_FORM, name, value));
   };
 

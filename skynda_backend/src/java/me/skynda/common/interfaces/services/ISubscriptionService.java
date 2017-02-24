@@ -1,8 +1,9 @@
 package me.skynda.common.interfaces.services;
 
-import me.skynda.common.dto.CreateOrUpdateResponseDto;
+import me.skynda.common.dto.SimpleResponseDto;
 import me.skynda.subscription.dto.SubscribeDto;
+import org.springframework.validation.Errors;
 
 public interface ISubscriptionService {
-    CreateOrUpdateResponseDto subscribe(SubscribeDto email);
+    SimpleResponseDto subscribe(SubscribeDto email, Errors bindingResult);
 }

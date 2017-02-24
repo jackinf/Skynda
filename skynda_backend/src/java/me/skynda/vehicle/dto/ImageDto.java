@@ -3,9 +3,12 @@ package me.skynda.vehicle.dto;
 import lombok.Data;
 import me.skynda.image.entities.Image;
 
+import javax.validation.constraints.Pattern;
+
 @Data
 public class ImageDto {
 
+    @Pattern(regexp = "^((http[s]?|ftp):\\/)?\\/?([^:\\/\\s]+)((\\/\\w+)*\\/)([\\w\\-\\.]+[^#?\\s]+)(.*)?(#[\\w\\-]+)?$")
     private String url;
     private String base64File;
     private String blobName;

@@ -3,6 +3,8 @@ package me.skynda.common.interfaces.daos;
 import me.skynda.common.db.SkyndaBaseEntityDao;
 import me.skynda.common.dto.DeleteResponseDto;
 import me.skynda.common.entities.VehicleReview;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 
 import java.io.Serializable;
 import java.util.List;
@@ -15,5 +17,5 @@ public interface IVehicleReviewDao extends SkyndaBaseEntityDao<VehicleReview> {
     List<VehicleReview> getAll();
     List getAllBy(Serializable vehicleId);
     List getAllBy(Serializable vehicleId, Boolean isActive);
-    VehicleReview saveOrUpdate(VehicleReview vehicleReportItem);
+    VehicleReview saveOrUpdate(VehicleReview vehicleReportItem, Errors bindingResult);
 }

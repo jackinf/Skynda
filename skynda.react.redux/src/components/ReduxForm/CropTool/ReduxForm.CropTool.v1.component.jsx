@@ -79,7 +79,7 @@ export default class ReduxFormCropToolComponent extends React.Component {
                          onComplete={(crop, pixelCrop) => this.onCropChange(crop, pixelCrop, name, reduxFormName)} />
               <button className="btn btn-success" onClick={e => this.onCropDone(e, name, reduxFormName)}>Accept</button>
               <ReactIconDeleteWrapped onClick={e => onImageRemove(e, name, reduxFormName)}/>
-            </span>) : (<img src={input.value} />))
+            </span>) : (<img src={input.value} width="100%" />))
             : <input className="btn btn-default" type="file" onChange={e => this.onImageUpload(e, name, reduxFormName)}/>}
         </div>)}/>
       </CardText>
