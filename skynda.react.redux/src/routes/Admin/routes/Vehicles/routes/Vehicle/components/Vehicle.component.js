@@ -352,7 +352,16 @@ class Vehicle extends React.Component {
                   <ImagesCardField onImageFileUpload={this.props.onImageFileUpload}
                                    onImageFileRemove={this.props.onImageFileRemove}
                                    errors={errors}>
-                    <SubmitCardActions disabled={this.props.submitting}/>
+                    {!isNaN(this.state.id) ?
+                      <SubmitCardActions disabled={this.props.submitting}/>
+                      :(
+                      <div>
+                        <span className="color-red">Please save vehicle before saving Images</span>
+                        <SubmitCardActions disabled={true}/>
+                      </div>
+                        )
+                    }
+
                   </ImagesCardField>
                 </Col>
               </Row>
