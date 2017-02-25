@@ -199,6 +199,7 @@
     <Compile Include="ViewModels\Email\EmailQuestionViewModel.cs" />
     <Compile Include="ViewModels\Email\EmailSellVehicleViewModel.cs" />
     <Compile Include="ViewModels\Email\EmailSubscribeViewModel.cs" />
+    <Compile Include="ViewModels\Feature\FeatureAdminSelectViewModel.cs" />
     <Compile Include="ViewModels\Feature\FeatureViewModel.cs" />
     <Compile Include="ViewModels\Image\ImageContainerViewModel.cs" />
     <Compile Include="ViewModels\Image\ImageCropInfoViewModel.cs" />
@@ -207,11 +208,14 @@
     <Compile Include="ViewModels\User\UserViewModel.cs" />
     <Compile Include="ViewModels\Vehicle\CategoriesViewModel.cs" />
     <Compile Include="ViewModels\Vehicle\FaultBaseViewModel.cs" />
+    <Compile Include="ViewModels\Vehicle\ImageStorable.cs" />
     <Compile Include="ViewModels\Vehicle\PointsViewModel.cs" />
     <Compile Include="ViewModels\Vehicle\Reponses\VehicleModelResponseViewModel.cs" />
     <Compile Include="ViewModels\Vehicle\Requests\SearchRequestViewModel.cs" />
     <Compile Include="ViewModels\Vehicle\Requests\VehicleModelSearchRequestViewModel.cs" />
     <Compile Include="ViewModels\Vehicle\ReviewViewModel.cs" />
+    <Compile Include="ViewModels\Vehicle\VehicleDetailedViewModel.cs" />
+    <Compile Include="ViewModels\Vehicle\VehicleAdminViewModel.cs" />
     <Compile Include="ViewModels\Vehicle\VehicleDescriptionViewModel.cs" />
     <Compile Include="ViewModels\Vehicle\VehicleFeatureViewModel.cs" />
     <Compile Include="ViewModels\Vehicle\VehicleImageFileToDeleteViewModel.cs" />
