@@ -33,6 +33,8 @@ namespace Triven.Domain.Models.Base
         /// </summary>
         int? DeletedBy { get; set; }
 
+        string ModifierUserIp { get; set; }
+
         //IApplicationUser<IApplicationUserContactInfo> Creator { get; set; }
 
         //IApplicationUser<IApplicationUserContactInfo> Modifier { get; set; }

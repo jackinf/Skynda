@@ -3,7 +3,7 @@
     public interface IBaseModel
     {
         /// <summary>
-        /// Guid
+        /// int
         /// </summary>
         int Id { get; set; }
     }
