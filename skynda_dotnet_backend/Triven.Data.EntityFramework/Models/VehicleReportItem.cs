@@ -4,6 +4,7 @@ using Triven.Domain.Models;
 
 namespace Triven.Data.EntityFramework.Models
 {
+    [Table("VehicleReportItem")]
     public class VehicleReportItem : AuditableModel, IVehicleReportItem
     {
         public bool IsPass { get; set; }
