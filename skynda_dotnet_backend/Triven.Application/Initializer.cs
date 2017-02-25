@@ -29,8 +29,7 @@ namespace Triven.Application
             {
                 //Account
                 configuration.CreateMap<ApplicationUser, AccountDisplayViewModel>();
-                configuration.CreateMap<AccountDisplayViewModel, ApplicationUser>()
-                    .ForMember(x => x.ContactInfos, opt => opt.Ignore());
+                configuration.CreateMap<AccountDisplayViewModel, ApplicationUser>().ForMember(x => x.ContactInfos, opt => opt.Ignore());
                 configuration.CreateMap<UserContactInfo, AccountContactInfoDisplayModel>().ReverseMap();
                 
                 //configuration.CreateMap<PartnerContactPersonDisplayViewModel, PartnerContactPersonModel>()
