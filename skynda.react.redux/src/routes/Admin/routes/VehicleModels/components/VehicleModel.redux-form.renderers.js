@@ -15,6 +15,7 @@ export const selectRenderer = (items, onChange, targetName, isMulti = false) => 
   <Row style={{marginBottom: "10px"}}>
     <Col sm={12}>
       <label className="sell-your-car__label" htmlFor={input.name}>{label}</label>
+      {console.log(items)}
       <Select name={input.name}
               value={input.value}
               options={items}

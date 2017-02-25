@@ -47,7 +47,7 @@ class VehicleModel extends React.Component {
       ? this.props.transmission.items.map(item => ({label: item.name, value: item.id}))
       : [];
     const vehicleBodies = !this.props.vehicleBody.isFetching
-      ? this.props.vehicleBody.items.map(item => ({label: item.name, value: item.id}))
+      ? this.props.vehicleBody.items.map(item => ({label: item.name + " " + item.description, value: item.id}))
       : [];
     const manufacturers = !this.props.manufacturer.isFetching
       ? this.props.manufacturer.items.map(item => ({label: item.name, value: item.id}))
