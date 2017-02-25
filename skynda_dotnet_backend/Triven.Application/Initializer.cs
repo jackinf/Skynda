@@ -2,11 +2,7 @@
 using AutoMapper;
 using Ninject;
 using Triven.Application.IoCModules;
-using Triven.Data.EntityFramework.Models;
-using Triven.Data.EntityFramework.Models.Assignmnet;
-using Triven.Data.EntityFramework.Models.Partner;
 using Triven.Data.EntityFramework.Models.User;
-using Triven.Data.EntityFramework.Models.Vehicle;
 using Triven.Domain.ViewModels;
 using Triven.Domain.ViewModels.Account;
 using Triven.Domain.ViewModels.Assignment;
@@ -36,28 +32,9 @@ namespace Triven.Application
                 configuration.CreateMap<AccountDisplayViewModel, ApplicationUser>()
                     .ForMember(x => x.ContactInfos, opt => opt.Ignore());
                 configuration.CreateMap<UserContactInfo, AccountContactInfoDisplayModel>().ReverseMap();
-
-                configuration.CreateMap<TodoModel, TodoDisplayViewModel>();
-                configuration.CreateMap<TodoPostViewModel, TodoModel>();
-                configuration.CreateMap<TodoPutViewModel, TodoModel>();
-
-                //Partner
-                configuration.CreateMap<PartnerModel, PartnerDisplayViewModel>();
-                configuration.CreateMap<PartnerModel, PartnerPutViewModel>().ReverseMap();
-                configuration.CreateMap<PartnerModel, PartnerStatusPutViewModel>().ReverseMap();
-
-                //Partner contact person
-                configuration.CreateMap<PartnerContactPersonModel, PartnerContactPersonDisplayViewModel>();
-                configuration.CreateMap<PartnerContactPersonDisplayViewModel, PartnerContactPersonModel>()
-                    .ForMember(x => x.ContactInfos, opt => opt.Ignore());
-
-                configuration.CreateMap<PartnerContactPersonContactInfoModel, PartnerContactPersonInfoDisplayViewModel>().ReverseMap();
-
-                configuration.CreateMap<Data.EntityFramework.Models.Vehicle.VehicleModel, PartnerVehicleDisplayViewModel>().ReverseMap();
-                configuration.CreateMap<Data.EntityFramework.Models.Vehicle.VehicleModel, PartnerStatusPutViewModel>().ReverseMap();
-
-                //Assignment
-                configuration.CreateMap<AssignmentModel, AssignmentDisplayViewModel>();
+                
+                //configuration.CreateMap<PartnerContactPersonDisplayViewModel, PartnerContactPersonModel>()
+                //    .ForMember(x => x.ContactInfos, opt => opt.Ignore());
             };
 
             Mapper.Initialize(configAction);

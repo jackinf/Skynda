@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-using Triven.Data.EntityFramework.Models.Partner;
 
 namespace Triven.Application.Validators.Partners
 {

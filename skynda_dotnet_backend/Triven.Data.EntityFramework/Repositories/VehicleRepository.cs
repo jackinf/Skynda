@@ -2,7 +2,6 @@
 using Triven.Data.EntityFramework.Models;
 using Triven.Data.EntityFramework.Repositories.Base;
 using Triven.Domain.Repositories;
-using Triven.Domain.Repositories.Base;
 using Triven.Domain.ViewModels.Common;
 using Triven.Domain.ViewModels.Vehicle.Requests;
 

@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using Triven.Data.EntityFramework.Models;
 using Triven.Data.EntityFramework.Repositories.Base;
-using Triven.Domain.Models;
 using Triven.Domain.Repositories;
 using Triven.Domain.ViewModels.Common;
 

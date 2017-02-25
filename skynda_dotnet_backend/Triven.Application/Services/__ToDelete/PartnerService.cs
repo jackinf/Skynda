@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using AutoMapper;
 using CuttingEdge.Conditions;
 using Microsoft.AspNet.Identity;
 using Triven.Application.Results;
 using Triven.Application.Validators.Partners;
-using Triven.Data.EntityFramework.Models.Partner;
 using Triven.Data.EntityFramework.Models.User;
-using Triven.Data.EntityFramework.Models.Vehicle;
 using Triven.Domain.Constants;
 using Triven.Domain.Repositories;
 using Triven.Domain.Repositories.Partner;

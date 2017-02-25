@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using Triven.Data.EntityFramework.Models;
 using Triven.Data.EntityFramework.Repositories.Base;
 using Triven.Domain.Models.Classification;
@@ -11,7 +10,8 @@ namespace Triven.Data.EntityFramework.Repositories
     {
         public IClassificationModel FindByName(string name)
         {
-            return _context.Classification.FirstOrDefault(x => x.Name == name);
+            throw new System.NotImplementedException();
+            //return _context.Classification.FirstOrDefault(x => x.Name == name);
         }
 
         public IList<Classification> GetByType(string type)

@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using System.Net.Mail;
 using System.Web.UI.WebControls;
-using Triven.Data.EntityFramework.Models.MessageTemplate;
 using Triven.Domain.Constants;
 using Triven.Domain.Infrastructure.Notice;
 using Triven.Domain.Repositories.Message;
@@ -32,7 +31,7 @@ namespace Triven.Application.Services.Messages
         /// <returns></returns>
         public bool Send()
         {
-            GetMessageTemplate();
+            //GetMessageTemplate();
             if (Notice.GetTemplate() == null)
                 return false;
 
@@ -46,18 +45,18 @@ namespace Triven.Application.Services.Messages
             return false;
         }
 
-        /// <summary>
-        /// Find notice message template form database
-        /// </summary>
-        /// <returns></returns>
-        private MessageTemplateModel GetMessageTemplate()
-        {
-            var repository = IoC.Get<IMessageRepository<MessageTemplateModel>>();
-            var template = repository.GetByNameAndLocale(MessageTemplateName.ToString(), Locale.ToString());
-            if (template != null)
-                Notice.SetTemplate(template);
-            return null;
-        }
+        ///// <summary>
+        ///// Find notice message template form database
+        ///// </summary>
+        ///// <returns></returns>
+        //private MessageTemplateModel GetMessageTemplate()
+        //{
+        //    var repository = IoC.Get<IMessageRepository<MessageTemplateModel>>();
+        //    var template = repository.GetByNameAndLocale(MessageTemplateName.ToString(), Locale.ToString());
+        //    if (template != null)
+        //        Notice.SetTemplate(template);
+        //    return null;
+        //}
 
         /// <summary>
         /// Creates mailmessage from template

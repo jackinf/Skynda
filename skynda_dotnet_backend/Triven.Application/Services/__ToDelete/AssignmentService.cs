@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using AutoMapper;
 using Triven.Application.Results;
-using Triven.Data.EntityFramework.Models.Assignmnet;
 using Triven.Domain.Repositories.Assignment;
 using Triven.Domain.Services;
 using Triven.Domain.ViewModelInterfaces;

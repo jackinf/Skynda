@@ -7,7 +7,6 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
-using Triven.Data.EntityFramework.Models.Partner;
 using Triven.Domain.Constants;
 using Triven.Domain.Extensions;
 using Triven.Domain.Models;
@@ -38,11 +37,7 @@ namespace Triven.Data.EntityFramework.Models.User
         public Status Status { get; set; }
 
         public virtual List<UserContactInfo> ContactInfos { get; set; } = new List<UserContactInfo>();
-
-        /// <summary>
-        /// many-to-many realation to PartnerUsers
-        /// </summary>
-        public virtual List<PartnerModel> UserPartners { get; set; }
+        
 
         public DateTime? UpdatedOn { get; set; }
         public DateTime? DeletedOn { get; set; }
@@ -62,13 +57,7 @@ namespace Triven.Data.EntityFramework.Models.User
         public virtual ApplicationUser Creator { get; set; }
         public virtual ApplicationUser Modifier { get; set; }
         public virtual ApplicationUser Remover { get; set; }
-
-        /// <summary>
-        /// one-to-many to PartnerModel
-        /// </summary>
-        [InverseProperty("User")]
-        public List<PartnerModel> Partners { get; set; }
-
+        
         /// <summary>
         /// Needed for password validation 
         /// NB! Do not remove attributes

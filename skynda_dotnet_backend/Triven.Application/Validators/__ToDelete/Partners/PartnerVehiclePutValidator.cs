@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Linq;
 using FluentValidation;
 using FluentValidation.Results;
-using Triven.Data.EntityFramework.Models.Partner;
 using Triven.Domain.Constants;
 using Triven.Domain.ViewModels.Partner.Vehicle;
 

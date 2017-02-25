@@ -305,16 +305,8 @@
     <Compile Include="Controllers\VehicleModelController.cs" />
     <Compile Include="Controllers\VehicleReportController.cs" />
     <Compile Include="Controllers\VehicleReviewController.cs" />
-    <Compile Include="Controllers\__ToDelete\AssignmentController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
-    <Compile Include="Controllers\__ToDelete\PartnerUserController.cs" />
-    <Compile Include="Controllers\__ToDelete\StatisticsController.cs" />
     <Compile Include="Controllers\ClassificationController.cs" />
-    <Compile Include="Controllers\__ToDelete\HomeController.cs" />
-    <Compile Include="Controllers\__ToDelete\PartnerContactPersonController.cs" />
-    <Compile Include="Controllers\__ToDelete\PartnerController.cs" />
-    <Compile Include="Controllers\__ToDelete\PartnerVehicleController.cs" />
-    <Compile Include="Controllers\__ToDelete\TodoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

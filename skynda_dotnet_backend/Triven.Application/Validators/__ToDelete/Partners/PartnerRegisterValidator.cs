@@ -1,6 +1,5 @@
 ﻿using System.Text.RegularExpressions;
 using FluentValidation;
-using Triven.Data.EntityFramework.Models.Partner;
 using Triven.Domain.Repositories.Partner;
 
 namespace Triven.Application.Validators.Partners
