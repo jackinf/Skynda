@@ -1,0 +1,154 @@
+namespace X3Project.Data.EntityFramework.Migrations
+{
+    using System;
+    using System.Data.Entity.Migrations;
+    
+    public partial class AuditNullableFix : DbMigration
+    {
+        public override void Up()
+        {
+            DropForeignKey("dbo.TodoModels", "CreatedBy", "dbo.Users");
+            DropForeignKey("dbo.TodoModels", "UpdatedBy", "dbo.Users");
+            DropForeignKey("dbo.TodoModels", "DeletedBy", "dbo.Users");
+            DropIndex("dbo.AssignmentModels", new[] { "CreatedBy" });
+            DropIndex("dbo.AssignmentModels", new[] { "UpdatedBy" });
+            DropIndex("dbo.AssignmentModels", new[] { "DeletedBy" });
+            DropIndex("dbo.Partner", new[] { "CreatedBy" });
+            DropIndex("dbo.Partner", new[] { "UpdatedBy" });
+            DropIndex("dbo.Partner", new[] { "DeletedBy" });
+            DropIndex("dbo.PartnerContactPersonModels", new[] { "CreatedBy" });
+            DropIndex("dbo.PartnerContactPersonModels", new[] { "UpdatedBy" });
+            DropIndex("dbo.PartnerContactPersonModels", new[] { "DeletedBy" });
+            DropIndex("dbo.Vehicle", new[] { "CreatedBy" });
+            DropIndex("dbo.Vehicle", new[] { "UpdatedBy" });
+            DropIndex("dbo.Vehicle", new[] { "DeletedBy" });
+            DropIndex("dbo.DriverModels", new[] { "CreatedBy" });
+            DropIndex("dbo.DriverModels", new[] { "UpdatedBy" });
+            DropIndex("dbo.DriverModels", new[] { "DeletedBy" });
+            DropIndex("dbo.Classification", new[] { "CreatedBy" });
+            DropIndex("dbo.Classification", new[] { "UpdatedBy" });
+            DropIndex("dbo.Classification", new[] { "DeletedBy" });
+            DropIndex("dbo.TodoModels", new[] { "CreatedBy" });
+            DropIndex("dbo.TodoModels", new[] { "UpdatedBy" });
+            DropIndex("dbo.TodoModels", new[] { "DeletedBy" });
+            AlterColumn("dbo.AssignmentModels", "CreatedBy", c => c.Int());
+            AlterColumn("dbo.AssignmentModels", "UpdatedBy", c => c.Int());
+            AlterColumn("dbo.AssignmentModels", "DeletedBy", c => c.Int());
+            AlterColumn("dbo.Partner", "CreatedBy", c => c.Int());
+            AlterColumn("dbo.Partner", "UpdatedBy", c => c.Int());
+            AlterColumn("dbo.Partner", "DeletedBy", c => c.Int());
+            AlterColumn("dbo.PartnerContactPersonModels", "CreatedBy", c => c.Int());
+            AlterColumn("dbo.PartnerContactPersonModels", "UpdatedBy", c => c.Int());
+            AlterColumn("dbo.PartnerContactPersonModels", "DeletedBy", c => c.Int());
+            AlterColumn("dbo.Vehicle", "CreatedBy", c => c.Int());
+            AlterColumn("dbo.Vehicle", "UpdatedBy", c => c.Int());
+            AlterColumn("dbo.Vehicle", "DeletedBy", c => c.Int());
+            AlterColumn("dbo.DriverModels", "CreatedBy", c => c.Int());
+            AlterColumn("dbo.DriverModels", "UpdatedBy", c => c.Int());
+            AlterColumn("dbo.DriverModels", "DeletedBy", c => c.Int());
+            AlterColumn("dbo.Classification", "CreatedBy", c => c.Int());
+            AlterColumn("dbo.Classification", "UpdatedBy", c => c.Int());
+            AlterColumn("dbo.Classification", "DeletedBy", c => c.Int());
+            AlterColumn("dbo.TodoModels", "CreatedBy", c => c.Int());
+            AlterColumn("dbo.TodoModels", "UpdatedBy", c => c.Int());
+            AlterColumn("dbo.TodoModels", "DeletedBy", c => c.Int());
+            CreateIndex("dbo.AssignmentModels", "CreatedBy");
+            CreateIndex("dbo.AssignmentModels", "UpdatedBy");
+            CreateIndex("dbo.AssignmentModels", "DeletedBy");
+            CreateIndex("dbo.Partner", "CreatedBy");
+            CreateIndex("dbo.Partner", "UpdatedBy");
+            CreateIndex("dbo.Partner", "DeletedBy");
+            CreateIndex("dbo.PartnerContactPersonModels", "CreatedBy");
+            CreateIndex("dbo.PartnerContactPersonModels", "UpdatedBy");
+            CreateIndex("dbo.PartnerContactPersonModels", "DeletedBy");
+            CreateIndex("dbo.Vehicle", "CreatedBy");
+            CreateIndex("dbo.Vehicle", "UpdatedBy");
+            CreateIndex("dbo.Vehicle", "DeletedBy");
+            CreateIndex("dbo.DriverModels", "CreatedBy");
+            CreateIndex("dbo.DriverModels", "UpdatedBy");
+            CreateIndex("dbo.DriverModels", "DeletedBy");
+            CreateIndex("dbo.Classification", "CreatedBy");
+            CreateIndex("dbo.Classification", "UpdatedBy");
+            CreateIndex("dbo.Classification", "DeletedBy");
+            CreateIndex("dbo.TodoModels", "CreatedBy");
+            CreateIndex("dbo.TodoModels", "UpdatedBy");
+            CreateIndex("dbo.TodoModels", "DeletedBy");
+            AddForeignKey("dbo.TodoModels", "CreatedBy", "dbo.Users", "Id");
+            AddForeignKey("dbo.TodoModels", "UpdatedBy", "dbo.Users", "Id");
+            AddForeignKey("dbo.TodoModels", "DeletedBy", "dbo.Users", "Id");
+        }
+        
+        public override void Down()
+        {
+            DropForeignKey("dbo.TodoModels", "DeletedBy", "dbo.Users");
+            DropForeignKey("dbo.TodoModels", "UpdatedBy", "dbo.Users");
+            DropForeignKey("dbo.TodoModels", "CreatedBy", "dbo.Users");
+            DropIndex("dbo.TodoModels", new[] { "DeletedBy" });
+            DropIndex("dbo.TodoModels", new[] { "UpdatedBy" });
+            DropIndex("dbo.TodoModels", new[] { "CreatedBy" });
+            DropIndex("dbo.Classification", new[] { "DeletedBy" });
+            DropIndex("dbo.Classification", new[] { "UpdatedBy" });
+            DropIndex("dbo.Classification", new[] { "CreatedBy" });
+            DropIndex("dbo.DriverModels", new[] { "DeletedBy" });
+            DropIndex("dbo.DriverModels", new[] { "UpdatedBy" });
+            DropIndex("dbo.DriverModels", new[] { "CreatedBy" });
+            DropIndex("dbo.Vehicle", new[] { "DeletedBy" });
+            DropIndex("dbo.Vehicle", new[] { "UpdatedBy" });
+            DropIndex("dbo.Vehicle", new[] { "CreatedBy" });
+            DropIndex("dbo.PartnerContactPersonModels", new[] { "DeletedBy" });
+            DropIndex("dbo.PartnerContactPersonModels", new[] { "UpdatedBy" });
+            DropIndex("dbo.PartnerContactPersonModels", new[] { "CreatedBy" });
+            DropIndex("dbo.Partner", new[] { "DeletedBy" });
+            DropIndex("dbo.Partner", new[] { "UpdatedBy" });
+            DropIndex("dbo.Partner", new[] { "CreatedBy" });
+            DropIndex("dbo.AssignmentModels", new[] { "DeletedBy" });
+            DropIndex("dbo.AssignmentModels", new[] { "UpdatedBy" });
+            DropIndex("dbo.AssignmentModels", new[] { "CreatedBy" });
+            AlterColumn("dbo.TodoModels", "DeletedBy", c => c.Int(nullable: false));
+            AlterColumn("dbo.TodoModels", "UpdatedBy", c => c.Int(nullable: false));
+            AlterColumn("dbo.TodoModels", "CreatedBy", c => c.Int(nullable: false));
+            AlterColumn("dbo.Classification", "DeletedBy", c => c.Int(nullable: false));
+            AlterColumn("dbo.Classification", "UpdatedBy", c => c.Int(nullable: false));
+            AlterColumn("dbo.Classification", "CreatedBy", c => c.Int(nullable: false));
+            AlterColumn("dbo.DriverModels", "DeletedBy", c => c.Int(nullable: false));
+            AlterColumn("dbo.DriverModels", "UpdatedBy", c => c.Int(nullable: false));
+            AlterColumn("dbo.DriverModels", "CreatedBy", c => c.Int(nullable: false));
+            AlterColumn("dbo.Vehicle", "DeletedBy", c => c.Int(nullable: false));
+            AlterColumn("dbo.Vehicle", "UpdatedBy", c => c.Int(nullable: false));
+            AlterColumn("dbo.Vehicle", "CreatedBy", c => c.Int(nullable: false));
+            AlterColumn("dbo.PartnerContactPersonModels", "DeletedBy", c => c.Int(nullable: false));
+            AlterColumn("dbo.PartnerContactPersonModels", "UpdatedBy", c => c.Int(nullable: false));
+            AlterColumn("dbo.PartnerContactPersonModels", "CreatedBy", c => c.Int(nullable: false));
+            AlterColumn("dbo.Partner", "DeletedBy", c => c.Int(nullable: false));
+            AlterColumn("dbo.Partner", "UpdatedBy", c => c.Int(nullable: false));
+            AlterColumn("dbo.Partner", "CreatedBy", c => c.Int(nullable: false));
+            AlterColumn("dbo.AssignmentModels", "DeletedBy", c => c.Int(nullable: false));
+            AlterColumn("dbo.AssignmentModels", "UpdatedBy", c => c.Int(nullable: false));
+            AlterColumn("dbo.AssignmentModels", "CreatedBy", c => c.Int(nullable: false));
+            CreateIndex("dbo.TodoModels", "DeletedBy");
+            CreateIndex("dbo.TodoModels", "UpdatedBy");
+            CreateIndex("dbo.TodoModels", "CreatedBy");
+            CreateIndex("dbo.Classification", "DeletedBy");
+            CreateIndex("dbo.Classification", "UpdatedBy");
+            CreateIndex("dbo.Classification", "CreatedBy");
+            CreateIndex("dbo.DriverModels", "DeletedBy");
+            CreateIndex("dbo.DriverModels", "UpdatedBy");
+            CreateIndex("dbo.DriverModels", "CreatedBy");
+            CreateIndex("dbo.Vehicle", "DeletedBy");
+            CreateIndex("dbo.Vehicle", "UpdatedBy");
+            CreateIndex("dbo.Vehicle", "CreatedBy");
+            CreateIndex("dbo.PartnerContactPersonModels", "DeletedBy");
+            CreateIndex("dbo.PartnerContactPersonModels", "UpdatedBy");
+            CreateIndex("dbo.PartnerContactPersonModels", "CreatedBy");
+            CreateIndex("dbo.Partner", "DeletedBy");
+            CreateIndex("dbo.Partner", "UpdatedBy");
+            CreateIndex("dbo.Partner", "CreatedBy");
+            CreateIndex("dbo.AssignmentModels", "DeletedBy");
+            CreateIndex("dbo.AssignmentModels", "UpdatedBy");
+            CreateIndex("dbo.AssignmentModels", "CreatedBy");
+            AddForeignKey("dbo.TodoModels", "DeletedBy", "dbo.Users", "Id", cascadeDelete: true);
+            AddForeignKey("dbo.TodoModels", "UpdatedBy", "dbo.Users", "Id", cascadeDelete: true);
+            AddForeignKey("dbo.TodoModels", "CreatedBy", "dbo.Users", "Id", cascadeDelete: true);
+        }
+    }
+}
