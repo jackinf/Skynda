@@ -103,7 +103,6 @@
   <ItemGroup>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
-    <Compile Include="Models\Authority.cs" />
     <Compile Include="Models\Classification.cs" />
     <Compile Include="Models\ClassificationType.cs" />
     <Compile Include="Models\Feature.cs" />

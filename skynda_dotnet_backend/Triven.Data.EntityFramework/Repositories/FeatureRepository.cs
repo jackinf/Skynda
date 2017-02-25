@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
 using Triven.Data.EntityFramework.Models;
 using Triven.Data.EntityFramework.Repositories.Base;
 using Triven.Domain.Repositories;
@@ -10,32 +13,30 @@ namespace Triven.Data.EntityFramework.Repositories
     {
         public IList<Feature> GetAll(bool isActive = true)
         {
-            throw new System.NotImplementedException();
+            return BaseQuery().ToList();
         }
 
-        public void DeleteEntity(Feature feature, DeleteResponseViewModel response)
+        public void DeleteEntity(int id, DeleteResponseViewModel response)
         {
-            throw new System.NotImplementedException();
+            var toDelete = BaseQuery().FirstOrDefault(x => x.Id == id);
+            if (toDelete == null)
+                throw new Exception("Sitt juhtus. Service, püüa mind.");
+            toDelete.DeletedOn = DateTime.Now;
+            _context.SaveChanges();
         }
 
         public Feature Get(int id, bool isActive = true)
         {
-            throw new System.NotImplementedException();
+            return BaseQuery().FirstOrDefault(x => x.Id == id);
         }
 
         public Feature SaveOrUpdate(Feature feature)
         {
-            throw new System.NotImplementedException();
-        }
-
-        public IList<Feature> GetAllBy(int vehicleId)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public IList<Feature> GetAllBy(int vehicleId, bool isActive)
-        {
-            throw new System.NotImplementedException();
+            _context.Entry(feature).State = EntityState.Modified;
+            var chagnes = _context.SaveChanges();
+            if (chagnes == 0)
+                throw new Exception("No changes!");
+            return feature;
         }
     }
 }

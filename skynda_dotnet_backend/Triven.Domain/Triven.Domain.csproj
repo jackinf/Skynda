@@ -94,7 +94,6 @@
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Infrastructure\Notice\ConfirmEmailNotice.cs" />
     <Compile Include="Infrastructure\Notice\NoticeBase.cs" />
-    <Compile Include="Models\IAuthority.cs" />
     <Compile Include="Models\IClassification.cs" />
     <Compile Include="Models\IClassificationType.cs" />
     <Compile Include="Models\IFeature.cs" />

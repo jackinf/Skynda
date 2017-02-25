@@ -1,4 +1,5 @@
-﻿using Triven.Data.EntityFramework.Models;
+﻿using System.Linq;
+using Triven.Data.EntityFramework.Models;
 using Triven.Data.EntityFramework.Repositories.Base;
 using Triven.Domain.Repositories;
 
@@ -8,7 +9,7 @@ namespace Triven.Data.EntityFramework.Repositories
     {
         public Subscription GetByEmail(string email)
         {
-            throw new System.NotImplementedException();
+            return BaseQuery().FirstOrDefault(x => x.Email == email);
         }
     }
 }

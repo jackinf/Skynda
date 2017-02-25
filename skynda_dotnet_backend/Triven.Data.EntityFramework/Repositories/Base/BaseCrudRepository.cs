@@ -127,6 +127,7 @@ namespace Triven.Data.EntityFramework.Repositories.Base
         }
 
         public IQueryable<TModel> BaseQuery() => _context.Set<TModel>().Where(x => x.DeletedOn == null);
+        public IQueryable<TModel> BaseQuery(ApplicationDbContext context) => context.Set<TModel>().Where(x => x.DeletedOn == null);
 
         /// <summary>
         /// Checks, if item with the same id already exists

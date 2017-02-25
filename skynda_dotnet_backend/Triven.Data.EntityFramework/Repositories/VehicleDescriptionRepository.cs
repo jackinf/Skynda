@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Triven.Data.EntityFramework.Models;
 using Triven.Data.EntityFramework.Repositories.Base;
 using Triven.Domain.Repositories;
@@ -8,9 +9,9 @@ namespace Triven.Data.EntityFramework.Repositories
 {
     public class VehicleDescriptionRepository : BaseCrudRepository<VehicleDescription>, IVehicleDescriptionRepository<VehicleDescription>
     {
-        public IList<VehicleDescription> GetAllVehicleDescriptions(int id)
+        public IList<VehicleDescription> GetAllVehicleDescriptions(int vehicleId)
         {
-            throw new System.NotImplementedException();
+            return BaseQuery().Where(x => x.VehicleId == vehicleId).ToList();
         }
 
         public void DeleteEntity(VehicleDescription vehicleDescription, DeleteResponseViewModel response)

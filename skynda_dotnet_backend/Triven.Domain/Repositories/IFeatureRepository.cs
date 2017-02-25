@@ -9,10 +9,8 @@ namespace Triven.Domain.Repositories
         where TFeatureEntity : IFeature
     {
         IList<TFeatureEntity> GetAll(bool isActive = true);
-        void DeleteEntity(TFeatureEntity feature, DeleteResponseViewModel response);
+        void DeleteEntity(int id, DeleteResponseViewModel response);
         TFeatureEntity Get(int id, bool isActive = true);        
         TFeatureEntity SaveOrUpdate(TFeatureEntity feature);
-        IList<TFeatureEntity> GetAllBy(int vehicleId);
-        IList<TFeatureEntity> GetAllBy(int vehicleId, bool isActive);
     }
 }

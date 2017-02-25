@@ -8,7 +8,7 @@ namespace Triven.Domain.Repositories
     public interface IVehicleDescriptionRepository<TVehicleDescriptionEntity> : IBaseCrudRepository<TVehicleDescriptionEntity>
         where TVehicleDescriptionEntity : IVehicleDescription
     {
-        IList<TVehicleDescriptionEntity> GetAllVehicleDescriptions(int id);
+        IList<TVehicleDescriptionEntity> GetAllVehicleDescriptions(int vehicleId);
         void DeleteEntity(TVehicleDescriptionEntity vehicleDescription, DeleteResponseViewModel response);
         TVehicleDescriptionEntity SaveOrUpdate(TVehicleDescriptionEntity vehicleReportItem);
         void SaveOrUpdate(ICollection<TVehicleDescriptionEntity> items);
