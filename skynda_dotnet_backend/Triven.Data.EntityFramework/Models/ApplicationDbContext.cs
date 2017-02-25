@@ -1,12 +1,6 @@
 ﻿using System.Data.Entity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using Triven.Data.EntityFramework.Models.Assignmnet;
-using Triven.Data.EntityFramework.Models.Classification;
-using Triven.Data.EntityFramework.Models.Driver;
-using Triven.Data.EntityFramework.Models.MessageTemplate;
-using Triven.Data.EntityFramework.Models.Partner;
 using Triven.Data.EntityFramework.Models.User;
-using Triven.Data.EntityFramework.Models.Vehicle;
 
 //using Microsoft.AspNet.Identity.Owin;
 
@@ -39,8 +33,22 @@ namespace Triven.Data.EntityFramework.Models
                 .WithMany(a => a.ContactInfos)
                 .HasForeignKey(n => n.ApplicationUserId)
                 .WillCascadeOnDelete(false);
-
         }
+
+        public DbSet<Classification> Classifications { get; set; }
+        public DbSet<ClassificationType> ClassificationTypes { get; set; }
+        public DbSet<Feature> Features { get; set; }
+        public DbSet<Image> Images { get; set; }
+        public DbSet<Subscription> Subscriptions { get; set; }
+        public DbSet<Vehicle> Vehicles { get; set; }
+        public DbSet<VehicleDescription> VehicleDescriptions { get; set; }
+        public DbSet<VehicleFault> VehicleFaults { get; set; }
+        public DbSet<VehicleFeature> VehicleFeatures { get; set; }
+        public DbSet<VehicleImage> VehicleImages { get; set; }
+        public DbSet<VehicleModel> VehicleModels { get; set; }
+        public DbSet<VehicleReport> VehicleReports { get; set; }
+        public DbSet<VehicleReportItem> VehicleReportItems { get; set; }
+        public DbSet<VehicleReview> VehicleReviews { get; set; }
 
         public static ApplicationDbContext Create()
         {

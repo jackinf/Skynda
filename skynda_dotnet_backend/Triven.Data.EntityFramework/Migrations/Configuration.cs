@@ -4,11 +4,8 @@ using System.Linq;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Triven.Data.EntityFramework.Models;
-using Triven.Data.EntityFramework.Models.MessageTemplate;
 using Triven.Data.EntityFramework.Models.User;
-using Triven.Data.EntityFramework.Repositories;
 using Triven.Domain.Constants;
-using Triven.Domain.Infrastructure.Notice;
 
 namespace Triven.Data.EntityFramework.Migrations
 {
@@ -71,24 +68,24 @@ namespace Triven.Data.EntityFramework.Migrations
                 context.SaveChanges();
             }
 
-            //
-            // Message template confirm email
-            //
+            ////
+            //// Message template confirm email
+            ////
 
-            var repository = new MessageTemplateRepository();
-            if (repository.GetByNameAndLocale(MessageTemplates.ConfirmEmail.ToString(), Language.en.ToString()) == null)
-            {
-                var messageTemplate = new MessageTemplateModel()
-                {
-                    Name = MessageTemplates.ConfirmEmail.ToString(),
-                    //Title = "Plase confirm your Speys account",
-                    Locale = Language.en,
-                    Message = "<div>Dear {COMPANY_NAME},<br/> Thank you for your registration. Please confirm your email {EMAIL} <a href='{URL}'>{URL}</a></div>",
-                    Fields = "[" + ConfirmEmailNotice.VarEmail + "," + ConfirmEmailNotice.VarCompanyName + "," + ConfirmEmailNotice.VarUrl + "]"
-                };
-                repository.Add(messageTemplate);
-                context.SaveChanges();
-            }
+            //var repository = new MessageTemplateRepository();
+            //if (repository.GetByNameAndLocale(MessageTemplates.ConfirmEmail.ToString(), Language.en.ToString()) == null)
+            //{
+            //    var messageTemplate = new MessageTemplateModel()
+            //    {
+            //        Name = MessageTemplates.ConfirmEmail.ToString(),
+            //        //Title = "Plase confirm your Speys account",
+            //        Locale = Language.en,
+            //        Message = "<div>Dear {COMPANY_NAME},<br/> Thank you for your registration. Please confirm your email {EMAIL} <a href='{URL}'>{URL}</a></div>",
+            //        Fields = "[" + ConfirmEmailNotice.VarEmail + "," + ConfirmEmailNotice.VarCompanyName + "," + ConfirmEmailNotice.VarUrl + "]"
+            //    };
+            //    repository.Add(messageTemplate);
+            //    context.SaveChanges();
+            //}
         }
     }
 }
