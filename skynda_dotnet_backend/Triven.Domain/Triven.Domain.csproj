@@ -146,6 +146,36 @@
     <Compile Include="ViewModels\Account\AccountContactInfoDisplayModel.cs" />
     <Compile Include="ViewModels\Account\AccountDisplayViewModel.cs" />
     <Compile Include="ViewModels\Account\AccountRegisterViewModel.cs" />
+    <Compile Include="ViewModels\Authentication\AuthorityModel.cs" />
+    <Compile Include="ViewModels\BlobStorage\CreateContainerModel.cs" />
+    <Compile Include="ViewModels\BlobStorage\DeleteBlobModel.cs" />
+    <Compile Include="ViewModels\BlobStorage\DeleteContainerModel.cs" />
+    <Compile Include="ViewModels\BlobStorage\DownloadBlobModel.cs" />
+    <Compile Include="ViewModels\BlobStorage\ListBlobsModel.cs" />
+    <Compile Include="ViewModels\BlobStorage\Response\BlobModel.cs" />
+    <Compile Include="ViewModels\BlobStorage\Response\BlobStorageUploadStreamResponseModel.cs" />
+    <Compile Include="ViewModels\BlobStorage\UploadBlobModel.cs" />
+    <Compile Include="ViewModels\Classification\ButtonAttributesModel.cs" />
+    <Compile Include="ViewModels\Classification\ClassificationModel.cs" />
+    <Compile Include="ViewModels\Classification\ClassificationBaseModel.cs" />
+    <Compile Include="ViewModels\Classification\ClassificationResponseModel.cs" />
+    <Compile Include="ViewModels\Classification\SliderAttributesModel.cs" />
+    <Compile Include="ViewModels\Common\BaseModel.cs" />
+    <Compile Include="ViewModels\Common\CreateOrUpdateResponseModel.cs" />
+    <Compile Include="ViewModels\Common\DeleteResponseModel.cs" />
+    <Compile Include="ViewModels\Common\SelectModel.cs" />
+    <Compile Include="ViewModels\Common\SearchResponseModel.cs" />
+    <Compile Include="ViewModels\Common\SimpleResponseModel.cs" />
+    <Compile Include="ViewModels\Common\UpdateResponseModel.cs" />
+    <Compile Include="ViewModels\Email\EmailBuyVehicleModel.cs" />
+    <Compile Include="ViewModels\Email\EmailQuestionModel.cs" />
+    <Compile Include="ViewModels\Email\EmailSellVehicle.cs" />
+    <Compile Include="ViewModels\Email\EmailSubscribeModel.cs" />
+    <Compile Include="ViewModels\Feature\FeatureModel.cs" />
+    <Compile Include="ViewModels\Image\ImageModel.cs" />
+    <Compile Include="ViewModels\Subscription\SubscriptionModel.cs" />
+    <Compile Include="ViewModels\User\UserModel.cs" />
+    <Compile Include="ViewModels\Vehicle\Requests\SearchRequestModel.cs" />
     <Compile Include="ViewModels\__ToDelete\Assignment\AssignmentDisplayViewModel.cs" />
     <Compile Include="ViewModels\Base\BasicResponseViewModel.cs" />
     <Compile Include="ViewModels\__ToDelete\Partner\ContactPerson\PartnerContactPersonInfoDisplayViewModel.cs" />
@@ -162,6 +192,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Repositories\User\" />
+    <Folder Include="ViewModelInterfaces\Common\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
