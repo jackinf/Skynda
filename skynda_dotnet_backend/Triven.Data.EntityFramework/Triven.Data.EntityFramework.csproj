@@ -115,7 +115,7 @@
     <Compile Include="Models\Classification\ClassificationValueModel.cs" />
     <Compile Include="Models\Classification\ClassificationValueTranslateModel.cs" />
     <Compile Include="Models\__ToDelete\Driver\DriverModel.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\__ToDelete\MessageTemplate\MessageTemplateModel.cs" />
     <Compile Include="Models\__ToDelete\Partner\PartnerContactPersonContactInfoModel.cs" />
     <Compile Include="Models\__ToDelete\Partner\PartnerContactPersonModel.cs" />

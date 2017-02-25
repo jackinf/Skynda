@@ -160,6 +160,15 @@
     <Compile Include="Repositories\Base\IUpdate.cs" />
     <Compile Include="Repositories\__ToDelete\ITodoRepository.cs" />
     <Compile Include="Services\IAccountService.cs" />
+    <Compile Include="Services\IBlobStorageService.cs" />
+    <Compile Include="Services\IFeatureService.cs" />
+    <Compile Include="Services\IImageService.cs" />
+    <Compile Include="Services\ISubscriptionService.cs" />
+    <Compile Include="Services\IVehicleFeatureService.cs" />
+    <Compile Include="Services\IVehicleModelService.cs" />
+    <Compile Include="Services\IVehicleReportService.cs" />
+    <Compile Include="Services\IVehicleReviewService.cs" />
+    <Compile Include="Services\IVehicleService.cs" />
     <Compile Include="Services\__ToDelete\IAssignmentService.cs" />
     <Compile Include="Services\IClassificationService.cs" />
     <Compile Include="Services\__ToDelete\IMessageService.cs" />
