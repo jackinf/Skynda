@@ -1,25 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using Microsoft.AspNet.Identity;
+﻿using System.Data.Entity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using X3Project.Data.EntityFramework.Models.Assignmnet;
-using X3Project.Data.EntityFramework.Models.Classification;
-using X3Project.Data.EntityFramework.Models.Driver;
-using X3Project.Data.EntityFramework.Models.MessageTemplate;
-using X3Project.Data.EntityFramework.Models.Partner;
-using X3Project.Data.EntityFramework.Models.User;
-using X3Project.Data.EntityFramework.Models.Vehicle;
-using X3Project.Domain.Constants;
-using X3Project.Domain.Models;
+using Triven.Data.EntityFramework.Models.Assignmnet;
+using Triven.Data.EntityFramework.Models.Classification;
+using Triven.Data.EntityFramework.Models.Driver;
+using Triven.Data.EntityFramework.Models.MessageTemplate;
+using Triven.Data.EntityFramework.Models.Partner;
+using Triven.Data.EntityFramework.Models.User;
+using Triven.Data.EntityFramework.Models.Vehicle;
 
 //using Microsoft.AspNet.Identity.Owin;
 
-namespace X3Project.Data.EntityFramework.Models
+namespace Triven.Data.EntityFramework.Models
 {
 
     public class ApplicationDbContext : IdentityDbContext<AppUser, AppRole, int, AppUserLogin, AppUserRole, AppUserClaim>

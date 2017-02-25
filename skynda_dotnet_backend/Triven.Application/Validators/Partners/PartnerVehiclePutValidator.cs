@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using FluentValidation;
 using FluentValidation.Results;
-using X3Project.Data.EntityFramework.Models.Partner;
-using X3Project.Domain.Constants;
-using X3Project.Domain.ViewModels.Partner.ContactPerson;
-using X3Project.Domain.ViewModels.Partner.Vehicle;
+using Triven.Data.EntityFramework.Models.Partner;
+using Triven.Domain.Constants;
+using Triven.Domain.ViewModels.Partner.Vehicle;
 
-namespace X3Project.Application.Validators.Partners
+namespace Triven.Application.Validators.Partners
 {
     public class PartnerVehiclePutValidator : AbstractValidator<PartnerVehicleDisplayViewModel>
     {

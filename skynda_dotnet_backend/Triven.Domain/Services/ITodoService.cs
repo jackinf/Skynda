@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using X3Project.Domain.Models;
-using X3Project.Domain.Results;
-using X3Project.Domain.ViewModels;
+﻿using System.Collections.Generic;
+using Triven.Domain.Models;
+using Triven.Domain.Results;
+using Triven.Domain.ViewModelInterfaces;
 
-namespace X3Project.Domain.Services
+namespace Triven.Domain.Services
 {
     public interface ITodoService
     {

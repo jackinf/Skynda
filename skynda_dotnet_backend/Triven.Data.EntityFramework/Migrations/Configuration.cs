@@ -3,14 +3,14 @@ using System.Data.Entity.Migrations;
 using System.Linq;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using X3Project.Data.EntityFramework.Models;
-using X3Project.Data.EntityFramework.Models.MessageTemplate;
-using X3Project.Data.EntityFramework.Models.User;
-using X3Project.Data.EntityFramework.Repositories;
-using X3Project.Domain.Constants;
-using X3Project.Domain.Infrastructure.Notice;
+using Triven.Data.EntityFramework.Models;
+using Triven.Data.EntityFramework.Models.MessageTemplate;
+using Triven.Data.EntityFramework.Models.User;
+using Triven.Data.EntityFramework.Repositories;
+using Triven.Domain.Constants;
+using Triven.Domain.Infrastructure.Notice;
 
-namespace X3Project.Data.EntityFramework.Migrations
+namespace Triven.Data.EntityFramework.Migrations
 {
     internal sealed class Configuration : DbMigrationsConfiguration<ApplicationDbContext>
     {

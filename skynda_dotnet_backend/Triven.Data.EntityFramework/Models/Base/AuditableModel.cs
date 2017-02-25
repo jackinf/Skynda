@@ -1,9 +1,9 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
-using X3Project.Data.EntityFramework.Models.User;
-using X3Project.Domain.Models.Base;
+using Triven.Data.EntityFramework.Models.User;
+using Triven.Domain.Models.Base;
 
-namespace X3Project.Data.EntityFramework.Models.Base
+namespace Triven.Data.EntityFramework.Models.Base
 {
     public abstract class AuditableModel : IAuditableBaseModel
     {

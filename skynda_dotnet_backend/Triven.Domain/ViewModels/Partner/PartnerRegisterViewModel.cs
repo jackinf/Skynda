@@ -1,6 +1,6 @@
-﻿using X3Project.Domain.ViewModels;
+﻿using Triven.Domain.ViewModelInterfaces;
 
-namespace X3Project.Domain.ViewModels.Partner
+namespace Triven.Domain.ViewModels.Partner
 {
     public class PartnerRegisterViewModel : IPartnerViewModel
     {

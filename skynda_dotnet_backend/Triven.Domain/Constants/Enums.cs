@@ -1,4 +1,4 @@
-﻿namespace X3Project.Domain.Constants
+﻿namespace Triven.Domain.Constants
 {
     public enum Status
     {

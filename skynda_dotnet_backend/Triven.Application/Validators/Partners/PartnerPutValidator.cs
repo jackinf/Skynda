@@ -1,8 +1,7 @@
 ﻿using FluentValidation;
-using X3Project.Data.EntityFramework.Models.Partner;
-using X3Project.Domain.ViewModels.Partner;
+using Triven.Data.EntityFramework.Models.Partner;
 
-namespace X3Project.Application.Validators.Partners
+namespace Triven.Application.Validators.Partners
 {
     public class PartnerPutValidator : AbstractValidator<PartnerModel>
     {

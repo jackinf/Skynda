@@ -1,22 +1,20 @@
 ﻿using Ninject.Modules;
-using X3Project.Application.Results;
-using X3Project.Application.Services;
-using X3Project.Data.EntityFramework.Models;
-using X3Project.Data.EntityFramework.Models.Assignmnet;
-using X3Project.Data.EntityFramework.Models.MessageTemplate;
-using X3Project.Data.EntityFramework.Models.Partner;
-using X3Project.Data.EntityFramework.Models.User;
-using X3Project.Data.EntityFramework.Repositories;
-using X3Project.Domain.Models;
-using X3Project.Domain.Repositories;
-using X3Project.Domain.Repositories.Assignment;
-using X3Project.Domain.Repositories.Message;
-using X3Project.Domain.Repositories.Partner;
-using X3Project.Domain.Results;
-using X3Project.Domain.Services;
-using X3Project.Domain.ViewModels;
+using Triven.Application.Results;
+using Triven.Application.Services;
+using Triven.Data.EntityFramework.Models;
+using Triven.Data.EntityFramework.Models.Assignmnet;
+using Triven.Data.EntityFramework.Models.MessageTemplate;
+using Triven.Data.EntityFramework.Models.Partner;
+using Triven.Data.EntityFramework.Models.User;
+using Triven.Data.EntityFramework.Repositories;
+using Triven.Domain.Models;
+using Triven.Domain.Repositories;
+using Triven.Domain.Repositories.Assignment;
+using Triven.Domain.Repositories.Message;
+using Triven.Domain.Repositories.Partner;
+using Triven.Domain.Services;
 
-namespace X3Project.Application.IoCModules
+namespace Triven.Application.IoCModules
 {
     public class MainNinjectModule : NinjectModule
     {

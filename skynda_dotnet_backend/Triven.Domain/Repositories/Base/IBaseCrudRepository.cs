@@ -1,6 +1,6 @@
-﻿using X3Project.Domain.Models.Base;
+﻿using Triven.Domain.Models.Base;
 
-namespace X3Project.Domain.Repositories.Base
+namespace Triven.Domain.Repositories.Base
 {
     public interface IBaseCrudRepository<TAggregate> :
         IGet<TAggregate>,

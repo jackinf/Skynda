@@ -2,15 +2,14 @@
 using System.Web.Http;
 using System.Web.Http.Description;
 using Microsoft.AspNet.Identity;
-using X3Project.Application;
-using X3Project.Application.Attributes;
-using X3Project.Application.Results;
-using X3Project.Domain.Constants;
-using X3Project.Domain.Services;
-using X3Project.Domain.ViewModels.Account;
-using X3Project.Domain.ViewModels.Partner.User;
+using Triven.Application;
+using Triven.Application.Attributes;
+using Triven.Application.Results;
+using Triven.Domain.Constants;
+using Triven.Domain.Services;
+using Triven.Domain.ViewModels.Account;
 
-namespace X3Project.Controllers
+namespace Triven.API.Controllers.__ToDelete
 {
     [RoutePrefix("api/partner/{partnerId:int}/user")]
     public class PartnerUserController : BaseController

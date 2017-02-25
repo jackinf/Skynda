@@ -1,20 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using X3Project.Data.EntityFramework.Models.Base;
-using X3Project.Data.EntityFramework.Models.Partner;
-using X3Project.Domain.Constants;
-using X3Project.Domain.Extensions;
-using X3Project.Domain.Models;
-using X3Project.Domain.Models.Base;
-using X3Project.Domain.Models.Partner;
-using X3Project.Domain.Models.User;
-using X3Project.Domain.Models.Vehicle;
+using Triven.Data.EntityFramework.Models.Base;
+using Triven.Data.EntityFramework.Models.Partner;
+using Triven.Domain.Constants;
+using Triven.Domain.Models.Vehicle;
 
-namespace X3Project.Data.EntityFramework.Models.Vehicle
+namespace Triven.Data.EntityFramework.Models.Vehicle
 {
     [Table("Vehicle")]
     public class VehicleModel : AuditableModel, IVehicleModel

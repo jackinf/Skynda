@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Mail;
-using System.Web;
+﻿using System.Collections.Generic;
 using System.Web.Http;
 using System.Web.Http.Description;
 using Microsoft.AspNet.Identity;
-using X3Project.Application.Services.Messages;
-using X3Project.Domain.Constants;
-using X3Project.Domain.Infrastructure.Notice;
-using X3Project.Domain.ViewModels.Partner;
+using Triven.Domain.ViewModels.Partner;
 
-namespace X3Project.Controllers
+namespace Triven.API.Controllers
 {
     [RoutePrefix("api/constants")]
     public class ConstantsController : BaseController

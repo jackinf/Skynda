@@ -1,4 +1,4 @@
-﻿namespace X3Project.Domain.ViewModels.Partner.User
+﻿namespace Triven.Domain.ViewModels.Partner.User
 {
     public class PartnerUserDisplayView
     {

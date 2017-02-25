@@ -4,11 +4,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
-using X3Project.Application.Services.Messages;
-using X3Project.Data.EntityFramework.Models;
-using X3Project.Data.EntityFramework.Models.User;
+using Triven.Application.Services.Messages;
+using Triven.Data.EntityFramework.Models;
+using Triven.Data.EntityFramework.Models.User;
 
-namespace X3Project.Application
+namespace Triven.Application
 {
     // Configure the application user manager used in this application. UserManager is defined in ASP.NET Identity and is used by the application.
     public class ApplicationUserManager : AppUserManager

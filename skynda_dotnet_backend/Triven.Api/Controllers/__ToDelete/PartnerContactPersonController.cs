@@ -1,13 +1,13 @@
 ﻿using System.Web.Http;
 using System.Web.Http.Description;
 using Microsoft.AspNet.Identity;
-using X3Project.Application;
-using X3Project.Application.Results;
-using X3Project.Domain.Services;
-using X3Project.Domain.ViewModels.Base;
-using X3Project.Domain.ViewModels.Partner.ContactPerson;
+using Triven.Application;
+using Triven.Application.Results;
+using Triven.Domain.Services;
+using Triven.Domain.ViewModels.Base;
+using Triven.Domain.ViewModels.Partner.ContactPerson;
 
-namespace X3Project.Controllers
+namespace Triven.API.Controllers.__ToDelete
 {
     [RoutePrefix("api/partner/{partnerId:int}/contact-person")]
     public class PartnerContactPersonController : BaseController

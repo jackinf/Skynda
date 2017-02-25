@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using X3Project.Domain.Models;
-using X3Project.Domain.Models.Partner;
-using X3Project.Domain.Repositories.Base;
-using X3Project.Domain.Results;
+using Triven.Domain.Models;
+using Triven.Domain.Models.Partner;
+using Triven.Domain.Repositories.Base;
+using Triven.Domain.Results;
 
-namespace X3Project.Domain.Repositories.Partner
+namespace Triven.Domain.Repositories.Partner
 {
     public interface IPartnerRepository<TPartnerModel> : IBaseCrudRepository<TPartnerModel>
         where TPartnerModel : IPartnerModel

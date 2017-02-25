@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace X3Project.Domain.ViewModelInterfaces
+﻿namespace Triven.Domain.ViewModelInterfaces
 {
     public interface IAssignmentViewModel
     {

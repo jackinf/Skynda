@@ -1,8 +1,8 @@
-﻿using X3Project.Data.EntityFramework.Models.User;
-using X3Project.Data.EntityFramework.Repositories.Base;
-using X3Project.Domain.Repositories;
+﻿using Triven.Data.EntityFramework.Models.User;
+using Triven.Data.EntityFramework.Repositories.Base;
+using Triven.Domain.Repositories;
 
-namespace X3Project.Data.EntityFramework.Repositories
+namespace Triven.Data.EntityFramework.Repositories
 {
     public class AccountRepository : BaseCrudRepository<ApplicationUser>, IAccountRepository<ApplicationUser>
     {

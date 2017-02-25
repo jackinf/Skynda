@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-namespace X3Project.Domain.ViewModels.Account
+namespace Triven.Domain.ViewModels.Account
 {
     public class AccountDisplayViewModel
     {

@@ -1,6 +1,6 @@
-﻿using X3Project.Domain.ViewModels;
+﻿using Triven.Domain.ViewModelInterfaces;
 
-namespace X3Project.Application.ViewModels.Account
+namespace Triven.Domain.ViewModels.Account
 {
     public class AccountRegisterViewModel : IAccountViewModel
     {

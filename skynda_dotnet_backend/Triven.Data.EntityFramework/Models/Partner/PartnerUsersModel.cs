@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using X3Project.Data.EntityFramework.Models.User;
-using X3Project.Domain.Models.Partner;
+using Triven.Data.EntityFramework.Models.User;
+using Triven.Domain.Models.Partner;
 
-namespace X3Project.Data.EntityFramework.Models.Partner
+namespace Triven.Data.EntityFramework.Models.Partner
 {
     [Table("PartnerUsers")]
     public class PartnerUsersModel : IPartnerUsersModel

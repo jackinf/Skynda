@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using X3Project.Domain.Models.Assignment;
+using Triven.Domain.Models.Assignment;
 
-namespace X3Project.Data.EntityFramework.Models.Assignmnet
+namespace Triven.Data.EntityFramework.Models.Assignmnet
 {
     [Table("AssignmentPallet")]
     public class AssignmentPalletModel : IAssignmentPalletModel

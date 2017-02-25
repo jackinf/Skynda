@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using X3Project.Data.EntityFramework.Models.Base;
-using X3Project.Data.EntityFramework.Models.User;
-using X3Project.Data.EntityFramework.Models.Vehicle;
-using X3Project.Domain.Constants;
-using X3Project.Domain.Extensions;
-using X3Project.Domain.Models;
-using X3Project.Domain.Models.Partner;
-using X3Project.Domain.Models.User;
-using X3Project.Domain.Models.Vehicle;
+using Triven.Data.EntityFramework.Models.Base;
+using Triven.Data.EntityFramework.Models.User;
+using Triven.Data.EntityFramework.Models.Vehicle;
+using Triven.Domain.Constants;
+using Triven.Domain.Models.Partner;
 
-namespace X3Project.Data.EntityFramework.Models.Partner
+namespace Triven.Data.EntityFramework.Models.Partner
 {
     [Table("Partner")]
     public class PartnerModel : AuditableModel, IPartnerModel

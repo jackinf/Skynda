@@ -1,8 +1,8 @@
 ﻿using System;
-using X3Project.Domain.Models.Base;
-using X3Project.Domain.Results;
+using Triven.Domain.Models.Base;
+using Triven.Domain.Results;
 
-namespace X3Project.Data.EntityFramework.Repositories.Base
+namespace Triven.Data.EntityFramework.Repositories.Base
 {
     public abstract class RepositoryResult<TModel> : IResult<TModel> 
         where TModel : IBaseModel

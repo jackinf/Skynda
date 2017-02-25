@@ -1,11 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using X3Project.Data.EntityFramework.Models.Base;
-using X3Project.Domain.Constants;
-using X3Project.Domain.Extensions;
-using X3Project.Domain.Models.Driver;
+using Triven.Data.EntityFramework.Models.Base;
+using Triven.Domain.Constants;
+using Triven.Domain.Models.Driver;
 
-namespace X3Project.Data.EntityFramework.Models.Driver
+namespace Triven.Data.EntityFramework.Models.Driver
 {
 
     [Table("Driver")]

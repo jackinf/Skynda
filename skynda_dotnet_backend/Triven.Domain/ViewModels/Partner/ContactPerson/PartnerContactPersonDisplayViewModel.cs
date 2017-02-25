@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using Triven.Domain.ViewModelInterfaces;
 
-namespace X3Project.Domain.ViewModels.Partner.ContactPerson
+namespace Triven.Domain.ViewModels.Partner.ContactPerson
 {
     public class PartnerContactPersonDisplayViewModel : IPartnerViewModel
     {

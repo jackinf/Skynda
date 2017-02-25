@@ -1,7 +1,7 @@
-﻿using X3Project.Domain.Constants;
-using X3Project.Domain.Models.Base;
+﻿using Triven.Domain.Constants;
+using Triven.Domain.Models.Base;
 
-namespace X3Project.Domain.Models.Partner
+namespace Triven.Domain.Models.Partner
 {
     public interface IPartnerModel : IAuditableBaseModel
     {

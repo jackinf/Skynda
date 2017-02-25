@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using X3Project.Domain.Constants;
-using X3Project.Domain.Extensions;
-using X3Project.Domain.Models.Classification;
+using Triven.Domain.Constants;
+using Triven.Domain.Models.Classification;
 
-namespace X3Project.Data.EntityFramework.Models.Classification
+namespace Triven.Data.EntityFramework.Models.Classification
 {
     [Table("ClassificationValuesTranslate")]
     public class ClassificationValueTranslateModel : IClassificationValueTranslateModel

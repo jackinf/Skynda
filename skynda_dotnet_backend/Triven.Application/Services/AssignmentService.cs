@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using AutoMapper;
-using X3Project.Application.Results;
-using X3Project.Data.EntityFramework.Models.Assignmnet;
-using X3Project.Domain.Repositories.Assignment;
-using X3Project.Domain.Services;
-using X3Project.Domain.ViewModelInterfaces;
+using Triven.Application.Results;
+using Triven.Data.EntityFramework.Models.Assignmnet;
+using Triven.Domain.Repositories.Assignment;
+using Triven.Domain.Services;
+using Triven.Domain.ViewModelInterfaces;
 
-namespace X3Project.Application.Services
+namespace Triven.Application.Services
 {
     public class AssignmentService : IAssignmentService<ServiceResult>
     {

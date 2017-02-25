@@ -1,7 +1,7 @@
-﻿using X3Project.Domain.Models;
-using X3Project.Domain.Repositories.Base;
+﻿using Triven.Domain.Models;
+using Triven.Domain.Repositories.Base;
 
-namespace X3Project.Domain.Repositories
+namespace Triven.Domain.Repositories
 {
     public interface IAccountRepository<TApplicationUser> : IBaseCrudRepository<TApplicationUser>
         where TApplicationUser : IApplicationUser

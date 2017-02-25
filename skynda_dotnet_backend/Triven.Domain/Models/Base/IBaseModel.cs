@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace X3Project.Domain.Models.Base
+﻿namespace Triven.Domain.Models.Base
 {
     public interface IBaseModel
     {

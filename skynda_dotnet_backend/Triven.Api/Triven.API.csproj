@@ -13,8 +13,8 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>X3Project</RootNamespace>
-    <AssemblyName>X3Project</AssemblyName>
+    <RootNamespace>Triven.API</RootNamespace>
+    <AssemblyName>Triven.API</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
@@ -295,16 +295,16 @@
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\AssignmentController.cs" />
+    <Compile Include="Controllers\__ToDelete\AssignmentController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
-    <Compile Include="Controllers\PartnerUserController.cs" />
-    <Compile Include="Controllers\StatisticsController.cs" />
+    <Compile Include="Controllers\__ToDelete\PartnerUserController.cs" />
+    <Compile Include="Controllers\__ToDelete\StatisticsController.cs" />
     <Compile Include="Controllers\ConstantsController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\PartnerContactPersonController.cs" />
-    <Compile Include="Controllers\PartnerController.cs" />
-    <Compile Include="Controllers\PartnerVehicleController.cs" />
-    <Compile Include="Controllers\TodoController.cs" />
+    <Compile Include="Controllers\__ToDelete\HomeController.cs" />
+    <Compile Include="Controllers\__ToDelete\PartnerContactPersonController.cs" />
+    <Compile Include="Controllers\__ToDelete\PartnerController.cs" />
+    <Compile Include="Controllers\__ToDelete\PartnerVehicleController.cs" />
+    <Compile Include="Controllers\__ToDelete\TodoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

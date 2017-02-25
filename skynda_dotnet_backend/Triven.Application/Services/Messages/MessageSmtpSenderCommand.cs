@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
-using System.Net;
 using System.Net.Configuration;
 using System.Net.Mail;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace X3Project.Application.Services.Messages
+namespace Triven.Application.Services.Messages
 {
     public class MessageSmtpSenderCommand
     {

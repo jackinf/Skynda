@@ -1,18 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
-using X3Project.Data.EntityFramework.Models.Partner;
-using X3Project.Data.EntityFramework.Models.User;
-using X3Project.Data.EntityFramework.Repositories.Base;
-using X3Project.Domain.Constants;
-using X3Project.Domain.Models;
-using X3Project.Domain.Models.Partner;
-using X3Project.Domain.Repositories.Partner;
-using X3Project.Domain.Results;
+using Triven.Data.EntityFramework.Models.Partner;
+using Triven.Data.EntityFramework.Models.User;
+using Triven.Data.EntityFramework.Repositories.Base;
+using Triven.Domain.Constants;
+using Triven.Domain.Models;
+using Triven.Domain.Models.Partner;
+using Triven.Domain.Repositories.Partner;
+using Triven.Domain.Results;
 
-namespace X3Project.Data.EntityFramework.Repositories
+namespace Triven.Data.EntityFramework.Repositories
 {
     public class PartnerRepository : BaseCrudRepository<PartnerModel>, IPartnerRepository<PartnerModel>
     {

@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using X3Project.Domain.Models.Message;
-using X3Project.Domain.Repositories.Base;
+﻿using Triven.Domain.Models.Message;
+using Triven.Domain.Repositories.Base;
 
-namespace X3Project.Domain.Repositories.Message
+namespace Triven.Domain.Repositories.Message
 {
     public interface IMessageRepository<TMessageModel> : IBaseCrudRepository<TMessageModel>
         where TMessageModel : IMessageModel

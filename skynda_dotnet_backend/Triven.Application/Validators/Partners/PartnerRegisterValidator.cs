@@ -1,10 +1,9 @@
 ﻿using System.Text.RegularExpressions;
 using FluentValidation;
-using FluentValidation.Results;
-using X3Project.Data.EntityFramework.Models.Partner;
-using X3Project.Domain.Repositories.Partner;
+using Triven.Data.EntityFramework.Models.Partner;
+using Triven.Domain.Repositories.Partner;
 
-namespace X3Project.Application.Validators.Partners
+namespace Triven.Application.Validators.Partners
 {
     public class PartnerRegisterValidator : AbstractValidator<PartnerModel>
     {

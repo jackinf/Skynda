@@ -1,21 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
-using X3Project.Application;
-using X3Project.Application.Helpers;
-using X3Project.Data.EntityFramework.Models.User;
-using X3Project.Domain.Constants;
+using Triven.Application;
+using Triven.Data.EntityFramework.Models.User;
+using Triven.Domain.Constants;
 
-namespace X3Project.Providers
+namespace Triven.API.Providers
 {
     public class ApplicationOAuthProvider : OAuthAuthorizationServerProvider
     {

@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using X3Project.Domain.Constants;
+﻿using Triven.Domain.Constants;
 
-namespace X3Project.Domain.ViewModels.Partner.ContactPerson
+namespace Triven.Domain.ViewModels.Partner.ContactPerson
 {
     public class PartnerContactPersonInfoDisplayViewModel
     {

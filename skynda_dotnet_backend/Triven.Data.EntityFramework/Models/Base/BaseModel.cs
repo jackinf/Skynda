@@ -1,10 +1,8 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using X3Project.Domain.Models;
-using X3Project.Domain.Models.Base;
+using Triven.Domain.Models.Base;
 
-namespace X3Project.Data.EntityFramework.Models.Base
+namespace Triven.Data.EntityFramework.Models.Base
 {
     public abstract class BaseModel : IBaseModel
     {

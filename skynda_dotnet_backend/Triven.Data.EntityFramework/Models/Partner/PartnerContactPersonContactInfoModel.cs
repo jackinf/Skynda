@@ -1,9 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using X3Project.Domain.Constants;
-using X3Project.Domain.Extensions;
-using X3Project.Domain.Models.Partner;
+using Triven.Domain.Constants;
+using Triven.Domain.Models.Partner;
 
-namespace X3Project.Data.EntityFramework.Models.Partner
+namespace Triven.Data.EntityFramework.Models.Partner
 {
     [Table("PartnerContactPersonContactInfo")]
     public class PartnerContactPersonContactInfoModel : IPartnerContactPersonContactInfoModel

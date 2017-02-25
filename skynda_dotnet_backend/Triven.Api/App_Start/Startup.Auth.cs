@@ -1,18 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
-using X3Project.Application;
-using X3Project.Providers;
-using X3Project.Data.EntityFramework.Models;
-using X3Project.Data.EntityFramework.Models.User;
+using Triven.Application;
+using Triven.API.Providers;
+using Triven.Data.EntityFramework.Models;
+using Triven.Data.EntityFramework.Models.User;
 
-namespace X3Project
+namespace Triven.API
 {
     public partial class Startup
     {

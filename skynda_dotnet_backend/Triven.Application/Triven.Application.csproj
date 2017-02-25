@@ -7,8 +7,8 @@
     <ProjectGuid>{53213F43-32AE-4255-943A-0400825101AD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>X3Project.Application</RootNamespace>
-    <AssemblyName>X3Project.Application</AssemblyName>
+    <RootNamespace>Triven.Application</RootNamespace>
+    <AssemblyName>Triven.Application</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

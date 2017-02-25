@@ -7,8 +7,8 @@
     <ProjectGuid>{2A49412F-782A-4AE8-BFFD-619FC7B159E1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>X3Project.Domain</RootNamespace>
-    <AssemblyName>X3Project.Domain</AssemblyName>
+    <RootNamespace>Triven.Domain</RootNamespace>
+    <AssemblyName>Triven.Domain</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

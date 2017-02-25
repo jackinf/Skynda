@@ -1,8 +1,8 @@
-﻿using X3Project.Data.EntityFramework.Repositories.Base;
-using X3Project.Domain.Models;
-using X3Project.Domain.Repositories;
+﻿using Triven.Data.EntityFramework.Repositories.Base;
+using Triven.Domain.Models;
+using Triven.Domain.Repositories;
 
-namespace X3Project.Data.EntityFramework.Repositories
+namespace Triven.Data.EntityFramework.Repositories
 {
     public class TodoRepository : BaseCrudRepository<ITodoModel>, ITodoRepository
     {

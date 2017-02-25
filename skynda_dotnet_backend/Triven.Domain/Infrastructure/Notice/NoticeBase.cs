@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Net.Mail;
-using System.Text;
-using System.Threading.Tasks;
-using X3Project.Domain.Models.Message;
+using Triven.Domain.Models.Message;
 
-namespace X3Project.Domain.Infrastructure.Notice
+namespace Triven.Domain.Infrastructure.Notice
 {
     public abstract class NoticeBase
     {

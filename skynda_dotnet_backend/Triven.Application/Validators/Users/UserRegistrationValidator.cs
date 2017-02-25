@@ -1,8 +1,8 @@
 ﻿using FluentValidation;
-using X3Project.Data.EntityFramework.Models.User;
-using X3Project.Domain.Constants;
+using Triven.Data.EntityFramework.Models.User;
+using Triven.Domain.Constants;
 
-namespace X3Project.Application.Validators.Users
+namespace Triven.Application.Validators.Users
 {
     public class UserRegistrationValidator : AbstractValidator<ApplicationUser>
     {
