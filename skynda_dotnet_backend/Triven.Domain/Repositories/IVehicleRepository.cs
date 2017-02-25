@@ -10,8 +10,5 @@ namespace Triven.Domain.Repositories
         where TVehicleEntity : IVehicle
     {
         IList<TVehicleEntity> Search(SearchRequestViewModel dto);
-        TVehicleEntity Get(int id, bool isActive = true);
-        void DeleteEntity(TVehicleEntity vehicleDescription, DeleteResponseViewModel response);
-        TVehicleEntity SaveOrUpdate(TVehicleEntity vehicle);
     }
 }

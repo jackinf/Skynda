@@ -12,7 +12,5 @@ namespace Triven.Domain.Repositories
     {
         TVehicleModel GetByModelCode(String vehicleModelCode);
         IList<TVehicleModel> Search(VehicleModelSearchRequestViewModel parameters);
-        void DeleteEntity(TVehicleModel model, DeleteResponseViewModel response);
-        List<TVehicleModel> GetAll(bool isActive = true);
     }
 }

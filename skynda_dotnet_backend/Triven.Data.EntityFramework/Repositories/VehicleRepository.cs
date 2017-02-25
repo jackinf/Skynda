@@ -13,20 +13,5 @@ namespace Triven.Data.EntityFramework.Repositories
         {
             throw new System.NotImplementedException();
         }
-
-        public Vehicle Get(int id, bool isActive = true)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void DeleteEntity(Vehicle vehicleDescription, DeleteResponseViewModel response)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public Vehicle SaveOrUpdate(Vehicle vehicle)
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }

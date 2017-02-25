@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Triven.Domain.Models;
 using Triven.Domain.Repositories.Base;
-using Triven.Domain.ViewModels.Common;
+using Triven.Domain.Results;
 
 namespace Triven.Domain.Repositories
 {
@@ -9,8 +9,8 @@ namespace Triven.Domain.Repositories
         where TFeatureEntity : IFeature
     {
         IList<TFeatureEntity> GetAll(bool isActive = true);
-        void DeleteEntity(int id, DeleteResponseViewModel response);
+        bool DeleteEntity(int id);
         TFeatureEntity Get(int id, bool isActive = true);        
-        TFeatureEntity SaveOrUpdate(TFeatureEntity feature);
+        IResult<TFeatureEntity> SaveOrUpdate(TFeatureEntity feature);
     }
 }

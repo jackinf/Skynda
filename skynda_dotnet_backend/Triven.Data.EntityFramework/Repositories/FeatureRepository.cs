@@ -5,6 +5,7 @@ using System.Linq;
 using Triven.Data.EntityFramework.Models;
 using Triven.Data.EntityFramework.Repositories.Base;
 using Triven.Domain.Repositories;
+using Triven.Domain.Results;
 using Triven.Domain.ViewModels.Common;
 
 namespace Triven.Data.EntityFramework.Repositories
@@ -16,13 +17,9 @@ namespace Triven.Data.EntityFramework.Repositories
             return BaseQuery().ToList();
         }
 
-        public void DeleteEntity(int id, DeleteResponseViewModel response)
+        public bool DeleteEntity(int id)
         {
-            var toDelete = BaseQuery().FirstOrDefault(x => x.Id == id);
-            if (toDelete == null)
-                throw new Exception("Sitt juhtus. Service, püüa mind.");
-            toDelete.DeletedOn = DateTime.Now;
-            _context.SaveChanges();
+            return base.Delete(id);
         }
 
         public Feature Get(int id, bool isActive = true)
@@ -30,13 +27,9 @@ namespace Triven.Data.EntityFramework.Repositories
             return BaseQuery().FirstOrDefault(x => x.Id == id);
         }
 
-        public Feature SaveOrUpdate(Feature feature)
+        public IResult<Feature> SaveOrUpdate(Feature feature)
         {
-            _context.Entry(feature).State = EntityState.Modified;
-            var chagnes = _context.SaveChanges();
-            if (chagnes == 0)
-                throw new Exception("No changes!");
-            return feature;
+            return base.Update(feature.Id, feature);
         }
     }
 }

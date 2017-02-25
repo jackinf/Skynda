@@ -10,6 +10,5 @@ namespace Triven.Domain.Repositories
     {
         IList<TVehicleFeatureEntity> GetAllBy(int vehicleId);
         IList<TVehicleFeatureEntity> GetAllBy(int vehicleId, bool isActive);
-        void DeleteEntity(TVehicleFeatureEntity vehicleDescription, DeleteResponseViewModel response);
     }
 }

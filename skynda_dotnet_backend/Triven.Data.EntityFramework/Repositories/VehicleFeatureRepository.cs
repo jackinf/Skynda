@@ -20,18 +20,5 @@ namespace Triven.Data.EntityFramework.Repositories
         {
             return BaseQuery().Where(x => x.VehicleId == vehicleId && x.IsArchived == !isActive).ToList();
         }
-
-        public void DeleteEntity(VehicleFeature vehicleDescription, DeleteResponseViewModel response)
-        {
-            using (var context = new ApplicationDbContext())
-            {
-                var toDelete = BaseQuery(context).FirstOrDefault(x => x.Id == vehicleDescription.Id);
-                if (toDelete == null)
-                    throw new Exception("Sitt juhtus. Service, püüa mind.");
-                //_context.Entry(toDelete).State = EntityState.Modified;
-                toDelete.DeletedOn = DateTime.Now;
-                context.SaveChanges();
-            }
-        }
     }
 }

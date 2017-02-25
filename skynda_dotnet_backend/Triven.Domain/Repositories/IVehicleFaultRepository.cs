@@ -9,8 +9,6 @@ namespace Triven.Domain.Repositories
         where TVehicleFaultEntity : IVehicleFault
     {
         IList<TVehicleFaultEntity> GetCategoryFaults(int categoryId);
-        void DeleteEntity(TVehicleFaultEntity fault, DeleteResponseViewModel response);
-        TVehicleFaultEntity SaveOrUpdate(TVehicleFaultEntity vehicleFault);
         IList<TVehicleFaultEntity> GetActiveFaults(int reportCategoryId);
     }
 }

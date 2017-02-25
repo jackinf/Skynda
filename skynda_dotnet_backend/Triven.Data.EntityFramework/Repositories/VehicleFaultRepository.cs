@@ -12,17 +12,7 @@ namespace Triven.Data.EntityFramework.Repositories
         {
             throw new System.NotImplementedException();
         }
-
-        public void DeleteEntity(VehicleFault fault, DeleteResponseViewModel response)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public VehicleFault SaveOrUpdate(VehicleFault vehicleFault)
-        {
-            throw new System.NotImplementedException();
-        }
-
+        
         public IList<VehicleFault> GetActiveFaults(int reportCategoryId)
         {
             throw new System.NotImplementedException();
