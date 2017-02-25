@@ -145,7 +145,7 @@ export default class extends React.Component {
       </Parallax>
 
       <div className="container">
-        {!isSuccessfullySent ? (
+        {isSuccessfullySent ? (
           <Row>
             <Col sm={12}>
               <h4 style={{marginTop: "25px"}}>Täname! Saime andmed kätte! Võtame Sinuga ühendust ühe tööpäeva jooksul.</h4>
