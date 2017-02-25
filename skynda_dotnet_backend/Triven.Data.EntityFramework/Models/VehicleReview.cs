@@ -4,6 +4,7 @@ using Triven.Domain.Models;
 
 namespace Triven.Data.EntityFramework.Models
 {
+    [Table("VehicleReview")]
     public class VehicleReview: AuditableModel, IVehicleReview
     {
         public int LogoId { get; set; }

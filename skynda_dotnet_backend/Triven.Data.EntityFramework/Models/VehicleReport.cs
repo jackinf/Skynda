@@ -6,6 +6,7 @@ using Triven.Domain.Models;
 
 namespace Triven.Data.EntityFramework.Models
 {
+    [Table("VehicleReport")]
     public class VehicleReport : AuditableModel, IVehicleReport
     {
         public string Title { get; set; }
