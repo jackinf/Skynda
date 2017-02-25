@@ -160,7 +160,7 @@ export default class extends React.Component {
               <br/>
 
               <Card>
-                <CardHeader title={<h3 className="sell-your-car__block-header">Saada meile enda ja oma auto andmed</h3>} />
+                <CardHeader title={<h3 className="sell-your-car__block-header">Saada meile enda ja oma auto andmed</h3>} textStyle={{paddingRight: "0px"}}/>
                 <CardText>
                   <Row style={{marginTop: "-23px"}}>
                     <Col smOffset={3} sm={6}>
