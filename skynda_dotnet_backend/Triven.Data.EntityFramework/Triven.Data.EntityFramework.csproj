@@ -110,7 +110,7 @@
     <Compile Include="Models\Image.cs" />
     <Compile Include="Models\Subscription.cs" />
     <Compile Include="Models\Vehicle.cs" />
-	<Compile Include="Models\VehicleImage.cs" />
+    <Compile Include="Models\VehicleImage.cs" />
     <Compile Include="Models\VehicleModel.cs" />
     <Compile Include="Models\VehicleReport.cs" />
     <Compile Include="Models\VehicleReportItem.cs" />
@@ -125,16 +125,22 @@
     <Compile Include="Models\VehicleFeature.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AccountRepository.cs" />
-    <Compile Include="Repositories\__ToDelete\AssignmentRepository.cs" />
+    <Compile Include="Repositories\FeatureRepository.cs" />
+    <Compile Include="Repositories\ImageRepository.cs" />
+    <Compile Include="Repositories\SubscriptionRepository.cs" />
+    <Compile Include="Repositories\VehicleDescriptionRepository.cs" />
+    <Compile Include="Repositories\VehicleFaultRepository.cs" />
+    <Compile Include="Repositories\VehicleFeatureRepository.cs" />
+    <Compile Include="Repositories\VehicleImageRepository.cs" />
+    <Compile Include="Repositories\VehicleModelRepository.cs" />
+    <Compile Include="Repositories\VehicleReportItemRepository.cs" />
+    <Compile Include="Repositories\VehicleReportRepository.cs" />
+    <Compile Include="Repositories\VehicleRepository.cs" />
+    <Compile Include="Repositories\VehicleReviewRepository.cs" />
     <Compile Include="Repositories\Base\BaseCrudRepository.cs" />
     <Compile Include="Repositories\Base\OnCreateOrUpdateResult.cs" />
     <Compile Include="Repositories\Base\RepositoryResult.cs" />
     <Compile Include="Repositories\ClassificationRepository.cs" />
-    <Compile Include="Repositories\__ToDelete\DriverRepository.cs" />
-    <Compile Include="Repositories\__ToDelete\MessageTemplateRepository.cs" />
-    <Compile Include="Repositories\__ToDelete\PartnerRepository.cs" />
-    <Compile Include="Repositories\__ToDelete\TodoRepository.cs" />
-    <Compile Include="Repositories\__ToDelete\VehicleRepository.cs" />
     <Compile Include="User.cs" />
   </ItemGroup>
   <ItemGroup>
