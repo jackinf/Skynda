@@ -1,12 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Web.Http;
-using System.Web.Http.Description;
-using Microsoft.AspNet.Identity;
-using Triven.Domain.ViewModels.Partner;
+﻿using System.Web.Http;
 
 namespace Triven.API.Controllers
 {
-    [RoutePrefix("api/constants")]
+    [RoutePrefix("api/classifications")]    // TODO: use singular, not plural
     public class ClassificationController : BaseController
     {
         //[HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
@@ -16,5 +12,26 @@ namespace Triven.API.Controllers
         //{
         //    return BadRequest();
         //}
+
+        private readonly dynamic _service; // TODO: use correct type
+
+        public ClassificationController()
+        {
+            // TODO: inject service
+        }
+
+        [HttpGet, Route("{type}")]
+        public IHttpActionResult GetAll([FromUri] string type)
+        {
+            var result = _service.GetByType(type);
+            return result.IsSuccessful ? Ok(result.Payload) : ReturnErrorResult(result.Validation);
+        }
+
+        [HttpGet, Route("{type}/vehicle-bound")]
+        public IHttpActionResult GetVehicleBound([FromUri] string type)
+        {
+            var result = _service.GetByTypeAndVehicleBound(type);
+            return result.IsSuccessful ? Ok(result.Payload) : ReturnErrorResult(result.Validation);
+        }
     }
 }
