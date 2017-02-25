@@ -75,15 +75,6 @@ namespace Triven.Data.EntityFramework.Models
             return new ApplicationDbContext();
         }
 
-        /// <summary>
-        /// Users
-        /// </summary>
-        //public DbSet<ApplicationUser> AppUsers { get; set; }
-        //public DbSet<AppRole> AppRoles { get; set; }
-        //public DbSet<AppUserLogin> AppUserLogins { get; set; }
-        //public DbSet<AppUserRole> AppUserRoles { get; set; }
-        //public DbSet<AppUserClaim> AppUserClaims { get; set; }
-
         public DbSet<TodoModel> Todos { get; set; }
 
         /// <summary>
