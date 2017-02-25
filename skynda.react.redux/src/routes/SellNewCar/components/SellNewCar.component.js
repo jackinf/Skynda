@@ -139,7 +139,7 @@ export default class extends React.Component {
           </Row>
 
           <Scroll.Link activeClass="active" to="fill-form-scroll-to" spy={true} smooth={true} offset={50} duration={500}>
-            <Button className="how-it-works__main-image-background__secondary-button">Panen auto müüki</Button>
+            <Button className="how-it-works__main-image-background__secondary-button sell-new-car-image-background__secondary-button">Panen auto müüki</Button>
           </Scroll.Link>
         </div>
       </Parallax>
@@ -160,8 +160,14 @@ export default class extends React.Component {
               <br/>
 
               <Card>
-                <CardHeader title={<h3 className="sell-your-car__block-header">Palun jäta oma kontakt, et saaksime sinuga ühendust võtta.</h3>} />
+                <CardHeader title={<h3 className="sell-your-car__block-header">Saada meile enda ja oma auto andmed</h3>} />
                 <CardText>
+                  <Row style={{marginTop: "-23px"}}>
+                    <Col smOffset={3} sm={6}>
+                      Võtame Sinuga ühendust 1 tööpäeva jooksul, viime auto ise taustakontrolli, teeme pildid ja valmistame kõik müügiks ette. Peale seda saad meilt sellise hinnapakkumise, millega teame, et saame Su auto müüdud. Kui pakutud hind sobib, hakkamegi kohe autole ostjat otsima.
+                    </Col>
+                  </Row>
+                  <br/>
                   <Scroll.Element name="fill-form-scroll-to" />
                   {rowWrapper(<Field name="fullName" component={TextField} hintText="Sinu nimi *" errorText={errors && errors["fullName"]}/>)}
                   {rowWrapper(<Field name="email" component={TextField} hintText="Sinu e-posti aadress *" type="email" errorText={errors && errors["email"]}/>)}
