@@ -65,14 +65,6 @@ export class About extends React.Component {
           <div className='well about__our-contacts'>
             <h4 className='about__our-contacts-header'>Meie kontaktid</h4>
 
-            <br />
-
-            <Row>
-              <img src={imageGoogle} alt='google'/>
-            </Row>
-
-            <br />
-
             <Row>
               Valge tn 16<br />19095 Tallinn<br />Eesti Vabariik
             </Row>

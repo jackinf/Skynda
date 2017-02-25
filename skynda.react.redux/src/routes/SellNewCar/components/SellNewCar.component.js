@@ -129,13 +129,13 @@ export default class extends React.Component {
       <Parallax bgImage={heroImageUrl} strength={250} >
         <div className="sell-your-car__centered sell-your-car__main-image-background2">
           <Row>
-            <Col sm={3}></Col>
+            <Col sm={3}/>
             <Col sm={6}>
-              <h3 className="sell-your-car__main-image-background__title__line">Ainult Triveniga saad oma auto müüdud</h3>
-              <h3 className="sell-your-car__main-image-background__title__line">arvuti tagant lahkumata ja</h3>
-              <h3 className="sell-your-car__main-image-background__title__line">müügikuulutuse avaldamine on alati tasuta</h3>
+              <h3 className="sell-your-car__main-image-background__title__line">
+                Ainult Triveniga saad oma auto müüdud arvuti tagant lahkumata ja müügikuulutuse avaldamine on alati tasuta
+              </h3>
             </Col>
-            <Col sm={3}></Col>
+            <Col sm={3}/>
           </Row>
 
           <Scroll.Link activeClass="active" to="fill-form-scroll-to" spy={true} smooth={true} offset={50} duration={500}>
@@ -145,10 +145,10 @@ export default class extends React.Component {
       </Parallax>
 
       <div className="container">
-        {isSuccessfullySent ? (
+        {!isSuccessfullySent ? (
           <Row>
             <Col sm={12}>
-              <h3>Võtame Sinuga ühendust ühe tööpäeva jooksul, viime Sinu auto ise taustakontrolli, teeme pildid ja valmistame kõik müügiks ette. Peale seda saad meilt hinnapakkumise, millega teame, et saame Su auto müüdud. Kui Sulle pakutud hind sobib, hakkamegi kohe Sinu autole ostjat otsima.</h3>
+              <h4 style={{marginTop: "25px"}}>Täname! Saime andmed kätte! Võtame Sinuga ühendust ühe tööpäeva jooksul.</h4>
             </Col>
           </Row>
           ) : (
