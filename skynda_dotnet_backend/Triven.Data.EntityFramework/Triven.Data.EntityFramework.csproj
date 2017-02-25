@@ -103,6 +103,11 @@
   <ItemGroup>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
+    <Compile Include="Models\VehicleImage.cs" />
+    <Compile Include="Models\VehicleModel.cs" />
+    <Compile Include="Models\VehicleReport.cs" />
+    <Compile Include="Models\VehicleReportItem.cs" />
+    <Compile Include="Models\VehicleReview.cs" />
     <Compile Include="Models\__ToDelete\Assignmnet\AssignmentAddressModel.cs" />
     <Compile Include="Models\__ToDelete\Assignmnet\AssignmentDriverInstructionModel.cs" />
     <Compile Include="Models\__ToDelete\Assignmnet\AssignmentModel.cs" />
@@ -111,9 +116,6 @@
     <Compile Include="Models\__ToDelete\Assignmnet\AssignmentVehicleModel.cs" />
     <Compile Include="Models\Base\AuditableModel.cs" />
     <Compile Include="Models\Base\BaseModel.cs" />
-    <Compile Include="Models\Classification\ClassificationModel.cs" />
-    <Compile Include="Models\Classification\ClassificationValueModel.cs" />
-    <Compile Include="Models\Classification\ClassificationValueTranslateModel.cs" />
     <Compile Include="Models\__ToDelete\Driver\DriverModel.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\__ToDelete\MessageTemplate\MessageTemplateModel.cs" />

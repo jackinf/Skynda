@@ -43,7 +43,7 @@ namespace Triven.Data.EntityFramework.Models.Partner
         public List<ApplicationUser> PartnerUsers { get; set; } = new List<ApplicationUser>();
 
         [InverseProperty("Partner")]
-        public List<VehicleModel> Vehicles { get; set; } = new List<VehicleModel>();
+        public List<Vehicle.VehicleModel> Vehicles { get; set; } = new List<Vehicle.VehicleModel>();
 
         [InverseProperty("Partner")]
         public List<PartnerContactPersonModel> ContactPersons { get; set; } = new List<PartnerContactPersonModel>();
