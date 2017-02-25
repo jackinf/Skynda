@@ -9,6 +9,5 @@ namespace Triven.Domain.Repositories
         where TVehicleReport : IVehicleReport
     {
         IList<TVehicleReport> GetAllBy(int vehicleId);
-        IList<TVehicleReport> GetAllBy(int vehicleId, bool isActive);
     }
 }

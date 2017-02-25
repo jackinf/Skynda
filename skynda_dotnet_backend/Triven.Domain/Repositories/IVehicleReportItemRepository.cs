@@ -9,6 +9,5 @@ namespace Triven.Domain.Repositories
         where TVehicleReportItemEntity : IVehicleReportItem
     {
         IList<TVehicleReportItemEntity> GetAllChildren(int parentId);
-        IList<TVehicleReportItemEntity> GetActiveItems(int parentId);
     }
 }

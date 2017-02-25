@@ -1,4 +1,7 @@
-﻿using Triven.Application.Results;
+﻿using System.Linq;
+using System.Web.Helpers;
+using Triven.Application.Results;
+using Triven.Domain.Repositories;
 using Triven.Domain.Services;
 using Triven.Domain.ViewModels.Vehicle;
 using Triven.Domain.ViewModels.Vehicle.Requests;
@@ -14,6 +17,8 @@ namespace Triven.Application.Services
 
         public ServiceResult Get(int id)
         {
+            var list = IoC.Get<IClassificationRepository<>>().GetByType();
+            var item = list[32];
             throw new System.NotImplementedException();
         }
 

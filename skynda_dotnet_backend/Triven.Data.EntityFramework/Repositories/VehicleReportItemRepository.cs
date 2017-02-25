@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Triven.Data.EntityFramework.Models;
 using Triven.Data.EntityFramework.Repositories.Base;
 using Triven.Domain.Repositories;
@@ -10,12 +11,7 @@ namespace Triven.Data.EntityFramework.Repositories
     {
         public IList<VehicleReportItem> GetAllChildren(int parentId)
         {
-            throw new System.NotImplementedException();
-        }
-
-        public IList<VehicleReportItem> GetActiveItems(int parentId)
-        {
-            throw new System.NotImplementedException();
+            return BaseQuery().Where(x => x.ParentId == parentId).ToList();
         }
     }
 }

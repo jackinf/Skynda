@@ -1,4 +1,5 @@
-﻿using Triven.Data.EntityFramework.Models.User;
+﻿using System.Linq;
+using Triven.Data.EntityFramework.Models.User;
 using Triven.Data.EntityFramework.Repositories.Base;
 using Triven.Domain.Repositories;
 
@@ -8,12 +9,12 @@ namespace Triven.Data.EntityFramework.Repositories
     {
         public ApplicationUser GetByEmail(string email)
         {
-            throw new System.NotImplementedException();
+            return BaseQuery().FirstOrDefault(x => x.Email == email);
         }
 
         public ApplicationUser GetByLogin(string login)
         {
-            throw new System.NotImplementedException();
+            return BaseQuery().FirstOrDefault(x => x.UserName == login);
         }
     }
 }

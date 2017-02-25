@@ -9,6 +9,5 @@ namespace Triven.Domain.Repositories
         where TVehicleFaultEntity : IVehicleFault
     {
         IList<TVehicleFaultEntity> GetCategoryFaults(int categoryId);
-        IList<TVehicleFaultEntity> GetActiveFaults(int reportCategoryId);
     }
 }
