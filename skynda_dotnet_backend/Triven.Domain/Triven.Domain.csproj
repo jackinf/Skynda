@@ -137,7 +137,15 @@
     <Compile Include="Repositories\IImageRepository.cs" />
     <Compile Include="Repositories\ISubscriptionRepository.cs" />
     <Compile Include="Repositories\IUserRepository.cs" />
+    <Compile Include="Repositories\IVehicleDescriptionRepository.cs" />
+    <Compile Include="Repositories\IVehicleFaultRepository.cs" />
+    <Compile Include="Repositories\IVehicleFeatureRepository.cs" />
+    <Compile Include="Repositories\IVehicleImageRepository.cs" />
+    <Compile Include="Repositories\IVehicleModelRepository.cs" />
+    <Compile Include="Repositories\IVehicleReportItemRepository.cs" />
+    <Compile Include="Repositories\IVehicleReportRepository.cs" />
     <Compile Include="Repositories\IVehicleRepository.cs" />
+    <Compile Include="Repositories\IVehicleReviewRepository.cs" />
     <Compile Include="Repositories\__ToDelete\Assignment\IAssignmentRepository.cs" />
     <Compile Include="Repositories\__ToDelete\Driver\IDriverRepository.cs" />
     <Compile Include="Repositories\IAccountRepository.cs" />
