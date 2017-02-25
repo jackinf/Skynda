@@ -24,10 +24,12 @@ public class VehicleValidator implements Validator {
     public void validate(Object object, Errors errors) {
         Vehicle vehicle = (Vehicle) object;
         ValidationHelper.validate(vehicle, errors);
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "model.id", "Model ID must be selected.", "Model ID must be selected.");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "price", "Price is not valid.", "Price is not valid.");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "mileage", "Mileage is not valid.", "Mileage is not valid.");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "vinCode", "Vin Code is not valid.", "Vin Code is not valid.");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "registrationNumber", "Registration Number is not valid.", "Registration Number is not valid.");
+//        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "model.id", "Model ID must be selected.", "Model ID must be selected.");
+//        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "price", "Price is not valid.", "Price is not valid.");
+//        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "mileage", "Mileage is not valid.", "Mileage is not valid.");
+//        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "vinCode", "Vin Code is not valid.", "Vin Code is not valid.");
+//        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "registrationNumber", "Registration Number is not valid.", "Registration Number is not valid.");
+
+
     }
 }
