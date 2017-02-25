@@ -57,6 +57,8 @@ namespace Triven.Data.EntityFramework.Models.User
         [ForeignKey("Remover")]
         public int? DeletedBy { get; set; }
 
+        public string ModifierUserIp { get; set; }
+
         public virtual ApplicationUser Creator { get; set; }
         public virtual ApplicationUser Modifier { get; set; }
         public virtual ApplicationUser Remover { get; set; }

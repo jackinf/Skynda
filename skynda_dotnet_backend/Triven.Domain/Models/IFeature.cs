@@ -9,7 +9,6 @@ namespace Triven.Domain.Models
         int Weight { get; set; }
         string Value { get; set; }
         string Name { get; set; }
-        IClassificationType ClassificationType { get; set; }
         bool IsActive { get; set; }
     }
 }
