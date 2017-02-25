@@ -110,6 +110,11 @@
     <Compile Include="Models\Image.cs" />
     <Compile Include="Models\Subscription.cs" />
     <Compile Include="Models\Vehicle.cs" />
+	<Compile Include="Models\VehicleImage.cs" />
+    <Compile Include="Models\VehicleModel.cs" />
+    <Compile Include="Models\VehicleReport.cs" />
+    <Compile Include="Models\VehicleReportItem.cs" />
+    <Compile Include="Models\VehicleReview.cs" />
     <Compile Include="Models\Base\AuditableModel.cs" />
     <Compile Include="Models\Base\BaseModel.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />

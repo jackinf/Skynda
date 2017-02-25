@@ -53,8 +53,8 @@ namespace Triven.Application
 
                 configuration.CreateMap<PartnerContactPersonContactInfoModel, PartnerContactPersonInfoDisplayViewModel>().ReverseMap();
 
-                configuration.CreateMap<VehicleModel, PartnerVehicleDisplayViewModel>().ReverseMap();
-                configuration.CreateMap<VehicleModel, PartnerStatusPutViewModel>().ReverseMap();
+                configuration.CreateMap<Data.EntityFramework.Models.Vehicle.VehicleModel, PartnerVehicleDisplayViewModel>().ReverseMap();
+                configuration.CreateMap<Data.EntityFramework.Models.Vehicle.VehicleModel, PartnerStatusPutViewModel>().ReverseMap();
 
                 //Assignment
                 configuration.CreateMap<AssignmentModel, AssignmentDisplayViewModel>();
