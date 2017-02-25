@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <setParameter name="IIS Web Application Name" value="Speys" />
+  <setParameter name="DefaultConnection-Web.config Connection String" value="Data Source=.\SQLEXPRESS;Initial Catalog=speys;Integrated Security=True" />
+  <setParameter name="DefaultConnection_DatabasePublish-Web.config Connection String" value="DefaultConnection_DatabasePublish.ConnetionString" />
+</parameters>

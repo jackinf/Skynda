@@ -1,0 +1,126 @@
+﻿[
+  {
+    "name": "Albania",
+    "zipcodeFormat": "AL"
+  },
+  {
+    "name": "Austria",
+    "zipcodeFormat": "AT"
+  },
+  {
+    "name": "Belarus",
+    "zipcodeFormat": "BY"
+  },
+  {
+    "name": "Belgium",
+    "zipcodeFormat": "BE"
+  },
+  {
+    "name": "Bosnia and Herzegovina",
+    "zipcodeFormat": "BA"
+  },
+  {
+    "name": "Bulgaria",
+    "zipcodeFormat": "BG"
+  },
+  {
+    "name": "Croatia",
+    "zipcodeFormat": "HR"
+  },
+  {
+    "name": "Czechia",
+    "zipcodeFormat": "CZ"
+  },
+  {
+    "name": "Denmark",
+    "zipcodeFormat": "DK"
+  },
+  {
+    "name": "Estonia",
+    "zipcodeFormat": "EE"
+  },
+  {
+    "name": "Finland",
+    "zipcodeFormat": "FI"
+  },
+  {
+    "name": "France",
+    "zipcodeFormat": "FR"
+  },
+  {
+    "name": "Georgia",
+    "zipcodeFormat": "GE"
+  },
+  {
+    "name": "Germany",
+    "zipcodeFormat": "DE"
+  },
+  {
+    "name": "Greece",
+    "zipcodeFormat": "GR"
+  },
+  {
+    "name": "Hungary",
+    "zipcodeFormat": "HU"
+  },
+  {
+    "name": "Iceland",
+    "zipcodeFormat": "IS"
+  },
+  {
+    "name": "Ireland",
+    "zipcodeFormat": "IE"
+  },
+  {
+    "name": "Italy",
+    "zipcodeFormat": "IT"
+  },
+  {
+    "name": "Latvia",
+    "zipcodeFormat": "LV"
+  },
+  {
+    "name": "Norway",
+    "zipcodeFormat": "NO"
+  },
+  {
+    "name": "Poland",
+    "zipcodeFormat": "PL"
+  },
+  {
+    "name": "Portugal",
+    "zipcodeFormat": "PT"
+  },
+  {
+    "name": "Romania",
+    "zipcodeFormat": "RO"
+  },
+  {
+    "name": "Russian Federation",
+    "zipcodeFormat": "RU"
+  },
+  {
+    "name": "Serbia",
+    "zipcodeFormat": "RS"
+  },
+  {
+    "name": "Slovakia",
+    "zipcodeFormat": "SK"
+  },
+  {
+    "name": "Slovenia",
+    "zipcodeFormat": "SI"
+  },
+  {
+    "name": "Spain",
+    "zipcodeFormat": "ES"
+  },
+  {
+    "name": "Sweden",
+    "zipcodeFormat": "SE"
+  },
+  {
+    "name": "Ukraine",
+    "zipcodeFormat": "UA"
+  }
+]
