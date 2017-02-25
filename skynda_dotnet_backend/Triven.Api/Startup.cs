@@ -2,11 +2,12 @@
 using Microsoft.Owin;
 using Newtonsoft.Json.Serialization;
 using Owin;
-using X3Project.Application;
+using Triven.Application;
+using Triven.API;
 
-[assembly: OwinStartup(typeof(X3Project.Startup))]
+[assembly: OwinStartup(typeof(Startup))]
 
-namespace X3Project
+namespace Triven.API
 {
     public partial class Startup
     {

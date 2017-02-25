@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using X3Project.Domain.Constants;
-using X3Project.Domain.ViewModelInterfaces;
+using Triven.Domain.Constants;
+using Triven.Domain.ViewModelInterfaces;
 
-namespace X3Project.Domain.ViewModels.Assignment
+namespace Triven.Domain.ViewModels.Assignment
 {
     public class AssignmentDisplayViewModel : IAssignmentViewModel
     {

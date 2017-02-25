@@ -1,15 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using X3Project.Domain.Constants;
-using X3Project.Domain.Models.Base;
-using X3Project.Domain.Models.Driver;
-using X3Project.Domain.Models.User;
-using X3Project.Domain.Models.Vehicle;
+using Triven.Domain.Constants;
+using Triven.Domain.Models.Base;
 
-namespace X3Project.Domain.Models.Assignment
+namespace Triven.Domain.Models.Assignment
 {
     public interface IAssignmentVehicleModel : IBaseModel
     {

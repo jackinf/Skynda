@@ -1,8 +1,8 @@
-﻿using X3Project.Domain.Constants;
-using X3Project.Domain.Results;
-using X3Project.Domain.ViewModels.Account;
+﻿using Triven.Domain.Constants;
+using Triven.Domain.Results;
+using Triven.Domain.ViewModels.Account;
 
-namespace X3Project.Domain.Services
+namespace Triven.Domain.Services
 {
     public interface IAccountService<out TResult> where TResult : IServiceResult
     {

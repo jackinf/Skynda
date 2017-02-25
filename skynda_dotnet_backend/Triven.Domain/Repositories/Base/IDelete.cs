@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace X3Project.Domain.Repositories.Base
+﻿namespace Triven.Domain.Repositories.Base
 {
     public interface IDelete
     {

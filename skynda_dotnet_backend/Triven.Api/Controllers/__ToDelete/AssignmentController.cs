@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 using System.Web.Http;
 using System.Web.Http.Description;
 using Microsoft.AspNet.Identity;
-using X3Project.Application;
-using X3Project.Application.Results;
-using X3Project.Domain.Services;
-using X3Project.Domain.ViewModels.Assignment;
+using Triven.Application;
+using Triven.Application.Results;
+using Triven.Domain.Services;
+using Triven.Domain.ViewModels.Assignment;
 
-namespace X3Project.Controllers
+namespace Triven.API.Controllers.__ToDelete
 {
     [RoutePrefix("api/assignment")]
     public class AssignmentController : BaseController

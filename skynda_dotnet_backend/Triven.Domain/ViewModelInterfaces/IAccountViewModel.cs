@@ -1,4 +1,4 @@
-﻿namespace X3Project.Domain.ViewModels
+﻿namespace Triven.Domain.ViewModelInterfaces
 {
     public interface IAccountViewModel
     {

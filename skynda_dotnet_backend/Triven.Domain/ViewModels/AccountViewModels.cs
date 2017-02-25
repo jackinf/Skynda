@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace X3Project.Data.EntityFramework.Models
+namespace Triven.Domain.ViewModels
 {
     // Models returned by AccountController actions.
 

@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
-using X3Project.Data.EntityFramework.Models;
-using X3Project.Domain.Models.Base;
-using X3Project.Domain.Repositories.Base;
-using X3Project.Domain.Results;
+using Triven.Data.EntityFramework.Models;
+using Triven.Domain.Models.Base;
+using Triven.Domain.Repositories.Base;
+using Triven.Domain.Results;
 
-
-namespace X3Project.Data.EntityFramework.Repositories.Base
+namespace Triven.Data.EntityFramework.Repositories.Base
 {
     /// <summary>
     /// Generic Create-Read-Update-Delete logic. It can make life much easier.

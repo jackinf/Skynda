@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using X3Project.Data.EntityFramework.Models.Base;
-using X3Project.Data.EntityFramework.Models.Vehicle;
-using X3Project.Domain.Constants;
-using X3Project.Domain.Extensions;
-using X3Project.Domain.Models.Assignment;
+using Triven.Data.EntityFramework.Models.Base;
+using Triven.Domain.Constants;
+using Triven.Domain.Models.Assignment;
 
-namespace X3Project.Data.EntityFramework.Models.Assignmnet
+namespace Triven.Data.EntityFramework.Models.Assignmnet
 {
     [Table("Assignment")]
     public class AssignmentModel : AuditableModel, IAssignmentModel

@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using X3Project.Domain.Models.Base;
+﻿using Triven.Domain.Models.Base;
 
-namespace X3Project.Domain.Models.Classification
+namespace Triven.Domain.Models.Classification
 {
     public interface IClassificationValueModel : IBaseModel
     {

@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using X3Project.Data.EntityFramework.Models.Base;
-using X3Project.Domain.Constants;
-using X3Project.Domain.Extensions;
-using X3Project.Domain.Models.Partner;
+using Triven.Data.EntityFramework.Models.Base;
+using Triven.Domain.Constants;
+using Triven.Domain.Models.Partner;
 
-namespace X3Project.Data.EntityFramework.Models.Partner
+namespace Triven.Data.EntityFramework.Models.Partner
 {
     [Table("PartnerContactPerson")]
     public class PartnerContactPersonModel : AuditableModel, IPartnerContactPersonModel

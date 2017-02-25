@@ -1,8 +1,8 @@
-﻿using X3Project.Data.EntityFramework.Repositories.Base;
-using X3Project.Domain.Models.Driver;
-using X3Project.Domain.Repositories.Driver;
+﻿using Triven.Data.EntityFramework.Repositories.Base;
+using Triven.Domain.Models.Driver;
+using Triven.Domain.Repositories.Driver;
 
-namespace X3Project.Data.EntityFramework.Repositories
+namespace Triven.Data.EntityFramework.Repositories
 {
     public class DriverRepository : BaseCrudRepository<IDriverModel>, IDriverRepository
     {

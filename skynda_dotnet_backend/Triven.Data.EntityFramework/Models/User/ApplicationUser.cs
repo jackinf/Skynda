@@ -7,12 +7,11 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
-using X3Project.Data.EntityFramework.Models.Partner;
-using X3Project.Domain.Constants;
-using X3Project.Domain.Extensions;
-using X3Project.Domain.Models;
+using Triven.Data.EntityFramework.Models.Partner;
+using Triven.Domain.Constants;
+using Triven.Domain.Models;
 
-namespace X3Project.Data.EntityFramework.Models.User
+namespace Triven.Data.EntityFramework.Models.User
 {
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : AppUser, IApplicationUser

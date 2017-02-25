@@ -1,8 +1,8 @@
 ﻿using System;
-using X3Project.Data.EntityFramework.Models.Base;
-using X3Project.Domain.Models;
+using Triven.Data.EntityFramework.Models.Base;
+using Triven.Domain.Models;
 
-namespace X3Project.Data.EntityFramework.Models
+namespace Triven.Data.EntityFramework.Models
 {
     public class TodoModel : AuditableModel, ITodoModel
     {

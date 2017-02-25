@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using X3Project.Domain.Constants;
-using X3Project.Domain.Models.User;
+using Triven.Domain.Constants;
+using Triven.Domain.Models.User;
 
-namespace X3Project.Data.EntityFramework.Models.User
+namespace Triven.Data.EntityFramework.Models.User
 {
     public class UserContactInfo : IApplicationUserContactInfo
     {

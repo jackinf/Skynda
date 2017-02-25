@@ -1,8 +1,7 @@
 ﻿using System;
-using X3Project.Domain.Models;
-using X3Project.Domain.Models.Base;
+using Triven.Domain.Models.Base;
 
-namespace X3Project.Data.EntityFramework.Repositories.Base
+namespace Triven.Data.EntityFramework.Repositories.Base
 {
     public class OnCreateOrUpdateResult<TModel> : RepositoryResult<TModel> where TModel : IBaseModel
     {

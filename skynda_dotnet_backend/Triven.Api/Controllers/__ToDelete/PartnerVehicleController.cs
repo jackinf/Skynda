@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Http;
+﻿using System.Web.Http;
 using System.Web.Http.Description;
 using Microsoft.AspNet.Identity;
-using X3Project.Application;
-using X3Project.Application.Results;
-using X3Project.Domain.Services;
-using X3Project.Domain.ViewModels.Base;
-using X3Project.Domain.ViewModels.Partner;
-using X3Project.Domain.ViewModels.Partner.Vehicle;
+using Triven.Application;
+using Triven.Application.Results;
+using Triven.Domain.Services;
+using Triven.Domain.ViewModels.Base;
+using Triven.Domain.ViewModels.Partner;
+using Triven.Domain.ViewModels.Partner.Vehicle;
 
-namespace X3Project.Controllers
+namespace Triven.API.Controllers.__ToDelete
 {
     [RoutePrefix("api/partner-vehicle")]
     public class PartnerVehicleController : BaseController

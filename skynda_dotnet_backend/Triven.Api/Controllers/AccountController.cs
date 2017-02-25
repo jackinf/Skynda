@@ -12,18 +12,16 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
-using X3Project.Application;
-using X3Project.Application.Results;
-using X3Project.Application.Services;
-using X3Project.Application.ViewModels.Account;
-using X3Project.Data.EntityFramework.Models;
-using X3Project.Data.EntityFramework.Models.User;
-using X3Project.Domain.ViewModels.Account;
-using X3Project.Domain.ViewModels.Partner;
-using X3Project.Providers;
-using X3Project.Results;
+using Triven.Application;
+using Triven.Application.Services;
+using Triven.API.Providers;
+using Triven.API.Results;
+using Triven.Data.EntityFramework.Models;
+using Triven.Data.EntityFramework.Models.User;
+using Triven.Domain.ViewModels;
+using Triven.Domain.ViewModels.Account;
 
-namespace X3Project.Controllers
+namespace Triven.API.Controllers
 {
     [Authorize]
     [RoutePrefix("api/account")]

@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FluentValidation;
-using X3Project.Data.EntityFramework.Models.User;
-using X3Project.Domain.ViewModels.Account;
+﻿using FluentValidation;
+using Triven.Domain.ViewModels.Account;
 
-namespace X3Project.Application.Validators.Users
+namespace Triven.Application.Validators.Users
 {
     public class UserUpdateAccountDataValidator : AbstractValidator<AccountDisplayViewModel>
     {

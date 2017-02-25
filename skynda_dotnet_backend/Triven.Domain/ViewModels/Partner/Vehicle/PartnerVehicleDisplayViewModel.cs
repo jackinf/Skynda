@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using X3Project.Domain.Constants;
-using X3Project.Domain.Extensions;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using Triven.Domain.Constants;
+using Triven.Domain.ViewModelInterfaces;
 
-namespace X3Project.Domain.ViewModels.Partner.Vehicle
+namespace Triven.Domain.ViewModels.Partner.Vehicle
 {
     public class PartnerVehicleDisplayViewModel : IPartnerViewModel
     {

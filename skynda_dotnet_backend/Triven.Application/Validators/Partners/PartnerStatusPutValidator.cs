@@ -1,15 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using FluentValidation;
-using X3Project.Data.EntityFramework.Models.Partner;
-using X3Project.Domain.Constants;
-using X3Project.Domain.Extensions;
-using X3Project.Domain.ViewModels.Partner;
+using Triven.Domain.Constants;
+using Triven.Domain.ViewModels.Partner;
 
-namespace X3Project.Application.Validators.Partners
+namespace Triven.Application.Validators.Partners
 {
     public class PartnerStatusPutValidator : AbstractValidator<PartnerStatusPutViewModel>
     {

@@ -1,20 +1,20 @@
 ﻿using System;
 using AutoMapper;
 using Ninject;
-using X3Project.Application.IoCModules;
-using X3Project.Application.ViewModels;
-using X3Project.Domain.ViewModels.Partner;
-using X3Project.Data.EntityFramework.Models;
-using X3Project.Data.EntityFramework.Models.Assignmnet;
-using X3Project.Data.EntityFramework.Models.Partner;
-using X3Project.Data.EntityFramework.Models.User;
-using X3Project.Data.EntityFramework.Models.Vehicle;
-using X3Project.Domain.ViewModels.Account;
-using X3Project.Domain.ViewModels.Assignment;
-using X3Project.Domain.ViewModels.Partner.ContactPerson;
-using X3Project.Domain.ViewModels.Partner.Vehicle;
+using Triven.Application.IoCModules;
+using Triven.Data.EntityFramework.Models;
+using Triven.Data.EntityFramework.Models.Assignmnet;
+using Triven.Data.EntityFramework.Models.Partner;
+using Triven.Data.EntityFramework.Models.User;
+using Triven.Data.EntityFramework.Models.Vehicle;
+using Triven.Domain.ViewModels;
+using Triven.Domain.ViewModels.Account;
+using Triven.Domain.ViewModels.Assignment;
+using Triven.Domain.ViewModels.Partner;
+using Triven.Domain.ViewModels.Partner.ContactPerson;
+using Triven.Domain.ViewModels.Partner.Vehicle;
 
-namespace X3Project.Application
+namespace Triven.Application
 {
     /// <summary>
     /// Connects interfaces with implementations, creates mappings.

@@ -1,8 +1,7 @@
-﻿using System;
-using X3Project.Domain.Models.Base;
-using X3Project.Domain.Results;
+﻿using Triven.Domain.Models.Base;
+using Triven.Domain.Results;
 
-namespace X3Project.Domain.Repositories.Base
+namespace Triven.Domain.Repositories.Base
 {
     public interface IUpdate<TAggregate> where TAggregate : IBaseModel
     {

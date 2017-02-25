@@ -1,12 +1,8 @@
-﻿using System.Net;
-using System.Net.Http;
-using System.Web.Http;
+﻿using System.Web.Http;
 using System.Web.Http.Cors;
-using System.Web.Http.Results;
 using FluentValidation.Results;
-using Microsoft.AspNet.Identity;
 
-namespace X3Project.Controllers
+namespace Triven.API.Controllers
 {
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public abstract class BaseController : ApiController

@@ -1,7 +1,7 @@
 ﻿using System;
-using X3Project.Domain.ViewModels;
+using Triven.Domain.ViewModelInterfaces;
 
-namespace X3Project.Application.ViewModels
+namespace Triven.Domain.ViewModels
 {
     public class TodoPostViewModel : ITodoViewModel
     {

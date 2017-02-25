@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using X3Project.Domain.ViewModels;
+﻿using Triven.Domain.ViewModelInterfaces;
 
-namespace X3Project.Domain.ViewModels.Partner
+namespace Triven.Domain.ViewModels.Partner
 {
     public class PartnerStatusPutViewModel : IPartnerViewModel
     {

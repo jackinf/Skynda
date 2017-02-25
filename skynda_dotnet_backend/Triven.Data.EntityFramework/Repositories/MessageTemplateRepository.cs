@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using X3Project.Data.EntityFramework.Models.MessageTemplate;
-using X3Project.Data.EntityFramework.Repositories.Base;
-using X3Project.Domain.Models.Message;
-using X3Project.Domain.Repositories.Message;
+﻿using System.Linq;
+using Triven.Data.EntityFramework.Models.MessageTemplate;
+using Triven.Data.EntityFramework.Repositories.Base;
+using Triven.Domain.Models.Message;
+using Triven.Domain.Repositories.Message;
 
-namespace X3Project.Data.EntityFramework.Repositories
+namespace Triven.Data.EntityFramework.Repositories
 {
     public class MessageTemplateRepository : BaseCrudRepository<MessageTemplateModel>, IMessageRepository<MessageTemplateModel>
     {

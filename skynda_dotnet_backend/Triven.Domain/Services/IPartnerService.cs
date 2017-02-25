@@ -1,10 +1,10 @@
-﻿using X3Project.Domain.Results;
-using X3Project.Domain.ViewModels;
-using X3Project.Domain.ViewModels.Partner;
-using X3Project.Domain.ViewModels.Partner.ContactPerson;
-using X3Project.Domain.ViewModels.Partner.Vehicle;
+﻿using Triven.Domain.Results;
+using Triven.Domain.ViewModelInterfaces;
+using Triven.Domain.ViewModels.Partner;
+using Triven.Domain.ViewModels.Partner.ContactPerson;
+using Triven.Domain.ViewModels.Partner.Vehicle;
 
-namespace X3Project.Domain.Services
+namespace Triven.Domain.Services
 {
     public interface IPartnerService<out TServiceResult> where TServiceResult : IServiceResult
     {

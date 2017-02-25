@@ -4,16 +4,15 @@ using System.Linq;
 using AutoMapper;
 using FluentValidation.Results;
 using Microsoft.AspNet.Identity;
-using X3Project.Application.Results;
-using X3Project.Application.Validators.Users;
-using X3Project.Data.EntityFramework.Models.Partner;
-using X3Project.Data.EntityFramework.Models.User;
-using X3Project.Domain.Constants;
-using X3Project.Domain.Repositories;
-using X3Project.Domain.Services;
-using X3Project.Domain.ViewModels.Account;
+using Triven.Application.Results;
+using Triven.Application.Validators.Users;
+using Triven.Data.EntityFramework.Models.User;
+using Triven.Domain.Constants;
+using Triven.Domain.Repositories;
+using Triven.Domain.Services;
+using Triven.Domain.ViewModels.Account;
 
-namespace X3Project.Application.Services
+namespace Triven.Application.Services
 {
     public class AccountService : IAccountService<ServiceResult>
     {

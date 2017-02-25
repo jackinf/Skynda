@@ -1,11 +1,7 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Security.Cryptography.X509Certificates;
-using X3Project.Domain.Constants;
-using X3Project.Domain.Models.Base;
-using X3Project.Domain.Models.User;
+﻿using Triven.Domain.Constants;
+using Triven.Domain.Models.Base;
 
-namespace X3Project.Domain.Models
+namespace Triven.Domain.Models
 {
     public interface IApplicationUser : IAuditableBaseModel
     {

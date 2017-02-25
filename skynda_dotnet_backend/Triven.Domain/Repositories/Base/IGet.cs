@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using X3Project.Domain.Models.Base;
+﻿using System.Collections.Generic;
+using Triven.Domain.Models.Base;
 
-namespace X3Project.Domain.Repositories.Base
+namespace Triven.Domain.Repositories.Base
 {
     public interface IGet<out TAggregate> where TAggregate : IBaseModel
     {

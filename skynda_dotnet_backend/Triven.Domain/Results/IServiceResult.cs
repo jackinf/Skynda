@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Web.UI;
 using FluentValidation.Results;
-using X3Project.Domain.Models.Base;
+using Triven.Domain.Models.Base;
 
-namespace X3Project.Domain.Results
+namespace Triven.Domain.Results
 {
     public interface IResult<TModel> where TModel : IBaseModel
     {

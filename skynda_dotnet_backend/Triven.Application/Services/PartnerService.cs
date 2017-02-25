@@ -4,23 +4,23 @@ using System.Linq;
 using AutoMapper;
 using CuttingEdge.Conditions;
 using Microsoft.AspNet.Identity;
-using X3Project.Application.Results;
-using X3Project.Application.Validators.Partners;
-using X3Project.Data.EntityFramework.Models.Partner;
-using X3Project.Data.EntityFramework.Models.User;
-using X3Project.Data.EntityFramework.Models.Vehicle;
-using X3Project.Domain.Constants;
-using X3Project.Domain.Repositories;
-using X3Project.Domain.Repositories.Partner;
-using X3Project.Domain.Services;
-using X3Project.Domain.ViewModels;
-using X3Project.Domain.ViewModels.Account;
-using X3Project.Domain.ViewModels.Base;
-using X3Project.Domain.ViewModels.Partner;
-using X3Project.Domain.ViewModels.Partner.ContactPerson;
-using X3Project.Domain.ViewModels.Partner.Vehicle;
+using Triven.Application.Results;
+using Triven.Application.Validators.Partners;
+using Triven.Data.EntityFramework.Models.Partner;
+using Triven.Data.EntityFramework.Models.User;
+using Triven.Data.EntityFramework.Models.Vehicle;
+using Triven.Domain.Constants;
+using Triven.Domain.Repositories;
+using Triven.Domain.Repositories.Partner;
+using Triven.Domain.Services;
+using Triven.Domain.ViewModelInterfaces;
+using Triven.Domain.ViewModels.Account;
+using Triven.Domain.ViewModels.Base;
+using Triven.Domain.ViewModels.Partner;
+using Triven.Domain.ViewModels.Partner.ContactPerson;
+using Triven.Domain.ViewModels.Partner.Vehicle;
 
-namespace X3Project.Application.Services
+namespace Triven.Application.Services
 {
     // ReSharper disable once ClassNeverInstantiated.Global
     public class PartnerService : IPartnerService<ServiceResult>

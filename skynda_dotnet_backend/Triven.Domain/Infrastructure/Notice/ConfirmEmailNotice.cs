@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using X3Project.Domain.Constants;
-using X3Project.Domain.Infrastructure.Notice;
+﻿using Triven.Domain.Constants;
 
-namespace X3Project.Domain.Infrastructure.Notice
+namespace Triven.Domain.Infrastructure.Notice
 {
     public sealed class ConfirmEmailNotice : NoticeBase
     {

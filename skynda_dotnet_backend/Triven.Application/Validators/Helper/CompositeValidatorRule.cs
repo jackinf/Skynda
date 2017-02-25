@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using FluentValidation;
 using FluentValidation.Results;
 using FluentValidation.Validators;
 
-namespace X3Project.Application.Validators.Helper
+namespace Triven.Application.Validators.Helper
 {
     /// <summary>
     /// Fluentvalidation multiple validators

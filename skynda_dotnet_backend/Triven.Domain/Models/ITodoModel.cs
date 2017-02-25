@@ -1,7 +1,7 @@
 ﻿using System;
-using X3Project.Domain.Models.Base;
+using Triven.Domain.Models.Base;
 
-namespace X3Project.Domain.Models
+namespace Triven.Domain.Models
 {
     public interface ITodoModel : IAuditableBaseModel
     {

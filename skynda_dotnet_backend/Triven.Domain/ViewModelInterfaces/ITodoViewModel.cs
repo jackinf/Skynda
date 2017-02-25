@@ -1,4 +1,4 @@
-﻿namespace X3Project.Domain.ViewModels
+﻿namespace Triven.Domain.ViewModelInterfaces
 {
     /// <summary>
     /// Just a base interface to use for implementation for each view model.

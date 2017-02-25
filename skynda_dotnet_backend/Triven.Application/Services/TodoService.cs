@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using AutoMapper;
-using X3Project.Domain.Models;
-using X3Project.Domain.Repositories;
-using X3Project.Domain.Results;
-using X3Project.Domain.Services;
-using X3Project.Domain.ViewModels;
+using Triven.Domain.Models;
+using Triven.Domain.Repositories;
+using Triven.Domain.Results;
+using Triven.Domain.Services;
+using Triven.Domain.ViewModelInterfaces;
 
-namespace X3Project.Application.Services
+namespace Triven.Application.Services
 {
     /// <summary>
     /// Service for TodoModels

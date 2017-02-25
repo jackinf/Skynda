@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Net.Mail;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.UI.WebControls;
-using X3Project.Data.EntityFramework.Models.MessageTemplate;
-using X3Project.Data.EntityFramework.Repositories;
-using X3Project.Domain.Constants;
-using X3Project.Domain.Infrastructure.Notice;
-using X3Project.Domain.Repositories.Message;
+using Triven.Data.EntityFramework.Models.MessageTemplate;
+using Triven.Domain.Constants;
+using Triven.Domain.Infrastructure.Notice;
+using Triven.Domain.Repositories.Message;
 
-namespace X3Project.Application.Services.Messages
+namespace Triven.Application.Services.Messages
 {
     /// <summary>
     /// Send notices by email (SMTP)

@@ -1,15 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web;
 using Microsoft.AspNet.Identity;
-using X3Project.Data.EntityFramework.Models.User;
-using X3Project.Domain.Constants;
+using Triven.Data.EntityFramework.Models.User;
+using Triven.Domain.Constants;
 
-namespace X3Project.Application.Helpers
+namespace Triven.Application.Helpers
 {
     public static class AuthHelper
     {

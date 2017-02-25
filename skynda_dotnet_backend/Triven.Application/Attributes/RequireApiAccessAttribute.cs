@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using System.Web;
 using System.Web.Http;
 using System.Web.Http.Controllers;
 using Microsoft.AspNet.Identity;
-using X3Project.Application.Extensions;
-using X3Project.Data.EntityFramework.Models.User;
-using X3Project.Domain.Constants;
+using Triven.Data.EntityFramework.Models.User;
+using Triven.Domain.Constants;
 
-namespace X3Project.Application.Attributes
+namespace Triven.Application.Attributes
 {
     public class RequireApiAccessAttribute : AuthorizeAttribute
     {

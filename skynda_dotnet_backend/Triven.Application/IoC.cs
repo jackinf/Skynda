@@ -1,6 +1,6 @@
 ﻿using Ninject;
 
-namespace X3Project.Application
+namespace Triven.Application
 {
     public class IoC
     {

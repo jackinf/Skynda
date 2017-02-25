@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Web.Http;
 using System.Web.Http.Description;
-using X3Project.Application.ViewModels;
-using X3Project.Domain.Models;
-using X3Project.Domain.Services;
+using Triven.Domain.Models;
+using Triven.Domain.Services;
+using Triven.Domain.ViewModels;
 
-namespace X3Project.Controllers
+namespace Triven.API.Controllers.__ToDelete
 {
     [RoutePrefix("api/todos")]
     public class TodoController : BaseController

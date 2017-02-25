@@ -1,9 +1,9 @@
 ﻿using System.Linq;
-using X3Project.Data.EntityFramework.Repositories.Base;
-using X3Project.Domain.Models.Classification;
-using X3Project.Domain.Repositories.Classification;
+using Triven.Data.EntityFramework.Repositories.Base;
+using Triven.Domain.Models.Classification;
+using Triven.Domain.Repositories.Classification;
 
-namespace X3Project.Data.EntityFramework.Repositories
+namespace Triven.Data.EntityFramework.Repositories
 {
     public class ClassificationRepository : BaseCrudRepository<IClassificationModel>, IClassificationRepository
     {

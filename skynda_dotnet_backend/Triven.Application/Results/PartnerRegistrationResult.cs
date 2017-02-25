@@ -1,7 +1,4 @@
-﻿using FluentValidation.Results;
-using X3Project.Domain.Results;
-
-namespace X3Project.Application.Results
+﻿namespace Triven.Application.Results
 {
     public class PartnerRegistrationResult : ServiceResult
     {
