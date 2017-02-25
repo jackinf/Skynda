@@ -1,6 +1,6 @@
 ﻿namespace Triven.Domain.ViewModels.Common
 {
-    public class SimpleResponseModel
+    public class SimpleResponseViewModel
     {
         
     }

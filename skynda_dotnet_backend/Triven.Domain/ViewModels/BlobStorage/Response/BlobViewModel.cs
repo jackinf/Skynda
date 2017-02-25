@@ -1,6 +1,6 @@
 ﻿namespace Triven.Domain.ViewModels.BlobStorage.Response
 {
-    public class BlobModel
+    public class BlobViewModel
     {
         public string Uri { get; set; }
     }

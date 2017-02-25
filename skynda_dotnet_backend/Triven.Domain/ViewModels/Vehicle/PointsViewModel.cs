@@ -1,6 +1,6 @@
 ﻿namespace Triven.Domain.ViewModels.Vehicle
 {
-    public class PointsModel
+    public class PointsViewModel
     {
         public string Text;
         public bool IsPass;

@@ -3,19 +3,19 @@ using Triven.Domain.ViewModels.Common;
 
 namespace Triven.Domain.ViewModels.Vehicle
 {
-    public class VehicleReportModel : BaseModel
+    public class VehicleReportViewModel : BaseViewModel
     {
-        public VehicleReportModel()
+        public VehicleReportViewModel()
         {
-            Items = new List<VehicleReportItemModel>();
+            Items = new List<VehicleReportItemViewModel>();
         }
 
         public int VehicleId { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public string Inspector { get; set; }
-        public IList<VehicleReportItemModel> Items { get; set; }
-        public IList<FaultBaseModel> Faults { get; set; }
+        public IList<VehicleReportItemViewModel> Items { get; set; }
+        public IList<FaultBaseViewModel> Faults { get; set; }
         public bool IsModal { get; set; }
 
     }

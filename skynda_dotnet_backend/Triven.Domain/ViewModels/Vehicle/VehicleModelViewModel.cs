@@ -3,7 +3,7 @@ using Triven.Domain.ViewModels.Common;
 
 namespace Triven.Domain.ViewModels.Vehicle
 {
-    public class VehicleModelViewModel : BaseModel
+    public class VehicleModelViewModel : BaseViewModel
     {
         public string ModelCode { get; set; }
         public string Description { get; set; }
@@ -13,10 +13,10 @@ namespace Triven.Domain.ViewModels.Vehicle
         public int Doors { get; set; }
         public int Seats { get; set; }
         public int Year { get; set; }
-        public ClassificationModel VehicleManufacturer { get; set; }
-        public ClassificationModel Transmission { get; set; }
-        public ClassificationModel Drivetrain { get; set; }
-        public ClassificationModel VehicleBody { get; set; }
-        public ClassificationModel FuelType { get; set; }
+        public ClassificationViewModel VehicleManufacturer { get; set; }
+        public ClassificationViewModel Transmission { get; set; }
+        public ClassificationViewModel Drivetrain { get; set; }
+        public ClassificationViewModel VehicleBody { get; set; }
+        public ClassificationViewModel FuelType { get; set; }
     }
 }

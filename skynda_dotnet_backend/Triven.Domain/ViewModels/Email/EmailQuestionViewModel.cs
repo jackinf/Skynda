@@ -1,6 +1,6 @@
 ﻿namespace Triven.Domain.ViewModels.Email
 {
-    public class EmailQuestionModel
+    public class EmailQuestionViewModel
     {
         public string HowCanWeHelp { get; set; }
         public string Name { get; set; }

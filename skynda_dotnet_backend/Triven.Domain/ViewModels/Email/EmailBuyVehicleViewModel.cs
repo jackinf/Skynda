@@ -1,6 +1,6 @@
 ﻿namespace Triven.Domain.ViewModels.Email
 {
-    public class EmailBuyVehicleModel
+    public class EmailBuyVehicleViewModel
     {
         public string FullName { get; set; }
 

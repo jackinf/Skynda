@@ -1,6 +1,6 @@
 ﻿namespace Triven.Domain.ViewModels.BlobStorage
 {
-    public class DeleteContainerModel
+    public class DeleteContainerViewModel
     {
         public string ContainerName { get; set; }
     }

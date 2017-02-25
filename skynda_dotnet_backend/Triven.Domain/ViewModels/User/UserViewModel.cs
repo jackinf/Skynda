@@ -5,7 +5,7 @@ using Triven.Domain.ViewModels.Common;
 
 namespace Triven.Domain.ViewModels.User
 {
-    public class UserModel : BaseModel
+    public class UserViewModel : BaseViewModel
     {
         public string Login { get; set; }
         public string Email { get; set; }
@@ -15,6 +15,6 @@ namespace Triven.Domain.ViewModels.User
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public bool Enabled { get; set; }
-        public IList<AuthorityModel> Authority { get; set; }
+        public IList<AuthorityViewModel> Authority { get; set; }
     }
 }

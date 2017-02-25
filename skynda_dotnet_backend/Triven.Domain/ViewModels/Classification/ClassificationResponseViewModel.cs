@@ -1,6 +1,6 @@
 ﻿namespace Triven.Domain.ViewModels.Classification
 {
-    public class ClassificationResponseModel : ClassificationBaseModel
+    public class ClassificationResponseViewModel : ClassificationBaseViewModel
     {
         public string Value;
         public string Name;

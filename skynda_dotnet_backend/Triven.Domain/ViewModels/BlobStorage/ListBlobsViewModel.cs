@@ -1,6 +1,6 @@
 ﻿namespace Triven.Domain.ViewModels.BlobStorage
 {
-    public class ListBlobsModel
+    public class ListBlobsViewModel
     {
         public string ContainerName { get; set; }
     }

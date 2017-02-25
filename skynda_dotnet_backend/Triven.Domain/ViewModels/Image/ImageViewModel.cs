@@ -1,18 +1,18 @@
 ﻿namespace Triven.Domain.ViewModels.Image
 {
-    public class ImageModel
+    public class ImageViewModel
     {
         public string Url { get; set; }
         public string BlobName { get; set; }
         public string ContainerName { get; set; }
         public string Base64File { get; set; }
-        private ImageCropInfoModel CropInfo { get; set; }
+        private ImageCropInfoViewModel CropInfo { get; set; }
 
         public static class Factory
         {
-            public static ImageModel Create(string url, string blobName, string containerName)
+            public static ImageViewModel Create(string url, string blobName, string containerName)
             {
-                return new ImageModel
+                return new ImageViewModel
                 {
                     Url = url,
                     BlobName = blobName,
@@ -20,15 +20,15 @@
                 };
             }
 
-            public static ImageModel CreateForDisplay(string url)
+            public static ImageViewModel CreateForDisplay(string url)
             {
-                return new ImageModel {Url = url};
+                return new ImageViewModel {Url = url};
             }
 
 
-            public static ImageModel CreateWithBase64(string base64File)
+            public static ImageViewModel CreateWithBase64(string base64File)
             {
-                return new ImageModel {Base64File = base64File};
+                return new ImageViewModel {Base64File = base64File};
             }
         }
 

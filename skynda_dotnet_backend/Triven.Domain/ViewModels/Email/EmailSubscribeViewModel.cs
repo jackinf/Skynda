@@ -1,6 +1,6 @@
 ﻿namespace Triven.Domain.ViewModels.Email
 {
-    public class EmailSubscribeModel
+    public class EmailSubscribeViewModel
     {
         public string FirstName;
         public string LastName;

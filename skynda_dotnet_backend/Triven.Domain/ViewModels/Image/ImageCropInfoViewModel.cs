@@ -1,6 +1,6 @@
 ﻿namespace Triven.Domain.ViewModels.Image
 {
-    public class ImageCropInfoModel
+    public class ImageCropInfoViewModel
     {
         public bool Crop { get; set; }
         public float X { get; set; }

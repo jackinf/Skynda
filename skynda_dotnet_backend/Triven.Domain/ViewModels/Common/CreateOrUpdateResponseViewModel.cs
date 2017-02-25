@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Triven.Domain.ViewModels.Common
 {
-    public class CreateOrUpdateResponseModel : BaseModel
+    public class CreateOrUpdateResponseViewModel : BaseViewModel
     {
         public bool Success { get; set; }
         public IList<string> Errors { get; set; }
@@ -13,14 +13,14 @@ namespace Triven.Domain.ViewModels.Common
 
         public static class Factory
         {
-            public static CreateOrUpdateResponseModel Fail(string errorMessage, IList<string> errors)
+            public static CreateOrUpdateResponseViewModel Fail(string errorMessage, IList<string> errors)
             {
-                return new CreateOrUpdateResponseModel { Success = false, ErrorMessage = errorMessage, Errors = errors};
+                return new CreateOrUpdateResponseViewModel { Success = false, ErrorMessage = errorMessage, Errors = errors};
             }
 
-            public static CreateOrUpdateResponseModel Success(int id)
+            public static CreateOrUpdateResponseViewModel Success(int id)
             {
-                return new CreateOrUpdateResponseModel { Id = id , Success = true };
+                return new CreateOrUpdateResponseViewModel { Id = id , Success = true };
             }
         }
     }

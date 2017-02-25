@@ -2,7 +2,7 @@
 
 namespace Triven.Domain.ViewModels.Authentication
 {
-    public class AuthorityViewModel : BaseModel
+    public class AuthorityViewModel : BaseViewModel
     {
         public string Name { get; set; }
     }

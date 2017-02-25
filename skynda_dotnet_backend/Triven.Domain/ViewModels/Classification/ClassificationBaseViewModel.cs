@@ -2,7 +2,7 @@
 
 namespace Triven.Domain.ViewModels.Classification
 {
-    public class ClassificationBaseModel : BaseModel
+    public class ClassificationBaseViewModel : BaseViewModel
     {
         public string Type { get; set; }
     }

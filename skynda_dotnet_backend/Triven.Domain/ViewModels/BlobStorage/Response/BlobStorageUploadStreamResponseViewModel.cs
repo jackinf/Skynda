@@ -1,20 +1,20 @@
 ﻿namespace Triven.Domain.ViewModels.BlobStorage.Response
 {
-    public class BlobStorageUploadStreamResponseModel
+    public class BlobStorageUploadStreamResponseViewModel
     {
         public bool Success { get; set; }
         public string Uri { get; set; }
 
         public static class Factory
         {
-            public static BlobStorageUploadStreamResponseModel Succeed(string uri)
+            public static BlobStorageUploadStreamResponseViewModel Succeed(string uri)
             {
-                return new BlobStorageUploadStreamResponseModel {Success = true, Uri =  uri};
+                return new BlobStorageUploadStreamResponseViewModel {Success = true, Uri =  uri};
             }
 
-            public static BlobStorageUploadStreamResponseModel Fail()
+            public static BlobStorageUploadStreamResponseViewModel Fail()
             {
-                return new BlobStorageUploadStreamResponseModel {Success = false};
+                return new BlobStorageUploadStreamResponseViewModel {Success = false};
             }
         }
     }
