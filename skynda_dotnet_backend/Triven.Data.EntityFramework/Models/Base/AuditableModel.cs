@@ -21,9 +21,14 @@ namespace Triven.Data.EntityFramework.Models.Base
 
         [ForeignKey("Remover")]
         public int? DeletedBy { get; set; }
+
+        public string ModifierUserIp { get; set; }
+
         public ApplicationUser Remover { get; set; }
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public virtual int Id { get; set; }
+
+        public bool IsArchived => DeletedOn.HasValue;
     }
 }
