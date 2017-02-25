@@ -9,6 +9,7 @@ export default {
 
 // Natuke laisk lahendus värvide otsingu osas
 // id-d ja hex-id peavad olema vastavuses backendiga, mis on klassis: me/skynda/vehicle/dao/VehicleDao.java meetodis mapColorIdToHex
+
 export const colors = [
   {id: -1, name: "Kõik"},
   {id: 1, style: {"backgroundColor":  "#f44336"}, hideName: true, isColored: true},
@@ -30,6 +31,46 @@ export const colors = [
   {id: 17, style: {"backgroundColor": "#795548"}, hideName: true, isColored: true},
   {id: 18, style: {"backgroundColor": "#607d8b"}, hideName: true, isColored: true}
 ];
+
+// Sõiduki värvi valikud
+export const insideColors = [
+  {id: -1, name: "Kõik"},
+  {id: 1, style: {"backgroundColor":  "#6e6d6e"}, hideName: true, isColored: true},
+  {id: 2, style: {"backgroundColor":  "#000000"}, hideName: true, isColored: true},
+  // {id: 3, style: {"backgroundColor":  "#9c27b0"}, hideName: true, isColored: true},
+  // {id: 4, style: {"backgroundColor":  "#673ab7"}, hideName: true, isColored: true},
+  {id: 5, style: {"backgroundColor":  "#c5b475"}, hideName: true, isColored: true},
+  // {id: 6, style: {"backgroundColor":  "#2196f3"}, hideName: true, isColored: true},
+  {id: 7, style: {"backgroundColor":  "#ffffff"}, hideName: true, isColored: true},
+  // {id: 8, style: {"backgroundColor":  "#00bcd4"}, hideName: true, isColored: true},
+  {id: 9, style: {"backgroundColor":  "#6b4124"}, hideName: true, isColored: true},
+  // TODO: mitmevärviline
+  // TODO: muu
+  // {id: 10, style: {"backgroundColor": "#4caf50"}, hideName: true, isColored: true},
+  // // {id: 11, style: {"backgroundColor": "#8bc34a"}, hideName: true, isColored: true},
+  // // {id: 12, style: {"backgroundColor": "#cddc39"}, hideName: true, isColored: true},
+  // {id: 13, style: {"backgroundColor": "#ffeb3b"}, hideName: true, isColored: true},
+  // // {id: 14, style: {"backgroundColor": "#ffc107"}, hideName: true, isColored: true},
+  // {id: 15, style: {"backgroundColor": "#ff9800"}, hideName: true, isColored: true},
+  // // {id: 16, style: {"backgroundColor": "#ff5722"}, hideName: true, isColored: true},
+  // {id: 17, style: {"backgroundColor": "#795548"}, hideName: true, isColored: true},
+  // {id: 18, style: {"backgroundColor": "#607d8b"}, hideName: true, isColored: true}
+];
+
+export const outsideColors = [
+  {id: -1, name: "Kõik"},
+  {id: 1, style: {"backgroundColor":  "#6e6d6e"}, hideName: true, isColored: true, description: "color name"},
+  {id: 2, style: {"backgroundColor":  "#000000"}, hideName: true, isColored: true, description: "color name"},
+  {id: 7, style: {"backgroundColor":  "#ffffff"}, hideName: true, isColored: true, description: "color name"},
+  {id: 9, style: {"backgroundColor":  "#6b4124"}, hideName: true, isColored: true, description: "color name"},
+  {id: 9, style: {"backgroundColor":  "#c6c6c7"}, hideName: true, isColored: true, description: "color name"},
+  {id: 9, style: {"backgroundColor":  "#174a95"}, hideName: true, isColored: true, description: "color name"},
+  {id: 9, style: {"backgroundColor":  "#bf251c"}, hideName: true, isColored: true, description: "color name"},
+  {id: 9, style: {"backgroundColor":  "#469f00"}, hideName: true, isColored: true, description: "color name"}
+  // TODO: muu
+];
+
+
 
 export const colorHashes = colors
   .filter(color => color && color.style && color.style.backgroundColor)
