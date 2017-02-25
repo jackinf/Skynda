@@ -111,7 +111,7 @@ export default class extends React.Component {
       </Row>
     </span>);
 
-    return (<div>
+    return (<div className="container">
       {displayMode === DISPLAY_MODE.WANT_TO_BUY ? buyingSteps
         : displayMode === DISPLAY_MODE.WANT_TO_SELL ? sellingSteps
           : ""

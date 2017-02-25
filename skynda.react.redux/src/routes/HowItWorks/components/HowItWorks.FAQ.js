@@ -195,7 +195,7 @@ export default class extends React.Component {
     const titleClass = isSell ? "how-it-works__primary-header-sell" : "how-it-works__primary-header";
     const expanded = this.state.expanded;
 
-    return (<div>
+    return (<div className="container">
       <Row>
         <Col sm={8} smOffset={2}>
           <h3 className={`how-it-works__centered ${titleClass}`}>Küsimused ja vastused</h3>
