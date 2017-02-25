@@ -1,6 +1,6 @@
 ﻿namespace Triven.Domain.ViewModels.Subscription
 {
-    public class SubscriptionModel
+    public class SubscriptionViewModel
     {        
         public string Email;
         public bool IsActive;

@@ -2,7 +2,7 @@
 
 namespace Triven.Domain.ViewModels.Vehicle.Requests
 {
-    public class VehicleModelSearchRequestModel
+    public class VehicleModelSearchRequestViewModel
     {
         public IList<int> ManufacturerIds { get; set; }
     }

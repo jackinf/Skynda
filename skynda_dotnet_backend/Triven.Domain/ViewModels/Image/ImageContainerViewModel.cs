@@ -2,9 +2,9 @@
 
 namespace Triven.Domain.ViewModels.Image
 {
-    public class ImageContainerModel : BaseModel
+    public class ImageContainerViewModel : BaseViewModel
     {
-        public ImageModel Image { get; set; }
+        public ImageViewModel Image { get; set; }
         public string Thumbnail { get; set; }
     }
 }

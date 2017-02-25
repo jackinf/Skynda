@@ -2,7 +2,7 @@
 
 namespace Triven.Domain.ViewModels.Vehicle.Reponses
 {
-    public class VehicleModelResponseModel : BaseModel
+    public class VehicleModelResponseViewModel : BaseViewModel
     {
         public string VehicleManufacturerCode { get; set; }
         public string ModelCode { get; set; }

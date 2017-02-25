@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using Triven.Data.EntityFramework.Repositories.Base;
 using Triven.Domain.Models.Classification;
-using Triven.Domain.Repositories.Classification;
 
 namespace Triven.Data.EntityFramework.Repositories
 {

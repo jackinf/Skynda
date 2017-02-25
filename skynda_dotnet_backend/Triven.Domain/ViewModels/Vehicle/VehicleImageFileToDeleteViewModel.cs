@@ -1,6 +1,6 @@
 ﻿namespace Triven.Domain.ViewModels.Vehicle
 {
-    public class VehicleImageFileToDeleteModel
+    public class VehicleImageFileToDeleteViewModel
     {
         /**
      * REQUIRED!

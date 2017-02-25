@@ -1,6 +1,6 @@
 ﻿namespace Triven.Domain.ViewModels.Common
 {
-    public class BaseModel
+    public class BaseViewModel
     {
         public int Id { get; set; }
     }

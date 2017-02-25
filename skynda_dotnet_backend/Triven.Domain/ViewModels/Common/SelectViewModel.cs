@@ -1,6 +1,6 @@
-﻿namespace Triven.Domain.ViewModels.Common.Response
+﻿namespace Triven.Domain.ViewModels.Common
 {
-    public class SelectModel : BaseModel
+    public class SelectModel : BaseViewModel
     {
         public string Label { get; set; }
         public int Value { get; set; }

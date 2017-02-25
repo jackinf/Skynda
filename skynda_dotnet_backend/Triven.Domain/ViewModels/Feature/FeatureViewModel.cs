@@ -2,7 +2,7 @@
 
 namespace Triven.Domain.ViewModels.Feature
 {
-    public class FeatureModel : BaseModel
+    public class FeatureViewModel : BaseViewModel
     {
         public string Description { get; set; }
         public int Weight { get; set; }

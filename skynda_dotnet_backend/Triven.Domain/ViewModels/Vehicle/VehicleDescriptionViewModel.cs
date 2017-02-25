@@ -2,7 +2,7 @@
 
 namespace Triven.Domain.ViewModels.Vehicle
 {
-    public class VehicleDescriptionModel : BaseModel
+    public class VehicleDescriptionViewModel : BaseViewModel
     {
         public string Title { get; set; }
         public string Content { get; set; }
