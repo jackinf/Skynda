@@ -205,8 +205,8 @@ export default class extends React.Component {
         <Row>
           <Col>
             <ButtonGroup>
-              <Button bsStyle="default" onClick={this.expandAllQARows}>Expand all</Button>
-              <Button bsStyle="default" onClick={this.collapseAllQARows}>Collapse all</Button>
+              <Button bsStyle="default" onClick={this.expandAllQARows}>Ava kõik</Button>
+              <Button bsStyle="default" onClick={this.collapseAllQARows}>Pane kõik kinni</Button>
             </ButtonGroup>
           </Col>
         </Row>
