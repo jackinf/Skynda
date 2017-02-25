@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Triven.Domain.Constants;
+using Triven.Domain.Extensions;
 using Triven.Domain.Models.Classification;
 
 namespace Triven.Data.EntityFramework.Models.Classification

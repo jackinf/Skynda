@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using Triven.Data.EntityFramework.Models.Base;
 using Triven.Domain.Constants;
+using Triven.Domain.Extensions;
 using Triven.Domain.Models.Driver;
 
 namespace Triven.Data.EntityFramework.Models.Driver

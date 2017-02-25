@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using Triven.Domain.Constants;
+using Triven.Domain.Extensions;
 using Triven.Domain.ViewModelInterfaces;
 
 namespace Triven.Domain.ViewModels.Partner.Vehicle

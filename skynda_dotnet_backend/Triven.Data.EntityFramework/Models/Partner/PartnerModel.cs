@@ -4,6 +4,7 @@ using Triven.Data.EntityFramework.Models.Base;
 using Triven.Data.EntityFramework.Models.User;
 using Triven.Data.EntityFramework.Models.Vehicle;
 using Triven.Domain.Constants;
+using Triven.Domain.Extensions;
 using Triven.Domain.Models.Partner;
 
 namespace Triven.Data.EntityFramework.Models.Partner

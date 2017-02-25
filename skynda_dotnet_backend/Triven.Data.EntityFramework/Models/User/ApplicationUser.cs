@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Triven.Data.EntityFramework.Models.Partner;
 using Triven.Domain.Constants;
+using Triven.Domain.Extensions;
 using Triven.Domain.Models;
 
 namespace Triven.Data.EntityFramework.Models.User
