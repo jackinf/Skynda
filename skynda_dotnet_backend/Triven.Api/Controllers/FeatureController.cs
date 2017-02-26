@@ -7,7 +7,7 @@ using Triven.Domain.ViewModels.Feature;
 
 namespace Triven.API.Controllers
 {
-    [RoutePrefix("/api/feature")]
+    [RoutePrefix("api/feature")]
     public class FeatureController : BaseController
     {
         private readonly IFeatureService<ServiceResult> _service;

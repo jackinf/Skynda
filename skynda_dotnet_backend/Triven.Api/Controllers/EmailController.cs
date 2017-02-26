@@ -5,7 +5,7 @@ using Triven.Domain.ViewModels.Email;
 
 namespace Triven.API.Controllers
 {
-    [System.Web.Mvc.RoutePrefix("/api/email")]
+    [RoutePrefix("api/email")]
     public class EmailController : BaseController
     {
         private readonly EmailService _service; // TODO: use interface

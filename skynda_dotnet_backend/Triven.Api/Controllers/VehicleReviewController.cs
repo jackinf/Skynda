@@ -7,7 +7,7 @@ using Triven.Domain.ViewModels.Vehicle;
 
 namespace Triven.API.Controllers
 {
-    [RoutePrefix("/api/vehicle-review")]
+    [RoutePrefix("api/vehicle-review")]
     public class VehicleReviewController : BaseController
     {
         private readonly IVehicleReviewService<ServiceResult> _service;

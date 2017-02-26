@@ -5,7 +5,7 @@ using Triven.Domain.Services;
 
 namespace Triven.API.Controllers
 {
-    [RoutePrefix("/api/vehicle-features")]
+    [RoutePrefix("api/vehicle-features")]
     public class VehicleFeatureController : BaseController
     {
         private readonly IVehicleFeatureService<ServiceResult> _service;

@@ -8,7 +8,7 @@ using Triven.Domain.ViewModels.BlobStorage;
 
 namespace Triven.API.Controllers
 {
-    [RoutePrefix("/api/blob")]
+    [RoutePrefix("api/blob")]
     public class BlobStorageController : BaseController
     {
         private readonly IBlobStorageService<ServiceResult> _service;

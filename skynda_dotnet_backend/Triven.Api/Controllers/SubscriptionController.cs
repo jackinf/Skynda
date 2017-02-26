@@ -6,7 +6,7 @@ using Triven.Domain.ViewModels.Email;
 
 namespace Triven.API.Controllers
 {
-    [RoutePrefix("/api/subscribe")]
+    [RoutePrefix("api/subscribe")]
     public class SubscriptionController : BaseController
     {
         private readonly ISubscriptionService<ServiceResult> _service;

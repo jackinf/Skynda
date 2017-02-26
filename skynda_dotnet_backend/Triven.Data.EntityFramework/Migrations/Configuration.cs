@@ -38,9 +38,9 @@ namespace Triven.Data.EntityFramework.Migrations
             // Seed classifications
             //
 
-            //var admin = context.Users.Single(x => x.Email == EmailSteve) as ApplicationUser;
-            var manager = new AppUserManager(new AppUserStore());
-            var admin = manager.FindByEmail(adminEmail) as ApplicationUser;
+            var admin = context.Users.Single(x => x.Email == adminEmail) as ApplicationUser;
+            //var manager = new AppUserManager(new AppUserStore());
+            //var admin = manager.FindByEmail(adminEmail) as ApplicationUser;
 
             var classificationType_paymentType = new ClassificationType
             {
@@ -160,6 +160,7 @@ namespace Triven.Data.EntityFramework.Migrations
                 ModifierUserIp = ModifierUserIp,
                 Classifications = new List<Classification>
                 {
+                    // TODO: I forgot value2 :/
                     Factory.CreateClassification("Sedan", "SEDAN",admin, "vehicle",1),
                     Factory.CreateClassification("Hatchback", "HATCHBACK",admin, "vehicle",2),
                     Factory.CreateClassification("Touring", "TOURING",admin, "vehicle",3),
@@ -297,25 +298,13 @@ namespace Triven.Data.EntityFramework.Migrations
 
         static class Factory
         {
-            public static ClassificationType CreateClassificationType(string name, string value, ApplicationUser user, params Classification[] classifications)
-            {
-                return new ClassificationType
-                {
-                    Name = name,
-                    Description = value,
-                    Creator = user,
-                    CreatedOn = DateTime.Now,
-                    ModifierUserIp = ModifierUserIp,
-                    Classifications = classifications.ToList()
-                };
-            }
-
             public static Classification CreateClassification(
                 string name,
                 string value,
                 ApplicationUser user,
                 string description = null,
-                int weight = 1)
+                int weight = 1,
+                string value2 = null)
             {
                 return new Classification
                 {
@@ -326,7 +315,8 @@ namespace Triven.Data.EntityFramework.Migrations
                     Value = value,
                     Creator = user,
                     CreatedOn = DateTime.Now,
-                    ModifierUserIp = ModifierUserIp
+                    ModifierUserIp = ModifierUserIp,
+                    Value2 = value2
                 };
             }
         }
