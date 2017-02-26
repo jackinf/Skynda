@@ -1,15 +1,27 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using EntityFramework.Extensions;
 using Triven.Data.EntityFramework.Models;
 using Triven.Data.EntityFramework.Repositories.Base;
 using Triven.Domain.Repositories;
+using Triven.Domain.Results;
 using Triven.Domain.ViewModels.Vehicle.Requests;
 
 namespace Triven.Data.EntityFramework.Repositories
 {
     public class VehicleRepository : BaseCrudRepository<Vehicle>, IVehicleRepository<Vehicle>
     {
+        public Vehicle GetIncluding(int id, bool descriptions = false, bool images = false) 
+            => BaseQuery().Include(x => x.Images).Include(x => x.Descriptions).FirstOrDefault();
+
+        public IResult<Vehicle> Update(int id, Vehicle model, List<int> toDeleteDescriptionIds = null, List<int> toDeleteImageIds = null)
+        {
+            _context.VehicleDescriptions.Where(x => toDeleteDescriptionIds.Any(xx => xx == x.Id)).Delete();
+            _context.VehicleImages.Where(x => toDeleteImageIds.Any(xx => xx == x.Id)).Delete();
+            return base.Update(id, model);
+        }
+
         public IList<Vehicle> Search(SearchRequestViewModel dto)
         {
             var query = BaseQuery().Include(x => x.VehicleModel);

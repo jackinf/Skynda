@@ -28,10 +28,10 @@ namespace Triven.Domain.ViewModels.Vehicle
         public VehicleModelViewModel Model { get; set; }
         public int SafetyStars { get; set; }
         public string SafetyUrl { get; set; }
-        public List<FeatureAdminSelectViewModel> FeaturesAdminSelect { get; set; }
-        public List<FaultBaseViewModel> Faults { get; set; }
-        public List<ImageContainerViewModel> Images { get; set; }
-        public List<VehicleDescriptionViewModel> Descriptions { get; set; }
+        public List<FeatureAdminSelectViewModel> FeaturesAdminSelect { get; set; } = new List<FeatureAdminSelectViewModel>();
+        public List<FaultBaseViewModel> Faults { get; set; } = new List<FaultBaseViewModel>();
+        public List<ImageContainerViewModel> Images { get; set; } = new List<ImageContainerViewModel>();
+        public List<VehicleDescriptionViewModel> Descriptions { get; set; } = new List<VehicleDescriptionViewModel>();
         public ImageViewModel GetImage { get; set; }
     }
 }
