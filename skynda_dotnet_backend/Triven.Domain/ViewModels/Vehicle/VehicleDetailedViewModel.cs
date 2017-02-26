@@ -8,7 +8,6 @@ namespace Triven.Domain.ViewModels.Vehicle
 {
     public class VehicleDetailedViewModel : BaseViewModel, ImageStorable<ImageViewModel>
     {
-        public int Id { get; set; }
         public string VinCode { get; set; }
         public decimal Price { get; set; }
         public string RegistrationNumber { get; set; }

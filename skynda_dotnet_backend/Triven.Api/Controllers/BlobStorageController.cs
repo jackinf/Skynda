@@ -5,7 +5,7 @@ using Triven.Domain.ViewModels.BlobStorage;
 
 namespace Triven.API.Controllers
 {
-    [System.Web.Mvc.RoutePrefix("/api/blob")]
+    [RoutePrefix("/api/blob")]
     public class BlobStorageController : BaseController
     {
         private readonly dynamic _service; // TODO: use correct type

@@ -6,8 +6,9 @@ namespace Triven.Domain.Services
     public interface IVehicleReportService<out TResult> where TResult : IServiceResult
     {
         TResult GetAll();
-        TResult GetSingleBy(int id);
-        TResult CreateOrUpdate(VehicleReportViewModel dto);
+        TResult Get(int id);
+        TResult Create(VehicleReportViewModel dto);
+        TResult Update(int id, VehicleReportViewModel dto);
         TResult Delete(int id);
         TResult GetAllBy(int vehicleId);
     }

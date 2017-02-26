@@ -6,13 +6,10 @@ namespace Triven.Domain.Services
     public interface IVehicleReviewService<out TResult> where TResult : IServiceResult
     {
         TResult GetAll();
-
-        TResult GetSingleBy(int id);
-
-        TResult CreateOrUpdate(VehicleReviewViewModel dto);
-
+        TResult Get(int id);
+        TResult Create(VehicleReviewViewModel dto);
+        TResult Update(int id, VehicleReviewViewModel dto);
         TResult Delete(int id);
-
         TResult GetAllBy(int vehicleId);
     }
 }

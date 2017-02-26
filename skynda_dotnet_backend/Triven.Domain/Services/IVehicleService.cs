@@ -11,7 +11,7 @@ namespace Triven.Domain.Services
     *
     * @return all vehicles
     */
-        TResult GetVehicles();
+        TResult GetAll();
 
         /**
          * Adds new vehicle for sale
@@ -19,7 +19,15 @@ namespace Triven.Domain.Services
          * @param vehicleAdminDto Added vehicle's dto
          * @return Response
          */
-        TResult CreateOrUpdateVehicle(VehicleAdminViewModel vehicleAdminDto);
+        TResult Create(VehicleAdminViewModel viewModel);
+
+        /// <summary>
+        /// Update a vehicle
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="viewModel"></param>
+        /// <returns></returns>
+        TResult Update(int id, VehicleAdminViewModel viewModel);
 
         /**
          * Gets a single vehicle. Used for udpating a vehicle.
@@ -27,7 +35,7 @@ namespace Triven.Domain.Services
          * @param id vehicle's id
          * @return single vehicle's dto
          */
-        TResult GetVehicle(int id);
+        TResult Get(int id);
 
         /**
          * Gets a single vehicle. Used for displaying full info about the vehicle to the user
@@ -35,7 +43,7 @@ namespace Triven.Domain.Services
          * @param id vehicle's id
          * @return single vehicle's dto
          */
-        TResult GetVehicleDetailed(int id);
+        TResult GetDetailed(int id);
 
         /**
          * Delets a single vehicle
@@ -43,7 +51,7 @@ namespace Triven.Domain.Services
          * @param id vehicle's id
          * @return Is the deletion successful or not
          */
-        TResult DeleteVehicle(int id);
+        TResult Delete(int id);
 
         /**
          * Search vehicles. Used for displaying full info about the vehicle to the user

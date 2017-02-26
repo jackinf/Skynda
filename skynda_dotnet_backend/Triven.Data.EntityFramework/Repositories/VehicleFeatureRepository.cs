@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Triven.Data.EntityFramework.Models;
 using Triven.Data.EntityFramework.Repositories.Base;
 using Triven.Domain.Repositories;
-using Triven.Domain.ViewModels.Common;
 
 namespace Triven.Data.EntityFramework.Repositories
 {

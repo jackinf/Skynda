@@ -8,7 +8,8 @@ namespace Triven.Domain.Services
         TResult GetAll();
         TResult GetAllForAdminSelect();
         TResult GetSingleBy(int id);
-        TResult CreateOrUpdate(FeatureViewModel dto);
+        TResult Create(FeatureViewModel dto);
+        TResult Update(int id, FeatureViewModel dto);
         TResult Delete(int id);
         TResult GetAllBy(int vehicleId);
     }

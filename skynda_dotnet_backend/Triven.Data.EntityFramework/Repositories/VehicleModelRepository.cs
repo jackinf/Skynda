@@ -4,7 +4,6 @@ using System.Linq;
 using Triven.Data.EntityFramework.Models;
 using Triven.Data.EntityFramework.Repositories.Base;
 using Triven.Domain.Repositories;
-using Triven.Domain.ViewModels.Common;
 using Triven.Domain.ViewModels.Vehicle.Requests;
 
 namespace Triven.Data.EntityFramework.Repositories
