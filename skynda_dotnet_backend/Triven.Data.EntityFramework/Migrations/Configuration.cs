@@ -10,7 +10,7 @@ using Triven.Domain.Constants;
 
 namespace Triven.Data.EntityFramework.Migrations
 {
-    internal sealed class Configuration : DbMigrationsConfiguration<ApplicationDbContext>
+    public class Configuration : DbMigrationsConfiguration<ApplicationDbContext>
     {
         private const string ModifierUserIp = "127.0.0.1";
 
