@@ -1,8 +1,9 @@
 ﻿using System;
+using Triven.Domain.ViewModels.Common;
 
 namespace Triven.Domain.ViewModels.Classification
 {
-    public class ClassificationViewModel
+    public class ClassificationViewModel : BaseViewModel
     {
         public string Description { get; set; }
         public bool IsImported { get; set; }

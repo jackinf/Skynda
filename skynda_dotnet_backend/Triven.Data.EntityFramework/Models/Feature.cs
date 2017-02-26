@@ -5,7 +5,7 @@ using Triven.Domain.Models;
 namespace Triven.Data.EntityFramework.Models
 {
     [Table("Feature")]
-    public class Feature :AuditableModel, IFeature
+    public class Feature : AuditableModel, IFeature
     {
         public string Description { get; set; }
         public bool IsImported { get; set; }

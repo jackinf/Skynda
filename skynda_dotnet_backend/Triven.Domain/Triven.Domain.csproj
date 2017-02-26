@@ -166,6 +166,7 @@
     <Compile Include="ViewModels\BlobStorage\Response\BlobStorageUploadStreamResponseViewModel.cs" />
     <Compile Include="ViewModels\BlobStorage\UploadBlobViewModel.cs" />
     <Compile Include="ViewModels\Classification\ButtonAttributesViewModel.cs" />
+    <Compile Include="ViewModels\Classification\ClassificationTypeViewModel.cs" />
     <Compile Include="ViewModels\Classification\ClassificationViewModel.cs" />
     <Compile Include="ViewModels\Classification\ClassificationBaseViewModel.cs" />
     <Compile Include="ViewModels\Classification\ClassificationResponseViewModel.cs" />

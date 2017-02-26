@@ -1,7 +1,10 @@
-﻿using Triven.Application.Results;
+﻿using System.Collections.Generic;
+using AutoMapper;
+using Triven.Application.Results;
 using Triven.Data.EntityFramework.Models;
 using Triven.Domain.Repositories;
 using Triven.Domain.Services;
+using Triven.Domain.ViewModels.Classification;
 
 namespace Triven.Application.Services
 {
@@ -16,14 +19,16 @@ namespace Triven.Application.Services
 
         public ServiceResult GetByType(string type)
         {
-            var result = _classificationRepository.GetByType(type);
-            return ServiceResult.Factory.Success(result);
+            var results = _classificationRepository.GetByType(type);
+            var mappedResults = Mapper.Map<IList<ClassificationViewModel>>(results);
+            return ServiceResult.Factory.Success(mappedResults);
         }
 
         public ServiceResult GetByTypeAndVehicleBound(string type)
         {
-            var result = _classificationRepository.GetByTypeAndVehicleBound(type);
-            return ServiceResult.Factory.Success(result);
+            var results = _classificationRepository.GetByTypeAndVehicleBound(type);
+            var mappedResults = Mapper.Map<IList<ClassificationViewModel>>(results);
+            return ServiceResult.Factory.Success(mappedResults);
         }
     }
 }
