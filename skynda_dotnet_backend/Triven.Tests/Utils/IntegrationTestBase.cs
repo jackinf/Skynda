@@ -19,7 +19,7 @@ namespace Triven.Tests.Utils
             Initializer.Initialize();
 
             Context = ApplicationDbContext.Create();
-            Context.Database.Delete();
+            //Context.Database.Delete();    // TODO: tegelt pole ju vajadust andmebaasi kustutada enne teste?.. vajadusel saame ClearTable-tega tabelid tühjaks lasta
             Context.Database.CreateIfNotExists();
             var configuration = new Configuration();
             var migrator = new DbMigrator(configuration);
