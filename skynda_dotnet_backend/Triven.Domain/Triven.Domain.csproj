@@ -84,13 +84,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Constants\__ToDelete\Assignment.cs" />
     <Compile Include="Constants\Auth.cs" />
     <Compile Include="Constants\Base.cs" />
     <Compile Include="Constants\CustomClaimTypes.cs" />
     <Compile Include="Constants\Enums.cs" />
     <Compile Include="Constants\MessageTemplate.cs" />
-    <Compile Include="Constants\__ToDelete\Partner.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Infrastructure\Notice\ConfirmEmailNotice.cs" />
     <Compile Include="Infrastructure\Notice\NoticeBase.cs" />
@@ -109,28 +107,13 @@
     <Compile Include="Models\IVehicleReport.cs" />
     <Compile Include="Models\IVehicleReportItem.cs" />
     <Compile Include="Models\IVehicleReview.cs" />
-    <Compile Include="Models\__ToDelete\Assignment\IAssignmentModel.cs" />
-    <Compile Include="Models\__ToDelete\Assignment\IAssignmentAddressModel.cs" />
-    <Compile Include="Models\__ToDelete\Assignment\IAssignmentDriverInstructionModel.cs" />
-    <Compile Include="Models\__ToDelete\Assignment\IAssignmentPalletModel.cs" />
-    <Compile Include="Models\__ToDelete\Assignment\IAssignmentTransportDocumentModel.cs" />
-    <Compile Include="Models\__ToDelete\Assignment\IAssignmentVehicleModel.cs" />
     <Compile Include="Models\Base\IAuditableBaseModel.cs" />
     <Compile Include="Models\Classification\IClassificationModel.cs" />
     <Compile Include="Models\Classification\IClassificationValueModel.cs" />
     <Compile Include="Models\Classification\IClassificationValueTranslateModel.cs" />
-    <Compile Include="Models\__ToDelete\Driver\IDriverModel.cs" />
     <Compile Include="Models\IApplicationUser.cs" />
     <Compile Include="Models\Base\IBaseModel.cs" />
-    <Compile Include="Models\__ToDelete\ITodoModel.cs" />
-    <Compile Include="Models\__ToDelete\Message\IMessageModel.cs" />
-    <Compile Include="Models\__ToDelete\Partner\IPartnerContactPersonContactInfoModel.cs" />
-    <Compile Include="Models\__ToDelete\Partner\IPartnerContactPersonModel.cs" />
-    <Compile Include="Models\__ToDelete\Partner\IPartnerModel.cs" />
-    <Compile Include="Models\__ToDelete\Partner\IPartnerUsersModel.cs" />
     <Compile Include="Models\User\IApplicationUserContactInfo.cs" />
-    <Compile Include="Models\__ToDelete\Vehicle\IVehicleModel.cs" />
-    <Compile Include="Models\__ToDelete\Vehicle\IVehicleProperyModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\IClassificationRepository.cs" />
     <Compile Include="Repositories\IFeatureRepository.cs" />
@@ -146,19 +129,13 @@
     <Compile Include="Repositories\IVehicleReportRepository.cs" />
     <Compile Include="Repositories\IVehicleRepository.cs" />
     <Compile Include="Repositories\IVehicleReviewRepository.cs" />
-    <Compile Include="Repositories\__ToDelete\Assignment\IAssignmentRepository.cs" />
-    <Compile Include="Repositories\__ToDelete\Driver\IDriverRepository.cs" />
     <Compile Include="Repositories\IAccountRepository.cs" />
     <Compile Include="Repositories\Base\IBaseCrudRepository.cs" />
     <Compile Include="Repositories\Base\ICreate.cs" />
     <Compile Include="Repositories\Base\IDelete.cs" />
     <Compile Include="Repositories\Base\IGet.cs" />
-    <Compile Include="Repositories\__ToDelete\Message\IMessageRepository.cs" />
-    <Compile Include="Repositories\__ToDelete\Partner\IPartnerRepository.cs" />
-    <Compile Include="Repositories\__ToDelete\Vehicle\IVehicleRepository.cs" />
     <Compile Include="Results\IServiceResult.cs" />
     <Compile Include="Repositories\Base\IUpdate.cs" />
-    <Compile Include="Repositories\__ToDelete\ITodoRepository.cs" />
     <Compile Include="Services\IAccountService.cs" />
     <Compile Include="Services\IBlobStorageService.cs" />
     <Compile Include="Services\IFeatureService.cs" />
@@ -169,11 +146,7 @@
     <Compile Include="Services\IVehicleReportService.cs" />
     <Compile Include="Services\IVehicleReviewService.cs" />
     <Compile Include="Services\IVehicleService.cs" />
-    <Compile Include="Services\__ToDelete\IAssignmentService.cs" />
     <Compile Include="Services\IClassificationService.cs" />
-    <Compile Include="Services\__ToDelete\IMessageService.cs" />
-    <Compile Include="Services\__ToDelete\IPartnerService.cs" />
-    <Compile Include="Services\__ToDelete\ITodoService.cs" />
     <Compile Include="Validators\IValidatorCommand.cs" />
     <Compile Include="ViewModelInterfaces\IAccountViewModel.cs" />
     <Compile Include="ViewModelInterfaces\__ToDelete\IAssignmentViewModel.cs" />
@@ -234,19 +207,7 @@
     <Compile Include="ViewModels\Vehicle\VehicleReportViewModel.cs" />
     <Compile Include="ViewModels\Vehicle\VehicleReviewViewModel.cs" />
     <Compile Include="ViewModels\Vehicle\VehicleSearchViewModel.cs" />
-    <Compile Include="ViewModels\__ToDelete\Assignment\AssignmentDisplayViewModel.cs" />
     <Compile Include="ViewModels\Base\BasicResponseViewModel.cs" />
-    <Compile Include="ViewModels\__ToDelete\Partner\ContactPerson\PartnerContactPersonInfoDisplayViewModel.cs" />
-    <Compile Include="ViewModels\__ToDelete\Partner\ContactPerson\PartnerContactPersonDisplayViewModel.cs" />
-    <Compile Include="ViewModels\__ToDelete\Partner\PartnerDisplayViewModel.cs" />
-    <Compile Include="ViewModels\__ToDelete\Partner\PartnerPutViewModel.cs" />
-    <Compile Include="ViewModels\__ToDelete\Partner\PartnerStatusPutViewModel.cs" />
-    <Compile Include="ViewModels\__ToDelete\Partner\PartnerRegisterViewModel.cs" />
-    <Compile Include="ViewModels\__ToDelete\Partner\User\PartnerUserDisplayView.cs" />
-    <Compile Include="ViewModels\__ToDelete\Partner\Vehicle\PartnerVehicleDisplayViewModel.cs" />
-    <Compile Include="ViewModels\__ToDelete\TodoDisplayViewModel.cs" />
-    <Compile Include="ViewModels\__ToDelete\TodoPostViewModel.cs" />
-    <Compile Include="ViewModels\__ToDelete\TodoPutViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Repositories\User\" />

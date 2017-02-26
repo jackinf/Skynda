@@ -8,18 +8,16 @@
             /// Administrator
             /// </summary>
             Admin,
+
             /// <summary>
-            /// Partner
+            /// Person, who uploads the vehicles
             /// </summary>
-            Partner,
+            VehicleManager,
+
             /// <summary>
-            /// Normal user (partners users)
+            /// Normal user
             /// </summary>
-            User,
-            /// <summary>
-            /// Driver 
-            /// </summary>
-            Driver
+            User
         }
     }
 }

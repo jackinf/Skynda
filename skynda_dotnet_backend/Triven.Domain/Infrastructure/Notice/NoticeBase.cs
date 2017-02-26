@@ -2,7 +2,6 @@
 using System.Collections.Specialized;
 using System.Linq;
 using System.Net.Mail;
-using Triven.Domain.Models.Message;
 
 namespace Triven.Domain.Infrastructure.Notice
 {
@@ -13,7 +12,7 @@ namespace Triven.Domain.Infrastructure.Notice
 
         protected virtual string[] Fields { get; set; }
 
-        protected IMessageModel Template { get; set; }
+        //protected IMessageModel Template { get; set; }
 
         // Creates and initializes a new ListDictionary.
         protected ListDictionary ReplacementFields { get; set; } = new ListDictionary();
@@ -38,23 +37,23 @@ namespace Triven.Domain.Infrastructure.Notice
             return Fields;
         }
 
-        /// <summary>
-        /// Return notice template
-        /// </summary>
-        /// <returns></returns>
-        public IMessageModel GetTemplate()
-        {
-            return Template;
-        }
+        ///// <summary>
+        ///// Return notice template
+        ///// </summary>
+        ///// <returns></returns>
+        //public IMessageModel GetTemplate()
+        //{
+        //    return Template;
+        //}
 
-        /// <summary>
-        /// Set template
-        /// </summary>
-        /// <param name="template"></param>
-        public void SetTemplate(IMessageModel template)
-        {
-            Template = template;
-        }
+        ///// <summary>
+        ///// Set template
+        ///// </summary>
+        ///// <param name="template"></param>
+        //public void SetTemplate(IMessageModel template)
+        //{
+        //    Template = template;
+        //}
 
         /// <summary>
         /// Add new replavement value for vars

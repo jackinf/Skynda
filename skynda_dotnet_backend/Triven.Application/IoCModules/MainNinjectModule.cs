@@ -4,11 +4,7 @@ using Triven.Application.Services;
 using Triven.Data.EntityFramework.Models;
 using Triven.Data.EntityFramework.Models.User;
 using Triven.Data.EntityFramework.Repositories;
-using Triven.Domain.Models;
 using Triven.Domain.Repositories;
-using Triven.Domain.Repositories.Assignment;
-using Triven.Domain.Repositories.Message;
-using Triven.Domain.Repositories.Partner;
 using Triven.Domain.Services;
 
 namespace Triven.Application.IoCModules

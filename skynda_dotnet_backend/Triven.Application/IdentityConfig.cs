@@ -6,7 +6,6 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Triven.Application.Services.Messages;
 using Triven.Data.EntityFramework;
-using Triven.Data.EntityFramework.Models;
 using Triven.Data.EntityFramework.Models.User;
 using Triven.Domain.ViewModels.Email;
 

@@ -36,8 +36,8 @@ namespace Triven.Data.EntityFramework.Models.User
         [NotMapped]
         public Status Status { get; set; }
 
+        [Obsolete("Not needed")]
         public virtual List<UserContactInfo> ContactInfos { get; set; } = new List<UserContactInfo>();
-        
 
         public DateTime? UpdatedOn { get; set; }
         public DateTime? DeletedOn { get; set; }

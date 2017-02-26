@@ -11,6 +11,8 @@ namespace Triven.Data.EntityFramework.Migrations
 {
     internal sealed class Configuration : DbMigrationsConfiguration<ApplicationDbContext>
     {
+        private const string ModifierUserIp = "127.0.0.1";
+
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
@@ -22,8 +24,98 @@ namespace Triven.Data.EntityFramework.Migrations
             //  Seed application roles
             //
 
+            CreateNewRoles(context);
+
+            //
+            //  Seed application users
+            //
+
+           var adminEmail = CreateAdmin(context);
+            CreateVehicleManager(context);
+
+            //
+            // Seed classifications
+            //
+
+            //var admin = context.Users.Single(x => x.Email == EmailSteve) as ApplicationUser;
+            var manager = new AppUserManager(new AppUserStore());
+            var admin = manager.FindByEmail(adminEmail) as ApplicationUser;
+
+            var classificationType_paymentType = new ClassificationType
+            {
+                Name = DatabaseConstants.ClassificationTypeName.PAYMENT_TYPE,
+                Description = "single or recurring payment",
+                Creator = admin,
+                CreatedOn = DateTime.Now,
+                ModifierUserIp = ModifierUserIp
+            };
+            var classificationType_drivetrain = new ClassificationType
+            {
+                Name = DatabaseConstants.ClassificationTypeName.DRIVETRAIN,
+                Description = "vehicle drivetrain",
+                Creator = admin,
+                CreatedOn = DateTime.Now,
+                ModifierUserIp = ModifierUserIp
+            };
+            var classificationType_transmission = new ClassificationType
+            {
+                Name = DatabaseConstants.ClassificationTypeName.TRANSMISSION,
+                Description = "transmission type",
+                Creator = admin,
+                CreatedOn = DateTime.Now,
+                ModifierUserIp = ModifierUserIp
+            };
+            var classificationType_paymentStatus = new ClassificationType
+            {
+                Name = DatabaseConstants.ClassificationTypeName.PAYMENT_STATUS,
+                Description = "payment status",
+                Creator = admin,
+                CreatedOn = DateTime.Now,
+                ModifierUserIp = ModifierUserIp
+            };
+            var classificationType_manufacturer = new ClassificationType
+            {
+                Name = DatabaseConstants.ClassificationTypeName.MANUFACTURER,
+                Description = "vehicles manufacturer",
+                Creator = admin,
+                CreatedOn = DateTime.Now,
+                ModifierUserIp = ModifierUserIp
+            };
+            var classificationType_fuel = new ClassificationType
+            {
+                Name = DatabaseConstants.ClassificationTypeName.FUEL,
+                Description = "fuel type",
+                Creator = admin,
+                CreatedOn = DateTime.Now,
+                ModifierUserIp = ModifierUserIp
+            };
+            var classificationType_body = new ClassificationType
+            {
+                Name = DatabaseConstants.ClassificationTypeName.VEHICLE_BODY,
+                Description = "vehicle body",
+                Creator = admin,
+                CreatedOn = DateTime.Now,
+                ModifierUserIp = ModifierUserIp
+            };
+            context.ClassificationTypes.AddOrUpdate(x => x.Name, 
+                classificationType_paymentType,
+                classificationType_drivetrain,
+                classificationType_transmission,
+                classificationType_paymentStatus,
+                classificationType_manufacturer,
+                classificationType_fuel,
+                classificationType_body
+            );
+            context.SaveChanges();
+
+
+        }
+
+        private static void CreateNewRoles(ApplicationDbContext context)
+        {
             var roleStore = new RoleStore<AppRole, int, AppUserRole>(context);
             var roleManager = new ApplicationRoleManager(roleStore);
+
             string[] roles = Enum.GetNames(typeof(Auth.Roles));
             foreach (string role in roles)
             {
@@ -34,23 +126,23 @@ namespace Triven.Data.EntityFramework.Migrations
                     roleManager.Create(newRole);
                 }
             }
+        }
 
-            //
-            //  Seed application admin user
-            //
-
-            string userName = "root@speys.com";
-            if (context.Users.Count(x => x.Email == userName) == 0)
+        private static string CreateAdmin(ApplicationDbContext context)
+        {
+            const string EmailSteve = "steve@steve.com";
+            if (context.Users.Count(x => x.Email == EmailSteve) == 0)
             {
-                string password = "Hammer&Nail";
+                string password = "123456aA!";
                 var manager = new AppUserManager(new AppUserStore());
 
                 var newUser = new ApplicationUser();
-                newUser.UserName = newUser.Email = userName;
-                newUser.FirstName = "Speys";
+                newUser.Email = EmailSteve;
+                newUser.UserName = "steve";
+                newUser.FirstName = "Triven";
                 newUser.LastName = "Administrator";
-                newUser.Password = password;
-                newUser.PasswordConfirm = password;
+                newUser.Password = password; // this assignment is obsolete i think
+                newUser.PasswordConfirm = password; // this assignment is obsolete i think
                 newUser.CreatedOn = DateTime.Now;
                 newUser.IsActive = true;
                 newUser.IsAdmin = true;
@@ -67,25 +159,40 @@ namespace Triven.Data.EntityFramework.Migrations
 
                 context.SaveChanges();
             }
+            return EmailSteve;
+        }
 
-            ////
-            //// Message template confirm email
-            ////
+        private static void CreateVehicleManager(ApplicationDbContext context)
+        {
+            string emailBill = "bill@bill.com";
+            if (context.Users.Count(x => x.Email == emailBill) == 0)
+            {
+                string password = "123456aA!";
+                var manager = new AppUserManager(new AppUserStore());
 
-            //var repository = new MessageTemplateRepository();
-            //if (repository.GetByNameAndLocale(MessageTemplates.ConfirmEmail.ToString(), Language.en.ToString()) == null)
-            //{
-            //    var messageTemplate = new MessageTemplateModel()
-            //    {
-            //        Name = MessageTemplates.ConfirmEmail.ToString(),
-            //        //Title = "Plase confirm your Speys account",
-            //        Locale = Language.en,
-            //        Message = "<div>Dear {COMPANY_NAME},<br/> Thank you for your registration. Please confirm your email {EMAIL} <a href='{URL}'>{URL}</a></div>",
-            //        Fields = "[" + ConfirmEmailNotice.VarEmail + "," + ConfirmEmailNotice.VarCompanyName + "," + ConfirmEmailNotice.VarUrl + "]"
-            //    };
-            //    repository.Add(messageTemplate);
-            //    context.SaveChanges();
-            //}
+                var newUser = new ApplicationUser();
+                newUser.Email = emailBill;
+                newUser.UserName = "bill";
+                newUser.FirstName = "Triven";
+                newUser.LastName = "Vehicle Manager";
+                newUser.Password = password; // this assignment is obsolete i think
+                newUser.PasswordConfirm = password; // this assignment is obsolete i think
+                newUser.CreatedOn = DateTime.Now;
+                newUser.IsActive = true;
+                newUser.IsAdmin = true;
+                newUser.EmailConfirmed = true;
+                newUser.Status = Status.Active;
+                newUser.CreatedOn = DateTime.Now;
+                newUser.UpdatedOn = DateTime.Now;
+                var result = manager.CreateAsync(newUser, password);
+                if (result.Result.Succeeded)
+                {
+                    if (!manager.IsInRole(newUser.Id, Auth.Roles.VehicleManager.ToString()))
+                        manager.AddToRole(newUser.Id, Auth.Roles.VehicleManager.ToString());
+                }
+
+                context.SaveChanges();
+            }
         }
     }
 }

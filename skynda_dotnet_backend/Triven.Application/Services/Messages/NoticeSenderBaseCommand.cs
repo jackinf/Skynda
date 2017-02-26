@@ -1,9 +1,9 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Net.Mail;
 using System.Web.UI.WebControls;
 using Triven.Domain.Constants;
 using Triven.Domain.Infrastructure.Notice;
-using Triven.Domain.Repositories.Message;
 
 namespace Triven.Application.Services.Messages
 {
@@ -32,8 +32,8 @@ namespace Triven.Application.Services.Messages
         public bool Send()
         {
             //GetMessageTemplate();
-            if (Notice.GetTemplate() == null)
-                return false;
+            //if (Notice.GetTemplate() == null)
+            //    return false;
 
             MailMessage message = CreateMessage(Notice);
             if (!string.IsNullOrEmpty(message.Body) && message.To.Count > 0)
@@ -68,7 +68,9 @@ namespace Triven.Application.Services.Messages
             MailMessage message = new MailMessage();
             message.From = new MailAddress(
                                "no-reply@speys.com", "Speys");
-            var template = notice.GetTemplate();
+            //var template = notice.GetTemplate();
+            dynamic template = null;
+            throw new NotImplementedException();
             if (template == null)
                 return message;
 
