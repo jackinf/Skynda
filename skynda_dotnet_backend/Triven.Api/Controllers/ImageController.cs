@@ -1,23 +1,21 @@
 ﻿using System.Web.Http;
+using Triven.Application;
+using Triven.Application.Results;
+using Triven.Domain.Services;
 
 namespace Triven.API.Controllers
 {
     [RoutePrefix("/api/iamge")]
     public class ImageController : BaseController
     {
-        private readonly dynamic _service; // TODO: use correct type
+        private readonly IImageService<ServiceResult> _service;
 
         public ImageController()
         {
-            _service = null;  // TODO: inject service
+            _service = IoC.Get<IImageService<ServiceResult>>();
         }
 
         [HttpGet, Route("list")]
-        public IHttpActionResult List([FromBody] string containerName)
-        {
-            var result = _service.subscribe(containerName);
-            return result.IsSuccessful ? Ok(result.Payload) : ReturnErrorResult(result.Validation);
-        }
-
+        public IHttpActionResult List([FromBody] string containerName) => HandleResult(_service.List(containerName));
     }
 }

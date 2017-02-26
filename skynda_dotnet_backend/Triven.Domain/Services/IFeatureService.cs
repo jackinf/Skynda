@@ -7,7 +7,7 @@ namespace Triven.Domain.Services
     {
         TResult GetAll();
         TResult GetAllForAdminSelect();
-        TResult GetSingleBy(int id);
+        TResult Get(int id);
         TResult Create(FeatureViewModel dto);
         TResult Update(int id, FeatureViewModel dto);
         TResult Delete(int id);

@@ -1,5 +1,8 @@
 ﻿using System.Web.Http;
 using Microsoft.AspNet.Identity;
+using Triven.Application;
+using Triven.Application.Results;
+using Triven.Domain.Services;
 using Triven.Domain.ViewModels.Vehicle;
 using Triven.Domain.ViewModels.Vehicle.Requests;
 
@@ -8,61 +11,35 @@ namespace Triven.API.Controllers
     [RoutePrefix("/api/vehicle-model")]
     public class VehicleModelController : BaseController
     {
-        private readonly dynamic _service;
-        //private readonly IVehicleModelService<ServiceResult> _service; // TODO: use this
+        private readonly IVehicleModelService<ServiceResult> _service;
 
         public VehicleModelController()
         {
-            //_service = IoC.Get<IVehicleModelService<ServiceResult>>(); // TODO: Use this
+            _service = IoC.Get<IVehicleModelService<ServiceResult>>();
         }
 
+        // TODO: Use vehicle model search params
         [HttpGet, Route("~/api/vehicle-models")]
-        public IHttpActionResult GetAll([FromBody] dynamic viewModel)   // Use vehicle model search params
-        {
-            var result = _service.GetAll(viewModel);
-            return result.IsSuccessful ? Ok(result.Payload) : ReturnErrorResult(result.Validation);
-        }
+        public IHttpActionResult GetAll([FromBody] VehicleModelViewModel viewModel) => HandleResult(_service.GetAll());
 
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [HttpGet, Route("{id:int}")]
-        public IHttpActionResult Get([FromUri] int id)
-        {
-            var result = _service.Get(id);
-            return result.IsSuccessful ? Ok(result.Payload) : ReturnErrorResult(result.Validation);
-        }
-        
+        public IHttpActionResult Get([FromUri] int id) => HandleResult(_service.Get(id));
+
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [HttpPost, Route("{id:int}")]
-        public IHttpActionResult Add([FromBody] VehicleModelViewModel viewModel)
-        {
-            viewModel.Id = 0;
-            var result = _service.CreateOrUpdate(viewModel, ModelState);
-            return result.IsSuccessful ? Ok(result.Payload) : ReturnErrorResult(result.Validation);
-        }
+        public IHttpActionResult Add([FromBody] VehicleModelViewModel viewModel) => HandleResult(_service.Create(viewModel));
 
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [HttpPut, Route("{id:int}")]
-        public IHttpActionResult Update([FromUri] int id, [FromBody] VehicleModelViewModel viewModel)
-        {
-            viewModel.Id = id;
-            var result = _service.CreateOrUpdate(viewModel, ModelState);
-            return result.IsSuccessful ? Ok(result.Payload) : ReturnErrorResult(result.Validation);
-        }
+        public IHttpActionResult Update([FromUri] int id, [FromBody] VehicleModelViewModel viewModel) => HandleResult(_service.Update(id, viewModel));
 
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [HttpDelete, Route("{id:int}")]
-        public IHttpActionResult Delete([FromUri] int id)
-        {
-            var result = _service.Delete(id);
-            return result.IsSuccessful ? Ok(result.Payload) : ReturnErrorResult(result.Validation);
-        }
+        public IHttpActionResult Delete([FromUri] int id) => HandleResult(_service.Delete(id));
 
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [HttpGet, Route("vehicle-models-by-manufacturers")]
-        public IHttpActionResult GetAllByManufacturers(VehicleModelSearchRequestViewModel searchParams)
-        {
-            var result = _service.Search(searchParams);
-            return result.IsSuccessful ? Ok(result.Payload) : ReturnErrorResult(result.Validation);
-        }
+        public IHttpActionResult GetAllByManufacturers(VehicleModelSearchRequestViewModel searchParams) => HandleResult(_service.Search(searchParams));
     }
 }

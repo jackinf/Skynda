@@ -28,7 +28,7 @@ namespace Triven.Application.Services
             throw new NotImplementedException("What is this method for?");    // TODO: implement or remove.
         }
 
-        public ServiceResult GetSingleBy(int id)
+        public ServiceResult Get(int id)
         {
             var result = _featureRepository.Get(id);
             return ServiceResult.Factory.Success(result);
