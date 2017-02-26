@@ -5,7 +5,7 @@ using Triven.Domain.Services;
 
 namespace Triven.API.Controllers
 {
-    [RoutePrefix("api/iamge")]
+    [RoutePrefix("api/image")]
     public class ImageController : BaseController
     {
         private readonly IImageService<ServiceResult> _service;
