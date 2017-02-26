@@ -19,10 +19,7 @@ namespace Triven.API.Controllers
         }
 
         [HttpPost, Route("create_container")]   // TODO: use create-container
-        public IHttpActionResult CreateContainer([FromBody] CreateContainerViewModel viewModel)
-        {
-            return HandleResult(_service.CreateContainer(viewModel));
-        }
+        public IHttpActionResult CreateContainer([FromBody] CreateContainerViewModel viewModel) => HandleResult(_service.CreateContainer(viewModel));
 
         [HttpPost, Route("upload")]
         public IHttpActionResult Upload([FromBody] UploadBlobViewModel viewModel, MultipartFileData file)
@@ -33,22 +30,12 @@ namespace Triven.API.Controllers
         }
 
         [HttpPost, Route("list")]
-        public IHttpActionResult List(ListBlobsViewModel viewModel)
-        {
-            return HandleResult(_service.List(viewModel));
-        }
+        public IHttpActionResult List(ListBlobsViewModel viewModel) => HandleResult(_service.List(viewModel));
 
         [HttpPost, Route("download")]
-        public IHttpActionResult Download(DownloadBlobViewModel viewModel)
-        {
-            return HandleResult(_service.Download(viewModel));
-        }
+        public IHttpActionResult Download(DownloadBlobViewModel viewModel) => HandleResult(_service.Download(viewModel));
 
         [HttpPost, Route("delete")]
-        public IHttpActionResult Download(DeleteBlobViewModel viewModel)
-        {
-            return HandleResult(_service.Delete(viewModel));
-        }
-
+        public IHttpActionResult Download(DeleteBlobViewModel viewModel) => HandleResult(_service.Delete(viewModel));
     }
 }

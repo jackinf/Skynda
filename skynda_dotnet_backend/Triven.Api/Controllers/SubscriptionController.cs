@@ -16,12 +16,8 @@ namespace Triven.API.Controllers
             _service = IoC.Get<ISubscriptionService<ServiceResult>>();
         }
 
+        // TODO: validate
         [HttpPost, Route("")]
-        public IHttpActionResult SubscribeEmail([FromBody] EmailSubscribeViewModel viewModel)
-        {
-            // TODO: validate
-            var result = _service.Subscribe(viewModel);
-            return result.IsSuccessful ? Ok(result.Payload) : ReturnErrorResult(result.Validation);
-        }
+        public IHttpActionResult SubscribeEmail([FromBody] EmailSubscribeViewModel viewModel) => HandleResult(_service.Subscribe(viewModel));
     }
 }

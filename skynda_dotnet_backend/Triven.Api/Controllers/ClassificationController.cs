@@ -16,15 +16,9 @@ namespace Triven.API.Controllers
         }
 
         [HttpGet, Route("{type}")]
-        public IHttpActionResult GetAll([FromUri] string type)
-        {
-            return HandleResult(_service.GetByType(type));
-        }
+        public IHttpActionResult GetAll([FromUri] string type) => HandleResult(_service.GetByType(type));
 
         [HttpGet, Route("{type}/vehicle-bound")]
-        public IHttpActionResult GetVehicleBound([FromUri] string type)
-        {
-            return HandleResult(_service.GetByTypeAndVehicleBound(type));
-        }
+        public IHttpActionResult GetVehicleBound([FromUri] string type) => HandleResult(_service.GetByTypeAndVehicleBound(type));
     }
 }

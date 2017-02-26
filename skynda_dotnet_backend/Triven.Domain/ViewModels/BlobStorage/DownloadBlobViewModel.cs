@@ -3,5 +3,6 @@
     public class DownloadBlobViewModel
     {
         public string ContainerName { get; set; }
+        public string BlobName { get; set; }
     }
 }
