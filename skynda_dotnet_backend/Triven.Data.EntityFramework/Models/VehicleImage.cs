@@ -8,14 +8,11 @@ namespace Triven.Data.EntityFramework.Models
     [Table("VehicleImage")]
     public class VehicleImage : AuditableModel, IVehicleImage
     {
-        [Key]
-        [ForeignKey("Vehicle")]
+        [Column(Order = 0), Key, ForeignKey(nameof(Vehicle))]
         public int VehicleId { get; set; }
-
         public virtual Vehicle Vehicle { get; set; }
 
-        [Key]
-        [ForeignKey("Image")]
+        [Column(Order = 1), Key, ForeignKey(nameof(Image))]
         public int ImageId { get; set; }
 
         [Required]

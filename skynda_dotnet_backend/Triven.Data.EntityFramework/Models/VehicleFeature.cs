@@ -8,13 +8,11 @@ namespace Triven.Data.EntityFramework.Models
     [Table("VehicleFeature")]
     public class VehicleFeature : AuditableModel, IVehicleFeature
     {
-        [Key]
-        [ForeignKey("Feature")]
+        [Column(Order = 0), Key, ForeignKey(nameof(Feature))]
         public int FeatureId { get; set; }   
         public Feature Feature { get; set; }
 
-        [Key]
-        [ForeignKey("Vehicle")]
+        [Column(Order = 1), Key, ForeignKey(nameof(Vehicle))]
         public int VehicleId { get; set; }
         public Vehicle Vehicle { get; set; }
     }

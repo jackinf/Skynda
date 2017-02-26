@@ -8,7 +8,13 @@ namespace Triven.Data.EntityFramework.Models
     public class VehicleFault : AuditableModel, IVehicleFault
     {
         public string Text { get; set; }
+
+        [ForeignKey(nameof(Image))]
         public int ImageId { get; set; }
-        public int ReportCategoryId { get; set; }
+        public Image Image { get; set; }
+
+        [ForeignKey(nameof(VehicleReport))]
+        public int VehicleReportId { get; set; }
+        public VehicleReport VehicleReport { get; set; }
     }
 }

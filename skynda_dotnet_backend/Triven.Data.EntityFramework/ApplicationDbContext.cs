@@ -1,10 +1,11 @@
 ﻿using System.Data.Entity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Triven.Data.EntityFramework.Models;
 using Triven.Data.EntityFramework.Models.User;
 
 //using Microsoft.AspNet.Identity.Owin;
 
-namespace Triven.Data.EntityFramework.Models
+namespace Triven.Data.EntityFramework
 {
 
     public class ApplicationDbContext : IdentityDbContext<AppUser, AppRole, int, AppUserLogin, AppUserRole, AppUserClaim>

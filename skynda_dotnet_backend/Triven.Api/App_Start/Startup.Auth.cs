@@ -6,6 +6,7 @@ using Microsoft.Owin.Security.OAuth;
 using Owin;
 using Triven.Application;
 using Triven.API.Providers;
+using Triven.Data.EntityFramework;
 using Triven.Data.EntityFramework.Models;
 using Triven.Data.EntityFramework.Models.User;
 

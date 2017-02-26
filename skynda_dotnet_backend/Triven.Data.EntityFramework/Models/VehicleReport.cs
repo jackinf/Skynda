@@ -11,16 +11,16 @@ namespace Triven.Data.EntityFramework.Models
         public string Title { get; set; }
         public string Description { get; set; }
 
-        [ForeignKey("Vehicle")]
+        [ForeignKey(nameof(Vehicle))]
         public int VehicleId { get; set; }
         public virtual Vehicle Vehicle { get; set; }
 
         public string Inspector { get; set; }
 
-        [InverseProperty("Parent")]
+        [InverseProperty(nameof(VehicleReportItem.Parent))]
         public List<VehicleReportItem> VehicleReportItems { get; set; } = new List<VehicleReportItem>();
 
-        [InverseProperty("ReportCategory")]
+        [InverseProperty(nameof(VehicleFault.VehicleReport))]
         public List<VehicleFault> Faults { get; set; } = new List<VehicleFault>();
     }
 }

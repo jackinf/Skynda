@@ -46,9 +46,9 @@ namespace Triven.Data.EntityFramework.Models
         /// <summary>
         /// Drivetrain
         /// </summary>
-        [Required]
         [ForeignKey("Drivetrain")]
         public int DrivetrainId { get; set; }
+        [Required]
         public virtual Classification Drivetrain { get; set; }
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace Triven.Data.EntityFramework.Models
         /// <summary>
         /// Fuel
         /// </summary>
-        [ForeignKey("FuelType")]
+        [ForeignKey(nameof(FuelType))]
         public int FuelTypeId { get; set; }
         [Required]
         public virtual Classification FuelType { get; set; }

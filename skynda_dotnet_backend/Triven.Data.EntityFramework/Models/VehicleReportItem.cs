@@ -11,7 +11,7 @@ namespace Triven.Data.EntityFramework.Models
         public string Title { get; set; }
         public string Text { get; set; }
 
-        [ForeignKey("Parent")]
+        [ForeignKey(nameof(Parent))]
         public int ParentId { get; set; }
         public VehicleReport Parent { get; set; }
     }

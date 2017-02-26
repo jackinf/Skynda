@@ -101,6 +101,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Migrations\201702261130301_Initial.cs" />
+    <Compile Include="Migrations\201702261130301_Initial.Designer.cs">
+      <DependentUpon>201702261130301_Initial.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\Classification.cs" />
@@ -116,7 +120,7 @@
     <Compile Include="Models\VehicleReview.cs" />
     <Compile Include="Models\Base\AuditableModel.cs" />
     <Compile Include="Models\Base\BaseModel.cs" />
-    <Compile Include="Models\ApplicationDbContext.cs" />
+    <Compile Include="ApplicationDbContext.cs" />
     <Compile Include="Models\User\ApplicationUser.cs" />
     <Compile Include="Models\User\UserContactInfo.cs" />
     <Compile Include="Models\VehicleDescription.cs" />
@@ -140,7 +144,6 @@
     <Compile Include="Repositories\Base\OnCreateOrUpdateResult.cs" />
     <Compile Include="Repositories\Base\RepositoryResult.cs" />
     <Compile Include="Repositories\ClassificationRepository.cs" />
-    <Compile Include="User.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
@@ -156,6 +159,11 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201702261130301_Initial.resx">
+      <DependentUpon>201702261130301_Initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
