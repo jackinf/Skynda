@@ -24,7 +24,7 @@ namespace Triven.API.Controllers
         }
 
 
-        [HttpPost, Route("subscribe")]
+        [HttpPost, Route("buy-vehicle")]
         public async Task<IHttpActionResult> PostEmailBuyVehicle([FromBody] EmailBuyVehicleViewModel viewModel)
         {
             // TODO: validate
@@ -33,7 +33,7 @@ namespace Triven.API.Controllers
         }
 
 
-        [HttpPost, Route("subscribe")]
+        [HttpPost, Route("sell-vehicle")]
         public async Task<IHttpActionResult> PostEmailSellVehicle([FromBody] EmailSellVehicleViewModel viewModel)
         {
             // TODO: validate
@@ -42,7 +42,7 @@ namespace Triven.API.Controllers
         }
 
 
-        [HttpPost, Route("subscribe")]
+        [HttpPost, Route("question")]
         public async Task<IHttpActionResult> PostEmailQuestion([FromBody] EmailQuestionViewModel viewModel)
         {
             // TODO: validate

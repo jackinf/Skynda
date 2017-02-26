@@ -30,7 +30,7 @@ namespace Triven.API.Controllers
         public IHttpActionResult Get([FromUri] int id) => HandleResult(_service.Get(id));
 
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
-        [HttpPost, Route("{id:int}")]
+        [HttpPost, Route("")]
         public IHttpActionResult Add([FromBody] VehicleReviewViewModel viewModel) => HandleResult(_service.Create(viewModel));
 
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]

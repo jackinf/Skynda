@@ -22,6 +22,8 @@ namespace Triven.Domain.Results
         /// Request message E.g for successful result
         /// </summary>
         string Message { get; set; }
+
+        TModel ContextObject { get; set; }
     }
 
     public interface IServiceResult

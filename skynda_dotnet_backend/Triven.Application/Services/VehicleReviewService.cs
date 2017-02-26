@@ -35,15 +35,17 @@ namespace Triven.Application.Services
         {
             var entity = Mapper.Map<VehicleReview>(viewModel);
             var result = _VehicleReviewRepository.Add(entity);
-            return ServiceResult.Factory.Success(result, result.Message);
+            var mappedResult = Mapper.Map<VehicleReviewViewModel>(result.ContextObject);
+            return ServiceResult.Factory.Success(mappedResult, result.Message);
         }
 
         public ServiceResult Update(int id, VehicleReviewViewModel viewModel)
         {
             var entity = _VehicleReviewRepository.Get(id);
             Mapper.Map(viewModel, entity);
-            var result = _VehicleReviewRepository.Add(entity);
-            return ServiceResult.Factory.Success(result, result.Message);
+            var result = _VehicleReviewRepository.Update(id, entity);
+            var mappedResult = Mapper.Map<VehicleReviewViewModel>(result.ContextObject);
+            return ServiceResult.Factory.Success(mappedResult, result.Message);
         }
 
         public ServiceResult Delete(int id)

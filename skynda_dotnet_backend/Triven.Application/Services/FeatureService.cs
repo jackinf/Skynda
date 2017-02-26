@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using AutoMapper;
 using Triven.Application.Results;
 using Triven.Data.EntityFramework.Models;
@@ -19,8 +21,9 @@ namespace Triven.Application.Services
 
         public ServiceResult GetAll()
         {
-            var result = _featureRepository.GetAll();
-            return ServiceResult.Factory.Success(result);
+            var results = _featureRepository.GetAll().ToList();
+            var mappedResults = Mapper.Map<IList<FeatureViewModel>>(results);
+            return ServiceResult.Factory.Success(mappedResults);
         }
 
         public ServiceResult GetAllForAdminSelect()
@@ -31,22 +34,25 @@ namespace Triven.Application.Services
         public ServiceResult Get(int id)
         {
             var result = _featureRepository.Get(id);
-            return ServiceResult.Factory.Success(result);
+            var mappedResult = Mapper.Map<FeatureViewModel>(result);
+            return ServiceResult.Factory.Success(mappedResult);
         }
 
-        public ServiceResult Create(FeatureViewModel dto)
+        public ServiceResult Create(FeatureViewModel viewModel)
         {
-            var feature = Mapper.Map<FeatureViewModel, Feature>(dto);
+            var feature = Mapper.Map<FeatureViewModel, Feature>(viewModel);
             var result = _featureRepository.Add(feature);
-            return ServiceResult.Factory.Success(result);
+            var mappedResult = Mapper.Map<FeatureViewModel>(result.ContextObject);
+            return ServiceResult.Factory.Success(mappedResult);
         }
 
-        public ServiceResult Update(int id, FeatureViewModel dto)
+        public ServiceResult Update(int id, FeatureViewModel viewModel)
         {
             var feature = _featureRepository.Get(id);
-            Mapper.Map(dto, feature);
-            var result = _featureRepository.Add(feature);
-            return ServiceResult.Factory.Success(result);
+            Mapper.Map(viewModel, feature);
+            var result = _featureRepository.Update(id, feature);
+            var mappedResult = Mapper.Map<FeatureViewModel>(result.ContextObject);
+            return ServiceResult.Factory.Success(mappedResult);
         }
 
         public ServiceResult Delete(int id)

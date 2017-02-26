@@ -18,18 +18,18 @@ namespace Triven.API.Controllers
         }
 
         // TODO: use search params
-        [HttpGet, Route("~/api/vehicle-features")]
+        [HttpGet, Route("~/api/features")]
         public IHttpActionResult GetAll() => HandleResult(_service.GetAll());
 
-        [HttpGet, Route("~/api/vehicle-features/{id:int}")]
-        public IHttpActionResult GetAllByVehicle([FromUri] int id) => HandleResult(_service.GetAllBy(id));
+        [HttpGet, Route("admin-select")]
+        public IHttpActionResult GetAllForAdminSelect([FromUri] int id) => HandleResult(_service.GetAllForAdminSelect());
 
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [HttpGet, Route("{id:int}")]
         public IHttpActionResult Get([FromUri] int id) => HandleResult(_service.Get(id));
 
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
-        [HttpPost, Route("{id:int}")]
+        [HttpPost, Route("")]
         public IHttpActionResult Add([FromBody] FeatureViewModel viewModel) => HandleResult(_service.Create(viewModel));
 
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]

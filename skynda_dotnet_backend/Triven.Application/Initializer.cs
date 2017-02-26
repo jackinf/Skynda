@@ -35,23 +35,30 @@ namespace Triven.Application
 
                 // Unsorted
                 configuration.CreateMap<Classification, ClassificationViewModel>();
-                configuration.CreateMap<ClassificationViewModel, Classification>();
+                configuration.CreateMap<ClassificationViewModel, Classification>()
+                    .ForMember(x => x.Id, opt => opt.Ignore());
 
                 configuration.CreateMap<ClassificationType, ClassificationTypeViewModel>();
-                configuration.CreateMap<ClassificationTypeViewModel, ClassificationType>().ForMember(x => x.Classifications, opt => opt.Ignore());
+                configuration.CreateMap<ClassificationTypeViewModel, ClassificationType>()
+                    .ForMember(x => x.Id, opt => opt.Ignore())
+                    .ForMember(x => x.Classifications, opt => opt.Ignore());
 
                 configuration.CreateMap<Feature, FeatureViewModel>();
-                configuration.CreateMap<FeatureViewModel, Feature>();
+                configuration.CreateMap<FeatureViewModel, Feature>()
+                    .ForMember(x => x.Id, opt => opt.Ignore());
 
                 configuration.CreateMap<Image, ImageViewModel>();
-                configuration.CreateMap<ImageViewModel, Image>();
+                configuration.CreateMap<ImageViewModel, Image>()
+                    .ForMember(x => x.Id, opt => opt.Ignore());
 
                 configuration.CreateMap<Subscription, SubscriptionViewModel>();
-                configuration.CreateMap<SubscriptionViewModel, Subscription>();
+                configuration.CreateMap<SubscriptionViewModel, Subscription>()
+                    .ForMember(x => x.Id, opt => opt.Ignore());
 
                 configuration.CreateMap<Vehicle, VehicleAdminViewModel>();
                 configuration.CreateMap<Vehicle, VehicleDetailedViewModel>();
                 configuration.CreateMap<VehicleAdminViewModel, Vehicle>()
+                    .ForMember(x => x.Id, opt => opt.Ignore())
                     .ForMember(x => x.Images, opt => opt.Ignore())
                     .ForMember(x => x.Descriptions, opt => opt.Ignore())
                     .ForMember(x => x.Features, opt => opt.Ignore())
@@ -59,19 +66,22 @@ namespace Triven.Application
                     .ForMember(x => x.Reviews, opt => opt.Ignore());
 
                 configuration.CreateMap<VehicleDescription, VehicleDescriptionViewModel>();
-                configuration.CreateMap<VehicleDescriptionViewModel, VehicleDescription>();
+                configuration.CreateMap<VehicleDescriptionViewModel, VehicleDescription>()
+                    .ForMember(x => x.Id, opt => opt.Ignore());
 
                 //configuration.CreateMap<VehicleFault, VehicleFaultViewModel>();
                 //configuration.CreateMap<VehicleFaultViewModel, VehicleFault>();
 
                 configuration.CreateMap<VehicleFeature, VehicleFeatureViewModel>();
-                configuration.CreateMap<VehicleFeatureViewModel, VehicleFeature>();
+                configuration.CreateMap<VehicleFeatureViewModel, VehicleFeature>()
+                    .ForMember(x => x.Id, opt => opt.Ignore());
 
                 //configuration.CreateMap<VehicleImage, VehicleImageViewModel>();
                 //configuration.CreateMap<VehicleImageViewModel, VehicleImage>();
 
                 configuration.CreateMap<VehicleModel, VehicleModelViewModel>();
                 configuration.CreateMap<VehicleModelViewModel, VehicleModel>()
+                    .ForMember(x => x.Id, opt => opt.Ignore())
                     .ForMember(x => x.VehicleManufacturer, opt => opt.Ignore())
                     .ForMember(x => x.Transmission, opt => opt.Ignore())
                     .ForMember(x => x.Drivetrain, opt => opt.Ignore())
@@ -80,14 +90,17 @@ namespace Triven.Application
 
                 configuration.CreateMap<VehicleReport, VehicleReportViewModel>();
                 configuration.CreateMap<VehicleReportViewModel, VehicleReport>()
+                    .ForMember(x => x.Id, opt => opt.Ignore())
                     .ForMember(x => x.VehicleReportItems, opt => opt.Ignore())
                     .ForMember(x => x.Faults, opt => opt.Ignore());
 
                 configuration.CreateMap<VehicleReportItem, VehicleReportItemViewModel>();
-                configuration.CreateMap<VehicleReportItemViewModel, VehicleReportItem>();
+                configuration.CreateMap<VehicleReportItemViewModel, VehicleReportItem>()
+                    .ForMember(x => x.Id, opt => opt.Ignore());
 
                 configuration.CreateMap<VehicleReview, VehicleReviewViewModel>();
-                configuration.CreateMap<VehicleReviewViewModel, VehicleReview>();
+                configuration.CreateMap<VehicleReviewViewModel, VehicleReview>()
+                    .ForMember(x => x.Id, opt => opt.Ignore());
 
                 //configuration.CreateMap<PartnerContactPersonDisplayViewModel, PartnerContactPersonModel>()
                 //    .ForMember(x => x.ContactInfos, opt => opt.Ignore());
