@@ -22,7 +22,6 @@ namespace Triven.Data.EntityFramework.Models
         /// </summary>
         [ForeignKey(nameof(ClassificationType))]
         public int ClassificationTypeId { get; set; }
-
         public ClassificationType ClassificationType { get; set; }
 
         public bool IsActive { get; set; }

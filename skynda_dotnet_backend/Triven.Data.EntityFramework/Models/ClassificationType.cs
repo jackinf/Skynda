@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using Triven.Data.EntityFramework.Models.Base;
 using Triven.Domain.Models;
 
@@ -9,5 +10,11 @@ namespace Triven.Data.EntityFramework.Models
     {
         public string Name { get; set; }
         public string Description { get; set; }
+
+        /// <summary>
+        /// Classifications
+        /// </summary>
+        [InverseProperty(nameof(Classification.ClassificationType))]
+        public IList<Classification> Classifications { get; set; } = new List<Classification>();
     }
 }

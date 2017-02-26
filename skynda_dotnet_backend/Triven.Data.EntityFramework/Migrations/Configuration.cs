@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using Microsoft.AspNet.Identity;
@@ -47,7 +48,12 @@ namespace Triven.Data.EntityFramework.Migrations
                 Description = "single or recurring payment",
                 Creator = admin,
                 CreatedOn = DateTime.Now,
-                ModifierUserIp = ModifierUserIp
+                ModifierUserIp = ModifierUserIp,
+                Classifications = new List<Classification>
+                {
+                    ImportClassification("Single payment", "FULL", admin),
+                    ImportClassification("Recurring payment", "RECURRING", admin)
+                }
             };
             var classificationType_drivetrain = new ClassificationType
             {
@@ -55,7 +61,13 @@ namespace Triven.Data.EntityFramework.Migrations
                 Description = "vehicle drivetrain",
                 Creator = admin,
                 CreatedOn = DateTime.Now,
-                ModifierUserIp = ModifierUserIp
+                ModifierUserIp = ModifierUserIp,
+                Classifications = new List<Classification>
+                {
+                    ImportClassification("Front-Wheel Drive", "FRONT", admin),
+                    ImportClassification("Rear-Wheel Drive", "REAR", admin),
+                    ImportClassification("Four-Wheel Drive", "ALL", admin)
+                }
             };
             var classificationType_transmission = new ClassificationType
             {
@@ -63,7 +75,13 @@ namespace Triven.Data.EntityFramework.Migrations
                 Description = "transmission type",
                 Creator = admin,
                 CreatedOn = DateTime.Now,
-                ModifierUserIp = ModifierUserIp
+                ModifierUserIp = ModifierUserIp,
+                Classifications = new List<Classification>
+                {
+                    ImportClassification("Manual", "MANUAL", admin),
+                    ImportClassification("Automatic", "AUTOMATIC", admin),
+                    ImportClassification("Semi-Automatic", "SEMIAUTOMATIC", admin)
+                }
             };
             var classificationType_paymentStatus = new ClassificationType
             {
@@ -71,7 +89,14 @@ namespace Triven.Data.EntityFramework.Migrations
                 Description = "payment status",
                 Creator = admin,
                 CreatedOn = DateTime.Now,
-                ModifierUserIp = ModifierUserIp
+                ModifierUserIp = ModifierUserIp,
+                Classifications = new List<Classification>
+                {
+                    ImportClassification("Completed", "COMPLETED", admin, "payment has successfully completed"),
+                    ImportClassification("Failed", "FAILED", admin, "payment has failed"),
+                    ImportClassification("Rejected", "REJECTED", admin, "payment was rejected"),
+                    ImportClassification("Pending", "PENDING", admin, "status is being processed")
+                }
             };
             var classificationType_manufacturer = new ClassificationType
             {
@@ -193,6 +218,26 @@ namespace Triven.Data.EntityFramework.Migrations
 
                 context.SaveChanges();
             }
+        }
+
+        private Classification ImportClassification(
+            string name, 
+            string value, 
+            ApplicationUser user,
+            string description = null, 
+            int weight = 1)
+        {
+            return new Classification
+            {
+                Name = name,
+                Description = description,
+                IsImported = true,
+                Weight = weight,
+                Value = value,
+                Creator = user,
+                CreatedOn = DateTime.Now,
+                ModifierUserIp = ModifierUserIp
+            };
         }
     }
 }
