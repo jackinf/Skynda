@@ -7,6 +7,7 @@ using Microsoft.Owin;
 using Triven.Application.Services.Messages;
 using Triven.Data.EntityFramework.Models;
 using Triven.Data.EntityFramework.Models.User;
+using Triven.Domain.ViewModels.Email;
 
 namespace Triven.Application
 {
@@ -55,6 +56,16 @@ namespace Triven.Application
         public Task SendAsync(IdentityMessage message)
         {
             return configSendGridasync(message);
+        }
+
+        public Task SendAsync(EmailBaseViewModel viewModel)
+        {
+            return configSendGridasync(new IdentityMessage
+            {
+                Destination = viewModel.GetSender(),
+                Subject = viewModel.GetSubject(),
+                Body = viewModel.GetContent()
+            });
         }
 
         private Task configSendGridasync(IdentityMessage message)

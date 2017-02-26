@@ -1,19 +1,13 @@
 ﻿namespace Triven.Domain.ViewModels.Email
 {
-    public class EmailQuestionViewModel
+    public class EmailQuestionViewModel : EmailBaseViewModel
     {
         public string HowCanWeHelp { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
 
-        public string GetSender()
-        {
-            return Email;
-        }
-
-        public string GetContent()
-        {
-            return "User " + Name + " (" + Email + ") a question: " + HowCanWeHelp;
-        }
+        public override string GetSubject() => "There is a question";
+        public override string GetSender() => Email;
+        public override string GetContent() => "User " + Name + " (" + Email + ") a question: " + HowCanWeHelp;
     }
 }

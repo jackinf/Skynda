@@ -1,9 +1,7 @@
-﻿using System.Collections.Generic;
-using Triven.Application.Results;
+﻿using Triven.Application.Results;
 using Triven.Domain.Models;
 using Triven.Domain.Services;
 using Triven.Domain.ViewModels.BlobStorage;
-using Triven.Domain.ViewModels.BlobStorage.Response;
 using Triven.Domain.ViewModels.Image;
 using Triven.Domain.ViewModels.Vehicle;
 
@@ -31,7 +29,7 @@ namespace Triven.Application.Services
             throw new System.NotImplementedException();
         }
 
-        public IList<BlobViewModel> List(ListBlobsViewModel viewModel)
+        public ServiceResult List(ListBlobsViewModel viewModel)
         {
             throw new System.NotImplementedException();
         }

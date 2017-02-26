@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Triven.Domain.Results;
+﻿using Triven.Domain.Results;
 using Triven.Domain.ViewModels.Vehicle;
 using Triven.Domain.ViewModels.Vehicle.Requests;
 

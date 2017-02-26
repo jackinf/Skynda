@@ -1,37 +1,30 @@
 ﻿using System.Web.Http;
+using Triven.Application;
+using Triven.Application.Results;
+using Triven.Domain.Services;
 
 namespace Triven.API.Controllers
 {
     [RoutePrefix("api/classifications")]    // TODO: use singular, not plural
     public class ClassificationController : BaseController
     {
-        //[HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
-        ////[Authorize(Roles = "Admin")]
-        //[HttpGet, Route("countries"), ResponseType(typeof(List<PartnerDisplayViewModel>))]
-        //public IHttpActionResult GetCountries()
-        //{
-        //    return BadRequest();
-        //}
-
-        private readonly dynamic _service; // TODO: use correct type
+        private readonly IClassificationService<ServiceResult> _service;
 
         public ClassificationController()
         {
-            // TODO: inject service
+            _service = IoC.Get<IClassificationService<ServiceResult>>();
         }
 
         [HttpGet, Route("{type}")]
         public IHttpActionResult GetAll([FromUri] string type)
         {
-            var result = _service.GetByType(type);
-            return result.IsSuccessful ? Ok(result.Payload) : ReturnErrorResult(result.Validation);
+            return HandleResult(_service.GetByType(type));
         }
 
         [HttpGet, Route("{type}/vehicle-bound")]
         public IHttpActionResult GetVehicleBound([FromUri] string type)
         {
-            var result = _service.GetByTypeAndVehicleBound(type);
-            return result.IsSuccessful ? Ok(result.Payload) : ReturnErrorResult(result.Validation);
+            return HandleResult(_service.GetByTypeAndVehicleBound(type));
         }
     }
 }

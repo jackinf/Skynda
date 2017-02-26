@@ -204,6 +204,7 @@
     <Compile Include="ViewModels\Common\SearchResponseViewModel.cs" />
     <Compile Include="ViewModels\Common\SimpleResponseViewModel.cs" />
     <Compile Include="ViewModels\Common\UpdateResponseViewModel.cs" />
+    <Compile Include="ViewModels\Email\EmailBaseViewModel.cs" />
     <Compile Include="ViewModels\Email\EmailBuyVehicleViewModel.cs" />
     <Compile Include="ViewModels\Email\EmailQuestionViewModel.cs" />
     <Compile Include="ViewModels\Email\EmailSellVehicleViewModel.cs" />

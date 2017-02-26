@@ -1,4 +1,6 @@
-﻿using System.Web.Http;
+﻿using System.Threading.Tasks;
+using System.Web.Http;
+using Triven.Application;
 using Triven.Domain.ViewModels.Email;
 
 namespace Triven.API.Controllers
@@ -6,46 +8,46 @@ namespace Triven.API.Controllers
     [System.Web.Mvc.RoutePrefix("/api/email")]
     public class EmailController : BaseController
     {
-        private readonly dynamic _service; // TODO: use correct type
+        private readonly EmailService _service; // TODO: use interface
 
         public EmailController()
         {
-            // TODO: inject service
+            _service = new EmailService();
         }
 
         [HttpPost, Route("subscribe")]
-        public IHttpActionResult PostEmailSubscribe([FromBody] EmailSubscribeViewModel viewModel)
+        public async Task<IHttpActionResult> PostEmailSubscribe([FromBody] EmailSubscribeViewModel viewModel)
         {
             // TODO: validate
-            var result = _service.sendEmail(viewModel);
-            return result.IsSuccessful ? Ok(result.Payload) : ReturnErrorResult(result.Validation);
-        }
-
-
-        [HttpPost, Route("subscribe")]
-        public IHttpActionResult PostEmailBuyVehicle([FromBody] EmailBuyVehicleViewModel viewModel)
-        {
-            // TODO: validate
-            var result = _service.sendEmail(viewModel);
-            return result.IsSuccessful ? Ok(result.Payload) : ReturnErrorResult(result.Validation);
+            await _service.SendAsync(viewModel);
+            return Ok();
         }
 
 
         [HttpPost, Route("subscribe")]
-        public IHttpActionResult PostEmailSellVehicle([FromBody] EmailSellVehicleViewModel viewModel)
+        public async Task<IHttpActionResult> PostEmailBuyVehicle([FromBody] EmailBuyVehicleViewModel viewModel)
         {
             // TODO: validate
-            var result = _service.sendEmail(viewModel);
-            return result.IsSuccessful ? Ok(result.Payload) : ReturnErrorResult(result.Validation);
+            await _service.SendAsync(viewModel);
+            return Ok();
         }
 
 
         [HttpPost, Route("subscribe")]
-        public IHttpActionResult PostEmailQuestion([FromBody] EmailQuestionViewModel viewModel)
+        public async Task<IHttpActionResult> PostEmailSellVehicle([FromBody] EmailSellVehicleViewModel viewModel)
         {
             // TODO: validate
-            var result = _service.sendEmail(viewModel);
-            return result.IsSuccessful ? Ok(result.Payload) : ReturnErrorResult(result.Validation);
+            await _service.SendAsync(viewModel);
+            return Ok();
+        }
+
+
+        [HttpPost, Route("subscribe")]
+        public async Task<IHttpActionResult> PostEmailQuestion([FromBody] EmailQuestionViewModel viewModel)
+        {
+            // TODO: validate
+            await _service.SendAsync(viewModel);
+            return Ok();
         }
 
     }

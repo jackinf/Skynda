@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Triven.Domain.ViewModels.Common;
 using Triven.Domain.ViewModels.Feature;
 using Triven.Domain.ViewModels.Image;

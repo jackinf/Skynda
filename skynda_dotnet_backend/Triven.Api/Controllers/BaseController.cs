@@ -1,6 +1,7 @@
 ﻿using System.Web.Http;
 using System.Web.Http.Cors;
 using FluentValidation.Results;
+using Triven.Application.Results;
 
 namespace Triven.API.Controllers
 {
@@ -45,5 +46,8 @@ namespace Triven.API.Controllers
                 return false;
             return ModelState.IsValid;
         }
+
+        protected IHttpActionResult HandleResult(ServiceResult result)
+            => result.IsSuccessful ? Ok(result.Payload) : ReturnErrorResult(result.Validation);
     }
 }
