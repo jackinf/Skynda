@@ -20,14 +20,14 @@ namespace Triven.Domain.ViewModels.Vehicle
         public string Configuration { get; set; }
         public string Cylinders { get; set; }
         public string Displacement { get; set; }
-        public string Size { get; set; }
+        public int Size { get; set; }
         public int Torque { get; set; }
         public int TotalValves { get; set; }
+        public string SafetyUrl { get; set; }
+        public int SafetyStars { get; set; }
         public string Additional { get; set; }
         public ImageViewModel MainImage { get; set; }
         public VehicleModelViewModel Model { get; set; }
-        public int SafetyStars { get; set; }
-        public string SafetyUrl { get; set; }
         public List<FeatureAdminSelectViewModel> FeaturesAdminSelect { get; set; } = new List<FeatureAdminSelectViewModel>();
         public List<FaultBaseViewModel> Faults { get; set; } = new List<FaultBaseViewModel>();
         public List<ImageContainerViewModel> Images { get; set; } = new List<ImageContainerViewModel>();

@@ -1,7 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
+using FluentValidation.Results;
 using Triven.Application.Results;
+using Triven.Application.Validators.Vehicle;
 using Triven.Data.EntityFramework.Models;
 using Triven.Domain.Repositories;
 using Triven.Domain.Services;
@@ -42,26 +45,42 @@ namespace Triven.Application.Services
 
         public ServiceResult Create(VehicleAdminViewModel viewModel)
         {
-            var entity = Mapper.Map<Vehicle>(viewModel);
-
-            if (viewModel.MainImage != null)
+            try
             {
-                // todo: handle upload of main image
+                VehicleValidator validator = new VehicleValidator();
+                ValidationResult results = validator.Validate(viewModel);
+
+                if (!results.IsValid)
+                {
+                    return ServiceResult.Factory.Fail(results.Errors);
+                }
+
+                var entity = Mapper.Map<Vehicle>(viewModel);
+
+                if (viewModel.MainImage != null)
+                {
+                    // todo: handle upload of main image
+                }
+
+                var descriptionEntities = Mapper.Map<List<VehicleDescription>>(viewModel.Descriptions);
+                entity.Descriptions = descriptionEntities;
+
+                var imageEntities = Mapper.Map<List<VehicleImage>>(viewModel.Images);
+                entity.Images = imageEntities;
+                foreach (var imageEntity in imageEntities)
+                {
+                    // todo: handle image uplaod to blob stoarge
+                }
+
+                var result = _vehicleRepository.Add(entity);
+                var mappedResult = Mapper.Map<VehicleAdminViewModel>(result.ContextObject);
+                return ServiceResult.Factory.Success(mappedResult, result.Message);
             }
-
-            var descriptionEntities = Mapper.Map<List<VehicleDescription>>(viewModel.Descriptions);
-            entity.Descriptions = descriptionEntities;
-
-            var imageEntities = Mapper.Map<List<VehicleImage>>(viewModel.Images);
-            entity.Images = imageEntities;
-            foreach (var imageEntity in imageEntities)
+            catch (Exception e)
             {
-                // todo: handle image uplaod to blob stoarge
+                return ServiceResult.Factory.Fail(new ValidationResult());
             }
-
-            var result = _vehicleRepository.Add(entity);
-            var mappedResult = Mapper.Map<VehicleAdminViewModel>(result.ContextObject);
-            return ServiceResult.Factory.Success(mappedResult, result.Message);
+           
         }
 
         public ServiceResult Update(int id, VehicleAdminViewModel viewModel)
