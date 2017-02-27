@@ -65,12 +65,12 @@ namespace Triven.Application.Services
                 var descriptionEntities = Mapper.Map<List<VehicleDescription>>(viewModel.Descriptions);
                 entity.Descriptions = descriptionEntities;
 
-                var imageEntities = Mapper.Map<List<VehicleImage>>(viewModel.Images);
-                entity.Images = imageEntities;
-                foreach (var imageEntity in imageEntities)
-                {
-                    // todo: handle image uplaod to blob stoarge
-                }
+                //var imageEntities = Mapper.Map<List<VehicleImage>>(viewModel.Images);
+                //entity.Images = imageEntities;
+                //foreach (var imageEntity in imageEntities)
+                //{
+                //    // todo: handle image uplaod to blob stoarge
+                //}
 
                 var result = _vehicleRepository.Add(entity);
                 var mappedResult = Mapper.Map<VehicleAdminViewModel>(result.ContextObject);
