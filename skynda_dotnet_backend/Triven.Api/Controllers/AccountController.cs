@@ -333,7 +333,7 @@ namespace Triven.API.Controllers
             var service = new AccountService(Request.GetOwinContext().GetUserManager<ApplicationUserManager>());
             var result = service.Register(viewModel.Email, viewModel.Password, viewModel.FirstName, viewModel.LastName);
 
-            return result.IsSuccessful ? Ok(result.Payload) : ReturnErrorResult(result.Validation);
+            return HandleResult(result);
         }
 
         // POST api/account/register-external
@@ -390,7 +390,7 @@ namespace Triven.API.Controllers
 
             var service = new AccountService(Request.GetOwinContext().GetUserManager<ApplicationUserManager>());
             var result = service.UpdateUserAccountData(User.Identity.GetUserId<int>(), viewModel);
-            return result.IsSuccessful ? Ok(result) : ReturnErrorResult(result.Validation);
+            return HandleResult(result);
         }
         
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
@@ -402,7 +402,7 @@ namespace Triven.API.Controllers
 
             var service = new AccountService(Request.GetOwinContext().GetUserManager<ApplicationUserManager>());
             var result = service.GetUsers();
-            return result.IsSuccessful ? Ok(result) : ReturnErrorResult(result.Validation);
+            return HandleResult(result);
         }
 
         protected override void Dispose(bool disposing)

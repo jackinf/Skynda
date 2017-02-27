@@ -48,6 +48,8 @@ namespace Triven.API.Controllers
         }
 
         protected IHttpActionResult HandleResult(ServiceResult result)
-            => result.IsSuccessful ? Ok(result.Payload) : ReturnErrorResult(result.Validation);
+        {
+            return result.IsSuccessful ? Ok(result.Payload) : ReturnErrorResult(result.Validation);
+        }
     }
 }
