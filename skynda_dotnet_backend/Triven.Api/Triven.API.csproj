@@ -298,6 +298,7 @@
     <Compile Include="Controllers\BlobStorageController.cs" />
     <Compile Include="Controllers\EmailController.cs" />
     <Compile Include="Controllers\FeatureController.cs" />
+    <Compile Include="Controllers\FileUploadController.cs" />
     <Compile Include="Controllers\ImageController.cs" />
     <Compile Include="Controllers\SubscriptionController.cs" />
     <Compile Include="Controllers\VehicleController.cs" />

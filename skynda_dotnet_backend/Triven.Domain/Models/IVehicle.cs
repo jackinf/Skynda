@@ -12,7 +12,6 @@ namespace Triven.Domain.Models
         string ColorInsideHex { get; set; }
         decimal FuelCity { get; set; }
         decimal FuelHighway { get; set; }
-        string Problems { get; set; }
         int CompressionRatio { get; set; }
         string CompressionType { get; set; }
         string Configuration { get; set; }

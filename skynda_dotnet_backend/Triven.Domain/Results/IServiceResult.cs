@@ -58,17 +58,36 @@ namespace Triven.Domain.Results
 
             public static T Fail(ValidationResult validation)
             {
-                var result = new T();
-                result.IsSuccessful = false;
-                result.Validation = validation;
+                var result = new T
+                {
+                    IsSuccessful = false,
+                    Validation = validation
+                };
+
                 return result;
             }
 
             public static T Fail(IEnumerable<string> errors)
             {
-                var result = new T();
-                result.IsSuccessful = false;
-                result.Validation = new ValidationResult(errors.Select(error => new ValidationFailure(string.Empty, error)));   // TODO: string.Empty - should be correct property
+                var result = new T
+                {
+                    IsSuccessful = false,
+                    Validation =
+                        new ValidationResult(errors.Select(error => new ValidationFailure(string.Empty, error)))
+                };
+                // TODO: string.Empty - should be correct property
+                return result;
+            }
+
+            public static T Fail(IList<ValidationFailure> errors)
+            {
+                var result = new T
+                {
+                    IsSuccessful = false,
+                    Validation =
+                        new ValidationResult(errors.Select(error => new ValidationFailure(error.PropertyName, error.ErrorMessage)))
+                };
+                // TODO: string.Empty - should be correct property
                 return result;
             }
 
@@ -81,10 +100,13 @@ namespace Triven.Domain.Results
 
             public static T Success<TPayload>(TPayload payload, string message  = "")
             {
-                var result = new T();
-                result.IsSuccessful = true;
-                result.Payload = payload;
-                result.Message = message;
+                var result = new T
+                {
+                    IsSuccessful = true,
+                    Payload = payload,
+                    Message = message
+                };
+
                 return result;
             }
         }

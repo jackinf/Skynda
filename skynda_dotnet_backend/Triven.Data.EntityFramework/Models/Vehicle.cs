@@ -31,8 +31,6 @@ namespace Triven.Data.EntityFramework.Models
 
         public decimal FuelHighway { get; set; }
 
-        public string Problems { get; set; }
-
         public int CompressionRatio { get; set; }
 
         public string CompressionType { get; set; }
