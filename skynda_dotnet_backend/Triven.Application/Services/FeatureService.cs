@@ -4,6 +4,7 @@ using System.Linq;
 using AutoMapper;
 using FluentValidation.Results;
 using Triven.Application.Results;
+using Triven.Application.Validators.Feature;
 using Triven.Data.EntityFramework.Models;
 using Triven.Domain.Repositories;
 using Triven.Domain.Services;
@@ -57,10 +58,17 @@ namespace Triven.Application.Services
 
         public ServiceResult Update(int id, FeatureViewModel viewModel)
         {
+            FeatureValidator validator =new FeatureValidator();
+            var validationResult = validator.Validate(viewModel);
+
+            if (!validationResult.IsValid)
+                return ServiceResult.Factory.Fail(validationResult.Errors);
+
             var feature = _featureRepository.Get(id);
             Mapper.Map(viewModel, feature);
             var result = _featureRepository.Update(id, feature);
             var mappedResult = Mapper.Map<FeatureViewModel>(result.ContextObject);
+
             return ServiceResult.Factory.Success(mappedResult);
         }
 

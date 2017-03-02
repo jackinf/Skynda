@@ -79,7 +79,7 @@ namespace Triven.Domain.Results
                 return result;
             }
 
-            public static T Fail(IList<ValidationFailure> errors)
+            public static T Fail(IEnumerable<ValidationFailure> errors)
             {
                 var result = new T
                 {

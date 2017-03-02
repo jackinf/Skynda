@@ -35,9 +35,7 @@ export function onFormSubmitSuccess(response, getFeatures, onSubmitCustom = null
 function createFeatureAsync(data) {
   const promise = FeatureService.createFeatureAsync(data);
   promise.then(resp => {
-    if (!resp.success) {
-      throw new SubmissionError(fromSpringToReduxFormError(resp.errors));
-    }
+    //TODO catch validation errors & display
     return resp;
   }).catch(err => {
     throw err;
@@ -51,9 +49,7 @@ function createFeatureAsync(data) {
 function updateFeatureAsync(data) {
   const promise = FeatureService.updateFeatureAsync(data);
   promise.then(resp => {
-    if (!resp.success) {
-      throw new SubmissionError(fromSpringToReduxFormError(resp.errors));
-    }
+    //TODO catch validation errors & display
     return resp;
   }).catch(err => {
     throw err;

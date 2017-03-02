@@ -1,12 +1,13 @@
 import _ from "underscore";
 
-export default function fromSpringToReduxFormError(springErrors) {
-  console.log("fromSpringToReduxFormError", springErrors);
-  if (!_.isArray(springErrors)) {
+export default function fromSpringToReduxFormError(modelStateErrors) {
+  console.log("fromSpringToReduxFormError", modelStateErrors);
+  if (!_.isArray(modelStateErrors)) {
+    console.log("no array");
     return {};
   }
 
-  const errs = springErrors
+  const errs = modelStateErrors
     .filter(springError => "code" in springError && "defaultMessage" in springError)
     .map(springError => ({[springError.code]: springError.defaultMessage}));
 

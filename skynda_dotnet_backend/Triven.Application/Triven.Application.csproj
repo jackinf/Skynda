@@ -196,6 +196,7 @@
     <Compile Include="Services\VehicleService.cs" />
     <Compile Include="Services\Messages\MessageSmtpSenderCommand.cs" />
     <Compile Include="Services\Messages\NoticeSenderBaseCommand.cs" />
+    <Compile Include="Validators\Feature\FeatureValidator.cs" />
     <Compile Include="Validators\Helper\CompositeValidatorRule.cs" />
     <Compile Include="Validators\IValidator.cs" />
     <Compile Include="Validators\Users\UserRegistrationValidator.cs" />

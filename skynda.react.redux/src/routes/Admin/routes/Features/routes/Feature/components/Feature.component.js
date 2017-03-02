@@ -42,15 +42,24 @@ class Feature extends React.Component {
   onSubmit(e) {
     let promise = this.props.handleSubmit(data => formSubmit(data, this.props.formModeFeature))(e);
     promise && promise.then(response => {
-      onFormSubmitSuccess(response, this.props.getFeatures, this.props.onSubmitCustom);
-    });
+      console.log("handleSubmit", response);
+      if(response.modelState){
+        this.props.errors = response.modelState;
+      }else{
+        onFormSubmitSuccess(response, this.props.getFeatures, this.props.onSubmitCustom);
+      }
+
+    }).catch(err => console.log("hamde", err));
   };
 
   render() {
+
+    const errors = this.props.errors;
     return (<div>
         {this.props.isFetching || this.props.submitting ? "Loading..." : (
             <form onSubmit={this.onSubmit.bind(this)}>
-
+              {errors != null && errors ?
+              errors : "no error"}
               <h3>{this.props.formModeFeature}</h3>
 
               <div>Feature ID: {this.props.params[ROUTE_PARAMS.FEATURE_ID]}</div>
