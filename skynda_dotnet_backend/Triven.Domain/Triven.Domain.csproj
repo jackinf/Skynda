@@ -147,6 +147,8 @@
     <Compile Include="Services\IVehicleReviewService.cs" />
     <Compile Include="Services\IVehicleService.cs" />
     <Compile Include="Services\IClassificationService.cs" />
+    <Compile Include="UnitOfWorks\IDbContext.cs" />
+    <Compile Include="UnitOfWorks\UnitOfWorkBase.cs" />
     <Compile Include="Validators\IValidatorCommand.cs" />
     <Compile Include="ViewModelInterfaces\IAccountViewModel.cs" />
     <Compile Include="ViewModelInterfaces\__ToDelete\IAssignmentViewModel.cs" />

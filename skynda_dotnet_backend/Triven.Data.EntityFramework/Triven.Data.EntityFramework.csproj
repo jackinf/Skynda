@@ -152,6 +152,7 @@
     <Compile Include="Repositories\Base\OnCreateOrUpdateResult.cs" />
     <Compile Include="Repositories\Base\RepositoryResult.cs" />
     <Compile Include="Repositories\ClassificationRepository.cs" />
+    <Compile Include="UnitOfWorks\UnitOfWorkEntityBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
