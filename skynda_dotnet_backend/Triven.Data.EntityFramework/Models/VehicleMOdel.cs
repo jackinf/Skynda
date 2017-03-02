@@ -30,41 +30,31 @@ namespace Triven.Data.EntityFramework.Models
         /// <summary>
         /// Manufacturer
         /// </summary>
-        [ForeignKey("VehicleManufacturer")]
-        public int VehicleManufacturerId { get; set; }
         [Required]
-        public virtual Classification VehicleManufacturer { get; set; }
+        public IClassification VehicleManufacturer { get; set; }
 
         /// <summary>
         /// Transmission
         /// </summary>
-        [ForeignKey("Transmission")]
-        public int TransmissionId { get; set; }
         [Required]
-        public virtual Classification Transmission { get; set; }
+        public IClassification Transmission { get; set; }
 
         /// <summary>
         /// Drivetrain
         /// </summary>
-        [ForeignKey("Drivetrain")]
-        public int DrivetrainId { get; set; }
         [Required]
-        public virtual Classification Drivetrain { get; set; }
+        public IClassification Drivetrain { get; set; }
 
         /// <summary>
         /// VehicleBody
         /// </summary>
-        [ForeignKey("VehicleBody")]
-        public int VehicleBodyId { get; set; }
         [Required]
-        public virtual Classification VehicleBody { get; set; }
+        public IClassification VehicleBody { get; set; }
 
         /// <summary>
         /// Fuel
         /// </summary>
-        [ForeignKey(nameof(FuelType))]
-        public int FuelTypeId { get; set; }
         [Required]
-        public virtual Classification FuelType { get; set; }
+        public IClassification FuelType { get; set; }
     }
 }

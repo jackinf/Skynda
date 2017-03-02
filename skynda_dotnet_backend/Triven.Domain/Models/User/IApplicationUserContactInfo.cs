@@ -1,16 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Triven.Domain.Constants;
+using Triven.Domain.Models.Base;
 
 namespace Triven.Domain.Models.User
 {
-    public interface IApplicationUserContactInfo
-    {
-        [Key]
-        int Id { get; set; }
+    public interface IApplicationUserContactInfo : IAuditableBaseModel
+    {                
 
-        [ForeignKey("UserId")]
-        int ApplicationUserId { get; set; }
+        IApplicationUser ApplicationUser { get; set; }
 
         string Phone { get; set; }
 
@@ -27,7 +25,6 @@ namespace Triven.Domain.Models.User
         string WWW { get; set; }
 
         string Skype { get; set; }
-
         ContactInfoType Type { get; set; }
     }
 }

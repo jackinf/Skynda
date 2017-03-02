@@ -26,9 +26,9 @@ namespace Triven.Data.EntityFramework.Repositories
         {
             var query = BaseQuery().Include(x => x.VehicleModel);
             if (dto.Models?.Any() ?? false)
-                query = query.Where(x => dto.Models.Any(model => model.Value == x.ModelId));
+                query = query.Where(x => dto.Models.Any(model => model.Value == x.VehicleModel.Id));
             if (dto.Brands?.Any() ?? false)
-                query = query.Where(x => dto.Brands.Any(model => model.Value == x.VehicleModel.VehicleManufacturerId));
+                query = query.Where(x => dto.Brands.Any(model => model.Value == x.VehicleModel.VehicleManufacturer.Id));
             // TODO: color the world
             //if (dto.Colors?.Any() ?? false)
             //    query = query.Where(x => dto.Colors.Any(model => model.Value == x.Color));
@@ -40,9 +40,9 @@ namespace Triven.Data.EntityFramework.Repositories
             if (dto.Seats?.Any() ?? false)
                 query = query.Where(x => dto.Seats.Any(model => model.Value >= x.VehicleModel.Seats));
             if (dto.Transmission?.Any() ?? false)
-                query = query.Where(x => dto.Transmission.Any(model => model.Value == x.VehicleModel.TransmissionId));
+                query = query.Where(x => dto.Transmission.Any(model => model.Value == x.VehicleModel.Transmission.Id));
             if (dto.FuelType?.Any() ?? false)
-                query = query.Where(x => dto.FuelType.Any(model => model.Value == x.VehicleModel.FuelTypeId));
+                query = query.Where(x => dto.FuelType.Any(model => model.Value == x.VehicleModel.FuelType.Id));
             if (dto.Mileage != null)
                 query = query.Where(x => x.Mileage >= dto.Mileage.Min && x.Mileage <= dto.Mileage.Max);
             if (dto.Price != null)

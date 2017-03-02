@@ -21,28 +21,56 @@ namespace Triven.Data.EntityFramework.Migrations
 
         protected override void Seed(ApplicationDbContext context)
         {
+            //SEED DATABASE
+
             //
             //  Seed application roles
             //
-
             CreateNewRoles(context);
 
             //
             //  Seed application users
             //
-
-           var adminEmail = CreateAdmin(context);
+            var adminEmail = CreateAdmin(context);
             CreateVehicleManager(context);
-
+            var admin = context.Users.Single(x => x.Email == adminEmail) as ApplicationUser;
             //
             // Seed classifications
             //
+            CreateClassificationTypes(context, admin);
 
-            var admin = context.Users.Single(x => x.Email == adminEmail) as ApplicationUser;
+            // Seed initial features
+            CreateInitialFeatures(context);
+
             //var manager = new AppUserManager(new AppUserStore());
             //var admin = manager.FindByEmail(adminEmail) as ApplicationUser;
 
-            var classificationType_paymentType = new ClassificationType
+            context.SaveChanges();
+        }
+
+        private static void CreateInitialFeatures(ApplicationDbContext context)
+        {
+            context.Features.AddOrUpdate(Factory.CreateFeature("Parking Sensors", "feature", "PARKING_SENSORS", true, 1));
+            context.Features.AddOrUpdate(Factory.CreateFeature("Bluetooth", "feature", "BLUETOOTH", true, 2));
+            context.Features.AddOrUpdate(Factory.CreateFeature("Sunroof", "feature", "SUNROOF", true, 3));
+            context.Features.AddOrUpdate(Factory.CreateFeature("Navigation", "feature", "NAVIGATION", true, 4));
+            context.Features.AddOrUpdate(Factory.CreateFeature("Keyless-Go", "feature", "KEYLESS_GO", true, 5));
+            context.Features.AddOrUpdate(Factory.CreateFeature("Immobilizer", "feature", "IMMOBILIZER", true, 6));
+            context.Features.AddOrUpdate(Factory.CreateFeature("Xenon Lights", "feature", "XENON_LIGHTS", true, 7));
+            context.Features.AddOrUpdate(Factory.CreateFeature("Alloy Wheels", "feature", "ALLOY_WHEELS", true, 8));
+            context.Features.AddOrUpdate(Factory.CreateFeature("Leather Upholstery", "feature", "Leather_Upholstery".ToUpper(), true, 9));
+            context.Features.AddOrUpdate(Factory.CreateFeature("Racing Seats", "feature", "Racing_Seats".ToUpper(), true, 10));
+            context.Features.AddOrUpdate(Factory.CreateFeature("Ventilated Seats", "feature", "Ventilated_Seats".ToUpper(), true, 11));
+            context.Features.AddOrUpdate(Factory.CreateFeature("Seat_Heating", "feature", "Seat_Heating".ToUpper(), true, 12));
+            context.Features.AddOrUpdate(Factory.CreateFeature("Mirror Heating", "feature", "Mirror_Heating".ToUpper(), true, 13));
+            context.Features.AddOrUpdate(Factory.CreateFeature("Rain Sensors", "feature", "Rain_Sensors".ToUpper(), true, 14));
+            context.Features.AddOrUpdate(Factory.CreateFeature("Power Steering", "feature", "Power_Steering".ToUpper(), true, 15));
+            context.Features.AddOrUpdate(Factory.CreateFeature("Cruise Control", "feature", "Cruise_Control".ToUpper(), true, 16));
+        }
+
+        private static void CreateClassificationTypes(ApplicationDbContext context, ApplicationUser admin)
+        {
+            var classificationTypePaymentType = new ClassificationType
             {
                 Name = DatabaseConstants.ClassificationTypeName.PAYMENT_TYPE,
                 Description = "single or recurring payment",
@@ -51,11 +79,11 @@ namespace Triven.Data.EntityFramework.Migrations
                 ModifierUserIp = ModifierUserIp,
                 Classifications = new List<Classification>
                 {
-                    Factory.CreateClassification("Single payment", "FULL", admin),
-                    Factory.CreateClassification("Recurring payment", "RECURRING", admin)
+                    Factory.CreateClassification("Single payment", "FULL", admin, 1),
+                    Factory.CreateClassification("Recurring payment", "RECURRING", admin, 2)
                 }
             };
-            var classificationType_drivetrain = new ClassificationType
+            var classificationTypeDrivetrain = new ClassificationType
             {
                 Name = DatabaseConstants.ClassificationTypeName.DRIVETRAIN,
                 Description = "vehicle drivetrain",
@@ -64,12 +92,12 @@ namespace Triven.Data.EntityFramework.Migrations
                 ModifierUserIp = ModifierUserIp,
                 Classifications = new List<Classification>
                 {
-                    Factory.CreateClassification("Front-Wheel Drive", "FRONT", admin),
-                    Factory.CreateClassification("Rear-Wheel Drive", "REAR", admin),
-                    Factory.CreateClassification("Four-Wheel Drive", "ALL", admin)
+                    Factory.CreateClassification("Front-Wheel Drive", "FRONT", admin, 1),
+                    Factory.CreateClassification("Rear-Wheel Drive", "REAR", admin, 2),
+                    Factory.CreateClassification("Four-Wheel Drive", "ALL", admin, 3)
                 }
             };
-            var classificationType_transmission = new ClassificationType
+            var classificationTypeTransmission = new ClassificationType
             {
                 Name = DatabaseConstants.ClassificationTypeName.TRANSMISSION,
                 Description = "transmission type",
@@ -78,12 +106,12 @@ namespace Triven.Data.EntityFramework.Migrations
                 ModifierUserIp = ModifierUserIp,
                 Classifications = new List<Classification>
                 {
-                    Factory.CreateClassification("Manual", "MANUAL", admin),
-                    Factory. CreateClassification("Automatic", "AUTOMATIC", admin),
-                    Factory.CreateClassification("Semi-Automatic", "SEMIAUTOMATIC", admin)
+                    Factory.CreateClassification("Manual", "MANUAL", admin,1 ),
+                    Factory.CreateClassification("Automatic", "AUTOMATIC", admin, 2),
+                    Factory.CreateClassification("Semi-Automatic", "SEMIAUTOMATIC", admin,3)
                 }
             };
-            var classificationType_paymentStatus = new ClassificationType
+            var classificationTypePaymentStatus = new ClassificationType
             {
                 Name = DatabaseConstants.ClassificationTypeName.PAYMENT_STATUS,
                 Description = "payment status",
@@ -92,13 +120,13 @@ namespace Triven.Data.EntityFramework.Migrations
                 ModifierUserIp = ModifierUserIp,
                 Classifications = new List<Classification>
                 {
-                    Factory.CreateClassification("Completed", "COMPLETED", admin, "payment has successfully completed"),
-                    Factory.CreateClassification("Failed", "FAILED", admin, "payment has failed"),
-                    Factory.CreateClassification("Rejected", "REJECTED", admin, "payment was rejected"),
-                    Factory.CreateClassification("Pending", "PENDING", admin, "status is being processed")
+                    Factory.CreateClassification("Completed", "COMPLETED", admin, 1, "payment has successfully completed"),
+                    Factory.CreateClassification("Failed", "FAILED", admin, 2, "payment has failed"),
+                    Factory.CreateClassification("Rejected", "REJECTED", admin, 3, "payment was rejected"),
+                    Factory.CreateClassification("Pending", "PENDING", admin, 4, "status is being processed")
                 }
             };
-            var classificationType_manufacturer = new ClassificationType
+            var classificationTypeManufacturer = new ClassificationType
             {
                 Name = DatabaseConstants.ClassificationTypeName.MANUFACTURER,
                 Description = "vehicles manufacturer",
@@ -131,7 +159,7 @@ namespace Triven.Data.EntityFramework.Migrations
                     Factory.CreateClassification("Ferrari", "FERRARI", admin, weight: 22),
                 }
             };
-            var classificationType_fuel = new ClassificationType
+            var classificationTypeFuel = new ClassificationType
             {
                 Name = DatabaseConstants.ClassificationTypeName.FUEL,
                 Description = "fuel type",
@@ -151,7 +179,7 @@ namespace Triven.Data.EntityFramework.Migrations
                     Factory.CreateClassification("Ethanol", "ETHANOL", admin, weight: 9)
                 }
             };
-            var classificationType_body = new ClassificationType
+            var classificationTypeBody = new ClassificationType
             {
                 Name = DatabaseConstants.ClassificationTypeName.VEHICLE_BODY,
                 Description = "vehicle body",
@@ -160,56 +188,55 @@ namespace Triven.Data.EntityFramework.Migrations
                 ModifierUserIp = ModifierUserIp,
                 Classifications = new List<Classification>
                 {
-                    // TODO: I forgot value2 :/
-                    Factory.CreateClassification("Sedan", "SEDAN",admin, "vehicle",1),
-                    Factory.CreateClassification("Hatchback", "HATCHBACK",admin, "vehicle",2),
-                    Factory.CreateClassification("Touring", "TOURING",admin, "vehicle",3),
-                    Factory.CreateClassification("Minivan", "MINIVAN",admin, "vehicle",4),
-                    Factory.CreateClassification("Coupe", "COUPE",admin, "vehicle",5),
-                    Factory.CreateClassification("Cabriolet", "CABRIOLET",admin, "vehicle",6),
-                    Factory.CreateClassification("Limousine", "LIMOUSINE",admin, "vehicle",7),
-                    Factory.CreateClassification("Limousine", "TOURING",admin, "SUV",1),
-                    Factory.CreateClassification("Pickup", "PICKUP",admin, "SUV",2),
-                    Factory.CreateClassification("Small Commercial", "SMALL_COMMERCIAL_VEHICLE",admin, "commercial vehicle",1),
-                    Factory.CreateClassification("Commercial Vehicle", "COMMERCIAL_VEHICLE",admin, "commercial vehicle",2),
-                    Factory.CreateClassification("Rigid", "RIGID",admin, "commercial vehicle",3),
-                    Factory.CreateClassification("Saddle", "SADDLE",admin, "truck",1),
-                    Factory.CreateClassification("Rigid", "RIGID",admin, "truck",2),
-                    Factory.CreateClassification("Chassis", "CHASSIS",admin, "truck",3),
-                    Factory.CreateClassification("Classical motorcycle", "CLASSICAL",admin, "motorcycle",1),
-                    Factory.CreateClassification("Scooter", "SCOOTER",admin, "motorcycle",2),
-                    Factory.CreateClassification("Moped", "MOPED",admin, "motorcycle",3),
-                    Factory.CreateClassification("Bike", "BIKE",admin, "motorcycle",4),
-                    Factory.CreateClassification("Cruiser/Chopper", "CRUISERCHOPPER",admin, "motorcycle",5),
-                    Factory.CreateClassification("Touring", "TOURING",admin, "motorcycle",6),
-                    Factory.CreateClassification("Motocross Bike", "MOTOCROSS",admin, "motorcycle",7),
-                    Factory.CreateClassification("Enduro/Supermoto", "ENDURO",admin, "motorcycle",8),
-                    Factory.CreateClassification("Trial", "TRIAL",admin, "motorcycle",9),
-                    Factory.CreateClassification("ATV", "ATV",admin, "motorcycle",10),
-                    Factory.CreateClassification("Buggy", "BUGGY",admin, "motorcycle",11),
-                    Factory.CreateClassification("Moped Car", "MOPEDCAR",admin, "motorcycle",12),
-                    Factory.CreateClassification("Other", "OTHER",admin, "motorcycle",13),
-                    Factory.CreateClassification("Launch/Motorboat", "MOTORBOAT",admin, "water type",1),
-                    Factory.CreateClassification("Yacht", "YACHT",admin, "water type",2),
-                    Factory.CreateClassification("Waterscooter", "WATERSCOOTER",admin, "water type",3),
-                    Factory.CreateClassification("Other", "OTHER",admin, "water type",4),
-                    Factory.CreateClassification("Light Trailer", "LIGHT",admin, "trailer type",1),
-                    Factory.CreateClassification("Semi-Trailer", "SEMI",admin, "trailer type",2),
-                    Factory.CreateClassification("Trailer", "TRAILER",admin, "trailer type",3),
-                    Factory.CreateClassification("Caravan", "CARAVAN",admin, "caravan type",1),
-                    Factory.CreateClassification("Trailer Tent", "TRAILERTENT",admin, "caravan type",2)
+                    // TODO: I forgot value2 :/ no need for it ATM
+                    Factory.CreateClassification("Sedan", "SEDAN", admin,  1, "vehicle", "PASSANGER_CAR"),
+                    Factory.CreateClassification("Hatchback", "HATCHBACK", admin,  2,"vehicle", "PASSANGER_CAR"),
+                    Factory.CreateClassification("Touring", "TOURING", admin,  3,"vehicle", "PASSANGER_CAR"),
+                    Factory.CreateClassification("Minivan", "MINIVAN", admin,  4,"vehicle", "PASSANGER_CAR"),
+                    Factory.CreateClassification("Coupe", "COUPE", admin,  5,"vehicle", "PASSANGER_CAR"),
+                    Factory.CreateClassification("Cabriolet", "CABRIOLET", admin,  6,"vehicle", "PASSANGER_CAR"),
+                    Factory.CreateClassification("Limousine", "LIMOUSINE", admin,  7,"vehicle", "PASSANGER_CAR"),
+                    Factory.CreateClassification("Limousine", "TOURING", admin,  1,"SUV", "SUV"),
+                    Factory.CreateClassification("Pickup", "PICKUP", admin,  2,"SUV", "SUV"),
+                    Factory.CreateClassification("Small Commercial", "SMALL_COMMERCIAL_VEHICLE", admin, 1, "commercial vehicle", "COMMERCIAL_VEHICLE" ),
+                    Factory.CreateClassification("Commercial Vehicle", "COMMERCIAL_VEHICLE", admin,  2, "commercial vehicle","COMMERCIAL_VEHICLE"),
+                    Factory.CreateClassification("Rigid", "RIGID", admin,3, "commercial vehicle",  "COMMERCIAL_VEHICLE"),
+                    Factory.CreateClassification("Saddle", "SADDLE", admin,  1,"truck", "TRUCK"),
+                    Factory.CreateClassification("Rigid", "RIGID", admin,  2, "truck","TRUCK"),
+                    Factory.CreateClassification("Chassis", "CHASSIS", admin, 3,"truck",  "TRUCK"),
+                    Factory.CreateClassification("Classical motorcycle", "CLASSICAL", admin, 1,"motorcycle",  "MOTO"),
+                    Factory.CreateClassification("Scooter", "SCOOTER", admin,  2, "motorcycle","MOTO"),
+                    Factory.CreateClassification("Moped", "MOPED", admin,  3, "motorcycle","MOTO"),
+                    Factory.CreateClassification("Bike", "BIKE", admin,  4,"motorcycle", "MOTO"),
+                    Factory.CreateClassification("Cruiser/Chopper", "CRUISERCHOPPER", admin,  5, "motorcycle","MOTO"),
+                    Factory.CreateClassification("Touring", "TOURING", admin,  6, "motorcycle","MOTO"),
+                    Factory.CreateClassification("Motocross Bike", "MOTOCROSS", admin,  7,"motorcycle", "MOTO"),
+                    Factory.CreateClassification("Enduro/Supermoto", "ENDURO", admin,  8,"motorcycle", "MOTO"),
+                    Factory.CreateClassification("Trial", "TRIAL", admin, 9, "motorcycle", "MOTO"),
+                    Factory.CreateClassification("ATV", "ATV", admin,  10, "motorcycle","MOTO"),
+                    Factory.CreateClassification("Buggy", "BUGGY", admin,  11,"motorcycle", "MOTO"),
+                    Factory.CreateClassification("Moped Car", "MOPEDCAR", admin,  12,"motorcycle", "MOTO"),
+                    Factory.CreateClassification("Other", "OTHER", admin,  13, "motorcycle","MOTO"),
+                    Factory.CreateClassification("Launch/Motorboat", "MOTORBOAT", admin,  1,"water type", "WATER_VEHICLE"),
+                    Factory.CreateClassification("Yacht", "YACHT", admin,  2,"water type", "WATER_VEHICLE"),
+                    Factory.CreateClassification("Waterscooter", "WATERSCOOTER", admin,  3,"water type", "WATER_VEHICLE"),
+                    Factory.CreateClassification("Other", "OTHER", admin,  4,"water type", "WATER_VEHICLE"),
+                    Factory.CreateClassification("Light Trailer", "LIGHT", admin,  1, "trailer type","TRAILER"),
+                    Factory.CreateClassification("Semi-Trailer", "SEMI", admin,  2,"trailer type", "TRAILER"),
+                    Factory.CreateClassification("Trailer", "TRAILER", admin,  3,"trailer type", "TRAILER"),
+                    Factory.CreateClassification("Caravan", "CARAVAN", admin,  1,"caravan type", "TRAILER"),
+                    Factory.CreateClassification("Trailer Tent", "TRAILERTENT", admin,  2, "caravan type","TRAILER")
                 }
             };
-            context.ClassificationTypes.AddOrUpdate(x => x.Name, 
-                classificationType_paymentType,
-                classificationType_drivetrain,
-                classificationType_transmission,
-                classificationType_paymentStatus,
-                classificationType_manufacturer,
-                classificationType_fuel,
-                classificationType_body
-            );
-            context.SaveChanges();
+            context.ClassificationTypes.AddOrUpdate(x => x.Name,
+                classificationTypePaymentType,
+                classificationTypeDrivetrain,
+                classificationTypeTransmission,
+                classificationTypePaymentStatus,
+                classificationTypeManufacturer,
+                classificationTypeFuel,
+                classificationTypeBody
+                );
         }
 
         private static void CreateNewRoles(ApplicationDbContext context)
@@ -222,8 +249,7 @@ namespace Triven.Data.EntityFramework.Migrations
             {
                 if (!roleManager.RoleExists(role))
                 {
-                    var newRole = new AppRole();
-                    newRole.Name = role;
+                    var newRole = new AppRole { Name = role };
                     roleManager.Create(newRole);
                 }
             }
@@ -231,24 +257,28 @@ namespace Triven.Data.EntityFramework.Migrations
 
         private static string CreateAdmin(ApplicationDbContext context)
         {
-            const string EmailSteve = "steve@steve.com";
-            if (context.Users.Count(x => x.Email == EmailSteve) == 0)
+            const string emailSteve = "steve@steve.com";
+            if (context.Users.Count(x => x.Email == emailSteve) == 0)
             {
                 string password = "123456aA!";
                 var manager = new AppUserManager(new AppUserStore());
 
-                var newUser = new ApplicationUser();
-                newUser.Email = EmailSteve;
-                newUser.UserName = "steve";
-                newUser.FirstName = "Triven";
-                newUser.LastName = "Administrator";
-                newUser.Password = password; // this assignment is obsolete i think
-                newUser.PasswordConfirm = password; // this assignment is obsolete i think
-                newUser.CreatedOn = DateTime.Now;
-                newUser.IsActive = true;
-                newUser.IsAdmin = true;
-                newUser.EmailConfirmed = true;
-                newUser.Status = Status.Active;
+                var newUser = new ApplicationUser
+                {
+                    Email = emailSteve,
+                    UserName = "steve",
+                    FirstName = "Triven",
+                    LastName = "Administrator",
+                    Password = password,
+                    PasswordConfirm = password,
+                    CreatedOn = DateTime.Now,
+                    IsActive = true,
+                    IsAdmin = true,
+                    EmailConfirmed = true,
+                    Status = Status.Active
+                };
+                // this assignment is obsolete i think
+                // this assignment is obsolete i think
                 newUser.CreatedOn = DateTime.Now;
                 newUser.UpdatedOn = DateTime.Now;
                 var result = manager.CreateAsync(newUser, password);
@@ -260,7 +290,7 @@ namespace Triven.Data.EntityFramework.Migrations
 
                 context.SaveChanges();
             }
-            return EmailSteve;
+            return emailSteve;
         }
 
         private static void CreateVehicleManager(ApplicationDbContext context)
@@ -271,18 +301,22 @@ namespace Triven.Data.EntityFramework.Migrations
                 string password = "123456aA!";
                 var manager = new AppUserManager(new AppUserStore());
 
-                var newUser = new ApplicationUser();
-                newUser.Email = emailBill;
-                newUser.UserName = "bill";
-                newUser.FirstName = "Triven";
-                newUser.LastName = "Vehicle Manager";
-                newUser.Password = password; // this assignment is obsolete i think
-                newUser.PasswordConfirm = password; // this assignment is obsolete i think
-                newUser.CreatedOn = DateTime.Now;
-                newUser.IsActive = true;
-                newUser.IsAdmin = true;
-                newUser.EmailConfirmed = true;
-                newUser.Status = Status.Active;
+                var newUser = new ApplicationUser
+                {
+                    Email = emailBill,
+                    UserName = "bill",
+                    FirstName = "Triven",
+                    LastName = "Vehicle Manager",
+                    Password = password,
+                    PasswordConfirm = password,
+                    CreatedOn = DateTime.Now,
+                    IsActive = true,
+                    IsAdmin = true,
+                    EmailConfirmed = true,
+                    Status = Status.Active
+                };
+                // this assignment is obsolete i think
+                // this assignment is obsolete i think
                 newUser.CreatedOn = DateTime.Now;
                 newUser.UpdatedOn = DateTime.Now;
                 var result = manager.CreateAsync(newUser, password);
@@ -302,8 +336,8 @@ namespace Triven.Data.EntityFramework.Migrations
                 string name,
                 string value,
                 ApplicationUser user,
+                int weight,
                 string description = null,
-                int weight = 1,
                 string value2 = null)
             {
                 return new Classification
@@ -317,6 +351,25 @@ namespace Triven.Data.EntityFramework.Migrations
                     CreatedOn = DateTime.Now,
                     ModifierUserIp = ModifierUserIp,
                     Value2 = value2
+                };
+            }
+
+            public static Feature CreateFeature(
+                string name,
+                string description,
+                string value,
+                bool isActive,
+                int weight)
+            {
+                return new Feature
+                {
+                    Name = name,
+                    Description = description,
+                    IsImported = true,
+                    Value = value,
+                    IsActive = isActive,
+                    Weight = weight,
+                    ModifierUserIp = ModifierUserIp
                 };
             }
         }

@@ -10,7 +10,7 @@ namespace Triven.Data.EntityFramework.Repositories
     {
         public IList<VehicleReport> GetAllBy(int vehicleId)
         {
-            return BaseQuery().Where(x => x.VehicleId == vehicleId).ToList();
+            return BaseQuery().Where(x => x.Vehicle.Id == vehicleId).ToList();
         }
     }
 }

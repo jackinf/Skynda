@@ -29,17 +29,17 @@ namespace Triven.Data.EntityFramework.Repositories
                 case DatabaseConstants.ClassificationTypeName.PAYMENT_TYPE:
                     return GetByType(type);
                 case DatabaseConstants.ClassificationTypeName.DRIVETRAIN:
-                    return Filter(_context.VehicleModels.Where(x => x.DrivetrainId > 0).Select(x => x.DrivetrainId));
+                    return Filter(_context.VehicleModels.Where(x => x.Drivetrain.Id > 0).Select(x => x.Drivetrain.Id));
                 case DatabaseConstants.ClassificationTypeName.TRANSMISSION:
-                    return Filter(_context.VehicleModels.Where(x => x.TransmissionId > 0).Select(x => x.TransmissionId));
+                    return Filter(_context.VehicleModels.Where(x => x.Transmission.Id > 0).Select(x => x.Transmission.Id));
                 case DatabaseConstants.ClassificationTypeName.PAYMENT_STATUS:
                     return GetByType(type);
                 case DatabaseConstants.ClassificationTypeName.MANUFACTURER:
-                    return Filter(_context.VehicleModels.Where(x => x.VehicleManufacturerId > 0).Select(x => x.VehicleManufacturerId));
+                    return Filter(_context.VehicleModels.Where(x => x.VehicleManufacturer.Id > 0).Select(x => x.VehicleManufacturer.Id));
                 case DatabaseConstants.ClassificationTypeName.FUEL:
-                    return Filter(_context.VehicleModels.Where(x => x.FuelTypeId > 0).Select(x => x.FuelTypeId));
+                    return Filter(_context.VehicleModels.Where(x => x.FuelType.Id > 0).Select(x => x.FuelType.Id));
                 case DatabaseConstants.ClassificationTypeName.VEHICLE_BODY:
-                    return Filter(_context.VehicleModels.Where(x => x.VehicleBodyId > 0).Select(x => x.VehicleBodyId));
+                    return Filter(_context.VehicleModels.Where(x => x.VehicleBody.Id > 0).Select(x => x.VehicleBody.Id));
             }
 
             return new List<Classification>();
@@ -53,7 +53,7 @@ namespace Triven.Data.EntityFramework.Repositories
             var existingFuelTypes = subQuery.ToList();
             return
                 BaseQuery()
-                    .Where(x => existingFuelTypes.Any(fuelTypeId => fuelTypeId == x.ClassificationTypeId))
+                    .Where(x => existingFuelTypes.Any(fuelTypeId => fuelTypeId == x.ClassificationType.Id))
                     .ToList();
         }
     }

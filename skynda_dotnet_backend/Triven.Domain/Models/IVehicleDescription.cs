@@ -6,6 +6,6 @@ namespace Triven.Domain.Models
     {
         string Title { get; set; }
         string Content { get; set; }
-        int VehicleId { get; set; }
+        IVehicle Vehicle { get; set; }
     }
 }

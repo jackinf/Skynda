@@ -22,10 +22,9 @@ namespace Triven.Domain.Models
         int TotalValves { get; set; }
         int Safetystars { get; set; }
         string SafetyUrl { get; set; }
-        string Additional { get; set; }
-        int OwnerId { get; set; }
-        int MainImageId { get; set; }
-        int ModelId { get; set; }
-
+        string Additional { get; set; }        
+        IVehicleModel VehicleModel { get; set; }
+        IImage MainImage { get; set; }
+        IApplicationUser ApplicationUser { get; set; }
     }
 }

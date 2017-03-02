@@ -12,11 +12,11 @@ namespace Triven.Domain.Models
         int Doors { get; set; }
         int Seats { get; set; }
         int Year { get; set; }
-        int VehicleManufacturerId { get; set; }
-        int TransmissionId { get; set; }
-        int DrivetrainId { get; set; }
-        int VehicleBodyId { get; set; }
-        int FuelTypeId { get; set; }
+        IClassification VehicleManufacturer { get; set; }
+        IClassification Transmission { get; set; }
+        IClassification Drivetrain { get; set; }
+        IClassification VehicleBody { get; set; }
+        IClassification FuelType { get; set; }
 
     }
 }

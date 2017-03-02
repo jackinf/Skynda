@@ -12,9 +12,7 @@ namespace Triven.Data.EntityFramework.Models
 
         /// <summary>
         /// Vehicle 
-        /// </summary>
-        [ForeignKey(nameof(Vehicle))]
-        public int VehicleId { get; set; }
-        public Vehicle Vehicle { get; set; }
+        /// </summary>        
+        public IVehicle Vehicle { get; set; }
     }
 }

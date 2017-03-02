@@ -6,6 +6,6 @@ namespace Triven.Domain.Models
     {
         bool IsActive { get; set; }
         string Email { get; set; }
-        int UserId { get; set; }
+        IApplicationUser ApplicationUser { get; set; }
     }
 }

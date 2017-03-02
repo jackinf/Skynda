@@ -7,6 +7,6 @@ namespace Triven.Domain.Models
         bool IsPass { get; set; }
         string Title { get; set; }
         string Text { get; set; }
-        int ParentId { get; set; }
+        IVehicleReport Parent { get; set; }
     }
 }

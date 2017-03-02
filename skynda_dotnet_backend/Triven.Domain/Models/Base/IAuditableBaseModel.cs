@@ -1,4 +1,5 @@
 ﻿using System;
+using Triven.Domain.Models.User;
 
 namespace Triven.Domain.Models.Base
 {
@@ -21,24 +22,19 @@ namespace Triven.Domain.Models.Base
         /// <summary>
         /// User ID who created
         /// </summary>
-        int? CreatedBy { get; set; }
+        IApplicationUser Creator { get; set; }
 
         /// <summary>
         /// User ID who updated
         /// </summary>
-        int? UpdatedBy { get; set; }
+        IApplicationUser Modifier { get; set; }
 
         /// <summary>
         /// User ID who archived
         /// </summary>
-        int? DeletedBy { get; set; }
+        IApplicationUser Remover { get; set; }
 
         string ModifierUserIp { get; set; }
 
-        //IApplicationUser<IApplicationUserContactInfo> Creator { get; set; }
-
-        //IApplicationUser<IApplicationUserContactInfo> Modifier { get; set; }
-
-        //IApplicationUser<IApplicationUserContactInfo> Remover { get; set; }
     }
 }

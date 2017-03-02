@@ -30,8 +30,8 @@ namespace Triven.Application
             {
                 // Account
                 configuration.CreateMap<ApplicationUser, AccountDisplayViewModel>();
-                configuration.CreateMap<AccountDisplayViewModel, ApplicationUser>().ForMember(x => x.ContactInfos, opt => opt.Ignore());
-                configuration.CreateMap<UserContactInfo, AccountContactInfoDisplayModel>().ReverseMap();    // TODO: Not needed
+                configuration.CreateMap<AccountDisplayViewModel, ApplicationUser>().ForMember(x => x.ContactInfos, opt => opt.Ignore()); //TODO not needed ? 
+                //configuration.CreateMap<UserContactInfo, AccountContactInfoDisplayModel>().ReverseMap();    // TODO: Not needed
 
                 // Unsorted
                 configuration.CreateMap<Classification, ClassificationViewModel>();

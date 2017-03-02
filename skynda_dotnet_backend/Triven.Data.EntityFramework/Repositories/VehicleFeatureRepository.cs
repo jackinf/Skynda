@@ -8,8 +8,8 @@ namespace Triven.Data.EntityFramework.Repositories
 {
     public class VehicleFeatureRepository : BaseCrudRepository<VehicleFeature>, IVehicleFeatureRepository<VehicleFeature>
     {
-        public IList<VehicleFeature> GetAllBy(int vehicleId) => BaseQuery().Where(x => x.VehicleId == vehicleId).ToList();
+        public IList<VehicleFeature> GetAllBy(int vehicleId) => BaseQuery().Where(x => x.Vehicle.Id == vehicleId).ToList();
         public IList<VehicleFeature> GetAllBy(int vehicleId, bool isActive) 
-            => BaseQuery().Where(x => x.VehicleId == vehicleId && x.IsArchived == !isActive).ToList();
+            => BaseQuery().Where(x => x.Vehicle.Id == vehicleId && x.IsArchived == !isActive).ToList();
     }
 }

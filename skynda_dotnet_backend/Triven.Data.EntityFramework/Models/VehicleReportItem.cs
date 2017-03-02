@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Triven.Data.EntityFramework.Models.Base;
 using Triven.Domain.Models;
 
@@ -11,8 +12,7 @@ namespace Triven.Data.EntityFramework.Models
         public string Title { get; set; }
         public string Text { get; set; }
 
-        [ForeignKey(nameof(Parent))]
-        public int ParentId { get; set; }
-        public VehicleReport Parent { get; set; }
+        [Required]
+        public IVehicleReport Parent { get; set; }
     }
 }

@@ -1,19 +1,14 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
 using Triven.Domain.Constants;
+using Triven.Domain.Models;
 using Triven.Domain.Models.User;
 
 namespace Triven.Data.EntityFramework.Models.User
 {
+    [Obsolete]
     public class UserContactInfo : IApplicationUserContactInfo
     {
-        [Key]
-        public int Id { get; set; }
-
-        [ForeignKey("ApplicationUser")]
-        public int ApplicationUserId { get; set; }
-
-        public string Phone { get; set; }
+      public string Phone { get; set; }
 
         public string Email { get; set; }
 
@@ -28,10 +23,18 @@ namespace Triven.Data.EntityFramework.Models.User
         public string WWW { get; set; }
 
         public string Skype { get; set; }
+        
 
+        public IApplicationUser ApplicationUser { get; set; }
+
+        public int Id { get; set; }
+        public DateTime? CreatedOn { get; set; }
+        public DateTime? UpdatedOn { get; set; }
+        public DateTime? DeletedOn { get; set; }
+        public IApplicationUser Creator { get; set; }
+        public IApplicationUser Modifier { get; set; }
+        public IApplicationUser Remover { get; set; }
+        public string ModifierUserIp { get; set; }
         public ContactInfoType Type { get; set; }
-
-        public virtual ApplicationUser ApplicationUser { get; set; }
-
     }
 }

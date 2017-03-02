@@ -10,6 +10,7 @@ using Microsoft.Owin;
 using Triven.Domain.Constants;
 using Triven.Domain.Extensions;
 using Triven.Domain.Models;
+using Triven.Domain.Models.Base;
 
 namespace Triven.Data.EntityFramework.Models.User
 {
@@ -36,27 +37,15 @@ namespace Triven.Data.EntityFramework.Models.User
         [NotMapped]
         public Status Status { get; set; }
 
-        [Obsolete("Not needed")]
-        public virtual List<UserContactInfo> ContactInfos { get; set; } = new List<UserContactInfo>();
-
         public DateTime? UpdatedOn { get; set; }
         public DateTime? DeletedOn { get; set; }
         public DateTime? CreatedOn { get; set; }
 
-        [ForeignKey("Creator")]
-        public int? CreatedBy { get; set; }
-
-        [ForeignKey("Modifier")]
-        public int? UpdatedBy { get; set; }
-
-        [ForeignKey("Remover")]
-        public int? DeletedBy { get; set; }
-
         public string ModifierUserIp { get; set; }
 
-        public virtual ApplicationUser Creator { get; set; }
-        public virtual ApplicationUser Modifier { get; set; }
-        public virtual ApplicationUser Remover { get; set; }
+        public virtual IApplicationUser Creator { get; set; }
+        public virtual IApplicationUser Modifier { get; set; }
+        public virtual IApplicationUser Remover { get; set; }
         
         /// <summary>
         /// Needed for password validation 
@@ -65,7 +54,7 @@ namespace Triven.Data.EntityFramework.Models.User
         [NotMapped]
         public string Password { get; set; }
         [NotMapped]
-        public string PasswordConfirm { get; set; }
+        public string PasswordConfirm { get; set; }        
 
         public string GetFullName()
         {
@@ -74,6 +63,8 @@ namespace Triven.Data.EntityFramework.Models.User
                 name += " " + LastName;
             return name;
         }
+        [Obsolete("Not needed")]
+        public virtual List<UserContactInfo> ContactInfos { get; set; } = new List<UserContactInfo>();
     }
 
 

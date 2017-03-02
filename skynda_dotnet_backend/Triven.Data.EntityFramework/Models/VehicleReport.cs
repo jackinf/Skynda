@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Triven.Data.EntityFramework.Models.Base;
 using Triven.Domain.Models;
@@ -11,9 +12,8 @@ namespace Triven.Data.EntityFramework.Models
         public string Title { get; set; }
         public string Description { get; set; }
 
-        [ForeignKey(nameof(Vehicle))]
-        public int VehicleId { get; set; }
-        public virtual Vehicle Vehicle { get; set; }
+        [Required]
+        public IVehicle Vehicle { get; set; }
 
         public string Inspector { get; set; }
 

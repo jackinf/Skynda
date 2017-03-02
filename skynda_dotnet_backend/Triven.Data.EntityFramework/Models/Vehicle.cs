@@ -56,26 +56,20 @@ namespace Triven.Data.EntityFramework.Models
         /// <summary>
         /// Application user
         /// </summary>
-        [ForeignKey(nameof(ApplicationUser))]
-        public int OwnerId { get; set; }
         [Required]
-        public ApplicationUser ApplicationUser { get; set; }
+        public IApplicationUser ApplicationUser { get; set; }
 
         /// <summary>
         /// Main image
         /// </summary>
-        [ForeignKey(nameof(MainImage))]
-        public int MainImageId { get; set; }
         [Required]
-        public Image MainImage { get; set; }
+        public IImage MainImage { get; set; }
 
         /// <summary>
         /// Vehicle Model
         /// </summary>
-        [ForeignKey(nameof(VehicleModel))]
-        public int ModelId { get; set; }
         [Required]
-        public VehicleModel VehicleModel { get; set; }
+        public IVehicleModel VehicleModel { get; set; }
 
         /// <summary>
         /// Vehicle images

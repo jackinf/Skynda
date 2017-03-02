@@ -17,7 +17,7 @@ namespace Triven.Data.EntityFramework.Repositories
             return
                 BaseQuery()
                     .Include(x => x.VehicleManufacturer)
-                    .Where(x => parameters.ManufacturerIds.Any(id => id == x.VehicleManufacturerId))
+                    .Where(x => parameters.ManufacturerIds.Any(id => id == x.VehicleManufacturer.Id))
                     .ToList();
         }
     }

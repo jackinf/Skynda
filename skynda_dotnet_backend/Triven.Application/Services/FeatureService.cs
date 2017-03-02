@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
+using FluentValidation.Results;
 using Triven.Application.Results;
 using Triven.Data.EntityFramework.Models;
 using Triven.Domain.Repositories;
@@ -21,9 +22,17 @@ namespace Triven.Application.Services
 
         public ServiceResult GetAll()
         {
-            var results = _featureRepository.GetAll().ToList();
-            var mappedResults = Mapper.Map<IList<FeatureViewModel>>(results);
-            return ServiceResult.Factory.Success(mappedResults);
+            try
+            {
+                var results = _featureRepository.GetAll().ToList();
+                var mappedResults = Mapper.Map<IList<FeatureViewModel>>(results);
+                return ServiceResult.Factory.Success(mappedResults);
+            }
+            catch (Exception ex)
+            {
+                return ServiceResult.Factory.Fail(new ValidationResult());
+            }
+            
         }
 
         public ServiceResult GetAllForAdminSelect()

@@ -4,7 +4,7 @@ namespace Triven.Domain.Models
 {
     public interface IVehicleImage : IAuditableBaseModel
     {
-        int VehicleId { get; set; }
-        int ImageId { get; set; }
+        IVehicle Vehicle { get; set; }
+        IImage Image { get; set; }
     }
 }

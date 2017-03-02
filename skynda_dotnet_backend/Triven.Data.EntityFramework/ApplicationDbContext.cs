@@ -26,14 +26,14 @@ namespace Triven.Data.EntityFramework
             modelBuilder.Entity<AppUserLogin>().ToTable("UserLogins");
             modelBuilder.Entity<AppUserClaim>().ToTable("UserClaims").HasKey(x => x.Id);
             modelBuilder.Entity<AppRole>().ToTable("Roles").HasKey(x => x.Id);
-            modelBuilder.Entity<UserContactInfo>().ToTable("UserContactInfo").HasKey(x => x.Id); // TODO: Not needed
+            //modelBuilder.Entity<UserContactInfo>().ToTable("UserContactInfo").HasKey(x => x.Id); // TODO: Not needed
 
             //Contact info relation TODO: Not needed
-            modelBuilder.Entity<UserContactInfo>()
-                .HasRequired(n => n.ApplicationUser)
-                .WithMany(a => a.ContactInfos)
-                .HasForeignKey(n => n.ApplicationUserId)
-                .WillCascadeOnDelete(false);
+            //modelBuilder.Entity<UserContactInfo>()
+            //    .HasRequired(n => n.ApplicationUser)
+            //    .WithMany(a => a.ContactInfos)
+            //    .HasForeignKey(n => n.ApplicationUserId)
+            //    .WillCascadeOnDelete(false);
         }
 
         public DbSet<Classification> Classifications { get; set; }

@@ -9,7 +9,7 @@ namespace Triven.Domain.Models
         int Weight { get; set; }
         string Value { get; set; }
         string Name { get; set; }
-        int ClassificationTypeId { get; set; }
+        IClassificationType ClassificationType { get; set; }
         bool IsActive { get; set; }
         string Value2 { get; set; }
 
