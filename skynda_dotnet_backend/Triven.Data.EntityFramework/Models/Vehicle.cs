@@ -2,7 +2,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Triven.Data.EntityFramework.Models.Base;
-using Triven.Data.EntityFramework.Models.User;
 using Triven.Domain.Models;
 
 namespace Triven.Data.EntityFramework.Models
@@ -75,30 +74,30 @@ namespace Triven.Data.EntityFramework.Models
         /// Vehicle images
         /// </summary>
         [InverseProperty(nameof(VehicleImage.Vehicle))]
-        public IList<VehicleImage> Images { get; set; } = new List<VehicleImage>();
+        public IList<IVehicleImage> Images { get; set; } = new List<IVehicleImage>();
 
         /// <summary>
         /// Vehicle descriptions
         /// </summary>
         [InverseProperty(nameof(VehicleDescription.Vehicle))]
-        public IList<VehicleDescription> Descriptions { get; set; } = new List<VehicleDescription>();
+        public IList<IVehicleDescription> Descriptions { get; set; } = new List<IVehicleDescription>();
 
         /// <summary>
         /// Vehicle features
         /// </summary>
         [InverseProperty(nameof(VehicleFeature.Vehicle))]
-        public IList<VehicleFeature> Features { get; set; } = new List<VehicleFeature>();
+        public IList<IVehicleFeature> Features { get; set; } = new List<IVehicleFeature>();
 
         /// <summary>
         /// Vehicle features
         /// </summary>
         [InverseProperty(nameof(VehicleReport.Vehicle))]
-        public IList<VehicleReport> Reports { get; set; } = new List<VehicleReport>();
+        public IList<IVehicleReport> Reports { get; set; } = new List<IVehicleReport>();
 
         /// <summary>
         /// Vehicle features
         /// </summary>
         [InverseProperty(nameof(VehicleReview.Vehicle))]
-        public IList<VehicleReview> Reviews { get; set; } = new List<VehicleReview>();
+        public IList<IVehicleReview> Reviews { get; set; } = new List<IVehicleReview>();
     }
 }

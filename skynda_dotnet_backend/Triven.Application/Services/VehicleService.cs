@@ -6,6 +6,7 @@ using FluentValidation.Results;
 using Triven.Application.Results;
 using Triven.Application.Validators.Vehicle;
 using Triven.Data.EntityFramework.Models;
+using Triven.Domain.Models;
 using Triven.Domain.Repositories;
 using Triven.Domain.Services;
 using Triven.Domain.ViewModels.Vehicle;
@@ -62,7 +63,7 @@ namespace Triven.Application.Services
                     // todo: handle upload of main image
                 }
 
-                var descriptionEntities = Mapper.Map<List<VehicleDescription>>(viewModel.Descriptions);
+                var descriptionEntities = Mapper.Map<List<IVehicleDescription>>(viewModel.Descriptions);
                 entity.Descriptions = descriptionEntities;
 
                 //var imageEntities = Mapper.Map<List<VehicleImage>>(viewModel.Images);
@@ -93,11 +94,11 @@ namespace Triven.Application.Services
                 // todo: handle upload of main image
             }
 
-            var newDescriptionEntities = Mapper.Map<List<VehicleDescription>>(viewModel.Descriptions);
+            var newDescriptionEntities = Mapper.Map<List<IVehicleDescription>>(viewModel.Descriptions);
             var toDeleteDescriptionIds = entity.Descriptions.Select(x => x.Id).Where(descriptionId => newDescriptionEntities.All(xx => xx.Id != descriptionId)).ToList();
             entity.Descriptions = newDescriptionEntities;
 
-            var newImageEntities = Mapper.Map<List<VehicleImage>>(viewModel.Images);
+            var newImageEntities = Mapper.Map<List<IVehicleImage>>(viewModel.Images);
             var toDeleteImageIds = entity.Images.Select(x => x.Id).Where(imageId => newImageEntities.All(xx => xx.Id != imageId)).ToList();
             entity.Images = newImageEntities;
             foreach (var newImageEntity in newImageEntities)
