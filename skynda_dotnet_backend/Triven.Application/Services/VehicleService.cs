@@ -17,10 +17,12 @@ namespace Triven.Application.Services
     public class VehicleService : IVehicleService<ServiceResult>
     {
         private readonly IVehicleRepository<Vehicle> _vehicleRepository;
+        private readonly IBlobStorageService<ServiceResult> _blobStorageService;
 
         public VehicleService()
         {
             _vehicleRepository = IoC.Get<IVehicleRepository<Vehicle>>();
+            _blobStorageService = IoC.Get<IBlobStorageService<ServiceResult>>();
         }
 
         public ServiceResult GetAll()
@@ -51,6 +53,11 @@ namespace Triven.Application.Services
                 VehicleValidator validator = new VehicleValidator();
                 ValidationResult results = validator.Validate(viewModel);
 
+                if (viewModel.MainImage != null)
+                {
+                    _blobStorageService.HandleMedia(viewModel.MainImage, null, true);
+                }
+
                 if (!results.IsValid)
                 {
                     return ServiceResult.Factory.Fail(results.Errors);
@@ -58,10 +65,7 @@ namespace Triven.Application.Services
 
                 var entity = Mapper.Map<Vehicle>(viewModel);
 
-                if (viewModel.MainImage != null)
-                {
-                    // todo: handle upload of main image
-                }
+                
 
                 var descriptionEntities = Mapper.Map<List<IVehicleDescription>>(viewModel.Descriptions);
                 entity.Descriptions = descriptionEntities;

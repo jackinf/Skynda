@@ -1,7 +1,6 @@
 import _ from "underscore";
 
 export default function fromSpringToReduxFormError(modelStateErrors) {
-  console.log("fromSpringToReduxFormError", modelStateErrors);
   if (!_.isArray(modelStateErrors)) {
     console.log("no array");
     return {};

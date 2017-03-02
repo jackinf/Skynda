@@ -6,7 +6,6 @@ export const ImageService = {
   getImagesInContainer: function (containerName) {
     return handle(fetch(`${remoteConfig.remote}/api/image/list?containerName=${containerName}`, {
       method: "GET",
-      credentials: "include",
       headers: getDefaultHeaders()
     }));
   }

@@ -4,7 +4,7 @@ import {VehicleReportService} from "../../../../../../../webServices"
 
 export function getList(vehicleId) {
   return (dispatch) => {
-    if (!vehicleId) {
+    if (!vehicleId || vehicleId == "new") {
       return null;
     }
 

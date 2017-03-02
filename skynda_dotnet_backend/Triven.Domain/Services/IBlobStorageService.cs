@@ -12,7 +12,6 @@ namespace Triven.Domain.Services
         TResult CreateContainer(CreateContainerViewModel viewModel);
         TResult DeleteContainer(DeleteContainerViewModel viewModel);
         TResult Upload(UploadBlobViewModel viewModel);
-        TResult UploadStream(UploadBlobViewModel viewModel);
         TResult List(ListBlobsViewModel viewModel);
         TResult Download(DownloadBlobViewModel viewModel);
         TResult Delete(DeleteBlobViewModel viewModel);
@@ -20,7 +19,6 @@ namespace Triven.Domain.Services
         IImage HandleMedia(ImageViewModel mediaViewModel, IImage existingMedia, bool urlChanged);
         IImage HandleMedia(ImageViewModel mediaViewModel, IImage existingMedia);
 
-        byte[] CropImage(byte[] imageInByte, ImageCropInfoViewModel cropInfo);
         byte[] CropImage(byte[] imageInByte, ImageCropInfoViewModel cropInfo, String formatName);
 
         void FromBase64ToUrl(ImageViewModel viewModel);

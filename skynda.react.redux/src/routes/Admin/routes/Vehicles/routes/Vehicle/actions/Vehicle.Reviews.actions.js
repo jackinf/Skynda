@@ -4,9 +4,10 @@ import {VehicleReviewService} from "../../../../../../../webServices"
 
 export function getList(vehicleId) {
   return (dispatch) => {
-    if (!vehicleId) {
+    if (!vehicleId || vehicleId == "new") {
       return null;
     }
+
     dispatch(setVehicleReviewsList({isFetching: true}));
 
     const promise = VehicleReviewService.getVehicleReviews(vehicleId);

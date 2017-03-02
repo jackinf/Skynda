@@ -6,7 +6,6 @@ export const VehicleFeatureService = {
   deleteItem: function (id) {
     return handle(fetch(`${remoteConfig.remote}/api/vehicle-feature/${id}`, {
       method: "DELETE",
-      credentials: "include",
       headers: getDefaultHeaders()
     }));
   }

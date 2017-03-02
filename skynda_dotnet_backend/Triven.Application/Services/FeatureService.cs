@@ -38,7 +38,22 @@ namespace Triven.Application.Services
 
         public ServiceResult GetAllForAdminSelect()
         {
-            throw new NotImplementedException("What is this method for?");    // TODO: implement or remove.
+            var results = _featureRepository.GetAll().ToList();
+            List<FeatureAdminSelectViewModel> adminSelectFeatures = new List<FeatureAdminSelectViewModel>();
+
+            if (results.Any())
+            {
+                foreach (var feature in results)
+                {
+                    adminSelectFeatures.Add(new FeatureAdminSelectViewModel
+                    {
+                        Value = feature.Id.ToString(),
+                        Label = feature.Name
+                    });
+                }
+            }
+
+            return ServiceResult.Factory.Success(adminSelectFeatures);
         }
 
         public ServiceResult Get(int id)

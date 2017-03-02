@@ -2,7 +2,7 @@
 {
     public class ImageCropInfoViewModel
     {
-        public bool Crop { get; set; }
+        public bool IsCrop { get; set; }
         public float X { get; set; }
         public float Y { get; set; }
         public float Width { get; set; }

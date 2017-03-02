@@ -19,7 +19,7 @@ namespace Triven.API.Controllers
             _service = IoC.Get<IVehicleService<ServiceResult>>();
         }
 
-        [HttpGet, Route("~api/vehicles")]
+        [HttpGet, Route("~/api/vehicles")]
         public IHttpActionResult GetAll([FromBody] SearchRequestViewModel viewModel) => HandleResult(_service.GetAll());
 
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]

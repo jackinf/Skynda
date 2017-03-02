@@ -6,7 +6,6 @@ export const BlobService = {
   getBlobsInContainer: function (containerName) {
     return handle(fetch(`${remoteConfig.remote}/api/blob/list?containerName=${containerName}`, {
       method: "GET",
-      credentials: "include",
       headers: getDefaultHeaders()
     }));
   }

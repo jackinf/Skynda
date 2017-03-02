@@ -6,7 +6,6 @@ export const SubscriptionService = {
   sendSubscriptionEmail: function (item) {
     return handle(fetch(`${remoteConfig.remote}/api/subscribe`, {
       method: "POST",
-      credentials: "include",
       headers: getDefaultHeaders(),
       body: JSON.stringify(item)
     }))

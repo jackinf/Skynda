@@ -26,19 +26,19 @@ namespace Triven.Data.EntityFramework.Repositories
         {
             switch (type) 
             {
-                case DatabaseConstants.ClassificationTypeName.PAYMENT_TYPE:
+                case DatabaseConstants.ClassificationTypeName.PaymentType:
                     return GetByType(type);
-                case DatabaseConstants.ClassificationTypeName.DRIVETRAIN:
+                case DatabaseConstants.ClassificationTypeName.Drivetrain:
                     return Filter(_context.VehicleModels.Where(x => x.Drivetrain.Id > 0).Select(x => x.Drivetrain.Id));
-                case DatabaseConstants.ClassificationTypeName.TRANSMISSION:
+                case DatabaseConstants.ClassificationTypeName.Transmission:
                     return Filter(_context.VehicleModels.Where(x => x.Transmission.Id > 0).Select(x => x.Transmission.Id));
-                case DatabaseConstants.ClassificationTypeName.PAYMENT_STATUS:
+                case DatabaseConstants.ClassificationTypeName.PaymentStatus:
                     return GetByType(type);
-                case DatabaseConstants.ClassificationTypeName.MANUFACTURER:
+                case DatabaseConstants.ClassificationTypeName.Manufacturer:
                     return Filter(_context.VehicleModels.Where(x => x.VehicleManufacturer.Id > 0).Select(x => x.VehicleManufacturer.Id));
-                case DatabaseConstants.ClassificationTypeName.FUEL:
+                case DatabaseConstants.ClassificationTypeName.Fuel:
                     return Filter(_context.VehicleModels.Where(x => x.FuelType.Id > 0).Select(x => x.FuelType.Id));
-                case DatabaseConstants.ClassificationTypeName.VEHICLE_BODY:
+                case DatabaseConstants.ClassificationTypeName.VehicleBody:
                     return Filter(_context.VehicleModels.Where(x => x.VehicleBody.Id > 0).Select(x => x.VehicleBody.Id));
             }
 

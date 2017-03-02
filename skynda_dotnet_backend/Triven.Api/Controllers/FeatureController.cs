@@ -22,7 +22,7 @@ namespace Triven.API.Controllers
         public IHttpActionResult GetAll() => HandleResult(_service.GetAll());
 
         [HttpGet, Route("admin-select")]
-        public IHttpActionResult GetAllForAdminSelect([FromUri] int id) => HandleResult(_service.GetAllForAdminSelect());
+        public IHttpActionResult GetAllForAdminSelect() => HandleResult(_service.GetAllForAdminSelect());
 
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [HttpGet, Route("{id:int}")]

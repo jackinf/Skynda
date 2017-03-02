@@ -73,7 +73,7 @@ namespace Triven.Data.EntityFramework.Migrations
         {
             var classificationTypePaymentType = new ClassificationType
             {
-                Name = DatabaseConstants.ClassificationTypeName.PAYMENT_TYPE,
+                Name = DatabaseConstants.ClassificationTypeName.PaymentType,
                 Description = "single or recurring payment",
                 Creator = admin,
                 CreatedOn = DateTime.Now,
@@ -86,7 +86,7 @@ namespace Triven.Data.EntityFramework.Migrations
             };
             var classificationTypeDrivetrain = new ClassificationType
             {
-                Name = DatabaseConstants.ClassificationTypeName.DRIVETRAIN,
+                Name = DatabaseConstants.ClassificationTypeName.Drivetrain,
                 Description = "vehicle drivetrain",
                 Creator = admin,
                 CreatedOn = DateTime.Now,
@@ -100,7 +100,7 @@ namespace Triven.Data.EntityFramework.Migrations
             };
             var classificationTypeTransmission = new ClassificationType
             {
-                Name = DatabaseConstants.ClassificationTypeName.TRANSMISSION,
+                Name = DatabaseConstants.ClassificationTypeName.Transmission,
                 Description = "transmission type",
                 Creator = admin,
                 CreatedOn = DateTime.Now,
@@ -114,7 +114,7 @@ namespace Triven.Data.EntityFramework.Migrations
             };
             var classificationTypePaymentStatus = new ClassificationType
             {
-                Name = DatabaseConstants.ClassificationTypeName.PAYMENT_STATUS,
+                Name = DatabaseConstants.ClassificationTypeName.PaymentStatus,
                 Description = "payment status",
                 Creator = admin,
                 CreatedOn = DateTime.Now,
@@ -129,7 +129,7 @@ namespace Triven.Data.EntityFramework.Migrations
             };
             var classificationTypeManufacturer = new ClassificationType
             {
-                Name = DatabaseConstants.ClassificationTypeName.MANUFACTURER,
+                Name = DatabaseConstants.ClassificationTypeName.Manufacturer,
                 Description = "vehicles manufacturer",
                 Creator = admin,
                 CreatedOn = DateTime.Now,
@@ -162,7 +162,7 @@ namespace Triven.Data.EntityFramework.Migrations
             };
             var classificationTypeFuel = new ClassificationType
             {
-                Name = DatabaseConstants.ClassificationTypeName.FUEL,
+                Name = DatabaseConstants.ClassificationTypeName.Fuel,
                 Description = "fuel type",
                 Creator = admin,
                 CreatedOn = DateTime.Now,
@@ -182,7 +182,7 @@ namespace Triven.Data.EntityFramework.Migrations
             };
             var classificationTypeBody = new ClassificationType
             {
-                Name = DatabaseConstants.ClassificationTypeName.VEHICLE_BODY,
+                Name = DatabaseConstants.ClassificationTypeName.VehicleBody,
                 Description = "vehicle body",
                 Creator = admin,
                 CreatedOn = DateTime.Now,

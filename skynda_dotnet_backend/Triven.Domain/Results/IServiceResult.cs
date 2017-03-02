@@ -91,10 +91,15 @@ namespace Triven.Domain.Results
                 return result;
             }
 
+            public static T Fail()
+            {
+                var result = new T { IsSuccessful = false };
+                return result;
+            }
+
             public static T Success()
             {
-                var result = new T();
-                result.IsSuccessful = true;
+                var result = new T {IsSuccessful = true};
                 return result;
             }
 
@@ -108,6 +113,11 @@ namespace Triven.Domain.Results
                 };
 
                 return result;
+            }
+
+            public static T Handle<TPayload>(bool success, TPayload payload, string message = "", IEnumerable<ValidationFailure> errors = null)
+            {
+                return success ? Success(payload, message) : Fail(errors);
             }
         }
     }
