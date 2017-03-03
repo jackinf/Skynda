@@ -339,8 +339,9 @@
     <Content Include="Web.Test.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\SkyndaBackend - FTP %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\SkyndaBackend - FTP.pubxml" />
-    <None Include="Properties\PublishProfiles\SkyndaBackend - Web Deploy %282%29.pubxml" />
+    <None Include="Properties\PublishProfiles\SkyndaBackend - Web Deploy Jevgeni.pubxml" />
     <None Include="Properties\PublishProfiles\SkyndaBackend - Web Deploy.pubxml" />
   </ItemGroup>
   <ItemGroup>
