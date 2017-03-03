@@ -15,6 +15,6 @@ namespace Triven.Data.EntityFramework.Models
         /// Classifications
         /// </summary>
         [InverseProperty(nameof(Classification.ClassificationType))]
-        public List<IClassification> Classifications { get; set; } = new List<IClassification>();
+        public List<Classification> Classifications { get; set; } = new List<Classification>();
     }
 }

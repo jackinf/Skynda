@@ -13,14 +13,14 @@ namespace Triven.Data.EntityFramework.Models
         public string Description { get; set; }
 
         [Required]
-        public IVehicle Vehicle { get; set; }
+        public Vehicle Vehicle { get; set; }
 
         public string Inspector { get; set; }
 
         [InverseProperty(nameof(VehicleReportItem.Parent))]
-        public List<IVehicleReportItem> VehicleReportItems { get; set; } = new List<IVehicleReportItem>();
+        public List<VehicleReportItem> VehicleReportItems { get; set; } = new List<VehicleReportItem>();
 
         [InverseProperty(nameof(VehicleFault.VehicleReport))]
-        public List<IVehicleFault> Faults { get; set; } = new List<IVehicleFault>();
+        public List<VehicleFault> Faults { get; set; } = new List<VehicleFault>();
     }
 }

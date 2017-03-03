@@ -97,6 +97,12 @@ namespace Triven.Domain.Results
                 return result;
             }
 
+            public static T Fail(string message)
+            {
+                var result = new T { IsSuccessful = false, Message = message};
+                return result;
+            }
+
             public static T Success()
             {
                 var result = new T {IsSuccessful = true};

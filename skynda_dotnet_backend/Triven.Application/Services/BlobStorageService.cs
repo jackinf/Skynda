@@ -1,57 +1,82 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
-using System.Net.Mime;
-using System.Runtime.InteropServices;
+using AutoMapper;
 using Microsoft.Azure;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
 using Triven.Application.Results;
+using Triven.Data.EntityFramework.Models;
 using Triven.Domain.Constants;
-using Triven.Domain.Extensions;
 using Triven.Domain.Models;
+using Triven.Domain.Repositories;
 using Triven.Domain.Services;
 using Triven.Domain.ViewModels.BlobStorage;
 using Triven.Domain.ViewModels.Image;
-using Triven.Domain.ViewModels.Vehicle;
 
 namespace Triven.Application.Services
 {
     public class BlobStorageService : IBlobStorageService<ServiceResult>
     {
         private readonly CloudBlobClient _blobClient;
+        private readonly IImageRepository<Image> _imageRepository;
 
         public BlobStorageService()
         {                        
             CloudStorageAccount storageAccount = CloudStorageAccount.Parse(CloudConfigurationManager.GetSetting(AppSettings.StorageConnectionString));
             _blobClient = storageAccount.CreateCloudBlobClient();
+            _imageRepository = IoC.Get<IImageRepository<Image>>();
         }
 
         public ServiceResult CreateContainer(CreateContainerViewModel viewModel)
         {
-            CloudBlobContainer container = _blobClient.GetContainerReference(viewModel.ContainerName);
-            var isCreated = container.CreateIfNotExists();
-            return ServiceResult.Factory.Handle(isCreated, isCreated);
+            try
+            {
+                CloudBlobContainer container = _blobClient.GetContainerReference(viewModel.ContainerName);
+                var isCreated = container.CreateIfNotExists();
+                return ServiceResult.Factory.Handle(isCreated, isCreated);
+            }
+            catch (Exception ex)
+            {
+                return ServiceResult.Factory.Fail(ex.Message);
+            }
+            
         }
 
         public ServiceResult DeleteContainer(DeleteContainerViewModel viewModel)
         {
-            CloudBlobContainer container = _blobClient.GetContainerReference(viewModel.ContainerName);
-            var isSuccess = container.DeleteIfExists();
-            return ServiceResult.Factory.Handle(isSuccess, isSuccess);
+            try
+            {
+                CloudBlobContainer container = _blobClient.GetContainerReference(viewModel.ContainerName);
+                var isSuccess = container.DeleteIfExists();
+                return ServiceResult.Factory.Success(isSuccess);
+            }
+            catch (Exception exception)
+            {
+                return ServiceResult.Factory.Fail(exception.Message);
+            }
+            
         }
 
         public ServiceResult Upload(UploadBlobViewModel viewModel)
         {
-            CloudBlobContainer container = _blobClient.GetContainerReference(viewModel.ContainerName);
-            CloudBlockBlob blockBlob = container.GetBlockBlobReference(viewModel.BlobName);
+            try
+            {
+                CreateContainer(new CreateContainerViewModel { ContainerName = viewModel.ContainerName });
 
-            blockBlob.UploadFromStream(new MemoryStream(viewModel.ByteArray));
+                CloudBlobContainer container = _blobClient.GetContainerReference(viewModel.ContainerName);
+                CloudBlockBlob blockBlob = container.GetBlockBlobReference(viewModel.BlobName);
 
-            return ServiceResult.Factory.Success(true);
+                blockBlob.UploadFromStream(new MemoryStream(viewModel.ByteArray));
+
+                return ServiceResult.Factory.Success(blockBlob.Uri);
+            }
+            catch (Exception exception)
+            {
+                return ServiceResult.Factory.Fail(exception.Message);
+            }
+            
         }
 
         public ServiceResult List(ListBlobsViewModel viewModel)
@@ -86,33 +111,53 @@ namespace Triven.Application.Services
 
         public ServiceResult Download(DownloadBlobViewModel viewModel)
         {
-            CloudBlobContainer container = _blobClient.GetContainerReference(viewModel.ContainerName);
-            CloudBlockBlob blockBlob = container.GetBlockBlobReference(viewModel.BlobName);
-
-            using (var memoryStream = new MemoryStream())
+            try
             {
-                blockBlob.DownloadToStream(memoryStream);
-                return ServiceResult.Factory.Success(memoryStream);
+                CloudBlobContainer container = _blobClient.GetContainerReference(viewModel.ContainerName);
+                CloudBlockBlob blockBlob = container.GetBlockBlobReference(viewModel.BlobName);
+
+                using (var memoryStream = new MemoryStream())
+                {
+                    blockBlob.DownloadToStream(memoryStream);
+                    return ServiceResult.Factory.Success(memoryStream);
+                }
             }
+            catch (Exception exception)
+            {
+                return ServiceResult.Factory.Fail(exception.Message);
+            }
+            
         }
 
         public ServiceResult Delete(DeleteBlobViewModel viewModel)
         {
-            CloudBlobContainer container = _blobClient.GetContainerReference(viewModel.ContainerName);
-            CloudBlockBlob blockBlob = container.GetBlockBlobReference(viewModel.BlobName);
-            blockBlob.Delete();
-            return ServiceResult.Factory.Success();
+            try
+            {
+                CloudBlobContainer container = _blobClient.GetContainerReference(viewModel.ContainerName);
+                CloudBlockBlob blockBlob = container.GetBlockBlobReference(viewModel.BlobName);
+                blockBlob.DeleteIfExists();
+                return ServiceResult.Factory.Success();
+            }
+            catch (Exception exception)
+            {
+                return ServiceResult.Factory.Fail(exception.Message);
+            }
+            
         }
 
-        public IImage HandleMedia(ImageViewModel mediaViewModel, IImage existingMedia, bool urlChanged)
+        public IImage HandleMedia(ImageViewModel mediaViewModel, IImage existingMedia)
         {
+            //TODO see if logic is how it's suppose to . It feels like checks can be simplified and there's too much...
+
             if (mediaViewModel == null)
                 return null;
 
-            if (!mediaViewModel.Base64File.IsNullOrEmpty())
+            bool isUrlSame = !string.IsNullOrWhiteSpace(existingMedia?.Url) && string.Equals(existingMedia.Url, mediaViewModel.Url, 
+                StringComparison.InvariantCultureIgnoreCase);
+
+            if (!string.IsNullOrWhiteSpace(mediaViewModel.Base64File))
             {
                 byte[] bytes = GetBytes(mediaViewModel.Base64File);
-                bytes = CropImage(bytes, mediaViewModel.CropInfo, mediaViewModel.FileType);
 
                 var result = Upload(new UploadBlobViewModel
                 {
@@ -123,11 +168,51 @@ namespace Triven.Application.Services
 
                 if (result.IsSuccessful)
                 {
-                    //return ImageRepository.save(
+                    ImageViewModel viewModel = ImageViewModel.Factory
+                        .Create(result.Payload.ToString(), mediaViewModel.BlobName, mediaViewModel.ContainerName);
+
+                    var mappedImageEntity = Mapper.Map<ImageViewModel, Image>(viewModel);
+
+                    var added = _imageRepository.Add(mappedImageEntity);
+
+                    DeleteBlobIfExists(existingMedia);
+
+                    //var mappedResult = Mapper.Map<Image, ImageViewModel>(add.ContextObject);
+                    return added.ContextObject;
                 }
+
+                return existingMedia;
             }
 
-            return null;
+            if(string.IsNullOrWhiteSpace(mediaViewModel.Url))            
+                return null;
+
+            if (isUrlSame)
+                return existingMedia;
+
+            //Save already handled image.
+            ImageViewModel newImage = ImageViewModel.Factory
+                    .Create(mediaViewModel.Url, mediaViewModel.BlobName, mediaViewModel.ContainerName);
+
+            var mappedNewImageEntity = Mapper.Map<ImageViewModel, Image>(newImage);
+
+            _imageRepository.Add(mappedNewImageEntity);
+
+            DeleteBlobIfExists(existingMedia);
+
+            return mappedNewImageEntity;
+        }
+
+        private void DeleteBlobIfExists(IImage existingMedia)
+        {
+            if (!string.IsNullOrWhiteSpace(existingMedia?.BlobName) && !string.IsNullOrWhiteSpace(existingMedia.ContainerName))
+            {
+                Delete(new DeleteBlobViewModel
+                {
+                    BlobName = existingMedia.BlobName,
+                    ContainerName = existingMedia.ContainerName
+                });
+            }
         }
 
         private byte[] GetBytes(string str)
@@ -137,37 +222,31 @@ namespace Triven.Application.Services
             return bytes;
         }
 
-        static string GetString(byte[] bytes)
-        {
-            char[] chars = new char[bytes.Length / sizeof(char)];
-            Buffer.BlockCopy(bytes, 0, chars, 0, bytes.Length);
-            return new string(chars);
-        }
+        //static string GetString(byte[] bytes)
+        //{
+        //    char[] chars = new char[bytes.Length / sizeof(char)];
+        //    Buffer.BlockCopy(bytes, 0, chars, 0, bytes.Length);
+        //    return new string(chars);
+        //}
 
-        public IImage HandleMedia(ImageViewModel mediaViewModel, IImage existingMedia)
-        {
-            throw new System.NotImplementedException();
-        }
+        //public byte[] CropImage(byte[] imageInByte, ImageCropInfoViewModel cropInfo, string formatName = "jpg")
+        //{
+        //    if (cropInfo == null || !cropInfo.IsCrop)
+        //        return imageInByte;
 
-        public byte[] CropImage(byte[] imageInByte, ImageCropInfoViewModel cropInfo, string formatName = "jpg")
-        {
-            if (cropInfo == null || !cropInfo.IsCrop)
-                return imageInByte;
+        //    using (MemoryStream memoryStream = new MemoryStream(imageInByte))
+        //    {
+        //        using (Image newImage = Image.FromStream(memoryStream))
+        //        {
+        //            var croppedImage = newImage.CropImage(new Rectangle(300, 150, 200, 200));
+        //            ImageConverter converter = new ImageConverter();
+        //            byte[] imgArray = (byte[])converter.ConvertTo(croppedImage, typeof(byte[]));
+        //            imageInByte = imgArray;
+        //        }
+        //    }
 
-            using (MemoryStream memoryStream = new MemoryStream(imageInByte))
-            {
-                using (Image newImage = Image.FromStream(memoryStream))
-                {
-                    var croppedImage = newImage.CropImage(new Rectangle(300, 150, 200, 200));
-                    ImageConverter converter = new ImageConverter();
-                    byte[] imgArray = (byte[])converter.ConvertTo(croppedImage, typeof(byte[]));
-                    return imgArray;
-                }
-            }
-           
-
-            return imageInByte;
-        }
+        //    return imageInByte;
+        //}
 
 
         public void FromBase64ToUrl(ImageViewModel viewModel)
@@ -175,10 +254,6 @@ namespace Triven.Application.Services
             throw new System.NotImplementedException();
         }
 
-        public ServiceResult TryDeleteBlob(VehicleImageFileToDeleteViewModel viewModel)
-        {
-            throw new System.NotImplementedException("This is not needed to be implemented in near future.");
-        }
     }
 
 }

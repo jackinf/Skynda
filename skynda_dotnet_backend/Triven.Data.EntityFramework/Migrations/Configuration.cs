@@ -78,7 +78,7 @@ namespace Triven.Data.EntityFramework.Migrations
                 Creator = admin,
                 CreatedOn = DateTime.Now,
                 ModifierUserIp = ModifierUserIp,
-                Classifications = new List<IClassification>
+                Classifications = new List<Classification>
                 {
                     Factory.CreateClassification("Single payment", "FULL", admin, 1),
                     Factory.CreateClassification("Recurring payment", "RECURRING", admin, 2)
@@ -91,7 +91,7 @@ namespace Triven.Data.EntityFramework.Migrations
                 Creator = admin,
                 CreatedOn = DateTime.Now,
                 ModifierUserIp = ModifierUserIp,
-                Classifications = new List<IClassification>
+                Classifications = new List<Classification>
                 {
                     Factory.CreateClassification("Front-Wheel Drive", "FRONT", admin, 1),
                     Factory.CreateClassification("Rear-Wheel Drive", "REAR", admin, 2),
@@ -105,7 +105,7 @@ namespace Triven.Data.EntityFramework.Migrations
                 Creator = admin,
                 CreatedOn = DateTime.Now,
                 ModifierUserIp = ModifierUserIp,
-                Classifications = new List<IClassification>
+                Classifications = new List<Classification>
                 {
                     Factory.CreateClassification("Manual", "MANUAL", admin,1 ),
                     Factory.CreateClassification("Automatic", "AUTOMATIC", admin, 2),
@@ -119,7 +119,7 @@ namespace Triven.Data.EntityFramework.Migrations
                 Creator = admin,
                 CreatedOn = DateTime.Now,
                 ModifierUserIp = ModifierUserIp,
-                Classifications = new List<IClassification>
+                Classifications = new List<Classification>
                 {
                     Factory.CreateClassification("Completed", "COMPLETED", admin, 1, "payment has successfully completed"),
                     Factory.CreateClassification("Failed", "FAILED", admin, 2, "payment has failed"),
@@ -134,7 +134,7 @@ namespace Triven.Data.EntityFramework.Migrations
                 Creator = admin,
                 CreatedOn = DateTime.Now,
                 ModifierUserIp = ModifierUserIp,
-                Classifications = new List<IClassification>
+                Classifications = new List<Classification>
                 {
                     Factory.CreateClassification("Jaguar", "JAGUAR", admin, weight: 1),
                     Factory.CreateClassification("BMW", "BMW", admin, weight: 2),
@@ -167,7 +167,7 @@ namespace Triven.Data.EntityFramework.Migrations
                 Creator = admin,
                 CreatedOn = DateTime.Now,
                 ModifierUserIp = ModifierUserIp,
-                Classifications = new List<IClassification>
+                Classifications = new List<Classification>
                 {
                     Factory.CreateClassification("Diesel", "DIESEL", admin, weight: 1),
                     Factory.CreateClassification("Petrol", "PETROL", admin, weight: 2),
@@ -187,7 +187,7 @@ namespace Triven.Data.EntityFramework.Migrations
                 Creator = admin,
                 CreatedOn = DateTime.Now,
                 ModifierUserIp = ModifierUserIp,
-                Classifications = new List<IClassification>
+                Classifications = new List<Classification>
                 {
                     // TODO: I forgot value2 :/ no need for it ATM
                     Factory.CreateClassification("Sedan", "SEDAN", admin,  1, "vehicle", "PASSANGER_CAR"),

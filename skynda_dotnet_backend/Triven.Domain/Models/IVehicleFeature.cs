@@ -4,7 +4,5 @@ namespace Triven.Domain.Models
 {
     public interface IVehicleFeature : IAuditableBaseModel
     {
-        IFeature Feature { get; set; }
-        IVehicle Vehicle { get; set; }
     }
 }

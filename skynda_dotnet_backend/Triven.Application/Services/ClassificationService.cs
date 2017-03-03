@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using AutoMapper;
 using Triven.Application.Results;
 using Triven.Data.EntityFramework.Models;
@@ -19,9 +20,17 @@ namespace Triven.Application.Services
 
         public ServiceResult GetByType(string type)
         {
-            var results = _classificationRepository.GetByType(type);
-            var mappedResults = Mapper.Map<IList<ClassificationViewModel>>(results);
-            return ServiceResult.Factory.Success(mappedResults);
+            try
+            {
+                var results = _classificationRepository.GetByType(type);
+                var mappedResults = Mapper.Map<IList<ClassificationViewModel>>(results);
+                return ServiceResult.Factory.Success(mappedResults);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            
         }
 
         public ServiceResult GetByTypeAndVehicleBound(string type)

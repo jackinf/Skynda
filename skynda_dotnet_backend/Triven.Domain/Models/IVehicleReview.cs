@@ -7,7 +7,6 @@ namespace Triven.Domain.Models
         int LogoId { get; set; }
         int VideoId { get; set; }
         int Rating { get; set; }
-        IVehicle Vehicle { get; set; }
         string Text { get; set; }
     }
 }

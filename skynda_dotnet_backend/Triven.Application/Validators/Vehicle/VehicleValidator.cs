@@ -14,6 +14,7 @@ namespace Triven.Application.Validators.Vehicle
             RuleFor(x => x.ColorOutsideHex).NotEmpty();
             RuleFor(x => x.MainImage).NotNull();
             RuleFor(x => x.Model).NotNull();
+            RuleFor(x => x.Model.Id).NotNull().NotEmpty();
         }
     }
 }

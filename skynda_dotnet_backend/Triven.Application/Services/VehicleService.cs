@@ -17,12 +17,14 @@ namespace Triven.Application.Services
     public class VehicleService : IVehicleService<ServiceResult>
     {
         private readonly IVehicleRepository<Vehicle> _vehicleRepository;
+        private readonly IVehicleModelRepository<VehicleModel> _vehicleModelRepository;
         private readonly IBlobStorageService<ServiceResult> _blobStorageService;
 
         public VehicleService()
         {
             _vehicleRepository = IoC.Get<IVehicleRepository<Vehicle>>();
             _blobStorageService = IoC.Get<IBlobStorageService<ServiceResult>>();
+            _vehicleModelRepository = IoC.Get<IVehicleModelRepository<VehicleModel>>();
         }
 
         public ServiceResult GetAll()
@@ -53,22 +55,36 @@ namespace Triven.Application.Services
                 VehicleValidator validator = new VehicleValidator();
                 ValidationResult results = validator.Validate(viewModel);
 
-                if (viewModel.MainImage != null)
-                {
-                    _blobStorageService.HandleMedia(viewModel.MainImage, null, true);
-                }
-
+              
                 if (!results.IsValid)
                 {
                     return ServiceResult.Factory.Fail(results.Errors);
                 }
 
-                var entity = Mapper.Map<Vehicle>(viewModel);
+                Vehicle entity = Mapper.Map<Vehicle>(viewModel);
 
-                
+                if (viewModel.Id != 0)
+                {
+                    entity = _vehicleRepository.Get(viewModel.Id);
+                    entity.UpdatedOn = DateTime.Now;
+                }
+                else
+                {
+                    entity.CreatedOn = DateTime.Now;
+                }
 
-                var descriptionEntities = Mapper.Map<List<IVehicleDescription>>(viewModel.Descriptions);
-                entity.Descriptions = descriptionEntities;
+                VehicleModel vehicleModel = _vehicleModelRepository.Get(viewModel.Model.Id);
+                entity.VehicleModel = vehicleModel;
+
+
+                if (viewModel.MainImage != null)
+                {
+                    var mainImage = _blobStorageService.HandleMedia(viewModel.MainImage, null);
+                    entity.MainImage = mainImage as Image;
+                }
+
+                //var descriptionEntities = Mapper.Map<List<IVehicleDescription>>(viewModel.Descriptions);
+                //entity.Descriptions = descriptionEntities;
 
                 //var imageEntities = Mapper.Map<List<VehicleImage>>(viewModel.Images);
                 //entity.Images = imageEntities;
@@ -100,11 +116,11 @@ namespace Triven.Application.Services
 
             var newDescriptionEntities = Mapper.Map<List<IVehicleDescription>>(viewModel.Descriptions);
             var toDeleteDescriptionIds = entity.Descriptions.Select(x => x.Id).Where(descriptionId => newDescriptionEntities.All(xx => xx.Id != descriptionId)).ToList();
-            entity.Descriptions = newDescriptionEntities;
+            //entity.Descriptions = newDescriptionEntities;
 
             var newImageEntities = Mapper.Map<List<IVehicleImage>>(viewModel.Images);
             var toDeleteImageIds = entity.Images.Select(x => x.Id).Where(imageId => newImageEntities.All(xx => xx.Id != imageId)).ToList();
-            entity.Images = newImageEntities;
+            //entity.Images = newImageEntities;
             foreach (var newImageEntity in newImageEntities)
             {
                 // todo: handle image uplaod to blob stoarge

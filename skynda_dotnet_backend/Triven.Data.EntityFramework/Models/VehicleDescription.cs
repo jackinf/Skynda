@@ -13,6 +13,6 @@ namespace Triven.Data.EntityFramework.Models
         /// <summary>
         /// Vehicle 
         /// </summary>        
-        public IVehicle Vehicle { get; set; }
+        public Vehicle Vehicle { get; set; }
     }
 }

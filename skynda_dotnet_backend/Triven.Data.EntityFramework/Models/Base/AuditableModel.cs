@@ -8,19 +8,29 @@ namespace Triven.Data.EntityFramework.Models.Base
 {
     public abstract class AuditableModel : IAuditableBaseModel
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public virtual int Id { get; set; }
+
         public DateTime? UpdatedOn { get; set; }
         public DateTime? DeletedOn { get; set; }
         public DateTime? CreatedOn { get; set; }
+        /// <summary>
+        /// User ID who created
+        /// </summary>
+        public ApplicationUser Creator { get; set; }
 
-        public IApplicationUser Creator { get; set; }
+        /// <summary>
+        /// User ID who updated
+        /// </summary>
+        public ApplicationUser Modifier { get; set; }
 
-        public IApplicationUser Modifier { get; set; }
-        public IApplicationUser Remover { get; set; }
+        /// <summary>
+        /// User ID who archived
+        /// </summary>
+        public ApplicationUser Remover { get; set; }
+
 
         public string ModifierUserIp { get; set; }
-
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public virtual int Id { get; set; }
 
         public bool IsArchived => DeletedOn.HasValue;
     }

@@ -117,6 +117,10 @@
     <Compile Include="Migrations\201703021108285_asdfg.Designer.cs">
       <DependentUpon>201703021108285_asdfg.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201703031037358_FixDomainInterfaceEntitiesCrap.cs" />
+    <Compile Include="Migrations\201703031037358_FixDomainInterfaceEntitiesCrap.Designer.cs">
+      <DependentUpon>201703031037358_FixDomainInterfaceEntitiesCrap.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\Classification.cs" />
@@ -182,6 +186,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201703021108285_asdfg.resx">
       <DependentUpon>201703021108285_asdfg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703031037358_FixDomainInterfaceEntitiesCrap.resx">
+      <DependentUpon>201703031037358_FixDomainInterfaceEntitiesCrap.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

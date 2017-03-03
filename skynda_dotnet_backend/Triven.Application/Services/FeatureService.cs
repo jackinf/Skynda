@@ -31,7 +31,7 @@ namespace Triven.Application.Services
             }
             catch (Exception ex)
             {
-                return ServiceResult.Factory.Fail(new ValidationResult());
+                return ServiceResult.Factory.Fail(ex.Message);
             }
             
         }

@@ -10,7 +10,7 @@ namespace Triven.Data.EntityFramework.Models
         public int LogoId { get; set; }
         public int VideoId { get; set; }
         public int Rating { get; set; }
-        public IVehicle Vehicle { get; set; }    
+        public Vehicle Vehicle { get; set; }    
         public string Text { get; set; }
     }
 }

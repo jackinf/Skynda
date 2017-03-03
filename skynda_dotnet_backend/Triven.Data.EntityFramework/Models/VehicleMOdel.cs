@@ -31,30 +31,30 @@ namespace Triven.Data.EntityFramework.Models
         /// Manufacturer
         /// </summary>
         [Required]
-        public IClassification VehicleManufacturer { get; set; }
+        public Classification VehicleManufacturer { get; set; }
 
         /// <summary>
         /// Transmission
         /// </summary>
         [Required]
-        public IClassification Transmission { get; set; }
+        public Classification Transmission { get; set; }
 
         /// <summary>
         /// Drivetrain
         /// </summary>
         [Required]
-        public IClassification Drivetrain { get; set; }
+        public Classification Drivetrain { get; set; }
 
         /// <summary>
         /// VehicleBody
         /// </summary>
         [Required]
-        public IClassification VehicleBody { get; set; }
+        public Classification VehicleBody { get; set; }
 
         /// <summary>
         /// Fuel
         /// </summary>
         [Required]
-        public IClassification FuelType { get; set; }
+        public Classification FuelType { get; set; }
     }
 }

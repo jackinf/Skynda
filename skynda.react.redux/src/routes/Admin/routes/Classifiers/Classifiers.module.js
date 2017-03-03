@@ -38,7 +38,7 @@ function getList(actionType, classificationTypeName = "") {
     dispatch(setItems(actionType, [], true));
     const promise = ClassificationService.getClassificationList(classificationTypeName);
     promise.then(resp => {
-      // console.info("Classifications response", resp);
+      console.info("Classifications response", resp);
       dispatch(setItems(actionType, resp, false));
     }).catch(err => {
       dispatch(setItems(actionType, [], false));

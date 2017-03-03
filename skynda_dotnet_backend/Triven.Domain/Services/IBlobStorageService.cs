@@ -16,12 +16,10 @@ namespace Triven.Domain.Services
         TResult Download(DownloadBlobViewModel viewModel);
         TResult Delete(DeleteBlobViewModel viewModel);
 
-        IImage HandleMedia(ImageViewModel mediaViewModel, IImage existingMedia, bool urlChanged);
         IImage HandleMedia(ImageViewModel mediaViewModel, IImage existingMedia);
 
-        byte[] CropImage(byte[] imageInByte, ImageCropInfoViewModel cropInfo, String formatName);
+        //byte[] CropImage(byte[] imageInByte, ImageCropInfoViewModel cropInfo, String formatName);
 
         void FromBase64ToUrl(ImageViewModel viewModel);
-        TResult TryDeleteBlob(VehicleImageFileToDeleteViewModel viewModel);
     }
 }

@@ -20,7 +20,7 @@ namespace Triven.Data.EntityFramework.Models
         /// <summary>
         /// many-to-one relation of ClassificationType
         /// </summary>
-        public IClassificationType ClassificationType { get; set; }
+        public ClassificationType ClassificationType { get; set; }
 
         public bool IsActive { get; set; }
 

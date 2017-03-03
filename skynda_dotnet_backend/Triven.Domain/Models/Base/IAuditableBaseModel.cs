@@ -19,20 +19,7 @@ namespace Triven.Domain.Models.Base
         /// </summary>
         DateTime? DeletedOn { get; set; }
 
-        /// <summary>
-        /// User ID who created
-        /// </summary>
-        IApplicationUser Creator { get; set; }
 
-        /// <summary>
-        /// User ID who updated
-        /// </summary>
-        IApplicationUser Modifier { get; set; }
-
-        /// <summary>
-        /// User ID who archived
-        /// </summary>
-        IApplicationUser Remover { get; set; }
 
         string ModifierUserIp { get; set; }
 

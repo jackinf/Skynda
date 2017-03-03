@@ -9,8 +9,8 @@ namespace Triven.Data.EntityFramework.Models
     public class VehicleFeature : AuditableModel, IVehicleFeature
     {
         [Required]
-        public IFeature Feature { get; set; }
+        public Feature Feature { get; set; }
         [Required]
-        public IVehicle Vehicle { get; set; }
+        public Vehicle Vehicle { get; set; }
     }
 }
