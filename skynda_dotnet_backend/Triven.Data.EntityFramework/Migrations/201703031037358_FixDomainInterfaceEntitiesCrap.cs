@@ -49,24 +49,24 @@ namespace Triven.Data.EntityFramework.Migrations
             CreateIndex("dbo.VehicleModel", "VehicleManufacturer_Id");
             AddForeignKey("dbo.Classification", "ClassificationType_Id", "dbo.ClassificationType", "Id");
             AddForeignKey("dbo.Subscription", "ApplicationUser_Id", "dbo.Users", "Id");
-            AddForeignKey("dbo.Vehicle", "ApplicationUser_Id", "dbo.Users", "Id", cascadeDelete: true);
+            AddForeignKey("dbo.Vehicle", "ApplicationUser_Id", "dbo.Users", "Id", cascadeDelete: false);
             AddForeignKey("dbo.VehicleDescription", "Vehicle_Id", "dbo.Vehicle", "Id");
-            AddForeignKey("dbo.VehicleFeature", "Feature_Id", "dbo.Feature", "Id", cascadeDelete: true);
-            AddForeignKey("dbo.VehicleFeature", "Vehicle_Id", "dbo.Vehicle", "Id", cascadeDelete: true);
-            AddForeignKey("dbo.VehicleImage", "Image_Id", "dbo.Image", "Id", cascadeDelete: true);
-            AddForeignKey("dbo.VehicleImage", "Vehicle_Id", "dbo.Vehicle", "Id", cascadeDelete: true);
-            AddForeignKey("dbo.Vehicle", "MainImage_Id", "dbo.Image", "Id", cascadeDelete: true);
+            AddForeignKey("dbo.VehicleFeature", "Feature_Id", "dbo.Feature", "Id", cascadeDelete: false);
+            AddForeignKey("dbo.VehicleFeature", "Vehicle_Id", "dbo.Vehicle", "Id", cascadeDelete: false);
+            AddForeignKey("dbo.VehicleImage", "Image_Id", "dbo.Image", "Id", cascadeDelete: false);
+            AddForeignKey("dbo.VehicleImage", "Vehicle_Id", "dbo.Vehicle", "Id", cascadeDelete: false);
+            AddForeignKey("dbo.Vehicle", "MainImage_Id", "dbo.Image", "Id", cascadeDelete: false);
             AddForeignKey("dbo.VehicleFault", "Image_Id", "dbo.Image", "Id");
             AddForeignKey("dbo.VehicleFault", "VehicleReport_Id", "dbo.VehicleReport", "Id");
-            AddForeignKey("dbo.VehicleReportItem", "Parent_Id", "dbo.VehicleReport", "Id", cascadeDelete: true);
-            AddForeignKey("dbo.VehicleReport", "Vehicle_Id", "dbo.Vehicle", "Id", cascadeDelete: true);
+            AddForeignKey("dbo.VehicleReportItem", "Parent_Id", "dbo.VehicleReport", "Id", cascadeDelete: false);
+            AddForeignKey("dbo.VehicleReport", "Vehicle_Id", "dbo.Vehicle", "Id", cascadeDelete: false);
             AddForeignKey("dbo.VehicleReview", "Vehicle_Id", "dbo.Vehicle", "Id");
-            AddForeignKey("dbo.VehicleModel", "Drivetrain_Id", "dbo.Classification", "Id", cascadeDelete: true);
-            AddForeignKey("dbo.VehicleModel", "FuelType_Id", "dbo.Classification", "Id", cascadeDelete: true);
-            AddForeignKey("dbo.VehicleModel", "Transmission_Id", "dbo.Classification", "Id", cascadeDelete: true);
-            AddForeignKey("dbo.VehicleModel", "VehicleBody_Id", "dbo.Classification", "Id", cascadeDelete: true);
-            AddForeignKey("dbo.VehicleModel", "VehicleManufacturer_Id", "dbo.Classification", "Id", cascadeDelete: true);
-            AddForeignKey("dbo.Vehicle", "VehicleModel_Id", "dbo.VehicleModel", "Id", cascadeDelete: true);
+            AddForeignKey("dbo.VehicleModel", "Drivetrain_Id", "dbo.Classification", "Id", cascadeDelete: false);
+            AddForeignKey("dbo.VehicleModel", "FuelType_Id", "dbo.Classification", "Id", cascadeDelete: false);
+            AddForeignKey("dbo.VehicleModel", "Transmission_Id", "dbo.Classification", "Id", cascadeDelete: false);
+            AddForeignKey("dbo.VehicleModel", "VehicleBody_Id", "dbo.Classification", "Id", cascadeDelete: false);
+            AddForeignKey("dbo.VehicleModel", "VehicleManufacturer_Id", "dbo.Classification", "Id", cascadeDelete: false);
+            AddForeignKey("dbo.Vehicle", "VehicleModel_Id", "dbo.VehicleModel", "Id", cascadeDelete: false);
         }
         
         public override void Down()
