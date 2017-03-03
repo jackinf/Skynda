@@ -105,22 +105,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\201702261130301_Initial.cs" />
-    <Compile Include="Migrations\201702261130301_Initial.Designer.cs">
-      <DependentUpon>201702261130301_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703020933146_201703021133.cs" />
-    <Compile Include="Migrations\201703020933146_201703021133.Designer.cs">
-      <DependentUpon>201703020933146_201703021133.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703021108285_asdfg.cs" />
-    <Compile Include="Migrations\201703021108285_asdfg.Designer.cs">
-      <DependentUpon>201703021108285_asdfg.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703031037358_FixDomainInterfaceEntitiesCrap.cs" />
-    <Compile Include="Migrations\201703031037358_FixDomainInterfaceEntitiesCrap.Designer.cs">
-      <DependentUpon>201703031037358_FixDomainInterfaceEntitiesCrap.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\Classification.cs" />
@@ -176,20 +160,6 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201702261130301_Initial.resx">
-      <DependentUpon>201702261130301_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703020933146_201703021133.resx">
-      <DependentUpon>201703020933146_201703021133.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703021108285_asdfg.resx">
-      <DependentUpon>201703021108285_asdfg.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703031037358_FixDomainInterfaceEntitiesCrap.resx">
-      <DependentUpon>201703031037358_FixDomainInterfaceEntitiesCrap.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

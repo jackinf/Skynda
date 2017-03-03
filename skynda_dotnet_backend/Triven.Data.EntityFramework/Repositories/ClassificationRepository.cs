@@ -19,7 +19,8 @@ namespace Triven.Data.EntityFramework.Repositories
 
         public IList<Classification> GetByType(string type)
         {
-            return BaseQuery().Include(x => x.ClassificationType).Where(x => x.ClassificationType.Name == type).ToList();
+            var query =  BaseQuery().Include(x => x.ClassificationType).Where(x => x.ClassificationType.Name == type).ToList();
+            return query;
         }
 
         public IList<Classification> GetByTypeAndVehicleBound(string type)

@@ -7,7 +7,6 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Triven.Data.EntityFramework.Models;
 using Triven.Data.EntityFramework.Models.User;
 using Triven.Domain.Constants;
-using Triven.Domain.Models;
 
 namespace Triven.Data.EntityFramework.Migrations
 {
