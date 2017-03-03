@@ -63,17 +63,45 @@ namespace Triven.Application.Services
 
         public ServiceResult Update(int id, VehicleModelViewModel viewModel)
         {
-            var entity = _vehicleModelRepository.Get(id);
-            Mapper.Map(viewModel, entity);
-            var result = _vehicleModelRepository.Update(id, entity);
-            var mappedResult = Mapper.Map<VehicleModelViewModel>(result.ContextObject);
-            return ServiceResult.Factory.Success(mappedResult, result.Message);
+            try
+            {
+                VehicleModelValidator validator = new VehicleModelValidator();
+                var validation = validator.Validate(viewModel);
+
+                if (!validation.IsValid)
+                {
+                    return ServiceResult.Factory.Fail(validation.Errors);
+                }
+
+                var entity = _vehicleModelRepository.Get(id);
+
+                Mapper.Map(viewModel, entity);
+
+                var result = _vehicleModelRepository.Update(id, entity);
+
+                var mappedResult = Mapper.Map<VehicleModelViewModel>(result.ContextObject);
+
+                return ServiceResult.Factory.Success(mappedResult, result.Message);
+            }
+            catch (Exception ex)
+            {
+                return ServiceResult.Factory.Fail(ex.Message);
+            }
+
         }
 
         public ServiceResult Delete(int id)
         {
-            var result = _vehicleModelRepository.Delete(id);
-            return ServiceResult.Factory.Success(result);
+            try
+            {
+                var result = _vehicleModelRepository.Delete(id);
+                return ServiceResult.Factory.Success(result);
+            }
+            catch (Exception ex)
+            {
+                return ServiceResult.Factory.Fail(ex.Message);
+            }
+            
         }
 
         public ServiceResult Search(VehicleModelSearchRequestViewModel viewModel)

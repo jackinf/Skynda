@@ -17,8 +17,8 @@ namespace Triven.Data.EntityFramework.Repositories
 
         public IResult<Vehicle> Update(int id, Vehicle model, List<int> toDeleteDescriptionIds = null, List<int> toDeleteImageIds = null)
         {
-            _context.VehicleDescriptions.Where(x => toDeleteDescriptionIds.Any(xx => xx == x.Id)).Delete();
-            _context.VehicleImages.Where(x => toDeleteImageIds.Any(xx => xx == x.Id)).Delete();
+            Context.VehicleDescriptions.Where(x => toDeleteDescriptionIds.Any(xx => xx == x.Id)).Delete();
+            Context.VehicleImages.Where(x => toDeleteImageIds.Any(xx => xx == x.Id)).Delete();
             return base.Update(id, model);
         }
 

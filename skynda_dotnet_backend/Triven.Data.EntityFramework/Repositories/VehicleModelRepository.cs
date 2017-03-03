@@ -37,13 +37,22 @@ namespace Triven.Data.EntityFramework.Repositories
 
         public override IResult<VehicleModel> Add(VehicleModel model)
         {
-            _context.Entry(model.Drivetrain).State = EntityState.Unchanged;
-            _context.Entry(model.FuelType).State = EntityState.Unchanged;
-            _context.Entry(model.Transmission).State = EntityState.Unchanged;
-            _context.Entry(model.VehicleBody).State = EntityState.Unchanged;
-            _context.Entry(model.VehicleManufacturer).State = EntityState.Unchanged;
+            Context.Entry(model.Drivetrain).State = EntityState.Unchanged;
+            Context.Entry(model.FuelType).State = EntityState.Unchanged;
+            Context.Entry(model.Transmission).State = EntityState.Unchanged;
+            Context.Entry(model.VehicleBody).State = EntityState.Unchanged;
+            Context.Entry(model.VehicleManufacturer).State = EntityState.Unchanged;
             return base.Add(model);
         }
 
+        public override IResult<VehicleModel> Update(int id, VehicleModel model)
+        {
+            Context.Entry(model.Drivetrain).State = EntityState.Unchanged;
+            Context.Entry(model.FuelType).State = EntityState.Unchanged;
+            Context.Entry(model.Transmission).State = EntityState.Unchanged;
+            Context.Entry(model.VehicleBody).State = EntityState.Unchanged;
+            Context.Entry(model.VehicleManufacturer).State = EntityState.Unchanged;
+            return base.Update(id, model);
+        }
     }
 }

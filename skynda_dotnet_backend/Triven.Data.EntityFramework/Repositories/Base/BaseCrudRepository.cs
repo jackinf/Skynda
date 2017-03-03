@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
-using Triven.Data.EntityFramework.Models;
 using Triven.Domain.Models.Base;
 using Triven.Domain.Repositories.Base;
 using Triven.Domain.Results;
+using Triven.Domain.Util;
 
 namespace Triven.Data.EntityFramework.Repositories.Base
 {
@@ -17,7 +17,7 @@ namespace Triven.Data.EntityFramework.Repositories.Base
     public abstract class BaseCrudRepository<TModel> : IBaseCrudRepository<TModel>, IDisposable
         where TModel : class, IAuditableBaseModel
     {
-        protected readonly ApplicationDbContext _context = new ApplicationDbContext();
+        protected readonly ApplicationDbContext Context = new ApplicationDbContext();
 
         /// <summary>
         /// When object is updated, here fields can be specified.
@@ -30,6 +30,11 @@ namespace Triven.Data.EntityFramework.Repositories.Base
         /// </summary>
         /// <param name="id"></param>
         protected virtual void OnBeforeDelete(int id) { }
+
+        protected virtual void OnBeforeDelete(TModel model)
+        {
+            model.DeletedOn = DateTime.Now;
+        }
 
         /// <summary>
         /// Gets all the items from the database
@@ -59,12 +64,13 @@ namespace Triven.Data.EntityFramework.Repositories.Base
         /// <returns></returns>
         public virtual IResult<TModel> Add(TModel model)
         {
-            _context.Entry(model).State = EntityState.Added;
-            _context.Set<TModel>().Add(model); // TODO: Fix   "exceptionMessage": "An entity object cannot be referenced by multiple instances of IEntityChangeTracker.",
+            Context.Entry(model).State = EntityState.Added;
+            Context.Set<TModel>().Add(model); // TODO: Fix   "exceptionMessage": "An entity object cannot be referenced by multiple instances of IEntityChangeTracker.",
             try
             {
-                model.UpdatedOn = DateTime.Now;
-                _context.SaveChanges();
+                model.CreatedOn = DateTime.Now;
+                model.UpdatedOn = DateTime.Now;                
+                Context.SaveChanges();
                 return OnCreateOrUpdateResult<TModel>.Factory.Success(model);
             }
             catch (DbUpdateException ex)
@@ -83,12 +89,13 @@ namespace Triven.Data.EntityFramework.Repositories.Base
         /// <returns></returns>
         public virtual IResult<TModel> Update(int id, TModel model)
         {
-            _context.Entry(model).State = EntityState.Modified;
+            Context.Entry(model).State = EntityState.Modified;
 
             try
             {
                 model.UpdatedOn = DateTime.Now;
-                _context.SaveChanges();
+                model.ModifierUserIp = HttpContextManager.Current.Request.UserHostAddress;
+                Context.SaveChanges();
                 return OnCreateOrUpdateResult<TModel>.Factory.Success(model);
             }
             catch (DbUpdateConcurrencyException ex)
@@ -107,14 +114,14 @@ namespace Triven.Data.EntityFramework.Repositories.Base
         /// <returns></returns>
         public virtual bool Delete(int id)
         {
-            var model = _context.Set<TModel>().SingleOrDefault(m => m.Id == id);
+            var model = Context.Set<TModel>().SingleOrDefault(m => m.Id == id);
             if (model == null)
                 return false;
 
-            OnBeforeDelete(id);
+            OnBeforeDelete(model);
+                        
+            var count = Context.SaveChanges();
 
-            model.DeletedOn = DateTime.Now;
-            var count = _context.SaveChanges();
             return count > 0;
         }
 
@@ -123,10 +130,10 @@ namespace Triven.Data.EntityFramework.Repositories.Base
         /// </summary>
         public virtual void Dispose()
         {
-            _context.Dispose();
+            Context.Dispose();
         }
 
-        public IQueryable<TModel> BaseQuery() => _context.Set<TModel>().Where(x => x.DeletedOn == null);
+        public IQueryable<TModel> BaseQuery() => Context.Set<TModel>().Where(x => x.DeletedOn == null);
         public IQueryable<TModel> BaseQuery(ApplicationDbContext context) => context.Set<TModel>().Where(x => x.DeletedOn == null);
 
         /// <summary>
@@ -134,6 +141,6 @@ namespace Triven.Data.EntityFramework.Repositories.Base
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public bool ItemExists(int id) => _context.Set<TModel>().Count(e => e.Id == id) > 0;
+        public bool ItemExists(int id) => Context.Set<TModel>().Count(e => e.Id == id) > 0;
     }
 }

@@ -30,17 +30,17 @@ namespace Triven.Data.EntityFramework.Repositories
                 case DatabaseConstants.ClassificationTypeName.PaymentType:
                     return GetByType(type);
                 case DatabaseConstants.ClassificationTypeName.Drivetrain:
-                    return Filter(_context.VehicleModels.Where(x => x.Drivetrain.Id > 0).Select(x => x.Drivetrain.Id));
+                    return Filter(Context.VehicleModels.Where(x => x.Drivetrain.Id > 0).Select(x => x.Drivetrain.Id));
                 case DatabaseConstants.ClassificationTypeName.Transmission:
-                    return Filter(_context.VehicleModels.Where(x => x.Transmission.Id > 0).Select(x => x.Transmission.Id));
+                    return Filter(Context.VehicleModels.Where(x => x.Transmission.Id > 0).Select(x => x.Transmission.Id));
                 case DatabaseConstants.ClassificationTypeName.PaymentStatus:
                     return GetByType(type);
                 case DatabaseConstants.ClassificationTypeName.Manufacturer:
-                    return Filter(_context.VehicleModels.Where(x => x.VehicleManufacturer.Id > 0).Select(x => x.VehicleManufacturer.Id));
+                    return Filter(Context.VehicleModels.Where(x => x.VehicleManufacturer.Id > 0).Select(x => x.VehicleManufacturer.Id));
                 case DatabaseConstants.ClassificationTypeName.Fuel:
-                    return Filter(_context.VehicleModels.Where(x => x.FuelType.Id > 0).Select(x => x.FuelType.Id));
+                    return Filter(Context.VehicleModels.Where(x => x.FuelType.Id > 0).Select(x => x.FuelType.Id));
                 case DatabaseConstants.ClassificationTypeName.VehicleBody:
-                    return Filter(_context.VehicleModels.Where(x => x.VehicleBody.Id > 0).Select(x => x.VehicleBody.Id));
+                    return Filter(Context.VehicleModels.Where(x => x.VehicleBody.Id > 0).Select(x => x.VehicleBody.Id));
             }
 
             return new List<Classification>();
