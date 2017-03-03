@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using AutoMapper;
 using Triven.Application.Results;
+using Triven.Application.Validators.VehicleModel;
 using Triven.Data.EntityFramework.Models;
 using Triven.Domain.Repositories;
 using Triven.Domain.Services;
@@ -34,10 +36,27 @@ namespace Triven.Application.Services
 
         public ServiceResult Create(VehicleModelViewModel viewModel)
         {
-            var entity = Mapper.Map<VehicleModel>(viewModel);
-            var result = _vehicleModelRepository.Add(entity);
-            var mappedResult = Mapper.Map<VehicleModelViewModel>(result.ContextObject);
-            return ServiceResult.Factory.Success(mappedResult, result.Message);
+            try
+            {
+                VehicleModelValidator validator = new VehicleModelValidator();
+                var validation = validator.Validate(viewModel);
+
+                if (!validation.IsValid)
+                {
+                    return ServiceResult.Factory.Fail(validation.Errors);
+                }
+
+                var entity = Mapper.Map<VehicleModel>(viewModel);
+
+                var result = _vehicleModelRepository.Add(entity);
+                var mappedResult = Mapper.Map<VehicleModelViewModel>(result.ContextObject);
+                return ServiceResult.Factory.Success(mappedResult, result.Message);
+            }
+            catch (Exception ex)
+            {
+                return ServiceResult.Factory.Fail(ex.Message);
+            }
+            
         }
 
         public ServiceResult Update(int id, VehicleModelViewModel viewModel)

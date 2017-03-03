@@ -1,5 +1,6 @@
 ﻿using System.Data.Entity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Triven.Data.EntityFramework.Migrations;
 using Triven.Data.EntityFramework.Models;
 using Triven.Data.EntityFramework.Models.User;
 using Triven.Domain.UnitOfWorks;
@@ -14,7 +15,8 @@ namespace Triven.Data.EntityFramework
         public ApplicationDbContext() : base("DefaultConnection")
         {
             // Here use initializer of your choice
-            Database.SetInitializer(new CreateDatabaseIfNotExists<ApplicationDbContext>());
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<ApplicationDbContext, Configuration>());
+            this.Database.Initialize(true);
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

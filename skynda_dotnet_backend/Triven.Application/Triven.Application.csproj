@@ -207,6 +207,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AccountService.cs" />
     <Compile Include="Validators\Users\UserUpdateAccountDataValidator.cs" />
+    <Compile Include="Validators\VehicleModel\VehicleModelValidator.cs" />
     <Compile Include="Validators\Vehicle\VehicleValidator.cs" />
   </ItemGroup>
   <ItemGroup>
