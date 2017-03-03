@@ -15,7 +15,6 @@ import {
 
 const stateToProps = (state) => {
   const classificators = state.classificators;
-  console.log("classificators", classificators);
   return {
     formInfo: state.formInfo,
     initialValues: state.formInfo ? state.formInfo.item : {modelCode: ""},

@@ -1,5 +1,3 @@
-import fromSpringToReduxFormError from "../../../../../utils/formUtils/fromSpringToReduxFormError";
-import {SubmissionError} from "redux-form";
 import {FORM_MODE} from "../constants/VehicleModel.constant";
 import {VehicleModelService} from "../../../../../webServices"
 
@@ -18,13 +16,7 @@ export function onHandleSubmit(item, formInfo) {
  * @returns {*|Promise.<TResult>|Promise<U>|Thenable<U>}
  */
 function createItem(item) {
-    const promise = VehicleModelService.createItem(item);
-    promise.then(resp => {
-      if (!resp.success) {
-        throw new SubmissionError(fromSpringToReduxFormError(resp.errors));
-      }
-      return resp;
-    });
+    return VehicleModelService.createItem(item);
 }
 
 /**
@@ -33,11 +25,5 @@ function createItem(item) {
  * @param item - vehicle input fields sent to the server
  */
 function updateItem(item) {
-    const promise = VehicleModelService.updateItem(item);
-    promise.then(resp => {
-      if (!resp.success) {
-        throw new SubmissionError(fromSpringToReduxFormError(resp.errors));
-      }
-      return resp;
-    })
+    return VehicleModelService.updateItem(item);
 }

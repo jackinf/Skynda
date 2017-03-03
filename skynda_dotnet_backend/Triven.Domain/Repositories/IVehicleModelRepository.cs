@@ -11,5 +11,7 @@ namespace Triven.Domain.Repositories
     {
         TVehicleModel GetByModelCode(String vehicleModelCode);
         IList<TVehicleModel> Search(VehicleModelSearchRequestViewModel parameters);
+
+        TVehicleModel GetFullVehicleModel(int id);
     }
 }

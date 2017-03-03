@@ -59,7 +59,7 @@ namespace Triven.Data.EntityFramework.Repositories.Base
         /// <returns></returns>
         public virtual IResult<TModel> Add(TModel model)
         {
-            //model.Id = Guid.NewGuid();
+            _context.Entry(model).State = EntityState.Added;
             _context.Set<TModel>().Add(model); // TODO: Fix   "exceptionMessage": "An entity object cannot be referenced by multiple instances of IEntityChangeTracker.",
             try
             {
@@ -134,6 +134,6 @@ namespace Triven.Data.EntityFramework.Repositories.Base
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        private bool ItemExists(int id) => _context.Set<TModel>().Count(e => e.Id == id) > 0;
+        public bool ItemExists(int id) => _context.Set<TModel>().Count(e => e.Id == id) > 0;
     }
 }

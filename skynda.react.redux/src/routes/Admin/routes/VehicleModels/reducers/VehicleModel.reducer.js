@@ -63,7 +63,8 @@ export const randomize = (prevItem) => (dispatch) => {
  * @param onSubmitCustom - custom callback function
  */
 export const onHandleSubmitFinished = (resp, onSubmitCustom = null) => (dispatch) => {
-  if (resp && resp.success && !isNaN(parseInt(resp.id))) {
+  console.log("resp", resp);
+  if (resp && !resp.modelState && !isNaN(parseInt(resp.id))) {
     if (onSubmitCustom && _.isFunction(onSubmitCustom)) {
       onSubmitCustom(null, resp.id);
     } else {
@@ -83,6 +84,9 @@ const fetchItem = (id) => (dispatch) => {
   promise.then(item => {
     dispatch(setFetchSuccessful());
     dispatch(setFormMode(FORM_MODE.UPDATING_MODEL));
+    console.log("setitem", item);
+
+
     dispatch(setItem(item));
   })
   .catch((error) => {

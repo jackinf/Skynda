@@ -29,7 +29,7 @@ namespace Triven.Application.Services
 
         public ServiceResult Get(int id)
         {
-            var result = _vehicleModelRepository.Get(id);
+            var result = _vehicleModelRepository.GetFullVehicleModel(id);
             var mappedResult = Mapper.Map<VehicleModel, VehicleModelViewModel>(result);
             return ServiceResult.Factory.Success(mappedResult);
         }
@@ -49,8 +49,10 @@ namespace Triven.Application.Services
                 var entity = Mapper.Map<VehicleModel>(viewModel);
 
                 var result = _vehicleModelRepository.Add(entity);
-                var mappedResult = Mapper.Map<VehicleModelViewModel>(result.ContextObject);
-                return ServiceResult.Factory.Success(mappedResult, result.Message);
+
+                var mappedViewModel = Mapper.Map<VehicleModelViewModel>(result.ContextObject);
+
+                return ServiceResult.Factory.Success(mappedViewModel, result.Message);
             }
             catch (Exception ex)
             {
