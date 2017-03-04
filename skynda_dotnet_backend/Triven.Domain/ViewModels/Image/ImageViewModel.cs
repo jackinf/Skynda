@@ -7,7 +7,7 @@ namespace Triven.Domain.ViewModels.Image
         public ImageViewModel()
         {
             FileType = "jpg";
-            ContainerName = "image";
+            ContainerName = "image".ToLower();
             BlobName = Guid.NewGuid().ToString();
         }
 

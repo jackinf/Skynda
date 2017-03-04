@@ -11,7 +11,7 @@ namespace Triven.Application.Validators.Vehicle
             RuleFor(x => x.Price).NotEmpty();
             RuleFor(x => x.RegistrationNumber).NotEmpty();
             RuleFor(x => x.Mileage).NotEmpty();
-            RuleFor(x => x.ColorOutsideHex).NotEmpty();
+            RuleFor(x => x.ColorOutsideHex).NotNull();
             RuleFor(x => x.MainImage).NotNull();
             RuleFor(x => x.Model).NotNull();
             RuleFor(x => x.Model.Id).NotNull().NotEmpty();

@@ -63,9 +63,9 @@ namespace Triven.Application.Services
         {
             try
             {
-                CreateContainer(new CreateContainerViewModel { ContainerName = viewModel.ContainerName });
+                CreateContainer(new CreateContainerViewModel { ContainerName = viewModel.ContainerName.ToLower() });
 
-                CloudBlobContainer container = _blobClient.GetContainerReference(viewModel.ContainerName);
+                CloudBlobContainer container = _blobClient.GetContainerReference(viewModel.ContainerName.ToLower());
                 CloudBlockBlob blockBlob = container.GetBlockBlobReference(viewModel.BlobName);
 
                 blockBlob.UploadFromStream(new MemoryStream(viewModel.ByteArray));
@@ -83,7 +83,7 @@ namespace Triven.Application.Services
         {
             var list = new List<string>();
 
-            CloudBlobContainer container = _blobClient.GetContainerReference(viewModel.ContainerName);
+            CloudBlobContainer container = _blobClient.GetContainerReference(viewModel.ContainerName.ToLower());
 
             foreach (IListBlobItem item in container.ListBlobs())
             {
@@ -113,7 +113,7 @@ namespace Triven.Application.Services
         {
             try
             {
-                CloudBlobContainer container = _blobClient.GetContainerReference(viewModel.ContainerName);
+                CloudBlobContainer container = _blobClient.GetContainerReference(viewModel.ContainerName.ToLower());
                 CloudBlockBlob blockBlob = container.GetBlockBlobReference(viewModel.BlobName);
 
                 using (var memoryStream = new MemoryStream())
@@ -132,7 +132,7 @@ namespace Triven.Application.Services
         {
             try
             {
-                CloudBlobContainer container = _blobClient.GetContainerReference(viewModel.ContainerName);
+                CloudBlobContainer container = _blobClient.GetContainerReference(viewModel.ContainerName.ToLower());
                 CloudBlockBlob blockBlob = container.GetBlockBlobReference(viewModel.BlobName);
                 blockBlob.DeleteIfExists();
                 return ServiceResult<bool>.Factory.Success();
@@ -160,7 +160,7 @@ namespace Triven.Application.Services
 
                 var result = Upload(new UploadBlobViewModel
                 {
-                    ContainerName = mediaViewModel.ContainerName,
+                    ContainerName = mediaViewModel.ContainerName.ToLower(),
                     BlobName = mediaViewModel.BlobName,
                     ByteArray = bytes
                 });
