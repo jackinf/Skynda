@@ -69,7 +69,7 @@ namespace Triven.Data.EntityFramework.Repositories.Base
             try
             {
                 model.CreatedOn = DateTime.Now;
-                model.UpdatedOn = DateTime.Now;                
+                model.UpdatedOn = DateTime.Now;
                 Context.SaveChanges();
                 return OnCreateOrUpdateResult<TModel>.Factory.Success(model);
             }
@@ -77,6 +77,10 @@ namespace Triven.Data.EntityFramework.Repositories.Base
             {
                 if (ItemExists(model.Id))
                     return OnCreateOrUpdateResult<TModel>.Factory.Fail(ex);
+                throw;
+            }
+            catch (Exception ex)
+            {
                 throw;
             }
         }
@@ -102,6 +106,10 @@ namespace Triven.Data.EntityFramework.Repositories.Base
             {
                 if (!ItemExists(id))
                     return OnCreateOrUpdateResult<TModel>.Factory.Fail(ex);
+                throw;
+            }
+            catch (Exception ex)
+            {
                 throw;
             }
         }
