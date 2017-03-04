@@ -94,7 +94,7 @@ namespace Triven.Data.EntityFramework.Repositories.Base
             try
             {
                 model.UpdatedOn = DateTime.Now;
-                model.ModifierUserIp = HttpContextManager.Current.Request.UserHostAddress;
+                model.ModifierUserIp = HttpContextManager.Current?.Request?.UserHostAddress;
                 Context.SaveChanges();
                 return OnCreateOrUpdateResult<TModel>.Factory.Success(model);
             }
