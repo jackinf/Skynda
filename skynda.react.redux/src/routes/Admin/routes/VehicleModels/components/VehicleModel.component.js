@@ -108,7 +108,6 @@ class VehicleModel extends React.Component {
                               component={selectRenderer(manufacturers, this.setField)}/>, 4)}
 
         <input type="submit" disabled={this.props.submitting} value={"Submit"}/>
-        {/*{rowWrapper(<Button onClick={e => this.props.handleSubmit(this.props.submitAsync(e))}>Submit</Button>)}*/}
       </form>
     </div>)
   }

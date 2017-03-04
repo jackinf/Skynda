@@ -63,7 +63,6 @@ export const randomize = (prevItem) => (dispatch) => {
  * @param onSubmitCustom - custom callback function
  */
 export const onHandleSubmitFinished = (resp, onSubmitCustom = null) => (dispatch) => {
-  console.log("resp", resp);
   if (resp && !resp.modelState && !isNaN(parseInt(resp.id))) {
     if (onSubmitCustom && _.isFunction(onSubmitCustom)) {
       onSubmitCustom(null, resp.id);
