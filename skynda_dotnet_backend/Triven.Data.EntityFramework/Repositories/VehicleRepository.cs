@@ -59,5 +59,13 @@ namespace Triven.Data.EntityFramework.Repositories
 
             return query.ToList();
         }
+
+        public override IResult<Vehicle> Add(Vehicle model)
+        {
+            Context.Entry(model.VehicleModel).State = EntityState.Unchanged;
+            return base.Add(model);
+        }
+
+
     }
 }

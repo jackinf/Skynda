@@ -10,19 +10,14 @@ namespace Triven.Data.EntityFramework.Models
     [Table("Vehicle")]
     public class Vehicle : AuditableModel, IVehicle
     {
-        [Required]
         public string VinCode { get; set; }
 
-        [Required]
         public decimal Price { get; set; }
 
-        [Required]
         public string RegistrationNumber { get; set; }
 
-        [Required]
         public decimal Mileage { get; set; }
 
-        [Required]
         public string ColorOutsideHex { get; set; }
         
         public string ColorInsideHex { get; set; }
@@ -56,19 +51,16 @@ namespace Triven.Data.EntityFramework.Models
         /// <summary>
         /// Application user
         /// </summary>
-        [Required]
         public ApplicationUser ApplicationUser { get; set; }
 
         /// <summary>
         /// Main image
         /// </summary>
-        [Required]        
         public Image MainImage { get; set; }
 
         /// <summary>
         /// Vehicle Model
         /// </summary>
-        [Required]
         public VehicleModel VehicleModel { get; set; }
 
         /// <summary>
