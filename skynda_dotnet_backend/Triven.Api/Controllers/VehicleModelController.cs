@@ -1,8 +1,6 @@
-﻿using System.Web;
-using System.Web.Http;
+﻿using System.Web.Http;
 using Microsoft.AspNet.Identity;
 using Triven.Application;
-using Triven.Application.Results;
 using Triven.Domain.Services;
 using Triven.Domain.ViewModels.Vehicle;
 using Triven.Domain.ViewModels.Vehicle.Requests;
@@ -12,11 +10,11 @@ namespace Triven.API.Controllers
     [RoutePrefix("api/vehicle-model")]
     public class VehicleModelController : BaseController
     {
-        private readonly IVehicleModelService<ServiceResult> _service;
+        private readonly IVehicleModelService _service;
 
         public VehicleModelController()
         {
-            _service = IoC.Get<IVehicleModelService<ServiceResult>>();
+            _service = IoC.Get<IVehicleModelService>();
         }
 
         // TODO: Use vehicle model search params

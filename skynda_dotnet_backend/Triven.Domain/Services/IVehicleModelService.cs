@@ -1,16 +1,17 @@
-﻿using Triven.Domain.Results;
+﻿using System.Collections.Generic;
+using Triven.Domain.Results;
 using Triven.Domain.ViewModels.Vehicle;
 using Triven.Domain.ViewModels.Vehicle.Requests;
 
 namespace Triven.Domain.Services
 {
-    public interface IVehicleModelService<out TResult> where TResult : IServiceResult
+    public interface IVehicleModelService
     {
-        TResult GetAll();
-        TResult Get(int id);
-        TResult Create(VehicleModelViewModel vehicleModelAdminDto);
-        TResult Update(int id, VehicleModelViewModel vehicleModelAdminDto);
-        TResult Delete(int id);
-        TResult Search(VehicleModelSearchRequestViewModel viewModel);
+        ServiceResult<IEnumerable<VehicleModelViewModel>> GetAll();
+        ServiceResult<VehicleModelViewModel> Get(int id);
+        ServiceResult<VehicleModelViewModel> Create(VehicleModelViewModel vehicleModelAdminDto);
+        ServiceResult<VehicleModelViewModel> Update(int id, VehicleModelViewModel vehicleModelAdminDto);
+        ServiceResult<bool> Delete(int id);
+        ServiceResult<IList<VehicleModelViewModel>> Search(VehicleModelSearchRequestViewModel viewModel);
     }
 }

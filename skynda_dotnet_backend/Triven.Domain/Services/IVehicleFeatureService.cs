@@ -1,10 +1,12 @@
-﻿using Triven.Domain.Results;
+﻿using System.Collections.Generic;
+using Triven.Domain.Results;
+using Triven.Domain.ViewModels.Vehicle;
 
 namespace Triven.Domain.Services
 {
-    public interface IVehicleFeatureService<out TResult> where TResult : IServiceResult
+    public interface IVehicleFeatureService
     {
-        TResult GetAllBy(int vehicleId);
-        TResult Delete(int id);
+        ServiceResult<IList<VehicleFeatureViewModel>> GetAllBy(int vehicleId);
+        ServiceResult<bool> Delete(int id);
     }
 }

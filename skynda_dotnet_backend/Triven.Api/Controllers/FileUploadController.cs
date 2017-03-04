@@ -1,5 +1,5 @@
-﻿using System.Web.Http;
-using Triven.Application.Results;
+﻿using System;
+using System.Web.Http;
 using Triven.Domain.ViewModels.Image;
 
 namespace Triven.API.Controllers
@@ -10,8 +10,8 @@ namespace Triven.API.Controllers
         [HttpPost]
         public IHttpActionResult PostFormData([FromBody] ImageViewModel imageModel)
         {
-
-            return HandleResult(new ServiceResult());
+            throw new NotImplementedException();
+            //return HandleResult(new ServiceResult());
         }
     }
 }

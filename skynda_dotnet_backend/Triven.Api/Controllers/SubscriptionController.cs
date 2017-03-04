@@ -1,6 +1,5 @@
 ﻿using System.Web.Http;
 using Triven.Application;
-using Triven.Application.Results;
 using Triven.Domain.Services;
 using Triven.Domain.ViewModels.Email;
 
@@ -9,11 +8,11 @@ namespace Triven.API.Controllers
     [RoutePrefix("api/subscribe")]
     public class SubscriptionController : BaseController
     {
-        private readonly ISubscriptionService<ServiceResult> _service;
+        private readonly ISubscriptionService _service;
 
         public SubscriptionController()
         {
-            _service = IoC.Get<ISubscriptionService<ServiceResult>>();
+            _service = IoC.Get<ISubscriptionService>();
         }
 
         // TODO: validate

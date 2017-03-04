@@ -2,7 +2,6 @@
 using System.Web.Http;
 using Microsoft.AspNet.Identity;
 using Triven.Application;
-using Triven.Application.Results;
 using Triven.Domain.Services;
 using Triven.Domain.ViewModels.Vehicle;
 using Triven.Domain.ViewModels.Vehicle.Requests;
@@ -12,11 +11,11 @@ namespace Triven.API.Controllers
     [RoutePrefix("api/vehicle")]
     public class VehicleController : BaseController
     {
-        private readonly IVehicleService<ServiceResult> _service;
+        private readonly IVehicleService _service;
 
         public VehicleController()
         {
-            _service = IoC.Get<IVehicleService<ServiceResult>>();
+            _service = IoC.Get<IVehicleService>();
         }
 
         [HttpGet, Route("~/api/vehicles")]

@@ -1,7 +1,6 @@
 ﻿using System.Web.Http;
 using Microsoft.AspNet.Identity;
 using Triven.Application;
-using Triven.Application.Results;
 using Triven.Domain.Services;
 using Triven.Domain.ViewModels.Feature;
 
@@ -10,11 +9,11 @@ namespace Triven.API.Controllers
     [RoutePrefix("api/feature")]
     public class FeatureController : BaseController
     {
-        private readonly IFeatureService<ServiceResult> _service;
+        private readonly IFeatureService _service;
 
         public FeatureController()
         {
-            _service = IoC.Get<IFeatureService<ServiceResult>>();
+            _service = IoC.Get<IFeatureService>();
         }
 
         // TODO: use search params

@@ -1,6 +1,5 @@
 ﻿using System.Web.Http;
 using Triven.Application;
-using Triven.Application.Results;
 using Triven.Domain.Services;
 
 namespace Triven.API.Controllers
@@ -8,11 +7,11 @@ namespace Triven.API.Controllers
     [RoutePrefix("api/image")]
     public class ImageController : BaseController
     {
-        private readonly IImageService<ServiceResult> _service;
+        private readonly IImageService _service;
 
         public ImageController()
         {
-            _service = IoC.Get<IImageService<ServiceResult>>();
+            _service = IoC.Get<IImageService>();
         }
 
         [HttpGet, Route("list")]

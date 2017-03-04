@@ -2,17 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
-using FluentValidation.Results;
-using Triven.Application.Results;
 using Triven.Application.Validators.Feature;
 using Triven.Data.EntityFramework.Models;
 using Triven.Domain.Repositories;
+using Triven.Domain.Results;
 using Triven.Domain.Services;
 using Triven.Domain.ViewModels.Feature;
 
 namespace Triven.Application.Services
 {
-    public class FeatureService : IFeatureService<ServiceResult>
+    public class FeatureService : IFeatureService
     {
         private readonly IFeatureRepository<Feature> _featureRepository;
 
@@ -21,22 +20,22 @@ namespace Triven.Application.Services
             _featureRepository = IoC.Get<IFeatureRepository<Feature>>();
         }
 
-        public ServiceResult GetAll()
+        public ServiceResult<IList<FeatureViewModel>> GetAll()
         {
             try
             {
                 var results = _featureRepository.GetAll().ToList();
-                var mappedResults = Mapper.Map<IList<FeatureViewModel>>(results);
-                return ServiceResult.Factory.Success(mappedResults);
+                IList<FeatureViewModel> mappedResults = Mapper.Map<IList<FeatureViewModel>>(results);
+                return ServiceResult<IList<FeatureViewModel>>.Factory.Success(mappedResults);
             }
             catch (Exception ex)
             {
-                return ServiceResult.Factory.Fail(ex.Message);
+                return ServiceResult<IList<FeatureViewModel>>.Factory.Fail(ex);
             }
             
         }
 
-        public ServiceResult GetAllForAdminSelect()
+        public ServiceResult<List<FeatureAdminSelectViewModel>> GetAllForAdminSelect()
         {
             var results = _featureRepository.GetAll().ToList();
             List<FeatureAdminSelectViewModel> adminSelectFeatures = new List<FeatureAdminSelectViewModel>();
@@ -53,47 +52,47 @@ namespace Triven.Application.Services
                 }
             }
 
-            return ServiceResult.Factory.Success(adminSelectFeatures);
+            return ServiceResult<List<FeatureAdminSelectViewModel>>.Factory.Success(adminSelectFeatures);
         }
 
-        public ServiceResult Get(int id)
+        public ServiceResult<FeatureViewModel> Get(int id)
         {
             var result = _featureRepository.Get(id);
-            var mappedResult = Mapper.Map<FeatureViewModel>(result);
-            return ServiceResult.Factory.Success(mappedResult);
+            FeatureViewModel mappedResult = Mapper.Map<FeatureViewModel>(result);
+            return ServiceResult<FeatureViewModel>.Factory.Success(mappedResult);
         }
 
-        public ServiceResult Create(FeatureViewModel viewModel)
+        public ServiceResult<FeatureViewModel> Create(FeatureViewModel viewModel)
         {
             var feature = Mapper.Map<FeatureViewModel, Feature>(viewModel);
             var result = _featureRepository.Add(feature);
-            var mappedResult = Mapper.Map<FeatureViewModel>(result.ContextObject);
-            return ServiceResult.Factory.Success(mappedResult);
+            FeatureViewModel mappedResult = Mapper.Map<FeatureViewModel>(result.ContextObject);
+            return ServiceResult<FeatureViewModel>.Factory.Success(mappedResult);
         }
 
-        public ServiceResult Update(int id, FeatureViewModel viewModel)
+        public ServiceResult<FeatureViewModel> Update(int id, FeatureViewModel viewModel)
         {
             FeatureValidator validator =new FeatureValidator();
             var validationResult = validator.Validate(viewModel);
 
             if (!validationResult.IsValid)
-                return ServiceResult.Factory.Fail(validationResult.Errors);
+                return ServiceResult<FeatureViewModel>.Factory.Fail(validationResult.Errors);
 
             var feature = _featureRepository.Get(id);
             Mapper.Map(viewModel, feature);
             var result = _featureRepository.Update(id, feature);
-            var mappedResult = Mapper.Map<FeatureViewModel>(result.ContextObject);
+            FeatureViewModel mappedResult = Mapper.Map<FeatureViewModel>(result.ContextObject);
 
-            return ServiceResult.Factory.Success(mappedResult);
+            return ServiceResult<FeatureViewModel>.Factory.Success(mappedResult);
         }
 
-        public ServiceResult Delete(int id)
+        public ServiceResult<bool> Delete(int id)
         {
-            var result = _featureRepository.Delete(id);
-            return ServiceResult.Factory.Success(result);
+            bool result = _featureRepository.Delete(id);
+            return ServiceResult<bool>.Factory.Success(result);
         }
 
-        public ServiceResult GetAllBy(int vehicleId)
+        public ServiceResult<List<object>>  GetAllBy(int vehicleId)
         {
             throw new NotImplementedException("What is this method for?");    // TODO: implement or remove.
         }

@@ -3,52 +3,53 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using FluentValidation.Results;
-using Triven.Application.Results;
 using Triven.Application.Validators.Vehicle;
 using Triven.Data.EntityFramework.Models;
 using Triven.Domain.Models;
 using Triven.Domain.Repositories;
+using Triven.Domain.Results;
 using Triven.Domain.Services;
 using Triven.Domain.ViewModels.Vehicle;
 using Triven.Domain.ViewModels.Vehicle.Requests;
 
 namespace Triven.Application.Services
 {
-    public class VehicleService : IVehicleService<ServiceResult>
+    public class VehicleService : IVehicleService
     {
         private readonly IVehicleRepository<Vehicle> _vehicleRepository;
         private readonly IVehicleModelRepository<VehicleModel> _vehicleModelRepository;
-        private readonly IBlobStorageService<ServiceResult> _blobStorageService;
+        private readonly IBlobStorageService _blobStorageService;
 
         public VehicleService()
         {
             _vehicleRepository = IoC.Get<IVehicleRepository<Vehicle>>();
-            _blobStorageService = IoC.Get<IBlobStorageService<ServiceResult>>();
             _vehicleModelRepository = IoC.Get<IVehicleModelRepository<VehicleModel>>();
+
+            _blobStorageService = IoC.Get<IBlobStorageService>();
         }
 
-        public ServiceResult GetAll()
+        public ServiceResult<IEnumerable<VehicleDetailedViewModel>> GetAll()
         {
             var results = _vehicleRepository.GetAll();
-            var mappedResults = Mapper.Map<IEnumerable<Vehicle>, IEnumerable<VehicleDetailedViewModel>>(results);
-            return ServiceResult.Factory.Success(mappedResults);
+            IEnumerable<VehicleDetailedViewModel> mappedResults = Mapper.Map<IEnumerable<Vehicle>, IEnumerable<VehicleDetailedViewModel>>(results);
+            return ServiceResult<IEnumerable<VehicleDetailedViewModel>>.Factory.Success(mappedResults);
         }
 
-        public ServiceResult Get(int id)
+        public ServiceResult<VehicleAdminViewModel> Get(int id)
         {
             var result = _vehicleRepository.Get(id);
-            var mappedResult = Mapper.Map<Vehicle, VehicleAdminViewModel>(result);
-            return ServiceResult.Factory.Success(mappedResult);
+            VehicleAdminViewModel mappedResult = Mapper.Map<Vehicle, VehicleAdminViewModel>(result);
+            return ServiceResult<VehicleAdminViewModel>.Factory.Success(mappedResult);
         }
 
-        public ServiceResult GetDetailed(int id)
+        public ServiceResult<VehicleDetailedViewModel> GetDetailed(int id)
         {
             var result = _vehicleRepository.Get(id);
-            var mappedResult = Mapper.Map<Vehicle, VehicleDetailedViewModel>(result);
-            return ServiceResult.Factory.Success(mappedResult);
+            VehicleDetailedViewModel mappedResult = Mapper.Map<Vehicle, VehicleDetailedViewModel>(result);
+            return ServiceResult<VehicleDetailedViewModel>.Factory.Success(mappedResult);
         }
 
-        public ServiceResult Create(VehicleAdminViewModel viewModel)
+        public ServiceResult<VehicleAdminViewModel> Create(VehicleAdminViewModel viewModel)
         {
             try
             {
@@ -58,7 +59,7 @@ namespace Triven.Application.Services
               
                 if (!results.IsValid)
                 {
-                    return ServiceResult.Factory.Fail(results.Errors);
+                    return ServiceResult<VehicleAdminViewModel>.Factory.Fail(results.Errors);
                 }
 
                 Vehicle entity = Mapper.Map<Vehicle>(viewModel);
@@ -94,17 +95,17 @@ namespace Triven.Application.Services
                 //}
 
                 var result = _vehicleRepository.Add(entity);
-                var mappedResult = Mapper.Map<VehicleAdminViewModel>(result.ContextObject);
-                return ServiceResult.Factory.Success(mappedResult, result.Message);
+                VehicleAdminViewModel mappedResult = Mapper.Map<VehicleAdminViewModel>(result.ContextObject);
+                return ServiceResult<VehicleAdminViewModel>.Factory.Success(mappedResult, result.Message);
             }
             catch (Exception e)
             {
-                return ServiceResult.Factory.Fail(new ValidationResult());
+                return ServiceResult<VehicleAdminViewModel>.Factory.Fail(new ValidationResult());
             }
            
         }
 
-        public ServiceResult Update(int id, VehicleAdminViewModel viewModel)
+        public ServiceResult<VehicleAdminViewModel> Update(int id, VehicleAdminViewModel viewModel)
         {
             var entity = _vehicleRepository.GetIncluding(id, descriptions: true, images: true);
             Mapper.Map(viewModel, entity);
@@ -127,21 +128,21 @@ namespace Triven.Application.Services
             }
 
             var result = _vehicleRepository.Update(id, entity, toDeleteDescriptionIds, toDeleteImageIds);
-            var mappedResult = Mapper.Map<VehicleAdminViewModel>(result.ContextObject);
-            return ServiceResult.Factory.Success(mappedResult, result.Message);
+            VehicleAdminViewModel mappedResult = Mapper.Map<VehicleAdminViewModel>(result.ContextObject);
+            return ServiceResult<VehicleAdminViewModel>.Factory.Success(mappedResult, result.Message);
         }
 
-        public ServiceResult Delete(int id)
+        public ServiceResult<bool> Delete(int id)
         {
-            var result = _vehicleRepository.Delete(id);
-            return ServiceResult.Factory.Success(result);
+            bool result = _vehicleRepository.Delete(id);
+            return ServiceResult<bool>.Factory.Success(result);
         }
 
-        public ServiceResult Search(SearchRequestViewModel parameters)
+        public ServiceResult<IList<VehicleDetailedViewModel>> Search(SearchRequestViewModel parameters)
         {
             var results = _vehicleRepository.Search(parameters);
-            var mappedResult = Mapper.Map<IList<Vehicle>, IList<VehicleDetailedViewModel>> (results);
-            return ServiceResult.Factory.Success(mappedResult);
+            IList<VehicleDetailedViewModel> mappedResult = Mapper.Map<IList<Vehicle>, IList<VehicleDetailedViewModel>> (results);
+            return ServiceResult<IList<VehicleDetailedViewModel>>.Factory.Success(mappedResult);
         }
     }
 }

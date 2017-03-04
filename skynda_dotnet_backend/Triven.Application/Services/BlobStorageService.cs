@@ -6,18 +6,18 @@ using AutoMapper;
 using Microsoft.Azure;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
-using Triven.Application.Results;
 using Triven.Data.EntityFramework.Models;
 using Triven.Domain.Constants;
 using Triven.Domain.Models;
 using Triven.Domain.Repositories;
+using Triven.Domain.Results;
 using Triven.Domain.Services;
 using Triven.Domain.ViewModels.BlobStorage;
 using Triven.Domain.ViewModels.Image;
 
 namespace Triven.Application.Services
 {
-    public class BlobStorageService : IBlobStorageService<ServiceResult>
+    public class BlobStorageService : IBlobStorageService
     {
         private readonly CloudBlobClient _blobClient;
         private readonly IImageRepository<Image> _imageRepository;
@@ -29,37 +29,37 @@ namespace Triven.Application.Services
             _imageRepository = IoC.Get<IImageRepository<Image>>();
         }
 
-        public ServiceResult CreateContainer(CreateContainerViewModel viewModel)
+        public ServiceResult<bool> CreateContainer(CreateContainerViewModel viewModel)
         {
             try
             {
-                CloudBlobContainer container = _blobClient.GetContainerReference(viewModel.ContainerName.ToLower());
-                var isCreated = container.CreateIfNotExists();
-                return ServiceResult.Factory.Handle(isCreated, isCreated);
+                CloudBlobContainer container = _blobClient.GetContainerReference(viewModel.ContainerName);
+                bool isCreated = container.CreateIfNotExists();
+                return ServiceResult<bool>.Factory.Success(isCreated);
             }
             catch (Exception ex)
             {
-                return ServiceResult.Factory.Fail(ex.Message);
+                return ServiceResult<bool>.Factory.Fail(ex);
             }
             
         }
 
-        public ServiceResult DeleteContainer(DeleteContainerViewModel viewModel)
+        public ServiceResult<bool> DeleteContainer(DeleteContainerViewModel viewModel)
         {
             try
             {
-                CloudBlobContainer container = _blobClient.GetContainerReference(viewModel.ContainerName.ToLower());
-                var isSuccess = container.DeleteIfExists();
-                return ServiceResult.Factory.Success(isSuccess);
+                CloudBlobContainer container = _blobClient.GetContainerReference(viewModel.ContainerName);
+                bool isSuccess = container.DeleteIfExists();
+                return ServiceResult<bool>.Factory.Success(isSuccess);
             }
             catch (Exception exception)
             {
-                return ServiceResult.Factory.Fail(exception.Message);
+                return ServiceResult<bool>.Factory.Fail(exception);
             }
             
         }
 
-        public ServiceResult Upload(UploadBlobViewModel viewModel)
+        public ServiceResult<Uri> Upload(UploadBlobViewModel viewModel)
         {
             try
             {
@@ -70,16 +70,16 @@ namespace Triven.Application.Services
 
                 blockBlob.UploadFromStream(new MemoryStream(viewModel.ByteArray));
 
-                return ServiceResult.Factory.Success(blockBlob.Uri);
+                return ServiceResult<Uri>.Factory.Success(blockBlob.Uri);
             }
             catch (Exception exception)
             {
-                return ServiceResult.Factory.Fail(exception.Message);
+                return ServiceResult<Uri>.Factory.Fail(exception);
             }
             
         }
 
-        public ServiceResult List(ListBlobsViewModel viewModel)
+        public ServiceResult<List<string>> List(ListBlobsViewModel viewModel)
         {
             var list = new List<string>();
 
@@ -106,10 +106,10 @@ namespace Triven.Application.Services
                 }
             }
 
-            return ServiceResult.Factory.Handle(list.Any(), list);
+            return ServiceResult<List<string>>.Factory.Handle(list.Any(), list);
         }
 
-        public ServiceResult Download(DownloadBlobViewModel viewModel)
+        public ServiceResult<MemoryStream> Download(DownloadBlobViewModel viewModel)
         {
             try
             {
@@ -119,28 +119,27 @@ namespace Triven.Application.Services
                 using (var memoryStream = new MemoryStream())
                 {
                     blockBlob.DownloadToStream(memoryStream);
-                    return ServiceResult.Factory.Success(memoryStream);
+                    return ServiceResult<MemoryStream>.Factory.Success(memoryStream);
                 }
             }
             catch (Exception exception)
             {
-                return ServiceResult.Factory.Fail(exception.Message);
+                return ServiceResult<MemoryStream>.Factory.Fail(exception);
             }
-            
         }
 
-        public ServiceResult Delete(DeleteBlobViewModel viewModel)
+        public ServiceResult<bool> Delete(DeleteBlobViewModel viewModel)
         {
             try
             {
                 CloudBlobContainer container = _blobClient.GetContainerReference(viewModel.ContainerName.ToLower());
                 CloudBlockBlob blockBlob = container.GetBlockBlobReference(viewModel.BlobName);
                 blockBlob.DeleteIfExists();
-                return ServiceResult.Factory.Success();
+                return ServiceResult<bool>.Factory.Success();
             }
             catch (Exception exception)
             {
-                return ServiceResult.Factory.Fail(exception.Message);
+                return ServiceResult<bool>.Factory.Fail(exception);
             }
             
         }

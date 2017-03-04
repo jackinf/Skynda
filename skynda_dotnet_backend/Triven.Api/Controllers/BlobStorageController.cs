@@ -2,7 +2,6 @@
 using System.Web;
 using System.Web.Http;
 using Triven.Application;
-using Triven.Application.Results;
 using Triven.Domain.Services;
 using Triven.Domain.ViewModels.BlobStorage;
 
@@ -11,11 +10,11 @@ namespace Triven.API.Controllers
     [RoutePrefix("api/blob")]
     public class BlobStorageController : BaseController
     {
-        private readonly IBlobStorageService<ServiceResult> _service;
+        private readonly IBlobStorageService _service;
 
         public BlobStorageController()
         {
-            _service = IoC.Get<IBlobStorageService<ServiceResult>>();
+            _service = IoC.Get<IBlobStorageService>();
         }
 
         [HttpPost, Route("create_container")]   // TODO: use create-container

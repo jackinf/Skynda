@@ -1,7 +1,6 @@
 ﻿using System.Web.Http;
 using Microsoft.AspNet.Identity;
 using Triven.Application;
-using Triven.Application.Results;
 using Triven.Domain.Services;
 using Triven.Domain.ViewModels.Vehicle;
 
@@ -10,11 +9,11 @@ namespace Triven.API.Controllers
     [RoutePrefix("api/vehicle-report")]
     public class VehicleReportController : BaseController
     {
-        private readonly IVehicleReportService<ServiceResult> _service;
+        private readonly IVehicleReportService _service;
 
         public VehicleReportController()
         {
-            _service = IoC.Get<IVehicleReportService<ServiceResult>>();
+            _service = IoC.Get<IVehicleReportService>();
         }
 
         // TODO: use search params

@@ -4,17 +4,17 @@ using System.Linq;
 using AutoMapper;
 using FluentValidation.Results;
 using Microsoft.AspNet.Identity;
-using Triven.Application.Results;
 using Triven.Application.Validators.Users;
 using Triven.Data.EntityFramework.Models.User;
 using Triven.Domain.Constants;
 using Triven.Domain.Repositories;
+using Triven.Domain.Results;
 using Triven.Domain.Services;
 using Triven.Domain.ViewModels.Account;
 
 namespace Triven.Application.Services
 {
-    public class AccountService : IAccountService<ServiceResult>
+    public class AccountService : IAccountService
     {
         private readonly ApplicationUserManager _userManager;
         private readonly IAccountRepository<ApplicationUser> _accountRepository;
@@ -35,9 +35,15 @@ namespace Triven.Application.Services
         /// <param name="lastName"></param>
         /// <param name="role"></param>
         /// <returns></returns>
-        public ServiceResult Register(string email, string password, string confirmPassword, string firstName = null, string lastName = null, Auth.Roles role = Auth.Roles.User)
+        public ServiceResult<AccountDisplayViewModel> Register(
+            string email, 
+            string password, 
+            string confirmPassword, 
+            string firstName = null, 
+            string lastName = null, 
+            Auth.Roles role = Auth.Roles.User)
         {
-            var newUser = new ApplicationUser();
+            ApplicationUser newUser = new ApplicationUser();
             newUser.UserName = newUser.Email = email;
             newUser.FirstName = firstName;
             newUser.LastName = lastName;
@@ -54,42 +60,43 @@ namespace Triven.Application.Services
             UserRegistrationValidator validator = new UserRegistrationValidator(_userManager);
             ValidationResult validation = validator.Validate(newUser);
             if (!validation.IsValid)
-                return ServiceResult.Factory.Fail(validation);
+                return ServiceResult<AccountDisplayViewModel>.Factory.Fail(validation);
 
             IdentityResult result = _userManager.CreateAsync(newUser, password).Result;
             if (!result.Succeeded)
-                return ServiceResult.Factory.Fail(result.Errors);
+                return ServiceResult<AccountDisplayViewModel>.Factory.Fail(result.Errors);
 
             //add role for user
             if (!_userManager.IsInRole(newUser.Id, role.ToString()))
                 _userManager.AddToRole(newUser.Id, role.ToString());
 
-            return ServiceResult.Factory.Success(newUser);
+            AccountDisplayViewModel mappedUser = Mapper.Map<AccountDisplayViewModel>(newUser);
+            return ServiceResult<AccountDisplayViewModel>.Factory.Success(mappedUser);
         }
 
-        public ServiceResult GetAccountData(int id)
+        public ServiceResult<AccountDisplayViewModel> GetAccountData(int id)
         {
             var entity = _userManager.FindById(id);
             var applicationUser = entity as ApplicationUser;
             if (entity == null || applicationUser == null || applicationUser.Status == Status.Deleted)
-                return ServiceResult.Factory.Fail(new List<string> { "User not found" });
+                return ServiceResult<AccountDisplayViewModel>.Factory.Fail(new List<string> { "User not found" });
 
-            var foundViewModel = Mapper.Map<AccountDisplayViewModel>(applicationUser);
-            return ServiceResult.Factory.Success(foundViewModel);
+            AccountDisplayViewModel foundViewModel = Mapper.Map<AccountDisplayViewModel>(applicationUser);
+            return ServiceResult<AccountDisplayViewModel>.Factory.Success(foundViewModel);
         }
 
-        public ServiceResult UpdateUserAccountData(int id, AccountDisplayViewModel viewModel)
+        public ServiceResult<int> UpdateUserAccountData(int id, AccountDisplayViewModel viewModel)
         {
             var entity = _userManager.FindById(id);
             var applicationUser = entity as ApplicationUser;
             var updateViewModel = viewModel ?? new AccountDisplayViewModel();
             if (entity == null || applicationUser == null || applicationUser.Status == Status.Deleted)
-                return ServiceResult.Factory.Fail(new List<string> { "User not found" });
+                return ServiceResult<int>.Factory.Fail(new List<string> { "User not found" });
 
             var validator = new UserUpdateAccountDataValidator();
             var validation = validator.Validate(viewModel);
             if (!validation.IsValid)
-                return ServiceResult.Factory.Fail(validation);
+                return ServiceResult<int>.Factory.Fail(validation);
 
             var contactInfo = applicationUser.ContactInfos.FirstOrDefault(x => x.Id == updateViewModel.Id) ??
                               new UserContactInfo()
@@ -109,14 +116,14 @@ namespace Triven.Application.Services
             }
 
             _userManager.Update(applicationUser);
-            return ServiceResult.Factory.Success(id, "User data saved successfully");
+            return ServiceResult<int>.Factory.Success(id, "User data saved successfully");
         }
 
-        public ServiceResult GetUsers()
+        public ServiceResult<List<AccountDisplayViewModel>> GetUsers()
         {
             var users = _accountRepository.GetAll().ToList();
             var foundViewModel = Mapper.Map<List<AccountDisplayViewModel>>(users);
-            return ServiceResult.Factory.Success(foundViewModel);
+            return ServiceResult<List<AccountDisplayViewModel>>.Factory.Success(foundViewModel);
         }
     }
 }

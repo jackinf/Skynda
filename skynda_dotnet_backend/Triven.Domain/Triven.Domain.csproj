@@ -136,8 +136,11 @@
     <Compile Include="Repositories\Base\ICreate.cs" />
     <Compile Include="Repositories\Base\IDelete.cs" />
     <Compile Include="Repositories\Base\IGet.cs" />
+    <Compile Include="Results\IResult.cs" />
     <Compile Include="Results\IServiceResult.cs" />
     <Compile Include="Repositories\Base\IUpdate.cs" />
+    <Compile Include="Results\ServiceBaseResult.cs" />
+    <Compile Include="Results\ServiceResult.cs" />
     <Compile Include="Services\IAccountService.cs" />
     <Compile Include="Services\IBlobStorageService.cs" />
     <Compile Include="Services\IFeatureService.cs" />
