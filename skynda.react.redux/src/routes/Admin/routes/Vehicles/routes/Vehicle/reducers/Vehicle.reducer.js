@@ -63,19 +63,18 @@ export const clear = () => (dispatch) => {
 
 export const onHandleSubmitFinished = (resp, exFormMode, getVehicles) => (dispatch) => {
   if (resp) {
-    if (resp.success && !isNaN(parseInt(resp.id))) {
+    if (!resp.modelState && !isNaN(parseInt(resp.id))) {
+
       if(exFormMode == FORM_MODE.ADDING && _.isFunction(getVehicles)){
         getVehicles();
       }
-
       dispatch(setFormMode(FORM_MODE.UPDATING));
       dispatch(setFetchSuccessful(resp.id));
       browserHistory.replace("/admin/vehicle/" + resp.id);
       toastr.success('Success', resp.message);
-
     } else {
-      const errors = fromSpringToReduxFormError(resp.errors);
       dispatch(setFetchFailed(resp.errors));
+      browserHistory.replace("/admin/vehicle");
     }
   }
 };

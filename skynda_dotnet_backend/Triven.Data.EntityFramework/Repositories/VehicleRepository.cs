@@ -15,12 +15,6 @@ namespace Triven.Data.EntityFramework.Repositories
         public Vehicle GetIncluding(int id, bool descriptions = false, bool images = false) 
             => BaseQuery().Include(x => x.Images).Include(x => x.Descriptions).FirstOrDefault();
 
-        public IResult<Vehicle> Update(int id, Vehicle model, List<int> toDeleteDescriptionIds = null, List<int> toDeleteImageIds = null)
-        {
-            Context.VehicleDescriptions.Where(x => toDeleteDescriptionIds.Any(xx => xx == x.Id)).Delete();
-            Context.VehicleImages.Where(x => toDeleteImageIds.Any(xx => xx == x.Id)).Delete();
-            return base.Update(id, model);
-        }
 
         public IList<Vehicle> Search(SearchRequestViewModel dto)
         {
@@ -66,6 +60,23 @@ namespace Triven.Data.EntityFramework.Repositories
             return base.Add(model);
         }
 
+        public override Vehicle Get(int id)
+        {
+            return BaseQuery()
+                .Include(x => x.VehicleModel)
+                .Include(x => x.MainImage)
+                .Include(x => x.Features)
+                .Include(x => x.Descriptions)
+                .Include(x => x.Reviews)
+                .Include(x => x.Reports)
+                .Include(x => x.Images)
+                .FirstOrDefault(x => x.Id == id);
+        }
 
+        public override IResult<Vehicle> Update(int id, Vehicle model)
+        {
+            Context.Entry(model.VehicleModel).State = EntityState.Unchanged;
+            return base.Update(id, model);
+        }
     }
 }

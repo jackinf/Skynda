@@ -9,7 +9,6 @@ namespace Triven.Domain.Repositories
     public interface IVehicleRepository<TVehicleEntity> : IBaseCrudRepository<TVehicleEntity>
         where TVehicleEntity : IVehicle
     {
-        IResult<TVehicleEntity> Update(int id, TVehicleEntity model, List<int> toDeleteDescriptionIds = null, List<int> toDeleteImageIds = null);
         TVehicleEntity GetIncluding(int id, bool descriptions = false, bool images = false);
         IList<TVehicleEntity> Search(SearchRequestViewModel dto);
     }
