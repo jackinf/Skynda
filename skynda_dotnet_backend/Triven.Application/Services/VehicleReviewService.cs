@@ -43,6 +43,7 @@ namespace Triven.Application.Services
         {
             var entity = _VehicleReviewRepository.Get(id);
             Mapper.Map(viewModel, entity);
+            entity.Id = id; // don't trust mapper. We shouldn't lose our Id.
             var result = _VehicleReviewRepository.Update(id, entity);
             VehicleReviewViewModel mappedResult = Mapper.Map<VehicleReviewViewModel>(result.ContextObject);
             return ServiceResult<VehicleReviewViewModel>.Factory.Success(mappedResult, result.Message);

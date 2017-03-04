@@ -35,5 +35,11 @@ namespace Triven.Tests.Utils
         {
             dbSet.RemoveRange(dbSet);
         }
+
+        public static void ClearTableAndApply<T>(DbSet<T> dbSet, ApplicationDbContext Context) where T : class
+        {
+            dbSet.RemoveRange(dbSet);
+            Context.SaveChanges();
+        }
     }
 }
