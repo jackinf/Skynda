@@ -8,7 +8,10 @@ const getDefaultHeaders = () => {
 const handle = (promise) => {
   return promise.then(response => response.json())
     .then(response => {
-      return response;
+      if (response.isSuccessful === false) {
+        throw response;
+      }
+      return response.payload;
     })
     .catch(error => {
       throw error

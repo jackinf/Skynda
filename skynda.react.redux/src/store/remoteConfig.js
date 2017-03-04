@@ -16,7 +16,7 @@ const config = {
 };
 
 if (env === "production") {
-  config.remote = "http://triven.eu:8888";
+  config.remote = "https://skyndabackend.azurewebsites.net";
 }
 
 export default config;
