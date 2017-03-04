@@ -4,6 +4,7 @@ using Triven.Application.Services;
 using Triven.Data.EntityFramework.Models;
 using Triven.Data.EntityFramework.Models.User;
 using Triven.Data.EntityFramework.Repositories;
+using Triven.Domain.Models;
 using Triven.Domain.Repositories;
 using Triven.Domain.Results;
 using Triven.Domain.Services;
@@ -37,6 +38,7 @@ namespace Triven.Application.IoCModules
             Kernel.Bind<IFeatureRepository<Feature>>().To<FeatureRepository>().InTransientScope();
             Kernel.Bind<IImageRepository<Image>>().To<ImageRepository>().InTransientScope();
             Kernel.Bind<ISubscriptionRepository<Subscription>>().To<SubscriptionRepository>().InTransientScope();
+            Kernel.Bind<IVehicleDescriptionRepository<VehicleDescription>>().To<VehicleDescriptionRepository>().InTransientScope();
             Kernel.Bind<IVehicleFeatureRepository<VehicleFeature>>().To<VehicleFeatureRepository>().InTransientScope();
             Kernel.Bind<IVehicleModelRepository<VehicleModel>>().To<VehicleModelRepository>().InTransientScope();
             Kernel.Bind<IVehicleReportRepository<VehicleReport>>().To<VehicleReportRepository>().InTransientScope();
