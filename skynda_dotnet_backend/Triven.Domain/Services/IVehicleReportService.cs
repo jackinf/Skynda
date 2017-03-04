@@ -1,15 +1,16 @@
-﻿using Triven.Domain.Results;
+﻿using System.Collections.Generic;
+using Triven.Domain.Results;
 using Triven.Domain.ViewModels.Vehicle;
 
 namespace Triven.Domain.Services
 {
-    public interface IVehicleReportService<out TResult> where TResult : IServiceResult
+    public interface IVehicleReportService
     {
-        TResult GetAll();
-        TResult Get(int id);
-        TResult Create(VehicleReportViewModel dto);
-        TResult Update(int id, VehicleReportViewModel dto);
-        TResult Delete(int id);
-        TResult GetAllBy(int vehicleId);
+        ServiceResult<IEnumerable<VehicleReportViewModel>> GetAll();
+        ServiceResult<VehicleReportViewModel> Get(int id);
+        ServiceResult<VehicleReportViewModel> Create(VehicleReportViewModel dto);
+        ServiceResult<VehicleReportViewModel> Update(int id, VehicleReportViewModel dto);
+        ServiceResult<bool> Delete(int id);
+        ServiceResult<IList<VehicleReportViewModel>> GetAllBy(int vehicleId);
     }
 }

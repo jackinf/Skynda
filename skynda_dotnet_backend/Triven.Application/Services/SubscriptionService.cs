@@ -1,13 +1,13 @@
 ﻿using System;
-using Triven.Application.Results;
 using Triven.Data.EntityFramework.Models;
 using Triven.Domain.Repositories;
+using Triven.Domain.Results;
 using Triven.Domain.Services;
 using Triven.Domain.ViewModels.Email;
 
 namespace Triven.Application.Services
 {
-    public class SubscriptionService : ISubscriptionService<ServiceResult>
+    public class SubscriptionService : ISubscriptionService
     {
         private readonly ISubscriptionRepository<Subscription> _subscriptionRepository;
 
@@ -16,7 +16,7 @@ namespace Triven.Application.Services
             _subscriptionRepository = IoC.Get<ISubscriptionRepository<Subscription>>();
         }
 
-        public ServiceResult Subscribe(EmailSubscribeViewModel email)
+        public ServiceResult<object> Subscribe(EmailSubscribeViewModel email)
         {
             throw new NotImplementedException("What is this method for?");    // TODO: implement or remove.
         }

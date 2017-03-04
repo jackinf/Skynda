@@ -1,9 +1,11 @@
-﻿using Triven.Domain.Results;
+﻿using System.Collections.Generic;
+using Triven.Domain.Results;
+using Triven.Domain.ViewModels.Image;
 
 namespace Triven.Domain.Services
 {
-    public interface IImageService<out TResult> where TResult : IServiceResult
+    public interface IImageService
     {
-        TResult List(string containerName);
+        ServiceResult<IList<ImageViewModel>> List(string containerName);
     }
 }

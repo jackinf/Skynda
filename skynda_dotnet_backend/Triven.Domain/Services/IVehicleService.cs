@@ -1,25 +1,39 @@
-﻿using Triven.Domain.Results;
+﻿using System.Collections.Generic;
+using Triven.Domain.Results;
 using Triven.Domain.ViewModels.Vehicle;
 using Triven.Domain.ViewModels.Vehicle.Requests;
 
 namespace Triven.Domain.Services
 {
-    public interface IVehicleService<out TResult> where TResult : IServiceResult
+    public interface IVehicleService
     {
-        /**
-    * Gets all data from the database
-    *
-    * @return all vehicles
-    */
-        TResult GetAll();
+        /// <summary>
+        /// Gets all data from the database
+        /// </summary>
+        /// <returns></returns>
+        ServiceResult<IEnumerable<VehicleDetailedViewModel>> GetAll();
 
+        /// <summary>
+        ///  Gets a single vehicle. Used for udpating a vehicle.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        ServiceResult<VehicleAdminViewModel> Get(int id);
+        
         /**
-         * Adds new vehicle for sale
+         * Gets a single vehicle. Used for displaying full info about the vehicle to the user
          *
-         * @param vehicleAdminDto Added vehicle's dto
-         * @return Response
+         * @param id vehicle's id
+         * @return single vehicle's dto
          */
-        TResult Create(VehicleAdminViewModel viewModel);
+        ServiceResult<VehicleDetailedViewModel> GetDetailed(int id);
+
+        /// <summary>
+        /// Adds new vehicle for sale
+        /// </summary>
+        /// <param name="viewModel"></param>
+        /// <returns></returns>
+        ServiceResult<VehicleAdminViewModel> Create(VehicleAdminViewModel viewModel);
 
         /// <summary>
         /// Update a vehicle
@@ -27,38 +41,20 @@ namespace Triven.Domain.Services
         /// <param name="id"></param>
         /// <param name="viewModel"></param>
         /// <returns></returns>
-        TResult Update(int id, VehicleAdminViewModel viewModel);
+        ServiceResult<VehicleAdminViewModel> Update(int id, VehicleAdminViewModel viewModel);
 
-        /**
-         * Gets a single vehicle. Used for udpating a vehicle.
-         *
-         * @param id vehicle's id
-         * @return single vehicle's dto
-         */
-        TResult Get(int id);
+        /// <summary>
+        /// Delets a single vehicle
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        ServiceResult<bool> Delete(int id);
 
-        /**
-         * Gets a single vehicle. Used for displaying full info about the vehicle to the user
-         *
-         * @param id vehicle's id
-         * @return single vehicle's dto
-         */
-        TResult GetDetailed(int id);
-
-        /**
-         * Delets a single vehicle
-         *
-         * @param id vehicle's id
-         * @return Is the deletion successful or not
-         */
-        TResult Delete(int id);
-
-        /**
-         * Search vehicles. Used for displaying full info about the vehicle to the user
-         *
-         * @return search results
-         * @params search params
-         */
-        TResult Search(SearchRequestViewModel parameters);
+        /// <summary>
+        /// Search vehicles. Used for displaying full info about the vehicle to the user
+        /// </summary>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
+        ServiceResult<IList<VehicleDetailedViewModel>> Search(SearchRequestViewModel parameters);
     }
 }

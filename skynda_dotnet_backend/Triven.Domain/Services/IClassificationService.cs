@@ -1,10 +1,12 @@
-﻿using Triven.Domain.Results;
+﻿using System.Collections.Generic;
+using Triven.Domain.Results;
+using Triven.Domain.ViewModels.Classification;
 
 namespace Triven.Domain.Services
 {
-    public interface IClassificationService<out TResult> where TResult : IServiceResult
+    public interface IClassificationService
     {
-        TResult GetByType(string param);
-        TResult GetByTypeAndVehicleBound(string param);
+        ServiceResult<IList<ClassificationViewModel>> GetByType(string param);
+        ServiceResult<IList<ClassificationViewModel>> GetByTypeAndVehicleBound(string param);
     }
 }

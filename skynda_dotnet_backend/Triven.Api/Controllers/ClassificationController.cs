@@ -1,6 +1,5 @@
 ﻿using System.Web.Http;
 using Triven.Application;
-using Triven.Application.Results;
 using Triven.Domain.Services;
 
 namespace Triven.API.Controllers
@@ -8,11 +7,11 @@ namespace Triven.API.Controllers
     [RoutePrefix("api/classification")]    // TODO: use singular, not plural
     public class ClassificationController : BaseController
     {
-        private readonly IClassificationService<ServiceResult> _service;
+        private readonly IClassificationService _service;
 
         public ClassificationController()
         {
-            _service = IoC.Get<IClassificationService<ServiceResult>>();
+            _service = IoC.Get<IClassificationService>();
         }
 
         [HttpGet, Route("{type}")]

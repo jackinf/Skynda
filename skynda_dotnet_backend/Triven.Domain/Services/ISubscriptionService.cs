@@ -3,8 +3,8 @@ using Triven.Domain.ViewModels.Email;
 
 namespace Triven.Domain.Services
 {
-    public interface ISubscriptionService<out TResult> where TResult : IServiceResult
+    public interface ISubscriptionService
     {
-        TResult Subscribe(EmailSubscribeViewModel email);
+        ServiceResult<object> Subscribe(EmailSubscribeViewModel email);
     }
 }
