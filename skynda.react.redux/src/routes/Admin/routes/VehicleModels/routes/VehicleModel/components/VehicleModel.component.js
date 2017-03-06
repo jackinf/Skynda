@@ -25,6 +25,8 @@ class VehicleModel extends React.Component {
 
   componentDidMount() {
     this.props.onHandleLoad(this.props.params[ROUTE_PARAMS.VEHICLE_MODEL_ID]);
+
+    // TODO: load this shit with 1 query :D
     this.props.getDrivetrains();
     this.props.getFuels();
     this.props.getTransmissions();
@@ -34,19 +36,11 @@ class VehicleModel extends React.Component {
 
   componentWillUnmount() {
     this.props.dispatch(destroy("vehicleModelForm"));
-    // this.props.clearItem();
   }
 
   setField = (name, selectedItem) => {
     this.props.dispatch(change("vehicleModelForm", name, selectedItem.value));
   };
-
-  // onSubmit(e) {
-  //   const promise = this.props.handleSubmit(data => onHandleSubmit(data, this.props.formInfo))(e);
-  //   promise && promise.then(resp => {
-  //     this.props.onHandleSubmitFinished(resp, this.props.onSubmitCustom)
-  //   });
-  // }
 
   render() {
     const drivetrains = !this.props.drivetrain.isFetching
@@ -75,13 +69,6 @@ class VehicleModel extends React.Component {
         <div className="container">
           {JSON.stringify(modelStateErrors, null, 2)}
         </div>
-
-        {/*COMMENTED BECAUSE IT's for debugging*/}
-      {/*<div className="well vehicle-model__form-info__helper-block">*/}
-        {/*<h4>Form info: {JSON.stringify(this.props.formInfo)}</h4>*/}
-        {/*<h5>Is modal: {this.props.isModal ? "yes" : "no"}</h5>*/}
-        {/*<button onClick={e => this.props.randomize(this.props.formInfo.item)}>Random</button>*/}
-      {/*</div>*/}
 
       <form>
         {rowWrapper(<Field name="modelCode" label="Model Code" component={TextField} floatingLabelText="Model Code *"/>)}
@@ -123,7 +110,6 @@ class VehicleModel extends React.Component {
                               label="Manufacturer *"
                               component={selectRenderer(manufacturers, this.setField)}/>, 4)}
 
-        {/*<input type="submit" disabled={this.props.submitting} value={"Submit"}/>*/}
         <Button onClick={e => this.props.onHandleSubmit(this.props.onSubmitCustom)}>Submit</Button>
       </form>
     </div>)

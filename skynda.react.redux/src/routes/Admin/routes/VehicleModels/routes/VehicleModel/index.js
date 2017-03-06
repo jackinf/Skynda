@@ -13,7 +13,7 @@ export default (store) => ({
     NProgress.start();
     require.ensure([], (require) => {
       injectReducer(store, {key: VEHICLE_MODEL_REDUCER_KEY, reducer: require("./reducers/VehicleModel.reducer.js").default});
-      injectReducer(store, {key: "classificators", reducer: require("./../../../Classifiers/Classifiers.module").default});
+      injectReducer(store, {key: "classificators", reducer: require("./../../../Classifiers/Classifiers.module").default}); // TODO: take somewhere away from here :D
       cb(null, require("./containers/VehicleModel.container.js").default);
       NProgress.done();
     }, "vehicleModel")

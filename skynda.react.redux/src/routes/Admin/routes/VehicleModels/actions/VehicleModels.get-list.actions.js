@@ -3,23 +3,44 @@
  */
 import {VehicleModelService} from "../../../../../webServices/VehicleModelServices";
 
-export const SET_VEHICLE_MODELS_DATA = "VEHICLE_MODEL/SET_VEHICLE_MODELS_DATA";  // TODO: Request, success, failure
+export const GET_LIST_REQUEST = "VEHICLE_MODELS/GET_LIST_REQUEST";
+export const GET_LIST_SUCCESS = "VEHICLE_MODELS/GET_LIST_SUCCESS";
+export const GET_LIST_FAILURE = "VEHICLE_MODELS/GET_LIST_FAILED";
 
-export function setVehicleModels(value) {
+export function getListRequest() {
   return {
-    type: SET_VEHICLE_MODELS_DATA,
-    payload: value
+    type: GET_LIST_REQUEST,
+    isFetching: true,
+    errors: {}
+  };
+}
+
+export function getListSuccess(items) {
+  return {
+    type: GET_LIST_SUCCESS,
+    isFetching: false,
+    items,
+    errors: {}
+  };
+}
+
+export function getListError(errors) {
+  return {
+    type: GET_LIST_FAILURE,
+    isFetching: false,
+    items: [],
+    errors: errors
   };
 }
 
 export default function getList() {
   return async (dispatch) => {
+    dispatch(getListRequest());
     try {
-      dispatch(setVehicleModels({isFetching: true}));
       const resp = await VehicleModelService.getList();
-      dispatch(setVehicleModels({isFetching: false, items: resp}));
+      dispatch(getListSuccess(resp));
     } catch(err) {
-      dispatch(setVehicleModels({isFetching: false, items: []}));
+      dispatch(getListError(err));
     }
   }
 }

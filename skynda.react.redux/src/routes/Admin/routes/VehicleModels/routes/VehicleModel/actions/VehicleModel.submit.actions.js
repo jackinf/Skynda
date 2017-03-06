@@ -108,6 +108,7 @@ export default function submit(onSubmitCustom) {
     const state = getState();
     const formValues = state.form[VEHICLE_MODEL_FORM].values;
     const formMode = state[VEHICLE_MODEL_REDUCER_KEY].formMode;
+
     if (formMode === FORM_MODE.ADDING_MODEL) {
       dispatch(submitCreate(formValues, onSubmitCustom))
     }

@@ -43,16 +43,6 @@ function loadEditError(errors) {
     formMode: FORM_MODE.NONE_MODEL
   }
 }
-
-// function loadCreateForm() {
-//   return (dispatch) => {
-//     console.log("333");
-//
-//     dispatch(loadCreateSuccess());
-//     // dispatch(initialize(VEHICLE_MODEL_FORM, {}));
-//   }
-// }
-
 /**
  * Private. Initializes an update form.
  */
@@ -69,12 +59,10 @@ const loadEditForm = (id) => async (dispatch) => {
 
 export default function load(id) {
   return (dispatch) => {
-    // dispatch(destroy("vehicleModelForm"));
     const formMode = id === ROUTE_PARAMS.values.NEW ? FORM_MODE.ADDING_MODEL : !isNaN(parseInt(id)) ? FORM_MODE.UPDATING_MODEL : FORM_MODE.NONE_MODEL;
-    console.log(formMode);
+
     if (formMode === FORM_MODE.ADDING_MODEL) {
       dispatch(loadCreateSuccess());
-      // dispatch(loadCreateForm());
     } else if (formMode == FORM_MODE.UPDATING_MODEL) {
       dispatch(loadEditForm(id));
     } else {

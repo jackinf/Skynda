@@ -11,6 +11,7 @@ export const rowWrapper = (block) =>
     <Col xs={12} >{block}</Col>
   </Row>);
 
+// TODO: to component
 export const selectRenderer = (items, onChange, targetName, isMulti = false) => ({input, label, meta: {touched, error}, ...custom}) => (
   <Row style={{marginBottom: "10px"}}>
     <Col sm={12}>
