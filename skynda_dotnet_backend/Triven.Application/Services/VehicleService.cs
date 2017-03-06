@@ -87,19 +87,7 @@ namespace Triven.Application.Services
                         
                         //entity.Images.Add(new Ve);
                     }
-                }
-
-
-
-                //var descriptionEntities = Mapper.Map<List<IVehicleDescription>>(viewModel.Descriptions);
-                //entity.Descriptions = descriptionEntities;
-
-                //var imageEntities = Mapper.Map<List<VehicleImage>>(viewModel.Images);
-                //entity.Images = imageEntities;
-                //foreach (var imageEntity in imageEntities)
-                //{
-                //    // todo: handle image uplaod to blob stoarge
-                //}
+                }            
 
                 var result = _vehicleRepository.Add(entity);
 
