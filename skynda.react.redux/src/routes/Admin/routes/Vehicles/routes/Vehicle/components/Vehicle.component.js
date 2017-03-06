@@ -25,7 +25,7 @@ import "./Vehicle.component.scss";
 import {ROUTE_PARAMS as VEHICLE_MODEL_ROUTE_PARAMS} from "../../../../VehicleModels/constants/VehicleModel.constant";
 import {ROUTE_PARAMS as VEHICLE_REPORT_ROUTE_PARAMS} from "../../../../VehicleReports/constants/VehicleReport.constant";
 import {ROUTE_PARAMS as VEHICLE_REVIEW_ROUTE_PARAMS} from "../../../../VehicleReviews/constants/VehicleReview.constant";
-import VehicleModel from "../../../../VehicleModels/containers/VehicleModel.container";
+import VehicleModel from "../../../../VehicleModels/routes/VehicleModel/containers/VehicleModel.container";
 import VehicleReport from "../../../../VehicleReports/containers/VehicleReport.container";
 import VehicleReview from "../../../../VehicleReviews/containers/VehicleReview.container";
 import {CropToolCard} from "../../../../../../../components/ReduxForm/CropTool";

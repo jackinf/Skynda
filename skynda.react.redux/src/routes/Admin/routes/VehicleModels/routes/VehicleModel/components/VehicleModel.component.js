@@ -4,17 +4,27 @@
 import React from "react";
 import {Field} from "redux-form";
 import {TextField} from "redux-form-material-ui";
-import {reduxForm, change, destroy} from "redux-form";
+import {change, destroy} from "redux-form";
 import RefreshIndicator from 'material-ui/RefreshIndicator';
-import {toastr} from "react-redux-toastr";
+import {Button} from "react-bootstrap";
 
-import {ROUTE_PARAMS, FORM_MODE} from "./../constants/VehicleModel.constant";
+import {ROUTE_PARAMS} from "../../../constants/VehicleModel.constant";
 import {rowWrapper, selectRenderer} from "./VehicleModel.redux-form.renderers";
-import {onHandleSubmit} from "../actions/VehicleModel.redux-form.actions";
 
 class VehicleModel extends React.Component {
+  static propTypes = {
+    onHandleLoad: React.PropTypes.func.isRequired,
+    onHandleSubmit: React.PropTypes.func.isRequired,
+    onSubmitCustom: React.PropTypes.func,
+    getDrivetrains: React.PropTypes.func,
+    getFuels: React.PropTypes.func,
+    getTransmissions: React.PropTypes.func,
+    getVehicleBodies: React.PropTypes.func,
+    getManufacturers: React.PropTypes.func
+  };
+
   componentDidMount() {
-    this.props.load(this.props.params[ROUTE_PARAMS.VEHICLE_MODEL_ID]);
+    this.props.onHandleLoad(this.props.params[ROUTE_PARAMS.VEHICLE_MODEL_ID]);
     this.props.getDrivetrains();
     this.props.getFuels();
     this.props.getTransmissions();
@@ -24,19 +34,19 @@ class VehicleModel extends React.Component {
 
   componentWillUnmount() {
     this.props.dispatch(destroy("vehicleModelForm"));
-    this.props.clearItem();
+    // this.props.clearItem();
   }
 
   setField = (name, selectedItem) => {
     this.props.dispatch(change("vehicleModelForm", name, selectedItem.value));
   };
 
-  onSubmit(e) {
-    const promise = this.props.handleSubmit(data => onHandleSubmit(data, this.props.formInfo))(e);
-    promise && promise.then(resp => {
-      this.props.onHandleSubmitFinished(resp, this.props.onSubmitCustom)
-    });
-  }
+  // onSubmit(e) {
+  //   const promise = this.props.handleSubmit(data => onHandleSubmit(data, this.props.formInfo))(e);
+  //   promise && promise.then(resp => {
+  //     this.props.onHandleSubmitFinished(resp, this.props.onSubmitCustom)
+  //   });
+  // }
 
   render() {
     const drivetrains = !this.props.drivetrain.isFetching
@@ -56,10 +66,16 @@ class VehicleModel extends React.Component {
       : [];
 
     const loadingIcon = (<div><RefreshIndicator size={100} left={20} top={0} status="loading"/></div>);
+    let modelStateErrors = this.props.errors && this.props.errors.modelState ? this.props.errors.modelState : [];
 
     return this.props.formInfo.isFetching
       ? (loadingIcon)
       : (<div>
+
+        <div className="container">
+          {JSON.stringify(modelStateErrors, null, 2)}
+        </div>
+
         {/*COMMENTED BECAUSE IT's for debugging*/}
       {/*<div className="well vehicle-model__form-info__helper-block">*/}
         {/*<h4>Form info: {JSON.stringify(this.props.formInfo)}</h4>*/}
@@ -67,7 +83,7 @@ class VehicleModel extends React.Component {
         {/*<button onClick={e => this.props.randomize(this.props.formInfo.item)}>Random</button>*/}
       {/*</div>*/}
 
-      <form onSubmit={this.onSubmit.bind(this)}>
+      <form>
         {rowWrapper(<Field name="modelCode" label="Model Code" component={TextField} floatingLabelText="Model Code *"/>)}
         {rowWrapper(<Field name="title" component={TextField} floatingLabelText="Title *"/>)}
         {rowWrapper(<Field name="description" component={TextField} floatingLabelText="Description *"/>)}
@@ -107,10 +123,11 @@ class VehicleModel extends React.Component {
                               label="Manufacturer *"
                               component={selectRenderer(manufacturers, this.setField)}/>, 4)}
 
-        <input type="submit" disabled={this.props.submitting} value={"Submit"}/>
+        {/*<input type="submit" disabled={this.props.submitting} value={"Submit"}/>*/}
+        <Button onClick={e => this.props.onHandleSubmit(this.props.onSubmitCustom)}>Submit</Button>
       </form>
     </div>)
   }
 }
 
-export default reduxForm({form: "vehicleModelForm"})(VehicleModel);
+export default VehicleModel;

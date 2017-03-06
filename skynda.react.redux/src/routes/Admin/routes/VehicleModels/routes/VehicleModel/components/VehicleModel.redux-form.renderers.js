@@ -13,7 +13,6 @@ export const rowWrapper = (block) =>
 
 export const selectRenderer = (items, onChange, targetName, isMulti = false) => ({input, label, meta: {touched, error}, ...custom}) => (
   <Row style={{marginBottom: "10px"}}>
-    {console.log("iinput", input.name)}
     <Col sm={12}>
       <label className="sell-your-car__label" htmlFor={input.name}>{label}</label>
       <Select name={input.name}

@@ -16,7 +16,7 @@ export default (store) => ({
     require.ensure([], (require) => {
       injectReducer(store, {key: REDUCER_KEYS.VEHICLE_DATA, reducer: require("./reducers/Vehicle.reducer.js").default});
       injectReducer(store, {key: "classificators", reducer: require("./../../../Classifiers/Classifiers.module").default});
-      injectReducer(store, {key: "formInfo", reducer: require("./../../../VehicleModels/reducers/VehicleModel.reducer.js").default});
+      injectReducer(store, {key: "formInfo", reducer: require("./../../../VehicleModels/routes/VehicleModel/reducers/VehicleModel.reducer.js").default});
 
       injectReducer(store, {key: REDUCER_KEYS.VEHICLE_MODELS_DATA, reducer: require("./../../../VehicleModels/reducers/VehicleModels.reducer.js").default});
 

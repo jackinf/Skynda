@@ -4,20 +4,29 @@
 import {connect} from "react-redux";
 
 import VehicleModel from "../components/VehicleModel.component";
-import {load, onHandleSubmitFinished, randomize, clearItem} from "../reducers/VehicleModel.reducer";
+import {
+  load,
+  randomize,
+  submit
+} from "../actions";
 import {
   getManufacturers,
   getFuels,
   getTransmissions,
   getDrivetrains,
   getVehicleBodies
-} from "./../../Classifiers/Classifiers.module";
+} from "../../../../Classifiers/Classifiers.module";
+import {reduxForm} from "redux-form";
+import {VEHICLE_MODEL_FORM, VEHICLE_MODEL_REDUCER_KEY} from "../../../constants/VehicleModel.constant";
+
+const VehicleModelForm = reduxForm({form: VEHICLE_MODEL_FORM})(VehicleModel);
 
 const stateToProps = (state) => {
   const classificators = state.classificators;
   return {
-    formInfo: state.formInfo,
-    initialValues: state.formInfo ? state.formInfo.item : {modelCode: ""},
+    formInfo: state[VEHICLE_MODEL_REDUCER_KEY],
+    initialValues: state[VEHICLE_MODEL_REDUCER_KEY].item,
+    errors: state[VEHICLE_MODEL_REDUCER_KEY].errors,
 
     // Classifiers
     manufacturer: classificators ? classificators.manufacturer : null,
@@ -34,9 +43,9 @@ const dispatchToProps = {
   getTransmissions,
   getDrivetrains,
   getVehicleBodies,
-  load,
-  onHandleSubmitFinished,
-  randomize,
-  clearItem
+
+  onHandleLoad: load,
+  onHandleSubmit: submit,
+  randomize
 };
-export default connect(stateToProps, dispatchToProps)(VehicleModel);
+export default connect(stateToProps, dispatchToProps)(VehicleModelForm);

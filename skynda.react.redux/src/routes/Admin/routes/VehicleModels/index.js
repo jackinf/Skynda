@@ -1,28 +1,23 @@
 import {injectReducer} from '../../../../store/reducers';
-import {ROUTE_PARAMS, REDUCER_KEYS, FORM_MODE} from "./constants/VehicleModel.constant";
+import {ROUTE_PARAMS, REDUCER_KEYS, FORM_MODE, VEHICLE_MODEL_REDUCER_KEY} from "./constants/VehicleModel.constant";
 import NProgress from "react-nprogress";
+import VehicleModelRoute from "./routes/VehicleModel";
+import {toastr} from 'react-redux-toastr'
 
 export default (store) => ({
-  path: `vehicle-model(/:${ROUTE_PARAMS.VEHICLE_MODEL_ID})`,
+  path: "vehicle-model",
   getComponent(nextState, cb) {
     NProgress.start();
     require.ensure([], (require) => {
-      const id = nextState.params[ROUTE_PARAMS.VEHICLE_MODEL_ID];
-      const formMode = id === ROUTE_PARAMS.values.NEW
-        ? FORM_MODE.ADDING_MODEL : !isNaN(parseInt(id))
-        ? FORM_MODE.UPDATING_MODEL : FORM_MODE.NONE;
-
-      if (formMode == FORM_MODE.ADDING_MODEL || formMode == FORM_MODE.UPDATING_MODEL) {
-        injectReducer(store, {key: "formInfo", reducer: require("./reducers/VehicleModel.reducer.js").default});
-        injectReducer(store, {key: "classificators", reducer: require("./../Classifiers/Classifiers.module").default});
-        cb(null, require("./containers/VehicleModel.container.js").default);
-        NProgress.done();
-      } else {
-        injectReducer(store, {key: REDUCER_KEYS.VEHICLE_MODELS_DATA, reducer: require("./reducers/VehicleModels.reducer.js").default});
-        cb(null, require("./containers/VehicleModels.container.js").default);
-        NProgress.done();
-      }
-
-    })
+      injectReducer(store, {key: REDUCER_KEYS.VEHICLE_MODELS_DATA, reducer: require("./reducers/VehicleModels.reducer.js").default});
+      cb(null, require("./containers/VehicleModels.container.js").default);
+      NProgress.done();
+    }, "vehicleModels")
+  },
+  childRoutes: [
+    VehicleModelRoute(store)
+  ],
+  onEnter() {
+    toastr.clean();
   }
 })

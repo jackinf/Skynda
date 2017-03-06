@@ -1,31 +1,4 @@
-import {VehicleModelService} from "../../../../../webServices"
-const SET_VEHICLE_MODELS_DATA = "VEHICLE_MODEL/SET_VEHICLE_MODELS_DATA";
-
-export function getList() {
-  return (dispatch) => {
-    dispatch(setVehicleModels({isFetching: true}));
-    const promise = VehicleModelService.getList();
-    promise.then(resp => {
-      dispatch(setVehicleModels({isFetching: false, items: resp}));
-    })
-    .catch(err => {
-      dispatch(setVehicleModels({isFetching: false, items: []}));
-      throw err;
-    });
-  }
-};
-
-
-export function setVehicleModels(value) {
-  return {
-    type: SET_VEHICLE_MODELS_DATA,
-    payload: value
-  };
-}
-
-export const actions = {
-  setVehicleModels
-};
+import {SET_VEHICLE_MODELS_DATA} from "../actions/VehicleModels.get-list.actions";
 
 // ------------------------------------
 // Action Handlers

@@ -29,7 +29,9 @@ export default class VehicleModels extends React.Component {
     const loading = this.props.data.isFetching ? "Fetching" : "Vehicle Models";
 
     return (<div className="container">
-      <h3>{loading}</h3>
+      {!this.props.children ?
+        (<span>
+        <h3>{loading}</h3>
 
       <RaisedButton secondary={true} label="Add" onClick={e => browserHistory.push(`/admin/vehicle-model/new`)}/>
 
@@ -61,7 +63,8 @@ export default class VehicleModels extends React.Component {
           width={200}
         />
       </Table>
-
+      </span>
+        ): this.props.children}
     </div>)
   }
 }

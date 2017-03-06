@@ -1,6 +1,5 @@
 import {connect} from "react-redux";
-import {getList} from "../reducers/VehicleModels.reducer";
-import deleteItem from "../actions/VehicleModels.deleteItem.action";
+import {deleteItem, getList} from "../actions";
 import {REDUCER_KEYS} from "../constants/VehicleModel.constant";
 import CarModelsComponent from "../components/VehicleModels.component";
 
