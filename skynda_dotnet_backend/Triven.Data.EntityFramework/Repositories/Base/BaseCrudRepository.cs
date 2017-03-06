@@ -17,7 +17,7 @@ namespace Triven.Data.EntityFramework.Repositories.Base
     public abstract class BaseCrudRepository<TModel> : IBaseCrudRepository<TModel>, IDisposable
         where TModel : class, IAuditableBaseModel
     {
-        protected readonly ApplicationDbContext Context = new ApplicationDbContext();
+        protected ApplicationDbContext Context = new ApplicationDbContext();
 
         /// <summary>
         /// When object is updated, here fields can be specified.
@@ -40,7 +40,10 @@ namespace Triven.Data.EntityFramework.Repositories.Base
         /// Gets all the items from the database
         /// </summary>
         /// <returns></returns>
-        public virtual IEnumerable<TModel> GetAll() => BaseQuery().OrderBy(x => x.Id);
+        public virtual IEnumerable<TModel> GetAll()
+        {
+            return BaseQuery().OrderBy(x => x.Id);
+        }
 
         /// <summary>
         /// Gets all the items from the database by page size
@@ -141,14 +144,24 @@ namespace Triven.Data.EntityFramework.Repositories.Base
             Context.Dispose();
         }
 
-        public IQueryable<TModel> BaseQuery() => Context.Set<TModel>().Where(x => x.DeletedOn == null);
-        public IQueryable<TModel> BaseQuery(ApplicationDbContext context) => context.Set<TModel>().Where(x => x.DeletedOn == null);
+        public IQueryable<TModel> BaseQuery()
+        {
+            return Context.Set<TModel>().Where(x => x.DeletedOn == null);
+        }
+
+        public IQueryable<TModel> BaseQuery(ApplicationDbContext context)
+        {
+            return context.Set<TModel>().Where(x => x.DeletedOn == null);
+        }
 
         /// <summary>
         /// Checks, if item with the same id already exists
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public bool ItemExists(int id) => Context.Set<TModel>().Count(e => e.Id == id) > 0;
+        public bool ItemExists(int id)
+        {
+            return Context.Set<TModel>().Count(e => e.Id == id) > 0;
+        }
     }
 }

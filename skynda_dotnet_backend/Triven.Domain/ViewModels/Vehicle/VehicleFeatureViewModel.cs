@@ -5,7 +5,7 @@ namespace Triven.Domain.ViewModels.Vehicle
 {
     public class VehicleFeatureViewModel : BaseViewModel
     {
-        public int VehicleId { get; set; }
+        public VehicleAdminViewModel Vehicle { get; set; }
         public FeatureViewModel Feature { get; set; }
     }
 }

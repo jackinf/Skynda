@@ -118,6 +118,10 @@
     <Compile Include="Migrations\201703041042226_VehicleMigrationReq.Designer.cs">
       <DependentUpon>201703041042226_VehicleMigrationReq.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201703061839077_VehicleMigra.cs" />
+    <Compile Include="Migrations\201703061839077_VehicleMigra.Designer.cs">
+      <DependentUpon>201703061839077_VehicleMigra.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\Classification.cs" />
@@ -183,6 +187,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201703041042226_VehicleMigrationReq.resx">
       <DependentUpon>201703041042226_VehicleMigrationReq.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703061839077_VehicleMigra.resx">
+      <DependentUpon>201703061839077_VehicleMigra.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

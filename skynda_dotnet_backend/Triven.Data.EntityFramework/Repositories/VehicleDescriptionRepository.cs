@@ -10,18 +10,30 @@ namespace Triven.Data.EntityFramework.Repositories
 {
     public class VehicleDescriptionRepository : BaseCrudRepository<VehicleDescription>, IVehicleDescriptionRepository<VehicleDescription>
     {
-        public IList<VehicleDescription> GetAllVehicleDescriptions(int vehicleId) => BaseQuery().Where(x => x.Vehicle.Id == vehicleId).ToList();
+        public IList<VehicleDescription> GetAllVehicleDescriptions(int vehicleId)
+        {
+            using (Context = new ApplicationDbContext())
+            {
+                return BaseQuery().Where(x => x.Vehicle.Id == vehicleId).ToList();
+            }
+        }
 
         public override IResult<VehicleDescription> Add(VehicleDescription model)
         {
-            Context.Entry(model.Vehicle).State = EntityState.Unchanged;
-            return base.Add(model);
+            using (Context = new ApplicationDbContext())
+            {
+                Context.Entry(model.Vehicle).State = EntityState.Unchanged;
+                return base.Add(model);
+            }
         }
 
         public override IResult<VehicleDescription> Update(int id, VehicleDescription model)
         {
-            Context.Entry(model.Vehicle).State = EntityState.Unchanged;
-            return base.Update(id, model);
+            using (Context = new ApplicationDbContext())
+            {
+                Context.Entry(model.Vehicle).State = EntityState.Unchanged;
+                return base.Update(id, model);
+            }
         }
     }
 }

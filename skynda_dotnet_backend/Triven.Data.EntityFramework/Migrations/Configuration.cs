@@ -50,28 +50,29 @@ namespace Triven.Data.EntityFramework.Migrations
 
         private static void CreateInitialFeatures(ApplicationDbContext context)
         {
-            context.Features.AddOrUpdate(Factory.CreateFeature("Parking Sensors", "feature", "PARKING_SENSORS", true, 1));
-            context.Features.AddOrUpdate(Factory.CreateFeature("Bluetooth", "feature", "BLUETOOTH", true, 2));
-            context.Features.AddOrUpdate(Factory.CreateFeature("Sunroof", "feature", "SUNROOF", true, 3));
-            context.Features.AddOrUpdate(Factory.CreateFeature("Navigation", "feature", "NAVIGATION", true, 4));
-            context.Features.AddOrUpdate(Factory.CreateFeature("Keyless-Go", "feature", "KEYLESS_GO", true, 5));
-            context.Features.AddOrUpdate(Factory.CreateFeature("Immobilizer", "feature", "IMMOBILIZER", true, 6));
-            context.Features.AddOrUpdate(Factory.CreateFeature("Xenon Lights", "feature", "XENON_LIGHTS", true, 7));
-            context.Features.AddOrUpdate(Factory.CreateFeature("Alloy Wheels", "feature", "ALLOY_WHEELS", true, 8));
-            context.Features.AddOrUpdate(Factory.CreateFeature("Leather Upholstery", "feature", "Leather_Upholstery".ToUpper(), true, 9));
-            context.Features.AddOrUpdate(Factory.CreateFeature("Racing Seats", "feature", "Racing_Seats".ToUpper(), true, 10));
-            context.Features.AddOrUpdate(Factory.CreateFeature("Ventilated Seats", "feature", "Ventilated_Seats".ToUpper(), true, 11));
-            context.Features.AddOrUpdate(Factory.CreateFeature("Seat_Heating", "feature", "Seat_Heating".ToUpper(), true, 12));
-            context.Features.AddOrUpdate(Factory.CreateFeature("Mirror Heating", "feature", "Mirror_Heating".ToUpper(), true, 13));
-            context.Features.AddOrUpdate(Factory.CreateFeature("Rain Sensors", "feature", "Rain_Sensors".ToUpper(), true, 14));
-            context.Features.AddOrUpdate(Factory.CreateFeature("Power Steering", "feature", "Power_Steering".ToUpper(), true, 15));
-            context.Features.AddOrUpdate(Factory.CreateFeature("Cruise Control", "feature", "Cruise_Control".ToUpper(), true, 16));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(1, "Parking Sensors", "feature", "PARKING_SENSORS", true, 1));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(2, "Bluetooth", "feature", "BLUETOOTH", true, 2));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(3,"Sunroof", "feature", "SUNROOF", true, 3));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(4,"Navigation", "feature", "NAVIGATION", true, 4));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(5,"Keyless-Go", "feature", "KEYLESS_GO", true, 5));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(6,"Immobilizer", "feature", "IMMOBILIZER", true, 6));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(7,"Xenon Lights", "feature", "XENON_LIGHTS", true, 7));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(8,"Alloy Wheels", "feature", "ALLOY_WHEELS", true, 8));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(9,"Leather Upholstery", "feature", "Leather_Upholstery".ToUpper(), true, 9));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(10,"Racing Seats", "feature", "Racing_Seats".ToUpper(), true, 10));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(11,"Ventilated Seats", "feature", "Ventilated_Seats".ToUpper(), true, 11));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(12,"Seat_Heating", "feature", "Seat_Heating".ToUpper(), true, 12));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(13,"Mirror Heating", "feature", "Mirror_Heating".ToUpper(), true, 13));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(14,"Rain Sensors", "feature", "Rain_Sensors".ToUpper(), true, 14));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(15,"Power Steering", "feature", "Power_Steering".ToUpper(), true, 15));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(16, "Cruise Control", "feature", "Cruise_Control".ToUpper(), true, 16));
         }
 
         private static void CreateClassificationTypes(ApplicationDbContext context, ApplicationUser admin)
         {
             var classificationTypePaymentType = new ClassificationType
             {
+                Id = 1,
                 Name = DatabaseConstants.ClassificationTypeName.PaymentType,
                 Description = "single or recurring payment",
                 Creator = admin,
@@ -85,6 +86,7 @@ namespace Triven.Data.EntityFramework.Migrations
             };
             var classificationTypeDrivetrain = new ClassificationType
             {
+                Id = 2,
                 Name = DatabaseConstants.ClassificationTypeName.Drivetrain,
                 Description = "vehicle drivetrain",
                 Creator = admin,
@@ -99,6 +101,7 @@ namespace Triven.Data.EntityFramework.Migrations
             };
             var classificationTypeTransmission = new ClassificationType
             {
+                Id = 3,
                 Name = DatabaseConstants.ClassificationTypeName.Transmission,
                 Description = "transmission type",
                 Creator = admin,
@@ -113,6 +116,7 @@ namespace Triven.Data.EntityFramework.Migrations
             };
             var classificationTypePaymentStatus = new ClassificationType
             {
+                Id = 4,
                 Name = DatabaseConstants.ClassificationTypeName.PaymentStatus,
                 Description = "payment status",
                 Creator = admin,
@@ -128,6 +132,7 @@ namespace Triven.Data.EntityFramework.Migrations
             };
             var classificationTypeManufacturer = new ClassificationType
             {
+                Id = 5,
                 Name = DatabaseConstants.ClassificationTypeName.Manufacturer,
                 Description = "vehicles manufacturer",
                 Creator = admin,
@@ -161,6 +166,7 @@ namespace Triven.Data.EntityFramework.Migrations
             };
             var classificationTypeFuel = new ClassificationType
             {
+                Id = 6,
                 Name = DatabaseConstants.ClassificationTypeName.Fuel,
                 Description = "fuel type",
                 Creator = admin,
@@ -181,6 +187,7 @@ namespace Triven.Data.EntityFramework.Migrations
             };
             var classificationTypeBody = new ClassificationType
             {
+                Id = 7,
                 Name = DatabaseConstants.ClassificationTypeName.VehicleBody,
                 Description = "vehicle body",
                 Creator = admin,
@@ -355,6 +362,7 @@ namespace Triven.Data.EntityFramework.Migrations
             }
 
             public static Feature CreateFeature(
+                int id,
                 string name,
                 string description,
                 string value,
@@ -363,6 +371,7 @@ namespace Triven.Data.EntityFramework.Migrations
             {
                 return new Feature
                 {
+                    Id = id,
                     Name = name,
                     Description = description,
                     IsImported = true,
