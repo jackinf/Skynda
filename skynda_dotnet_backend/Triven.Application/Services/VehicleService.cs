@@ -78,21 +78,13 @@ namespace Triven.Application.Services
                     entity.MainImage = mainImage as Image;
                 }
 
-                if (viewModel.Images != null && viewModel.Images.Any())
-                {
-                    foreach (var imageContainerViewModel in viewModel.Images)
-                    {
-
-                        var image = _blobStorageService.HandleMedia(imageContainerViewModel.Image, null);
-                        
-                        //entity.Images.Add(new Ve);
-                    }
-                }            
+                /*
+                 * No need to add images, reviews, reports in create
+                 */
 
                 var result = _vehicleRepository.Add(entity);
-
-                UpdateDescriptions(result.ContextObject.Id, viewModel.Descriptions);
-                UpdateFeatures(result.ContextObject.Id, viewModel.FeaturesAdminSelect);
+                
+                UpdateFeatures(result.ContextObject.Id, viewModel.FeaturesAdminSelect, result.ContextObject.Features);
 
                 VehicleAdminViewModel mappedResult = Mapper.Map<VehicleAdminViewModel>(result.ContextObject);
 

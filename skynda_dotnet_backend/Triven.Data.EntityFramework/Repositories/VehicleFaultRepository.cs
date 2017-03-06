@@ -8,6 +8,12 @@ namespace Triven.Data.EntityFramework.Repositories
 {
     public class VehicleFaultRepository : BaseCrudRepository<VehicleFault>, IVehicleFaultRepository<VehicleFault>
     {
-        public IList<VehicleFault> GetCategoryFaults(int categoryId) => BaseQuery().Where(x => x.VehicleReport.Id == categoryId).ToList();
+        public IList<VehicleFault> GetCategoryFaults(int categoryId)
+        {
+            using (Context = new ApplicationDbContext())
+            {
+                return BaseQuery().Where(x => x.VehicleReport.Id == categoryId).ToList();
+            }
+        }
     }
 }
