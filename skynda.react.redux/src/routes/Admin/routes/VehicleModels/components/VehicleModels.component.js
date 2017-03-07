@@ -7,6 +7,17 @@ import 'fixed-data-table/dist/fixed-data-table.css';
 import {browserHistory, Link} from "react-router"
 import RaisedButton from "material-ui/RaisedButton";
 
+const bootstrapTableOptions = {
+  onRowClick: (item) => {browserHistory.push(`/admin/vehicle-model/${item.id}`)},
+  handleConfirmDeleteRow: (next, dropRowKeys) => {
+    dropRowKeys.forEach((id) => {this.props.deleteItem(id);});
+    next();
+  },
+  defaultSortName: "id",
+  defaultSortOrder: 'asc'
+};
+const selectRow = {mode: 'checkbox', clickToSelect: true};
+
 export default class VehicleModels extends React.Component {
   static propTypes = {
     getList: React.PropTypes.func.isRequired,
@@ -33,36 +44,46 @@ export default class VehicleModels extends React.Component {
         (<span>
         <h3>{loading}</h3>
 
-      <RaisedButton secondary={true} label="Add" onClick={e => browserHistory.push(`/admin/vehicle-model/new`)}/>
+          <RaisedButton secondary={true} label="Add" onClick={e => browserHistory.push(`/admin/vehicle-model/new`)}/>
+            <BootstrapTable data={rows}
+                            options={bootstrapTableOptions}
+                            selectRow={selectRow}
+                            deleteRow
+                            hover={true}
+                            search={true}>
+              <TableHeaderColumn dataField="id" isKey={true} dataAlign="center" dataSort={true}>Vehicle Model ID</TableHeaderColumn>
+              <TableHeaderColumn dataField="modelCode" dataSort={true}>Code</TableHeaderColumn>
+              <TableHeaderColumn dataField="title" dataSort={true}>Name</TableHeaderColumn>
+            </BootstrapTable>
 
-      <Table rowHeight={50} rowsCount={rows.length} width={1000} maxHeight={500} headerHeight={50}>
-        <Column
-          header={<Cell>#</Cell>}
-          cell={({rowIndex, ...props}) => (<Cell {...props}>{rowIndex+1}.</Cell>)}
-          width={50}
-        />
-        <Column
-          header={<Cell>Id</Cell>}
-          cell={({rowIndex, ...props}) => (<Cell {...props}>{rows[rowIndex].modelCode}</Cell>)}
-          width={200}
-        />
-        <Column
-          header={<Cell>Name</Cell>}
-          cell={({rowIndex, ...props}) => (<Cell {...props}>{rows[rowIndex].title}</Cell>
-          )}
-          width={200}
-        />
-        <Column
-          header={<Cell>Actions</Cell>}
-          cell={({rowIndex, ...props}) => (
-            <Cell {...props}>
-              <RaisedButton label="Show" onClick={e => browserHistory.push(`/admin/vehicle-model/${rows[rowIndex].id}`)}/>
-              <RaisedButton secondary={true} label="Delete" onClick={e => this.props.deleteItem(rows[rowIndex].id)}/>
-            </Cell>
-          )}
-          width={200}
-        />
-      </Table>
+      {/*<Table rowHeight={50} rowsCount={rows.length} width={1000} maxHeight={500} headerHeight={50}>*/}
+        {/*<Column*/}
+          {/*header={<Cell>#</Cell>}*/}
+          {/*cell={({rowIndex, ...props}) => (<Cell {...props}>{rowIndex+1}.</Cell>)}*/}
+          {/*width={50}*/}
+        {/*/>*/}
+        {/*<Column*/}
+          {/*header={<Cell>Id</Cell>}*/}
+          {/*cell={({rowIndex, ...props}) => (<Cell {...props}>{rows[rowIndex].modelCode}</Cell>)}*/}
+          {/*width={200}*/}
+        {/*/>*/}
+        {/*<Column*/}
+          {/*header={<Cell>Name</Cell>}*/}
+          {/*cell={({rowIndex, ...props}) => (<Cell {...props}>{rows[rowIndex].title}</Cell>*/}
+          {/*)}*/}
+          {/*width={200}*/}
+        {/*/>*/}
+        {/*<Column*/}
+          {/*header={<Cell>Actions</Cell>}*/}
+          {/*cell={({rowIndex, ...props}) => (*/}
+            {/*<Cell {...props}>*/}
+              {/*<RaisedButton label="Show" onClick={e => browserHistory.push(`/admin/vehicle-model/${rows[rowIndex].id}`)}/>*/}
+              {/*<RaisedButton secondary={true} label="Delete" onClick={e => this.props.deleteItem(rows[rowIndex].id)}/>*/}
+            {/*</Cell>*/}
+          {/*)}*/}
+          {/*width={200}*/}
+        {/*/>*/}
+      {/*</Table>*/}
       </span>
         ): this.props.children}
     </div>)
