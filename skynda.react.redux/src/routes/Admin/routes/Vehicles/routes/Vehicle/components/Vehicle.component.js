@@ -16,7 +16,7 @@ import {
   BootstrapTable,
   TableHeaderColumn,
   selectFeaturesRenderer
-} from "./Vehicle.redux-form.renderers";
+} from "../../../../../components/FormRenderers/Vehicle.redux-form.renderers";
 import {onHandleSubmit} from "../actions/Vehicle.redux-form.actions";
 import {renderCheckbox, renderSelectField} from "../../../../../components/FormRenderers";
 import RefreshIndicator from 'material-ui/RefreshIndicator';
