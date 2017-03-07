@@ -1,27 +1,31 @@
 import React from 'react';
-import {Field, FieldArray, change, reduxForm} from 'redux-form';
+import {Field, FieldArray, change} from 'redux-form';
 import {toastr} from "react-redux-toastr";
 import {Card, CardActions, CardTitle, CardText} from 'material-ui/Card';
+import RefreshIndicator from 'material-ui/RefreshIndicator';
+
 import {Row, Col, Modal} from "react-bootstrap";
 import _ from "underscore";
+import {TableHeaderColumn} from "react-bootstrap-table";
+
+import "./Vehicle.component.scss";
 import {ROUTE_PARAMS, FORM_MODE, FORMS} from "../../../constants/Vehicle.constant";
 import {
-  renderTextField,
   descriptionRenderer,
-  renderFeatures,
   ImagesCardField,
+  selectFeaturesRenderer,
+  renderFeatures
+} from "./FormRenderers";
+import {
+  renderTextField,
   selectRenderer,
   ErrorBlockRenderer,
   ColorRenderer,
-  BootstrapTable,
-  TableHeaderColumn,
-  selectFeaturesRenderer
-} from "../../../../../components/FormRenderers/Vehicle.redux-form.renderers";
+  renderCheckbox
+} from "../../../../../components/FormRenderers";
+import BootstrapTable from "./Vehicle.bootstrap-table.component";
 import {onHandleSubmit} from "../actions/Vehicle.redux-form.actions";
-import {renderCheckbox, renderSelectField} from "../../../../../components/FormRenderers";
-import RefreshIndicator from 'material-ui/RefreshIndicator';
 import fromSpringToReduxFormError from "../../../../../../../utils/formUtils/fromSpringToReduxFormError";
-import "./Vehicle.component.scss";
 import {ROUTE_PARAMS as VEHICLE_MODEL_ROUTE_PARAMS} from "../../../../VehicleModels/constants/VehicleModel.constant";
 import {ROUTE_PARAMS as VEHICLE_REPORT_ROUTE_PARAMS} from "../../../../VehicleReports/constants/VehicleReport.constant";
 import {ROUTE_PARAMS as VEHICLE_REVIEW_ROUTE_PARAMS} from "../../../../VehicleReviews/constants/VehicleReview.constant";
@@ -331,22 +335,6 @@ class Vehicle extends React.Component {
 
                     <SubmitCardActions disabled={this.props.submitting}/>
                   </Card>
-                  {/*UNCOMMENTED FOR MVP*/}
-                  {/*<Card>*/}
-                  {/*<CardTitle title={<h3>Performance</h3>} />*/}
-                  {/*<CardText>*/}
-                  {/*<Field name="compressionRatio" label="Compression Ratio" component={renderTextField} errors={errors}/>*/}
-                  {/*<Field name="compressionType" label="Compression Type" component={renderTextField} errors={errors}/>*/}
-                  {/*<Field name="configuration" label="Configuration" component={renderTextField} errors={errors}/>*/}
-                  {/*<Field name="cylinders" label="Cylinders" component={renderTextField} errors={errors}/>*/}
-                  {/*<Field name="displacement" label="Displacement" component={renderTextField} errors={errors}/>*/}
-                  {/*<Field name="size" label="Size" component={renderTextField} type="number" errors={errors}/>*/}
-                  {/*<Field name="torque" label="Torque" component={renderTextField} type="number" errors={errors}/>*/}
-                  {/*<Field name="totalValves" label="Total Valves" component={renderTextField} type="number" errors={errors}/>*/}
-                  {/*</CardText>*/}
-
-                  {/*<SubmitCardActions disabled={this.props.submitting} />*/}
-                  {/*</Card>*/}
                 </Col>
                 <Col md={6} xs={12}>
                   <ImagesCardField onImageFileUpload={this.props.onImageFileUpload}
@@ -451,8 +439,6 @@ class Vehicle extends React.Component {
   }
 }
 
-export default reduxForm({form: FORMS.VEHICLE_FORM})(Vehicle);
-
 Vehicle.propTypes = {
   isFetching: React.PropTypes.bool.isRequired,
   load: React.PropTypes.func.isRequired,
@@ -520,3 +506,5 @@ Vehicle.propTypes = {
     additionalInfo: React.PropTypes.string
   })
 };
+
+export default Vehicle;

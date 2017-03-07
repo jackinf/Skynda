@@ -12,8 +12,11 @@ import {getList as getVehicleReportsList, deleteItem as deleteReport} from "../a
 import {getList as getVehicleReviewsList, deleteItem as deleteReview} from "../actions/Vehicle.Reviews.actions";
 import {getList as getFeaturesList, deleteItem as deleteFeature} from "../actions/Vehicle.Features.actions";
 import {getList as getVehicles} from "../../../actions"
-import {REDUCER_KEYS} from "../../../constants/Vehicle.constant";
+import {REDUCER_KEYS, FORMS} from "../../../constants/Vehicle.constant";
 import VehicleComponent from "../components/Vehicle.component";
+import {reduxForm} from "redux-form";
+
+const VehicleComponentForm = reduxForm({form: FORMS.VEHICLE_FORM})(VehicleComponent);
 
 const mapDispatchToProps = {
   load,
@@ -51,4 +54,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(VehicleComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(VehicleComponentForm);
