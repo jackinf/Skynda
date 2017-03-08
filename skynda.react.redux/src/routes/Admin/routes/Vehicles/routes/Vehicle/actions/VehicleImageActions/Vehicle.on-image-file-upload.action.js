@@ -1,0 +1,20 @@
+/**
+ * Created by zekar on 3/8/2017.
+ */
+import {FORMS} from "../../../../constants/Vehicles.constant";
+import {arrayPush} from 'redux-form';
+import {imageUtil} from "utils/allUtils";
+
+// Ideas to crop image in client
+// 1. https://gist.github.com/DominicTobias/b1fb501349893922ec7f
+// 2. https://gist.github.com/DominicTobias/6aa43d03bc12232ef723
+
+export default function onImageFileUpload(acceptedFiles) {
+  return (dispatch, getState) => {
+    acceptedFiles.forEach(file => {
+      imageUtil.imageFileToBase64(file, (base64File) => {
+        dispatch(arrayPush(FORMS.VEHICLE_FORM, `images`, {image: {base64File}}));
+      });
+    });
+  }
+}

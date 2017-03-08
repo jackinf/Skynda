@@ -1,4 +1,4 @@
-import {ACTIONS} from "../../../constants/Vehicle.constant";
+import {ACTIONS} from "../../../constants/Vehicles.constant";
 
 export const setFeaturesList = (state = {isFetching: false, items: []}, action) => {
   switch (action.type) {

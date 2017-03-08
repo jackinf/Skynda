@@ -9,7 +9,7 @@ import _ from "underscore";
 import {TableHeaderColumn} from "react-bootstrap-table";
 
 import "./Vehicle.component.scss";
-import {ROUTE_PARAMS, FORM_MODE, FORMS} from "../../../constants/Vehicle.constant";
+import {ROUTE_PARAMS, FORM_MODE, FORMS} from "../../../constants/Vehicles.constant";
 import {
   descriptionRenderer,
   ImagesCardField,

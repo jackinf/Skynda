@@ -1,5 +1,5 @@
-import getList from "./Vehicles.getList.action";
-import deleteItem from "./Vehicles.deleteItem.action";
+import getList from "./Vehicles.get-list.actions";
+import deleteItem from "./Vehicles.delete-item.actions";
 
 export {
   getList,

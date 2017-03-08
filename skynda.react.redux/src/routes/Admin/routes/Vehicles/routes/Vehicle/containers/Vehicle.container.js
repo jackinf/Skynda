@@ -1,18 +1,29 @@
 import {connect} from "react-redux";
 import {
-  onMainImageUpload,
-  onMainImageRemove,
-  onMainImageCropComplete,
-  onImageFileUpload,
+  onFaultFileUpload,
+  onFaultRemove,
   onImageFileRemove,
-} from "../actions/Vehicle.image.actions";
-import {load, clear, onHandleSubmitFinished} from "../reducers/Vehicle.reducer";
-import {getList as getVehicleModelsList} from "../../../../VehicleModels/reducers/VehicleModels.reducer";
-import {getList as getVehicleReportsList, deleteItem as deleteReport} from "../actions/Vehicle.Reports.actions";
-import {getList as getVehicleReviewsList, deleteItem as deleteReview} from "../actions/Vehicle.Reviews.actions";
-import {getList as getFeaturesList, deleteItem as deleteFeature} from "../actions/Vehicle.Features.actions";
+  onImageFileUpload,
+  onMainImageCropComplete,
+  onMainImageRemove,
+  onMainImageUpload,
+
+  vehicleFeaturesDeleteItem as deleteFeature,
+  vehicleFeaturesGetList as getFeaturesList,
+  vehicleLoad as load,
+  vehicleReportsDeleteItem as deleteReport,
+  vehicleReportsGetList as getVehicleReportsList,
+  vehicleReviewDeleteItem as deleteReview,
+  vehicleReviewsGetList as getVehicleReviewsList,
+  vehicleSubmit
+} from "../actions";
+// import {load, clear, onHandleSubmitFinished} from "../reducers/Vehicle.reducer";
+import {getList as getVehicleModelsList} from "../../../../VehicleModels/actions";
+// import {getList as getVehicleReportsList, deleteItem as deleteReport} from "../actions/Vehicle.reports.get-list.action";
+// import {getList as getVehicleReviewsList, deleteItem as deleteReview} from "../actions/Vehicle.reviews.get-list.action";
+// import {getList as getFeaturesList, deleteItem as deleteFeature} from "../actions/Vehicle.features.get-list.action";
 import {getList as getVehicles} from "../../../actions"
-import {REDUCER_KEYS, FORMS} from "../../../constants/Vehicle.constant";
+import {REDUCER_KEYS, FORMS} from "../../../constants/Vehicles.constant";
 import VehicleComponent from "../components/Vehicle.component";
 import {reduxForm} from "redux-form";
 
@@ -39,7 +50,8 @@ const mapDispatchToProps = {
 
 const mapStateToProps = (state) => {
   let formInfo = state[REDUCER_KEYS.VEHICLE_DATA];
-  let classificators = state.classificators;
+  let classificators = state.classificators;  // TODO: reducer key
+
   return {
     id: formInfo.id,
     isFetching: formInfo.isFetching,

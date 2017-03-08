@@ -2,10 +2,9 @@
  * Created by jevgenir on 10/26/2016.
  */
 import React from "react";
-import {Table, Column, Cell} from 'fixed-data-table';
-import 'fixed-data-table/dist/fixed-data-table.css';
-import {browserHistory, Link} from "react-router"
+import {browserHistory} from "react-router"
 import RaisedButton from "material-ui/RaisedButton";
+import {BootstrapTable} from "react-bootstrap-table";
 
 const tableOptions = {
   onRowClick: (item) => {browserHistory.push(`/admin/vehicle-model/${item.id}`)},

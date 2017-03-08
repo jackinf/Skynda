@@ -1,7 +1,8 @@
 import {injectReducer} from '../../../../../../store/reducers';
-import {ROUTE_PARAMS, REDUCER_KEYS} from "./../../constants/Vehicle.constant";
+import {ROUTE_PARAMS, REDUCER_KEYS} from "../../constants/Vehicles.constant";
 import {REDUCER_KEYS as REPORT_REDUCER_KEYS} from "../../../VehicleReports/constants/VehicleReport.constant";
 import {REDUCER_KEYS as REVIEW_REDUCER_KEYS} from "../../../VehicleReviews/constants/VehicleReview.constant";
+import {VEHICLE_MODEL_REDUCER_KEY} from "../../../VehicleModels/constants/VehicleModel.constant";
 import {setVehicleReportData, setFormMode as setFormModeReport} from "../../../VehicleReports/reducers";
 import {setVehicleReviewData, setFormMode as setFormModeReview} from "../../../VehicleReviews/reducers";
 import {setVehicleReportsList} from "./reducers/Vehicle.Reports.reducer";
@@ -15,8 +16,8 @@ export default (store) => ({
     NProgress.start();
     require.ensure([], (require) => {
       injectReducer(store, {key: REDUCER_KEYS.VEHICLE_DATA, reducer: require("./reducers/Vehicle.reducer.js").default});
-      injectReducer(store, {key: "classificators", reducer: require("./../../../Classifiers/Classifiers.module").default});
-      injectReducer(store, {key: "formInfo", reducer: require("./../../../VehicleModels/routes/VehicleModel/reducers/VehicleModel.reducer.js").default});
+      injectReducer(store, {key: "classificators", reducer: require("./../../../Classifiers/Classifiers.module").default}); // TODO: Use constant
+      injectReducer(store, {key: VEHICLE_MODEL_REDUCER_KEY, reducer: require("./../../../VehicleModels/routes/VehicleModel/reducers/VehicleModel.reducer.js").default});
 
       injectReducer(store, {key: REDUCER_KEYS.VEHICLE_MODELS_DATA, reducer: require("./../../../VehicleModels/reducers/VehicleModels.reducer.js").default});
 

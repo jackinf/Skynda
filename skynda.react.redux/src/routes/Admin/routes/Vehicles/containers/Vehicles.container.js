@@ -1,7 +1,7 @@
 import {connect} from "react-redux";
 import {getList, deleteItem} from "../actions";
-import VehiclesComponent from "../components/Vehicle.list.component";
-import {REDUCER_KEYS} from "../constants/Vehicle.constant";
+import VehiclesComponent from "../components/Vehicles.component";
+import {REDUCER_KEYS} from "../constants/Vehicles.constant";
 
 const mapDispatchToProps = {
   getList,

@@ -1,8 +1,8 @@
 import {setVehicleReviewsList} from "./index";
-import {REDUCER_KEYS} from "../../../constants/Vehicle.constant";
+import {REDUCER_KEYS} from "../../../constants/Vehicles.constant";
 import {VehicleReviewService} from "../../../../../../../webServices"
 
-export function getList(vehicleId) {
+export default function getList(vehicleId) {
   return (dispatch) => {
     if (!vehicleId || vehicleId == "new") {
       return null;
@@ -19,22 +19,4 @@ export function getList(vehicleId) {
     });
   };
 }
-
-export function deleteItem(id) {
-  return (dispatch, getState) => {
-    let items = getState()[REDUCER_KEYS.VEHICLE_REVIEWS_DATA_LIST].items;
-    const promise = VehicleReviewService.deleteItem(id);
-    promise.then(resp => {
-      items = items.filter(c => c.id !== id);
-      dispatch(setVehicleReviewsList({isFetching: false, items: items}));
-    }).catch(err => {
-      throw err;
-    });
-  };
-}
-
-export default {
-  getList,
-  deleteItem
-};
 

@@ -5,17 +5,17 @@
 import _ from "underscore";
 import {browserHistory} from "react-router";
 import {change} from "redux-form";
-import {FORM_MODE, VEHICLE_MODEL_FORM, VEHICLE_MODEL_REDUCER_KEY} from "../../../constants/VehicleModel.constant";
+import {FORM_MODE, FORMS, VEHICLE_MODEL_FORM, VEHICLE_MODEL_REDUCER_KEY} from "../../../constants/Vehicles.constant";
 import {VehicleModelService} from "../../../../../../../webServices/VehicleModelServices";
 import {toastr} from "react-redux-toastr";
 
-export const ADD_REQUEST = 'VEHICLE_MODEL/ADD_REQUEST';
-export const ADD_SUCCESS = 'VEHICLE_MODEL/ADD_SUCCESS';
-export const ADD_FAILURE = 'VEHICLE_MODEL/ADD_FAILURE';
+export const ADD_REQUEST = 'VEHICLE/ADD_REQUEST';
+export const ADD_SUCCESS = 'VEHICLE/ADD_SUCCESS';
+export const ADD_FAILURE = 'VEHICLE/ADD_FAILURE';
 
-export const EDIT_REQUEST = 'VEHICLE_MODEL/EDIT_REQUEST';
-export const EDIT_SUCCESS = 'VEHICLE_MODEL/EDIT_SUCCESS';
-export const EDIT_FAILURE = 'VEHICLE_MODEL/EDIT_FAILURE';
+export const EDIT_REQUEST = 'VEHICLE/EDIT_REQUEST';
+export const EDIT_SUCCESS = 'VEHICLE/EDIT_SUCCESS';
+export const EDIT_FAILURE = 'VEHICLE/EDIT_FAILURE';
 
 function addRequest() {
   return {
@@ -106,7 +106,7 @@ function submitEdit(item, onSubmitCustom) {
 export default function submit(onSubmitCustom) {
   return (dispatch, getState) => {
     const state = getState();
-    const formValues = state.form[VEHICLE_MODEL_FORM].values;
+    const formValues = state.form[FORMS.VEHICLE_FORM].values;
     const formMode = state[VEHICLE_MODEL_REDUCER_KEY].formMode;
 
     if (formMode === FORM_MODE.ADDING_MODEL) {
