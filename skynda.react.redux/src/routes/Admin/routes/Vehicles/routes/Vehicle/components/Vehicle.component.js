@@ -85,26 +85,28 @@ class Vehicle extends React.Component {
    * @param name - field name, like transmission.id, or firstname
    * @param chosenOption - object {label: string (visible text), value: int (ID)}
    */
+    // TODO: cure this cancer :O
   onSelectItemChange = (name, chosenOption) => {
     const hackName = name.replace(".id", "");
     if (chosenOption.value !== chosenOption.label) {
       this.props.dispatch(change(FORMS.VEHICLE_FORM, hackName, {id: chosenOption.value}));
     } else if (hackName === "model") {
-      this.openVehicleModelDialog(null);
+      // this.openVehicleModelDialog(null);
+      this.setState({isVehicleModelDialogOpen: true});
     }
   };
 
-  openVehicleModelDialog = (e) => {
-    if (e && e.hasOwnProperty("preventDefault") && _.isFunction(e.preventDefault))
-      e.preventDefault(); // stop event propagation to avoid form submission.
-    this.setState({isVehicleModelDialogOpen: true});
-  };
+  // openVehicleModelDialog = (e) => {
+  //   if (e && e.hasOwnProperty("preventDefault") && _.isFunction(e.preventDefault))
+  //     e.preventDefault(); // stop event propagation to avoid form submission.
+  // };
 
   /**
    *
    * @param e - event, if exists. E.g. button click event.
    * @param value - vehicle model id
    */
+    // TODO: eraldi failisse - VehicleSublistActions/Vehicle.close-vehicle-model-dialog.action.js
   closeVehicleModelDialog = (e, value) => {
     if (e && e.hasOwnProperty("preventDefault") && _.isFunction(e.preventDefault))
       e.preventDefault(); // stop event propagation to avoid form submission.
@@ -118,6 +120,7 @@ class Vehicle extends React.Component {
     }
   };
 
+  // TODO: eraldi failisse - VehicleSublistActions/Vehicle.open-vehicle-report-dialog.action.js
   openVehicleReportDialog = (e) => {
     if (e && e.hasOwnProperty("preventDefault") && _.isFunction(e.preventDefault))
       e.preventDefault(); // stop event propagation to avoid form submission.
@@ -126,6 +129,8 @@ class Vehicle extends React.Component {
     }
     this.setState({isVehicleReportDialogOpen: true});
   };
+
+  // TODO: eraldi failisse - VehicleSublistActions/Vehicle.close-vehicle-report-dialog.action.js
   closeVehicleReportDialog = (e, value) => {
     if (e && e.hasOwnProperty("preventDefault") && _.isFunction(e.preventDefault))
       e.preventDefault(); // stop event propagation to avoid form submission.
@@ -133,6 +138,8 @@ class Vehicle extends React.Component {
     this.setState({isVehicleReportDialogOpen: false});
     this.props.getVehicleReportsList(value);
   };
+
+  // TODO: eraldi failisse - VehicleSublistActions/Vehicle.delete-report-item.action.js
   deleteReportItem = (next, dropRowKeys) => {
     const dropRowKeysStr = dropRowKeys.join(',');
     const functionDeleteSingleReportItem = this.props.deleteSingleReportItem;
@@ -146,7 +153,7 @@ class Vehicle extends React.Component {
     }
   };
 
-
+  // TODO: eraldi failisse - VehicleSublistActions/Vehicle.open-vehicle-review-dialog.action.js
   openVehicleReviewDialog = (e) => {
     if (e && e.hasOwnProperty("preventDefault") && _.isFunction(e.preventDefault))
       e.preventDefault(); // stop event propagation to avoid form submission.
@@ -155,6 +162,8 @@ class Vehicle extends React.Component {
     }
     this.setState({isVehicleReviewDialogOpen: true});
   };
+
+  // TODO: eraldi failisse - VehicleSublistActions/Vehicle.close-vehicle-review-dialog.action.js
   closeVehicleReviewDialog = (e, value) => {
     if (e && e.hasOwnProperty("preventDefault") && _.isFunction(e.preventDefault))
       e.preventDefault(); // stop event propagation to avoid form submission.
@@ -162,6 +171,8 @@ class Vehicle extends React.Component {
     this.setState({isVehicleReviewDialogOpen: false});
     this.props.getVehicleReviewsList(value);
   };
+
+  // TODO: eraldi failisse - VehicleSublistActions/Vehicle.delete-review-item.action.js
   deleteReviewItem = (next, dropRowKeys) => {
     const dropRowKeysStr = dropRowKeys.join(',');
     const deleteSingleReview = this.props.deleteSingleReview;
@@ -207,7 +218,7 @@ class Vehicle extends React.Component {
 
     // Validation errors
     const springErrors = this.props.errors;
-    const errors = fromSpringToReduxFormError(springErrors);
+    const errors = fromSpringToReduxFormError(springErrors);  // TODO: LOL, spring, LOL. there is only one spring - time of the year... so fuck you, java.
     const bootstrapTableOptionsReport = {
       onRowClick: this.openVehicleReportDialog,
       onAdd: this.openVehicleReportDialog,
@@ -246,6 +257,7 @@ class Vehicle extends React.Component {
 
               <Row>
                 <Col md={6} xs={12}>
+                  {/* TODO: See panna Vehicle.main-card.component.js */}
                   <Card>
                     <CropToolCard
                       name="mainImage"
@@ -342,23 +354,22 @@ class Vehicle extends React.Component {
                                    errors={errors}>
                     {!isNaN(this.state.id) ?
                       <SubmitCardActions disabled={this.props.submitting}/>
-                      :(
-                      <div>
-                        <span className="color-red">Please save vehicle before saving Images</span>
-                        <SubmitCardActions disabled={true}/>
-                      </div>
-                        )
+                      :(<div>
+                          <span className="color-red">Please save vehicle before saving Images</span>
+                          <SubmitCardActions disabled={true}/>
+                        </div>)
                     }
-
                   </ImagesCardField>
                 </Col>
               </Row>
             </form>
 
             <br/>
+
             {!isNaN(this.state.id)
               ?
               <div>
+                {/* TODO: See panna Vehicle.reports-card.component.js */}
                 <Card>
                   <CardTitle title="Vehicle reports"/>
                   <CardText>
@@ -394,6 +405,7 @@ class Vehicle extends React.Component {
                 </Card>
 
                 <br/>
+                {/* TODO: See panna Vehicle.reviews-card.component.js */}
                 <Card>
                   <CardTitle title="Vehicle reviews"/>
                   <CardText>
@@ -431,8 +443,6 @@ class Vehicle extends React.Component {
               </div>
             : ""
             }
-
-
           </div>)}
       </div>
     )
