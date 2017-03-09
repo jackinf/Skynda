@@ -71,12 +71,15 @@ const loadEditForm = (id) => async (dispatch) => {
  */
 export default function load(id) {
   return (dispatch) => {
+    console.log("start loading");
     dispatch(destroy(FORMS.VEHICLE_FORM));
 
     const formMode = id === ROUTE_PARAMS.values.NEW
       ? FORM_MODE.ADDING
       : !isNaN(parseInt(id))
         ? FORM_MODE.UPDATING : FORM_MODE.NONE;
+
+    console.log("load formMdoe", formMode);
 
     if (formMode === FORM_MODE.ADDING) {
       dispatch(loadCreateSuccess());

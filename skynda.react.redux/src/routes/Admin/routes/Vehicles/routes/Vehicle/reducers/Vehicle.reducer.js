@@ -22,7 +22,7 @@ import {
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
-  [CLEAR_VEHICLE_DATA]: (state, action) => ({...state, item: action.item}),
+  [CLEAR_VEHICLE_DATA]: (state, action) => ({...state, isFetching: action.isFetching, item: action.item}),
 
   [LOAD_CREATE_SUCCESS]: (state, action) => ({...state, type: action.type, isFetching: action.isFetching, errors: action.errors, formMode: action.formMode}),
   [LOAD_EDIT_FAILURE]: (state, action) => ({...state, type: action.type, isFetching: action.isFetching, errors: action.errors, formMode: action.formMode}),
@@ -39,7 +39,7 @@ const ACTION_HANDLERS = {
 
 };
 
-const initialState = {isFetching: false, item: [], errors: []};
+const initialState = {isFetching: false, item: {}, errors: []};
 // ------------------------------------
 // Reducer
 // ------------------------------------

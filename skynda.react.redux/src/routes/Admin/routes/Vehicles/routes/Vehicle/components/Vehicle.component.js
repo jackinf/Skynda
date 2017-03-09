@@ -3,18 +3,15 @@ import {Field, FieldArray, change} from 'redux-form';
 import {toastr} from "react-redux-toastr";
 import {Card, CardActions, CardTitle, CardText} from 'material-ui/Card';
 import RefreshIndicator from 'material-ui/RefreshIndicator';
-
 import {Row, Col, Modal, Button} from "react-bootstrap";
 import _ from "underscore";
 import {TableHeaderColumn} from "react-bootstrap-table";
-
 import "./Vehicle.component.scss";
 import {ROUTE_PARAMS, FORM_MODE, FORMS} from "../../../constants/Vehicles.constant";
 import {
   descriptionRenderer,
   ImagesCardField,
-  selectFeaturesRenderer,
-  renderFeatures
+  selectFeaturesRenderer
 } from "./FormRenderers";
 import {
   renderTextField,
@@ -191,16 +188,16 @@ class Vehicle extends React.Component {
 
 
   render() {
-    const vehicleReports = !this.props.vehicleReports.isFetching
+    const vehicleReports = this.props.vehicleReports && !this.props.vehicleReports.isFetching
       ? this.props.vehicleReports.items : [];
-    const vehicleReviews = !this.props.vehicleReviews.isFetching
+    const vehicleReviews = this.props.vehicleReviews && !this.props.vehicleReviews.isFetching
       ? this.props.vehicleReviews.items : [];
-    const featuresList = !this.props.featuresList.isFetching
+    const featuresList =  this.props.featuresList && !this.props.featuresList.isFetching
       ? this.props.featuresList.items : [];
-    const vehicleModels = !this.props.vehicleModels.isFetching
+    const vehicleModels = this.props.vehicleModels && !this.props.vehicleModels.isFetching
       ? this.props.vehicleModels.items.map(item => ({label: item.title + " " + item.modelCode, value: item.id}))
       : [];
-    const colors = !this.props.colors.isFetching
+    const colors = this.props.colors && !this.props.colors.isFetching
       ? this.props.colors.items.map(item => ({label: item.name, value: item.id}))
       : [];
 

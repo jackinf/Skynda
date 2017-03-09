@@ -44,6 +44,8 @@ const mapStateToProps = (state) => {
   let formInfo = state[REDUCER_KEYS.VEHICLE_DATA];
   let classificators = state.classificators;  // TODO: reducer key
 
+  console.log("formInfo data", formInfo);
+
   return {
     id: formInfo.id,
     isFetching: formInfo.isFetching,
