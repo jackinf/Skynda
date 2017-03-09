@@ -5,8 +5,8 @@
 import _ from "underscore";
 import {browserHistory} from "react-router";
 import {change} from "redux-form";
-import {FORM_MODE, FORMS, VEHICLE_MODEL_FORM, VEHICLE_MODEL_REDUCER_KEY} from "../../../constants/Vehicles.constant";
-import {VehicleModelService} from "../../../../../../../webServices/VehicleModelServices";
+import {FORM_MODE, FORMS} from "../../../constants/Vehicles.constant";
+import {VehicleService} from "../../../../../../../webServices/VehicleServices";
 import {toastr} from "react-redux-toastr";
 
 export const ADD_REQUEST = 'VEHICLE/ADD_REQUEST';
@@ -20,7 +20,8 @@ export const EDIT_FAILURE = 'VEHICLE/EDIT_FAILURE';
 function addRequest() {
   return {
     type: ADD_REQUEST,
-    isFetching: true
+    isFetching: true,
+    formMode: FORM_MODE.ADDING
   }
 }
 
@@ -28,14 +29,15 @@ function addSuccess() {
   return {
     type: ADD_SUCCESS,
     isFetching: false,
-    formMode: FORM_MODE.UPDATING_MODEL
+    formMode: FORM_MODE.UPDATING
   }
 }
 
-function addError(errors) {
+function addFailure(errors) {
   return {
     type: ADD_FAILURE,
     isFetching: false,
+    formMode: FORM_MODE.ADDING,
     errors
   }
 }
@@ -44,7 +46,7 @@ function editRequest() {
   return {
     type: EDIT_REQUEST,
     isFetching: true,
-    formMode: FORM_MODE.UPDATING_MODEL
+    formMode: FORM_MODE.UPDATING
   }
 }
 
@@ -52,16 +54,16 @@ function editSuccess() {
   return {
     type: EDIT_SUCCESS,
     isFetching: false,
-    formMode: FORM_MODE.UPDATING_MODEL
+    formMode: FORM_MODE.UPDATING
   }
 }
 
-function editError(errors) {
+function editFailure(errors) {
   return {
     type: EDIT_FAILURE,
     isFetching: false,
-    errors,
-    formMode: FORM_MODE.UPDATING_MODEL
+    formMode: FORM_MODE.UPDATING,
+    errors
   }
 }
 
@@ -69,17 +71,17 @@ function submitCreate(item, onSubmitCustom) {
   return async (dispatch) => {
     dispatch(addRequest());
     try {
-      const resp = await VehicleModelService.createItem(item);
+      const resp = await VehicleService.createItem(item);
       dispatch(addSuccess());
       if (_.isFunction(onSubmitCustom)) {
         onSubmitCustom(null, resp.id);
       } else {
-        dispatch(change("vehicleModelForm", "id", resp.id));
-        browserHistory.replace("/admin/vehicle-model/" + resp.id);
+        dispatch(change(FORMS.VEHICLE_FORM, "id", resp.id));
+        browserHistory.replace("/admin/vehicle/" + resp.id);
         toastr.success("Success", "Create successful");
       }
     } catch (err) {
-      dispatch(addError(err));
+      dispatch(addFailure(err));
       toastr.error("Oh no!", "Create failed");
     }
   }
@@ -89,15 +91,16 @@ function submitEdit(item, onSubmitCustom) {
   return async (dispatch) => {
     dispatch(editRequest());
     try {
-      const resp = await VehicleModelService.updateItem(item);
+      const resp = await VehicleService.updateItem(item);
       dispatch(editSuccess());
       if (_.isFunction(onSubmitCustom)) {
         onSubmitCustom(null, resp.id);
       } else {
+
         toastr.success("Success", "Update successful");
       }
     } catch (err) {
-      dispatch(editError(err));
+      dispatch(editFailure(err));
       toastr.error("Oh no!", "Update failed");
     }
   }
@@ -107,12 +110,12 @@ export default function submit(onSubmitCustom) {
   return (dispatch, getState) => {
     const state = getState();
     const formValues = state.form[FORMS.VEHICLE_FORM].values;
-    const formMode = state[VEHICLE_MODEL_REDUCER_KEY].formMode;
+    const formMode = state[FORMS.VEHICLE_FORM].formMode;
 
-    if (formMode === FORM_MODE.ADDING_MODEL) {
+    if (formMode === FORM_MODE.ADDING) {
       dispatch(submitCreate(formValues, onSubmitCustom))
     }
-    else if (formMode === FORM_MODE.UPDATING_MODEL) {
+    else if (formMode === FORM_MODE.UPDATING) {
       dispatch(submitEdit(formValues, onSubmitCustom));
     }
   }

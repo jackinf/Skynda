@@ -1,4 +1,4 @@
-const CLEAR_VEHICLE_DATA = "VEHICLE/CLEAR_VEHICLE_DATA";
+export const CLEAR_VEHICLE_DATA = "VEHICLE/CLEAR_VEHICLE_DATA";
 
 function clearVehicleData() {
   return {
