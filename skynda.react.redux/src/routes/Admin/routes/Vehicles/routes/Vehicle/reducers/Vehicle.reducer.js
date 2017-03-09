@@ -2,7 +2,7 @@ import {browserHistory} from "react-router";
 import {destroy} from "redux-form";
 import {toastr} from 'react-redux-toastr';
 import {VehicleService} from "../../../../../../../webServices"
-import {ACTIONS, FORM_MODE, FORMS, ROUTE_PARAMS} from "../../../constants/Vehicle.constant";
+import {ACTIONS, FORM_MODE, FORMS, ROUTE_PARAMS} from "../../../constants/Vehicles.constant";
 import fromSpringToReduxFormError from "../../../../../../../utils/formUtils/fromSpringToReduxFormError";
 import _ from "underscore";
 // ------------------------------------

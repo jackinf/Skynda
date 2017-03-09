@@ -21,3 +21,6 @@ export const ROUTE_PARAMS = {
     NEW: "new"
   }
 };
+
+export const VEHICLE_MODEL_FORM = "vehicleModelForm";
+export const VEHICLE_MODEL_REDUCER_KEY = "vehicleModel";

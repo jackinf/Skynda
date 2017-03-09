@@ -18,7 +18,7 @@ export default (store) => ({
         injectReducer(store, {key: REDUCER_KEYS.VEHICLE_REVIEW_DATA, reducer: setVehicleReviewData});
         injectReducer(store, {key: REDUCER_KEYS.FORM_MODE_VEHICLE_REVIEW, reducer: setFormMode});
         injectReducer(store, {key: FORMS.DEFAULT_REDUX_FORM_KEY, reducer: formReducer});
-        injectReducer(store, {key: REDUCER_KEYS.VEHICLES_REVIEW, reducer: require("./../Vehicles/reducers/Vehicles.list.reducer.js").default});
+        injectReducer(store, {key: REDUCER_KEYS.VEHICLES_REVIEW, reducer: require("./../Vehicles/reducers/Vehicles.reducer.js").default});
         NProgress.done();
         cb(null, Container);
       }

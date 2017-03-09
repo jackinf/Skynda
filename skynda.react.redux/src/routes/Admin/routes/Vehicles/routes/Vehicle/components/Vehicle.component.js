@@ -1,31 +1,35 @@
 import React from 'react';
-import {Field, FieldArray, change, reduxForm} from 'redux-form';
+import {Field, FieldArray, change} from 'redux-form';
 import {toastr} from "react-redux-toastr";
 import {Card, CardActions, CardTitle, CardText} from 'material-ui/Card';
+import RefreshIndicator from 'material-ui/RefreshIndicator';
+
 import {Row, Col, Modal} from "react-bootstrap";
 import _ from "underscore";
-import {ROUTE_PARAMS, FORM_MODE, FORMS} from "../../../constants/Vehicle.constant";
+import {TableHeaderColumn} from "react-bootstrap-table";
+
+import "./Vehicle.component.scss";
+import {ROUTE_PARAMS, FORM_MODE, FORMS} from "../../../constants/Vehicles.constant";
+import {
+  descriptionRenderer,
+  ImagesCardField,
+  selectFeaturesRenderer,
+  renderFeatures
+} from "./FormRenderers";
 import {
   renderTextField,
-  descriptionRenderer,
-  renderFeatures,
-  ImagesCardField,
   selectRenderer,
   ErrorBlockRenderer,
   ColorRenderer,
-  BootstrapTable,
-  TableHeaderColumn,
-  selectFeaturesRenderer
-} from "./Vehicle.redux-form.renderers";
+  renderCheckbox
+} from "../../../../../components/FormRenderers";
+import BootstrapTable from "./Vehicle.bootstrap-table.component";
 import {onHandleSubmit} from "../actions/Vehicle.redux-form.actions";
-import {renderCheckbox, renderSelectField} from "../../../../../components/FormRenderers";
-import RefreshIndicator from 'material-ui/RefreshIndicator';
 import fromSpringToReduxFormError from "../../../../../../../utils/formUtils/fromSpringToReduxFormError";
-import "./Vehicle.component.scss";
 import {ROUTE_PARAMS as VEHICLE_MODEL_ROUTE_PARAMS} from "../../../../VehicleModels/constants/VehicleModel.constant";
 import {ROUTE_PARAMS as VEHICLE_REPORT_ROUTE_PARAMS} from "../../../../VehicleReports/constants/VehicleReport.constant";
 import {ROUTE_PARAMS as VEHICLE_REVIEW_ROUTE_PARAMS} from "../../../../VehicleReviews/constants/VehicleReview.constant";
-import VehicleModel from "../../../../VehicleModels/containers/VehicleModel.container";
+import VehicleModel from "../../../../VehicleModels/routes/VehicleModel/containers/VehicleModel.container";
 import VehicleReport from "../../../../VehicleReports/containers/VehicleReport.container";
 import VehicleReview from "../../../../VehicleReviews/containers/VehicleReview.container";
 import {CropToolCard} from "../../../../../../../components/ReduxForm/CropTool";
@@ -81,26 +85,28 @@ class Vehicle extends React.Component {
    * @param name - field name, like transmission.id, or firstname
    * @param chosenOption - object {label: string (visible text), value: int (ID)}
    */
+    // TODO: cure this cancer :O
   onSelectItemChange = (name, chosenOption) => {
     const hackName = name.replace(".id", "");
     if (chosenOption.value !== chosenOption.label) {
       this.props.dispatch(change(FORMS.VEHICLE_FORM, hackName, {id: chosenOption.value}));
     } else if (hackName === "model") {
-      this.openVehicleModelDialog(null);
+      // this.openVehicleModelDialog(null);
+      this.setState({isVehicleModelDialogOpen: true});
     }
   };
 
-  openVehicleModelDialog = (e) => {
-    if (e && e.hasOwnProperty("preventDefault") && _.isFunction(e.preventDefault))
-      e.preventDefault(); // stop event propagation to avoid form submission.
-    this.setState({isVehicleModelDialogOpen: true});
-  };
+  // openVehicleModelDialog = (e) => {
+  //   if (e && e.hasOwnProperty("preventDefault") && _.isFunction(e.preventDefault))
+  //     e.preventDefault(); // stop event propagation to avoid form submission.
+  // };
 
   /**
    *
    * @param e - event, if exists. E.g. button click event.
    * @param value - vehicle model id
    */
+    // TODO: eraldi failisse - VehicleSublistActions/Vehicle.close-vehicle-model-dialog.action.js
   closeVehicleModelDialog = (e, value) => {
     if (e && e.hasOwnProperty("preventDefault") && _.isFunction(e.preventDefault))
       e.preventDefault(); // stop event propagation to avoid form submission.
@@ -114,6 +120,7 @@ class Vehicle extends React.Component {
     }
   };
 
+  // TODO: eraldi failisse - VehicleSublistActions/Vehicle.open-vehicle-report-dialog.action.js
   openVehicleReportDialog = (e) => {
     if (e && e.hasOwnProperty("preventDefault") && _.isFunction(e.preventDefault))
       e.preventDefault(); // stop event propagation to avoid form submission.
@@ -122,6 +129,8 @@ class Vehicle extends React.Component {
     }
     this.setState({isVehicleReportDialogOpen: true});
   };
+
+  // TODO: eraldi failisse - VehicleSublistActions/Vehicle.close-vehicle-report-dialog.action.js
   closeVehicleReportDialog = (e, value) => {
     if (e && e.hasOwnProperty("preventDefault") && _.isFunction(e.preventDefault))
       e.preventDefault(); // stop event propagation to avoid form submission.
@@ -129,6 +138,8 @@ class Vehicle extends React.Component {
     this.setState({isVehicleReportDialogOpen: false});
     this.props.getVehicleReportsList(value);
   };
+
+  // TODO: eraldi failisse - VehicleSublistActions/Vehicle.delete-report-item.action.js
   deleteReportItem = (next, dropRowKeys) => {
     const dropRowKeysStr = dropRowKeys.join(',');
     const functionDeleteSingleReportItem = this.props.deleteSingleReportItem;
@@ -142,7 +153,7 @@ class Vehicle extends React.Component {
     }
   };
 
-
+  // TODO: eraldi failisse - VehicleSublistActions/Vehicle.open-vehicle-review-dialog.action.js
   openVehicleReviewDialog = (e) => {
     if (e && e.hasOwnProperty("preventDefault") && _.isFunction(e.preventDefault))
       e.preventDefault(); // stop event propagation to avoid form submission.
@@ -151,6 +162,8 @@ class Vehicle extends React.Component {
     }
     this.setState({isVehicleReviewDialogOpen: true});
   };
+
+  // TODO: eraldi failisse - VehicleSublistActions/Vehicle.close-vehicle-review-dialog.action.js
   closeVehicleReviewDialog = (e, value) => {
     if (e && e.hasOwnProperty("preventDefault") && _.isFunction(e.preventDefault))
       e.preventDefault(); // stop event propagation to avoid form submission.
@@ -158,6 +171,8 @@ class Vehicle extends React.Component {
     this.setState({isVehicleReviewDialogOpen: false});
     this.props.getVehicleReviewsList(value);
   };
+
+  // TODO: eraldi failisse - VehicleSublistActions/Vehicle.delete-review-item.action.js
   deleteReviewItem = (next, dropRowKeys) => {
     const dropRowKeysStr = dropRowKeys.join(',');
     const deleteSingleReview = this.props.deleteSingleReview;
@@ -203,7 +218,7 @@ class Vehicle extends React.Component {
 
     // Validation errors
     const springErrors = this.props.errors;
-    const errors = fromSpringToReduxFormError(springErrors);
+    const errors = fromSpringToReduxFormError(springErrors);  // TODO: LOL, spring, LOL. there is only one spring - time of the year... so fuck you, java.
     const bootstrapTableOptionsReport = {
       onRowClick: this.openVehicleReportDialog,
       onAdd: this.openVehicleReportDialog,
@@ -242,6 +257,7 @@ class Vehicle extends React.Component {
 
               <Row>
                 <Col md={6} xs={12}>
+                  {/* TODO: See panna Vehicle.main-card.component.js */}
                   <Card>
                     <CropToolCard
                       name="mainImage"
@@ -331,22 +347,6 @@ class Vehicle extends React.Component {
 
                     <SubmitCardActions disabled={this.props.submitting}/>
                   </Card>
-                  {/*UNCOMMENTED FOR MVP*/}
-                  {/*<Card>*/}
-                  {/*<CardTitle title={<h3>Performance</h3>} />*/}
-                  {/*<CardText>*/}
-                  {/*<Field name="compressionRatio" label="Compression Ratio" component={renderTextField} errors={errors}/>*/}
-                  {/*<Field name="compressionType" label="Compression Type" component={renderTextField} errors={errors}/>*/}
-                  {/*<Field name="configuration" label="Configuration" component={renderTextField} errors={errors}/>*/}
-                  {/*<Field name="cylinders" label="Cylinders" component={renderTextField} errors={errors}/>*/}
-                  {/*<Field name="displacement" label="Displacement" component={renderTextField} errors={errors}/>*/}
-                  {/*<Field name="size" label="Size" component={renderTextField} type="number" errors={errors}/>*/}
-                  {/*<Field name="torque" label="Torque" component={renderTextField} type="number" errors={errors}/>*/}
-                  {/*<Field name="totalValves" label="Total Valves" component={renderTextField} type="number" errors={errors}/>*/}
-                  {/*</CardText>*/}
-
-                  {/*<SubmitCardActions disabled={this.props.submitting} />*/}
-                  {/*</Card>*/}
                 </Col>
                 <Col md={6} xs={12}>
                   <ImagesCardField onImageFileUpload={this.props.onImageFileUpload}
@@ -354,23 +354,22 @@ class Vehicle extends React.Component {
                                    errors={errors}>
                     {!isNaN(this.state.id) ?
                       <SubmitCardActions disabled={this.props.submitting}/>
-                      :(
-                      <div>
-                        <span className="color-red">Please save vehicle before saving Images</span>
-                        <SubmitCardActions disabled={true}/>
-                      </div>
-                        )
+                      :(<div>
+                          <span className="color-red">Please save vehicle before saving Images</span>
+                          <SubmitCardActions disabled={true}/>
+                        </div>)
                     }
-
                   </ImagesCardField>
                 </Col>
               </Row>
             </form>
 
             <br/>
+
             {!isNaN(this.state.id)
               ?
               <div>
+                {/* TODO: See panna Vehicle.reports-card.component.js */}
                 <Card>
                   <CardTitle title="Vehicle reports"/>
                   <CardText>
@@ -406,6 +405,7 @@ class Vehicle extends React.Component {
                 </Card>
 
                 <br/>
+                {/* TODO: See panna Vehicle.reviews-card.component.js */}
                 <Card>
                   <CardTitle title="Vehicle reviews"/>
                   <CardText>
@@ -443,15 +443,11 @@ class Vehicle extends React.Component {
               </div>
             : ""
             }
-
-
           </div>)}
       </div>
     )
   }
 }
-
-export default reduxForm({form: FORMS.VEHICLE_FORM})(Vehicle);
 
 Vehicle.propTypes = {
   isFetching: React.PropTypes.bool.isRequired,
@@ -520,3 +516,5 @@ Vehicle.propTypes = {
     additionalInfo: React.PropTypes.string
   })
 };
+
+export default Vehicle;

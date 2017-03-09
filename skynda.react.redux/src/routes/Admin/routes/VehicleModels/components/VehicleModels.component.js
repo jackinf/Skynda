@@ -2,10 +2,20 @@
  * Created by jevgenir on 10/26/2016.
  */
 import React from "react";
-import {Table, Column, Cell} from 'fixed-data-table';
-import 'fixed-data-table/dist/fixed-data-table.css';
-import {browserHistory, Link} from "react-router"
+import {browserHistory} from "react-router"
 import RaisedButton from "material-ui/RaisedButton";
+import {BootstrapTable} from "react-bootstrap-table";
+
+const tableOptions = {
+  onRowClick: (item) => {browserHistory.push(`/admin/vehicle-model/${item.id}`)},
+  handleConfirmDeleteRow: (next, dropRowKeys) => {
+    dropRowKeys.forEach((id) => {this.props.deleteItem(id);});
+    next();
+  },
+  defaultSortName: "id",
+  defaultSortOrder: 'asc'
+};
+const selectRow = {mode: 'checkbox', clickToSelect: true};
 
 export default class VehicleModels extends React.Component {
   static propTypes = {
@@ -29,39 +39,18 @@ export default class VehicleModels extends React.Component {
     const loading = this.props.data.isFetching ? "Fetching" : "Vehicle Models";
 
     return (<div className="container">
-      <h3>{loading}</h3>
+      {!this.props.children ?
+        (<span>
+        <h3>{loading}</h3>
 
-      <RaisedButton secondary={true} label="Add" onClick={e => browserHistory.push(`/admin/vehicle-model/new`)}/>
-
-      <Table rowHeight={50} rowsCount={rows.length} width={1000} maxHeight={500} headerHeight={50}>
-        <Column
-          header={<Cell>#</Cell>}
-          cell={({rowIndex, ...props}) => (<Cell {...props}>{rowIndex+1}.</Cell>)}
-          width={50}
-        />
-        <Column
-          header={<Cell>Id</Cell>}
-          cell={({rowIndex, ...props}) => (<Cell {...props}>{rows[rowIndex].modelCode}</Cell>)}
-          width={200}
-        />
-        <Column
-          header={<Cell>Name</Cell>}
-          cell={({rowIndex, ...props}) => (<Cell {...props}>{rows[rowIndex].title}</Cell>
-          )}
-          width={200}
-        />
-        <Column
-          header={<Cell>Actions</Cell>}
-          cell={({rowIndex, ...props}) => (
-            <Cell {...props}>
-              <RaisedButton label="Show" onClick={e => browserHistory.push(`/admin/vehicle-model/${rows[rowIndex].id}`)}/>
-              <RaisedButton secondary={true} label="Delete" onClick={e => this.props.deleteItem(rows[rowIndex].id)}/>
-            </Cell>
-          )}
-          width={200}
-        />
-      </Table>
-
+        <RaisedButton secondary={true} label="Add" onClick={e => browserHistory.push(`/admin/vehicle-model/new`)}/>
+        <BootstrapTable data={rows} options={tableOptions} selectRow={selectRow} deleteRow hover={true} search={true}>
+          <TableHeaderColumn dataField="id" isKey={true} dataAlign="center" dataSort={true}>Vehicle Model ID</TableHeaderColumn>
+          <TableHeaderColumn dataField="modelCode" dataSort={true}>Code</TableHeaderColumn>
+          <TableHeaderColumn dataField="title" dataSort={true}>Name</TableHeaderColumn>
+        </BootstrapTable>
+      </span>
+        ): this.props.children}
     </div>)
   }
 }
