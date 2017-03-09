@@ -50,13 +50,10 @@ class Vehicle extends React.Component {
 
   componentDidMount() {
     this.props.onHandleLoad(this.props.params[ROUTE_PARAMS.VEHICLE_ID]);
-    console.log("found it");
-
     this.props.getVehicleModelsList();
+    this.props.vehicleFeaturesGetList();
     this.props.getVehicleReportsList(this.props.params[ROUTE_PARAMS.VEHICLE_ID]);
     this.props.getVehicleReviewsList(this.props.params[ROUTE_PARAMS.VEHICLE_ID]);
-    this.props.vehicleFeaturesGetList();
-    // this.props.getColors();
   }
 
   /**
@@ -205,7 +202,7 @@ class Vehicle extends React.Component {
 
     // Validation errors
     const springErrors = this.props.errors;
-    const errors = fromSpringToReduxFormError(springErrors);  // TODO: LOL, spring, LOL. there is only one spring - time of the year... so fuck you, java.
+    const errors = fromSpringToReduxFormError(springErrors);  // TODO: LOL, spring, LOL. there is only one spring - time of the year... so fuck you, java. XD IMMA FIRIN MY LAAZO00oRRSS!!!
     const bootstrapTableOptionsReport = {
       onRowClick: this.openVehicleReportDialog,
       onAdd: this.openVehicleReportDialog,
