@@ -33,6 +33,7 @@ export function deleteFailure(errors) {
 export default function deleteItem(id) {
   return async (dispatch, getState) => {
     try{
+      dispatch(deleteRequest());
       let items = getState()[REDUCER_KEYS.VEHICLE_REPORTS_DATA_LIST].items;
       const result = await VehicleReportService.deleteItem(id);
       items = items.filter(c => c.id !== id);

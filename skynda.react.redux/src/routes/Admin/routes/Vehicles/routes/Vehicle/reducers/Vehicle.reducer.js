@@ -1,65 +1,15 @@
 import {browserHistory} from "react-router";
-import {destroy} from "redux-form";
 import {toastr} from 'react-redux-toastr';
-import {VehicleService} from "../../../../../../../webServices"
-import {ACTIONS, FORM_MODE, FORMS, ROUTE_PARAMS} from "../../../constants/Vehicles.constant";
-import fromSpringToReduxFormError from "../../../../../../../utils/formUtils/fromSpringToReduxFormError";
+import {FORM_MODE} from "../../../constants/Vehicles.constant";
 import _ from "underscore";
 // ------------------------------------
 // Actions
 // ------------------------------------
 
-const CLEAR_VEHICLE_DATA = "VEHICLE/CLEAR_VEHICLE_DATA";
 const FETCHING = "VEHICLE/FETCHING";
 const FETCH_SUCCESSFUL = "VEHICLE/FETCH_SUCCESSFUL";
 const FETCH_FAILED = "VEHICLE/FETCH_FAILED";
 
-// ------------------------------------
-// Async Action Creators (Redux thunk)
-// ------------------------------------
-
-/**
- * Loads "Create new vehicle" or "Update existing vehicle" forms
- * @param id
- */
-export const load = (id) => (dispatch) => {
-  dispatch(destroy(FORMS.VEHICLE_FORM));
-  const formMode = id === ROUTE_PARAMS.values.NEW
-    ? FORM_MODE.ADDING : !isNaN(parseInt(id))
-      ? FORM_MODE.UPDATING : FORM_MODE.NONE;
-
-  if (formMode === FORM_MODE.ADDING) {
-    dispatch(clearVehicleData());
-    dispatch(setFormMode(FORM_MODE.ADDING));
-  } else if (formMode == FORM_MODE.UPDATING && !isNaN(parseInt(id))) {
-    dispatch(fetchItem(parseInt(id)));
-  } else {
-    throw "Invalid form mode";
-  }
-};
-
-/**
- * Private. Fetches data from API and prepares update form.
- * @param id - vehicle ID.
- */
-const fetchItem = (id) => (dispatch) => {
-  dispatch(setFetching(true));
-  const promise = VehicleService.fetchItem(id);
-  promise.then(data => {
-    dispatch(setFetchSuccessful(data.id));
-    dispatch(setVehicleData(data));
-    dispatch(setFormMode(FORM_MODE.UPDATING));
-  }).catch((error) => {
-    dispatch(setFetchFailed(error));
-    dispatch(clearVehicleData());
-    throw error;
-  });
-};
-
-export const clear = () => (dispatch) => {
-  dispatch(clearVehicleData());
-  dispatch(setFetching(false));
-};
 
 export const onHandleSubmitFinished = (resp, exFormMode, getVehicles) => (dispatch) => {
   if (resp) {
@@ -90,28 +40,6 @@ function setFormMode(formMode = FORM_MODE.NONE) {
   };
 }
 
-function setVehicleData(item) {
-  return {
-    type: ACTIONS.SET_VEHICLE_DATA,
-    item
-  };
-}
-
-function clearVehicleData() {
-  return {
-    type: CLEAR_VEHICLE_DATA,
-    item: {}
-  };
-}
-
-
-function setFetching(isFetching = true) {
-  return {
-    type: FETCHING,
-    isFetching
-  }
-}
-
 function setFetchSuccessful(id) {
   return {
     id: id,
@@ -129,22 +57,77 @@ function setFetchFailed(errors) {
   }
 }
 
+import {
+  GET_LIST_REQUEST as GET_LIST_REQUEST_FEATURE,
+  GET_LIST_SUCCESS as GET_LIST_SUCCESS_FEATURE,
+  GET_LIST_FAILURE as GET_LIST_FAILURE_FEATURE
+} from "../actions/Vehicle.features.get-list.action";
+
+import {
+  GET_LIST_REQUEST as GET_LIST_REQUEST_REPORT,
+  GET_LIST_SUCCESS as GET_LIST_SUCCESS_REPORT,
+  GET_LIST_FAILURE as GET_LIST_FAILURE_REPORT
+} from "../actions/Vehicle.reports.get-list.action";
+
+import {
+  GET_LIST_REQUEST as GET_LIST_REQUEST_REVIEW,
+  GET_LIST_SUCCESS as GET_LIST_SUCCESS_REVIEW,
+  GET_LIST_FAILURE as GET_LIST_FAILURE_REVIEW
+} from "../actions/Vehicle.reviews.get-list.action";
+
+import {
+  DELETE_REQUEST as DELETE_REQUEST_FEATURE,
+  DELETE_SUCCESS as DELETE_SUCCESS_FEATURE,
+  DELETE_FAILURE as DELETE_FAILURE_FEATURE
+} from "../actions/Vehicle.features.delete-item.action";
+
+import {
+  DELETE_REQUEST as DELETE_REQUEST_REPORT,
+  DELETE_SUCCESS as DELETE_SUCCESS_REPORT,
+  DELETE_FAILURE as DELETE_FAILURE_REPORT
+} from "../actions/Vehicle.reports.delete-item.action";
+
+import {
+  CLEAR_VEHICLE_DATA
+} from "../actions/Vehicle.clear.action";
+
 // ------------------------------------
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
-  [ACTIONS.SET_FORM_MODE]: (state, action) => ({...state, formMode: action.formMode}),
-  [ACTIONS.SET_VEHICLE_DATA]: (state, action) => ({...state, item: action.item}),
   [CLEAR_VEHICLE_DATA]: (state, action) => ({...state, item: action.item}),
-  [FETCHING]: (state, action) => ({...state, isFetching: action.isFetching, errors: action.errors}),
-  [FETCH_SUCCESSFUL]: (state, action) => ({...state, isFetching: action.isFetching, errors: action.errors}),
-  [FETCH_FAILED]: (state, action) => ({...state, isFetching: action.isFetching, errors: action.errors})
+  // [FETCHING]: (state, action) => ({...state, isFetching: action.isFetching, errors: action.errors}),
+  // [FETCH_SUCCESSFUL]: (state, action) => ({...state, isFetching: action.isFetching, errors: action.errors}),
+  // [FETCH_FAILED]: (state, action) => ({...state, isFetching: action.isFetching, errors: action.errors}),
+
+  // FEATURES ACTION HANDLERS FOR REDUCER
+  [GET_LIST_REQUEST_FEATURE]: (state, action) => ({...state, type: action.type, isFetching: action.isFetching, errors: action.errors}),
+  [GET_LIST_SUCCESS_FEATURE]: (state, action) => ({...state, type: action.type, isFetching: action.isFetching, errors: action.errors, items: action.items}),
+  [GET_LIST_FAILURE_FEATURE]: (state, action) => ({...state, type: action.type, isFetching: action.isFetching, errors: action.errors, items: action.items}),
+
+  [DELETE_REQUEST_FEATURE]: (state, action) => ({...state, type: action.type, isFetching: action.isFetching, errors: action.errors}),
+  [DELETE_SUCCESS_FEATURE]: (state, action) => ({...state, type: action.type, isFetching: action.isFetching, errors: action.errors}),
+  [DELETE_FAILURE_FEATURE]: (state, action) => ({...state, type: action.type, isFetching: action.isFetching, errors: action.errors}),
+
+  // REPORTS ACTION HANDLERS FOR REDUCER
+  [GET_LIST_REQUEST_REPORT]: (state, action) => ({...state, type: action.type, isFetching: action.isFetching, errors: action.errors}),
+  [GET_LIST_SUCCESS_REPORT]: (state, action) => ({...state, type: action.type, isFetching: action.isFetching, errors: action.errors, items: action.items}),
+  [GET_LIST_FAILURE_REPORT]: (state, action) => ({...state, type: action.type, isFetching: action.isFetching, errors: action.errors, items: action.items}),
+
+  [DELETE_REQUEST_REPORT]: (state, action) => ({...state, type: action.type, isFetching: action.isFetching, errors: action.errors}),
+  [DELETE_SUCCESS_REPORT]: (state, action) => ({...state, type: action.type, isFetching: action.isFetching, errors: action.errors}),
+  [DELETE_FAILURE_REPORT]: (state, action) => ({...state, type: action.type, isFetching: action.isFetching, errors: action.errors}),
+
+  // REVIEWS ACTION HANDLERS FOR REDUCER
+  [GET_LIST_REQUEST_REVIEW]: (state, action) => ({...state, type: action.type, isFetching: action.isFetching, errors: action.errors}),
+  [GET_LIST_SUCCESS_REVIEW]: (state, action) => ({...state, type: action.type, isFetching: action.isFetching, errors: action.errors, items: action.items}),
+  [GET_LIST_FAILURE_REVIEW]: (state, action) => ({...state, type: action.type, isFetching: action.isFetching, errors: action.errors, items: action.items}),
 };
 
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState = {isFetching: false, item: null, errors: []};
+const initialState = {isFetching: false, item: [], errors: []};
 export default function reducer(state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type];
   return handler ? handler(state, action) : state;

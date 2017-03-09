@@ -1,4 +1,4 @@
-import {FeatureService, VehicleFeatureService} from "../../../../../../../webServices"
+import {FeatureService} from "../../../../../../../webServices"
 
 export const GET_LIST_REQUEST = "VEHICLE_FEATURE/GET_LIST_REQUEST";
 export const GET_LIST_SUCCESS = "VEHICLE_FEATURE/GET_LIST_SUCCESS";

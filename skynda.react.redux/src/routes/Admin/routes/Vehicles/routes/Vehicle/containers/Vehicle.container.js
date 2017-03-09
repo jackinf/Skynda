@@ -1,7 +1,5 @@
 import {connect} from "react-redux";
 import {
-  onFaultFileUpload,
-  onFaultRemove,
   onImageFileRemove,
   onImageFileUpload,
   onMainImageCropComplete,
@@ -14,14 +12,9 @@ import {
   vehicleReportsDeleteItem as deleteReport,
   vehicleReportsGetList as getVehicleReportsList,
   vehicleReviewDeleteItem as deleteReview,
-  vehicleReviewsGetList as getVehicleReviewsList,
-  vehicleSubmit
+  vehicleReviewsGetList as getVehicleReviewsList
 } from "../actions";
-// import {load, clear, onHandleSubmitFinished} from "../reducers/Vehicle.reducer";
 import {getList as getVehicleModelsList} from "../../../../VehicleModels/actions";
-// import {getList as getVehicleReportsList, deleteItem as deleteReport} from "../actions/Vehicle.reports.get-list.action";
-// import {getList as getVehicleReviewsList, deleteItem as deleteReview} from "../actions/Vehicle.reviews.get-list.action";
-// import {getList as getFeaturesList, deleteItem as deleteFeature} from "../actions/Vehicle.features.get-list.action";
 import {getList as getVehicles} from "../../../actions"
 import {REDUCER_KEYS, FORMS} from "../../../constants/Vehicles.constant";
 import VehicleComponent from "../components/Vehicle.component";
