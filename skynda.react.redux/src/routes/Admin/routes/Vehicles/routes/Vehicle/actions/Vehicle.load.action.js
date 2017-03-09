@@ -1,8 +1,8 @@
 /**
  * Created by zekar on 3/6/2017.
  */
-import {FORM_MODE, ROUTE_PARAMS, VEHICLE_MODEL_FORM} from "../../../constants/VehicleModel.constant";
-import {destroy, initialize} from "redux-form";
+import {FORM_MODE, ROUTE_PARAMS, FORMS} from "../../../constants/Vehicles.constant";
+import {initialize} from "redux-form";
 import {VehicleModelService} from "../../../../../../../webServices"
 
 export const LOAD_CREATE_SUCCESS = 'VEHICLE_MODEL/LOAD_CREATE_SUCCESS123';
@@ -15,7 +15,7 @@ function loadCreateSuccess() {
     type: LOAD_CREATE_SUCCESS,
     isFetching: false,
     errors: {},
-    formMode: FORM_MODE.ADDING_MODEL
+    formMode: FORM_MODE.ADDING
   }
 }
 
@@ -23,7 +23,7 @@ function loadEditRequest() {
   return {
     type: LOAD_EDIT_REQUEST,
     isFetching: true,
-    formMode: FORM_MODE.UPDATING_MODEL
+    formMode: FORM_MODE.UPDATING
   }
 }
 
@@ -31,7 +31,7 @@ function loadEditSuccess() {
   return {
     type: LOAD_EDIT_SUCCESS,
     isFetching: false,
-    formMode: FORM_MODE.UPDATING_MODEL
+    formMode: FORM_MODE.UPDATING
   }
 }
 
@@ -40,7 +40,7 @@ function loadEditError(errors) {
     type: LOAD_EDIT_FAILURE,
     isFetching: false,
     errors,
-    formMode: FORM_MODE.NONE_MODEL
+    formMode: FORM_MODE.NONE
   }
 }
 /**
@@ -51,7 +51,7 @@ const loadEditForm = (id) => async (dispatch) => {
   try {
     const item = await VehicleModelService.fetchItem(id);
     dispatch(loadEditSuccess());
-    dispatch(initialize(VEHICLE_MODEL_FORM, item));
+    dispatch(initialize(FORMS.VEHICLE_FORM, item));
   } catch (error) {
     dispatch(loadEditError(error));
   }
@@ -59,11 +59,14 @@ const loadEditForm = (id) => async (dispatch) => {
 
 export default function load(id) {
   return (dispatch) => {
-    const formMode = id === ROUTE_PARAMS.values.NEW ? FORM_MODE.ADDING_MODEL : !isNaN(parseInt(id)) ? FORM_MODE.UPDATING_MODEL : FORM_MODE.NONE_MODEL;
+    const formMode = id === ROUTE_PARAMS.values.NEW
+      ? FORM_MODE.ADDING
+      : !isNaN(parseInt(id))
+        ? FORM_MODE.UPDATING : FORM_MODE.NONE;
 
-    if (formMode === FORM_MODE.ADDING_MODEL) {
+    if (formMode === FORM_MODE.ADDING) {
       dispatch(loadCreateSuccess());
-    } else if (formMode == FORM_MODE.UPDATING_MODEL) {
+    } else if (formMode == FORM_MODE.UPDATING) {
       dispatch(loadEditForm(id));
     } else {
       console.error("Invalid form mode");

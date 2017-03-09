@@ -63,7 +63,7 @@ class Vehicle extends React.Component {
 
   /**
    * We need to clean toastr's already shown messages.
-   * We also clear the form (I am not sure if this is necessary).
+   * We also clear the form (I am not sure if this is necessary). Yes it is. Somewhere something said it is.
    */
   componentWillUnmount() {
     toastr.clean();
