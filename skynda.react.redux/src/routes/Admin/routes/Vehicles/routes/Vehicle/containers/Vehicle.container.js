@@ -5,14 +5,15 @@ import {
   onMainImageCropComplete,
   onMainImageRemove,
   onMainImageUpload,
-
   vehicleFeaturesDeleteItem as deleteFeature,
   vehicleFeaturesGetList as getFeaturesList,
   vehicleLoad as load,
   vehicleReportsDeleteItem as deleteReport,
   vehicleReportsGetList as getVehicleReportsList,
   vehicleReviewDeleteItem as deleteReview,
-  vehicleReviewsGetList as getVehicleReviewsList
+  vehicleReviewsGetList as getVehicleReviewsList,
+  vehicleSubmit as submit,
+  vehicleClear as clear
 } from "../actions";
 import {getList as getVehicleModelsList} from "../../../../VehicleModels/actions";
 import {getList as getVehicles} from "../../../actions"
@@ -23,22 +24,20 @@ import {reduxForm} from "redux-form";
 const VehicleComponentForm = reduxForm({form: FORMS.VEHICLE_FORM})(VehicleComponent);
 
 const mapDispatchToProps = {
-  load,
   clear,
   getVehicleModelsList,
-  getVehicleReportsList: getVehicleReportsList,
+  getVehicleReportsList,
   deleteSingleReportItem: deleteReport,
-  getVehicleReviewsList: getVehicleReviewsList,
+  getVehicleReviewsList,
   deleteSingleReview: deleteReview,
-  getFeaturesList: getFeaturesList,
-  deleteSingleFeature: deleteFeature,
-  onMainImageUpload: onMainImageUpload,
-  onMainImageRemove: onMainImageRemove,
+  getFeaturesList,
   onMainImageCropComplete: onMainImageCropComplete,
   onImageFileUpload: onImageFileUpload,
   onImageFileRemove: onImageFileRemove,
-  onHandleSubmitFinished: onHandleSubmitFinished,
-  getVehicles
+  getVehicles,
+  onHandleLoad: load,
+  onHandleSubmit: submit,
+  onHandleClear: clear
 };
 
 const mapStateToProps = (state) => {

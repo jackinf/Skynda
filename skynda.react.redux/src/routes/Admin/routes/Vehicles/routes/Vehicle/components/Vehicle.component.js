@@ -4,7 +4,7 @@ import {toastr} from "react-redux-toastr";
 import {Card, CardActions, CardTitle, CardText} from 'material-ui/Card';
 import RefreshIndicator from 'material-ui/RefreshIndicator';
 
-import {Row, Col, Modal} from "react-bootstrap";
+import {Row, Col, Modal, Button} from "react-bootstrap";
 import _ from "underscore";
 import {TableHeaderColumn} from "react-bootstrap-table";
 
@@ -24,7 +24,6 @@ import {
   renderCheckbox
 } from "../../../../../components/FormRenderers";
 import BootstrapTable from "./Vehicle.bootstrap-table.component";
-import {onHandleSubmit} from "../actions/Vehicle.redux-form.actions";
 import fromSpringToReduxFormError from "../../../../../../../utils/formUtils/fromSpringToReduxFormError";
 import {ROUTE_PARAMS as VEHICLE_MODEL_ROUTE_PARAMS} from "../../../../VehicleModels/constants/VehicleModel.constant";
 import {ROUTE_PARAMS as VEHICLE_REPORT_ROUTE_PARAMS} from "../../../../VehicleReports/constants/VehicleReport.constant";
@@ -53,7 +52,7 @@ class Vehicle extends React.Component {
   }
 
   componentDidMount() {
-    this.props.load(this.props.params[ROUTE_PARAMS.VEHICLE_ID]);
+    this.props.onHandleLoad(this.props.params[ROUTE_PARAMS.VEHICLE_ID]);
     this.props.getVehicleModelsList();
     this.props.getVehicleReportsList(this.props.params[ROUTE_PARAMS.VEHICLE_ID]);
     this.props.getVehicleReviewsList(this.props.params[ROUTE_PARAMS.VEHICLE_ID]);
@@ -67,7 +66,7 @@ class Vehicle extends React.Component {
    */
   componentWillUnmount() {
     toastr.clean();
-    this.props.clear();
+    this.props.onHandleClear();
   }
 
   /**
@@ -191,17 +190,6 @@ class Vehicle extends React.Component {
   };
 
 
-  /**
-   * Form submission. Create or update.
-   * @param e
-   */
-  onSubmit(e) {
-    let promise = this.props.handleSubmit(data => onHandleSubmit(data, this.props.formModeVehicle))(e);
-    promise && promise.then(resp => {
-      this.props.onHandleSubmitFinished(resp, this.props.formModeVehicle, this.props.getVehicles)
-    });
-  };
-
   render() {
     const vehicleReports = !this.props.vehicleReports.isFetching
       ? this.props.vehicleReports.items : [];
@@ -243,7 +231,7 @@ class Vehicle extends React.Component {
         {this.props.isFetching || this.props.submitting
           ? <div><RefreshIndicator size={100} left={200} top={200} status="loading"/></div>
           : (<div>
-            <form onSubmit={this.onSubmit.bind(this)}>
+            <form>
 
               <ErrorBlockRenderer errors={springErrors}/>
 
@@ -345,7 +333,7 @@ class Vehicle extends React.Component {
                       <Field name="additional" label="Additional info" component={renderTextField} errors={errors}/>
                     </CardText>
 
-                    <SubmitCardActions disabled={this.props.submitting}/>
+                    <Button disabled={this.props.submitting} onClick={e => this.props.onHandleSubmit(this.props.onSubmitCustom)}/>
                   </Card>
                 </Col>
                 <Col md={6} xs={12}>
@@ -450,17 +438,20 @@ class Vehicle extends React.Component {
 }
 
 Vehicle.propTypes = {
-  isFetching: React.PropTypes.bool.isRequired,
-  load: React.PropTypes.func.isRequired,
-  clear: React.PropTypes.func.isRequired,
+  onHandleLoad: React.PropTypes.func.isRequired,
+  onHandleSubmit: React.PropTypes.func.isRequired,
+  onHandleClear: React.PropTypes.func.isRequired,
   getVehicleModelsList: React.PropTypes.func.isRequired,
   getVehicleReportsList: React.PropTypes.func.isRequired,
   deleteSingleReportItem: React.PropTypes.func.isRequired,
   getVehicleReviewsList: React.PropTypes.func.isRequired,
   deleteSingleReview: React.PropTypes.func.isRequired,
   getFeaturesList: React.PropTypes.func.isRequired,
-  deleteSingleFeature: React.PropTypes.func.isRequired,
-  // vehicle models data for combobox
+  onImageFileRemove: React.PropTypes.func,
+  onImageFileUpload: React.PropTypes.func,
+  onMainImageCropComplete: React.PropTypes.func,
+
+
   vehicleModels: React.PropTypes.shape({
     isFetching: React.PropTypes.bool,
     items: React.PropTypes.arrayOf(React.PropTypes.shape({

@@ -33,7 +33,7 @@ import vehicleReportsGetList      from "./Vehicle.reports.get-list.action";
 import vehicleReviewDeleteItem    from "./Vehicle.reviews.delete-item.action";
 import vehicleReviewsGetList      from "./Vehicle.reviews.get-list.action";
 import vehicleSubmit              from "./Vehicle.submit.action";
-import clear                      from "./Vehicle.clear.action"
+import vehicleClear               from "./Vehicle.clear.action"
 
 export {
   onFaultFileUpload,
@@ -52,5 +52,5 @@ export {
   vehicleReviewDeleteItem,
   vehicleReviewsGetList,
   vehicleSubmit,
-  clear
+  vehicleClear
 }
