@@ -8,7 +8,7 @@ export function getListRequest() {
   return {
     type: GET_LIST_REQUEST,
     isFetching: true,
-    errors: {}
+    errors: []
   };
 }
 
@@ -17,7 +17,7 @@ export function getListSuccess(items) {
     type: GET_LIST_SUCCESS,
     isFetching: false,
     items,
-    errors: {}
+    errors: []
   };
 }
 

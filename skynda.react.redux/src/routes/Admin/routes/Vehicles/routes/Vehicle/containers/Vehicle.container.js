@@ -3,10 +3,7 @@ import {
   onImageFileRemove,
   onImageFileUpload,
   onMainImageCropComplete,
-  onMainImageRemove,
-  onMainImageUpload,
-  vehicleFeaturesDeleteItem as deleteFeature,
-  vehicleFeaturesGetList as getFeaturesList,
+  vehicleFeaturesGetList,
   vehicleLoad as load,
   vehicleReportsDeleteItem as deleteReport,
   vehicleReportsGetList as getVehicleReportsList,
@@ -30,7 +27,7 @@ const mapDispatchToProps = {
   deleteSingleReportItem: deleteReport,
   getVehicleReviewsList,
   deleteSingleReview: deleteReview,
-  getFeaturesList,
+  vehicleFeaturesGetList,
   onMainImageCropComplete: onMainImageCropComplete,
   onImageFileUpload: onImageFileUpload,
   onImageFileRemove: onImageFileRemove,
@@ -44,7 +41,8 @@ const mapStateToProps = (state) => {
   let formInfo = state[REDUCER_KEYS.VEHICLE_DATA];
   let classificators = state.classificators;  // TODO: reducer key
 
-  console.log("formInfo data", formInfo);
+  //TODO WHY IS THIS EMPTY?
+  // console.log("featuresList", state[REDUCER_KEYS.FEATURES_DATA_LIST]);
 
   return {
     id: formInfo.id,
@@ -55,8 +53,8 @@ const mapStateToProps = (state) => {
     vehicleModels: state[REDUCER_KEYS.VEHICLE_MODELS_DATA],
     vehicleReports: state[REDUCER_KEYS.VEHICLE_REPORTS_DATA_LIST],
     vehicleReviews: state[REDUCER_KEYS.VEHICLE_REVIEWS_DATA_LIST],
-    colors: classificators ? classificators.color : {},
-    featuresList: state[REDUCER_KEYS.FEATURES_DATA_LIST]
+    featuresList: state[REDUCER_KEYS.FEATURES_DATA_LIST],
+    colors: classificators ? classificators.color : {}
   };
 };
 

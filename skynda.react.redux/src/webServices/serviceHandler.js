@@ -8,7 +8,6 @@ const getDefaultHeaders = () => {
 const handle = (promise) => {
   return promise.then(response => response.json())
     .then(response => {
-      console.log("checkForErrors", response);
       if (response.message && (response.modelState || response.exceptionMessage)) {
         throw response;
       }

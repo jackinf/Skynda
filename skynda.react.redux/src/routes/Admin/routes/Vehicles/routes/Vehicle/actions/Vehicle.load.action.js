@@ -3,12 +3,12 @@
  */
 import {FORM_MODE, ROUTE_PARAMS, FORMS} from "../../../constants/Vehicles.constant";
 import {initialize, destroy} from "redux-form";
-import {VehicleModelService} from "../../../../../../../webServices"
+import {VehicleService} from "../../../../../../../webServices"
 
-export const LOAD_CREATE_SUCCESS = 'VEHICLE_MODEL/LOAD_CREATE_SUCCESS123';
-export const LOAD_EDIT_REQUEST = 'VEHICLE_MODEL/LOAD_EDIT_REQUEST';
-export const LOAD_EDIT_SUCCESS = 'VEHICLE_MODEL/LOAD_EDIT_SUCCESS';
-export const LOAD_EDIT_FAILURE = 'VEHICLE_MODEL/LOAD_EDIT_FAILURE';
+export const LOAD_CREATE_SUCCESS = 'VEHICLE/LOAD_CREATE_SUCCESS123';
+export const LOAD_EDIT_REQUEST = 'VEHICLE/LOAD_EDIT_REQUEST';
+export const LOAD_EDIT_SUCCESS = 'VEHICLE/LOAD_EDIT_SUCCESS';
+export const LOAD_EDIT_FAILURE = 'VEHICLE/LOAD_EDIT_FAILURE';
 
 function loadCreateSuccess() {
   return {
@@ -53,7 +53,7 @@ function loadEditError(errors) {
 const loadEditForm = (id) => async (dispatch) => {
   dispatch(loadEditRequest());
   try {
-    const item = await VehicleModelService.fetchItem(id);
+    const item = await VehicleService.fetchItem(id);
     dispatch(loadEditSuccess(item));
     dispatch(initialize(FORMS.VEHICLE_FORM, item));
   } catch (error) {
@@ -71,15 +71,12 @@ const loadEditForm = (id) => async (dispatch) => {
  */
 export default function load(id) {
   return (dispatch) => {
-    console.log("start loading");
     dispatch(destroy(FORMS.VEHICLE_FORM));
 
     const formMode = id === ROUTE_PARAMS.values.NEW
       ? FORM_MODE.ADDING
       : !isNaN(parseInt(id))
         ? FORM_MODE.UPDATING : FORM_MODE.NONE;
-
-    console.log("load formMdoe", formMode);
 
     if (formMode === FORM_MODE.ADDING) {
       dispatch(loadCreateSuccess());

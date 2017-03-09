@@ -25,7 +25,6 @@ import {
   onMainImageUpload
 } from "./VehicleImageActions";
 
-import vehicleFeaturesDeleteItem  from "./Vehicle.features.delete-item.action";
 import vehicleFeaturesGetList     from "./Vehicle.features.get-list.action";
 import vehicleLoad                from "./Vehicle.load.action";
 import vehicleReportsDeleteItem   from "./Vehicle.reports.delete-item.action";
@@ -44,7 +43,6 @@ export {
   onMainImageRemove,
   onMainImageUpload,
 
-  vehicleFeaturesDeleteItem,
   vehicleFeaturesGetList,
   vehicleLoad,
   vehicleReportsDeleteItem,

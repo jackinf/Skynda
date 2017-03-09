@@ -1,16 +1,3 @@
-// import {ACTIONS} from "../../../constants/Vehicles.constant";
-//
-// export const setVehicleReportsList = (state = {isFetching: false, items: []}, action) => {
-//   switch (action.type) {
-//     case ACTIONS.SET_VEHICLE_REPORTS_DATA: {
-//       return action.payload;
-//     }
-//
-//     default:
-//       return state;
-//   }
-// };
-
 import {
   GET_LIST_REQUEST as GET_LIST_REQUEST_REPORT,
   GET_LIST_SUCCESS as GET_LIST_SUCCESS_REPORT,
@@ -66,7 +53,7 @@ const ACTION_HANDLERS = {
   })
 };
 
-const initialState = {isFetching: false, item: [], errors: []};
+const initialState = {isFetching: false, items: [], errors: []};
 export default function reducer(state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type];
   return handler ? handler(state, action) : state;

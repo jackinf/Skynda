@@ -50,10 +50,12 @@ class Vehicle extends React.Component {
 
   componentDidMount() {
     this.props.onHandleLoad(this.props.params[ROUTE_PARAMS.VEHICLE_ID]);
+    console.log("found it");
+
     this.props.getVehicleModelsList();
     this.props.getVehicleReportsList(this.props.params[ROUTE_PARAMS.VEHICLE_ID]);
     this.props.getVehicleReviewsList(this.props.params[ROUTE_PARAMS.VEHICLE_ID]);
-    this.props.getFeaturesList();
+    this.props.vehicleFeaturesGetList();
     // this.props.getColors();
   }
 
