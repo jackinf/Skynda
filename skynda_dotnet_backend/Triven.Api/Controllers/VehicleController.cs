@@ -34,7 +34,19 @@ namespace Triven.API.Controllers
 
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [HttpPut, Route("{id:int}")]
-        public IHttpActionResult Update([FromUri] int id, [FromBody] dynamic viewModel) => HandleResult(_service.Update(id, viewModel));
+        public IHttpActionResult Update([FromUri] int id, [FromBody] dynamic viewModel)
+        {
+            try
+            {
+                return HandleResult(_service.Update(id, viewModel));
+
+            }
+            catch (Exception ex)
+            {
+                
+                throw;
+            }
+        }
 
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [HttpDelete, Route("{id:int}")]
