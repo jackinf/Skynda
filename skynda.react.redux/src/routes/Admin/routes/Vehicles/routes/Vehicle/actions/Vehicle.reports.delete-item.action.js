@@ -1,21 +1,45 @@
-/**
- * Created by zekar on 3/8/2017.
- */
-
-import {setVehicleReportsList} from "./index";
 import {REDUCER_KEYS} from "../../../constants/Vehicles.constant";
 import {VehicleReportService} from "../../../../../../../webServices"
 
+export const DELETE_REQUEST = "VEHICLE_REPORT/DELETE_REQUEST";
+export const DELETE_SUCCESS = "VEHICLE_REPORT/DELETE_SUCCESS";
+export const DELETE_FAILURE = "VEHICLE_REPORT/DELETE_FAILURE";
+
+export function deleteRequest() {
+  return {
+    type: DELETE_REQUEST,
+    isFetching: true,
+    errors: {}
+  };
+}
+
+export function deleteSuccess(items) {
+  return {
+    type: DELETE_SUCCESS,
+    isFetching: false,
+    items: items,
+    errors: {}
+  };
+}
+
+export function deleteFailure(errors) {
+  return {
+    type: DELETE_FAILURE,
+    isFetching: false,
+    errors
+  };
+}
+
 export default function deleteItem(id) {
-  return (dispatch, getState) => {
-    let items = getState()[REDUCER_KEYS.VEHICLE_REPORTS_DATA_LIST].items;
-    const promise = VehicleReportService.deleteItem(id);
-    promise.then(resp => {
+  return async (dispatch, getState) => {
+    try{
+      let items = getState()[REDUCER_KEYS.VEHICLE_REPORTS_DATA_LIST].items;
+      const result = await VehicleReportService.deleteItem(id);
       items = items.filter(c => c.id !== id);
-      dispatch(setVehicleReportsList({isFetching: false, items: items}));
-    }).catch(err => {
-      console.error(err);
-      throw err;
-    });
+      dispatch(deleteSuccess(items));
+    }catch (error){
+      dispatch(deleteFailure(error));
+      throw error;
+    }
   };
 }
