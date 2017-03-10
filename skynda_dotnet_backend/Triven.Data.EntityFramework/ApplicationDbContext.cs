@@ -16,6 +16,7 @@ namespace Triven.Data.EntityFramework
         {
             // Here use initializer of your choice
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<ApplicationDbContext, Configuration>());
+
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -58,7 +59,7 @@ namespace Triven.Data.EntityFramework
         {
             return new ApplicationDbContext();
         }
-
+        
 
     }
 }

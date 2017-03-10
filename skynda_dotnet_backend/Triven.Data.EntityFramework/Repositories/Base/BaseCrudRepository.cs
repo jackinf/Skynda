@@ -17,7 +17,6 @@ namespace Triven.Data.EntityFramework.Repositories.Base
     public abstract class BaseCrudRepository<TModel> : IBaseCrudRepository<TModel>, IDisposable
         where TModel : class, IAuditableBaseModel
     {
-        protected ApplicationDbContext Context = new ApplicationDbContext();
 
         /// <summary>
         /// When object is updated, here fields can be specified.
@@ -127,15 +126,21 @@ namespace Triven.Data.EntityFramework.Repositories.Base
         public virtual bool Delete(int id)
         {
             var model = Context.Set<TModel>().SingleOrDefault(m => m.Id == id);
+                
             if (model == null)
                 return false;
 
+            Context.Entry(model).State = EntityState.Unchanged;
+            Context.Entry(model).Property(x => x.DeletedOn).IsModified = true;
+
             OnBeforeDelete(model);
-                        
+
             var count = Context.SaveChanges();
 
             return count > 0;
+            
         }
+
 
         /// <summary>
         /// Closes the database connection
