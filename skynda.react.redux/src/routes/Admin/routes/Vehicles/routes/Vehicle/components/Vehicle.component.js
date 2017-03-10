@@ -297,13 +297,11 @@ class Vehicle extends React.Component {
                       <br/>
                       <Field name="colorInsideHex"
                              label="Color inside *"
-
                              onChangeComplete={this.onSetField}
                              component={ColorRenderer}/>
 
                       <Field name="colorOutsideHex"
                              label="Color outside *"
-
                              onChangeComplete={this.onSetField}
                              component={ColorRenderer}/>
                     </CardText>

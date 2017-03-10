@@ -1,6 +1,4 @@
-/**
- * Created by zekar on 3/6/2017.
- */
+import {change} from "redux-form";
 import {FORM_MODE, ROUTE_PARAMS, VEHICLE_FORM_KEY} from "../../../constants/Vehicles.constant";
 import {initialize, destroy} from "redux-form";
 import {VehicleService} from "../../../../../../../webServices"
@@ -80,6 +78,9 @@ export default function load(id) {
 
     if (formMode === FORM_MODE.ADDING) {
       dispatch(loadCreateSuccess());
+      dispatch(initialize(VEHICLE_FORM_KEY));
+      dispatch(change(VEHICLE_FORM_KEY, "colorOutsideHex", "#000000"));
+      dispatch(change(VEHICLE_FORM_KEY, "colorInsideHex", "#000000"));
     } else if (formMode == FORM_MODE.UPDATING) {
       dispatch(loadEditForm(id));
     } else {

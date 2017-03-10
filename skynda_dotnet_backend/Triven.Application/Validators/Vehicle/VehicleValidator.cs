@@ -7,11 +7,11 @@ namespace Triven.Application.Validators.Vehicle
     {
         public VehicleValidator()
         {
-            RuleFor(x => x.VinCode).NotEmpty();
-            RuleFor(x => x.Price).NotEmpty();
-            RuleFor(x => x.RegistrationNumber).NotEmpty();
-            RuleFor(x => x.Mileage).NotEmpty();
-            RuleFor(x => x.ColorOutsideHex).NotNull();
+            RuleFor(x => x.VinCode).NotNull().NotEmpty();
+            RuleFor(x => x.Price).NotNull().NotEmpty();
+            RuleFor(x => x.RegistrationNumber).NotNull().NotEmpty();
+            RuleFor(x => x.Mileage).NotNull().NotEmpty();
+            RuleFor(x => x.ColorOutsideHex).NotNull().NotEmpty();
             RuleFor(x => x.MainImage).NotNull();
             RuleFor(x => x.Model).NotNull();
             RuleFor(x => x.Model.Id).NotNull().NotEmpty();

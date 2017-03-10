@@ -104,14 +104,20 @@ function submitEdit(item, onSubmitCustom) {
 
 export default function submit(onSubmitCustom) {
   return (dispatch, getState) => {
-    const state = getState();
-    const formValues = state.form[VEHICLE_FORM_KEY].values;
-    const formMode = state[REDUCER_KEYS.VEHICLE_DATA].formMode;
-    if (formMode === FORM_MODE.ADDING) {
-      dispatch(submitCreate(formValues, onSubmitCustom))
+    try {
+      const state = getState();
+      const formValues = state.form[VEHICLE_FORM_KEY].values;
+      const formMode = state[REDUCER_KEYS.VEHICLE_DATA].formMode;
+      if (formMode === FORM_MODE.ADDING) {
+        dispatch(submitCreate(formValues, onSubmitCustom))
+      }
+      else if (formMode === FORM_MODE.UPDATING) {
+        dispatch(submitEdit(formValues, onSubmitCustom));
+      }
+    }catch (error){
+      toastr.error("Oh no!", "Create/update failed. Check form values or contact support.", error);
+
     }
-    else if (formMode === FORM_MODE.UPDATING) {
-      dispatch(submitEdit(formValues, onSubmitCustom));
-    }
+
   }
 }
