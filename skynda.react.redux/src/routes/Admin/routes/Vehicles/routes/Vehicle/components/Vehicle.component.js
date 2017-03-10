@@ -201,8 +201,7 @@ class Vehicle extends React.Component {
       : [];
 
     // Validation errors
-    const springErrors = this.props.errors;
-    const errors = fromSpringToReduxFormError(springErrors);  // TODO: LOL, spring, LOL. there is only one spring - time of the year... so fuck you, java. XD IMMA FIRIN MY LAAZO00oRRSS!!!
+    const errors = this.props.errors;  // TODO: LOL, spring, LOL. there is only one spring - time of the year... so fuck you, java. XD IMMA FIRIN MY LAAZO00oRRSS!!!
     const bootstrapTableOptionsReport = {
       onRowClick: this.openVehicleReportDialog,
       onAdd: this.openVehicleReportDialog,
@@ -229,7 +228,7 @@ class Vehicle extends React.Component {
           : (<div>
             <form>
 
-              <ErrorBlockRenderer errors={springErrors}/>
+              <ErrorBlockRenderer errors={errors}/>
 
               <Row>
                 <Col xs={12}>
@@ -266,23 +265,23 @@ class Vehicle extends React.Component {
                         </Modal.Body>
                       </Modal>
 
-                      <Field name="price" label="Price *" component={renderTextField} type="number" errors={errors}/>
+                      <Field name="price" label="Price *" component={renderTextField} type="number" />
                       <Field name="mileage" label="Mileage *" component={renderTextField} type="number"
-                             errors={errors}/>
+                             />
                       <Card>
                         <CardText>
                           <label>Fuel:</label>
-                          <Field name="fuelCity" label="Fuel City" component={renderTextField} errors={errors}/>
-                          <Field name="fuelHighway" label="Fuel Highway" component={renderTextField} errors={errors}/>
+                          <Field name="fuelCity" label="Fuel City" component={renderTextField} />
+                          <Field name="fuelHighway" label="Fuel Highway" component={renderTextField} />
                         </CardText>
                       </Card>
                       <br/>
                       <Card>
                         <CardText>
                           <label>History:</label>
-                          <Field name="vinCode" label="Vin Code *" component={renderTextField} errors={errors}/>
+                          <Field name="vinCode" label="Vin Code *" component={renderTextField} />
                           <Field name="registrationNumber" label="Registration Number *" component={renderTextField}
-                                 errors={errors}/>
+                                 />
                         </CardText>
                       </Card>
                       <br/>
@@ -290,21 +289,21 @@ class Vehicle extends React.Component {
                         <CardText>
                           <label>Safety:</label>
                           <Field name="safetyStars" label="Safety Stars" component={renderTextField} type="number"
-                                 errors={errors}/>
+                                 />
                           <Field name="safetyUrl" label="Safety Url" component={renderTextField}
-                                 errors={errors}/>
+                                 />
                         </CardText>
                       </Card>
                       <br/>
                       <Field name="colorInsideHex"
                              label="Color inside *"
-                             errors={errors}
+
                              onChangeComplete={this.onSetField}
                              component={ColorRenderer}/>
 
                       <Field name="colorOutsideHex"
                              label="Color outside *"
-                             errors={errors}
+
                              onChangeComplete={this.onSetField}
                              component={ColorRenderer}/>
                     </CardText>
@@ -325,8 +324,8 @@ class Vehicle extends React.Component {
                     <CardTitle title={<h3>Descriptions & addition info</h3>}/>
                     <CardText>
                       <FieldArray name="descriptions" label="Descriptions" component={descriptionRenderer}
-                                  errors={errors}/>
-                      <Field name="additional" label="Additional info" component={renderTextField} errors={errors}/>
+                                  />
+                      <Field name="additional" label="Additional info" component={renderTextField} />
                     </CardText>
 
                     <Button disabled={this.props.submitting} onClick={e => this.props.onHandleSubmit(this.props.onSubmitCustom)}/>
@@ -335,7 +334,7 @@ class Vehicle extends React.Component {
                 <Col md={6} xs={12}>
                   <ImagesCardField onImageFileUpload={this.props.onImageFileUpload}
                                    onImageFileRemove={this.props.onImageFileRemove}
-                                   errors={errors}>
+                                   >
                     {!isNaN(this.state.id) ?
                       <SubmitCardActions disabled={this.props.submitting}/>
                       :(<div>
@@ -442,7 +441,7 @@ Vehicle.propTypes = {
   deleteSingleReportItem: React.PropTypes.func.isRequired,
   getVehicleReviewsList: React.PropTypes.func.isRequired,
   deleteSingleReview: React.PropTypes.func.isRequired,
-  getFeaturesList: React.PropTypes.func.isRequired,
+  vehicleFeaturesGetList: React.PropTypes.func.isRequired,
   onImageFileRemove: React.PropTypes.func,
   onImageFileUpload: React.PropTypes.func,
   onMainImageCropComplete: React.PropTypes.func,
