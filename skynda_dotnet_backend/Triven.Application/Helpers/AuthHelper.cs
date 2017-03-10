@@ -4,6 +4,7 @@ using System.Web;
 using Microsoft.AspNet.Identity;
 using Triven.Data.EntityFramework.Models.User;
 using Triven.Domain.Constants;
+using Triven.Domain.Util;
 
 namespace Triven.Application.Helpers
 {
@@ -16,7 +17,7 @@ namespace Triven.Application.Helpers
         /// <returns></returns>
         public static bool IsAuthorized()
         {
-            if (HttpContext.Current.User?.Identity != null && HttpContext.Current.User.Identity.IsAuthenticated)
+            if (HttpContextManager.Current.User?.Identity != null && HttpContextManager.Current.User.Identity.IsAuthenticated)
             {
                 return true;
             }
@@ -29,9 +30,9 @@ namespace Triven.Application.Helpers
         /// <returns></returns>
         public static ApplicationUser GetAuthorizedApplicationUserInfo()
         {
-            if (HttpContext.Current.User?.Identity != null && HttpContext.Current.User.Identity.IsAuthenticated)
+            if (HttpContextManager.Current.User?.Identity != null && HttpContextManager.Current.User.Identity.IsAuthenticated)
             {
-                var uInfo = HttpContext.Current.User.Identity;
+                var uInfo = HttpContextManager.Current.User.Identity;
                 var manager = new ApplicationUserManager(new AppUserStore());
                 var appUser = manager.FindByEmail(uInfo.Name);
                 return appUser as ApplicationUser;
@@ -46,10 +47,10 @@ namespace Triven.Application.Helpers
         public static int GetAuthorizedUserId()
         {
             int id = 0;
-            if (HttpContext.Current.User?.Identity != null
-                && HttpContext.Current.User.Identity.IsAuthenticated)
+            if (HttpContextManager.Current.User?.Identity != null
+                && HttpContextManager.Current.User.Identity.IsAuthenticated)
             {
-                var userIdClim = HttpContext.Current.User.Identity.GetUserId();
+                var userIdClim = HttpContextManager.Current.User.Identity.GetUserId();
                 Int32.TryParse(userIdClim, out id);
             }
             return id;
@@ -62,14 +63,14 @@ namespace Triven.Application.Helpers
         public static List<string> GetAuthorizedUserRoles()
         {
             List<string> result = new List<string>();
-            if (HttpContext.Current.User?.Identity != null
-                && HttpContext.Current.User.Identity.IsAuthenticated)
+            if (HttpContextManager.Current.User?.Identity != null
+                && HttpContextManager.Current.User.Identity.IsAuthenticated)
             {
                 var user = GetAuthorizedApplicationUserInfo();
                 string[] roles = Enum.GetNames(typeof(Auth.Roles));
                 foreach (string role in roles)
                 {
-                    if (HttpContext.Current.User.IsInRole(role))
+                    if (HttpContextManager.Current.User.IsInRole(role))
                         result.Add(role);
                 }
 

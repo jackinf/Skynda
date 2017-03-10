@@ -252,7 +252,7 @@ class Vehicle extends React.Component {
                     <CardText>
                       <Field name="isSold" label="Is Sold" component={renderCheckbox} errors={errors}/>
 
-                      <Field name="model.id" label="Vehicle model *"
+                      <Field name="vehicleModel.id" label="Vehicle model *"
                              component={selectRenderer(vehicleModels, this.onSelectItemChange)}/>
                       <Modal show={this.state.isVehicleModelDialogOpen} onHide={this.closeVehicleModelDialog}>
                         <Modal.Header closeButton>

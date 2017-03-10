@@ -74,15 +74,17 @@ namespace Triven.Data.EntityFramework.Repositories
         {
             using (Context = new ApplicationDbContext())
             {
-                return BaseQuery()
+                Context.Features.Include(c => c.Id);
+
+                var result = BaseQuery()
                     .Include(x => x.VehicleModel)
-                    .Include(x => x.MainImage)
-                    .Include(x => x.Features)
+                    .Include(x => x.MainImage)                    
+                    .Include(x => x.Features.Select(o => o.Feature))
                     .Include(x => x.Descriptions)
                     .Include(x => x.Reviews)
                     .Include(x => x.Reports)
-                    .Include(x => x.Images)
-                    .FirstOrDefault(x => x.Id == id);
+                    .Include(x => x.Images).FirstOrDefault(x => x.Id == id);
+                return result;
             }
             
         }

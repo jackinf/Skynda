@@ -59,7 +59,7 @@ namespace Triven.Data.EntityFramework.Models
         public Image MainImage { get; set; }
 
         /// <summary>
-        /// Vehicle Model
+        /// Vehicle VehicleModel
         /// </summary>
         public VehicleModel VehicleModel { get; set; }
 

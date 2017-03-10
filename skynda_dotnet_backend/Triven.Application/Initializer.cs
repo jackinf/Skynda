@@ -49,32 +49,36 @@ namespace Triven.Application
                 configuration.CreateMap<Subscription, SubscriptionViewModel>();
                 configuration.CreateMap<SubscriptionViewModel, Subscription>();
 
-                configuration.CreateMap<Vehicle, VehicleAdminViewModel>().PreserveReferences();
+                configuration.CreateMap<Vehicle, VehicleAdminViewModel>().PreserveReferences()
+                    .ForMember(x => x.Features, conf => conf.Ignore());
                 configuration.CreateMap<Vehicle, VehicleDetailedViewModel>().PreserveReferences();
                 configuration.CreateMap<VehicleAdminViewModel, Vehicle>();
 
-                configuration.CreateMap<VehicleDescription, VehicleDescriptionViewModel>();
+                configuration.CreateMap<VehicleDescription, VehicleDescriptionViewModel>().PreserveReferences()
+                    .ForMember(x => x.Vehicle, conf => conf.Ignore());
                 configuration.CreateMap<VehicleDescriptionViewModel, VehicleDescription>();
 
                 //configuration.CreateMap<VehicleFault, VehicleFaultViewModel>();
                 //configuration.CreateMap<VehicleFaultViewModel, VehicleFault>();
 
-                configuration.CreateMap<VehicleFeature, VehicleFeatureViewModel>();
+                configuration.CreateMap<VehicleFeature, VehicleFeatureViewModel>().PreserveReferences()
+                    .ForMember(x => x.Vehicle, conf => conf.Ignore());
                 configuration.CreateMap<VehicleFeatureViewModel, VehicleFeature>();
 
                 //configuration.CreateMap<VehicleImage, VehicleImageViewModel>();
                 //configuration.CreateMap<VehicleImageViewModel, VehicleImage>();
 
-                configuration.CreateMap<VehicleModel, VehicleModelViewModel>();
+                configuration.CreateMap<VehicleModel, VehicleModelViewModel>().PreserveReferences();
                 configuration.CreateMap<VehicleModelViewModel, VehicleModel>();
 
-                configuration.CreateMap<VehicleReport, VehicleReportViewModel>();
+                configuration.CreateMap<VehicleReport, VehicleReportViewModel>().PreserveReferences()
+                    .ForMember(x => x.Vehicle, conf => conf.Ignore());
                 configuration.CreateMap<VehicleReportViewModel, VehicleReport>();
 
-                configuration.CreateMap<VehicleReportItem, VehicleReportItemViewModel>();
+                configuration.CreateMap<VehicleReportItem, VehicleReportItemViewModel>().PreserveReferences();
                 configuration.CreateMap<VehicleReportItemViewModel, VehicleReportItem>();
 
-                configuration.CreateMap<VehicleReview, VehicleReviewViewModel>();
+                configuration.CreateMap<VehicleReview, VehicleReviewViewModel>().PreserveReferences();
                 configuration.CreateMap<VehicleReviewViewModel, VehicleReview>();
 
                 //configuration.CreateMap<PartnerContactPersonDisplayViewModel, PartnerContactPersonModel>()

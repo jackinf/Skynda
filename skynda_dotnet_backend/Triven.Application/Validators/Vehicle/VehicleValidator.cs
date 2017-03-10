@@ -9,7 +9,7 @@ namespace Triven.Application.Validators.Vehicle
         {
             RuleFor(x => x.MainImage).NotEmpty().WithMessage("MainImage is required");
 
-            RuleFor(x => x.Model).NotEmpty().WithMessage("Model is required");
+            RuleFor(x => x.VehicleModel).NotEmpty().WithMessage("VehicleModel is required");
 
             RuleFor(x => x.Price).NotEmpty().WithMessage("Price is required");
 

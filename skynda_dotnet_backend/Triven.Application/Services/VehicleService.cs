@@ -44,6 +44,19 @@ namespace Triven.Application.Services
             {
                 var result = _vehicleRepository.Get(id);
                 VehicleAdminViewModel mappedResult = Mapper.Map<Vehicle, VehicleAdminViewModel>(result);
+
+                if (result.Features.Any())
+                {
+                    foreach (var feature in result.Features)
+                    {
+                        mappedResult.FeaturesAdminSelect.Add(new FeatureAdminSelectViewModel
+                        {
+                            Value = feature.Feature.Id.ToString(),
+                            Label = feature.Feature.Name
+                        });
+                    }    
+                }
+
                 return ServiceResult<VehicleAdminViewModel>.Factory.Success(mappedResult);
             }
             catch (Exception e)
@@ -75,7 +88,7 @@ namespace Triven.Application.Services
 
                 Vehicle entity = Mapper.Map<Vehicle>(viewModel);
 
-                VehicleModel vehicleModel = _vehicleModelRepository.Get(viewModel.Model.Id);
+                VehicleModel vehicleModel = _vehicleModelRepository.Get(viewModel.VehicleModel.Id);
                 entity.VehicleModel = vehicleModel;
 
 
@@ -201,7 +214,7 @@ namespace Triven.Application.Services
 
             Vehicle entity = _vehicleRepository.Get(viewModel.Id);
             Mapper.Map(viewModel, entity);
-            VehicleModel vehicleModel = _vehicleModelRepository.Get(viewModel.Model.Id);
+            VehicleModel vehicleModel = _vehicleModelRepository.Get(viewModel.VehicleModel.Id);
             entity.VehicleModel = vehicleModel;
 
             var mainImage = _blobStorageService.HandleMedia(viewModel.MainImage, entity.MainImage);

@@ -6,6 +6,6 @@ namespace Triven.Domain.ViewModels.Vehicle
     {
         public string Title { get; set; }
         public string Content { get; set; }
-        public int VehicleId { get; set; }
+        public VehicleAdminViewModel Vehicle { get; set; }
     }
 }

@@ -52,6 +52,7 @@ const loadEditForm = (id) => async (dispatch) => {
   dispatch(loadEditRequest());
   try {
     const item = await VehicleService.fetchItem(id);
+    console.log("loadEditForm err NOT", item);
     dispatch(loadEditSuccess(item));
     dispatch(initialize(VEHICLE_FORM_KEY, item));
   } catch (error) {
