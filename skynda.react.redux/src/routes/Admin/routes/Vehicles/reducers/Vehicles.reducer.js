@@ -26,26 +26,6 @@ const ACTION_HANDLERS = {
   [DELETE_FAILURE]: (state, action) => ({...state, type: action.type, isFetching: action.isFetching, errors: action.errors}),
 };
 
-// import {ACTIONS} from "../constants/Vehicles.constant";
-//
-// export function setVehicles(value) {
-//   return {
-//     type: ACTIONS.SET_VEHICLES_DATA,
-//     payload: value
-//   };
-// }
-//
-// export const actions = {
-//   setVehicles
-// };
-
-// // ------------------------------------
-// // Action Handlers
-// // ------------------------------------
-// const ACTION_HANDLERS = {
-//   [ACTIONS.SET_VEHICLES_DATA]: (state, action) => action.payload
-// };
-
 // ------------------------------------
 // Reducer
 // ------------------------------------

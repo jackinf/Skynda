@@ -8,9 +8,6 @@ const ACTION_HANDLERS = {
   // FEATURES ACTION HANDLERS FOR REDUCER
   [GET_LIST_REQUEST]: (state, action) => ({...state, type: action.type, isFetching: action.isFetching, errors: action.errors}),
   [GET_LIST_SUCCESS]: function (state, action) {
-
-    console.log("Get_list_success_for_features", action);
-
     return {
       ...state, type: action.type, isFetching: action.isFetching, errors: action.errors, items: action.items
     };

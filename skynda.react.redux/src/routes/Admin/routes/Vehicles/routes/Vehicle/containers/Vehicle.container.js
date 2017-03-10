@@ -41,9 +41,6 @@ const mapStateToProps = (state) => {
   let formInfo = state[REDUCER_KEYS.VEHICLE_DATA];
   let classificators = state.classificators;  // TODO: reducer key
 
-  //TODO WHY IS THIS EMPTY?
-  // console.log("featuresList", state[REDUCER_KEYS.FEATURES_DATA_LIST]);
-
   return {
     id: formInfo.id,
     isFetching: formInfo.isFetching,
