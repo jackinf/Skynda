@@ -21,7 +21,6 @@ import {
   renderCheckbox
 } from "../../../../../components/FormRenderers";
 import BootstrapTable from "./Vehicle.bootstrap-table.component";
-import fromSpringToReduxFormError from "../../../../../../../utils/formUtils/fromSpringToReduxFormError";
 import {ROUTE_PARAMS as VEHICLE_MODEL_ROUTE_PARAMS} from "../../../../VehicleModels/constants/VehicleModel.constant";
 import {ROUTE_PARAMS as VEHICLE_REPORT_ROUTE_PARAMS} from "../../../../VehicleReports/constants/VehicleReport.constant";
 import {ROUTE_PARAMS as VEHICLE_REVIEW_ROUTE_PARAMS} from "../../../../VehicleReviews/constants/VehicleReview.constant";
@@ -191,7 +190,7 @@ class Vehicle extends React.Component {
       ? this.props.vehicleReports.items : [];
     const vehicleReviews = this.props.vehicleReviews && !this.props.vehicleReviews.isFetching
       ? this.props.vehicleReviews.items : [];
-    const featuresList =  this.props.featuresList && !this.props.featuresList.isFetching
+    const featuresList = this.props.featuresList && !this.props.featuresList.isFetching
       ? this.props.featuresList.items : [];
     const vehicleModels = this.props.vehicleModels && !this.props.vehicleModels.isFetching
       ? this.props.vehicleModels.items.map(item => ({label: item.title + " " + item.modelCode, value: item.id}))
@@ -202,7 +201,6 @@ class Vehicle extends React.Component {
 
     // Validation errors
     const errors = this.props.errors;  // TODO: LOL, spring, LOL. there is only one spring - time of the year... so fuck you, java. XD IMMA FIRIN MY LAAZO00oRRSS!!!
-    console.log("errors ", errors);
     const bootstrapTableOptionsReport = {
       onRowClick: this.openVehicleReportDialog,
       onAdd: this.openVehicleReportDialog,
@@ -266,36 +264,23 @@ class Vehicle extends React.Component {
                         </Modal.Body>
                       </Modal>
 
-                      <Field name="price" label="Price *" component={renderTextField} type="number" />
-                      <Field name="mileage" label="Mileage *" component={renderTextField} type="number"
-                             />
-                      <Card>
-                        <CardText>
-                          <label>Fuel:</label>
-                          <Field name="fuelCity" label="Fuel City" component={renderTextField} />
-                          <Field name="fuelHighway" label="Fuel Highway" component={renderTextField} />
-                        </CardText>
-                      </Card>
+                      <Field name="price" label="Price *" component={renderTextField} type="number"/>
+                      <Field name="mileage" label="Mileage *" component={renderTextField} type="number" />
+
+                      <label>Fuel:</label><br/>
+                      <Field name="fuelCity" label="Fuel City" component={renderTextField}/>
+                      <Field name="fuelHighway" label="Fuel Highway" component={renderTextField}/>
                       <br/>
-                      <Card>
-                        <CardText>
-                          <label>History:</label>
-                          <Field name="vinCode" label="Vin Code *" component={renderTextField} />
-                          <Field name="registrationNumber" label="Registration Number *" component={renderTextField}
-                                 />
-                        </CardText>
-                      </Card>
+
+                      <label>History:</label><br/>
+                      <Field name="vinCode" label="Vin Code *" component={renderTextField}/>
+                      <Field name="registrationNumber" label="Registration Number *" component={renderTextField} />
                       <br/>
-                      <Card>
-                        <CardText>
-                          <label>Safety:</label>
-                          <Field name="safetyStars" label="Safety Stars" component={renderTextField} type="number"
-                                 />
-                          <Field name="safetyUrl" label="Safety Url" component={renderTextField}
-                                 />
-                        </CardText>
-                      </Card>
-                      <br/>
+
+                      <label>Safety:</label><br/>
+                      <Field name="safetyStars" label="Safety Stars" component={renderTextField} type="number" />
+                      <Field name="safetyUrl" label="Safety Url" component={renderTextField} />
+
                       <Field name="colorInsideHex"
                              label="Color inside *"
                              onChangeComplete={this.onSetField}
@@ -323,12 +308,13 @@ class Vehicle extends React.Component {
                     <CardTitle title={<h3>Descriptions & addition info</h3>}/>
                     <CardText>
                       <FieldArray name="descriptions" label="Descriptions" component={descriptionRenderer}
-                                  />
-                      <Field name="additional" label="Additional info" component={renderTextField} />
+                      />
+                      <Field name="additional" label="Additional info" component={renderTextField}/>
                     </CardText>
 
                     <Button className="btn btn-success vehicle-component--button-success"
-                          disabled={this.props.submitting} onClick={e => this.props.onHandleSubmit(this.props.onSubmitCustom)}>
+                            disabled={this.props.submitting}
+                            onClick={e => this.props.onHandleSubmit(this.props.onSubmitCustom)}>
                       Save
                     </Button>
                   </Card>
@@ -336,13 +322,13 @@ class Vehicle extends React.Component {
                 <Col md={6} xs={12}>
                   <ImagesCardField onImageFileUpload={this.props.onImageFileUpload}
                                    onImageFileRemove={this.props.onImageFileRemove}
-                                   >
+                  >
                     {!isNaN(this.state.id) ?
                       <SubmitCardActions disabled={this.props.submitting}/>
-                      :(<div>
-                          <span className="color-red">Please save vehicle before saving Images</span>
-                          <SubmitCardActions disabled={true}/>
-                        </div>)
+                      : (<div>
+                        <span className="color-red">Please save vehicle before saving Images</span>
+                        <SubmitCardActions disabled={true}/>
+                      </div>)
                     }
                   </ImagesCardField>
                 </Col>
@@ -374,14 +360,14 @@ class Vehicle extends React.Component {
                     {vehicleReports && vehicleReports != null && vehicleReports instanceof Array
                       ? (<div>
                         <BootstrapTable ref="tableReport" data={vehicleReports}
-                        options={bootstrapTableOptionsReport}
-                        selectRow={selectRow}
-                        deleteRow
-                        insertRow
+                                        options={bootstrapTableOptionsReport}
+                                        selectRow={selectRow}
+                                        deleteRow
+                                        insertRow
                         >
-                        <TableHeaderColumn dataField="id" isKey={true} dataAlign="center" dataSort={true}>Report
-                        ID</TableHeaderColumn>
-                        <TableHeaderColumn dataField="title" dataSort={true}>Report Title</TableHeaderColumn>
+                          <TableHeaderColumn dataField="id" isKey={true} dataAlign="center" dataSort={true}>Report
+                            ID</TableHeaderColumn>
+                          <TableHeaderColumn dataField="title" dataSort={true}>Report Title</TableHeaderColumn>
                         </BootstrapTable>
                       </div>)
                       : ""}
@@ -426,7 +412,7 @@ class Vehicle extends React.Component {
                   </CardText>
                 </Card>
               </div>
-            : ""
+              : ""
             }
           </div>)}
       </div>

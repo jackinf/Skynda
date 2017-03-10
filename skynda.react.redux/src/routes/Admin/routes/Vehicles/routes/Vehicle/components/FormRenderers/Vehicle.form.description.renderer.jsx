@@ -5,6 +5,7 @@ import {Row, Col} from "react-bootstrap";
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentRemove from 'material-ui/svg-icons/content/remove';
 import {fieldListWrapper} from "../../../../../../components/FormRenderers/index";
+import {renderTextField} from "../../../../../../components/FormRenderers";
 
 export const descriptionRenderer = ({fields, ...custom}) => fieldListWrapper({
   fields,
