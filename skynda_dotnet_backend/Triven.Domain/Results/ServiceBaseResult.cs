@@ -48,6 +48,17 @@ namespace Triven.Domain.Results
                 return result;
             }
 
+            public static ServiceResult<TPayload> Fail(string message)
+            {
+                var result = new ServiceResult<TPayload>
+                {
+                    IsSuccessful = false,
+                    Message = message
+                };
+                return result;
+            }
+
+
             public static ServiceResult<TPayload> Success()
             {
                 var result = new ServiceResult<TPayload>();

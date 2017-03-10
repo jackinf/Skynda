@@ -49,8 +49,8 @@ namespace Triven.Application
                 configuration.CreateMap<Subscription, SubscriptionViewModel>();
                 configuration.CreateMap<SubscriptionViewModel, Subscription>();
 
-                configuration.CreateMap<Vehicle, VehicleAdminViewModel>();
-                configuration.CreateMap<Vehicle, VehicleDetailedViewModel>();
+                configuration.CreateMap<Vehicle, VehicleAdminViewModel>().PreserveReferences();
+                configuration.CreateMap<Vehicle, VehicleDetailedViewModel>().PreserveReferences();
                 configuration.CreateMap<VehicleAdminViewModel, Vehicle>();
 
                 configuration.CreateMap<VehicleDescription, VehicleDescriptionViewModel>();

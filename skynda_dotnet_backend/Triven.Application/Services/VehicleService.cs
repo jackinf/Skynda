@@ -5,7 +5,6 @@ using AutoMapper;
 using FluentValidation.Results;
 using Triven.Application.Validators.Vehicle;
 using Triven.Data.EntityFramework.Models;
-using Triven.Domain.Models;
 using Triven.Domain.Repositories;
 using Triven.Domain.Results;
 using Triven.Domain.Services;
@@ -41,9 +40,17 @@ namespace Triven.Application.Services
 
         public ServiceResult<VehicleAdminViewModel> Get(int id)
         {
-            var result = _vehicleRepository.Get(id);
-            VehicleAdminViewModel mappedResult = Mapper.Map<Vehicle, VehicleAdminViewModel>(result);
-            return ServiceResult<VehicleAdminViewModel>.Factory.Success(mappedResult);
+            try
+            {
+                var result = _vehicleRepository.Get(id);
+                VehicleAdminViewModel mappedResult = Mapper.Map<Vehicle, VehicleAdminViewModel>(result);
+                return ServiceResult<VehicleAdminViewModel>.Factory.Success(mappedResult);
+            }
+            catch (Exception e)
+            {
+                return ServiceResult<VehicleAdminViewModel>.Factory.Fail(e.Message);
+            }
+            
         }
 
         public ServiceResult<VehicleDetailedViewModel> GetDetailed(int id)
