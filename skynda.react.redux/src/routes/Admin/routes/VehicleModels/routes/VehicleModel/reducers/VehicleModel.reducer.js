@@ -34,10 +34,10 @@ const ACTION_HANDLERS = {
   [SET_RANDOM_ITEM]: (state, action) => ({...state, type: action.type, item: action.item, errors: action.errors})
 };
 
+const initialState = {isFetching: false, errors: {}, formMode: FORM_MODE.NONE_MODEL};
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState = {isFetching: false, errors: {}, formMode: FORM_MODE.NONE_MODEL};
 export default function reducer(state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type];
   return handler ? handler(state, action) : state;

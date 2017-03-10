@@ -14,11 +14,11 @@ import {
 } from "../actions";
 import {getList as getVehicleModelsList} from "../../../../VehicleModels/actions";
 import {getList as getVehicles} from "../../../actions"
-import {REDUCER_KEYS, FORMS} from "../../../constants/Vehicles.constant";
+import {REDUCER_KEYS, VEHICLE_FORM_KEY} from "../../../constants/Vehicles.constant";
 import VehicleComponent from "../components/Vehicle.component";
 import {reduxForm} from "redux-form";
 
-const VehicleComponentForm = reduxForm({form: FORMS.VEHICLE_FORM})(VehicleComponent);
+const VehicleComponentForm = reduxForm({form: VEHICLE_FORM_KEY})(VehicleComponent);
 
 const mapDispatchToProps = {
   clear,

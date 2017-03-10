@@ -1,11 +1,7 @@
-/**
- * Created by zekar on 3/6/2017.
- */
-
 import _ from "underscore";
 import {browserHistory} from "react-router";
 import {change} from "redux-form";
-import {FORM_MODE, FORMS} from "../../../constants/Vehicles.constant";
+import {FORM_MODE, REDUCER_KEYS, VEHICLE_FORM_KEY} from "../../../constants/Vehicles.constant";
 import {VehicleService} from "../../../../../../../webServices/VehicleServices";
 import {toastr} from "react-redux-toastr";
 
@@ -76,7 +72,7 @@ function submitCreate(item, onSubmitCustom) {
       if (_.isFunction(onSubmitCustom)) {
         onSubmitCustom(null, resp.id);
       } else {
-        dispatch(change(FORMS.VEHICLE_FORM, "id", resp.id));
+        dispatch(change(VEHICLE_FORM_KEY, "id", resp.id));
         browserHistory.replace("/admin/vehicle/" + resp.id);
         toastr.success("Success", "Create successful");
       }
@@ -109,9 +105,8 @@ function submitEdit(item, onSubmitCustom) {
 export default function submit(onSubmitCustom) {
   return (dispatch, getState) => {
     const state = getState();
-    const formValues = state.form[FORMS.VEHICLE_FORM].values;
-    const formMode = state[FORMS.VEHICLE_FORM].formMode;
-
+    const formValues = state.form[VEHICLE_FORM_KEY].values;
+    const formMode = state[REDUCER_KEYS.VEHICLE_DATA].formMode;
     if (formMode === FORM_MODE.ADDING) {
       dispatch(submitCreate(formValues, onSubmitCustom))
     }

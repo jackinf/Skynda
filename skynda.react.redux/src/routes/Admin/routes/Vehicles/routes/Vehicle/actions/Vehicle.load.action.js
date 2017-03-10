@@ -1,7 +1,7 @@
 /**
  * Created by zekar on 3/6/2017.
  */
-import {FORM_MODE, ROUTE_PARAMS, FORMS} from "../../../constants/Vehicles.constant";
+import {FORM_MODE, ROUTE_PARAMS, VEHICLE_FORM_KEY} from "../../../constants/Vehicles.constant";
 import {initialize, destroy} from "redux-form";
 import {VehicleService} from "../../../../../../../webServices"
 
@@ -55,7 +55,7 @@ const loadEditForm = (id) => async (dispatch) => {
   try {
     const item = await VehicleService.fetchItem(id);
     dispatch(loadEditSuccess(item));
-    dispatch(initialize(FORMS.VEHICLE_FORM, item));
+    dispatch(initialize(VEHICLE_FORM_KEY, item));
   } catch (error) {
     dispatch(loadEditError(error));
   }
@@ -71,7 +71,7 @@ const loadEditForm = (id) => async (dispatch) => {
  */
 export default function load(id) {
   return (dispatch) => {
-    dispatch(destroy(FORMS.VEHICLE_FORM));
+    dispatch(destroy(VEHICLE_FORM_KEY));
 
     const formMode = id === ROUTE_PARAMS.values.NEW
       ? FORM_MODE.ADDING

@@ -1,6 +1,5 @@
 export const FORMS = {
-  DEFAULT_REDUX_FORM_KEY: "form", // Do not change the value! redux-forms depends on it.  // TODO: REMOVE
-  VEHICLE_FORM: "adminVehicleAddUpdateForm",
+  DEFAULT_REDUX_FORM_KEY: "form" // Do not change the value! redux-forms depends on it.  // TODO: REMOVE
 };
 
 export const ROUTE_PARAMS = {
@@ -27,3 +26,6 @@ export const REDUCER_KEYS = {
   VEHICLES_DATA: "vehiclesData",
   FORM_MODE_VEHICLE: "formMode1"
 };
+
+
+export const VEHICLE_FORM_KEY = "adminVehicleForm";

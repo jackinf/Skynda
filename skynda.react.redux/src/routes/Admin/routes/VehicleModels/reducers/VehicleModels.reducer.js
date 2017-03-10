@@ -22,10 +22,10 @@ const ACTION_HANDLERS = {
   [DELETE_FAILURE]: (state, action) => ({...state, type: action.type, isFetching: action.isFetching, errors: action.errors}),
 };
 
+const initialState = {isFetching: false, items: []};
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState = {isFetching: false, items: []};
 export default function reducer(state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type];
   return handler ? handler(state, action) : state;

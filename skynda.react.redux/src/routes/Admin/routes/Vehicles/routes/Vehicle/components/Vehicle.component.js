@@ -7,7 +7,7 @@ import {Row, Col, Modal, Button} from "react-bootstrap";
 import _ from "underscore";
 import {TableHeaderColumn} from "react-bootstrap-table";
 import "./Vehicle.component.scss";
-import {ROUTE_PARAMS, FORM_MODE, FORMS} from "../../../constants/Vehicles.constant";
+import {ROUTE_PARAMS, FORM_MODE, VEHICLE_FORM_KEY} from "../../../constants/Vehicles.constant";
 import {
   descriptionRenderer,
   ImagesCardField,
@@ -72,7 +72,7 @@ class Vehicle extends React.Component {
    * @param event
    */
   onSetField = (name, value, event) => {
-    this.props.dispatch(change(FORMS.VEHICLE_FORM, name, value))
+    this.props.dispatch(change(VEHICLE_FORM_KEY, name, value))
   };
 
   /**
@@ -84,7 +84,7 @@ class Vehicle extends React.Component {
   onSelectItemChange = (name, chosenOption) => {
     const hackName = name.replace(".id", "");
     if (chosenOption.value !== chosenOption.label) {
-      this.props.dispatch(change(FORMS.VEHICLE_FORM, hackName, {id: chosenOption.value}));
+      this.props.dispatch(change(VEHICLE_FORM_KEY, hackName, {id: chosenOption.value}));
     } else if (hackName === "model") {
       // this.openVehicleModelDialog(null);
       this.setState({isVehicleModelDialogOpen: true});
@@ -182,7 +182,7 @@ class Vehicle extends React.Component {
   };
 
   setField = (name, value) => {
-    this.props.dispatch(change(FORMS.VEHICLE_FORM, name, value));
+    this.props.dispatch(change(VEHICLE_FORM_KEY, name, value));
   };
 
 
@@ -244,7 +244,7 @@ class Vehicle extends React.Component {
                   <Card>
                     <CropToolCard
                       name="mainImage"
-                      reduxFormName={FORMS.VEHICLE_FORM}
+                      reduxFormName={VEHICLE_FORM_KEY}
                       title="Main image"
                       errors={errors}
                     >
@@ -328,7 +328,10 @@ class Vehicle extends React.Component {
                       <Field name="additional" label="Additional info" component={renderTextField} />
                     </CardText>
 
-                    <Button disabled={this.props.submitting} onClick={e => this.props.onHandleSubmit(this.props.onSubmitCustom)}/>
+                    <Button className="btn btn-success vehicle-component--button-success"
+                          disabled={this.props.submitting} onClick={e => this.props.onHandleSubmit(this.props.onSubmitCustom)}>
+                      Save
+                    </Button>
                   </Card>
                 </Col>
                 <Col md={6} xs={12}>
