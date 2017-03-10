@@ -28,17 +28,23 @@ namespace Triven.Domain.Results
         {
             public static ServiceResult<TPayload> Fail(ValidationResult validation)
             {
-                var result = new ServiceResult<TPayload>();
-                result.IsSuccessful = false;
-                result.Validation = validation;
+                var result = new ServiceResult<TPayload>
+                {
+                    IsSuccessful = false,
+                    Validation = validation
+                };
                 return result;
             }
 
             public static ServiceResult<TPayload> Fail(IEnumerable<string> errors)
             {
-                var result = new ServiceResult<TPayload>();
-                result.IsSuccessful = false;
-                result.Validation = new ValidationResult(errors.Select(error => new ValidationFailure(string.Empty, error)));   // TODO: string.Empty - should be correct property
+                var result = new ServiceResult<TPayload>
+                {
+                    IsSuccessful = false,
+                    Validation = new ValidationResult(
+                        errors.Select(error => new ValidationFailure(string.Empty, error)))
+                };
+                // TODO: string.Empty - should be correct property
                 return result;
             }
 
@@ -51,18 +57,24 @@ namespace Triven.Domain.Results
 
             public static ServiceResult<TPayload> Success(TPayload payload, string message = "")
             {
-                var result = new ServiceResult<TPayload>();
-                result.IsSuccessful = true;
-                result.Payload = payload;
-                result.Message = message;
+                var result = new ServiceResult<TPayload>
+                {
+                    IsSuccessful = true,
+                    Payload = payload,
+                    Message = message
+                };
                 return result;
             }
 
             public static ServiceResult<TPayload> Fail(IList<ValidationFailure> errors)
             {
-                var result = new ServiceResult<TPayload>();
-                result.IsSuccessful = false;
-                result.Validation = new ValidationResult(errors.Select(error => new ValidationFailure(string.Empty, error.ErrorMessage)));   // TODO: string.Empty - should be correct property
+                var result = new ServiceResult<TPayload>
+                {
+                    IsSuccessful = false,
+                    Validation = new ValidationResult(
+                        errors.Select(error => new ValidationFailure(error.PropertyName, error.ErrorMessage)))
+                };
+                // TODO: string.Empty - should be correct property
                 return result;
             }
 
@@ -73,9 +85,12 @@ namespace Triven.Domain.Results
 
             public static ServiceResult<TPayload> Fail(Exception exception)
             {
-                var result = new ServiceResult<TPayload>();
-                result.IsSuccessful = false;
-                result.Validation = new ValidationResult(new List<ValidationFailure> {new ValidationFailure(string.Empty, exception.Message) });
+                var result = new ServiceResult<TPayload>
+                {
+                    IsSuccessful = false,
+                    Validation = new ValidationResult(
+                        new List<ValidationFailure> {new ValidationFailure(string.Empty, exception.Message)})
+                };
                 return result;
             }
         }

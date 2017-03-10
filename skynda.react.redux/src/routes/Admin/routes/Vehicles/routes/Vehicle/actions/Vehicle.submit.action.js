@@ -76,9 +76,9 @@ function submitCreate(item, onSubmitCustom) {
         browserHistory.replace("/admin/vehicle/" + resp.id);
         toastr.success("Success", "Create successful");
       }
-    } catch (err) {
-      dispatch(addFailure(err));
-      toastr.error("Oh no!", "Create failed");
+    } catch (error) {
+      dispatch(addFailure(error.modelState));
+      toastr.error("Oh no!", "Create failed: " +  error.message);
     }
   }
 }
@@ -95,9 +95,9 @@ function submitEdit(item, onSubmitCustom) {
 
         toastr.success("Success", "Update successful");
       }
-    } catch (err) {
-      dispatch(editFailure(err));
-      toastr.error("Oh no!", "Update failed");
+    } catch (error) {
+      dispatch(editFailure(error.modelState));
+      toastr.error("Oh no!", "Update failed " + error.message);
     }
   }
 }

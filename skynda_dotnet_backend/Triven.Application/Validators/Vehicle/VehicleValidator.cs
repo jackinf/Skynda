@@ -7,14 +7,20 @@ namespace Triven.Application.Validators.Vehicle
     {
         public VehicleValidator()
         {
-            RuleFor(x => x.VinCode).NotNull().NotEmpty();
-            RuleFor(x => x.Price).NotNull().NotEmpty();
-            RuleFor(x => x.RegistrationNumber).NotNull().NotEmpty();
-            RuleFor(x => x.Mileage).NotNull().NotEmpty();
-            RuleFor(x => x.ColorOutsideHex).NotNull().NotEmpty();
-            RuleFor(x => x.MainImage).NotNull();
-            RuleFor(x => x.Model).NotNull();
-            RuleFor(x => x.Model.Id).NotNull().NotEmpty();
+            RuleFor(x => x.MainImage).NotEmpty().WithMessage("MainImage is required");
+
+            RuleFor(x => x.Model).NotEmpty().WithMessage("Model is required");
+
+            RuleFor(x => x.Price).NotEmpty().WithMessage("Price is required");
+
+            RuleFor(x => x.Mileage).NotEmpty().WithMessage("Mileage is required");
+
+            RuleFor(x => x.VinCode).NotEmpty().WithMessage("Vin Code is required");
+
+            RuleFor(x => x.RegistrationNumber).NotEmpty().WithMessage("RegistrationNumber is required");
+
+            RuleFor(x => x.ColorOutsideHex).NotEmpty().WithMessage("ColorOutsideHex is required");
+
         }
     }
 }

@@ -22,7 +22,7 @@ namespace Triven.API.Controllers
 
             if (result.Errors != null)
             {
-                foreach (var error in result.Errors)
+                foreach (ValidationFailure error in result.Errors)
                 {
                     ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
                 }

@@ -202,6 +202,7 @@ class Vehicle extends React.Component {
 
     // Validation errors
     const errors = this.props.errors;  // TODO: LOL, spring, LOL. there is only one spring - time of the year... so fuck you, java. XD IMMA FIRIN MY LAAZO00oRRSS!!!
+    console.log("errors ", errors);
     const bootstrapTableOptionsReport = {
       onRowClick: this.openVehicleReportDialog,
       onAdd: this.openVehicleReportDialog,
