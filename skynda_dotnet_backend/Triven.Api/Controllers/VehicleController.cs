@@ -34,7 +34,7 @@ namespace Triven.API.Controllers
 
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [HttpPut, Route("{id:int}")]
-        public IHttpActionResult Update([FromUri] int id, [FromBody] dynamic viewModel)
+        public IHttpActionResult Update([FromUri] int id, [FromBody] VehicleAdminViewModel viewModel)
         {
             try
             {

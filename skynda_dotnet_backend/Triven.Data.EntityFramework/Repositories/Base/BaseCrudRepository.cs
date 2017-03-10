@@ -97,6 +97,7 @@ namespace Triven.Data.EntityFramework.Repositories.Base
         public virtual IResult<TModel> Update(int id, TModel model)
         {
             Context.Entry(model).State = EntityState.Modified;
+            Context.Entry(model).Property(x => x.CreatedOn).IsModified = false;
 
             try
             {

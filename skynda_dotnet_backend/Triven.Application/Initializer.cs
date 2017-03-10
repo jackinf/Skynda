@@ -52,11 +52,14 @@ namespace Triven.Application
                 configuration.CreateMap<Vehicle, VehicleAdminViewModel>().PreserveReferences()
                     .ForMember(x => x.Features, conf => conf.Ignore());
                 configuration.CreateMap<Vehicle, VehicleDetailedViewModel>().PreserveReferences();
-                configuration.CreateMap<VehicleAdminViewModel, Vehicle>();
+                configuration.CreateMap<VehicleAdminViewModel, Vehicle>()
+                    .ForMember(x => x.Features, conf => conf.Ignore())
+                    .ForMember(x => x.Descriptions, conf => conf.Ignore());
 
                 configuration.CreateMap<VehicleDescription, VehicleDescriptionViewModel>().PreserveReferences()
                     .ForMember(x => x.Vehicle, conf => conf.Ignore());
-                configuration.CreateMap<VehicleDescriptionViewModel, VehicleDescription>();
+                configuration.CreateMap<VehicleDescriptionViewModel, VehicleDescription>()
+                    .ForMember(x => x.Vehicle, conf => conf.Ignore());
 
                 //configuration.CreateMap<VehicleFault, VehicleFaultViewModel>();
                 //configuration.CreateMap<VehicleFaultViewModel, VehicleFault>();

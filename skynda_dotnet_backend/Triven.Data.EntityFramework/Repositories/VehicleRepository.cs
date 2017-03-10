@@ -94,6 +94,8 @@ namespace Triven.Data.EntityFramework.Repositories
             using (Context = new ApplicationDbContext())
             {
                 Context.Entry(model.VehicleModel).State = EntityState.Unchanged;
+                Context.Entry(model.Descriptions).State = EntityState.Unchanged;
+                Context.Entry(model.Features).State = EntityState.Unchanged;
                 return base.Update(id, model);
             }
         }

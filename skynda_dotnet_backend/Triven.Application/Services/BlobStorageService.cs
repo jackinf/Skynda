@@ -172,12 +172,14 @@ namespace Triven.Application.Services
 
                     var mappedImageEntity = Mapper.Map<ImageViewModel, Image>(viewModel);
 
-                    var added = _imageRepository.Add(mappedImageEntity);
+                    if (existingMedia == null || existingMedia.Id == 0)
+                    {
+                        return _imageRepository.Add(mappedImageEntity).ContextObject;
+                    }
 
-                    DeleteBlobIfExists(existingMedia);
+                    mappedImageEntity.Id = existingMedia.Id;                    
 
-                    //var mappedResult = Mapper.Map<Image, ImageViewModel>(add.ContextObject);
-                    return added.ContextObject;
+                    return _imageRepository.Update(mappedImageEntity.Id, mappedImageEntity).ContextObject;
                 }
 
                 return existingMedia;

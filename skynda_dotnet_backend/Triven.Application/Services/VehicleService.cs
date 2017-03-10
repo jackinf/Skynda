@@ -110,20 +110,16 @@ namespace Triven.Application.Services
 
                 return ServiceResult<VehicleAdminViewModel>.Factory.Success(mappedResult, result.Message);
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                return ServiceResult<VehicleAdminViewModel>.Factory.Fail(new ValidationResult());
+                return ServiceResult<VehicleAdminViewModel>.Factory.Fail(ex.Message);
             }
            
         }
 
-        private void UpdateDescriptions(int id, List<VehicleDescriptionViewModel> descriptions, 
-            IList<VehicleDescription> existingDescriptions = null )
+        private void UpdateDescriptions(int id, List<VehicleDescriptionViewModel> descriptions)
         {
-            if (existingDescriptions == null)
-            {
-                existingDescriptions = _vehicleDescriptionRepository.GetAllVehicleDescriptions(id);
-            }
+            var existingDescriptions = _vehicleDescriptionRepository.GetAllVehicleDescriptions(id);
 
             if (existingDescriptions.Any())
             {
@@ -142,8 +138,12 @@ namespace Triven.Application.Services
 
             foreach (var vehicleDescriptionViewModel in descriptions)
             {
-                VehicleDescription description =
-                    Mapper.Map<VehicleDescriptionViewModel, VehicleDescription>(vehicleDescriptionViewModel);
+                VehicleDescription description = new VehicleDescription
+                {
+                    Vehicle = new Vehicle { Id = id }
+                };
+
+                Mapper.Map(vehicleDescriptionViewModel, description);
 
                 if (existingDescriptions.Any() &&
                     existingDescriptions.Any(x => x.Id == vehicleDescriptionViewModel.Id))
@@ -157,8 +157,7 @@ namespace Triven.Application.Services
             }
         }
 
-        private void UpdateFeatures(int vehicleId, List<FeatureAdminSelectViewModel> features,
-            IList<VehicleFeature> existingFeatures = null)
+        private void UpdateFeatures(int vehicleId, List<FeatureAdminSelectViewModel> features, IList<VehicleFeature> existingFeatures = null)
         {
             if(existingFeatures == null)
                 existingFeatures = _vehicleFeatureRepository.GetAllBy(vehicleId);
@@ -202,10 +201,8 @@ namespace Triven.Application.Services
 
         public ServiceResult<VehicleAdminViewModel> Update(int id, VehicleAdminViewModel viewModel)
         {
-
             VehicleValidator validator = new VehicleValidator();
             ValidationResult results = validator.Validate(viewModel);
-
 
             if (!results.IsValid)
             {
@@ -220,17 +217,17 @@ namespace Triven.Application.Services
             var mainImage = _blobStorageService.HandleMedia(viewModel.MainImage, entity.MainImage);
             entity.MainImage = mainImage as Image;         
 
-            UpdateDescriptions(entity.Id, viewModel.Descriptions, entity.Descriptions);
+            UpdateDescriptions(entity.Id, viewModel.Descriptions);
             UpdateFeatures(entity.Id, viewModel.FeaturesAdminSelect, entity.Features);
 
-            if (viewModel.Images != null && viewModel.Images.Any())
-            {
-                foreach (var imageContainerViewModel in viewModel.Images)
-                {
+            //if (viewModel.Images != null && viewModel.Images.Any())
+            //{
+            //    foreach (var imageContainerViewModel in viewModel.Images)
+            //    {
 
-                    var image = _blobStorageService.HandleMedia(imageContainerViewModel.Image, null);                    
-                }
-            }
+            //        var image = _blobStorageService.HandleMedia(imageContainerViewModel, null);                    
+            //    }
+            //}
 
             var result = _vehicleRepository.Update(id, entity);
 
