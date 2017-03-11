@@ -9,9 +9,9 @@ namespace Triven.Data.EntityFramework.Repositories
     {
         public Subscription GetByEmail(string email)
         {
-            using (Context = new ApplicationDbContext())
+            using (var context = new ApplicationDbContext())
             {
-                return BaseQuery().FirstOrDefault(x => x.Email == email);
+                return BaseQuery(context).FirstOrDefault(x => x.Email == email);
             }
         }
     }

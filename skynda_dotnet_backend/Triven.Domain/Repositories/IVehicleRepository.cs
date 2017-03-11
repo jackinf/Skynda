@@ -11,5 +11,7 @@ namespace Triven.Domain.Repositories
     {
         TVehicleEntity GetIncluding(int id, bool descriptions = false, bool images = false);
         IList<TVehicleEntity> Search(SearchRequestViewModel dto);
+
+        TVehicleEntity GetDetailed(int id);
     }
 }

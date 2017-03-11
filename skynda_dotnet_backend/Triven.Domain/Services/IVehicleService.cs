@@ -18,7 +18,7 @@ namespace Triven.Domain.Services
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        ServiceResult<VehicleAdminViewModel> Get(int id);
+        ServiceResult<VehicleDetailedViewModel> Get(int id);
         
         /**
          * Gets a single vehicle. Used for displaying full info about the vehicle to the user
@@ -26,7 +26,7 @@ namespace Triven.Domain.Services
          * @param id vehicle's id
          * @return single vehicle's dto
          */
-        ServiceResult<VehicleDetailedViewModel> GetDetailed(int id);
+        ServiceResult<VehicleAdminViewModel> GetDetailed(int id);
 
         /// <summary>
         /// Adds new vehicle for sale

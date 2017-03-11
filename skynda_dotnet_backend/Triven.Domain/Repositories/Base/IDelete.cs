@@ -1,7 +1,9 @@
-﻿namespace Triven.Domain.Repositories.Base
+﻿using Triven.Domain.UnitOfWorks;
+
+namespace Triven.Domain.Repositories.Base
 {
     public interface IDelete
     {
-        bool Delete(int id);
+        bool Delete(int id, IDbContext context = null);
     }
 }

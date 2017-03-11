@@ -38,11 +38,11 @@ namespace Triven.Application.Services
             return ServiceResult<IEnumerable<VehicleDetailedViewModel>>.Factory.Success(mappedResults);
         }
 
-        public ServiceResult<VehicleAdminViewModel> Get(int id)
+        public ServiceResult<VehicleAdminViewModel> GetDetailed(int id)
         {
             try
             {
-                var result = _vehicleRepository.Get(id);
+                var result = _vehicleRepository.GetDetailed(id);
                 VehicleAdminViewModel mappedResult = Mapper.Map<Vehicle, VehicleAdminViewModel>(result);
 
                 if (result.Features.Any())
@@ -66,7 +66,7 @@ namespace Triven.Application.Services
             
         }
 
-        public ServiceResult<VehicleDetailedViewModel> GetDetailed(int id)
+        public ServiceResult<VehicleDetailedViewModel> Get(int id)
         {
             var result = _vehicleRepository.Get(id);
             VehicleDetailedViewModel mappedResult = Mapper.Map<Vehicle, VehicleDetailedViewModel>(result);

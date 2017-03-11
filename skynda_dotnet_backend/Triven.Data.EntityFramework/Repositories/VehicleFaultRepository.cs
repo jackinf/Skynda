@@ -10,9 +10,9 @@ namespace Triven.Data.EntityFramework.Repositories
     {
         public IList<VehicleFault> GetCategoryFaults(int categoryId)
         {
-            using (Context = new ApplicationDbContext())
+            using (var context = new ApplicationDbContext())
             {
-                return BaseQuery().Where(x => x.VehicleReport.Id == categoryId).ToList();
+                return BaseQuery(context).Where(x => x.VehicleReport.Id == categoryId).ToList();
             }
         }
     }

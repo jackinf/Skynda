@@ -17,10 +17,10 @@ namespace Triven.Data.EntityFramework.Repositories
 
         public IList<VehicleModel> Search(VehicleModelSearchRequestViewModel parameters)
         {
-            using (Context = new ApplicationDbContext())
+            using (var context = new ApplicationDbContext())
             {
                 return
-                    BaseQuery()
+                    BaseQuery(context)
                         .Include(x => x.VehicleManufacturer)
                         .Where(x => parameters.ManufacturerIds.Any(id => id == x.VehicleManufacturer.Id))
                         .ToList();
@@ -29,9 +29,9 @@ namespace Triven.Data.EntityFramework.Repositories
 
         public VehicleModel GetFullVehicleModel(int id)
         {
-            using (Context = new ApplicationDbContext())
+            using (var context = new ApplicationDbContext())
             {
-                return BaseQuery()
+                return BaseQuery(context)
                     .Include(x => x.Drivetrain)
                     .Include(x => x.FuelType)
                     .Include(x => x.Transmission)
@@ -41,29 +41,29 @@ namespace Triven.Data.EntityFramework.Repositories
             }
         }
 
-        public override IResult<VehicleModel> Add(VehicleModel model)
+        public IResult<VehicleModel> Add(VehicleModel model)
         {
-            using (Context = new ApplicationDbContext())
+            using (var context = new ApplicationDbContext())
             {
-                Context.Entry(model.Drivetrain).State = EntityState.Unchanged;
-                Context.Entry(model.FuelType).State = EntityState.Unchanged;
-                Context.Entry(model.Transmission).State = EntityState.Unchanged;
-                Context.Entry(model.VehicleBody).State = EntityState.Unchanged;
-                Context.Entry(model.VehicleManufacturer).State = EntityState.Unchanged;
-                return base.Add(model);
+                context.Entry(model.Drivetrain).State = EntityState.Unchanged;
+                context.Entry(model.FuelType).State = EntityState.Unchanged;
+                context.Entry(model.Transmission).State = EntityState.Unchanged;
+                context.Entry(model.VehicleBody).State = EntityState.Unchanged;
+                context.Entry(model.VehicleManufacturer).State = EntityState.Unchanged;
+                return base.Add(model, context);
             }
         }
 
-        public override IResult<VehicleModel> Update(int id, VehicleModel model)
+        public IResult<VehicleModel> Update(int id, VehicleModel model)
         {
-            using (Context = new ApplicationDbContext())
+            using (var context = new ApplicationDbContext())
             {
-                Context.Entry(model.Drivetrain).State = EntityState.Unchanged;
-                Context.Entry(model.FuelType).State = EntityState.Unchanged;
-                Context.Entry(model.Transmission).State = EntityState.Unchanged;
-                Context.Entry(model.VehicleBody).State = EntityState.Unchanged;
-                Context.Entry(model.VehicleManufacturer).State = EntityState.Unchanged;
-                return base.Update(id, model);
+                context.Entry(model.Drivetrain).State = EntityState.Unchanged;
+                context.Entry(model.FuelType).State = EntityState.Unchanged;
+                context.Entry(model.Transmission).State = EntityState.Unchanged;
+                context.Entry(model.VehicleBody).State = EntityState.Unchanged;
+                context.Entry(model.VehicleManufacturer).State = EntityState.Unchanged;
+                return base.Update(id, model, context);
             }
         }
     }

@@ -10,17 +10,17 @@ namespace Triven.Data.EntityFramework.Repositories
     {
         public List<VehicleReview> GetAllBy(int vehicleId)
         {
-            using (Context = new ApplicationDbContext())
+            using (var context = new ApplicationDbContext())
             {
-                return BaseQuery().Where(x => x.Vehicle.Id == vehicleId).ToList();
+                return BaseQuery(context).Where(x => x.Vehicle.Id == vehicleId).ToList();
             }
         }
 
         public List<VehicleReview> GetAllBy(int vehicleId, bool isActive)
         {
-            using (Context = new ApplicationDbContext())
+            using (var context = new ApplicationDbContext())
             {
-                return BaseQuery().Where(x => x.Vehicle.Id == vehicleId).ToList();
+                return BaseQuery(context).Where(x => x.Vehicle.Id == vehicleId).ToList();
             }
         }
     }

@@ -12,9 +12,9 @@ namespace Triven.Data.EntityFramework.Repositories
     {
         public IList<VehicleFeature> GetAllBy(int vehicleId)
         {
-            using (Context = new ApplicationDbContext())
+            using (var context = new ApplicationDbContext())
             {
-                return BaseQuery()
+                return BaseQuery(context)
                     .Include(x => x.Vehicle)
                     .Include(x => x.Feature)
                     .Where(x => x.Vehicle.Id == vehicleId).ToList();
@@ -23,19 +23,19 @@ namespace Triven.Data.EntityFramework.Repositories
 
         public IList<VehicleFeature> GetAllBy(int vehicleId, bool isActive)
         {
-            using (Context = new ApplicationDbContext())
+            using (var context = new ApplicationDbContext())
             {
-                return BaseQuery().Where(x => x.Vehicle.Id == vehicleId && x.IsArchived == !isActive).ToList();
+                return BaseQuery(context).Where(x => x.Vehicle.Id == vehicleId && x.IsArchived == !isActive).ToList();
             }
         }
 
-        public override IResult<VehicleFeature> Add(VehicleFeature model)
+        public IResult<VehicleFeature> Add(VehicleFeature model)
         {
-            using (Context = new ApplicationDbContext())
+            using (var context = new ApplicationDbContext())
             {
-                Context.Entry(model.Feature).State = EntityState.Unchanged;
-                Context.Entry(model.Vehicle).State = EntityState.Unchanged;
-                return base.Add(model);
+                context.Entry(model.Feature).State = EntityState.Unchanged;
+                context.Entry(model.Vehicle).State = EntityState.Unchanged;
+                return base.Add(model, context);
             }
             
         }

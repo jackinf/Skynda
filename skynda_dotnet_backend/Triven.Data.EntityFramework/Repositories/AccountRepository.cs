@@ -9,12 +9,14 @@ namespace Triven.Data.EntityFramework.Repositories
     {
         public ApplicationUser GetByEmail(string email)
         {
-            return BaseQuery().FirstOrDefault(x => x.Email == email);
+            using (var context = new ApplicationDbContext())
+                return BaseQuery(context).FirstOrDefault(x => x.Email == email);
         }
 
         public ApplicationUser GetByLogin(string login)
         {
-            return BaseQuery().FirstOrDefault(x => x.UserName == login);
+            using (var context = new ApplicationDbContext())
+                return BaseQuery(context).FirstOrDefault(x => x.UserName == login);
         }
     }
 }

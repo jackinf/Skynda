@@ -13,18 +13,18 @@ namespace Triven.Data.EntityFramework.Repositories
     {
         public Vehicle GetIncluding(int id, bool descriptions = false, bool images = false)
         {
-            using (Context = new ApplicationDbContext()) 
+            using (var context = new ApplicationDbContext()) 
             {
-                return BaseQuery().Include(x => x.Images).Include(x => x.Descriptions).FirstOrDefault();
+                return BaseQuery(context).Include(x => x.Images).Include(x => x.Descriptions).FirstOrDefault();
             }
         }
 
 
         public IList<Vehicle> Search(SearchRequestViewModel dto)
         {
-            using (Context = new ApplicationDbContext())
+            using (var context = new ApplicationDbContext())
             {
-                var query = BaseQuery().Include(x => x.VehicleModel);
+                var query = BaseQuery(context).Include(x => x.VehicleModel);
                 if (dto.Models?.Any() ?? false)
                     query = query.Where(x => dto.Models.Any(model => model.Value == x.VehicleModel.Id));
                 if (dto.Brands?.Any() ?? false)
@@ -61,22 +61,22 @@ namespace Triven.Data.EntityFramework.Repositories
             }
         }
 
-        public override IResult<Vehicle> Add(Vehicle model)
+        public IResult<Vehicle> Add(Vehicle model)
         {
-            using (Context = new ApplicationDbContext())
+            using (var context = new ApplicationDbContext())
             {
-                Context.Entry(model.VehicleModel).State = EntityState.Unchanged;
+                context.Entry(model.VehicleModel).State = EntityState.Unchanged;
                 return base.Add(model);
             }
         }
 
-        public override Vehicle Get(int id)
+        public Vehicle GetDetailed(int id)
         {
-            using (Context = new ApplicationDbContext())
+            using (var context = new ApplicationDbContext())
             {
-                Context.Features.Include(c => c.Id);
+                context.Features.Include(c => c.Id);
 
-                var result = BaseQuery()
+                var result = BaseQuery(context)
                     .Include(x => x.VehicleModel)
                     .Include(x => x.MainImage)                    
                     .Include(x => x.Features.Select(o => o.Feature))
@@ -89,14 +89,14 @@ namespace Triven.Data.EntityFramework.Repositories
             
         }
 
-        public override IResult<Vehicle> Update(int id, Vehicle model)
+        public IResult<Vehicle> Update(int id, Vehicle model)
         {
-            using (Context = new ApplicationDbContext())
+            using (var context = new ApplicationDbContext())
             {
-                Context.Entry(model.VehicleModel).State = EntityState.Unchanged;
-                Context.Entry(model.Descriptions).State = EntityState.Unchanged;
-                Context.Entry(model.Features).State = EntityState.Unchanged;
-                return base.Update(id, model);
+                context.Entry(model.VehicleModel).State = EntityState.Unchanged;
+                context.Entry(model.Descriptions).State = EntityState.Unchanged;
+                context.Entry(model.Features).State = EntityState.Unchanged;
+                return base.Update(id, model, context);
             }
         }
     }
