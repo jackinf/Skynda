@@ -2,7 +2,6 @@ import React from 'react';
 import {Field, change} from 'redux-form';
 import {toastr} from "react-redux-toastr";
 import {Card, CardText} from 'material-ui/Card';
-import RefreshIndicator from 'material-ui/RefreshIndicator';
 import {Row, Col, Modal} from "react-bootstrap";
 import _ from "underscore";
 import "./Vehicle.component.scss";
@@ -16,15 +15,13 @@ import {
   renderCheckbox
 } from "../../../../../components/FormRenderers";
 import {ROUTE_PARAMS as VEHICLE_MODEL_ROUTE_PARAMS} from "../../../../VehicleModels/constants/VehicleModel.constant";
-import {ROUTE_PARAMS as VEHICLE_REPORT_ROUTE_PARAMS} from "../../../../VehicleReports/constants/VehicleReport.constant";
-import {ROUTE_PARAMS as VEHICLE_REVIEW_ROUTE_PARAMS} from "../../../../VehicleReviews/constants/VehicleReview.constant";
 import VehicleModel from "../../../../VehicleModels/routes/VehicleModel/containers/VehicleModel.container";
 import {CropToolCard} from "../../../../../../../components/ReduxForm/CropTool";
 import VehicleFeaturesAndDescriptionsCard from "./Vehicle.features-and-descriptions-card.component";
 import VehicleReviewsCardComponent from "./Vehicle.reviews-card.component";
 import VehicleReportsCardComponent from "./Vehicle.reports-card.component";
 import {SubmitCardActionsComponent as SubmitCardActions} from "./FormRenderers";
-
+import {TrivenLoader} from "components/Triven";
 
 class Vehicle extends React.Component {
   constructor(props) {
@@ -32,10 +29,6 @@ class Vehicle extends React.Component {
     this.state = {
       id: this.props.params[ROUTE_PARAMS.VEHICLE_ID],
       isVehicleModelDialogOpen: false,
-      isVehicleReportDialogOpen: false,
-      isVehicleReviewDialogOpen: false,
-      vehicleReportId: VEHICLE_REPORT_ROUTE_PARAMS.values.NEW,
-      vehicleReviewId: VEHICLE_REVIEW_ROUTE_PARAMS.values.NEW
     };
   }
 
@@ -130,112 +123,114 @@ class Vehicle extends React.Component {
 
     const isUpdating = this.props.formModeVehicle === FORM_MODE.UPDATING;
     const submitCardActions = <SubmitCardActions disabled={this.props.submitting} onSubmit={this.props.onHandleSubmit} />;
+    const isFetching = this.props.isFetching;
 
     return (<div>
-        {this.props.isFetching || this.props.submitting
-          ? <div><RefreshIndicator size={100} left={200} top={200} status="loading"/></div>
-          : (<div>
-            <form>
+      <form>
+        <ErrorBlockRenderer errors={errors}/>
 
-              <ErrorBlockRenderer errors={errors}/>
+        <Row>
+          <Col xs={12}>
+            {isUpdating
+              ? <h3><span className="label label-primary">ID: {this.props.id || this.state.id}</span></h3>
+              : <h3><span className="label label-success">{this.props.formModeVehicle}</span></h3>}
+          </Col>
+        </Row>
 
-              <Row>
-                <Col xs={12}>
-                  {isUpdating
-                    ? <h3><span className="label label-primary">ID: {this.props.id || this.state.id}</span></h3>
-                    : <h3><span className="label label-success">{this.props.formModeVehicle}</span></h3>}
-                </Col>
-              </Row>
+        <Row>
+            <Col md={6} xs={12}>
+              <CropToolCard
+                name="mainImage"
+                reduxFormName={VEHICLE_FORM_KEY}
+                title="Main image"
+                errors={errors}
+              >
+              </CropToolCard>
+              <br/>
 
-              <Row>
-                  <Col md={6} xs={12}>
-                    <CropToolCard
-                      name="mainImage"
-                      reduxFormName={VEHICLE_FORM_KEY}
-                      title="Main image"
-                      errors={errors}
-                    >
-                    </CropToolCard>
+              {/* TODO: See panna Vehicle.main-card.component.js */}
+              <TrivenLoader isLoading={isFetching}>
+                <Card>
+                  <CardText>
+                    <Field name="isSold" label="Is Sold" component={renderCheckbox} errors={errors}/>
+
+                    <Field name="vehicleModel.id" label="Vehicle model *"
+                           component={selectRenderer(vehicleModels, this.onSelectItemChange)}/>
+                    <Modal show={this.state.isVehicleModelDialogOpen} onHide={this.closeVehicleModelDialog}>
+                      <Modal.Header closeButton>
+                        <Modal.Title>Modal heading</Modal.Title>
+                      </Modal.Header>
+                      <Modal.Body>
+                        <VehicleModel params={{[VEHICLE_MODEL_ROUTE_PARAMS.VEHICLE_MODEL_ID]: "new"}}
+                                      onSubmitCustom={this.closeVehicleModelDialog}/>
+                      </Modal.Body>
+                    </Modal>
+
+                    <Field name="price" label="Price *" component={renderTextField} type="number"/>
+                    <Field name="mileage" label="Mileage *" component={renderTextField} type="number" />
+
+                    <label>Fuel:</label><br/>
+                    <Field name="fuelCity" label="Fuel City" component={renderTextField}/>
+                    <Field name="fuelHighway" label="Fuel Highway" component={renderTextField}/>
                     <br/>
 
-                    {/* TODO: See panna Vehicle.main-card.component.js */}
-                    <Card>
-                      <CardText>
-                        <Field name="isSold" label="Is Sold" component={renderCheckbox} errors={errors}/>
-
-                        <Field name="vehicleModel.id" label="Vehicle model *"
-                               component={selectRenderer(vehicleModels, this.onSelectItemChange)}/>
-                        <Modal show={this.state.isVehicleModelDialogOpen} onHide={this.closeVehicleModelDialog}>
-                          <Modal.Header closeButton>
-                            <Modal.Title>Modal heading</Modal.Title>
-                          </Modal.Header>
-                          <Modal.Body>
-                            <VehicleModel params={{[VEHICLE_MODEL_ROUTE_PARAMS.VEHICLE_MODEL_ID]: "new"}}
-                                          onSubmitCustom={this.closeVehicleModelDialog}/>
-                          </Modal.Body>
-                        </Modal>
-
-                        <Field name="price" label="Price *" component={renderTextField} type="number"/>
-                        <Field name="mileage" label="Mileage *" component={renderTextField} type="number" />
-
-                        <label>Fuel:</label><br/>
-                        <Field name="fuelCity" label="Fuel City" component={renderTextField}/>
-                        <Field name="fuelHighway" label="Fuel Highway" component={renderTextField}/>
-                        <br/>
-
-                        <label>History:</label><br/>
-                        <Field name="vinCode" label="Vin Code *" component={renderTextField}/>
-                        <Field name="registrationNumber" label="Registration Number *" component={renderTextField} />
-                        <br/>
-
-                        <label>Safety:</label><br/>
-                        <Field name="safetyStars" label="Safety Stars" component={renderTextField} type="number" />
-                        <Field name="safetyUrl" label="Safety Url" component={renderTextField} />
-
-                        <Field name="colorInsideHex"
-                               label="Color inside *"
-                               onChangeComplete={this.onSetField}
-                               component={ColorRenderer}/>
-
-                        <Field name="colorOutsideHex"
-                               label="Color outside *"
-                               onChangeComplete={this.onSetField}
-                               component={ColorRenderer}/>
-                      </CardText>
-                      {submitCardActions}
-                    </Card>
-
+                    <label>History:</label><br/>
+                    <Field name="vinCode" label="Vin Code *" component={renderTextField}/>
+                    <Field name="registrationNumber" label="Registration Number *" component={renderTextField} />
                     <br/>
 
-                    <VehicleFeaturesAndDescriptionsCard featuresList={featuresList}>
-                      {submitCardActions}
-                      </VehicleFeaturesAndDescriptionsCard>
-                  </Col>
+                    <label>Safety:</label><br/>
+                    <Field name="safetyStars" label="Safety Stars" component={renderTextField} type="number" />
+                    <Field name="safetyUrl" label="Safety Url" component={renderTextField} />
 
-                {isUpdating ?
-                  (<Col md={6} xs={12}>
-                    <ImagesCard
-                      onImageFileUpload={this.props.onImageFileUpload}
-                      onImageFileRemove={this.props.onImageFileRemove}>
-                      {submitCardActions}
-                    </ImagesCard>
-                  </Col>) :
-                  ""}
-              </Row>
-            </form>
+                    <Field name="colorInsideHex"
+                           label="Color inside *"
+                           onChangeComplete={this.onSetField}
+                           component={ColorRenderer}/>
 
-            <br/>
+                    <Field name="colorOutsideHex"
+                           label="Color outside *"
+                           onChangeComplete={this.onSetField}
+                           component={ColorRenderer}/>
+                  </CardText>
+                  {submitCardActions}
+                </Card>
+              </TrivenLoader>
 
-            {!isNaN(this.state.id) ?
-              (<div>
-                <VehicleReportsCardComponent vehicleReports={vehicleReports} />
-                <br/>
-                <VehicleReviewsCardComponent vehicleReviews={vehicleReviews} />
-              </div>)
-              : ""
-            }
-          </div>)}
-      </div>
+              <br/>
+
+              <VehicleFeaturesAndDescriptionsCard featuresList={featuresList}>
+                {submitCardActions}
+                </VehicleFeaturesAndDescriptionsCard>
+            </Col>
+
+          {isUpdating ?
+            (<Col md={6} xs={12}>
+              <ImagesCard
+                onImageFileUpload={this.props.onImageFileUpload}
+                onImageFileRemove={this.props.onImageFileRemove}>
+                {submitCardActions}
+              </ImagesCard>
+            </Col>) :
+            ""}
+        </Row>
+      </form>
+
+        <br/>
+
+      {isUpdating ?
+        <Row>
+          <Col sm={12}>
+            <div>
+              <VehicleReportsCardComponent vehicleReports={vehicleReports} />
+              <br/>
+              <VehicleReviewsCardComponent vehicleReviews={vehicleReviews} />
+            </div>
+          </Col>
+        </Row>
+        : ""
+      }
+    </div>
     )
   }
 }

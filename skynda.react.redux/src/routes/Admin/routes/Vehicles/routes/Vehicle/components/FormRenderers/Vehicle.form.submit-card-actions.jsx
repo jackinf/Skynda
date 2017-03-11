@@ -12,7 +12,10 @@ export default class SubmitCardActionsComponent extends React.Component {
       <CardActions>
         <hr/>
         <button className="btn btn-success vehicle-component--button-success"
-                onClick={this.props.onSubmit}
+                onClick={e => {
+                  e.preventDefault();
+                  this.props.onSubmit();
+                }}
                 disabled={this.props.disabled}>Save</button>
       </CardActions>
     )
