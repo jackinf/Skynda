@@ -27,7 +27,8 @@ export default class VehicleReportsCardComponent extends React.Component {
             (
               <Field name="featuresAdminSelect"
                      label="Features select"
-                     component={selectFeaturesRenderer(featuresList, this.setField, true)}/>
+                     component={selectFeaturesRenderer(featuresList, this.props.setField, true)}
+              />
             )
             : "Fetching..."}
         </CardText>

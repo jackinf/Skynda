@@ -199,7 +199,7 @@ class Vehicle extends React.Component {
 
               <br/>
 
-              <VehicleFeaturesAndDescriptionsCard featuresList={featuresList}>
+              <VehicleFeaturesAndDescriptionsCard featuresList={featuresList} setField={this.setField}>
                 {submitCardActions}
               </VehicleFeaturesAndDescriptionsCard>
             </Col>
