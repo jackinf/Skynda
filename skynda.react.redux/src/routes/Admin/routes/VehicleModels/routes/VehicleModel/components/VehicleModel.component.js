@@ -6,10 +6,11 @@ import {Field} from "redux-form";
 import {TextField} from "redux-form-material-ui";
 import {change, destroy} from "redux-form";
 import RefreshIndicator from 'material-ui/RefreshIndicator';
-import {Button} from "react-bootstrap";
+import {Row, Col, Button} from "react-bootstrap";
 
 import {ROUTE_PARAMS} from "../../../constants/VehicleModel.constant";
 import {rowWrapper, selectRenderer} from "./VehicleModel.redux-form.renderers";
+import {TrivenLoader} from "components/Triven";
 
 class VehicleModel extends React.Component {
   static propTypes = {
@@ -60,58 +61,74 @@ class VehicleModel extends React.Component {
       : [];
 
     const loadingIcon = (<div><RefreshIndicator size={100} left={20} top={0} status="loading"/></div>);
-    let modelStateErrors = this.props.errors && this.props.errors.modelState ? this.props.errors.modelState : [];
+    // let modelStateErrors = this.props.errors && this.props.errors.modelState ? this.props.errors.modelState : [];
+    const isFetching = this.props.formInfo.isFetching;
 
-    return this.props.formInfo.isFetching
-      ? (loadingIcon)
-      : (<div>
+    return (<div>
+      {/*<div className="container">*/}
+        {/*{JSON.stringify(modelStateErrors, null, 2)}*/}
+      {/*</div>*/}
 
-        <div className="container">
-          {JSON.stringify(modelStateErrors, null, 2)}
-        </div>
+      <TrivenLoader isLoading={isFetching}>
+        <form>
+          <Row>
+            <Col md={6} xs={12}>
+              {rowWrapper(<Field name="modelCode" label="Model Code" component={TextField} floatingLabelText="Model Code *"/>)}
+              {rowWrapper(<Field name="title" component={TextField} floatingLabelText="Title *"/>)}
+              {rowWrapper(<Field name="description" component={TextField} floatingLabelText="Description *"/>)}
+              {rowWrapper(<Field name="doors" component={TextField} type="number" floatingLabelText="Doors *"/>)}
+            </Col>
+            <Col md={6} xs={12}>
+              {rowWrapper(<Field name="horsePower" component={TextField} floatingLabelText="Horse Power *"/>)}
+              {rowWrapper(<Field name="engine" component={TextField} floatingLabelText="Engine *"/>)}
+              {rowWrapper(<Field name="seats" component={TextField} type="number" floatingLabelText="Seats *"/>)}
+              {rowWrapper(<Field name="year" component={TextField} type="number" floatingLabelText="Year *"/>)}
+            </Col>
+          </Row>
 
-      <form>
-        {rowWrapper(<Field name="modelCode" label="Model Code" component={TextField} floatingLabelText="Model Code *"/>)}
-        {rowWrapper(<Field name="title" component={TextField} floatingLabelText="Title *"/>)}
-        {rowWrapper(<Field name="description" component={TextField} floatingLabelText="Description *"/>)}
-        {rowWrapper(<Field name="doors" component={TextField} type="number" floatingLabelText="Doors *"/>)}
-        {rowWrapper(<Field name="horsePower" component={TextField} floatingLabelText="Horse Power *"/>)}
-        {rowWrapper(<Field name="engine" component={TextField} floatingLabelText="Engine *"/>)}
-        {rowWrapper(<Field name="seats" component={TextField} type="number" floatingLabelText="Seats *"/>)}
-        {rowWrapper(<Field name="year" component={TextField} type="number" floatingLabelText="Year *"/>)}
+          <Row>
+            <Col md={6} xs={12}>
+              {this.props.drivetrain.isFetching
+                ? <div>Loading...</div>
+                : rowWrapper(<Field name="drivetrain.id"
+                                    label="Drivetrain *"
+                                    component={selectRenderer(drivetrains, this.setField)}/>, 4)}
 
-        {this.props.drivetrain.isFetching
-          ? <div>{loadingIcon}</div>
-          : rowWrapper(<Field name="drivetrain.id"
-                              label="Drivetrain *"
-                              component={selectRenderer(drivetrains, this.setField)}/>, 4)}
+              {this.props.fuel.isFetching
+                ? <div>Loading...</div>
+                : rowWrapper(<Field name="fuelType.id"
+                                    label="Fuel type *"
+                                    component={selectRenderer(fuels, this.setField)}/>, 4)}
 
-        {this.props.fuel.isFetching
-          ? <div>{loadingIcon}</div>
-          : rowWrapper(<Field name="fuelType.id"
-                              label="Fuel type *"
-                              component={selectRenderer(fuels, this.setField)}/>, 4)}
+              {this.props.transmission.isFetching
+                ? <div>Loading...</div>
+                : rowWrapper(<Field name="transmission.id"
+                                    label="Transmission *"
+                                    component={selectRenderer(transmissions, this.setField)}/>, 4)}
+            </Col>
+            <Col md={6} xs={12}>
+              {this.props.vehicleBody.isFetching
+                ? <div>Loading...</div>
+                : rowWrapper(<Field name="vehicleBody.id"
+                                    label="Vehicle body *"
+                                    component={selectRenderer(vehicleBodies, this.setField)}/>, 4)}
 
-        {this.props.transmission.isFetching
-          ? <div>{loadingIcon}</div>
-          : rowWrapper(<Field name="transmission.id"
-                              label="Transmission *"
-                              component={selectRenderer(transmissions, this.setField)}/>, 4)}
+              {this.props.manufacturer.isFetching
+                ? <div>Loading...</div>
+                : rowWrapper(<Field name="vehicleManufacturer.id"
+                                    label="Manufacturer *"
+                                    component={selectRenderer(manufacturers, this.setField)}/>, 4)}
+            </Col>
+          </Row>
 
-        {this.props.vehicleBody.isFetching
-          ? <div>{loadingIcon}</div>
-          : rowWrapper(<Field name="vehicleBody.id"
-                              label="Vehicle body *"
-                              component={selectRenderer(vehicleBodies, this.setField)}/>, 4)}
+          <Row>
+            <Col xs={12}>
+              <Button onClick={e => this.props.onHandleSubmit(this.props.onSubmitCustom)}>Submit</Button>
+            </Col>
+          </Row>
 
-        {this.props.manufacturer.isFetching
-          ? <div>{loadingIcon}</div>
-          : rowWrapper(<Field name="vehicleManufacturer.id"
-                              label="Manufacturer *"
-                              component={selectRenderer(manufacturers, this.setField)}/>, 4)}
-
-        <Button onClick={e => this.props.onHandleSubmit(this.props.onSubmitCustom)}>Submit</Button>
-      </form>
+        </form>
+      </TrivenLoader>
     </div>)
   }
 }
