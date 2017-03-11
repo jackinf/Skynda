@@ -1,13 +1,14 @@
-import React from "react";
+/**
+ * Created by jevgenir on 3/11/2017.
+ */
 import {Row, Col} from "react-bootstrap";
 import {Field} from 'redux-form';
 import {Checkbox} from "redux-form-material-ui";
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentRemove from 'material-ui/svg-icons/content/remove';
-import MenuItem from 'material-ui/MenuItem';
 import {Card, CardText} from 'material-ui/Card';
 
-import {fieldListWrapper, renderSelectField, renderTextField} from "../../../components/FormRenderers";
+import {fieldListWrapper, renderTextField} from "../../../../components/FormRenderers";
 
 /**
  * Displays a list of report category items, which can be dynamically added or removed
@@ -55,38 +56,4 @@ export const renderReportCategoryItems = ({fields, ...custom}) => fieldListWrapp
   </div>)
 });
 
-/**
- * Dropdown field for displaying list of vehicles to choose a single vehicle from.
- * @param props
- * @constructor
- */
-export const VehiclesSelectField = (props) => (<div>
-  {props.vehicles.isFetching
-    ? "Fetching vehicle models"
-    : (
-      <Field name={props.name} label={props.label} component={renderSelectField}>
-        {props.vehicles.items.map((item, i) => (
-          <MenuItem key={i} value={item.id} primaryText={`${item.id} -
-        ${item.model ? item.model.vehicleManufacturer.name : ""} ${item.model ? item.model.modelCode : ""}`}/>
-        ))}
-      </Field>
-    )
-  }
-</div>);
-
-export const TextFieldForReport = (props) => (<div>
-  <Row>
-    <Col sm={12}>
-      <Field name={props.name} label={props.label} component={renderTextField}/>
-    </Col>
-  </Row>
-</div>);
-
-export const TextAreaForReport = (props) => (<div>
-  <Row>
-    <Col sm={12}>
-      <Field name={props.name} label={props.label} component={renderTextField} multiLine={true}
-             rows={2}/>
-    </Col>
-  </Row>
-</div>);
+export default renderReportCategoryItems;

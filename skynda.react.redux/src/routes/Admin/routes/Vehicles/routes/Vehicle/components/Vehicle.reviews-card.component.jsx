@@ -15,7 +15,9 @@ const selectRow = {
 
 export default class VehicleReviewsCardComponent extends React.Component {
   static propTypes = {
-    vehicleReviews: React.PropTypes.array.isRequired
+    vehicleReviews: React.PropTypes.array.isRequired,
+    vehicleId: React.PropTypes.any,
+    getVehicleReviewsList: React.PropTypes.func.isRequired
   };
 
   constructor(props) {
@@ -42,7 +44,9 @@ export default class VehicleReviewsCardComponent extends React.Component {
       e.preventDefault(); // stop event propagation to avoid form submission.
     this.setState({vehicleReviewId: VEHICLE_REVIEW_ROUTE_PARAMS.values.NEW});
     this.setState({isVehicleReviewDialogOpen: false});
-    this.props.getVehicleReviewsList(value);
+
+    if (!isNaN(this.props.vehicleId))
+      this.props.getVehicleReviewsList(this.props.vehicleId);
   };
 
   // TODO: eraldi failisse - VehicleSublistActions/Vehicle.delete-review-item.action.js
@@ -70,11 +74,13 @@ export default class VehicleReviewsCardComponent extends React.Component {
       defaultSortOrder: 'asc',
     };
 
+    if (isNaN(this.props.vehicleId))
+      return null;
+
     return (
       <Card>
         <CardTitle title="Vehicle reviews"/>
         <CardText>
-
           <Modal show={this.state.isVehicleReviewDialogOpen} onHide={this.closeVehicleReviewDialog}>
             <Modal.Header closeButton>
               <Modal.Title>REVIEW ITEM</Modal.Title>

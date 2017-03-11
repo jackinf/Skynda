@@ -1,17 +1,16 @@
 import {connect} from "react-redux";
 import {reduxForm} from 'redux-form';
 import {
-  clear,
   load,
-  formSubmit,
+  submit as formSubmit,
   onFormSubmitSuccess,
   onFormSubmitError,
   onFaultFileUpload,
   onFaultRemove
-} from "../reducers";
+} from "../actions";
 import ViewComponent from "../components/VehicleReport.component";
 import {FORMS, REDUCER_KEYS} from "../constants/VehicleReport.constant";
-import {setFormMode} from "../actions";
+// import {setFormMode} from "../actions";
 import {getList as getVehiclesList} from "../../Vehicles/actions";
 
 // Decorate the form component
@@ -21,12 +20,11 @@ const DecoratedViewComponent = reduxForm({
 
 const mapDispatchToProps = {
   load,
-  clear,
   getVehiclesList,
   formSubmit,
   onFormSubmitSuccess,
   onFormSubmitError,
-  setFormMode,
+  // setFormMode,
   onFaultFileUpload,
   onFaultRemove,
 };

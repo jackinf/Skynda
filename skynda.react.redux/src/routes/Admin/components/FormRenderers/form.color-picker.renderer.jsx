@@ -3,6 +3,7 @@ import {Row, Col} from "react-bootstrap";
 import "react-image-crop/dist/ReactCrop.css";
 import {CirclePicker} from 'react-color';
 import {colorHashes} from "../../../../utils/constants";
+import {OverlayTrigger, Popover} from "react-bootstrap";
 
 export class ColorRenderer extends React.Component {
   constructor(props) {
@@ -10,32 +11,26 @@ export class ColorRenderer extends React.Component {
     this.state = {expanded: false};
   }
 
-  onToggle = () => {
-    this.setState({expanded: !this.state.expanded})
-  };
-
   onChangeComplete = (color, event) => {
-    this.onToggle({expanded: false});
     this.props.onChangeComplete(this.props.input.name, color.hex, event);
   };
 
   render() {
     const {input, label} = this.props;
 
+    const popoverBottom = (
+      <Popover id="popover-positioned-bottom">
+        <CirclePicker colors={colorHashes} onChangeComplete={this.onChangeComplete} color={input.value} triangle="hide"/>
+      </Popover>);
+
     return (
       <Row style={{marginBottom: "10px"}}>
         <Col sm={12}>
           <label className="sell-your-car__label"  htmlFor={input.name}>{label}</label>
-          <div style={{background: input.value || "black"}}
-               className="sell-your-car__color-renderer-display"
-               onClick={e => this.onToggle()}>&nbsp;</div>
-
-          {this.state.expanded
-            ? (<CirclePicker colors={colorHashes}
-                             onChangeComplete={this.onChangeComplete}
-                             color={input.value}
-                             triangle="hide"/>)
-            : ""}
+          <OverlayTrigger trigger="click" placement="bottom" overlay={popoverBottom} rootClose>
+            <div style={{background: input.value || "black"}}
+                 className="sell-your-car__color-renderer-display">&nbsp;</div>
+          </OverlayTrigger>
         </Col>
       </Row>
     );

@@ -222,9 +222,17 @@ class Vehicle extends React.Component {
         <Row>
           <Col sm={12}>
             <div>
-              <VehicleReportsCardComponent vehicleReports={vehicleReports} vehicleId={this.props.id} />
+              <VehicleReportsCardComponent
+                vehicleReports={vehicleReports}
+                vehicleId={this.props.id}
+                getVehicleReportsList={this.props.getVehicleReportsList}
+              />
               <br/>
-              <VehicleReviewsCardComponent vehicleReviews={vehicleReviews} vehicleId={this.props.id} />
+              <VehicleReviewsCardComponent
+                vehicleReviews={vehicleReviews}
+                vehicleId={this.props.id}
+                getVehicleReviewsList={this.props.getVehicleReviewsList}
+              />
             </div>
           </Col>
         </Row>
