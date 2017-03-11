@@ -109,6 +109,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\ContextIsNullException.cs" />
     <Compile Include="Migrations\201703031222121_Initial.cs" />
     <Compile Include="Migrations\201703031222121_Initial.Designer.cs">
       <DependentUpon>201703031222121_Initial.cs</DependentUpon>
