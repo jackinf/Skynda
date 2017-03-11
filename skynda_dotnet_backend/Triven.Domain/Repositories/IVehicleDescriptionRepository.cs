@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Triven.Domain.Models;
 using Triven.Domain.Repositories.Base;
+using Triven.Domain.Results;
 
 namespace Triven.Domain.Repositories
 {
@@ -8,5 +9,7 @@ namespace Triven.Domain.Repositories
         where TVehicleDescriptionEntity : IVehicleDescription
     {
         IList<TVehicleDescriptionEntity> GetAllVehicleDescriptions(int vehicleId);
+        IResult<TVehicleDescriptionEntity> Add(TVehicleDescriptionEntity model);
+        IResult<TVehicleDescriptionEntity> Update(int id, TVehicleDescriptionEntity model);
     }
 }

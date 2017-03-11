@@ -13,9 +13,7 @@ namespace Triven.Data.EntityFramework.Repositories
         public IList<VehicleDescription> GetAllVehicleDescriptions(int vehicleId)
         {
             using (var context = new ApplicationDbContext())
-            {
                 return BaseQuery(context).Where(x => x.Vehicle.Id == vehicleId).ToList();
-            }
         }
 
         public IResult<VehicleDescription> Add(VehicleDescription model)

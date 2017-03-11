@@ -13,7 +13,11 @@ namespace Triven.Data.EntityFramework.Repositories
 {
     public class VehicleModelRepository : BaseCrudRepository<VehicleModel>, IVehicleModelRepository<VehicleModel>
     {
-        public VehicleModel GetByModelCode(string vehicleModelCode) => BaseQuery().FirstOrDefault(x => x.ModelCode == vehicleModelCode);
+        public VehicleModel GetByModelCode(string vehicleModelCode)
+        {
+            using (var context = new ApplicationDbContext())
+                return BaseQuery(context).FirstOrDefault(x => x.ModelCode == vehicleModelCode);
+        }
 
         public IList<VehicleModel> Search(VehicleModelSearchRequestViewModel parameters)
         {

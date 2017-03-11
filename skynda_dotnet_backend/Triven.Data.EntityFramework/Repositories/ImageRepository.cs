@@ -11,9 +11,7 @@ namespace Triven.Data.EntityFramework.Repositories
         public IList<Image> GetAllBy(string containerName)
         {
             using (var context = new ApplicationDbContext())
-            {
                 return BaseQuery(context).Where(x => x.ContainerName == containerName).ToList();
-            }
         }
     }
 }
