@@ -46,7 +46,7 @@ namespace Triven.Data.EntityFramework.Repositories.Base
 
             try
             {
-                return BaseQuery(dbContext).OrderBy(x => x.Id);
+                return BaseQuery(dbContext).OrderBy(x => x.Id).ToList();
             }
             finally
             {
