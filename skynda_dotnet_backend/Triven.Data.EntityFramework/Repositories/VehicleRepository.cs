@@ -61,14 +61,15 @@ namespace Triven.Data.EntityFramework.Repositories
             }
         }
 
-        public IResult<Vehicle> Add(Vehicle model)
-        {
-            using (var context = new ApplicationDbContext())
-            {
-                context.Entry(model.VehicleModel).State = EntityState.Unchanged;
-                return base.Add(model);
-            }
-        }
+        //public IResult<Vehicle> Add(Vehicle model)
+        //{
+        //    using (var context = new ApplicationDbContext())
+        //    {                
+        //        context.Entry(model.VehicleModel).State = EntityState.Unchanged;
+        //        context.Entry(model.MainImage).State = EntityState.Unchanged;
+        //        return base.Add(model);
+        //    }
+        //}
 
         public Vehicle GetDetailed(int id)
         {
