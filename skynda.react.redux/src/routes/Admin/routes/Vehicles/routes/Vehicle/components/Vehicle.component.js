@@ -1,18 +1,13 @@
 import React from 'react';
-import {Field, FieldArray, change} from 'redux-form';
+import {Field, change} from 'redux-form';
 import {toastr} from "react-redux-toastr";
-import {Card, CardActions, CardTitle, CardText} from 'material-ui/Card';
+import {Card, CardText} from 'material-ui/Card';
 import RefreshIndicator from 'material-ui/RefreshIndicator';
-import {Row, Col, Modal, Button} from "react-bootstrap";
+import {Row, Col, Modal} from "react-bootstrap";
 import _ from "underscore";
-import {TableHeaderColumn} from "react-bootstrap-table";
 import "./Vehicle.component.scss";
 import {ROUTE_PARAMS, FORM_MODE, VEHICLE_FORM_KEY} from "../../../constants/Vehicles.constant";
-import {
-  descriptionRenderer,
-  ImagesCardField,
-  selectFeaturesRenderer
-} from "./FormRenderers";
+import {ImagesCardField as ImagesCard} from "./FormRenderers";
 import {
   renderTextField,
   selectRenderer,
@@ -20,20 +15,16 @@ import {
   ColorRenderer,
   renderCheckbox
 } from "../../../../../components/FormRenderers";
-import BootstrapTable from "./Vehicle.bootstrap-table.component";
 import {ROUTE_PARAMS as VEHICLE_MODEL_ROUTE_PARAMS} from "../../../../VehicleModels/constants/VehicleModel.constant";
 import {ROUTE_PARAMS as VEHICLE_REPORT_ROUTE_PARAMS} from "../../../../VehicleReports/constants/VehicleReport.constant";
 import {ROUTE_PARAMS as VEHICLE_REVIEW_ROUTE_PARAMS} from "../../../../VehicleReviews/constants/VehicleReview.constant";
 import VehicleModel from "../../../../VehicleModels/routes/VehicleModel/containers/VehicleModel.container";
-import VehicleReport from "../../../../VehicleReports/containers/VehicleReport.container";
 import {CropToolCard} from "../../../../../../../components/ReduxForm/CropTool";
+import VehicleFeaturesAndDescriptionsCard from "./Vehicle.features-and-descriptions-card.component";
 import VehicleReviewsCardComponent from "./Vehicle.reviews-card.component";
 import VehicleReportsCardComponent from "./Vehicle.reports-card.component";
+import {SubmitCardActionsComponent as SubmitCardActions} from "./FormRenderers";
 
-const SubmitCardActions = ({disabled}) => (<CardActions>
-  <hr/>
-  <button className="btn btn-success vehicle-component--button-success" type="submit" disabled={disabled}>Save</button>
-</CardActions>);
 
 class Vehicle extends React.Component {
   constructor(props) {
@@ -130,12 +121,14 @@ class Vehicle extends React.Component {
     const vehicleModels = this.props.vehicleModels && !this.props.vehicleModels.isFetching
       ? this.props.vehicleModels.items.map(item => ({label: item.title + " " + item.modelCode, value: item.id}))
       : [];
-    const colors = this.props.colors && !this.props.colors.isFetching
-      ? this.props.colors.items.map(item => ({label: item.name, value: item.id}))
-      : [];
+    // const colors = this.props.colors && !this.props.colors.isFetching
+    //   ? this.props.colors.items.map(item => ({label: item.name, value: item.id}))
+    //   : [];
 
     // Validation errors
     const errors = this.props.errors;  // TODO: LOL, spring, LOL. there is only one spring - time of the year... so fuck you, java. XD IMMA FIRIN MY LAAZO00oRRSS!!!
+
+    const isUpdating = this.props.formModeVehicle === FORM_MODE.UPDATING;
 
     return (<div>
         {this.props.isFetching || this.props.submitting
@@ -147,106 +140,86 @@ class Vehicle extends React.Component {
 
               <Row>
                 <Col xs={12}>
-                  {this.props.formModeVehicle === FORM_MODE.UPDATING
+                  {isUpdating
                     ? <h3><span className="label label-primary">ID: {this.props.id || this.state.id}</span></h3>
                     : <h3><span className="label label-success">{this.props.formModeVehicle}</span></h3>}
                 </Col>
               </Row>
 
               <Row>
-                <Col md={6} xs={12}>
-                  <CropToolCard
-                    name="mainImage"
-                    reduxFormName={VEHICLE_FORM_KEY}
-                    title="Main image"
-                    errors={errors}
-                  >
-                  </CropToolCard>
+                  <Col md={6} xs={12}>
+                    <CropToolCard
+                      name="mainImage"
+                      reduxFormName={VEHICLE_FORM_KEY}
+                      title="Main image"
+                      errors={errors}
+                    >
+                    </CropToolCard>
+                    <br/>
 
-                  {/* TODO: See panna Vehicle.main-card.component.js */}
-                  <Card>
-                    <CardText>
-                      <Field name="isSold" label="Is Sold" component={renderCheckbox} errors={errors}/>
+                    {/* TODO: See panna Vehicle.main-card.component.js */}
+                    <Card>
+                      <CardText>
+                        <Field name="isSold" label="Is Sold" component={renderCheckbox} errors={errors}/>
 
-                      <Field name="vehicleModel.id" label="Vehicle model *"
-                             component={selectRenderer(vehicleModels, this.onSelectItemChange)}/>
-                      <Modal show={this.state.isVehicleModelDialogOpen} onHide={this.closeVehicleModelDialog}>
-                        <Modal.Header closeButton>
-                          <Modal.Title>Modal heading</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>
-                          <VehicleModel params={{[VEHICLE_MODEL_ROUTE_PARAMS.VEHICLE_MODEL_ID]: "new"}}
-                                        onSubmitCustom={this.closeVehicleModelDialog}/>
-                        </Modal.Body>
-                      </Modal>
+                        <Field name="vehicleModel.id" label="Vehicle model *"
+                               component={selectRenderer(vehicleModels, this.onSelectItemChange)}/>
+                        <Modal show={this.state.isVehicleModelDialogOpen} onHide={this.closeVehicleModelDialog}>
+                          <Modal.Header closeButton>
+                            <Modal.Title>Modal heading</Modal.Title>
+                          </Modal.Header>
+                          <Modal.Body>
+                            <VehicleModel params={{[VEHICLE_MODEL_ROUTE_PARAMS.VEHICLE_MODEL_ID]: "new"}}
+                                          onSubmitCustom={this.closeVehicleModelDialog}/>
+                          </Modal.Body>
+                        </Modal>
 
-                      <Field name="price" label="Price *" component={renderTextField} type="number"/>
-                      <Field name="mileage" label="Mileage *" component={renderTextField} type="number" />
+                        <Field name="price" label="Price *" component={renderTextField} type="number"/>
+                        <Field name="mileage" label="Mileage *" component={renderTextField} type="number" />
 
-                      <label>Fuel:</label><br/>
-                      <Field name="fuelCity" label="Fuel City" component={renderTextField}/>
-                      <Field name="fuelHighway" label="Fuel Highway" component={renderTextField}/>
-                      <br/>
+                        <label>Fuel:</label><br/>
+                        <Field name="fuelCity" label="Fuel City" component={renderTextField}/>
+                        <Field name="fuelHighway" label="Fuel Highway" component={renderTextField}/>
+                        <br/>
 
-                      <label>History:</label><br/>
-                      <Field name="vinCode" label="Vin Code *" component={renderTextField}/>
-                      <Field name="registrationNumber" label="Registration Number *" component={renderTextField} />
-                      <br/>
+                        <label>History:</label><br/>
+                        <Field name="vinCode" label="Vin Code *" component={renderTextField}/>
+                        <Field name="registrationNumber" label="Registration Number *" component={renderTextField} />
+                        <br/>
 
-                      <label>Safety:</label><br/>
-                      <Field name="safetyStars" label="Safety Stars" component={renderTextField} type="number" />
-                      <Field name="safetyUrl" label="Safety Url" component={renderTextField} />
+                        <label>Safety:</label><br/>
+                        <Field name="safetyStars" label="Safety Stars" component={renderTextField} type="number" />
+                        <Field name="safetyUrl" label="Safety Url" component={renderTextField} />
 
-                      <Field name="colorInsideHex"
-                             label="Color inside *"
-                             onChangeComplete={this.onSetField}
-                             component={ColorRenderer}/>
+                        <Field name="colorInsideHex"
+                               label="Color inside *"
+                               onChangeComplete={this.onSetField}
+                               component={ColorRenderer}/>
 
-                      <Field name="colorOutsideHex"
-                             label="Color outside *"
-                             onChangeComplete={this.onSetField}
-                             component={ColorRenderer}/>
-                    </CardText>
+                        <Field name="colorOutsideHex"
+                               label="Color outside *"
+                               onChangeComplete={this.onSetField}
+                               component={ColorRenderer}/>
+                      </CardText>
+                      <SubmitCardActions />
+                    </Card>
 
-                    <CardTitle title={<h3>Vehicle Features</h3>}/>
-                    <CardText>
-                      {featuresList && featuresList != null
-                        ?
-                        (
-                          <Field name="featuresAdminSelect"
-                                 label="Features select"
-                                 component={selectFeaturesRenderer(featuresList, this.setField, true)}/>
-                        )
-                        : "Fetching..."}
+                    <br/>
 
-                    </CardText>
-
-                    <CardTitle title={<h3>Descriptions & addition info</h3>}/>
-                    <CardText>
-                      <FieldArray name="descriptions" label="Descriptions" component={descriptionRenderer}
-                      />
-                      <Field name="additional" label="Additional info" component={renderTextField}/>
-                    </CardText>
-
-                    <Button className="btn btn-success vehicle-component--button-success"
-                            disabled={this.props.submitting}
-                            onClick={e => this.props.onHandleSubmit(this.props.onSubmitCustom)}>
-                      Save
-                    </Button>
-                  </Card>
-                </Col>
-                <Col md={6} xs={12}>
-                  <ImagesCardField onImageFileUpload={this.props.onImageFileUpload}
-                                   onImageFileRemove={this.props.onImageFileRemove}                  >
-                    {!isNaN(this.state.id) ?
+                    <VehicleFeaturesAndDescriptionsCard featuresList={featuresList}>
                       <SubmitCardActions disabled={this.props.submitting}/>
-                      : (<div>
-                        <span className="color-red">Please save vehicle before saving Images</span>
-                        <SubmitCardActions disabled={true}/>
-                      </div>)
-                    }
-                  </ImagesCardField>
-                </Col>
+                    </VehicleFeaturesAndDescriptionsCard>
+                  </Col>
+
+                {isUpdating ?
+                  (<Col md={6} xs={12}>
+                    <ImagesCard
+                      onImageFileUpload={this.props.onImageFileUpload}
+                      onImageFileRemove={this.props.onImageFileRemove}>
+                      <SubmitCardActions disabled={this.props.submitting}/>
+                    </ImagesCard>
+                  </Col>) :
+                  ""}
               </Row>
             </form>
 
