@@ -2,6 +2,7 @@ import React from "react";
 import RaisedButton from "material-ui/RaisedButton";
 import {browserHistory} from "react-router"
 import {BootstrapTable} from "react-bootstrap-table";
+import {TrivenLoader} from "components/Triven";
 
 const tableOptions = {
   onRowClick: (item) => {browserHistory.push(`/admin/vehicle/${item.id}`)},
@@ -18,10 +19,8 @@ export default class VehicleList extends React.Component {
   static propTypes = {
     getList: React.PropTypes.func.isRequired,
     deleteItem: React.PropTypes.func.isRequired,
-    data: React.PropTypes.shape({
-      isFetching: React.PropTypes.bool.isRequired,
-      items: React.PropTypes.array
-    })
+    isFetching: React.PropTypes.bool.isRequired,
+    items: React.PropTypes.array
   };
 
   componentDidMount() {
@@ -29,18 +28,20 @@ export default class VehicleList extends React.Component {
   }
 
   render() {
-    let rows = !this.props.data.isFetching ? this.props.data.items : [];
-    const loading = this.props.data.isFetching ? "Fetching" : "Vehicles";
+    let rows = !this.props.isFetching ? this.props.items : [];
+    const loading = this.props.isFetching ? "Fetching" : "Vehicles";
 
     return (<span>
       {this.props.children ?  this.props.children : (<div className="container">
           <h3>{loading}</h3>
 
           <RaisedButton secondary={true} label="Add" onClick={e => browserHistory.push(`/admin/vehicle/new`)}/>
-          <BootstrapTable data={rows} options={tableOptions} selectRow={selectRow} deleteRow hover={true} search={true}>
-            <TableHeaderColumn dataField="id" isKey={true} dataAlign="center" dataSort={true}>Vehicle Model ID</TableHeaderColumn>
-            <TableHeaderColumn dataField="model.modelCode" dataSort={true}>Code</TableHeaderColumn>
-          </BootstrapTable>
+          <TrivenLoader isLoading={this.props.isFetching}>
+            <BootstrapTable data={rows} options={tableOptions} selectRow={selectRow} deleteRow hover={true} search={true}>
+              <TableHeaderColumn dataField="id" isKey={true} dataAlign="center" dataSort={true}>Vehicle Model ID</TableHeaderColumn>
+              <TableHeaderColumn dataField="model.modelCode" dataSort={true}>Code</TableHeaderColumn>
+            </BootstrapTable>
+          </TrivenLoader>
       </div>)}
     </span>)
   }

@@ -9,7 +9,8 @@ const mapDispatchToProps = {
 };
 
 const mapStateToProps = (state) => ({
-  data: state[REDUCER_KEYS.VEHICLES_DATA]
+  isFetching: state[REDUCER_KEYS.VEHICLES_DATA].isFetching,
+  items: state[REDUCER_KEYS.VEHICLES_DATA].items
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(VehiclesComponent);
