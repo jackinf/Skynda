@@ -51,7 +51,7 @@ function loadEditError(errors) {
 const loadEditForm = (id) => async (dispatch) => {
   dispatch(loadEditRequest());
   try {
-    const item = await VehicleService.fetchItem(id);
+    const item = await VehicleService.fetchAdminItem(id);
     dispatch(loadEditSuccess(item));
     dispatch(initialize(VEHICLE_FORM_KEY, item));
   } catch (error) {

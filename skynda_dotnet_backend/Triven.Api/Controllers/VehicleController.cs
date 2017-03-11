@@ -22,11 +22,11 @@ namespace Triven.API.Controllers
         public IHttpActionResult GetAll([FromBody] SearchRequestViewModel viewModel) => HandleResult(_service.GetAll());
 
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
-        [HttpGet, Route("{id:int}")]
-        public IHttpActionResult Get([FromUri] int id) => HandleResult(_service.GetDetailed(id));
-
         [HttpGet, Route("{id:int}/detailed")]
-        public IHttpActionResult GetDetailed([FromUri] int id) => HandleResult(_service.Get(id));
+        public IHttpActionResult GetDetailed([FromUri] int id) => HandleResult(_service.GetDetailed(id));
+
+        [HttpGet, Route("{id:int}")]
+        public IHttpActionResult Get([FromUri] int id) => HandleResult(_service.Get(id));
 
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [HttpPost, Route("")]
