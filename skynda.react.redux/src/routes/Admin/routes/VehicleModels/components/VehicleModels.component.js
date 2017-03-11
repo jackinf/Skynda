@@ -5,6 +5,7 @@ import React from "react";
 import {browserHistory} from "react-router"
 import RaisedButton from "material-ui/RaisedButton";
 import {BootstrapTable} from "react-bootstrap-table";
+import {TrivenLoader} from "components/Triven";
 
 const tableOptions = {
   onRowClick: (item) => {browserHistory.push(`/admin/vehicle-model/${item.id}`)},
@@ -35,8 +36,8 @@ export default class VehicleModels extends React.Component {
   }
 
   render() {
-    let rows = !this.props.data.isFetching ? this.props.data.items : [];
-    const loading = this.props.data.isFetching ? "Fetching" : "Vehicle Models";
+    let rows = !this.props.isFetching ? this.props.items : [];
+    const loading = this.props.isFetching ? "Fetching" : "Vehicle Models";
 
     return (<div className="container">
       {!this.props.children ?
@@ -44,11 +45,13 @@ export default class VehicleModels extends React.Component {
         <h3>{loading}</h3>
 
         <RaisedButton secondary={true} label="Add" onClick={e => browserHistory.push(`/admin/vehicle-model/new`)}/>
-        <BootstrapTable data={rows} options={tableOptions} selectRow={selectRow} deleteRow hover={true} search={true}>
-          <TableHeaderColumn dataField="id" isKey={true} dataAlign="center" dataSort={true}>Vehicle Model ID</TableHeaderColumn>
-          <TableHeaderColumn dataField="modelCode" dataSort={true}>Code</TableHeaderColumn>
-          <TableHeaderColumn dataField="title" dataSort={true}>Name</TableHeaderColumn>
-        </BootstrapTable>
+          <TrivenLoader isLoading={!this.props.isFetching}>
+            <BootstrapTable data={rows} options={tableOptions} selectRow={selectRow} deleteRow hover={true} search={true}>
+              <TableHeaderColumn dataField="id" isKey={true} dataAlign="center" dataSort={true}>Vehicle Model ID</TableHeaderColumn>
+              <TableHeaderColumn dataField="modelCode" dataSort={true}>Code</TableHeaderColumn>
+              <TableHeaderColumn dataField="title" dataSort={true}>Name</TableHeaderColumn>
+            </BootstrapTable>
+          </TrivenLoader>
       </span>
         ): this.props.children}
     </div>)

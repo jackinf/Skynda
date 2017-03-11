@@ -11,9 +11,13 @@ export default class TrivenLoader extends React.Component {
   };
 
   render() {
-    return (<div className={this.props.isLoading ? "triven-loader-wrapper": ""}>
-      {this.props.isLoading ?  <div className="triven-loader"></div> : ""}
-      {this.props.children}
+    const isLoading = this.props.isLoading;
+
+    return (<div className={isLoading ? "triven-loader-wrapper": ""}>
+      {isLoading ?  <div className="triven-loader"></div> : ""}
+      <span className={isLoading ? "triven-loader-disabler" : ""}>
+        {this.props.children}
+      </span>
     </div>);
   }
 }
