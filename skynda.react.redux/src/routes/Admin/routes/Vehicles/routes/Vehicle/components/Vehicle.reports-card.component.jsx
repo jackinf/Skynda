@@ -17,7 +17,8 @@ const selectRow = {
 export default class VehicleReportsCardComponent extends React.Component {
   static propTypes = {
     vehicleReports: React.PropTypes.array.isRequired,
-    vehicleId: React.PropTypes.any.isRequired
+    vehicleId: React.PropTypes.any,
+    getVehicleReportsList: React.PropTypes.func.isRequired
   };
 
   constructor(props) {
@@ -45,7 +46,9 @@ export default class VehicleReportsCardComponent extends React.Component {
       e.preventDefault(); // stop event propagation to avoid form submission.
     this.setState({vehicleReportId: VEHICLE_REPORT_ROUTE_PARAMS.values.NEW});
     this.setState({isVehicleReportDialogOpen: false});
-    this.props.getVehicleReportsList(value);
+
+    if (!isNaN(this.props.vehicleId))
+      this.props.getVehicleReportsList(this.props.vehicleId);
   };
 
   // TODO: eraldi failisse - VehicleSublistActions/Vehicle.delete-report-item.action.js
@@ -72,6 +75,9 @@ export default class VehicleReportsCardComponent extends React.Component {
       defaultSortName: "id",
       defaultSortOrder: 'asc',
     };
+
+    if (isNaN(this.props.vehicleId))
+      return null;
 
     return (
       <Card>
