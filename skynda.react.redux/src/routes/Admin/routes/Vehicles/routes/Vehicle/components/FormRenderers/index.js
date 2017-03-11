@@ -8,6 +8,7 @@ import ImagesCardField      from "./Vehicle.form.image-card-field.renderer";
 import MainImageCardField   from "./Vehicle.form.main-image-card-field.renderer";
 import renderReportItems    from "./Vehicle.form.report-items.renderer";
 import selectFeaturesRenderer from "./Vehicle.form.select-features.renderer";
+import SubmitCardActionsComponent from "./Vehicle.form.submit-card-actions";
 
 export {
   descriptionRenderer,
@@ -16,5 +17,6 @@ export {
   ImagesCardField,
   MainImageCardField,
   renderReportItems,
-  selectFeaturesRenderer
+  selectFeaturesRenderer,
+  SubmitCardActionsComponent
 }

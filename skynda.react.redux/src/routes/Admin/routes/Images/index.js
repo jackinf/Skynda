@@ -4,6 +4,7 @@
 import {injectReducer} from '../../../../store/reducers';
 import {REDUCER_KEYS} from "./Image.list.constant";
 import NProgress from "react-nprogress";
+import {onEnterAdmin} from "../../../../utils/routerUtils";
 
 export default (store) => ({
   path: `images`,
@@ -14,5 +15,8 @@ export default (store) => ({
       cb(null, require("./Image.list.container.js").default);
       NProgress.done();
     })
+  },
+  onEnter(nextState, replace) {
+    onEnterAdmin(nextState, replace);
   }
 })

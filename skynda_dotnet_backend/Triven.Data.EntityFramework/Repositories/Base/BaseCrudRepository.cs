@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
+using Triven.Data.EntityFramework.Exceptions;
 using System.Reflection;
 using Triven.Data.EntityFramework.Models.Base;
 using Triven.Domain.Models.Base;
@@ -42,21 +43,8 @@ namespace Triven.Data.EntityFramework.Repositories.Base
         /// Gets all the items from the database
         /// </summary>
         /// <returns></returns>
-        public virtual IEnumerable<TModel> GetAll(IDbContext context = null)
-        {
-            var (dbContext, isDisposable) = DbContextHelper(context);
-
-            try
-            {
-                return BaseQuery(dbContext).OrderBy(x => x.Id).ToList();
-            }
-            finally
-            {
-                if (isDisposable)
-                    dbContext.Dispose();
-            }
-
-        }
+        public virtual IEnumerable<TModel> GetAll(IDbContext context = null) 
+            => HandleWithContext(context, dbContext => BaseQuery(dbContext).OrderBy(x => x.Id).ToList());
 
         /// <summary>
         /// Gets all the items from the database by page size
@@ -64,7 +52,8 @@ namespace Triven.Data.EntityFramework.Repositories.Base
         /// <param name="pageNumber"></param>
         /// <param name="pageSize"></param>
         /// <returns></returns>
-        public virtual IEnumerable<TModel> GetPagedList(int pageNumber = 1, int pageSize = 25) => GetAll().Skip(pageSize * (pageNumber - 1)).Take(pageSize);
+        public virtual IEnumerable<TModel> GetPagedList(int pageNumber = 1, int pageSize = 25) 
+            => GetAll().Skip(pageSize * (pageNumber - 1)).Take(pageSize);
 
         /// <summary>
         /// Gets a single item from the databse
@@ -72,21 +61,8 @@ namespace Triven.Data.EntityFramework.Repositories.Base
         /// <param name="id"></param>
         /// <param name="context">Should be ApplicationDbContext</param>
         /// <returns></returns>
-        public virtual TModel Get(int id, IDbContext context = null)
-        {
-            var (dbContext, isDisposable) = DbContextHelper(context);
-
-            try
-            {
-                return BaseQuery(dbContext).SingleOrDefault(m => m.Id == id);
-            }
-            finally
-            {
-                if(isDisposable)
-                    dbContext.Dispose();
-            }
-
-        }
+        public virtual TModel Get(int id, IDbContext context = null) 
+            => HandleWithContext(context, dbContext => BaseQuery(dbContext).SingleOrDefault(m => m.Id == id));
 
         /// <summary>
         /// Adds new item to the database and saves changes
@@ -251,20 +227,11 @@ namespace Triven.Data.EntityFramework.Repositories.Base
 
         }
 
-        public IQueryable<TModel> BaseQuery(IDbContext context)
+        protected IQueryable<TModel> BaseQuery(ApplicationDbContext dbContext)
         {
-            var (dbContext, isDisposable) = DbContextHelper(context);
-
-            try
-            {
-                return dbContext.Set<TModel>().Where(x => x.DeletedOn == null);
-            }
-            finally
-            {
-                if (isDisposable)
-                    dbContext.Dispose();
-            }
-
+            if (dbContext == null)
+                throw new ContextIsNullException();
+            return dbContext.Set<TModel>().Where(x => x.DeletedOn == null);
         }
 
         /// <summary>
@@ -306,6 +273,34 @@ namespace Triven.Data.EntityFramework.Repositories.Base
             }
 
             return (dbContext, isDisposable);
+        }
+
+        /// <summary>
+        /// Wrapper to create and dispose a context when needed
+        /// </summary>
+        /// <param name="context">ApplicationDbContext pls.</param>
+        /// <param name="action"></param>
+        /// <returns></returns>
+        private T HandleWithContext<T>(IDbContext context, Func<ApplicationDbContext, T> action)
+        {
+            var isDisposable = false;
+            ApplicationDbContext dbContext = (ApplicationDbContext) context;    // all or nothing. We exclude every possibility for another database context.
+
+            if (dbContext == null)
+            {
+                dbContext = new ApplicationDbContext();
+                isDisposable = true;
+            }
+
+            try
+            {
+                return action(dbContext);
+            }
+            finally
+            {
+                if (isDisposable)
+                    dbContext.Dispose();
+            }
         }
     }
 }

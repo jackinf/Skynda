@@ -9,7 +9,9 @@ export class CoreLayout extends React.Component {
     return (
       <div>
         <Header />
-        {this.props.children}
+        <div style={{height: "90%"}}>
+          {this.props.children}
+        </div>
         <Footer />
       </div>
     );

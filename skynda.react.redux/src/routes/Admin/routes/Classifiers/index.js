@@ -1,6 +1,6 @@
 import {injectReducer} from '../../../../store/reducers';
-import {ROUTE_PARAMS, REDUCER_KEYS} from "./Classifiers.constant";
 import NProgress from "react-nprogress";
+import {onEnterAdmin} from "../../../../utils/routerUtils";
 
 export default (store) => ({
   path: `classifier`,
@@ -12,5 +12,8 @@ export default (store) => ({
       NProgress.done();
       cb(null, Container);
     })
+  },
+  onEnter(nextState, replace) {
+    onEnterAdmin(nextState, replace);
   }
 })

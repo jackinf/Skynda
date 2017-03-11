@@ -3,6 +3,7 @@ import {reducer as formReducer} from 'redux-form';
 import {ROUTE_PARAMS, FORMS, REDUCER_KEYS} from "./constants/VehicleReport.constant";
 import {setFormMode, setVehicleReportData, setVehicleReports} from "./reducers";
 import NProgress from "react-nprogress";
+import {onEnterAdmin} from "../../../../utils/routerUtils";
 
 export default (store) => ({
   path: `vehicle-reports(/:${ROUTE_PARAMS.VEHICLE_REPORT_ID})`,
@@ -29,6 +30,9 @@ export default (store) => ({
         cb(null, Container);
       }
     })
+  },
+  onEnter(nextState, replace) {
+    onEnterAdmin(nextState, replace);
   }
 
 })
