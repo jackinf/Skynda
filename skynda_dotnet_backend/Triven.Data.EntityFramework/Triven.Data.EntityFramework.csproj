@@ -130,6 +130,10 @@
     <Compile Include="Migrations\201703101521079_removeVehFeatureReq.Designer.cs">
       <DependentUpon>201703101521079_removeVehFeatureReq.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201703111924393_RequiredVehicleImgREMOVE.cs" />
+    <Compile Include="Migrations\201703111924393_RequiredVehicleImgREMOVE.Designer.cs">
+      <DependentUpon>201703111924393_RequiredVehicleImgREMOVE.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\Classification.cs" />
@@ -201,6 +205,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201703101521079_removeVehFeatureReq.resx">
       <DependentUpon>201703101521079_removeVehFeatureReq.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703111924393_RequiredVehicleImgREMOVE.resx">
+      <DependentUpon>201703111924393_RequiredVehicleImgREMOVE.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

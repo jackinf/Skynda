@@ -84,7 +84,7 @@ namespace Triven.Data.EntityFramework.Repositories
                     .Include(x => x.Descriptions)
                     .Include(x => x.Reviews)
                     .Include(x => x.Reports)
-                    .Include(x => x.Images).FirstOrDefault(x => x.Id == id);
+                    .Include(x => x.Images.Select(o => o.Image)).FirstOrDefault(x => x.Id == id);
                 return result;
             }
 

@@ -247,6 +247,7 @@ namespace Triven.Data.EntityFramework.Repositories.Base
         {
             if (dbContext == null)
                 throw new ContextIsNullException();
+
             return dbContext.Set<TModel>().Where(x => x.DeletedOn == null);
         }
 

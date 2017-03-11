@@ -1,14 +1,16 @@
 ﻿using System;
+using Triven.Domain.ViewModels.Common;
 
 namespace Triven.Domain.ViewModels.Image
 {
-    public class ImageViewModel
+    public class ImageViewModel : BaseViewModel
     {
         public ImageViewModel()
         {
-            FileType = "jpg";
+            FileType = "png";
             ContainerName = "image".ToLower();
             BlobName = Guid.NewGuid().ToString();
+            ContentType = "image/png";
         }
 
         public string Url { get; set; }
@@ -16,6 +18,7 @@ namespace Triven.Domain.ViewModels.Image
         public string ContainerName { get; set; }
         public string Base64File { get; set; }
         public string FileType { get; set; }
+        public string ContentType { get; set; }
         public ImageCropInfoViewModel CropInfo { get; set; }
 
         public static class Factory

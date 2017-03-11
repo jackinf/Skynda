@@ -84,6 +84,9 @@ namespace Triven.Application
                 configuration.CreateMap<VehicleReview, VehicleReviewViewModel>().PreserveReferences();
                 configuration.CreateMap<VehicleReviewViewModel, VehicleReview>();
 
+                configuration.CreateMap<VehicleImage, VehicleImageViewModel>().PreserveReferences()
+                    .ForMember(x => x.Vehicle, conf => conf.Ignore()); 
+                configuration.CreateMap<VehicleImageViewModel, VehicleImage>();
                 //configuration.CreateMap<PartnerContactPersonDisplayViewModel, PartnerContactPersonModel>()
                 //    .ForMember(x => x.ContactInfos, opt => opt.Ignore());
             };

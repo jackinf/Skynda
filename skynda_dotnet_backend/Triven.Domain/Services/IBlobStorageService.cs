@@ -20,8 +20,6 @@ namespace Triven.Domain.Services
 
         IImage HandleMedia(ImageViewModel mediaViewModel, IImage existingMedia);
 
-        //byte[] CropImage(byte[] imageInByte, ImageCropInfoViewModel cropInfo, String formatName);
-
-        void FromBase64ToUrl(ImageViewModel viewModel);
+        void HandleMediaCollection(int vehicleId, IList<VehicleImageViewModel> mediaViewModel, IList<VehicleImageViewModel> existingMedia);
     }
 }

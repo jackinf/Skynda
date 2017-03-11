@@ -21,6 +21,7 @@ namespace Triven.Application.Services
         private readonly IVehicleFeatureRepository<VehicleFeature> _vehicleFeatureRepository;
         private readonly IVehicleModelRepository<VehicleModel> _vehicleModelRepository;
         private readonly IBlobStorageService _blobStorageService;
+        private readonly IVehicleImageRepository<VehicleImage> _vehicleImageRepository;
 
         public VehicleService()
         {
@@ -29,6 +30,7 @@ namespace Triven.Application.Services
             _vehicleDescriptionRepository = IoC.Get<IVehicleDescriptionRepository<VehicleDescription>>();
             _vehicleFeatureRepository = IoC.Get<IVehicleFeatureRepository<VehicleFeature>>();
             _blobStorageService = IoC.Get<IBlobStorageService>();
+            _vehicleImageRepository = IoC.Get<IVehicleImageRepository<VehicleImage>>();
         }
 
         public ServiceResult<IEnumerable<VehicleDetailedViewModel>> GetAll()
@@ -92,11 +94,11 @@ namespace Triven.Application.Services
                 entity.VehicleModel = vehicleModel;
 
 
-                if (viewModel.MainImage != null)
-                {
-                    var mainImage = _blobStorageService.HandleMedia(viewModel.MainImage, null);
-                    entity.MainImage = mainImage as Image;
-                }
+                if (viewModel.MainImage == null)
+                    throw new NullReferenceException("Main image is required");
+
+                var mainImage = _blobStorageService.HandleMedia(viewModel.MainImage, null);
+                entity.MainImage = mainImage as Image;
 
                 /*
                  * No need to add images, reviews, reports in create
@@ -104,7 +106,14 @@ namespace Triven.Application.Services
 
                 var result = _vehicleRepository.Add(entity);
                 
+                /*
+                 * Update Descriptions
+                 */
                 UpdateDescriptions(result.ContextObject.Id, viewModel.Descriptions);
+
+                /*
+                 * Update Features
+                 */
                 UpdateFeatures(result.ContextObject.Id, viewModel.FeaturesAdminSelect);
 
                 VehicleAdminViewModel mappedResult = Mapper.Map<VehicleAdminViewModel>(result.ContextObject);
@@ -158,10 +167,9 @@ namespace Triven.Application.Services
             }
         }
 
-        private void UpdateFeatures(int vehicleId, List<FeatureAdminSelectViewModel> features, IList<VehicleFeature> existingFeatures = null)
+        private void UpdateFeatures(int vehicleId, List<FeatureAdminSelectViewModel> features)
         {
-            if(existingFeatures == null)
-                existingFeatures = _vehicleFeatureRepository.GetAllBy(vehicleId);
+            var existingFeatures = _vehicleFeatureRepository.GetAllBy(vehicleId);
 
             if (existingFeatures.Any())
             {
@@ -215,22 +223,39 @@ namespace Triven.Application.Services
             VehicleModel vehicleModel = _vehicleModelRepository.Get(viewModel.VehicleModel.Id);
             entity.VehicleModel = vehicleModel;
 
+            if(viewModel.MainImage == null)
+                throw new NullReferenceException("Main image is required");
+
             var mainImage = _blobStorageService.HandleMedia(viewModel.MainImage, entity.MainImage);
             entity.MainImage = mainImage as Image;         
 
-            UpdateDescriptions(entity.Id, viewModel.Descriptions);
-            UpdateFeatures(entity.Id, viewModel.FeaturesAdminSelect, entity.Features);
-
-            //if (viewModel.Images != null && viewModel.Images.Any())
-            //{
-            //    foreach (var imageContainerViewModel in viewModel.Images)
-            //    {
-
-            //        var image = _blobStorageService.HandleMedia(imageContainerViewModel, null);                    
-            //    }
-            //}
-
             var result = _vehicleRepository.Update(id, entity);
+
+            /*
+             * Update Images
+             */
+            if (viewModel.Images != null && viewModel.Images.Any())
+            {
+                var existingVehicleImages = _vehicleImageRepository.GetAllVehicleImages(result.ContextObject.Id);
+
+                List<VehicleImageViewModel> vehicleImages = new List<VehicleImageViewModel>();
+                Mapper.Map(existingVehicleImages, vehicleImages);
+                _blobStorageService.HandleMediaCollection(entity.Id, viewModel.Images, vehicleImages);
+            }
+
+            /*
+             * Update Descriptions
+             */
+            UpdateDescriptions(result.ContextObject.Id, viewModel.Descriptions);
+
+            /*
+             * Update Features
+             */
+            UpdateFeatures(result.ContextObject.Id, viewModel.FeaturesAdminSelect);
+
+            var images = _vehicleImageRepository.GetAllVehicleImages(result.ContextObject.Id);
+
+            result.ContextObject.Images = images;
 
             VehicleAdminViewModel mappedResult = Mapper.Map<VehicleAdminViewModel>(result.ContextObject);
 

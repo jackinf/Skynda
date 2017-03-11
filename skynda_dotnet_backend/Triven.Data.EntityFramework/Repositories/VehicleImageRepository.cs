@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
 using Triven.Data.EntityFramework.Models;
 using Triven.Data.EntityFramework.Repositories.Base;
 using Triven.Domain.Models;
@@ -9,9 +12,15 @@ namespace Triven.Data.EntityFramework.Repositories
 {
     public class VehicleImageRepository : BaseCrudRepository<VehicleImage>, IVehicleImageRepository<VehicleImage>
     {
-        public void AddMultipleToVehicle(IVehicle vehicle, IList<ImageContainerViewModel> images)
+        public IList<VehicleImage> GetAllVehicleImages(int vehicleId)
         {
-            throw new System.NotImplementedException();
+            using (var context = new ApplicationDbContext())
+            {
+                return BaseQuery(context)
+                    .Include(x => x.Image)
+                    .Include(x => x.Vehicle)
+                .Where(x => x.Vehicle.Id == vehicleId).ToList();
+            }
         }
     }
 }

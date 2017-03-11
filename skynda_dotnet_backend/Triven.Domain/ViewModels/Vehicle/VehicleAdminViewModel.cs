@@ -31,7 +31,7 @@ namespace Triven.Domain.ViewModels.Vehicle
         public List<FeatureAdminSelectViewModel> FeaturesAdminSelect { get; set; } = new List<FeatureAdminSelectViewModel>();
         public List<VehicleFeatureViewModel> Features { get; set; } = new List<VehicleFeatureViewModel>();
         public List<FaultBaseViewModel> Faults { get; set; } = new List<FaultBaseViewModel>();
-        public List<ImageViewModel> Images { get; set; } = new List<ImageViewModel>();
+        public List<VehicleImageViewModel> Images { get; set; } = new List<VehicleImageViewModel>();
         public List<VehicleDescriptionViewModel> Descriptions { get; set; } = new List<VehicleDescriptionViewModel>();
         public ImageViewModel GetImage { get; set; }
     }

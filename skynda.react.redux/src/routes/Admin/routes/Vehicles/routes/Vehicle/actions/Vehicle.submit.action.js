@@ -46,11 +46,12 @@ function editRequest() {
   }
 }
 
-function editSuccess() {
+function editSuccess(item) {
   return {
     type: EDIT_SUCCESS,
     isFetching: false,
-    formMode: FORM_MODE.UPDATING
+    formMode: FORM_MODE.UPDATING,
+    item
   }
 }
 
@@ -88,7 +89,7 @@ function submitEdit(item, onSubmitCustom) {
     dispatch(editRequest());
     try {
       const resp = await VehicleService.updateItem(item);
-      dispatch(editSuccess());
+      dispatch(editSuccess(resp));
       if (_.isFunction(onSubmitCustom)) {
         onSubmitCustom(null, resp.id);
       } else {

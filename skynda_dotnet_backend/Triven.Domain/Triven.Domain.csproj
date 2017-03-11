@@ -213,7 +213,7 @@
     <Compile Include="ViewModels\Vehicle\VehicleAdminViewModel.cs" />
     <Compile Include="ViewModels\Vehicle\VehicleDescriptionViewModel.cs" />
     <Compile Include="ViewModels\Vehicle\VehicleFeatureViewModel.cs" />
-    <Compile Include="ViewModels\Vehicle\VehicleImageFileToDeleteViewModel.cs" />
+    <Compile Include="ViewModels\Vehicle\VehicleImageViewModel.cs" />
     <Compile Include="ViewModels\Vehicle\VehicleModelViewModel.cs" />
     <Compile Include="ViewModels\Vehicle\VehicleReportItemViewModel.cs" />
     <Compile Include="ViewModels\Vehicle\VehicleReportViewModel.cs" />

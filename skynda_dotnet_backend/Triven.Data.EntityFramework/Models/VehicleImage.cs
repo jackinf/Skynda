@@ -8,9 +8,7 @@ namespace Triven.Data.EntityFramework.Models
     [Table("VehicleImage")]
     public class VehicleImage : AuditableModel, IVehicleImage
     {
-        [Required]
         public Vehicle Vehicle { get; set; }
-        [Required]
         public Image Image { get; set; }
     }
 }

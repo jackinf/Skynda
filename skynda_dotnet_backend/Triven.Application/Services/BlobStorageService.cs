@@ -14,6 +14,7 @@ using Triven.Domain.Results;
 using Triven.Domain.Services;
 using Triven.Domain.ViewModels.BlobStorage;
 using Triven.Domain.ViewModels.Image;
+using Triven.Domain.ViewModels.Vehicle;
 
 namespace Triven.Application.Services
 {
@@ -21,12 +22,14 @@ namespace Triven.Application.Services
     {
         private readonly CloudBlobClient _blobClient;
         private readonly IImageRepository<Image> _imageRepository;
+        private readonly IVehicleImageRepository<VehicleImage> _vehicleImageRepository;
 
         public BlobStorageService()
         {                        
             CloudStorageAccount storageAccount = CloudStorageAccount.Parse(CloudConfigurationManager.GetSetting(AppSettings.StorageConnectionString));
             _blobClient = storageAccount.CreateCloudBlobClient();
             _imageRepository = IoC.Get<IImageRepository<Image>>();
+            _vehicleImageRepository = IoC.Get<IVehicleImageRepository<VehicleImage>>();
         }
 
         public ServiceResult<bool> CreateContainer(CreateContainerViewModel viewModel)
@@ -68,7 +71,16 @@ namespace Triven.Application.Services
                 CloudBlobContainer container = _blobClient.GetContainerReference(viewModel.ContainerName.ToLower());
                 CloudBlockBlob blockBlob = container.GetBlockBlobReference(viewModel.BlobName);
 
-                blockBlob.UploadFromStream(new MemoryStream(viewModel.ByteArray));
+                blockBlob.Properties.ContentType = viewModel.ContentType;
+
+                using (var stream = new MemoryStream(viewModel.ByteArray))
+                {
+                    stream.Seek(0, SeekOrigin.Begin);
+                    blockBlob.UploadFromStream(stream);
+                }
+
+                //blockBlob.SetProperties();
+
 
                 return ServiceResult<Uri>.Factory.Success(blockBlob.Uri);
             }
@@ -156,33 +168,49 @@ namespace Triven.Application.Services
 
             if (!string.IsNullOrWhiteSpace(mediaViewModel.Base64File))
             {
-                byte[] bytes = GetBytes(mediaViewModel.Base64File);
+                //"data:image/png;base64,ivorasgkas..." --this comes in
 
-                var result = Upload(new UploadBlobViewModel
+                //Remove data: and read content type
+                var indexOfTypeEnd = mediaViewModel.Base64File.IndexOf(";", StringComparison.Ordinal);
+                var contentType = mediaViewModel.Base64File.Substring(5, 
+                    mediaViewModel.Base64File.Length - (mediaViewModel.Base64File.Length - indexOfTypeEnd) - 5 );
+
+                //substring for base64 string
+                var indexOfComma = mediaViewModel.Base64File.IndexOf(",", StringComparison.Ordinal) + 1;
+                string base64String = mediaViewModel.Base64File.Substring(indexOfComma, mediaViewModel.Base64File.Length - indexOfComma);
+
+                if (!string.IsNullOrWhiteSpace(base64String))
                 {
-                    ContainerName = mediaViewModel.ContainerName.ToLower(),
-                    BlobName = mediaViewModel.BlobName,
-                    ByteArray = bytes
-                });
+                    byte[] bytes = Convert.FromBase64String(base64String);
 
-                if (result.IsSuccessful)
-                {
-                    ImageViewModel viewModel = ImageViewModel.Factory
-                        .Create(result.Payload.ToString(), mediaViewModel.BlobName, mediaViewModel.ContainerName);
-
-                    var mappedImageEntity = Mapper.Map<ImageViewModel, Image>(viewModel);
-
-                    if (existingMedia == null || existingMedia.Id == 0)
+                    var result = Upload(new UploadBlobViewModel
                     {
-                        return _imageRepository.Add(mappedImageEntity).ContextObject;
+                        ContainerName = mediaViewModel.ContainerName.ToLower(),
+                        BlobName = mediaViewModel.BlobName,
+                        ByteArray = bytes,
+                        ContentType = contentType
+                    });
+
+                    if (result.IsSuccessful)
+                    {
+                        ImageViewModel viewModel = ImageViewModel.Factory
+                            .Create(result.Payload.ToString(), mediaViewModel.BlobName, mediaViewModel.ContainerName);
+
+                        var mappedImageEntity = Mapper.Map<ImageViewModel, Image>(viewModel);
+
+                        if (existingMedia == null || existingMedia.Id == 0)
+                        {
+                            return _imageRepository.Add(mappedImageEntity).ContextObject;
+                        }
+
+                        mappedImageEntity.Id = existingMedia.Id;
+
+                        return mappedImageEntity;
                     }
 
-                    mappedImageEntity.Id = existingMedia.Id;                    
-
-                    return mappedImageEntity;
+                    return existingMedia;
                 }
-
-                return existingMedia;
+                
             }
 
             if(string.IsNullOrWhiteSpace(mediaViewModel.Url))            
@@ -204,6 +232,54 @@ namespace Triven.Application.Services
             return mappedNewImageEntity;
         }
 
+        public void HandleMediaCollection(int vehicleId, IList<VehicleImageViewModel> mediaViewModel, IList<VehicleImageViewModel> existingMedia)
+        {
+            if (existingMedia.Any())
+            {
+                foreach (var existingVehicleImage in existingMedia)
+                {
+                    bool exists = mediaViewModel.Any() && mediaViewModel.Any(
+                        x => x.Image.BlobName == existingVehicleImage.Image.BlobName);
+
+                    if (!exists)
+                    {
+                        _vehicleImageRepository.Delete(existingVehicleImage.Id);
+                    }
+                }
+            }
+
+            if (!mediaViewModel.Any()) return;
+
+            foreach (var imageViewModel in mediaViewModel)
+            {
+                var existingMediaSingle = existingMedia.FirstOrDefault(x => x.Image.BlobName == imageViewModel.Image.BlobName);
+
+                var image = new Image();
+
+                if (existingMediaSingle != null)
+                {
+                    Mapper.Map(existingMediaSingle.Image, image);
+                }
+                
+                var imageResult = HandleMedia(imageViewModel.Image, image);
+
+                bool exists = existingMedia.Any() &&
+                              existingMedia.Any(x =>
+                                  x.Image.BlobName == imageResult.BlobName);
+
+                var entityVehicleImage = new VehicleImage
+                {
+                    Vehicle = new Vehicle {Id = vehicleId},
+                    Image = imageResult as Image
+                };
+
+                if (!exists)
+                {
+                    _vehicleImageRepository.Add(entityVehicleImage);
+                }
+            }            
+        }
+
         private void DeleteBlobIfExists(IImage existingMedia)
         {
             if (!string.IsNullOrWhiteSpace(existingMedia?.BlobName) && !string.IsNullOrWhiteSpace(existingMedia.ContainerName))
@@ -214,45 +290,6 @@ namespace Triven.Application.Services
                     ContainerName = existingMedia.ContainerName
                 });
             }
-        }
-
-        private byte[] GetBytes(string str)
-        {
-            byte[] bytes = new byte[str.Length * sizeof(char)];
-            Buffer.BlockCopy(str.ToCharArray(), 0, bytes, 0, bytes.Length);
-            return bytes;
-        }
-
-        //static string GetString(byte[] bytes)
-        //{
-        //    char[] chars = new char[bytes.Length / sizeof(char)];
-        //    Buffer.BlockCopy(bytes, 0, chars, 0, bytes.Length);
-        //    return new string(chars);
-        //}
-
-        //public byte[] CropImage(byte[] imageInByte, ImageCropInfoViewModel cropInfo, string formatName = "jpg")
-        //{
-        //    if (cropInfo == null || !cropInfo.IsCrop)
-        //        return imageInByte;
-
-        //    using (MemoryStream memoryStream = new MemoryStream(imageInByte))
-        //    {
-        //        using (Image newImage = Image.FromStream(memoryStream))
-        //        {
-        //            var croppedImage = newImage.CropImage(new Rectangle(300, 150, 200, 200));
-        //            ImageConverter converter = new ImageConverter();
-        //            byte[] imgArray = (byte[])converter.ConvertTo(croppedImage, typeof(byte[]));
-        //            imageInByte = imgArray;
-        //        }
-        //    }
-
-        //    return imageInByte;
-        //}
-
-
-        public void FromBase64ToUrl(ImageViewModel viewModel)
-        {
-            throw new System.NotImplementedException();
         }
 
     }

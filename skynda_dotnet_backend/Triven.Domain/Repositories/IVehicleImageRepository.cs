@@ -8,6 +8,6 @@ namespace Triven.Domain.Repositories
     public interface IVehicleImageRepository<TVehicleImageEntity> : IBaseCrudRepository<TVehicleImageEntity>
         where TVehicleImageEntity : IVehicleImage
     {
-        void AddMultipleToVehicle(IVehicle vehicle, IList<ImageContainerViewModel> images);
+        IList<TVehicleImageEntity> GetAllVehicleImages(int vehicleId);
     }
 }

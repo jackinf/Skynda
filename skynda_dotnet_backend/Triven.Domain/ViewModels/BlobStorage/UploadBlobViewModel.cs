@@ -6,7 +6,9 @@ namespace Triven.Domain.ViewModels.BlobStorage
     {
         public string ContainerName { get; set; }
         public string BlobName { get; set; }
-        public HttpPostedFile FileSource;
-        public byte[] ByteArray;
+        public HttpPostedFile FileSource { get; set; }
+        public byte[] ByteArray { get; set; }
+        public string ContentType { get; set; }
+
     }
 }
