@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Triven.Domain.Models;
 using Triven.Domain.Repositories.Base;
+using Triven.Domain.Results;
 
 namespace Triven.Domain.Repositories
 {
@@ -9,5 +10,6 @@ namespace Triven.Domain.Repositories
     {
         IList<TVehicleFeatureEntity> GetAllBy(int vehicleId);
         IList<TVehicleFeatureEntity> GetAllBy(int vehicleId, bool isActive);
+        IResult<TVehicleFeatureEntity> Add(TVehicleFeatureEntity model);
     }
 }
