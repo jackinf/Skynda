@@ -10,7 +10,8 @@ namespace Triven.Domain.ViewModels.Vehicle
             Items = new List<VehicleReportItemViewModel>();
         }
 
-        public VehicleAdminViewModel Vehicle { get; set; }
+        //public VehicleAdminViewModel Vehicle { get; set; }
+        public int VehicleId { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public string Inspector { get; set; }

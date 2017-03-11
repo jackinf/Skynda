@@ -1,12 +1,11 @@
-import {change} from "redux-form";
-import {FORM_MODE, ROUTE_PARAMS, VEHICLE_FORM_KEY} from "../../../constants/Vehicles.constant";
+import {FORM_MODE, ROUTE_PARAMS, FORMS} from "../constants/VehicleReport.constant";
 import {initialize, destroy} from "redux-form";
-import {VehicleService} from "../../../../../../../webServices"
+import {VehicleReportService} from "../../../../../webServices"
 
-export const LOAD_CREATE_SUCCESS = 'VEHICLE/LOAD_CREATE_SUCCESS123';
-export const LOAD_EDIT_REQUEST = 'VEHICLE/LOAD_EDIT_REQUEST';
-export const LOAD_EDIT_SUCCESS = 'VEHICLE/LOAD_EDIT_SUCCESS';
-export const LOAD_EDIT_FAILURE = 'VEHICLE/LOAD_EDIT_FAILURE';
+export const LOAD_CREATE_SUCCESS  = 'VEHICLE_REPORT/LOAD_CREATE_SUCCESS123';
+export const LOAD_EDIT_REQUEST    = 'VEHICLE_REPORT/LOAD_EDIT_REQUEST';
+export const LOAD_EDIT_SUCCESS    = 'VEHICLE_REPORT/LOAD_EDIT_SUCCESS';
+export const LOAD_EDIT_FAILURE    = 'VEHICLE_REPORT/LOAD_EDIT_FAILURE';
 
 function loadCreateSuccess() {
   return {
@@ -47,13 +46,13 @@ function loadEditError(errors) {
  *
  * Private. Fetches data from API and prepares update form.
  * @param id - vehicle ID.
-*/
+ */
 const loadEditForm = (id) => async (dispatch) => {
   dispatch(loadEditRequest());
   try {
-    const item = await VehicleService.fetchAdminItem(id);
+    const item = await VehicleReportService.fetchAdminItem(id);
     dispatch(loadEditSuccess(item));
-    dispatch(initialize(VEHICLE_FORM_KEY, item));
+    dispatch(initialize(FORMS.VEHICLE_FORM_REPORT, item));
   } catch (error) {
     dispatch(loadEditError(error));
   }
@@ -69,7 +68,7 @@ const loadEditForm = (id) => async (dispatch) => {
  */
 export default function load(id) {
   return (dispatch) => {
-    dispatch(destroy(VEHICLE_FORM_KEY));
+    dispatch(destroy(FORMS.VEHICLE_FORM_REPORT));
 
     const formMode = id === ROUTE_PARAMS.values.NEW
       ? FORM_MODE.ADDING
@@ -78,12 +77,7 @@ export default function load(id) {
 
     if (formMode === FORM_MODE.ADDING) {
       dispatch(loadCreateSuccess());
-      dispatch(initialize(VEHICLE_FORM_KEY, {
-        colorOutsideHex: "#000000",
-        colorInsideHex: "#000000"
-      }));
-      // dispatch(change(FORMS.VEHICLE_FORM_REPORT, "colorOutsideHex", "#000000"));
-      // dispatch(change(FORMS.VEHICLE_FORM_REPORT, "colorInsideHex", "#000000"));
+      dispatch(initialize(FORMS.VEHICLE_FORM_REPORT));
     } else if (formMode == FORM_MODE.UPDATING) {
       dispatch(loadEditForm(id));
     } else {
