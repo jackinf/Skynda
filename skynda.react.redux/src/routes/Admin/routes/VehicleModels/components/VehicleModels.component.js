@@ -45,7 +45,7 @@ export default class VehicleModels extends React.Component {
         <h3>{loading}</h3>
 
         <RaisedButton secondary={true} label="Add" onClick={e => browserHistory.push(`/admin/vehicle-model/new`)}/>
-          <TrivenLoader isLoading={!this.props.isFetching}>
+          <TrivenLoader isLoading={this.props.isFetching}>
             <BootstrapTable data={rows} options={tableOptions} selectRow={selectRow} deleteRow hover={true} search={true}>
               <TableHeaderColumn dataField="id" isKey={true} dataAlign="center" dataSort={true}>Vehicle Model ID</TableHeaderColumn>
               <TableHeaderColumn dataField="modelCode" dataSort={true}>Code</TableHeaderColumn>
