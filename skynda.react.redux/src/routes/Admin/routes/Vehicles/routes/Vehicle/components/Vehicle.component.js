@@ -16,8 +16,6 @@ import {
   renderCheckbox
 } from "../../../../../components/FormRenderers";
 import {ROUTE_PARAMS as VEHICLE_MODEL_ROUTE_PARAMS} from "../../../../VehicleModels/constants/VehicleModel.constant";
-import {ROUTE_PARAMS as VEHICLE_REPORT_ROUTE_PARAMS} from "../../../../VehicleReports/constants/VehicleReport.constant";
-import {ROUTE_PARAMS as VEHICLE_REVIEW_ROUTE_PARAMS} from "../../../../VehicleReviews/constants/VehicleReview.constant";
 import VehicleModel from "../../../../VehicleModels/routes/VehicleModel/containers/VehicleModel.container";
 import {CropToolCard} from "../../../../../../../components/ReduxForm/CropTool";
 import VehicleFeaturesAndDescriptionsCard from "./Vehicle.features-and-descriptions-card.component";
@@ -25,17 +23,12 @@ import VehicleReviewsCardComponent from "./Vehicle.reviews-card.component";
 import VehicleReportsCardComponent from "./Vehicle.reports-card.component";
 import {SubmitCardActionsComponent as SubmitCardActions} from "./FormRenderers";
 
-
 class Vehicle extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       id: this.props.params[ROUTE_PARAMS.VEHICLE_ID],
       isVehicleModelDialogOpen: false,
-      isVehicleReportDialogOpen: false,
-      isVehicleReviewDialogOpen: false,
-      vehicleReportId: VEHICLE_REPORT_ROUTE_PARAMS.values.NEW,
-      vehicleReviewId: VEHICLE_REVIEW_ROUTE_PARAMS.values.NEW
     };
   }
 

@@ -8,6 +8,7 @@ import {ROUTE_PARAMS as VEHICLE_REPORT_ROUTE_PARAMS} from "../../../../VehicleRe
 import VehicleReport from "../../../../VehicleReports/containers/VehicleReport.container";
 import _ from "underscore";
 
+
 const selectRow = {
   mode: 'checkbox',
   clickToSelect: true
@@ -17,6 +18,15 @@ export default class VehicleReportsCardComponent extends React.Component {
   static propTypes = {
     vehicleReports: React.PropTypes.array.isRequired
   };
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      isVehicleReportDialogOpen: false,
+      vehicleReportId: VEHICLE_REPORT_ROUTE_PARAMS.values.NEW
+    };
+  }
+
 
   // TODO: eraldi failisse - VehicleSublistActions/Vehicle.open-vehicle-report-dialog.action.js
   openVehicleReportDialog = (e) => {

@@ -6,6 +6,7 @@ import "./Vehicle.component.scss";
 import BootstrapTable from "./Vehicle.bootstrap-table.component";
 import {ROUTE_PARAMS as VEHICLE_REVIEW_ROUTE_PARAMS} from "../../../../VehicleReviews/constants/VehicleReview.constant";
 import _ from "underscore";
+import VehicleReview from "../../../../VehicleReviews/containers/VehicleReview.container";
 
 const selectRow = {
   mode: 'checkbox',
@@ -16,6 +17,14 @@ export default class VehicleReviewsCardComponent extends React.Component {
   static propTypes = {
     vehicleReviews: React.PropTypes.array.isRequired
   };
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      isVehicleReviewDialogOpen: false,
+      vehicleReviewId: VEHICLE_REVIEW_ROUTE_PARAMS.values.NEW
+    };
+  }
 
   // TODO: eraldi failisse - VehicleSublistActions/Vehicle.open-vehicle-review-dialog.action.js
   openVehicleReviewDialog = (e) => {
