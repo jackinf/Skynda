@@ -16,6 +16,5 @@ namespace Triven.Domain.Repositories
 
         IResult<TVehicleEntity> Add(TVehicleEntity model);
 
-        IResult<TVehicleEntity> Update(int id, TVehicleEntity model);
     }
 }

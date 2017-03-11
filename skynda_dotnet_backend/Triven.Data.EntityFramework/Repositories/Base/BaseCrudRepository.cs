@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
+using System.Reflection;
+using Triven.Data.EntityFramework.Models.Base;
 using Triven.Domain.Models.Base;
 using Triven.Domain.Repositories.Base;
 using Triven.Domain.Results;
@@ -50,10 +52,10 @@ namespace Triven.Data.EntityFramework.Repositories.Base
             }
             finally
             {
-                if(isDisposable)
+                if (isDisposable)
                     dbContext.Dispose();
             }
-           
+
         }
 
         /// <summary>
@@ -70,7 +72,21 @@ namespace Triven.Data.EntityFramework.Repositories.Base
         /// <param name="id"></param>
         /// <param name="context">Should be ApplicationDbContext</param>
         /// <returns></returns>
-        public virtual TModel Get(int id, IDbContext context = null) => BaseQuery(context).SingleOrDefault(m => m.Id == id);
+        public virtual TModel Get(int id, IDbContext context = null)
+        {
+            var (dbContext, isDisposable) = DbContextHelper(context);
+
+            try
+            {
+                return BaseQuery(dbContext).SingleOrDefault(m => m.Id == id);
+            }
+            finally
+            {
+                if(isDisposable)
+                    dbContext.Dispose();
+            }
+
+        }
 
         /// <summary>
         /// Adds new item to the database and saves changes
@@ -80,7 +96,7 @@ namespace Triven.Data.EntityFramework.Repositories.Base
         /// <returns></returns>
         public virtual IResult<TModel> Add(TModel model, IDbContext context = null)
         {
-            var(dbContext, isDisposable) = DbContextHelper(context);
+            var (dbContext, isDisposable) = DbContextHelper(context);
 
             try
             {
@@ -107,7 +123,7 @@ namespace Triven.Data.EntityFramework.Repositories.Base
                 if (isDisposable)
                     dbContext.Dispose();
             }
-        }   
+        }
 
         /// <summary>
         /// Updates an item in the database
@@ -122,12 +138,11 @@ namespace Triven.Data.EntityFramework.Repositories.Base
 
             try
             {
-
-                dbContext.Entry(model).State = EntityState.Modified;
-                dbContext.Entry(model).Property(x => x.CreatedOn).IsModified = false;
-
                 model.UpdatedOn = DateTime.Now;
                 model.ModifierUserIp = HttpContextManager.Current?.Request?.UserHostAddress;
+
+                UpdateWithComplexTypes(model, dbContext);
+
                 dbContext.SaveChanges();
 
                 return OnCreateOrUpdateResult<TModel>.Factory.Success(model);
@@ -144,9 +159,59 @@ namespace Triven.Data.EntityFramework.Repositories.Base
             }
             finally
             {
-                if(isDisposable)
+                if (isDisposable)
                     dbContext.Dispose();
             }
+        }
+
+        private static void UpdateWithComplexTypes(TModel model, ApplicationDbContext dbContext)
+        {
+            IEnumerable<PropertyInfo> complexProps = model.GetType()
+                .GetProperties()
+                .Where(p => p.PropertyType.BaseType == typeof(AuditableModel));
+
+            Dictionary<string, int?> updateFkValues = new Dictionary<string, int?>();
+
+            var complexPropertyInfos = complexProps as IList<PropertyInfo> ?? complexProps.ToList();
+
+            foreach (PropertyInfo prop in complexPropertyInfos)
+            {
+                var val = (AuditableModel) prop.GetValue(model);
+                if (val == null)
+                {
+                    updateFkValues.Add(prop.Name, null);
+                }
+                else
+                {
+                    updateFkValues.Add(prop.Name, val.Id);
+                }
+
+                prop.SetValue(model, null);
+            }
+
+            // dbContext creation may need to move to here as per below working example
+            var dbObj = dbContext.Set(typeof(TModel)).Find(new object[] {model.Id}); //this also differs from example
+
+            //update the simple values
+            dbContext.Entry(dbObj).CurrentValues.SetValues(model);
+
+            //update complex values
+            foreach (PropertyInfo prop in complexPropertyInfos)
+            {
+                Object propValue = null;
+                if (updateFkValues[prop.Name].HasValue)
+                {
+                    propValue = dbContext.Set(prop.PropertyType).Find(new object[] {updateFkValues[prop.Name]});
+                }
+
+                prop.SetValue(dbObj, propValue);
+
+                if (propValue != null)
+                {
+                    dbContext.Entry(propValue).State = EntityState.Unchanged;
+                }
+            }
+
         }
 
 
@@ -179,10 +244,10 @@ namespace Triven.Data.EntityFramework.Repositories.Base
             }
             finally
             {
-                if(isDisposable)
+                if (isDisposable)
                     dbContext.Dispose();
             }
-            
+
 
         }
 
@@ -196,10 +261,10 @@ namespace Triven.Data.EntityFramework.Repositories.Base
             }
             finally
             {
-                if(isDisposable)
+                if (isDisposable)
                     dbContext.Dispose();
             }
-           
+
         }
 
         /// <summary>
@@ -218,7 +283,7 @@ namespace Triven.Data.EntityFramework.Repositories.Base
             }
             finally
             {
-                if(isDisposable)
+                if (isDisposable)
                     dbContext.Dispose();
             }
 

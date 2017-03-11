@@ -13,7 +13,7 @@ namespace Triven.Data.EntityFramework.Repositories
     {
         public Vehicle GetIncluding(int id, bool descriptions = false, bool images = false)
         {
-            using (var context = new ApplicationDbContext()) 
+            using (var context = new ApplicationDbContext())
             {
                 return BaseQuery(context).Include(x => x.Images).Include(x => x.Descriptions).FirstOrDefault();
             }
@@ -78,7 +78,7 @@ namespace Triven.Data.EntityFramework.Repositories
 
                 var result = BaseQuery(context)
                     .Include(x => x.VehicleModel)
-                    .Include(x => x.MainImage)                    
+                    .Include(x => x.MainImage)
                     .Include(x => x.Features.Select(o => o.Feature))
                     .Include(x => x.Descriptions)
                     .Include(x => x.Reviews)
@@ -86,18 +86,8 @@ namespace Triven.Data.EntityFramework.Repositories
                     .Include(x => x.Images).FirstOrDefault(x => x.Id == id);
                 return result;
             }
-            
+
         }
 
-        public IResult<Vehicle> Update(int id, Vehicle model)
-        {
-            using (var context = new ApplicationDbContext())
-            {
-                context.Entry(model.VehicleModel).State = EntityState.Unchanged;
-                context.Entry(model.Descriptions).State = EntityState.Unchanged;
-                context.Entry(model.Features).State = EntityState.Unchanged;
-                return base.Update(id, model, context);
-            }
-        }
     }
 }

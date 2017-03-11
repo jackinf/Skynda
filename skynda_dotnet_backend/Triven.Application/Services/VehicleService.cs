@@ -209,7 +209,7 @@ namespace Triven.Application.Services
                 return ServiceResult<VehicleAdminViewModel>.Factory.Fail(results.Errors);
             }
 
-            Vehicle entity = _vehicleRepository.Get(viewModel.Id);
+            Vehicle entity = _vehicleRepository.GetDetailed(viewModel.Id);
             Mapper.Map(viewModel, entity);
             VehicleModel vehicleModel = _vehicleModelRepository.Get(viewModel.VehicleModel.Id);
             entity.VehicleModel = vehicleModel;
