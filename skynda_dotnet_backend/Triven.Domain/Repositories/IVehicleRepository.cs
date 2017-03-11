@@ -13,5 +13,6 @@ namespace Triven.Domain.Repositories
         IList<TVehicleEntity> Search(SearchRequestViewModel dto);
 
         TVehicleEntity GetDetailed(int id);
+
     }
 }
