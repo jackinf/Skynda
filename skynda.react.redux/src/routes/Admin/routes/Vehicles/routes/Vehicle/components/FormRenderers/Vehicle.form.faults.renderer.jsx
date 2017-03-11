@@ -4,7 +4,7 @@ import {Card} from 'material-ui/Card';
 import {Row, Col} from "react-bootstrap";
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentRemove from 'material-ui/svg-icons/content/remove';
-import {fieldListWrapper, renderImage} from "../../../../../../components/FormRenderers/index";
+import {renderTextField, fieldListWrapper, renderImage} from "../../../../../../components/FormRenderers/index";
 
 export const renderFaults = ({fields, ...custom}) => fieldListWrapper({
   fields,

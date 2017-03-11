@@ -16,7 +16,8 @@ const selectRow = {
 
 export default class VehicleReportsCardComponent extends React.Component {
   static propTypes = {
-    vehicleReports: React.PropTypes.array.isRequired
+    vehicleReports: React.PropTypes.array.isRequired,
+    vehicleId: React.PropTypes.any.isRequired
   };
 
   constructor(props) {
@@ -83,7 +84,7 @@ export default class VehicleReportsCardComponent extends React.Component {
             <Modal.Body>
               <VehicleReport params={{
                 [VEHICLE_REPORT_ROUTE_PARAMS.VEHICLE_REPORT_ID]: this.state.vehicleReportId,
-                [VEHICLE_REPORT_ROUTE_PARAMS.VEHICLE_ID]: this.props.id || this.state.id
+                [VEHICLE_REPORT_ROUTE_PARAMS.VEHICLE_ID]: this.props.vehicleId
               }}
                onSubmitCustom={this.closeVehicleReportDialog}/>
             </Modal.Body>

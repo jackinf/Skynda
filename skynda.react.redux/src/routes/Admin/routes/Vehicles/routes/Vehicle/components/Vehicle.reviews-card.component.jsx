@@ -82,7 +82,7 @@ export default class VehicleReviewsCardComponent extends React.Component {
             <Modal.Body>
               <VehicleReview params={{
                 [VEHICLE_REVIEW_ROUTE_PARAMS.VEHICLE_REVIEW_ID]: this.state.vehicleReviewId,
-                [VEHICLE_REVIEW_ROUTE_PARAMS.VEHICLE_ID]: this.props.id || this.state.id
+                [VEHICLE_REVIEW_ROUTE_PARAMS.VEHICLE_ID]: this.props.vehicleId
                 }}
                  onSubmitCustom={this.closeVehicleReviewDialog}/>
             </Modal.Body>

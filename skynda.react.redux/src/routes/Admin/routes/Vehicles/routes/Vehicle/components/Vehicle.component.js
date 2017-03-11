@@ -132,7 +132,7 @@ class Vehicle extends React.Component {
         <Row>
           <Col xs={12}>
             {isUpdating
-              ? <h3><span className="label label-primary">ID: {this.props.id || this.state.id}</span></h3>
+              ? <h3><span className="label label-primary">ID: {this.props.id}</span></h3>
               : <h3><span className="label label-success">{this.props.formModeVehicle}</span></h3>}
           </Col>
         </Row>
@@ -201,7 +201,7 @@ class Vehicle extends React.Component {
 
               <VehicleFeaturesAndDescriptionsCard featuresList={featuresList}>
                 {submitCardActions}
-                </VehicleFeaturesAndDescriptionsCard>
+              </VehicleFeaturesAndDescriptionsCard>
             </Col>
 
           {isUpdating ?
@@ -222,9 +222,9 @@ class Vehicle extends React.Component {
         <Row>
           <Col sm={12}>
             <div>
-              <VehicleReportsCardComponent vehicleReports={vehicleReports} />
+              <VehicleReportsCardComponent vehicleReports={vehicleReports} vehicleId={this.props.id} />
               <br/>
-              <VehicleReviewsCardComponent vehicleReviews={vehicleReviews} />
+              <VehicleReviewsCardComponent vehicleReviews={vehicleReviews} vehicleId={this.props.id} />
             </div>
           </Col>
         </Row>

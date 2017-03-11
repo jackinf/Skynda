@@ -42,7 +42,7 @@ const mapStateToProps = (state) => {
   let classificators = state.classificators;  // TODO: reducer key
 
   return {
-    id: formInfo.id,
+    id: formInfo.item ? formInfo.item.id : "new",
     isFetching: formInfo.isFetching,
     initialValues: formInfo.item,
     formModeVehicle: formInfo.formMode,
