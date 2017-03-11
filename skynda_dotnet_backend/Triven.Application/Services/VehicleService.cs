@@ -104,7 +104,8 @@ namespace Triven.Application.Services
 
                 var result = _vehicleRepository.Add(entity);
                 
-                UpdateFeatures(result.ContextObject.Id, viewModel.FeaturesAdminSelect, result.ContextObject.Features);
+                UpdateDescriptions(result.ContextObject.Id, viewModel.Descriptions);
+                UpdateFeatures(result.ContextObject.Id, viewModel.FeaturesAdminSelect);
 
                 VehicleAdminViewModel mappedResult = Mapper.Map<VehicleAdminViewModel>(result.ContextObject);
 

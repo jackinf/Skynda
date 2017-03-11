@@ -76,12 +76,12 @@ namespace Triven.Data.EntityFramework.Repositories.Base
 
             try
             {
-                dbContext.Entry(model).State = EntityState.Added;
-                dbContext.Set<TModel>().Add(model);
-
                 model.CreatedOn = DateTime.Now;
                 model.UpdatedOn = DateTime.Now;
-                dbContext.SaveChanges();
+                dbContext.Set<TModel>().Add(model);
+
+                int save = SaveModelWithComplexTypes(model, dbContext);
+
                 return OnCreateOrUpdateResult<TModel>.Factory.Success(model);
             }
             catch (DbUpdateException ex)
@@ -116,10 +116,8 @@ namespace Triven.Data.EntityFramework.Repositories.Base
             {
                 model.UpdatedOn = DateTime.Now;
                 model.ModifierUserIp = HttpContextManager.Current?.Request?.UserHostAddress;
-
-                UpdateWithComplexTypes(model, dbContext);
-
-                dbContext.SaveChanges();
+                
+                int save = SaveModelWithComplexTypes(model, dbContext);
 
                 return OnCreateOrUpdateResult<TModel>.Factory.Success(model);
             }
@@ -140,7 +138,7 @@ namespace Triven.Data.EntityFramework.Repositories.Base
             }
         }
 
-        private static void UpdateWithComplexTypes(TModel model, ApplicationDbContext dbContext)
+        private static int SaveModelWithComplexTypes(TModel model, ApplicationDbContext dbContext)
         {
             IEnumerable<PropertyInfo> complexProps = model.GetType()
                 .GetProperties()
@@ -150,44 +148,62 @@ namespace Triven.Data.EntityFramework.Repositories.Base
 
             var complexPropertyInfos = complexProps as IList<PropertyInfo> ?? complexProps.ToList();
 
-            foreach (PropertyInfo prop in complexPropertyInfos)
+            if (model.Id <= 0)
             {
-                var val = (AuditableModel) prop.GetValue(model);
-                if (val == null)
+                //insert
+
+                //set fk reference props to unchanged state
+                foreach (PropertyInfo prop in complexPropertyInfos)
                 {
-                    updateFkValues.Add(prop.Name, null);
-                }
-                else
+                    Object val = prop.GetValue(model);
+                    if (val != null)
+                    {
+                        dbContext.Entry(val).State = EntityState.Unchanged;
+                    }
+                }                
+            }
+            else
+            {
+                foreach (PropertyInfo prop in complexPropertyInfos)
                 {
-                    updateFkValues.Add(prop.Name, val.Id);
+                    var val = (AuditableModel)prop.GetValue(model);
+                    if (val == null)
+                    {
+                        updateFkValues.Add(prop.Name, null);
+                    }
+                    else
+                    {
+                        updateFkValues.Add(prop.Name, val.Id);
+                    }
+
+                    prop.SetValue(model, null);
                 }
 
-                prop.SetValue(model, null);
+                // dbContext creation may need to move to here as per below working example
+                var dbObj = dbContext.Set(typeof(TModel)).Find(new object[] { model.Id }); //this also differs from example
+
+                //update the simple values
+                dbContext.Entry(dbObj).CurrentValues.SetValues(model);
+
+                //update complex values
+                foreach (PropertyInfo prop in complexPropertyInfos)
+                {
+                    Object propValue = null;
+                    if (updateFkValues[prop.Name].HasValue)
+                    {
+                        propValue = dbContext.Set(prop.PropertyType).Find(new object[] { updateFkValues[prop.Name] });
+                    }
+
+                    prop.SetValue(dbObj, propValue);
+
+                    if (propValue != null)
+                    {
+                        dbContext.Entry(propValue).State = EntityState.Unchanged;
+                    }
+                }
             }
 
-            // dbContext creation may need to move to here as per below working example
-            var dbObj = dbContext.Set(typeof(TModel)).Find(new object[] {model.Id}); //this also differs from example
-
-            //update the simple values
-            dbContext.Entry(dbObj).CurrentValues.SetValues(model);
-
-            //update complex values
-            foreach (PropertyInfo prop in complexPropertyInfos)
-            {
-                Object propValue = null;
-                if (updateFkValues[prop.Name].HasValue)
-                {
-                    propValue = dbContext.Set(prop.PropertyType).Find(new object[] {updateFkValues[prop.Name]});
-                }
-
-                prop.SetValue(dbObj, propValue);
-
-                if (propValue != null)
-                {
-                    dbContext.Entry(propValue).State = EntityState.Unchanged;
-                }
-            }
-
+            return dbContext.SaveChanges();
         }
 
 
