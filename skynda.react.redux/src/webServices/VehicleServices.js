@@ -21,6 +21,12 @@ export const VehicleService = {
       headers: getDefaultHeaders()
     }));
   },
+  fetchAdminItem: function (id) {
+    return handle(fetch(`${remoteConfig.remote}/api/vehicle/${id}/detailed`, {
+      method: "GET",
+      headers: getDefaultHeaders()
+    }));
+  },
   getDataAsync: function (id) {
     return handle(fetch(`${remoteConfig.remote}/api/vehicle/${id}/detailed`, {
       method: "GET",
