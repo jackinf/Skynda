@@ -122,7 +122,7 @@ namespace Triven.Tests.IntegrationTests
             var requestViewModel = new VehicleReportViewModel
             {
                 Description = "test123",
-                VehicleId = vehicle.Id
+                Vehicle = new VehicleAdminViewModel{ Id = vehicle.Id }
             };
             var okNegotiatedContentResult = controller.Add(requestViewModel) as OkNegotiatedContentResult<ServiceResult<VehicleReportViewModel>>;
             Assert.IsNotNull(okNegotiatedContentResult, "Response was not ok");
@@ -153,7 +153,7 @@ namespace Triven.Tests.IntegrationTests
             //
 
             var controller = NewController();
-            var requestViewModel = new VehicleReportViewModel { Description = "test123_updated", VehicleId = vehicle.Id };
+            var requestViewModel = new VehicleReportViewModel { Description = "test123_updated", Vehicle = new VehicleAdminViewModel{Id = vehicle.Id } };
             var okNegotiatedContentResult = controller.Update(review.Id, requestViewModel) as OkNegotiatedContentResult<ServiceResult<VehicleReportViewModel>>;
             Assert.IsNotNull(okNegotiatedContentResult, "Response was not ok");
             var result = okNegotiatedContentResult.Content.Payload;
