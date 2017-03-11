@@ -1,7 +1,8 @@
 import {injectReducer} from '../../../../store/reducers';
-import {ROUTE_PARAMS, FORM_MODE, REDUCER_KEYS} from "./constants/Vehicles.constant";
+import {REDUCER_KEYS} from "./constants/Vehicles.constant";
 import NProgress from "react-nprogress";
 import VehicleRoute from "./routes/Vehicle";
+import {onEnterAdmin} from "utils/routerUtils";
 
 export default (store) => ({
   path: `vehicle`,
@@ -15,6 +16,9 @@ export default (store) => ({
   },
   childRoutes: [
     VehicleRoute(store)
-  ]
+  ],
+  onEnter(nextState, replace) {
+    onEnterAdmin(nextState, replace);
+  }
 
 })

@@ -129,6 +129,7 @@ class Vehicle extends React.Component {
     const errors = this.props.errors;  // TODO: LOL, spring, LOL. there is only one spring - time of the year... so fuck you, java. XD IMMA FIRIN MY LAAZO00oRRSS!!!
 
     const isUpdating = this.props.formModeVehicle === FORM_MODE.UPDATING;
+    const submitCardActions = <SubmitCardActions disabled={this.props.submitting} onSubmit={this.props.onHandleSubmit} />;
 
     return (<div>
         {this.props.isFetching || this.props.submitting
@@ -201,14 +202,14 @@ class Vehicle extends React.Component {
                                onChangeComplete={this.onSetField}
                                component={ColorRenderer}/>
                       </CardText>
-                      <SubmitCardActions />
+                      {submitCardActions}
                     </Card>
 
                     <br/>
 
                     <VehicleFeaturesAndDescriptionsCard featuresList={featuresList}>
-                      <SubmitCardActions disabled={this.props.submitting}/>
-                    </VehicleFeaturesAndDescriptionsCard>
+                      {submitCardActions}
+                      </VehicleFeaturesAndDescriptionsCard>
                   </Col>
 
                 {isUpdating ?
@@ -216,7 +217,7 @@ class Vehicle extends React.Component {
                     <ImagesCard
                       onImageFileUpload={this.props.onImageFileUpload}
                       onImageFileRemove={this.props.onImageFileRemove}>
-                      <SubmitCardActions disabled={this.props.submitting}/>
+                      {submitCardActions}
                     </ImagesCard>
                   </Col>) :
                   ""}

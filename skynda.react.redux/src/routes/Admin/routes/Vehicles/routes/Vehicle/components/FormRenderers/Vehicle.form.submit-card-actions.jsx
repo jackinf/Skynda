@@ -3,7 +3,8 @@ import {CardActions} from 'material-ui/Card';
 
 export default class SubmitCardActionsComponent extends React.Component {
   static propTypes = {
-    disabled: React.PropTypes.bool
+    disabled: React.PropTypes.bool,
+    onSubmit: React.PropTypes.func.isRequired
   };
 
   render() {
@@ -11,7 +12,7 @@ export default class SubmitCardActionsComponent extends React.Component {
       <CardActions>
         <hr/>
         <button className="btn btn-success vehicle-component--button-success"
-                type="submit"
+                onClick={this.props.onSubmit}
                 disabled={this.props.disabled}>Save</button>
       </CardActions>
     )

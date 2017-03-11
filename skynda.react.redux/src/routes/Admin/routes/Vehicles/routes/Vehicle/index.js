@@ -6,6 +6,7 @@ import {VEHICLE_MODEL_REDUCER_KEY} from "../../../VehicleModels/constants/Vehicl
 import {setVehicleReportData, setFormMode as setFormModeReport} from "../../../VehicleReports/reducers";
 import {setVehicleReviewData, setFormMode as setFormModeReview} from "../../../VehicleReviews/reducers";
 import NProgress from "react-nprogress";
+import {onEnterAdmin} from "../../../../../../utils/routerUtils";
 
 export default (store) => ({
   path: `:${ROUTE_PARAMS.VEHICLE_ID}`,
@@ -34,6 +35,8 @@ export default (store) => ({
       cb(null, require("./containers/Vehicle.container.js").default);
       NProgress.done();
     })
+  },
+  onEnter(nextState, replace) {
+    onEnterAdmin(nextState, replace);
   }
-
 })

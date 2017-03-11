@@ -3,6 +3,7 @@ import {reducer as formReducer} from 'redux-form';
 import {ROUTE_PARAMS, FORMS, REDUCER_KEYS} from "./constants/VehicleReview.constant";
 import NProgress from "react-nprogress";
 import {setFormMode, setVehicleReviewData, setVehicleReviews} from "./reducers";
+import {onEnterAdmin} from "../../../../utils/routerUtils";
 
 export default (store) => ({
   path: `vehicle-reviews(/:${ROUTE_PARAMS.VEHICLE_REVIEW_ID})`,
@@ -29,6 +30,9 @@ export default (store) => ({
         cb(null, Container);
       }
     })
+  },
+  onEnter(nextState, replace) {
+    onEnterAdmin(nextState, replace);
   }
 
 })

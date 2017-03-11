@@ -8,7 +8,7 @@ import ImagesRoute from "./routes/Images";
 import VehicleReportsRoute from "./routes/VehicleReports";
 import VehicleReviewsRoute from "./routes/VehicleReviews";
 import Features from "./routes/Features";
-import {isLoggedInAs} from "../../utils/userUtils";
+import {onEnterAdmin} from "utils/routerUtils";
 
 export default (store) => ({
   path: "admin",
@@ -33,10 +33,6 @@ export default (store) => ({
    * @param replace
    */
   onEnter: (nextState, replace) => {
-    // console.info("ON ENTER REQUIRE AUTH?");
-    if (!isLoggedInAs(["admin"])) {
-      // console.info("NOT LOGGED IN, REDIRECTING");
-      replace({ nextPathname: nextState.location.pathname, pathname: '/login' });
-    }
+    onEnterAdmin(nextState, replace);
   }
 })
