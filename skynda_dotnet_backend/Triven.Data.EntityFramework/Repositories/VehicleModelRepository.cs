@@ -48,14 +48,7 @@ namespace Triven.Data.EntityFramework.Repositories
         public IResult<VehicleModel> Add(VehicleModel model)
         {
             using (var context = new ApplicationDbContext())
-            {
-                context.Entry(model.Drivetrain).State = EntityState.Unchanged;
-                context.Entry(model.FuelType).State = EntityState.Unchanged;
-                context.Entry(model.Transmission).State = EntityState.Unchanged;
-                context.Entry(model.VehicleBody).State = EntityState.Unchanged;
-                context.Entry(model.VehicleManufacturer).State = EntityState.Unchanged;
                 return base.Add(model, context);
-            }
         }
 
         public IResult<VehicleModel> Update(int id, VehicleModel model)

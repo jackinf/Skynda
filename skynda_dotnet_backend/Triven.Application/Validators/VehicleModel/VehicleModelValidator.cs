@@ -14,11 +14,12 @@ namespace Triven.Application.Validators.VehicleModel
             RuleFor(x => x.Seats).NotNull().NotEmpty();
             RuleFor(x => x.Engine).NotNull().NotEmpty();
             RuleFor(x => x.HorsePower).NotNull().NotEmpty();
-            RuleFor(x => x.Drivetrain).NotNull().NotEmpty();
-            RuleFor(x => x.FuelType).NotNull().NotEmpty();
-            RuleFor(x => x.Transmission).NotNull().NotEmpty();
-            RuleFor(x => x.VehicleBody).NotNull().NotEmpty();
-            RuleFor(x => x.VehicleManufacturer).NotNull().NotEmpty();
+
+            RuleFor(x => x.DrivetrainId).NotNull().NotEmpty().GreaterThan(0);
+            RuleFor(x => x.FuelTypeId).NotNull().NotEmpty().GreaterThan(0);
+            RuleFor(x => x.TransmissionId).NotNull().NotEmpty().GreaterThan(0);
+            RuleFor(x => x.VehicleBodyId).NotNull().NotEmpty().GreaterThan(0);
+            RuleFor(x => x.VehicleManufacturerId).NotNull().NotEmpty().GreaterThan(0);
         }
         
     }

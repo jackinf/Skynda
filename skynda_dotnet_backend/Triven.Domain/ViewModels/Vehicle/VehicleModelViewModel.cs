@@ -13,10 +13,11 @@ namespace Triven.Domain.ViewModels.Vehicle
         public int Doors { get; set; }
         public int Seats { get; set; }
         public int Year { get; set; }
-        public ClassificationViewModel VehicleManufacturer { get; set; }
-        public ClassificationViewModel Transmission { get; set; }
-        public ClassificationViewModel Drivetrain { get; set; }
-        public ClassificationViewModel VehicleBody { get; set; }
-        public ClassificationViewModel FuelType { get; set; }
+
+        public int VehicleManufacturerId { get; set; }
+        public int TransmissionId { get; set; }
+        public int DrivetrainId { get; set; }
+        public int VehicleBodyId { get; set; }
+        public int FuelTypeId { get; set; }
     }
 }

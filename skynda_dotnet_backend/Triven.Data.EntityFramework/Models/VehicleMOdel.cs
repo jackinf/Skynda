@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Triven.Data.EntityFramework.Models.Base;
 using Triven.Domain.Models;
 
@@ -27,26 +26,31 @@ namespace Triven.Data.EntityFramework.Models
         /// <summary>
         /// Manufacturer
         /// </summary>
-        public Classification VehicleManufacturer { get; set; }
+        public int VehicleManufacturerId { get; set; }
+        public virtual Classification VehicleManufacturer { get; set; }
 
         /// <summary>
         /// Transmission
         /// </summary>
-        public Classification Transmission { get; set; }
+        public int TransmissionId { get; set; }
+        public virtual Classification Transmission { get; set; }
 
         /// <summary>
         /// Drivetrain
         /// </summary>
-        public Classification Drivetrain { get; set; }
+        public int DrivetrainId { get; set; }
+        public virtual Classification Drivetrain { get; set; }
 
         /// <summary>
         /// VehicleBody
         /// </summary>
-        public Classification VehicleBody { get; set; }
+        public int VehicleBodyId { get; set; }
+        public virtual Classification VehicleBody { get; set; }
 
         /// <summary>
         /// Fuel
         /// </summary>
-        public Classification FuelType { get; set; }
+        public int FuelTypeId { get; set; }
+        public virtual Classification FuelType { get; set; }
     }
 }

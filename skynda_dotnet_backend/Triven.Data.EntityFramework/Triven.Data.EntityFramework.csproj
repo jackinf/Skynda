@@ -139,6 +139,10 @@
     <Compile Include="Migrations\201703120954183_VehicleReport_VehicleReview_VehicleId.Designer.cs">
       <DependentUpon>201703120954183_VehicleReport_VehicleReview_VehicleId.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201703121058193_VehicleModel_ClassifierIds.cs" />
+    <Compile Include="Migrations\201703121058193_VehicleModel_ClassifierIds.Designer.cs">
+      <DependentUpon>201703121058193_VehicleModel_ClassifierIds.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\Classification.cs" />
@@ -216,6 +220,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201703120954183_VehicleReport_VehicleReview_VehicleId.resx">
       <DependentUpon>201703120954183_VehicleReport_VehicleReview_VehicleId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703121058193_VehicleModel_ClassifierIds.resx">
+      <DependentUpon>201703121058193_VehicleModel_ClassifierIds.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
