@@ -1,17 +1,14 @@
 import React from 'react';
 import {Field, change} from 'redux-form';
-import {ROUTE_PARAMS, FORMS} from "../constants/VehicleReview.constant";
-import {Row, Col} from "react-bootstrap";
-import {onFormSubmitSuccess, onFormSubmitError, formSubmit} from "../actions";
-import {VehiclesSelectField} from "./VehicleReview.component.renderers";
-import {
-  TextField
-} from 'redux-form-material-ui'
+import {Row, Col, Button} from "react-bootstrap";
+import {TextField} from 'redux-form-material-ui'
+import {ROUTE_PARAMS, FORMS} from "../../../constants/VehicleReview.constant";
+import {VehiclesSelectField} from "./FormRenderers";
 
 class VehicleReview extends React.Component {
   static propTypes = {
     isFetching: React.PropTypes.bool.isRequired,
-    formSubmit: React.PropTypes.func.isRequired,
+    onHandleSubmit: React.PropTypes.func.isRequired,
     load: React.PropTypes.func.isRequired,
     clear: React.PropTypes.func.isRequired,
     getVehiclesList: React.PropTypes.func.isRequired,
@@ -39,29 +36,15 @@ class VehicleReview extends React.Component {
     }
   }
 
-  componentWillUnmount() {
-    this.props.clear();
-  }
-
-  /*
-   *  Form submit logic. Saves or updates
-   */
-  onSubmit(e) {
-    let promise = this.props.handleSubmit(data => formSubmit(data, this.props.formModeReview))(e);
-    promise && promise.then(response => {
-      onFormSubmitSuccess(response, this.props.onSubmitCustom);
-      onFormSubmitError;
-    });
-  };
-
   render() {
+    const vehicleId = this.props.params[ROUTE_PARAMS.VEHICLE_ID];
+
     return (<div>
         {this.props.isFetching || this.props.submitting ? "Loading..." : (
           <form onSubmit={this.onSubmit.bind(this)}>
-            <h3>{this.props.formModeReview}</h3>
             {
-              this.props.params[ROUTE_PARAMS.VEHICLE_ID] ?
-                <div>VehicleId: {this.props.params[ROUTE_PARAMS.VEHICLE_ID]}</div>
+              vehicleId?
+                <div>VehicleId: {vehicleId}</div>
                 : <VehiclesSelectField name="vehicleId" label="Vehicle *" vehicles={this.props.vehicles} />
             }
 
@@ -89,7 +72,7 @@ class VehicleReview extends React.Component {
               </Col>
             </Row>
 
-            <button type="submit" disabled={this.props.submitting}>Submit</button>
+            <Button onClick={e => this.props.onHandleSubmit()}>Submit</Button>
           </form>
 
         )}

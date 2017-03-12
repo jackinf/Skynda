@@ -27,7 +27,6 @@ const mapStateToProps = (state) => {
   return {
     isFetching: state[REDUCER_KEYS.VEHICLE_REPORT_DATA].isFetching,
     initialValues: state[REDUCER_KEYS.VEHICLE_REPORT_DATA].data,
-    formModeReport: state[REDUCER_KEYS.FORM_MODE_VEHICLE_REPORT],
     vehicles: state[REDUCER_KEYS.VEHICLES]
   };
 };

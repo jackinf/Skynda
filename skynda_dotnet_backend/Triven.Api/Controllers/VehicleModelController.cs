@@ -27,11 +27,7 @@ namespace Triven.API.Controllers
 
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [HttpPost, Route("")]
-        public IHttpActionResult Add([FromBody] VehicleModelViewModel viewModel)
-        {
-            
-            return HandleResult(_service.Create(viewModel));
-        }
+        public IHttpActionResult Add([FromBody] VehicleModelViewModel viewModel) => HandleResult(_service.Create(viewModel));
 
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [HttpPut, Route("{id:int}")]

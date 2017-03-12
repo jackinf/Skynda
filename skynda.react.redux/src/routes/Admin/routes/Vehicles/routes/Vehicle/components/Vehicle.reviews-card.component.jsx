@@ -6,7 +6,7 @@ import "./Vehicle.component.scss";
 import BootstrapTable from "./Vehicle.bootstrap-table.component";
 import {ROUTE_PARAMS as VEHICLE_REVIEW_ROUTE_PARAMS} from "../../../../VehicleReviews/constants/VehicleReview.constant";
 import _ from "underscore";
-import VehicleReview from "../../../../VehicleReviews/containers/VehicleReview.container";
+import VehicleReview from "../../../../VehicleReviews/routes/VehicleReview/containers/VehicleReview.container";
 
 const selectRow = {
   mode: 'checkbox',

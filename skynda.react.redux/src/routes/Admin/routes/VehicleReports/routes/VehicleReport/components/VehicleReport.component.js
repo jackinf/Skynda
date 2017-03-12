@@ -50,7 +50,6 @@ class VehicleReportCategory extends React.Component {
       <div>
         {this.props.isFetching || this.props.submitting ? "Loading..." : (
           <form className="vehicle-report">
-            <h3>{this.props.formModeReport}</h3>
             {vehicleId ?
               <div>VehicleId: {vehicleId}</div>
                 : <VehiclesSelectField name="vehicleId" label="Vehicle *" vehicles={this.props.vehicles}/>
@@ -64,7 +63,6 @@ class VehicleReportCategory extends React.Component {
                         onFaultRemove={this.props.onFaultRemove}
             />
             <Button onClick={e => this.props.onHandleSubmit()}>Submit</Button>
-            {/*<button type="submit" disabled={this.props.submitting}>Submit</button>*/}
           </form>
         )}
       </div>

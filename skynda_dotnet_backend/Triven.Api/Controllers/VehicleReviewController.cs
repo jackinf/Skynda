@@ -29,11 +29,11 @@ namespace Triven.API.Controllers
         public IHttpActionResult Get([FromUri] int id) => HandleResult(_service.Get(id));
 
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
-        [HttpPost, Route("")]
+        [HttpPost, Route("~/api/vehicle/{vehicleId:int}/vehicle-review")]
         public IHttpActionResult Add([FromBody] VehicleReviewViewModel viewModel) => HandleResult(_service.Create(viewModel));
 
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
-        [HttpPut, Route("{id:int}")]
+        [HttpPut, Route("~/api/vehicle/{vehicleId:int}/vehicle-review/{id:int}")]
         public IHttpActionResult Update([FromUri] int id, [FromBody] VehicleReviewViewModel viewModel) => HandleResult(_service.Update(id, viewModel));
 
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]

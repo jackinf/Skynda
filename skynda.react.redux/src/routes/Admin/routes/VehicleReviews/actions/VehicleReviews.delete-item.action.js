@@ -1,4 +1,4 @@
-import {REDUCER_KEYS} from "../constants/VehicleReport.constant";
+import {REDUCER_KEYS} from "../constants/VehicleReview.constant";
 import {VehicleReportService} from "../../../../../webServices"
 
 export const DELETE_REQUEST = "VEHICLE_REPORT/DELETE_REQUEST";
