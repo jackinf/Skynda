@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
 using Triven.Data.EntityFramework.Models;
 using Triven.Data.EntityFramework.Repositories.Base;
@@ -54,14 +52,7 @@ namespace Triven.Data.EntityFramework.Repositories
         public IResult<VehicleModel> Update(int id, VehicleModel model)
         {
             using (var context = new ApplicationDbContext())
-            {
-                context.Entry(model.Drivetrain).State = EntityState.Unchanged;
-                context.Entry(model.FuelType).State = EntityState.Unchanged;
-                context.Entry(model.Transmission).State = EntityState.Unchanged;
-                context.Entry(model.VehicleBody).State = EntityState.Unchanged;
-                context.Entry(model.VehicleManufacturer).State = EntityState.Unchanged;
                 return base.Update(id, model, context);
-            }
         }
     }
 }
