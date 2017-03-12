@@ -20,8 +20,8 @@ export const FORM_MODE = {
 export const REDUCER_KEYS = {
   VEHICLE_DATA: "vehicleFormInfo",
   VEHICLE_MODELS_DATA: "vehicleModelsData",
-  VEHICLE_REPORTS_DATA_LIST: "vehicleReportsDataList",
-  VEHICLE_REVIEWS_DATA_LIST: "vehicleReviewsDataList",
+  VEHICLE_REPORTS_DATA_LIST: "vehicleReportsData",
+  VEHICLE_REVIEWS_DATA_LIST: "vehicleReviewsData",
   FEATURES_DATA_LIST: "vehicleFeaturesDataList",
   VEHICLES_DATA: "vehiclesData",
   FORM_MODE_VEHICLE: "formMode1"

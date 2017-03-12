@@ -18,7 +18,8 @@ export default class VehicleReportsCardComponent extends React.Component {
   static propTypes = {
     vehicleReports: React.PropTypes.array.isRequired,
     vehicleId: React.PropTypes.any,
-    getVehicleReportsList: React.PropTypes.func.isRequired
+    getVehicleReportsList: React.PropTypes.func.isRequired,
+    deleteSingleReportItem: React.PropTypes.func.isRequired
   };
 
   constructor(props) {
@@ -54,11 +55,10 @@ export default class VehicleReportsCardComponent extends React.Component {
   // TODO: eraldi failisse - VehicleSublistActions/Vehicle.delete-report-item.action.js
   deleteReportItem = (next, dropRowKeys) => {
     const dropRowKeysStr = dropRowKeys.join(',');
-    const functionDeleteSingleReportItem = this.props.deleteSingleReportItem;
     if (confirm(`Are you sure you want to delete report with ID(s) ${dropRowKeysStr}?`)) {
       // If the confirmation is true, call the function that
-      _.each(dropRowKeys, function (i) {
-        functionDeleteSingleReportItem(i);
+      dropRowKeys.forEach((i) => {
+        this.props.deleteSingleReportItem(i);
       });
       // continues the deletion of the record.
       next();

@@ -1,5 +1,6 @@
 import {REDUCER_KEYS} from "../constants/VehicleReport.constant";
 import {VehicleReportService} from "../../../../../webServices"
+import {toastr} from "react-redux-toastr";
 
 export const DELETE_REQUEST = "VEHICLE_REPORT/DELETE_REQUEST";
 export const DELETE_SUCCESS = "VEHICLE_REPORT/DELETE_SUCCESS";
@@ -34,12 +35,15 @@ export default function deleteItem(id) {
   return async (dispatch, getState) => {
     try{
       dispatch(deleteRequest());
-      let items = getState()[REDUCER_KEYS.VEHICLE_REPORTS_DATA_LIST].items;
+      const state = getState();
       await VehicleReportService.deleteItem(id);
+      let items = state[REDUCER_KEYS.VEHICLES_REPORTS_DATA].items;
       items = items.filter(c => c.id !== id);
       dispatch(deleteSuccess(items));
+      toastr.success("Success", "Delete successful!");
     }catch (error){
       dispatch(deleteFailure(error));
+      toastr.success("Oh no!", "Delete failed!");
       throw error;
     }
   };

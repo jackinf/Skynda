@@ -211,12 +211,14 @@ class Vehicle extends React.Component {
                 vehicleReports={vehicleReports}
                 vehicleId={this.props.id}
                 getVehicleReportsList={this.props.getVehicleReportsList}
+                deleteSingleReportItem={this.props.deleteSingleReportItem}
               />
               <br/>
               <VehicleReviewsCardComponent
                 vehicleReviews={vehicleReviews}
                 vehicleId={this.props.id}
                 getVehicleReviewsList={this.props.getVehicleReviewsList}
+                deleteSingleReview={this.props.deleteSingleReview}
               />
             </div>
           </Col>

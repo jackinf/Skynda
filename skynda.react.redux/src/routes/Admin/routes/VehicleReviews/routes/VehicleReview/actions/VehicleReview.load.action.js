@@ -12,7 +12,7 @@ function loadCreateSuccess() {
     type: LOAD_CREATE_SUCCESS,
     isFetching: false,
     errors: {},
-    formMode: FORM_MODE.ADDING
+    formMode: FORM_MODE.ADDING_REVIEW
   }
 }
 
@@ -20,7 +20,7 @@ function loadEditRequest() {
   return {
     type: LOAD_EDIT_REQUEST,
     isFetching: true,
-    formMode: FORM_MODE.UPDATING
+    formMode: FORM_MODE.UPDATING_REVIEW
   }
 }
 
@@ -28,7 +28,7 @@ function loadEditSuccess(item) {
   return {
     type: LOAD_EDIT_SUCCESS,
     isFetching: false,
-    formMode: FORM_MODE.UPDATING,
+    formMode: FORM_MODE.UPDATING_REVIEW,
     item
   }
 }
@@ -38,7 +38,7 @@ function loadEditError(errors) {
     type: LOAD_EDIT_FAILURE,
     isFetching: false,
     errors,
-    formMode: FORM_MODE.NONE
+    formMode: "-"
   }
 }
 /**
@@ -47,12 +47,14 @@ function loadEditError(errors) {
  * Private. Fetches data from API and prepares update form.
  * @param id - vehicle ID.
  */
-const loadEditForm = (id) => async (dispatch) => {
+const loadEditForm = (id, onSuccess) => async (dispatch) => {
   dispatch(loadEditRequest());
   try {
     const item = await VehicleReviewService.fetchAdminItem(id);
     dispatch(loadEditSuccess(item));
     dispatch(initialize(FORMS.VEHICLE_FORM_REPORT, item));
+    if (onSuccess instanceof Function)
+      onSuccess();
   } catch (error) {
     dispatch(loadEditError(error));
   }
@@ -66,20 +68,22 @@ const loadEditForm = (id) => async (dispatch) => {
  * Loads "Create new vehicle" or "Update existing vehicle" forms
  * @param id
  */
-export default function load(id) {
+export default function load(id, onSuccess) {
   return (dispatch) => {
     dispatch(destroy(FORMS.VEHICLE_FORM_REPORT));
 
     const formMode = id === ROUTE_PARAMS.values.NEW
-      ? FORM_MODE.ADDING
+      ? FORM_MODE.ADDING_REVIEW
       : !isNaN(parseInt(id))
-        ? FORM_MODE.UPDATING : FORM_MODE.NONE;
+        ? FORM_MODE.UPDATING_REVIEW : FORM_MODE.NONE;
 
-    if (formMode === FORM_MODE.ADDING) {
+    if (formMode === FORM_MODE.ADDING_REVIEW) {
       dispatch(loadCreateSuccess());
       dispatch(initialize(FORMS.VEHICLE_FORM_REPORT));
-    } else if (formMode == FORM_MODE.UPDATING) {
-      dispatch(loadEditForm(id));
+      if (onSuccess instanceof Function)
+        onSuccess();
+    } else if (formMode == FORM_MODE.UPDATING_REVIEW) {
+      dispatch(loadEditForm(id, onSuccess));
     } else {
       console.error("Invalid form mode");
     }

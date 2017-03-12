@@ -17,7 +17,8 @@ export default class VehicleReviewsCardComponent extends React.Component {
   static propTypes = {
     vehicleReviews: React.PropTypes.array.isRequired,
     vehicleId: React.PropTypes.any,
-    getVehicleReviewsList: React.PropTypes.func.isRequired
+    getVehicleReviewsList: React.PropTypes.func.isRequired,
+    deleteSingleReview: React.PropTypes.func.isRequired
   };
 
   constructor(props) {

@@ -17,7 +17,7 @@ function addRequest() {
   return {
     type: ADD_REQUEST,
     isFetching: true,
-    formMode: FORM_MODE.ADDING
+    formMode: FORM_MODE.ADDING_REVIEW
   }
 }
 
@@ -25,7 +25,7 @@ function addSuccess() {
   return {
     type: ADD_SUCCESS,
     isFetching: false,
-    formMode: FORM_MODE.UPDATING
+    formMode: FORM_MODE.UPDATING_REVIEW
   }
 }
 
@@ -33,7 +33,7 @@ function addFailure(errors) {
   return {
     type: ADD_FAILURE,
     isFetching: false,
-    formMode: FORM_MODE.ADDING,
+    formMode: FORM_MODE.ADDING_REVIEW,
     errors
   }
 }
@@ -42,7 +42,7 @@ function editRequest() {
   return {
     type: EDIT_REQUEST,
     isFetching: true,
-    formMode: FORM_MODE.UPDATING
+    formMode: FORM_MODE.UPDATING_REVIEW
   }
 }
 
@@ -50,7 +50,7 @@ function editSuccess() {
   return {
     type: EDIT_SUCCESS,
     isFetching: false,
-    formMode: FORM_MODE.UPDATING
+    formMode: FORM_MODE.UPDATING_REVIEW
   }
 }
 
@@ -108,10 +108,10 @@ export default function submit(onSubmitCustom) {
       const formValues = state.form[FORMS.VEHICLE_FORM_REPORT].values;
       const formMode = state[REDUCER_KEYS.VEHICLE_REPORT_DATA].formMode;
 
-      if (formMode === FORM_MODE.ADDING) {
+      if (formMode === FORM_MODE.ADDING_REVIEW) {
         dispatch(submitCreate(formValues, onSubmitCustom))
       }
-      else if (formMode === FORM_MODE.UPDATING) {
+      else if (formMode === FORM_MODE.UPDATING_REVIEW) {
         dispatch(submitEdit(formValues, onSubmitCustom));
       }
     }catch (error){

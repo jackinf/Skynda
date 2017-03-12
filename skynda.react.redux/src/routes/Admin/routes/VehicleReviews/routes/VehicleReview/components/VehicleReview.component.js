@@ -10,7 +10,6 @@ class VehicleReview extends React.Component {
     isFetching: React.PropTypes.bool.isRequired,
     onHandleSubmit: React.PropTypes.func.isRequired,
     load: React.PropTypes.func.isRequired,
-    clear: React.PropTypes.func.isRequired,
     getVehiclesList: React.PropTypes.func.isRequired,
 
     // vehicle review data
@@ -27,12 +26,13 @@ class VehicleReview extends React.Component {
   }
 
   componentDidMount() {
-    this.props.load(this.props.params[ROUTE_PARAMS.VEHICLE_REVIEW_ID]);
-    this.props.getVehiclesList();
-
-    if(this.props.params[ROUTE_PARAMS.VEHICLE_ID]){
+    this.props.load(this.props.params[ROUTE_PARAMS.VEHICLE_REVIEW_ID], () => {
       this.props.dispatch(change(FORMS.VEHICLE_FORM_REVIEW, "vehicleId", this.props.params[ROUTE_PARAMS.VEHICLE_ID]));
       this.props.dispatch(change(FORMS.VEHICLE_FORM_REVIEW, "isModal", true));
+    });
+
+    if(isNaN(this.props.params[ROUTE_PARAMS.VEHICLE_ID])){
+      this.props.getVehiclesList();
     }
   }
 
@@ -41,7 +41,7 @@ class VehicleReview extends React.Component {
 
     return (<div>
         {this.props.isFetching || this.props.submitting ? "Loading..." : (
-          <form onSubmit={this.onSubmit.bind(this)}>
+          <form>
             {
               vehicleId?
                 <div>VehicleId: {vehicleId}</div>
