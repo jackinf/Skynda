@@ -88,10 +88,11 @@ export default class VehicleReportsCardComponent extends React.Component {
               <Modal.Title>REPORT CATEGORY</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              <VehicleReport params={{
-                [VEHICLE_REPORT_ROUTE_PARAMS.VEHICLE_REPORT_ID]: this.state.vehicleReportId,
-                [VEHICLE_REPORT_ROUTE_PARAMS.VEHICLE_ID]: this.props.vehicleId
-              }}
+              <VehicleReport
+                params={{
+                  [VEHICLE_REPORT_ROUTE_PARAMS.VEHICLE_REPORT_ID]: this.state.vehicleReportId,
+                  [VEHICLE_REPORT_ROUTE_PARAMS.VEHICLE_ID]: this.props.vehicleId
+                }}
                onSubmitCustom={this.closeVehicleReportDialog}/>
             </Modal.Body>
           </Modal>

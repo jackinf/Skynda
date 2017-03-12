@@ -1,4 +1,10 @@
-import {FORM_MODE, ROUTE_PARAMS, FORMS} from "../../../constants/VehicleReport.constant";
+import {
+  ROUTE_PARAMS,
+  FORMS,
+  FORM_MODE__ADDING_REPORT,
+  FORM_MODE__UPDATING_REPORT,
+  FORM_MODE__NONE_REPORT
+} from "../../../constants/VehicleReport.constant";
 import {initialize, destroy} from "redux-form";
 import {VehicleReportService} from "../../../../../../../webServices"
 
@@ -12,7 +18,7 @@ function loadCreateSuccess() {
     type: LOAD_CREATE_SUCCESS,
     isFetching: false,
     errors: {},
-    formMode: FORM_MODE.ADDING
+    formMode: FORM_MODE__ADDING_REPORT
   }
 }
 
@@ -20,7 +26,7 @@ function loadEditRequest() {
   return {
     type: LOAD_EDIT_REQUEST,
     isFetching: true,
-    formMode: FORM_MODE.UPDATING
+    formMode: FORM_MODE__UPDATING_REPORT
   }
 }
 
@@ -28,7 +34,7 @@ function loadEditSuccess(item) {
   return {
     type: LOAD_EDIT_SUCCESS,
     isFetching: false,
-    formMode: FORM_MODE.UPDATING,
+    formMode: FORM_MODE__UPDATING_REPORT,
     item
   }
 }
@@ -38,7 +44,7 @@ function loadEditError(errors) {
     type: LOAD_EDIT_FAILURE,
     isFetching: false,
     errors,
-    formMode: FORM_MODE.NONE
+    formMode: FORM_MODE__UPDATING_REPORT
   }
 }
 /**
@@ -47,12 +53,14 @@ function loadEditError(errors) {
  * Private. Fetches data from API and prepares update form.
  * @param id - vehicle ID.
  */
-const loadEditForm = (id) => async (dispatch) => {
+const loadEditForm = (id, onSuccess) => async (dispatch) => {
   dispatch(loadEditRequest());
   try {
-    const item = await VehicleReportService.fetchAdminItem(id);
+    const item = await VehicleReportService.loadUpdateForm(id);
     dispatch(loadEditSuccess(item));
     dispatch(initialize(FORMS.VEHICLE_FORM_REPORT, item));
+    if (onSuccess instanceof Function)
+      onSuccess();
   } catch (error) {
     dispatch(loadEditError(error));
   }
@@ -66,20 +74,21 @@ const loadEditForm = (id) => async (dispatch) => {
  * Loads "Create new vehicle" or "Update existing vehicle" forms
  * @param id
  */
-export default function load(id) {
+export default function load(id, onSuccess) {
   return (dispatch) => {
     dispatch(destroy(FORMS.VEHICLE_FORM_REPORT));
 
-    const formMode = id === ROUTE_PARAMS.values.NEW
-      ? FORM_MODE.ADDING
-      : !isNaN(parseInt(id))
-        ? FORM_MODE.UPDATING : FORM_MODE.NONE;
+    const formMode = id === ROUTE_PARAMS.values.NEW ? FORM_MODE__ADDING_REPORT
+      : !isNaN(parseInt(id)) ? FORM_MODE__UPDATING_REPORT
+        : FORM_MODE__NONE_REPORT;
 
-    if (formMode === FORM_MODE.ADDING) {
+    if (formMode === FORM_MODE__ADDING_REPORT) {
       dispatch(loadCreateSuccess());
       dispatch(initialize(FORMS.VEHICLE_FORM_REPORT));
-    } else if (formMode == FORM_MODE.UPDATING) {
-      dispatch(loadEditForm(id));
+      if (onSuccess instanceof Function)
+        onSuccess();
+    } else if (formMode == FORM_MODE__UPDATING_REPORT) {
+      dispatch(loadEditForm(id, onSuccess));
     } else {
       console.error("Invalid form mode");
     }

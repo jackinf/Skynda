@@ -16,7 +16,7 @@ export const VehicleReportService = {
       body: JSON.stringify(data)
     }));
   },
-  udpateItem: function (vehicleId, vehicleReportId, data) {
+  updateItem: function (vehicleId, vehicleReportId, data) {
     return handle(fetch(`${remoteConfig.remote}/api/vehicle/${vehicleId}/vehicle-report/${vehicleReportId}`, {
       method: "PUT",
       headers: getDefaultHeaders(),

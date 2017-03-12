@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import {FieldArray, change} from 'redux-form';
 import {ROUTE_PARAMS,FORMS} from "../../../constants/VehicleReport.constant";
 
@@ -21,6 +21,7 @@ class VehicleReportCategory extends React.Component {
     getVehiclesList: React.PropTypes.func.isRequired,
     onFaultFileUpload: React.PropTypes.func.isRequired,
     onFaultRemove: React.PropTypes.func.isRequired,
+
     // vehicle review data
     initialValues: React.PropTypes.shape({
       // TODO
@@ -35,11 +36,13 @@ class VehicleReportCategory extends React.Component {
   }
 
   componentDidMount() {
-    this.props.load(this.props.params[ROUTE_PARAMS.VEHICLE_REPORT_ID]);
-    this.props.getVehiclesList();
-    if(this.props.params[ROUTE_PARAMS.VEHICLE_ID]){
+    this.props.load(this.props.params[ROUTE_PARAMS.VEHICLE_REPORT_ID], () => {
       this.props.dispatch(change(FORMS.VEHICLE_FORM_REPORT, "vehicleId", this.props.params[ROUTE_PARAMS.VEHICLE_ID]));
       this.props.dispatch(change(FORMS.VEHICLE_FORM_REPORT, "isModal", true));
+    });
+
+    if(isNaN(this.props.params[ROUTE_PARAMS.VEHICLE_ID])) {
+      this.props.getVehiclesList();
     }
   }
 

@@ -1,4 +1,4 @@
-// We only need to import the modules necessary for initial render
+﻿// We only need to import the modules necessary for initial render
 import CoreLayout from "../layouts/CoreLayout/CoreLayout";
 import Home from "./Home";
 import Search from "./Search";
@@ -28,14 +28,14 @@ export const createRoutes = (store) => {
   injectReducer(store, {key: "toastr", reducer: require("react-redux-toastr").reducer});
   injectReducer(store, {key: "auth", reducer: require("./Auth/modules/auth.module").default});
   syncTranslationWithStore(store);
-  // store.dispatch(loadTranslations({
-  //   et: {},
-  //   en: {}
+  //store.dispatch(loadTranslations({
+  //  et: {},
+  //  en: {}
   // }));
-  store.dispatch(loadTranslations({
-    et: require("./../store/translations/et.json"),
-    en: require("./../store/translations/en.json")
-  }));
+   store.dispatch(loadTranslations({
+     et: require("./../store/translations/et.json"),
+     en: require("./../store/translations/en.json")
+   }));
   store.dispatch(setLocale('et'));
 
   injectReducer(store, {key: "form", reducer: formReducer});

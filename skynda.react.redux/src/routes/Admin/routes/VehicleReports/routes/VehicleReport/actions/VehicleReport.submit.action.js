@@ -1,7 +1,13 @@
 import _ from "underscore";
 import {browserHistory} from "react-router";
 import {change} from "redux-form";
-import {FORM_MODE, REDUCER_KEYS, FORMS} from "../../../constants/VehicleReport.constant";
+import {
+  FORM_MODE__ADDING_REPORT,
+  FORM_MODE__UPDATING_REPORT,
+  FORM_MODE__NONE_REPORT,
+  REDUCER_KEYS,
+  FORMS
+} from "../../../constants/VehicleReport.constant";
 import {VehicleReportService} from "../../../../../../../webServices";
 import {toastr} from "react-redux-toastr";
 
@@ -17,7 +23,7 @@ function addRequest() {
   return {
     type: ADD_REQUEST,
     isFetching: true,
-    formMode: FORM_MODE.ADDING
+    formMode: FORM_MODE__ADDING_REPORT
   }
 }
 
@@ -25,7 +31,7 @@ function addSuccess() {
   return {
     type: ADD_SUCCESS,
     isFetching: false,
-    formMode: FORM_MODE.UPDATING
+    formMode: FORM_MODE__UPDATING_REPORT
   }
 }
 
@@ -33,7 +39,7 @@ function addFailure(errors) {
   return {
     type: ADD_FAILURE,
     isFetching: false,
-    formMode: FORM_MODE.ADDING,
+    formMode: FORM_MODE__ADDING_REPORT,
     errors
   }
 }
@@ -42,7 +48,7 @@ function editRequest() {
   return {
     type: EDIT_REQUEST,
     isFetching: true,
-    formMode: FORM_MODE.UPDATING
+    formMode: FORM_MODE__UPDATING_REPORT
   }
 }
 
@@ -50,7 +56,7 @@ function editSuccess() {
   return {
     type: EDIT_SUCCESS,
     isFetching: false,
-    formMode: FORM_MODE.UPDATING
+    formMode: FORM_MODE__UPDATING_REPORT
   }
 }
 
@@ -58,7 +64,7 @@ function editFailure(errors) {
   return {
     type: EDIT_FAILURE,
     isFetching: false,
-    formMode: FORM_MODE.UPDATING,
+    formMode: FORM_MODE__UPDATING_REPORT,
     errors
   }
 }
@@ -107,10 +113,10 @@ export default function submit(onSubmitCustom) {
       const state = getState();
       const formValues = state.form[FORMS.VEHICLE_FORM_REPORT].values;
       const formMode = state[REDUCER_KEYS.VEHICLE_REPORT_DATA].formMode;
-      if (formMode === FORM_MODE.ADDING) {
+      if (formMode === FORM_MODE__ADDING_REPORT) {
         dispatch(submitCreate(formValues, onSubmitCustom))
       }
-      else if (formMode === FORM_MODE.UPDATING) {
+      else if (formMode === FORM_MODE__UPDATING_REPORT) {
         dispatch(submitEdit(formValues, onSubmitCustom));
       }
     }catch (error){
