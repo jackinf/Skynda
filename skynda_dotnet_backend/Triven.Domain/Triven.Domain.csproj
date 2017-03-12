@@ -164,7 +164,7 @@
     <Compile Include="ViewModelInterfaces\__ToDelete\IPartnerViewModel.cs" />
     <Compile Include="ViewModelInterfaces\__ToDelete\ITodoViewModel.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
-    <Compile Include="ViewModels\Account\AccountContactInfoDisplayModel.cs" />
+    <Compile Include="ViewModels\Account\__ToDelete\AccountContactInfoDisplayModel.cs" />
     <Compile Include="ViewModels\Account\AccountDisplayViewModel.cs" />
     <Compile Include="ViewModels\Account\AccountRegisterViewModel.cs" />
     <Compile Include="ViewModels\Authentication\AuthorityViewModel.cs" />

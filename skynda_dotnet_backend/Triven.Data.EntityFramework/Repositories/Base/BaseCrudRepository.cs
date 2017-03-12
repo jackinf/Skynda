@@ -72,33 +72,30 @@ namespace Triven.Data.EntityFramework.Repositories.Base
         /// <returns></returns>
         public virtual IResult<TModel> Add(TModel model, IDbContext context = null)
         {
-            var (dbContext, isDisposable) = DbContextHelper(context);
+            //var (dbContext, isDisposable) = DbContextHelper(context);
 
-            try
+            return HandleWithContext(context, dbContext =>
             {
-                model.CreatedOn = DateTime.Now;
-                model.UpdatedOn = DateTime.Now;
-                dbContext.Set<TModel>().Add(model);
+                try
+                {
+                    BeforeAdd(model);
+                    dbContext.Set<TModel>().Add(model);
 
-                int save = SaveModelWithComplexTypes(model, dbContext);
+                    int save = SaveModelWithComplexTypes(model, dbContext);
 
-                return OnCreateOrUpdateResult<TModel>.Factory.Success(model);
-            }
-            catch (DbUpdateException ex)
-            {
-                if (ItemExists(model.Id))
-                    return OnCreateOrUpdateResult<TModel>.Factory.Fail(ex);
-                throw;
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-            finally
-            {
-                if (isDisposable)
-                    dbContext.Dispose();
-            }
+                    return OnCreateOrUpdateResult<TModel>.Factory.Success(model);
+                }
+                catch (DbUpdateException ex)
+                {
+                    if (ItemExists(model.Id))
+                        return OnCreateOrUpdateResult<TModel>.Factory.Fail(ex);
+                    throw;
+                }
+                catch (Exception ex)
+                {
+                    throw;
+                }
+            });
         }
 
         /// <summary>
@@ -110,102 +107,33 @@ namespace Triven.Data.EntityFramework.Repositories.Base
         /// <returns></returns>
         public virtual IResult<TModel> Update(int id, TModel model, IDbContext context = null)
         {
-            var (dbContext, isDisposable) = DbContextHelper(context);
+            if (!(id >= 0 && model.Id >= 0 && model.Id == id))
+                throw new CannotUpdateException($"Id is invalid. Id: {id}, model.Id: {model.Id}");
 
-            try
+            return HandleWithContext(context, dbContext =>
             {
-                model.UpdatedOn = DateTime.Now;
-                model.ModifierUserIp = HttpContextManager.Current?.Request?.UserHostAddress;
-                
-                int save = SaveModelWithComplexTypes(model, dbContext);
-
-                return OnCreateOrUpdateResult<TModel>.Factory.Success(model);
-            }
-            catch (DbUpdateConcurrencyException ex)
-            {
-                if (!ItemExists(id))
-                    return OnCreateOrUpdateResult<TModel>.Factory.Fail(ex);
-                throw;
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-            finally
-            {
-                if (isDisposable)
-                    dbContext.Dispose();
-            }
-        }
-
-        private static int SaveModelWithComplexTypes(TModel model, ApplicationDbContext dbContext)
-        {
-            IEnumerable<PropertyInfo> complexProps = model.GetType()
-                .GetProperties()
-                .Where(p => p.PropertyType.BaseType == typeof(AuditableModel));
-
-            Dictionary<string, int?> updateFkValues = new Dictionary<string, int?>();
-
-            var complexPropertyInfos = complexProps as IList<PropertyInfo> ?? complexProps.ToList();
-
-            if (model.Id <= 0)
-            {
-                //insert
-
-                //set fk reference props to unchanged state
-                foreach (PropertyInfo prop in complexPropertyInfos)
+                try
                 {
-                    Object val = prop.GetValue(model);
-                    if (val != null)
-                    {
-                        dbContext.Entry(val).State = EntityState.Unchanged;
-                    }
-                }                
-            }
-            else
-            {
-                foreach (PropertyInfo prop in complexPropertyInfos)
-                {
-                    var val = (AuditableModel)prop.GetValue(model);
-                    if (val == null)
-                    {
-                        updateFkValues.Add(prop.Name, null);
-                    }
-                    else
-                    {
-                        updateFkValues.Add(prop.Name, val.Id);
-                    }
+                    model.UpdatedOn = DateTime.Now;
+                    model.ModifierUserIp = HttpContextManager.Current?.Request?.UserHostAddress;
 
-                    prop.SetValue(model, null);
+                    int save = SaveModelWithComplexTypes(model, dbContext);
+
+                    return OnCreateOrUpdateResult<TModel>.Factory.Success(model);
                 }
-
-                // dbContext creation may need to move to here as per below working example
-                var dbObj = dbContext.Set(typeof(TModel)).Find(new object[] { model.Id }); //this also differs from example
-
-                //update the simple values
-                dbContext.Entry(dbObj).CurrentValues.SetValues(model);
-
-                //update complex values
-                foreach (PropertyInfo prop in complexPropertyInfos)
+                catch (DbUpdateConcurrencyException ex)
                 {
-                    Object propValue = null;
-                    if (updateFkValues[prop.Name].HasValue)
-                    {
-                        propValue = dbContext.Set(prop.PropertyType).Find(new object[] { updateFkValues[prop.Name] });
-                    }
-
-                    prop.SetValue(dbObj, propValue);
-
-                    if (propValue != null)
-                    {
-                        dbContext.Entry(propValue).State = EntityState.Unchanged;
-                    }
+                    if (!ItemExists(id))
+                        return OnCreateOrUpdateResult<TModel>.Factory.Fail(ex);
+                    throw;
                 }
-            }
+                catch (Exception ex)
+                {
+                    throw;
+                }
+            });
 
-            return dbContext.SaveChanges();
         }
-
 
         /// <summary>
         /// Deletes an item in the database
@@ -274,6 +202,45 @@ namespace Triven.Data.EntityFramework.Repositories.Base
         }
 
         /// <summary>
+        /// Wrapper to create and dispose a context when needed
+        /// </summary>
+        /// <param name="context">ApplicationDbContext pls.</param>
+        /// <param name="action"></param>
+        /// <returns></returns>
+        protected T HandleWithContext<T>(IDbContext context, Func<ApplicationDbContext, T> action)
+        {
+            var isDisposable = false;
+            ApplicationDbContext dbContext;
+
+            if (context == null)
+            {
+                dbContext = new ApplicationDbContext();
+                isDisposable = true;
+            }
+            else
+            {
+                dbContext = (ApplicationDbContext) context;
+            }
+
+            try
+            {
+                var res = action(dbContext);
+                return res;
+            }
+            finally
+            {
+                if (isDisposable)
+                    dbContext.Dispose();
+            }
+        }
+
+        protected T HandleWithContext<T>(Func<ApplicationDbContext, T> action) => HandleWithContext(null, action);
+
+        protected virtual void BeforeAdd(TModel model) => model.UpdatedOn = model.CreatedOn = DateTime.Now;
+        protected virtual void BeforeUpdate(TModel model) => model.UpdatedOn = DateTime.Now;
+        protected virtual void BeforeDelete(TModel model) => model.DeletedOn = DateTime.Now;
+
+        /// <summary>
         /// Creates new ApplicationDbContext if not exists.
         /// </summary>
         /// <param name="context">ApplicationDbContext pls.</param>
@@ -292,32 +259,74 @@ namespace Triven.Data.EntityFramework.Repositories.Base
             return (dbContext, isDisposable);
         }
 
-        /// <summary>
-        /// Wrapper to create and dispose a context when needed
-        /// </summary>
-        /// <param name="context">ApplicationDbContext pls.</param>
-        /// <param name="action"></param>
-        /// <returns></returns>
-        private T HandleWithContext<T>(IDbContext context, Func<ApplicationDbContext, T> action)
+        private static int SaveModelWithComplexTypes(TModel model, ApplicationDbContext dbContext)
         {
-            var isDisposable = false;
-            ApplicationDbContext dbContext = (ApplicationDbContext) context;    // all or nothing. We exclude every possibility for another database context.
+            IEnumerable<PropertyInfo> complexProps = model.GetType()
+                .GetProperties()
+                .Where(p => p.PropertyType.BaseType == typeof(AuditableModel) && !p.GetMethod.IsVirtual);
 
-            if (dbContext == null)
+            var complexPropertyInfos = complexProps as IList<PropertyInfo> ?? complexProps.ToList();
+
+            if (model.Id <= 0)
             {
-                dbContext = new ApplicationDbContext();
-                isDisposable = true;
+                // Insert
+
+                //set fk reference props to unchanged state
+                foreach (PropertyInfo prop in complexPropertyInfos)
+                {
+                    Object val = prop.GetValue(model);
+                    if (val != null)
+                    {
+                        dbContext.Entry(val).State = EntityState.Unchanged;
+                    }
+                }
+                return dbContext.SaveChanges();
+            }
+            else
+            {
+                // Update
+
+                Dictionary<string, int?> updateFkValues = new Dictionary<string, int?>();
+                foreach (PropertyInfo prop in complexPropertyInfos)
+                {
+                    var val = (AuditableModel)prop.GetValue(model);
+                    if (val == null)
+                    {
+                        updateFkValues.Add(prop.Name, null);
+                    }
+                    else
+                    {
+                        updateFkValues.Add(prop.Name, val.Id);
+                    }
+
+                    prop.SetValue(model, null);
+                }
+
+                // dbContext creation may need to move to here as per below working example
+                var dbObj = dbContext.Set(typeof(TModel)).Find(new object[] { model.Id }); //this also differs from example
+
+                // update the simple values
+                dbContext.Entry(dbObj).CurrentValues.SetValues(model);
+
+                // update complex values
+                foreach (PropertyInfo prop in complexPropertyInfos)
+                {
+                    Object propValue = null;
+                    if (updateFkValues[prop.Name].HasValue)
+                    {
+                        propValue = dbContext.Set(prop.PropertyType).Find(new object[] { updateFkValues[prop.Name] });
+                    }
+
+                    prop.SetValue(dbObj, propValue);
+
+                    if (propValue != null)
+                    {
+                        dbContext.Entry(propValue).State = EntityState.Unchanged;
+                    }
+                }
             }
 
-            try
-            {
-                return action(dbContext);
-            }
-            finally
-            {
-                if (isDisposable)
-                    dbContext.Dispose();
-            }
+            return dbContext.SaveChanges();
         }
     }
 }

@@ -14,6 +14,6 @@ namespace Triven.Domain.ViewModels.Account
 
         public string DefaultLanguage { get; set; }
 
-        public List<AccountContactInfoDisplayModel> ContactInfos { get; set; } = new List<AccountContactInfoDisplayModel>();
+        //public List<AccountContactInfoDisplayModel> ContactInfos { get; set; } = new List<AccountContactInfoDisplayModel>();
     }
 }

@@ -21,20 +21,22 @@ namespace Triven.API.Controllers
         public IHttpActionResult GetAll() => HandleResult(_service.GetAll());
 
         // TODO: use search params
-        [HttpGet, Route("~/api/vehicle-reports/{id:int}")]
-        public IHttpActionResult GetAllByVehicle([FromUri] int id) => HandleResult(_service.GetAllBy(id));
+        [HttpGet, Route("~/api/vehicle-reports/{vehicleId:int}")]
+        public IHttpActionResult GetAllByVehicle([FromUri] int vehicleId) => HandleResult(_service.GetAllBy(vehicleId));
 
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [HttpGet, Route("{id:int}")]
         public IHttpActionResult Get([FromUri] int id) => HandleResult(_service.Get(id));
 
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
-        [HttpPost, Route("")]
-        public IHttpActionResult Add([FromBody] VehicleReportViewModel viewModel) => HandleResult(_service.Create(viewModel));
+        [HttpPost, Route("~/api/vehicle/{vehicleId:int}/vehicle-report")]
+        public IHttpActionResult Add([FromUri] int vehicleId, [FromBody] VehicleReportViewModel viewModel) 
+            => HandleResult(_service.Create(vehicleId, viewModel));
 
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
-        [HttpPut, Route("{id:int}")]
-        public IHttpActionResult Update([FromUri] int id, [FromBody] VehicleReportViewModel viewModel) => HandleResult(_service.Update(id, viewModel));
+        [HttpPut, Route("~/api/vehicle/{vehicleId:int}/vehicle-report/{id:int}")]
+        public IHttpActionResult Update([FromUri] int vehicleId, [FromUri] int id, [FromBody] VehicleReportViewModel viewModel) 
+            => HandleResult(_service.Update(vehicleId, id, viewModel));
 
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [HttpDelete, Route("{id:int}")]

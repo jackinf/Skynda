@@ -8,8 +8,8 @@ namespace Triven.Domain.Services
     {
         ServiceResult<IEnumerable<VehicleReportViewModel>> GetAll();
         ServiceResult<VehicleReportViewModel> Get(int id);
-        ServiceResult<VehicleReportViewModel> Create(VehicleReportViewModel dto);
-        ServiceResult<VehicleReportViewModel> Update(int id, VehicleReportViewModel dto);
+        ServiceResult<VehicleReportViewModel> Create(int vehicleId, VehicleReportViewModel dto);
+        ServiceResult<VehicleReportViewModel> Update(int vehicleId, int id, VehicleReportViewModel dto);
         ServiceResult<bool> Delete(int id);
         ServiceResult<IList<VehicleReportViewModel>> GetAllBy(int vehicleId);
     }

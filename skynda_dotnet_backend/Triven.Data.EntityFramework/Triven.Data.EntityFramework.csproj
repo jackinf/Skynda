@@ -109,6 +109,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\CannotUpdateException.cs" />
     <Compile Include="Exceptions\ContextIsNullException.cs" />
     <Compile Include="Migrations\201703031222121_Initial.cs" />
     <Compile Include="Migrations\201703031222121_Initial.Designer.cs">
@@ -133,6 +134,10 @@
     <Compile Include="Migrations\201703111924393_RequiredVehicleImgREMOVE.cs" />
     <Compile Include="Migrations\201703111924393_RequiredVehicleImgREMOVE.Designer.cs">
       <DependentUpon>201703111924393_RequiredVehicleImgREMOVE.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703120954183_VehicleReport_VehicleReview_VehicleId.cs" />
+    <Compile Include="Migrations\201703120954183_VehicleReport_VehicleReview_VehicleId.Designer.cs">
+      <DependentUpon>201703120954183_VehicleReport_VehicleReview_VehicleId.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -208,6 +213,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201703111924393_RequiredVehicleImgREMOVE.resx">
       <DependentUpon>201703111924393_RequiredVehicleImgREMOVE.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703120954183_VehicleReport_VehicleReview_VehicleId.resx">
+      <DependentUpon>201703120954183_VehicleReport_VehicleReview_VehicleId.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

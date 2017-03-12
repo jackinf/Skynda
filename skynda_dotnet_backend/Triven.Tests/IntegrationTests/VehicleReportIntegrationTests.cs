@@ -121,10 +121,9 @@ namespace Triven.Tests.IntegrationTests
             var controller = NewController();
             var requestViewModel = new VehicleReportViewModel
             {
-                Description = "test123",
-                Vehicle = new VehicleAdminViewModel{ Id = vehicle.Id }
+                Description = "test123"
             };
-            var okNegotiatedContentResult = controller.Add(requestViewModel) as OkNegotiatedContentResult<ServiceResult<VehicleReportViewModel>>;
+            var okNegotiatedContentResult = controller.Add(vehicle.Id, requestViewModel) as OkNegotiatedContentResult<ServiceResult<VehicleReportViewModel>>;
             Assert.IsNotNull(okNegotiatedContentResult, "Response was not ok");
             var result = okNegotiatedContentResult.Content.Payload;
 
@@ -144,7 +143,7 @@ namespace Triven.Tests.IntegrationTests
             //
 
             ClearTable(Context.VehicleReports);
-            var review = Context.VehicleReports.Add(new VehicleReport { Description = "test123" });
+            var report = Context.VehicleReports.Add(new VehicleReport { Description = "test123" });
             var vehicle = Context.Vehicles.Add(new Vehicle());
             Context.SaveChanges();
 
@@ -153,8 +152,8 @@ namespace Triven.Tests.IntegrationTests
             //
 
             var controller = NewController();
-            var requestViewModel = new VehicleReportViewModel { Description = "test123_updated", Vehicle = new VehicleAdminViewModel{Id = vehicle.Id } };
-            var okNegotiatedContentResult = controller.Update(review.Id, requestViewModel) as OkNegotiatedContentResult<ServiceResult<VehicleReportViewModel>>;
+            var requestViewModel = new VehicleReportViewModel { Description = "test123_updated" };
+            var okNegotiatedContentResult = controller.Update(vehicle.Id, report.Id, requestViewModel) as OkNegotiatedContentResult<ServiceResult<VehicleReportViewModel>>;
             Assert.IsNotNull(okNegotiatedContentResult, "Response was not ok");
             var result = okNegotiatedContentResult.Content.Payload;
 
@@ -162,7 +161,7 @@ namespace Triven.Tests.IntegrationTests
             // ASSERT
             //
 
-            Assert.AreEqual(review.Id, result.Id);
+            Assert.AreEqual(report.Id, result.Id);
             Assert.AreEqual("test123_updated", result.Description);
         }
 

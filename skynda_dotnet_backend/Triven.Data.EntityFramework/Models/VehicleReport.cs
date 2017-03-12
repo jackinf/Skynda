@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Triven.Data.EntityFramework.Models.Base;
 using Triven.Domain.Models;
@@ -12,8 +11,8 @@ namespace Triven.Data.EntityFramework.Models
         public string Title { get; set; }
         public string Description { get; set; }
 
-        [Required]
-        public Vehicle Vehicle { get; set; }
+        public int VehicleId { get; set; }
+        public virtual Vehicle Vehicle { get; set; }
 
         public string Inspector { get; set; }
 
@@ -22,5 +21,6 @@ namespace Triven.Data.EntityFramework.Models
 
         [InverseProperty(nameof(VehicleFault.VehicleReport))]
         public List<VehicleFault> Faults { get; set; } = new List<VehicleFault>();
+
     }
 }

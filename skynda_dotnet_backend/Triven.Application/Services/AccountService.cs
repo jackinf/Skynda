@@ -98,22 +98,22 @@ namespace Triven.Application.Services
             if (!validation.IsValid)
                 return ServiceResult<int>.Factory.Fail(validation);
 
-            var contactInfo = applicationUser.ContactInfos.FirstOrDefault(x => x.Id == updateViewModel.Id) ??
-                              new UserContactInfo()
-                              {
-                                  Type = ContactInfoType.Work
-                              };
+            //var contactInfo = applicationUser.ContactInfos.FirstOrDefault(x => x.Id == updateViewModel.Id) ??
+            //                  new UserContactInfo()
+            //                  {
+            //                      Type = ContactInfoType.Work
+            //                  };
 
-            Mapper.Map(viewModel, applicationUser);
-            if (!applicationUser.ContactInfos.Any())
-                applicationUser.ContactInfos.Add(contactInfo);
+            //Mapper.Map(viewModel, applicationUser);
+            //if (!applicationUser.ContactInfos.Any())
+            //    applicationUser.ContactInfos.Add(contactInfo);
 
-            UserContactInfo contactPersonInfo = applicationUser.ContactInfos.First();
-            if (updateViewModel.ContactInfos != null && updateViewModel.ContactInfos.Any())
-            {
-                Mapper.Map(updateViewModel.ContactInfos[0], contactPersonInfo);
-                contactPersonInfo.Type = ContactInfoType.Work;
-            }
+            //UserContactInfo contactPersonInfo = applicationUser.ContactInfos.First();
+            //if (updateViewModel.ContactInfos != null && updateViewModel.ContactInfos.Any())
+            //{
+            //    Mapper.Map(updateViewModel.ContactInfos[0], contactPersonInfo);
+            //    contactPersonInfo.Type = ContactInfoType.Work;
+            //}
 
             _userManager.Update(applicationUser);
             return ServiceResult<int>.Factory.Success(id, "User data saved successfully");
