@@ -18,7 +18,6 @@ export function deleteSuccess(items) {
   return {
     type: DELETE_SUCCESS,
     isFetching: false,
-    items: items,
     errors: {}
   };
 }
@@ -35,15 +34,12 @@ export default function deleteItem(id) {
   return async (dispatch, getState) => {
     try{
       dispatch(deleteRequest());
-      const state = getState();
       await VehicleReportService.deleteItem(id);
-      let items = state[REDUCER_KEYS.VEHICLES_REPORTS_DATA].items;
-      items = items.filter(c => c.id !== id);
-      dispatch(deleteSuccess(items));
       toastr.success("Success", "Delete successful!");
+      dispatch(deleteSuccess());
     }catch (error){
       dispatch(deleteFailure(error));
-      toastr.success("Oh no!", "Delete failed!");
+      toastr.error("Oh no!", "Delete failed!");
       throw error;
     }
   };

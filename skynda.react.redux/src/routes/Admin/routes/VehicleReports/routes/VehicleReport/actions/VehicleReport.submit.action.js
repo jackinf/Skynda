@@ -80,8 +80,8 @@ function submitCreate(item, onSubmitCustom) {
       } else {
         dispatch(change(FORMS.VEHICLE_FORM_REPORT, "id", resp.id));
         browserHistory.replace("/admin/vehicle-report/" + resp.id);
-        toastr.success("Success", "Create successful");
       }
+      toastr.success("Success", "Create successful");
     } catch (error) {
       dispatch(addFailure(error.modelState));
       toastr.error("Oh no!", "Create failed: " +  error.message);
@@ -97,9 +97,8 @@ function submitEdit(item, onSubmitCustom) {
       dispatch(editSuccess());
       if (_.isFunction(onSubmitCustom)) {
         onSubmitCustom(null, resp.id);
-      } else {
-        toastr.success("Success", "Update successful");
       }
+      toastr.success("Success", "Update successful");
     } catch (error) {
       dispatch(editFailure(error.modelState));
       toastr.error("Oh no!", "Update failed " + error.message);

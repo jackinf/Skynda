@@ -30,6 +30,10 @@ export default class VehicleReportsCardComponent extends React.Component {
     };
   }
 
+  refreshList = () => {
+    if (!isNaN(this.props.vehicleId))
+      this.props.getVehicleReportsList(this.props.vehicleId);
+  };
 
   // TODO: eraldi failisse - VehicleSublistActions/Vehicle.open-vehicle-report-dialog.action.js
   openVehicleReportDialog = (e) => {
@@ -48,8 +52,7 @@ export default class VehicleReportsCardComponent extends React.Component {
     this.setState({vehicleReportId: VEHICLE_REPORT_ROUTE_PARAMS.values.NEW});
     this.setState({isVehicleReportDialogOpen: false});
 
-    if (!isNaN(this.props.vehicleId))
-      this.props.getVehicleReportsList(this.props.vehicleId);
+    this.refreshList();
   };
 
   // TODO: eraldi failisse - VehicleSublistActions/Vehicle.delete-report-item.action.js
@@ -62,6 +65,7 @@ export default class VehicleReportsCardComponent extends React.Component {
       });
       // continues the deletion of the record.
       next();
+      this.refreshList();
     }
   };
 

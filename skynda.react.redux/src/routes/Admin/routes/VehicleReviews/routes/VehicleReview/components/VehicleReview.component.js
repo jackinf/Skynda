@@ -12,6 +12,8 @@ class VehicleReview extends React.Component {
     load: React.PropTypes.func.isRequired,
     getVehiclesList: React.PropTypes.func.isRequired,
 
+    onSubmitCustom: React.PropTypes.func,
+
     // vehicle review data
     initialValues: React.PropTypes.shape({
       // TODO
@@ -26,7 +28,9 @@ class VehicleReview extends React.Component {
   }
 
   componentDidMount() {
+    console.log("here1");
     this.props.load(this.props.params[ROUTE_PARAMS.VEHICLE_REVIEW_ID], () => {
+      console.log("here2");
       this.props.dispatch(change(FORMS.VEHICLE_FORM_REVIEW, "vehicleId", this.props.params[ROUTE_PARAMS.VEHICLE_ID]));
       this.props.dispatch(change(FORMS.VEHICLE_FORM_REVIEW, "isModal", true));
     });
@@ -72,7 +76,7 @@ class VehicleReview extends React.Component {
               </Col>
             </Row>
 
-            <Button onClick={e => this.props.onHandleSubmit()}>Submit</Button>
+            <Button onClick={e => this.props.onHandleSubmit(this.props.onSubmitCustom)}>Submit</Button>
           </form>
 
         )}

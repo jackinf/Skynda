@@ -50,9 +50,9 @@ function loadEditError(errors) {
 const loadEditForm = (id, onSuccess) => async (dispatch) => {
   dispatch(loadEditRequest());
   try {
-    const item = await VehicleReviewService.fetchAdminItem(id);
+    const item = await VehicleReviewService.loadUpdateForm(id);
     dispatch(loadEditSuccess(item));
-    dispatch(initialize(FORMS.VEHICLE_FORM_REPORT, item));
+    dispatch(initialize(FORMS.VEHICLE_FORM_REVIEW, item));
     if (onSuccess instanceof Function)
       onSuccess();
   } catch (error) {
@@ -70,7 +70,7 @@ const loadEditForm = (id, onSuccess) => async (dispatch) => {
  */
 export default function load(id, onSuccess) {
   return (dispatch) => {
-    dispatch(destroy(FORMS.VEHICLE_FORM_REPORT));
+    dispatch(destroy(FORMS.VEHICLE_FORM_REVIEW));
 
     const formMode = id === ROUTE_PARAMS.values.NEW
       ? FORM_MODE.ADDING_REVIEW
@@ -79,7 +79,7 @@ export default function load(id, onSuccess) {
 
     if (formMode === FORM_MODE.ADDING_REVIEW) {
       dispatch(loadCreateSuccess());
-      dispatch(initialize(FORMS.VEHICLE_FORM_REPORT));
+      dispatch(initialize(FORMS.VEHICLE_FORM_REVIEW));
       if (onSuccess instanceof Function)
         onSuccess();
     } else if (formMode == FORM_MODE.UPDATING_REVIEW) {

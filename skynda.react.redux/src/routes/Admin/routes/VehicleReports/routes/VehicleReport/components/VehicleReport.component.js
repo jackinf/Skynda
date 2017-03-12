@@ -22,6 +22,8 @@ class VehicleReportCategory extends React.Component {
     onFaultFileUpload: React.PropTypes.func.isRequired,
     onFaultRemove: React.PropTypes.func.isRequired,
 
+    onSubmitCustom: React.PropTypes.func,
+
     // vehicle review data
     initialValues: React.PropTypes.shape({
       // TODO
@@ -65,7 +67,7 @@ class VehicleReportCategory extends React.Component {
                         onFaultFileAdd={this.props.onFaultFileUpload}
                         onFaultRemove={this.props.onFaultRemove}
             />
-            <Button onClick={e => this.props.onHandleSubmit()}>Submit</Button>
+            <Button onClick={e => this.props.onHandleSubmit(this.props.onSubmitCustom)}>Submit</Button>
           </form>
         )}
       </div>

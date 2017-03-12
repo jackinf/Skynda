@@ -9,15 +9,15 @@ export const VehicleReviewService = {
       headers: getDefaultHeaders()
     }));
   },
-  createVehicleAsync: (data) => {
-    return handle(fetch(`${remoteConfig.remote}/api/vehicle-review`, {
+  createItem: (vehicleId, data) => {
+    return handle(fetch(`${remoteConfig.remote}/api/vehicle/${vehicleId}/vehicle-review`, {
       method: "POST",
       headers: getDefaultHeaders(),
       body: JSON.stringify(data)
     }));
   },
-  updateVehicleAsync: (data) => {
-    return handle(fetch(`${remoteConfig.remote}/api/vehicle-review/${data.id}`, {
+  updateItem: (vehicleId, id, data) => {
+    return handle(fetch(`${remoteConfig.remote}/api/vehicle/${vehicleId}/vehicle-review/${id}`, {
       method: "PUT",
       headers: getDefaultHeaders(),
       body: JSON.stringify(data)

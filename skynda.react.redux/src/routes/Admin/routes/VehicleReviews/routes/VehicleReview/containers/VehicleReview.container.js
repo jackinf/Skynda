@@ -19,11 +19,13 @@ const mapDispatchToProps = {
   onHandleSubmit
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
   return {
     isFetching: state[REDUCER_KEYS.VEHICLE_REVIEW_DATA].isFetching,
     initialValues: state[REDUCER_KEYS.VEHICLE_REVIEW_DATA].data,
-    vehicles: state[REDUCER_KEYS.VEHICLES_REVIEW]
+    vehicles: state[REDUCER_KEYS.VEHICLES_REVIEW],
+
+    onSubmitCustom: ownProps.onSubmitCustom
   };
 };
 

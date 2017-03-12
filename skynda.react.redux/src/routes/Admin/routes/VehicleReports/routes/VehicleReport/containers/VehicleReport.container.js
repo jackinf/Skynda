@@ -23,11 +23,13 @@ const mapDispatchToProps = {
   onFaultRemove,
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
   return {
     isFetching: state[REDUCER_KEYS.VEHICLE_REPORT_DATA].isFetching,
     initialValues: state[REDUCER_KEYS.VEHICLE_REPORT_DATA].data,
-    vehicles: state[REDUCER_KEYS.VEHICLES]
+    vehicles: state[REDUCER_KEYS.VEHICLES],
+
+    onSubmitCustom: ownProps.onSubmitCustom
   };
 };
 

@@ -29,6 +29,12 @@ export default class VehicleReviewsCardComponent extends React.Component {
     };
   }
 
+  refreshList = () => {
+    if (!isNaN(this.props.vehicleId)) {
+      this.props.getVehicleReviewsList(this.props.vehicleId);
+    }
+  };
+
   // TODO: eraldi failisse - VehicleSublistActions/Vehicle.open-vehicle-review-dialog.action.js
   openVehicleReviewDialog = (e) => {
     if (e && e.hasOwnProperty("preventDefault") && _.isFunction(e.preventDefault))
@@ -46,21 +52,18 @@ export default class VehicleReviewsCardComponent extends React.Component {
     this.setState({vehicleReviewId: VEHICLE_REVIEW_ROUTE_PARAMS.values.NEW});
     this.setState({isVehicleReviewDialogOpen: false});
 
-    if (!isNaN(this.props.vehicleId))
-      this.props.getVehicleReviewsList(this.props.vehicleId);
+    this.refreshList();
   };
 
   // TODO: eraldi failisse - VehicleSublistActions/Vehicle.delete-review-item.action.js
   deleteReviewItem = (next, dropRowKeys) => {
     const dropRowKeysStr = dropRowKeys.join(',');
-    const deleteSingleReview = this.props.deleteSingleReview;
     if (confirm(`Are you sure you want to delete report with ID(s) ${dropRowKeysStr}?`)) {
-      // If the confirmation is true, call the function that
-      _.each(dropRowKeys, function (i) {
-        deleteSingleReview(i);
+      dropRowKeys.forEach((i) => {
+        this.props.deleteSingleReview(i);
       });
-      // continues the deletion of the record.
-      next();
+      next(); // continues the deletion of the record.
+      this.refreshList();
     }
   };
 
@@ -87,9 +90,10 @@ export default class VehicleReviewsCardComponent extends React.Component {
               <Modal.Title>REVIEW ITEM</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              <VehicleReview params={{
-                [VEHICLE_REVIEW_ROUTE_PARAMS.VEHICLE_REVIEW_ID]: this.state.vehicleReviewId,
-                [VEHICLE_REVIEW_ROUTE_PARAMS.VEHICLE_ID]: this.props.vehicleId
+              <VehicleReview
+                params={{
+                  [VEHICLE_REVIEW_ROUTE_PARAMS.VEHICLE_REVIEW_ID]: this.state.vehicleReviewId,
+                  [VEHICLE_REVIEW_ROUTE_PARAMS.VEHICLE_ID]: this.props.vehicleId
                 }}
                  onSubmitCustom={this.closeVehicleReviewDialog}/>
             </Modal.Body>

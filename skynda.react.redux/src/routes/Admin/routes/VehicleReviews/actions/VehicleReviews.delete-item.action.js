@@ -1,10 +1,11 @@
 import {REDUCER_KEYS} from "../constants/VehicleReview.constant";
-import {VehicleReportService} from "../../../../../webServices"
+import {VehicleReviewService} from "../../../../../webServices"
 import {toastr} from "react-redux-toastr";
+import getList from "./VehicleReviews.get-list.action";
 
-export const DELETE_REQUEST = "VEHICLE_REPORT/DELETE_REQUEST";
-export const DELETE_SUCCESS = "VEHICLE_REPORT/DELETE_SUCCESS";
-export const DELETE_FAILURE = "VEHICLE_REPORT/DELETE_FAILURE";
+export const DELETE_REQUEST = "VEHICLE_REVIEW/DELETE_REQUEST";
+export const DELETE_SUCCESS = "VEHICLE_REVIEW/DELETE_SUCCESS";
+export const DELETE_FAILURE = "VEHICLE_REVIEW/DELETE_FAILURE";
 
 export function deleteRequest() {
   return {
@@ -18,7 +19,6 @@ export function deleteSuccess(items) {
   return {
     type: DELETE_SUCCESS,
     isFetching: false,
-    items: items,
     errors: {}
   };
 }
@@ -35,14 +35,14 @@ export default function deleteItem(id) {
   return async (dispatch, getState) => {
     try{
       dispatch(deleteRequest());
-      let items = getState()[REDUCER_KEYS.VEHICLES_REVIEWS_DATA].items;
-      await VehicleReportService.deleteItem(id);
-      items = items.filter(c => c.id !== id);
-      dispatch(deleteSuccess(items));
+      await VehicleReviewService.deleteItem(id);
       toastr.success("Success", "Delete successful!");
+      dispatch(deleteSuccess());
+      // dispatch(getList());
     }catch (error){
+      console.log(error);
       dispatch(deleteFailure(error));
-      toastr.success("Oh no!", "Delete failed!");
+      toastr.error("Oh no!", "Delete failed!");
       throw error;
     }
   };
