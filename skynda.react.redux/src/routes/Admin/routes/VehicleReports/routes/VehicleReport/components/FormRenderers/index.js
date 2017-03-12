@@ -6,10 +6,12 @@ import renderReportCategoryItems from "./VehicleReport.render-report-category-it
 import TextAreaForReport         from "./VehicleReport.text-area-for-report.renderer";
 import TextFieldForReport        from "./VehicleReport.text-field-for-report.renderer";
 import VehiclesSelectField       from "./VehicleReport.vehicles-select-field.renderer";
+import renderFaults              from "./VehicleReport.form.faults.renderer";
 
 export {
   renderReportCategoryItems,
   TextAreaForReport,
   TextFieldForReport,
-  VehiclesSelectField
+  VehiclesSelectField,
+  renderFaults
 }

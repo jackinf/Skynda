@@ -90,32 +90,32 @@ class VehicleModel extends React.Component {
             <Col md={6} xs={12}>
               {this.props.drivetrain.isFetching
                 ? <div>Loading...</div>
-                : rowWrapper(<Field name="drivetrain.id"
+                : rowWrapper(<Field name="drivetrainId"
                                     label="Drivetrain *"
                                     component={selectRenderer(drivetrains, this.setField)}/>, 4)}
 
               {this.props.fuel.isFetching
                 ? <div>Loading...</div>
-                : rowWrapper(<Field name="fuelType.id"
+                : rowWrapper(<Field name="fuelTypeId"
                                     label="Fuel type *"
                                     component={selectRenderer(fuels, this.setField)}/>, 4)}
 
               {this.props.transmission.isFetching
                 ? <div>Loading...</div>
-                : rowWrapper(<Field name="transmission.id"
+                : rowWrapper(<Field name="transmissionId"
                                     label="Transmission *"
                                     component={selectRenderer(transmissions, this.setField)}/>, 4)}
             </Col>
             <Col md={6} xs={12}>
               {this.props.vehicleBody.isFetching
                 ? <div>Loading...</div>
-                : rowWrapper(<Field name="vehicleBody.id"
+                : rowWrapper(<Field name="vehicleBodyId"
                                     label="Vehicle body *"
                                     component={selectRenderer(vehicleBodies, this.setField)}/>, 4)}
 
               {this.props.manufacturer.isFetching
                 ? <div>Loading...</div>
-                : rowWrapper(<Field name="vehicleManufacturer.id"
+                : rowWrapper(<Field name="vehicleManufacturerId"
                                     label="Manufacturer *"
                                     component={selectRenderer(manufacturers, this.setField)}/>, 4)}
             </Col>

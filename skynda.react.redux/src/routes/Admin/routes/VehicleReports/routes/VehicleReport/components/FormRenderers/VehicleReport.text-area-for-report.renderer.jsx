@@ -1,6 +1,7 @@
+import React from "react";
 import {Row, Col} from "react-bootstrap";
 import {Field} from 'redux-form';
-import {renderTextField} from "../../../../components/FormRenderers";
+import {renderTextField} from "../../../../../../components/FormRenderers";
 
 export const TextAreaForReport = (props) => (<div>
   <Row>

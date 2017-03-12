@@ -1,10 +1,11 @@
 /**
  * Created by jevgenir on 3/11/2017.
  */
+import React from "react";
 import {Field} from 'redux-form';
 import MenuItem from 'material-ui/MenuItem';
 
-import {renderSelectField} from "../../../../components/FormRenderers";
+import {renderSelectField} from "../../../../../../components/FormRenderers";
 
 /**
  * Dropdown field for displaying list of vehicles to choose a single vehicle from.

@@ -1,22 +1,21 @@
 import React from 'react';
-import {FieldArray, change, Field} from 'redux-form';
-import {ROUTE_PARAMS,FORMS} from "../constants/VehicleReport.constant";
-import {formSubmit, onFormSubmitSuccess, onFormSubmitError} from "../reducers";
+import {FieldArray, change} from 'redux-form';
+import {ROUTE_PARAMS,FORMS} from "../../../constants/VehicleReport.constant";
 
 import {
   renderReportCategoryItems,
   VehiclesSelectField,
   TextFieldForReport,
-  TextAreaForReport
-} from "./FormRenderers/VehicleReport.category.component.renderers";
-import {renderFaults} from "../../Vehicles/routes/Vehicle/components/FormRenderers";
+  TextAreaForReport,
+  renderFaults
+} from "./FormRenderers";
 import "./VehicleReport.component.scss";
 import {Button} from "react-bootstrap";
 
 class VehicleReportCategory extends React.Component {
   static propTypes = {
     isFetching: React.PropTypes.bool.isRequired,
-    formSubmit: React.PropTypes.func.isRequired,
+    onHandleSubmit: React.PropTypes.func.isRequired,
     load: React.PropTypes.func.isRequired,
     // clear: React.PropTypes.func.isRequired,
     getVehiclesList: React.PropTypes.func.isRequired,
@@ -44,30 +43,16 @@ class VehicleReportCategory extends React.Component {
     }
   }
 
-  // componentWillUnmount() {
-  //   this.props.clear();
-  // }
-  //
-  // /*
-  //  *  Form submit logic. Saves or updates
-  //  */
-  // onSubmit(e) {
-  //   let promise = this.props.handleSubmit(data => formSubmit(data, this.props.formModeReport))(e);
-  //   promise && promise.then(response =>{
-  //       onFormSubmitSuccess(response, this.props.onSubmitCustom);
-  //       onFormSubmitError;
-  //     });
-  //
-  // };
-
   render() {
+    const vehicleId = this.props.params[ROUTE_PARAMS.VEHICLE_ID];
+
     return (
       <div>
         {this.props.isFetching || this.props.submitting ? "Loading..." : (
           <form className="vehicle-report">
             <h3>{this.props.formModeReport}</h3>
-            {this.props.params[ROUTE_PARAMS.VEHICLE_ID] ?
-              <div>VehicleId: {this.props.params[ROUTE_PARAMS.VEHICLE_ID]}</div>
+            {vehicleId ?
+              <div>VehicleId: {vehicleId}</div>
                 : <VehiclesSelectField name="vehicleId" label="Vehicle *" vehicles={this.props.vehicles}/>
             }
             <TextFieldForReport name="inspector" label="Inspector Name *"/>
@@ -79,7 +64,7 @@ class VehicleReportCategory extends React.Component {
                         onFaultRemove={this.props.onFaultRemove}
             />
             <Button onClick={e => this.props.onHandleSubmit()}>Submit</Button>
-            <button type="submit" disabled={this.props.submitting}>Submit</button>
+            {/*<button type="submit" disabled={this.props.submitting}>Submit</button>*/}
           </form>
         )}
       </div>

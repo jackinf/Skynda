@@ -3,8 +3,7 @@ import {ROUTE_PARAMS, REDUCER_KEYS} from "../../constants/Vehicles.constant";
 import {REDUCER_KEYS as REPORT_REDUCER_KEYS} from "../../../VehicleReports/constants/VehicleReport.constant";
 import {REDUCER_KEYS as REVIEW_REDUCER_KEYS} from "../../../VehicleReviews/constants/VehicleReview.constant";
 import {VEHICLE_MODEL_REDUCER_KEY} from "../../../VehicleModels/constants/VehicleModel.constant";
-import {setVehicleReportData, setFormMode as setFormModeReport} from "../../../VehicleReports/reducers";
-import {setVehicleReviewData, setFormMode as setFormModeReview} from "../../../VehicleReviews/reducers";
+import {setVehicleReviewData} from "../../../VehicleReviews/reducers";
 import NProgress from "react-nprogress";
 
 export default (store) => ({
@@ -20,13 +19,11 @@ export default (store) => ({
 
       //FOR VEHICLE REPORTS
       injectReducer(store, {key: REDUCER_KEYS.VEHICLE_REPORTS_DATA_LIST, reducer: require("./reducers/Vehicle.Reports.reducer").default});
-      injectReducer(store, {key: REPORT_REDUCER_KEYS.VEHICLE_REPORT_DATA, reducer: setVehicleReportData});
-      injectReducer(store, {key: REPORT_REDUCER_KEYS.FORM_MODE_VEHICLE_REPORT, reducer: setFormModeReport});
+      injectReducer(store, {key: REPORT_REDUCER_KEYS.VEHICLE_REPORT_DATA, reducer: require("../../../VehicleReports/routes/VehicleReport/reducers/VehicleReport.reducer.js").default});
 
       //FOR VEHICLE REVIEWS
       injectReducer(store, {key: REDUCER_KEYS.VEHICLE_REVIEWS_DATA_LIST, reducer: require("./reducers/Vehicle.Reviews.reducer").default});
       injectReducer(store, {key: REVIEW_REDUCER_KEYS.VEHICLE_REVIEW_DATA, reducer: setVehicleReviewData});
-      injectReducer(store, {key: REVIEW_REDUCER_KEYS.FORM_MODE_VEHICLE_REVIEW, reducer: setFormModeReview});
 
       //FOR VEHICLE FEATURES
       injectReducer(store, {key: REDUCER_KEYS.FEATURES_DATA_LIST, reducer: require("./reducers/Vehicle.Features.reducer").default});

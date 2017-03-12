@@ -1,6 +1,7 @@
 /**
  * Created by jevgenir on 3/11/2017.
  */
+import React from "react";
 import {Row, Col} from "react-bootstrap";
 import {Field} from 'redux-form';
 import {Checkbox} from "redux-form-material-ui";
@@ -8,7 +9,7 @@ import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentRemove from 'material-ui/svg-icons/content/remove';
 import {Card, CardText} from 'material-ui/Card';
 
-import {fieldListWrapper, renderTextField} from "../../../../components/FormRenderers";
+import {fieldListWrapper, renderTextField} from "../../../../../../components/FormRenderers";
 
 /**
  * Displays a list of report category items, which can be dynamically added or removed

@@ -3,7 +3,7 @@
  */
 
 import {imageUtil} from "utils/allUtils";
-import {FORMS} from "../../constants/VehicleReport.constant";
+import {FORMS} from "../../../../constants/VehicleReport.constant";
 import {change} from 'redux-form';
 
 export default function onFaultFileUpload(e, index) {

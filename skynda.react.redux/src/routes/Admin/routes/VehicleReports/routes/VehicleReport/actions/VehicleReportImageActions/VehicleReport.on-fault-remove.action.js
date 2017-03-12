@@ -3,7 +3,7 @@
  */
 
 import {imageUtil} from "utils/allUtils";
-import {FORMS} from "../../constants/VehicleReport.constant";
+import {FORMS} from "../../../../constants/VehicleReport.constant";
 import {arrayRemove} from 'redux-form';
 
 export default function onFaultRemove(e, index) {

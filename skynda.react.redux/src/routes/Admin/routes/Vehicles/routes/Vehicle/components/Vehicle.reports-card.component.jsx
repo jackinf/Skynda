@@ -5,7 +5,7 @@ import {TableHeaderColumn} from "react-bootstrap-table";
 import "./Vehicle.component.scss";
 import BootstrapTable from "./Vehicle.bootstrap-table.component";
 import {ROUTE_PARAMS as VEHICLE_REPORT_ROUTE_PARAMS} from "../../../../VehicleReports/constants/VehicleReport.constant";
-import VehicleReport from "../../../../VehicleReports/containers/VehicleReport.container";
+import VehicleReport from "../../../../VehicleReports/routes/VehicleReport/containers/VehicleReport.container";
 import _ from "underscore";
 
 

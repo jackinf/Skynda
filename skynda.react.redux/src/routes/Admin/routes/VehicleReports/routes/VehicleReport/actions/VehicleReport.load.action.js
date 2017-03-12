@@ -1,6 +1,6 @@
-import {FORM_MODE, ROUTE_PARAMS, FORMS} from "../constants/VehicleReport.constant";
+import {FORM_MODE, ROUTE_PARAMS, FORMS} from "../../../constants/VehicleReport.constant";
 import {initialize, destroy} from "redux-form";
-import {VehicleReportService} from "../../../../../webServices"
+import {VehicleReportService} from "../../../../../../../webServices"
 
 export const LOAD_CREATE_SUCCESS  = 'VEHICLE_REPORT/LOAD_CREATE_SUCCESS123';
 export const LOAD_EDIT_REQUEST    = 'VEHICLE_REPORT/LOAD_EDIT_REQUEST';
