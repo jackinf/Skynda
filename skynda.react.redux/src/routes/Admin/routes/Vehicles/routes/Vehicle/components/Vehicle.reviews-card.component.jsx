@@ -60,10 +60,9 @@ export default class VehicleReviewsCardComponent extends React.Component {
     const dropRowKeysStr = dropRowKeys.join(',');
     if (confirm(`Are you sure you want to delete report with ID(s) ${dropRowKeysStr}?`)) {
       dropRowKeys.forEach((i) => {
-        this.props.deleteSingleReview(i);
+        this.props.deleteSingleReview(i, this.refreshList);
       });
       next(); // continues the deletion of the record.
-      this.refreshList();
     }
   };
 

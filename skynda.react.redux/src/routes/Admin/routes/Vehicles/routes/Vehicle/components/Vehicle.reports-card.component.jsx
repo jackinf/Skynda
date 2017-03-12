@@ -61,11 +61,10 @@ export default class VehicleReportsCardComponent extends React.Component {
     if (confirm(`Are you sure you want to delete report with ID(s) ${dropRowKeysStr}?`)) {
       // If the confirmation is true, call the function that
       dropRowKeys.forEach((i) => {
-        this.props.deleteSingleReportItem(i);
+        this.props.deleteSingleReportItem(i, this.refreshList);
       });
       // continues the deletion of the record.
       next();
-      this.refreshList();
     }
   };
 

@@ -30,13 +30,15 @@ export function deleteFailure(errors) {
   };
 }
 
-export default function deleteItem(id) {
+export default function deleteItem(id, onSuccess) {
   return async (dispatch, getState) => {
     try{
       dispatch(deleteRequest());
       await VehicleReportService.deleteItem(id);
       toastr.success("Success", "Delete successful!");
       dispatch(deleteSuccess());
+      if (onSuccess instanceof Function)
+        onSuccess();
     }catch (error){
       dispatch(deleteFailure(error));
       toastr.error("Oh no!", "Delete failed!");
