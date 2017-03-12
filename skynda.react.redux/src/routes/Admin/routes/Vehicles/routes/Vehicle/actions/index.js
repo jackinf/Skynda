@@ -27,10 +27,6 @@ import {
 
 import vehicleFeaturesGetList     from "./Vehicle.features.get-list.action";
 import vehicleLoad                from "./Vehicle.load.action";
-import vehicleReportsDeleteItem   from "./Vehicle.reports.delete-item.action";
-import vehicleReportsGetList      from "./Vehicle.reports.get-list.action";
-import vehicleReviewDeleteItem    from "./Vehicle.reviews.delete-item.action";
-import vehicleReviewsGetList      from "./Vehicle.reviews.get-list.action";
 import vehicleSubmit              from "./Vehicle.submit.action";
 import vehicleClear               from "./Vehicle.clear.action"
 
@@ -45,10 +41,6 @@ export {
 
   vehicleFeaturesGetList,
   vehicleLoad,
-  vehicleReportsDeleteItem,
-  vehicleReportsGetList,
-  vehicleReviewDeleteItem,
-  vehicleReviewsGetList,
   vehicleSubmit,
   vehicleClear
 }

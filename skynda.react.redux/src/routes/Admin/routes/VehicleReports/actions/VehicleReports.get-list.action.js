@@ -1,8 +1,8 @@
 import {VehicleReportService} from "../../../../../webServices"
 
-export const GET_LIST_REQUEST = "VEHICLE_REPORT/GET_LIST_REQUEST";
-export const GET_LIST_SUCCESS = "VEHICLE_REPORT/GET_LIST_SUCCESS";
-export const GET_LIST_FAILURE = "VEHICLE_REPORT/GET_LIST_FAILED";
+export const GET_LIST_REQUEST = "VEHICLE_REPORTS/GET_LIST_REQUEST";
+export const GET_LIST_SUCCESS = "VEHICLE_REPORTS/GET_LIST_SUCCESS";
+export const GET_LIST_FAILURE = "VEHICLE_REPORTS/GET_LIST_FAILED";
 
 export function getListRequest() {
   return {

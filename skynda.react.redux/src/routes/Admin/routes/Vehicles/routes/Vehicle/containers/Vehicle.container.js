@@ -5,13 +5,19 @@ import {
   onMainImageCropComplete,
   vehicleFeaturesGetList,
   vehicleLoad as load,
-  vehicleReportsDeleteItem as deleteReport,
-  vehicleReportsGetList as getVehicleReportsList,
-  vehicleReviewDeleteItem as deleteReview,
-  vehicleReviewsGetList as getVehicleReviewsList,
   vehicleSubmit as submit,
-  vehicleClear as clear
 } from "../actions";
+
+import {
+  getList as getVehicleReportsList,
+  deleteItem as deleteReport
+} from "../../../../VehicleReports/actions";
+
+import {
+  getList as getVehicleReviewsList,
+  deleteItem as deleteReview
+} from "../../../../VehicleReviews/actions";
+
 import {getList as getVehicleModelsList} from "../../../../VehicleModels/actions";
 import {getList as getVehicles} from "../../../actions"
 import {REDUCER_KEYS, VEHICLE_FORM_KEY} from "../../../constants/Vehicles.constant";
@@ -21,7 +27,6 @@ import {reduxForm} from "redux-form";
 const VehicleComponentForm = reduxForm({form: VEHICLE_FORM_KEY})(VehicleComponent);
 
 const mapDispatchToProps = {
-  clear,
   getVehicleModelsList,
   getVehicleReportsList,
   deleteSingleReportItem: deleteReport,
@@ -33,8 +38,7 @@ const mapDispatchToProps = {
   onImageFileRemove: onImageFileRemove,
   getVehicles,
   onHandleLoad: load,
-  onHandleSubmit: submit,
-  onHandleClear: clear
+  onHandleSubmit: submit
 };
 
 const mapStateToProps = (state) => {

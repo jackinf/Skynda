@@ -40,21 +40,6 @@ class Vehicle extends React.Component {
     this.props.getVehicleReviewsList(this.props.params[ROUTE_PARAMS.VEHICLE_ID]);
   }
 
-  /**
-   * We need to clean toastr's already shown messages.
-   * We also clear the form (I am not sure if this is necessary). Yes it is. Somewhere something said it is.
-   */
-  componentWillUnmount() {
-    toastr.clean();
-    this.props.onHandleClear();
-  }
-
-  /**
-   * Simple wrapper, which changes value using redux-form.
-   * @param name - value type variable, e.g. "colorInside"
-   * @param value - value type variable, e.g. "blue" or "#faf"
-   * @param event
-   */
   onSetField = (name, value, event) => {
     this.props.dispatch(change(VEHICLE_FORM_KEY, name, value))
   };
@@ -246,7 +231,6 @@ class Vehicle extends React.Component {
 Vehicle.propTypes = {
   onHandleLoad: React.PropTypes.func.isRequired,
   onHandleSubmit: React.PropTypes.func.isRequired,
-  onHandleClear: React.PropTypes.func.isRequired,
   getVehicleModelsList: React.PropTypes.func.isRequired,
   getVehicleReportsList: React.PropTypes.func.isRequired,
   deleteSingleReportItem: React.PropTypes.func.isRequired,
@@ -256,7 +240,6 @@ Vehicle.propTypes = {
   onImageFileRemove: React.PropTypes.func,
   onImageFileUpload: React.PropTypes.func,
   onMainImageCropComplete: React.PropTypes.func,
-
 
   vehicleModels: React.PropTypes.shape({
     isFetching: React.PropTypes.bool,

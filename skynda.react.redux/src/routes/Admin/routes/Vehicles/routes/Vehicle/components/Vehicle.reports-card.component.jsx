@@ -3,7 +3,7 @@ import {Card, CardTitle, CardText} from 'material-ui/Card';
 import {Modal} from "react-bootstrap";
 import {TableHeaderColumn} from "react-bootstrap-table";
 import "./Vehicle.component.scss";
-import BootstrapTable from "./Vehicle.bootstrap-table.component";
+import BootstrapTable from "./FormRenderers/Vehicle.bootstrap-table.component";
 import {ROUTE_PARAMS as VEHICLE_REPORT_ROUTE_PARAMS} from "../../../../VehicleReports/constants/VehicleReport.constant";
 import VehicleReport from "../../../../VehicleReports/routes/VehicleReport/containers/VehicleReport.container";
 import _ from "underscore";

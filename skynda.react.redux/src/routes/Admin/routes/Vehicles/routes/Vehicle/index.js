@@ -17,11 +17,11 @@ export default (store) => ({
       injectReducer(store, {key: REDUCER_KEYS.VEHICLE_MODELS_DATA, reducer: require("./../../../VehicleModels/reducers/VehicleModels.reducer.js").default});
 
       //FOR VEHICLE REPORTS
-      injectReducer(store, {key: REDUCER_KEYS.VEHICLE_REPORTS_DATA_LIST, reducer: require("./reducers/Vehicle.Reports.reducer").default});
+      injectReducer(store, {key: REDUCER_KEYS.VEHICLE_REPORTS_DATA_LIST, reducer: require("../../../VehicleReports/reducers/VehicleReports.reducer").default});
       injectReducer(store, {key: REPORT_REDUCER_KEYS.VEHICLE_REPORT_DATA, reducer: require("../../../VehicleReports/routes/VehicleReport/reducers/VehicleReport.reducer.js").default});
 
       //FOR VEHICLE REVIEWS
-      injectReducer(store, {key: REDUCER_KEYS.VEHICLE_REVIEWS_DATA_LIST, reducer: require("./reducers/Vehicle.Reviews.reducer").default});
+      injectReducer(store, {key: REDUCER_KEYS.VEHICLE_REVIEWS_DATA_LIST, reducer: require("../../../VehicleReviews/reducers/VehicleReviews.reducer").default});
       injectReducer(store, {key: REVIEW_REDUCER_KEYS.VEHICLE_REVIEW_DATA, reducer: require("../../../VehicleReviews/routes/VehicleReview/reducers/VehicleReview.reducer").default});
 
       //FOR VEHICLE FEATURES
