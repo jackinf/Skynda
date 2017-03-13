@@ -189,7 +189,7 @@ class Vehicle extends React.Component {
               </VehicleFeaturesAndDescriptionsCard>
             </Col>
 
-          {isUpdating && !isNaN(this.props.id) ?
+          {isUpdating && !isNaN(this.state.id) ?
             (<Col md={6} xs={12}>
               <ImagesCard
                 onImageFileUpload={this.props.onImageFileUpload}
@@ -203,7 +203,7 @@ class Vehicle extends React.Component {
 
         <br/>
 
-      {isUpdating && !isNaN(this.props.id) ?
+      {isUpdating && !isNaN(this.state.id) ?
         <Row>
           <Col sm={12}>
             <div>

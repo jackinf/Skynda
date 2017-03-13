@@ -50,6 +50,7 @@ function loadEditError(errors) {
 */
 const loadEditForm = (id) => async (dispatch) => {
   dispatch(loadEditRequest());
+  console.log("reload success");
   try {
     const item = await VehicleService.fetchAdminItem(id);
     dispatch(loadEditSuccess(item));

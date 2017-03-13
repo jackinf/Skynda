@@ -93,7 +93,7 @@ function submitEdit(item, onSubmitCustom) {
       if (_.isFunction(onSubmitCustom)) {
         onSubmitCustom(null, resp.id);
       } else {
-
+        window.location.reload();
         toastr.success("Success", "Update successful");
       }
     } catch (error) {
