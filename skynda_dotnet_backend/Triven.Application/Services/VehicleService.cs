@@ -49,7 +49,7 @@ namespace Triven.Application.Services
 
                 if (result.Features.Any())
                 {
-                    foreach (var feature in result.Features.Where(x => x.DeletedOn == null))
+                    foreach (var feature in result.Features)
                     {
                         mappedResult.FeaturesAdminSelect.Add(new FeatureAdminSelectViewModel
                         {

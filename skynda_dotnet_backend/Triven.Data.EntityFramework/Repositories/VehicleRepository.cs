@@ -85,6 +85,14 @@ namespace Triven.Data.EntityFramework.Repositories
                     .Include(x => x.Reviews)
                     .Include(x => x.Reports)
                     .Include(x => x.Images.Select(o => o.Image)).FirstOrDefault(x => x.Id == id);
+
+                //TODO fix this loading fault hack... do not load deletedOn items
+                if (result != null && result.Features.Any())
+                    result.Features = result.Features.Where(x => x.DeletedOn == null).ToList();
+
+                if (result != null && result.Images.Any())
+                    result.Images = result.Images.Where(x => x.DeletedOn == null).ToList();
+
                 return result;
             }
 
