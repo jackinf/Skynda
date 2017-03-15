@@ -90,6 +90,7 @@
     <Compile Include="IntegrationTests\VehicleModelIntegrationTests.cs" />
     <Compile Include="IntegrationTests\VehicleReportIntegrationTests.cs" />
     <Compile Include="IntegrationTests\VehicleReviewIntegrationTests.cs" />
+    <Compile Include="SimpleTests\EmailTest.cs" />
     <Compile Include="Utils\IntegrationTestBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\TestContextProvider.cs" />

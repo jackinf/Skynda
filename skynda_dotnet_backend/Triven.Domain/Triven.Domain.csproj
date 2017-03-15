@@ -146,6 +146,7 @@
     <Compile Include="Results\ServiceResult.cs" />
     <Compile Include="Services\IAccountService.cs" />
     <Compile Include="Services\IBlobStorageService.cs" />
+    <Compile Include="Services\IEmailService.cs" />
     <Compile Include="Services\IFeatureService.cs" />
     <Compile Include="Services\IImageService.cs" />
     <Compile Include="Services\ISubscriptionService.cs" />

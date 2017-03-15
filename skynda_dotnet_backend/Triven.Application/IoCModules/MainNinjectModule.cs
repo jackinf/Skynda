@@ -29,6 +29,7 @@ namespace Triven.Application.IoCModules
             Kernel.Bind<IVehicleReportService>().To<VehicleReportService>().InTransientScope();
             Kernel.Bind<IVehicleReviewService>().To<VehicleReviewService>().InTransientScope();
             Kernel.Bind<IVehicleService>().To<VehicleService>().InTransientScope();
+            Kernel.Bind<IEmailService>().To<EmailService>().InTransientScope();
 
             /*
              * Repositories
@@ -45,12 +46,7 @@ namespace Triven.Application.IoCModules
             Kernel.Bind<IVehicleReviewRepository<VehicleReview>>().To<VehicleReviewRepository>().InTransientScope();
             Kernel.Bind<IVehicleRepository<Vehicle>>().To<VehicleRepository>().InTransientScope();
             Kernel.Bind<IVehicleImageRepository<VehicleImage>>().To<VehicleImageRepository>().InTransientScope();
-
-            /*
-             * Models
-             */
-
-
+            
         }
     }
 }

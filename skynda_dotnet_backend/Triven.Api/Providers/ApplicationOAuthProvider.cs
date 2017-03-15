@@ -9,6 +9,7 @@ using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 using Triven.Application;
+using Triven.Application.Services;
 using Triven.Data.EntityFramework.Models.User;
 using Triven.Domain.Constants;
 

@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using Triven.Application.Services;
 using Triven.Data.EntityFramework.Models.User;
 using Triven.Domain.Constants;
 

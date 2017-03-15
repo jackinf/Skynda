@@ -5,6 +5,7 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
 using Triven.Application;
+using Triven.Application.Services;
 using Triven.API.Providers;
 using Triven.Data.EntityFramework;
 using Triven.Data.EntityFramework.Models;

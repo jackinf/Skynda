@@ -3,6 +3,7 @@ using System.Web;
 using System.Web.Http;
 using System.Web.Http.Controllers;
 using Microsoft.AspNet.Identity;
+using Triven.Application.Services;
 using Triven.Data.EntityFramework.Models.User;
 using Triven.Domain.Constants;
 

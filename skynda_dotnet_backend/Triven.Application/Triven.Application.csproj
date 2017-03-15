@@ -183,9 +183,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\RequireApiAccessAttribute.cs" />
+    <Compile Include="Services\EmailService.cs" />
     <Compile Include="Extensions\Extensions.cs" />
     <Compile Include="Helpers\AuthHelper.cs" />
-    <Compile Include="IdentityConfig.cs" />
+    <Compile Include="Services\ApplicationUserManager.cs" />
     <Compile Include="Results\AccountRegistrationResult.cs" />
     <Compile Include="Services\BlobStorageService.cs" />
     <Compile Include="Services\ClassificationService.cs" />
