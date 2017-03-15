@@ -29,7 +29,8 @@ export const colors = [
   {id: 15, style: {"backgroundColor": "#ff9800"}, hideName: true, isColored: true},
   // {id: 16, style: {"backgroundColor": "#ff5722"}, hideName: true, isColored: true},
   {id: 17, style: {"backgroundColor": "#795548"}, hideName: true, isColored: true},
-  {id: 18, style: {"backgroundColor": "#607d8b"}, hideName: true, isColored: true}
+  {id: 18, style: {"backgroundColor": "#607d8b"}, hideName: true, isColored: true},
+  {id: 19, style: {"backgroundColor": "#000000"}, hideName: true, isColored: true}
 ];
 
 // Sõiduki värvi valikud
