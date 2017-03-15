@@ -16,6 +16,7 @@ export const FORM_MODE = {
 
 export const ROUTE_PARAMS = {
   VEHICLE_MODEL_ID: "vehicleModelId",
+  VEHICLE_MODEL_TITLE: "vehicleModelTitle",
 
   values: {
     NEW: "new"

@@ -26,7 +26,9 @@ class VehicleModel extends React.Component {
 
   componentDidMount() {
     this.props.onHandleLoad(this.props.params[ROUTE_PARAMS.VEHICLE_MODEL_ID]);
-
+    if(this.props.params[ROUTE_PARAMS.VEHICLE_MODEL_TITLE]){
+      this.props.dispatch(change("vehicleModelForm", "title", this.props.params[ROUTE_PARAMS.VEHICLE_MODEL_TITLE]))
+    }
     // TODO: load this shit with 1 query :D
     this.props.getDrivetrains();
     this.props.getFuels();
@@ -73,8 +75,8 @@ class VehicleModel extends React.Component {
         <form>
           <Row>
             <Col md={6} xs={12}>
-              {rowWrapper(<Field name="modelCode" label="Model Code" component={TextField} floatingLabelText="Model Code *"/>)}
               {rowWrapper(<Field name="title" component={TextField} floatingLabelText="Title *"/>)}
+              {rowWrapper(<Field name="modelCode" label="Model Code" component={TextField} floatingLabelText="Model Code *"/>)}
               {rowWrapper(<Field name="description" component={TextField} floatingLabelText="Description *"/>)}
               {rowWrapper(<Field name="doors" component={TextField} type="number" floatingLabelText="Doors *"/>)}
             </Col>

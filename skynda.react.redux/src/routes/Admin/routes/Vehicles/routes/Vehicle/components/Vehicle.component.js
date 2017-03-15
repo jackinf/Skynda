@@ -29,6 +29,7 @@ class Vehicle extends React.Component {
     this.state = {
       id: this.props.params[ROUTE_PARAMS.VEHICLE_ID],
       isVehicleModelDialogOpen: false,
+      newModelTitle: ""
     };
   }
 
@@ -52,11 +53,13 @@ class Vehicle extends React.Component {
     // TODO: cure this cancer :O
   onSelectItemChange = (name, chosenOption) => {
     const hackName = name.replace(".id", "");
+    console.log("choisem", chosenOption);
     if (chosenOption.value !== chosenOption.label) {
       this.props.dispatch(change(VEHICLE_FORM_KEY, hackName, {id: chosenOption.value}));
-    } else if (hackName === "model") {
+    } else if (hackName === "vehicleModel") {
       // this.openVehicleModelDialog(null);
       this.setState({isVehicleModelDialogOpen: true});
+      this.setState({newModelTitle: chosenOption.value})
     }
   };
 
@@ -97,7 +100,7 @@ class Vehicle extends React.Component {
     const featuresList = this.props.featuresList && !this.props.featuresList.isFetching
       ? this.props.featuresList.items : [];
     const vehicleModels = this.props.vehicleModels && !this.props.vehicleModels.isFetching
-      ? this.props.vehicleModels.items.map(item => ({label: item.title + " " + item.modelCode, value: item.id}))
+      ? this.props.vehicleModels.items.map(item => ({label: item.title, value: item.id}))
       : [];
     // const colors = this.props.colors && !this.props.colors.isFetching
     //   ? this.props.colors.items.map(item => ({label: item.name, value: item.id}))
@@ -146,7 +149,10 @@ class Vehicle extends React.Component {
                         <Modal.Title>Modal heading</Modal.Title>
                       </Modal.Header>
                       <Modal.Body>
-                        <VehicleModel params={{[VEHICLE_MODEL_ROUTE_PARAMS.VEHICLE_MODEL_ID]: "new"}}
+                        <VehicleModel params={{
+                          [VEHICLE_MODEL_ROUTE_PARAMS.VEHICLE_MODEL_ID]: "new",
+                          [VEHICLE_MODEL_ROUTE_PARAMS.VEHICLE_MODEL_TITLE]: this.state.newModelTitle
+                        }}
                                       onSubmitCustom={this.closeVehicleModelDialog}/>
                       </Modal.Body>
                     </Modal>
