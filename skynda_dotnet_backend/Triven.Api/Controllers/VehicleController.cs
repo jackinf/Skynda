@@ -34,27 +34,14 @@ namespace Triven.API.Controllers
 
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [HttpPut, Route("{id:int}")]
-        public IHttpActionResult Update([FromUri] int id, [FromBody] VehicleAdminViewModel viewModel)
-        {
-            try
-            {
-                return HandleResult(_service.Update(id, viewModel));
-
-            }
-            catch (Exception ex)
-            {
-                
-                throw;
-            }
-        }
+        public IHttpActionResult Update([FromUri] int id, [FromBody] VehicleAdminViewModel viewModel) => HandleResult(_service.Update(id, viewModel));
 
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [HttpDelete, Route("{id:int}")]
         public IHttpActionResult Delete([FromUri] int id) => HandleResult(_service.Delete(id));
 
         [Obsolete("Use GetAll")]    // TODO : Use get all if searchParams exist
-        [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
-        [HttpGet, Route("{id:int}")]
+        [HttpPost, Route("{id:int}")]
         public IHttpActionResult Search([FromBody] SearchRequestViewModel searchParams) => HandleResult(_service.Search(searchParams));
     }
 }
