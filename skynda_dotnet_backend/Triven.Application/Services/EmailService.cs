@@ -4,7 +4,7 @@ using Triven.Domain.Results;
 using Triven.Domain.Services;
 using Triven.Domain.ViewModels.Email;
 
-namespace Triven.Application
+namespace Triven.Application.Services
 {
     /// <summary>
     /// Sends email to new partner to confrim email
