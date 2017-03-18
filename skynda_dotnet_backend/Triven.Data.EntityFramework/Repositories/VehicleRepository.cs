@@ -23,7 +23,10 @@ namespace Triven.Data.EntityFramework.Repositories
         {
             using (var context = new ApplicationDbContext())
             {
-                var query = BaseQuery(context).Include(x => x.VehicleModel);
+                var query = BaseQuery(context)
+                    .Include(x => x.VehicleModel)
+                    .Include(x => x.VehicleModel.VehicleManufacturer)
+                    .Include(x => x.MainImage);
 
                 if (dto.Models?.Any() ?? false)
                     query = query.Where(ExpressionHelpers.BuildContainsExpression<Vehicle, int>(

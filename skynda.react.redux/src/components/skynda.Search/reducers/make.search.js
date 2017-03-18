@@ -12,8 +12,8 @@ export const searchCarAsync = () => (dispatch, getState) => {
   NProgress.start();
   const promise = VehicleService.search(searchValues);
   promise.then(resp => {
-    dispatch(setSearchResults(resp.vehicles));
     dispatch(setIsSearching(false));
+    dispatch(setSearchResults(resp));
     NProgress.done();
   }).catch(err => {
     dispatch(setIsSearching(false));

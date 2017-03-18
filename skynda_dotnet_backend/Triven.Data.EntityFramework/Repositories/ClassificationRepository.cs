@@ -24,12 +24,12 @@ namespace Triven.Data.EntityFramework.Repositories
         {
             using (var context = new ApplicationDbContext())
             {
-
                 var query =
                     BaseQuery(context)
                         .Include(x => x.ClassificationType)
                         .Where(x => x.ClassificationType.Name == type)
                         .ToList();
+
                 return query;
             }
         }
@@ -44,55 +44,65 @@ namespace Triven.Data.EntityFramework.Repositories
                     case DatabaseConstants.ClassificationTypeName.PaymentType:
                         return GetByType(type);
                     case DatabaseConstants.ClassificationTypeName.Drivetrain:
-                        return Filter(
-                            context.VehicleModels.Where(x => x.Drivetrain.Id > 0).Select(x => x.Drivetrain.Id));
+                    {
+                        var query = context.Vehicles.Include(x => x.VehicleModel)
+                            .Where(x => x.VehicleModel != null && x.VehicleModel.Drivetrain.Id > 0)
+                            .Join(context.Classifications,
+                                vehicle => vehicle.VehicleModel.Drivetrain.Id,
+                                classification => classification.Id,
+                                (vehicle, classification) => classification);
+
+                        return query.ToList();
+                    }
                     case DatabaseConstants.ClassificationTypeName.Transmission:
-                        return Filter(context.VehicleModels.Where(x => x.Transmission.Id > 0)
-                            .Select(x => x.Transmission.Id));
+                    {
+                        var query = context.Vehicles.Include(x => x.VehicleModel)
+                            .Where(x => x.VehicleModel != null && x.VehicleModel.Transmission.Id > 0)
+                            .Join(context.Classifications,
+                                vehicle => vehicle.VehicleModel.Transmission.Id,
+                                classification => classification.Id,
+                                (vehicle, classification) => classification);
+
+                        return query.ToList();
+                    }
                     case DatabaseConstants.ClassificationTypeName.PaymentStatus:
                         return GetByType(type);
                     case DatabaseConstants.ClassificationTypeName.Manufacturer:
-
-                        var query = context.Vehicles
-                            .Include(x => x.VehicleModel)
+                    {
+                        var query = context.Vehicles.Include(x => x.VehicleModel)
                             .Where(x => x.VehicleModel != null && x.VehicleModel.VehicleManufacturer.Id > 0)
                             .Join(context.Classifications,
                                 vehicle => vehicle.VehicleModel.VehicleManufacturer.Id,
                                 classification => classification.Id,
                                 (vehicle, classification) => classification);
 
-                        var list = query.ToList();
-                        return list;
-                        //return Filter(context.Vehicles
-                        //    .Include(x => x.VehicleModel)
-                        //    .Where(x => x.VehicleModel != null && x.VehicleModel.VehicleManufacturer.Id > 0)
-                        //    .Select(x => x.VehicleModel.VehicleManufacturer.Id));
-
-                    //return Filter(context.VehicleModels.Where(x => x.VehicleManufacturer.Id > 0).Select(x => x.VehicleManufacturer.Id));
+                        return query.ToList();
+                    }
                     case DatabaseConstants.ClassificationTypeName.Fuel:
-                        return Filter(context.VehicleModels.Where(x => x.FuelType.Id > 0).Select(x => x.FuelType.Id));
+                    {
+                        var query = context.Vehicles.Include(x => x.VehicleModel)
+                            .Where(x => x.VehicleModel != null && x.VehicleModel.FuelType.Id > 0)
+                            .Join(context.Classifications,
+                                vehicle => vehicle.VehicleModel.FuelType.Id,
+                                classification => classification.Id,
+                                (vehicle, classification) => classification);
+
+                        return query.ToList();
+                    }
                     case DatabaseConstants.ClassificationTypeName.VehicleBody:
-                        return Filter(context.VehicleModels.Where(x => x.VehicleBody.Id > 0).Select(x => x.VehicleBody.Id));
+                    {
+                        var query = context.Vehicles.Include(x => x.VehicleModel)
+                            .Where(x => x.VehicleModel != null && x.VehicleModel.VehicleBody.Id > 0)
+                            .Join(context.Classifications,
+                                vehicle => vehicle.VehicleModel.VehicleBody.Id,
+                                classification => classification.Id,
+                                (vehicle, classification) => classification);
+
+                        return query.ToList();
+                    }
                 }
 
                 return new List<Classification>();
-            }
-        }
-
-        private IList<Classification> Filter(IQueryable<int> subQuery)
-        {
-            using (var context = new ApplicationDbContext())
-            {
-
-                if (subQuery.Count() <= 0)
-                    return new List<Classification>();
-
-                var existingClassificationIds = subQuery.ToList();
-                var query =
-                    BaseQuery(context)
-                        .Where(x => existingClassificationIds.Any(id => id == x.Id))
-                        .ToList();
-                return query;
             }
         }
     }

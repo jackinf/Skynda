@@ -10,6 +10,7 @@ class ResultsComponent extends React.Component {
     const searchingTxt = <Translate value="home_page.searching"/>;
     const chooseFavTxt = <Translate value="home_page.choose_your_favorite"/>;
     const recentlyAddedTxt = <Translate value="home_page.recently_added"/>;
+
     return (
       <Col md={12}>
         {
@@ -28,7 +29,7 @@ class ResultsComponent extends React.Component {
                 </Col>
               </Row>
             </Row>)
-            : ("")
+            : null
         }
 
         <br />
@@ -52,7 +53,7 @@ class ResultsComponent extends React.Component {
                   {/*<CarPreview.Grid vehicles={this.props.recentlyAdded}/>*/}
                 </Col>
               </Row>
-            </Row>) : ""}
+            </Row>) : null}
 
       </Col>)
   }

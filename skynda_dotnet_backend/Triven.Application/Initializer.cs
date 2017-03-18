@@ -58,7 +58,9 @@ namespace Triven.Application
 
                 configuration.CreateMap<Vehicle, VehicleAdminViewModel>().PreserveReferences()
                     .ForMember(x => x.Features, conf => conf.Ignore());
-                configuration.CreateMap<Vehicle, VehicleDetailedViewModel>().PreserveReferences();
+                configuration.CreateMap<Vehicle, VehicleDetailedViewModel>().PreserveReferences()
+                    .ForMember(x => x.Model, opt => opt.MapFrom(xx => xx.VehicleModel))
+                    .ForMember(x => x.VehicleManufacturerName, opt => opt.MapFrom(xx => xx.VehicleModel.VehicleManufacturer.Name));
                 configuration.CreateMap<VehicleAdminViewModel, Vehicle>()
                     .ForMember(x => x.Id, opt => opt.Ignore())
                     .ForMember(x => x.Features, conf => conf.Ignore())

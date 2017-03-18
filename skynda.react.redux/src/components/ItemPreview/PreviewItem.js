@@ -6,20 +6,20 @@ import {Link} from "react-router";
 
 class CarPreview extends React.Component {
   render() {
-    const {id, mainImage, model, price, mileage, comment} = this.props.vehicle;
+    const {id, mainImage, model, price, mileage, comment, vehicleManufacturerName} = this.props.vehicle;
     const localizedMileage = <Localize value={mileage}/>;
     const doorsText = <Translate value="components.car_preview.doors"/>;
     const seatsText = <Translate value="components.car_preview.seats"/>;
     return (<div className='car-preview'>
       <Link to={"/details/" + id}>
-        <img src={mainImage.url} className='car-preview__image'/>
+        <img src={mainImage ? mainImage.url : ""} className='car-preview__image'/>
       </Link>
 
       <div className='car-preview__info-panel-bg'/>
 
       <div className='car-preview__info-panel'>
         <Row className='car-preview__info-panel-primary-row'>
-          <Col sm={7}>{model.year} {model.vehicleManufacturer.name}</Col>
+          <Col sm={7}>{model.year} {vehicleManufacturerName}</Col>
           <Col sm={5} className="align-right">{price} EUR</Col>
         </Row>
         <Row>

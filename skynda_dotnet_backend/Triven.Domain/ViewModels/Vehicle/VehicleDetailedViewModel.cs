@@ -39,6 +39,8 @@ namespace Triven.Domain.ViewModels.Vehicle
         public List<ImageContainerViewModel> Images { get; set; }
         public List<VehicleDescriptionViewModel> Descriptions { get; set; }
 
+        public string VehicleManufacturerName { get; set; }
+
         public void CalculateFuelAverage()
         {
             try
