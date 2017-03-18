@@ -12,6 +12,16 @@ import {
   DELETE_SUCCESS,
   DELETE_FAILURE
 } from "../actions/Vehicles.delete-item.actions";
+import {
+  PUBLISH_REQUEST,
+  PUBLISH_SUCCESS,
+  PUBLISH_FAILURE
+} from "../actions/Vehicle.publish.action";
+import {
+  UNPUBLISH_REQUEST,
+  UNPUBLISH_SUCCESS,
+  UNPUBLISH_FAILURE
+} from "../actions/Vehicle.unpublish.action";
 
 // ------------------------------------
 // Action Handlers
@@ -24,6 +34,14 @@ const ACTION_HANDLERS = {
   [DELETE_REQUEST]: (state, action) => ({...state, type: action.type, isFetching: action.isFetching, errors: action.errors}),
   [DELETE_SUCCESS]: (state, action) => ({...state, type: action.type, isFetching: action.isFetching, errors: action.errors}),
   [DELETE_FAILURE]: (state, action) => ({...state, type: action.type, isFetching: action.isFetching, errors: action.errors}),
+
+  [PUBLISH_REQUEST]: (state, action) => ({...state, type: action.type, isFetching: action.isFetching, errors: action.errors}),
+  [PUBLISH_SUCCESS]: (state, action) => ({...state, type: action.type, isFetching: action.isFetching, errors: action.errors}),
+  [PUBLISH_FAILURE]: (state, action) => ({...state, type: action.type, isFetching: action.isFetching, errors: action.errors}),
+
+  [UNPUBLISH_REQUEST]: (state, action) => ({...state, type: action.type, isFetching: action.isFetching, errors: action.errors}),
+  [UNPUBLISH_SUCCESS]: (state, action) => ({...state, type: action.type, isFetching: action.isFetching, errors: action.errors}),
+  [UNPUBLISH_FAILURE]: (state, action) => ({...state, type: action.type, isFetching: action.isFetching, errors: action.errors}),
 };
 
 // ------------------------------------

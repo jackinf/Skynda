@@ -9,6 +9,18 @@ export const VehicleService = {
       headers: getDefaultHeaders()
     }));
   },
+  publishItem: function (id) {
+    return handle(fetch(`${remoteConfig.remote}/api/vehicle/${id}/publish`, {
+      method: "PUT",
+      headers: getDefaultHeaders()
+    }));
+  },
+  unpublishItem: function (id) {
+    return handle(fetch(`${remoteConfig.remote}/api/vehicle/${id}/unpublish`, {
+      method: "PUT",
+      headers: getDefaultHeaders()
+    }));
+  },
   getList: function () {
     return handle(fetch(`${remoteConfig.remote}/api/vehicles`, {
       method: "GET",
