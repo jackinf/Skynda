@@ -41,7 +41,7 @@ namespace Triven.API.Controllers
         public IHttpActionResult Delete([FromUri] int id) => HandleResult(_service.Delete(id));
 
         [Obsolete("Use GetAll")]    // TODO : Use get all if searchParams exist
-        [HttpPost, Route("{id:int}")]
+        [HttpPost, Route("search")]
         public IHttpActionResult Search([FromBody] SearchRequestViewModel searchParams) => HandleResult(_service.Search(searchParams));
     }
 }

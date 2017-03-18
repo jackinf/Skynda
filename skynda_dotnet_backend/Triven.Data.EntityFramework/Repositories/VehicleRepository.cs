@@ -3,8 +3,8 @@ using System.Data.Entity;
 using System.Linq;
 using Triven.Data.EntityFramework.Models;
 using Triven.Data.EntityFramework.Repositories.Base;
+using Triven.Domain.Helpers;
 using Triven.Domain.Repositories;
-using Triven.Domain.Results;
 using Triven.Domain.ViewModels.Vehicle.Requests;
 
 namespace Triven.Data.EntityFramework.Repositories
@@ -13,45 +13,62 @@ namespace Triven.Data.EntityFramework.Repositories
     {
         public Vehicle GetIncluding(int id, bool descriptions = false, bool images = false)
         {
-            using (var context = new ApplicationDbContext())
-            {
-                return BaseQuery(context).Include(x => x.Images).Include(x => x.Descriptions).FirstOrDefault();
-            }
+            return HandleWithContext(dbContext => BaseQuery(dbContext)
+                .Include(x => x.Images)
+                .Include(x => x.Descriptions)
+                .FirstOrDefault());
         }
-
 
         public IList<Vehicle> Search(SearchRequestViewModel dto)
         {
             using (var context = new ApplicationDbContext())
             {
                 var query = BaseQuery(context).Include(x => x.VehicleModel);
+
                 if (dto.Models?.Any() ?? false)
-                    query = query.Where(x => dto.Models.Any(model => model.Value == x.VehicleModel.Id));
+                    query = query.Where(ExpressionHelpers.BuildContainsExpression<Vehicle, int>(
+                        vehicle => vehicle.VehicleModel.Id, dto.Models.Select(t => t.Value)));
+
                 if (dto.Brands?.Any() ?? false)
-                    query = query.Where(x => dto.Brands.Any(model => model.Value == x.VehicleModel.VehicleManufacturer.Id));
+                    query = query.Where(ExpressionHelpers.BuildContainsExpression<Vehicle, int>(
+                        vehicle => vehicle.VehicleModel.VehicleManufacturer.Id, dto.Brands.Select(t => t.Value)));
+
                 // TODO: color the world
                 //if (dto.Colors?.Any() ?? false)
                 //    query = query.Where(x => dto.Colors.Any(model => model.Value == x.Color));
-                if (dto.Features?.Any() ?? false)
-                    query = query.Where(x => dto.Features.Any(model => x.Features.Any(tt => tt.Id == model.Value)));
+                
+                // TODO: search by features
+                //if (dto.Features?.Any() ?? false)
+                //    query = query.Where(x => dto.Features.Any(model => x.Features.Any(tt => tt.Id == model.Value)));
+
                 if (dto.Doors?.Any() ?? false)
-                    query = query.Where(x => dto.Doors.Any(model => model.Value >= x.VehicleModel.Doors));
+                    query = query.Where(ExpressionHelpers.BuildContainsExpression<Vehicle, int>(
+                        vehicle => vehicle.VehicleModel.Doors, dto.Doors.Select(t => t.Value)));
 
                 if (dto.Seats?.Any() ?? false)
-                    query = query.Where(x => dto.Seats.Any(model => model.Value >= x.VehicleModel.Seats));
+                    query = query.Where(ExpressionHelpers.BuildContainsExpression<Vehicle, int>(
+                        vehicle => vehicle.VehicleModel.Seats, dto.Seats.Select(t => t.Value)));
+
                 if (dto.Transmission?.Any() ?? false)
-                    query = query.Where(x => dto.Transmission.Any(model => model.Value == x.VehicleModel.Transmission.Id));
+                    query = query.Where(ExpressionHelpers.BuildContainsExpression<Vehicle, int>(
+                        vehicle => vehicle.VehicleModel.Transmission.Id, dto.Transmission.Select(t => t.Value)));
+
                 if (dto.FuelType?.Any() ?? false)
-                    query = query.Where(x => dto.FuelType.Any(model => model.Value == x.VehicleModel.FuelType.Id));
+                    query = query.Where(ExpressionHelpers.BuildContainsExpression<Vehicle, int>(
+                        vehicle => vehicle.VehicleModel.FuelType.Id, dto.FuelType.Select(t => t.Value)));
+
                 if (dto.Mileage != null)
                     query = query.Where(x => x.Mileage >= dto.Mileage.Min && x.Mileage <= dto.Mileage.Max);
+
                 if (dto.Price != null)
                     query = query.Where(x => x.Price >= dto.Price.Min && x.Price <= dto.Price.Max);
 
                 if (dto.Year != null)
                     query = query.Where(x => x.VehicleModel.Year >= dto.Year.Min && x.VehicleModel.Year <= dto.Year.Max);
+
                 if (dto.Power != null)
                     query = query.Where(x => x.VehicleModel.HorsePower >= dto.Power.Min && x.VehicleModel.HorsePower <= dto.Power.Max);
+
                 if (dto.PetrolConsumption != null)
                     query = query.Where(x =>
                         x.FuelCity >= dto.PetrolConsumption.Min && x.FuelHighway >= dto.PetrolConsumption.Min ||
@@ -60,16 +77,6 @@ namespace Triven.Data.EntityFramework.Repositories
                 return query.ToList();
             }
         }
-
-        //public IResult<Vehicle> Add(Vehicle model)
-        //{
-        //    using (var context = new ApplicationDbContext())
-        //    {                
-        //        context.Entry(model.VehicleModel).State = EntityState.Unchanged;
-        //        context.Entry(model.MainImage).State = EntityState.Unchanged;
-        //        return base.Add(model);
-        //    }
-        //}
 
         public Vehicle GetDetailed(int id)
         {
@@ -99,4 +106,5 @@ namespace Triven.Data.EntityFramework.Repositories
         }
 
     }
+
 }

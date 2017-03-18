@@ -4,6 +4,6 @@ namespace Triven.Domain.ViewModels.Vehicle.Requests
 {
     public class VehicleModelSearchRequestViewModel
     {
-        public IList<int> ManufacturerIds { get; set; }
+        public List<int> ManufacturerIds { get; set; } = new List<int>();
     }
 }

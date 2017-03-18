@@ -21,11 +21,11 @@ namespace Triven.Data.EntityFramework.Repositories
         {
             using (var context = new ApplicationDbContext())
             {
-                return
-                    BaseQuery(context)
-                        .Include(x => x.VehicleManufacturer)
-                        .Where(x => parameters.ManufacturerIds.Any(id => id == x.VehicleManufacturer.Id))
-                        .ToList();
+                var query = BaseQuery(context).Include(x => x.VehicleManufacturer);
+                query = parameters?.ManufacturerIds.Any() == true 
+                    ? query.Where(x => parameters.ManufacturerIds.Any(id => id == x.VehicleManufacturer.Id)) 
+                    : query.Where(x => false);
+                return query.ToList();
             }
         }
 

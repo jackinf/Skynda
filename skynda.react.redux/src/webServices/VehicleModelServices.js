@@ -38,7 +38,7 @@ export const VehicleModelService = {
     }));
   },
   getModelsList: function (manufacturerIds) {
-    return handle(fetch(`${remoteConfig.remote}/api/vehicle-models-by-manufacturers/${manufacturerIds}`, {
+    return handle(fetch(`${remoteConfig.remote}/api/vehicle-model/search${manufacturerIds}`, {
       method: "GET",
       headers: getDefaultHeaders()
     }));

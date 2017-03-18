@@ -38,7 +38,7 @@ namespace Triven.API.Controllers
         public IHttpActionResult Delete([FromUri] int id) => HandleResult(_service.Delete(id));
 
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
-        [HttpGet, Route("vehicle-models-by-manufacturers")]
-        public IHttpActionResult GetAllByManufacturers(VehicleModelSearchRequestViewModel searchParams) => HandleResult(_service.Search(searchParams));
+        [HttpGet, Route("search")]
+        public IHttpActionResult Search([FromUri] VehicleModelSearchRequestViewModel searchParams) => HandleResult(_service.Search(searchParams));
     }
 }
