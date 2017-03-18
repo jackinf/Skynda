@@ -16,7 +16,7 @@ namespace Triven.Data.EntityFramework.Migrations
 
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = false; // NB! Never ever let you go!! >:D ALWAYS STAYS ON FALSE OR I'LL ASSASSINATE YOUR ASS!
         }
 
         protected override void Seed(ApplicationDbContext context)
