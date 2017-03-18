@@ -1,47 +1,55 @@
 /**
  * Created by jevgenir on 11/7/2016.
  */
-import remoteConfig from "store/remoteConfig";
-import {authSetUser} from "../modules/auth.module";
-import _ from "underscore";
-import * as jQuery from "jquery";
+import {AuthService} from "../../../webServices";
+export const LOGIN_REQUEST = 'AUTH/LOGIN_REQUEST';
+export const LOGIN_SUCCESS = 'AUTH/LOGIN_SUCCESS';
+export const LOGIN_FAILURE = 'AUTH/LOGIN_FAILURE';
+
+function loginRequest(creds) {
+  return {
+    type: LOGIN_REQUEST,
+    isFetching: true,
+    isAuthenticated: false,
+    creds
+  }
+}
+
+function loginSuccess(user) {
+  return {
+
+    type: LOGIN_SUCCESS,
+    isFetching: false,
+    isAuthenticated: true,
+    user
+  }
+}
+
+function loginError(errorMessage) {
+  return {
+    type: LOGIN_FAILURE,
+    isFetching: false,
+    isAuthenticated: false,
+    errorMessage
+  }
+}
 
 export default function submitLogin(data) {
-  return (dispatch, getState) => {
-    const loginFormValues = getState().form.loginForm.values;
+  return async (dispatch, getState) => {
+    const state = getState();
+    const loginFormValues = state.form.loginForm.values;
 
-    var formData = new FormData();
-    formData.append("username", loginFormValues.username);
-    formData.append("password", loginFormValues.password);
-    formData.append("rememberme", loginFormValues.rememberme);
+    dispatch(loginRequest(loginFormValues));
 
-    jQuery.post({
-      url:  `${remoteConfig.remote}/login`,
-      data: formData,
-      processData: false,
-      contentType: false,
-      xhrFields: {
-        withCredentials: true
-      },
-      // headers: {"Content-Type": "application/x-www-form-urlencoded"},
-      type: 'POST',
-      success: function(data){
-        // Hack. we don't expect to receive correct stuff from login response, ask for legit account info from other api
-        if (_.isObject(data)) {
-          fetch(`${remoteConfig.remote}/security/account`, {
-            method: 'GET',
-            credentials: 'include'
-          })
-            .then(resp => resp.json())
-            .then(resp => {
-            dispatch(authSetUser(resp));
-          });
-        } else {
-          console.error("Logging in failed");
-        }
-      }
-    });
+    try {
 
-    // return Promise.resolve(true); // TODO: fetch
+      const response = await AuthService.login(loginFormValues.username, loginFormValues.password, loginFormValues.rememberme);
+      console.log(response);
+      // loginSuccess(response);
+
+    } catch (err) {
+      console.log(err);
+      dispatch(loginError(err.error_description ? err.error_description : err));
+    }
   }
 }

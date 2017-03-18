@@ -1,3 +1,4 @@
+import AuthService from "./Auth.service";
 import {VehicleModelService} from "./VehicleModelServices"
 import {VehicleReviewService} from "./VehicleReviewServices"
 import {VehicleReportService} from "./VehicleReportServices"
@@ -11,6 +12,7 @@ import {EmailService} from "./EmailServices"
 import {SubscriptionService} from "./SubscriptionServices"
 
 export {
+  AuthService,
   VehicleModelService,
   VehicleReviewService,
   VehicleReportService,

@@ -1,6 +1,6 @@
 import fetch from "isomorphic-fetch";
 import remoteConfig from "store/remoteConfig";
-import {handle, getDefaultHeaders} from "./serviceHandler";
+import {handle, getDefaultHeaders} from "../utils/serviceHandler";
 
 /*
  * VehicleModelController*/

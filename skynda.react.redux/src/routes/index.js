@@ -7,18 +7,19 @@ import About from "./About";
 import HowItWorks from "./HowItWorks";
 import Examples from "./Examples";
 import Admin from "./Admin";
-import {LoginRoute, RegisterRoute} from "./Auth";
+import {LoginRoute} from "./Auth";
 import SellNewCar from "./SellNewCar";
 import Privacy from "./Privacy";
 import {reducer as formReducer} from 'redux-form';
 
 import {loadTranslations, setLocale, syncTranslationWithStore, i18nReducer} from 'react-redux-i18n';
 import {injectReducer} from "../store/reducers";
+import {REDUCER_KEY__AUTH} from "./Auth/constants/Auth.constants";
 // import {config as ravenConfig} from "raven-js"; // https://sentry.io
 
 // Bonus
-import {authSetUser} from "./Auth/modules/auth.module";
-import {getStoredUser} from "../utils/userUtils";
+// import {authSetUser} from "./Auth/modules/auth.module";
+// import {getStoredUser} from "../utils/userUtils";
 
 export const createRoutes = (store) => {
   // ========================================================
@@ -26,7 +27,7 @@ export const createRoutes = (store) => {
   // ========================================================
   injectReducer(store, {key: "i18n", reducer: i18nReducer});
   injectReducer(store, {key: "toastr", reducer: require("react-redux-toastr").reducer});
-  injectReducer(store, {key: "auth", reducer: require("./Auth/modules/auth.module").default});
+  injectReducer(store, {key: REDUCER_KEY__AUTH, reducer: require("./Auth/modules/Auth.reducer").default});
   syncTranslationWithStore(store);
   //store.dispatch(loadTranslations({
   //  et: {},
@@ -43,7 +44,7 @@ export const createRoutes = (store) => {
   // ========================================================
   // Logged in user setup
   // ========================================================
-  store.dispatch(authSetUser(getStoredUser()));
+  // store.dispatch(authSetUser(getStoredUser()));
 
   return {
     path: "/",
@@ -56,7 +57,7 @@ export const createRoutes = (store) => {
       Examples(store),
       Admin(store),
       LoginRoute(store),
-      RegisterRoute(store),
+      // RegisterRoute(store),
       Search(store),
       SellNewCar(store),
       Privacy(store)

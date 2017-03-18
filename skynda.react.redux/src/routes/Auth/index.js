@@ -20,15 +20,15 @@ export function LoginRoute(store) {
   };
 }
 
-
-export function RegisterRoute(store) {
-  return {
-    path: "/register",
-    getComponent(ns, cb) {
-      require.ensure([], (require) => {
-        injectReducer(store, {key: REDUX_FORM_KEY, reducer: formReducer});
-        cb(null, require("./containers/Register.container").default);
-      })
-    }
-  };
-}
+//
+// export function RegisterRoute(store) {
+//   return {
+//     path: "/register",
+//     getComponent(ns, cb) {
+//       require.ensure([], (require) => {
+//         injectReducer(store, {key: REDUX_FORM_KEY, reducer: formReducer});
+//         cb(null, require("./containers/Login.container").default);
+//       })
+//     }
+//   };
+// }
