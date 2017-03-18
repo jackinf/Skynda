@@ -6,6 +6,7 @@ using Triven.Data.EntityFramework.Models.Base;
 using Triven.Data.EntityFramework.Models.User;
 using Triven.Domain.Enums;
 using Triven.Domain.Extensions;
+using Triven.Domain.Helpers;
 using Triven.Domain.Models;
 
 namespace Triven.Data.EntityFramework.Models

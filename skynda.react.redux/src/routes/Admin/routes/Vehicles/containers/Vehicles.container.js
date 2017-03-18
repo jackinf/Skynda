@@ -1,11 +1,13 @@
 import {connect} from "react-redux";
-import {getList, deleteItem} from "../actions";
+import {getList, deleteItem, publishItem, unpublishItem} from "../actions";
 import VehiclesComponent from "../components/Vehicles.component";
 import {REDUCER_KEYS} from "../constants/Vehicles.constant";
 
 const mapDispatchToProps = {
   getList,
-  deleteItem
+  deleteItem,
+  publishItem,
+  unpublishItem
 };
 
 const mapStateToProps = (state) => ({

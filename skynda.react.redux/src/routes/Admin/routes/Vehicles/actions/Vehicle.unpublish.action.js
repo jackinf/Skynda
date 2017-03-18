@@ -34,11 +34,11 @@ export function unpublishFailure(errors) {
   };
 }
 
-export default function deleteItem(id) {
+export default function unpublishItem(id) {
   return async(dispatch) => {
     dispatch(unpublishRequest());
     try {
-      await VehicleService.publishItem(id);
+      await VehicleService.unpublishItem(id);
       dispatch(unpublishSuccess());
       dispatch(getList());
       toastr.success("Success", "Unpublish successful");

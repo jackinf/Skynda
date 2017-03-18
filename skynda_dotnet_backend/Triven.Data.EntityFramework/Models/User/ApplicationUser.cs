@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Triven.Domain.Constants;
 using Triven.Domain.Extensions;
+using Triven.Domain.Helpers;
 using Triven.Domain.Models;
 using Triven.Domain.Models.Base;
 

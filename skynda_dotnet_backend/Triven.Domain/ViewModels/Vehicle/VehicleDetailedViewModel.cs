@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Triven.Domain.Enums;
 using Triven.Domain.ViewModels.Common;
 using Triven.Domain.ViewModels.Image;
 
@@ -40,6 +41,8 @@ namespace Triven.Domain.ViewModels.Vehicle
         public List<VehicleDescriptionViewModel> Descriptions { get; set; }
 
         public string VehicleManufacturerName { get; set; }
+        public VehicleStatus VehicleStatus { get; set; }
+        public string VehicleStatusString => VehicleStatus.ToString();
 
         public void CalculateFuelAverage()
         {

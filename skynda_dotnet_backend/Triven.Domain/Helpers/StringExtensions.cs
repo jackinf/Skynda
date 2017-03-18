@@ -1,17 +1,14 @@
 ﻿using System;
 
-namespace Triven.Domain.Extensions
+namespace Triven.Domain.Helpers
 {
     public static class StringExtensions
     {
         public static T ParseEnum<T>(this string value)
         {
+            if (value == null)
+                value = "0";
             return (T)Enum.Parse(typeof(T), value, true);
-        }
-
-        public static bool IsNullOrEmpty(this string input)
-        {
-            return input == null || input.Length < 1 || input.Trim().Length < 1;
         }
     }
 }

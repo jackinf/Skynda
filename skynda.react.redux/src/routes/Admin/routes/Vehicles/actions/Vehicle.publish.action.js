@@ -34,7 +34,7 @@ export function publishFailure(errors) {
   };
 }
 
-export default function deleteItem(id) {
+export default function publishItem(id) {
   return async(dispatch) => {
     dispatch(publishRequest());
     try {

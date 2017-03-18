@@ -54,8 +54,8 @@ namespace Triven.Application.Services
                     {
                         mappedResult.FeaturesAdminSelect.Add(new FeatureAdminSelectViewModel
                         {
-                            Value = feature.Feature.Id.ToString(),
-                            Label = feature.Feature.Name
+                            Value = feature?.Feature?.Id.ToString(),
+                            Label = feature?.Feature?.Name
                         });
                     }    
                 }
