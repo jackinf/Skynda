@@ -75,7 +75,7 @@ export class About extends React.Component {
             </Row>
 
             <Row>
-              +372 5884 1335
+              +372 5884 1553
             </Row>
 
             <h4 className='about__our-contacts-header'>Partnerid</h4>

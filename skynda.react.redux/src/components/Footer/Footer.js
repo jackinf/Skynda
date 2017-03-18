@@ -12,7 +12,7 @@ function Footer() {
           <span className='spacer'>·</span>
           <span className='link'><Translate value="components.footer.email"/></span>
           <span className='spacer'>·</span>
-          <span className='text'><Translate value="components.footer.phone"/></span>
+          <span className='text'>5884 1553</span>
           <span className='spacer'>·</span>
           <Link className='link' to='/privacy'><Translate value="components.footer.agreement"/></Link>
         </div>
