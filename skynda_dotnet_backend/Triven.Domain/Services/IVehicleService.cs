@@ -56,5 +56,8 @@ namespace Triven.Domain.Services
         /// <param name="parameters"></param>
         /// <returns></returns>
         ServiceResult<IList<VehicleDetailedViewModel>> Search(SearchRequestViewModel parameters);
+
+        ServiceResult<bool> Publish(int vehicleId);
+        ServiceResult<bool> Unpublish(int vehicleId);
     }
 }

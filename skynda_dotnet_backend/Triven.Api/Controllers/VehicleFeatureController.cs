@@ -1,9 +1,11 @@
-﻿using System.Web.Http;
+﻿using System;
+using System.Web.Http;
 using Triven.Application;
 using Triven.Domain.Services;
 
 namespace Triven.API.Controllers
 {
+    [Obsolete("Delete. Do not use")]
     [RoutePrefix("api/vehicle-features")]
     public class VehicleFeatureController : BaseController
     {

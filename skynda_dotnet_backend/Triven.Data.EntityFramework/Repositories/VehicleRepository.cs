@@ -89,12 +89,14 @@ namespace Triven.Data.EntityFramework.Repositories
 
                 var result = BaseQuery(context)
                     .Include(x => x.VehicleModel)
+                    .Include(x => x.VehicleModel.VehicleManufacturer)
                     .Include(x => x.MainImage)
-                    .Include(x => x.Features.Select(o => o.Feature))
+                    .Include(x => x.Features)
                     .Include(x => x.Descriptions)
                     .Include(x => x.Reviews)
                     .Include(x => x.Reports)
-                    .Include(x => x.Images.Select(o => o.Image)).FirstOrDefault(x => x.Id == id);
+                    .Include(x => x.Images)
+                    .FirstOrDefault(x => x.Id == id);
 
                 //TODO fix this loading fault hack... do not load deletedOn items
                 if (result != null && result.Features.Any())

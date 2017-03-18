@@ -1,13 +1,17 @@
 ﻿using System.Net.Http;
 using System.Web;
 using System.Web.Http;
+using Microsoft.AspNet.Identity;
 using Triven.Application;
+using Triven.Application.Attributes;
+using Triven.Domain.Constants;
 using Triven.Domain.Services;
 using Triven.Domain.ViewModels.BlobStorage;
 
 namespace Triven.API.Controllers
 {
     [RoutePrefix("api/blob")]
+    [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer), RequireApiAccess(Auth.Roles.Admin)]
     public class BlobStorageController : BaseController
     {
         private readonly IBlobStorageService _service;

@@ -5,6 +5,7 @@ using AutoMapper;
 using FluentValidation.Results;
 using Triven.Application.Validators.Vehicle;
 using Triven.Data.EntityFramework.Models;
+using Triven.Domain.Enums;
 using Triven.Domain.Repositories;
 using Triven.Domain.Results;
 using Triven.Domain.Services;
@@ -70,7 +71,7 @@ namespace Triven.Application.Services
 
         public ServiceResult<VehicleDetailedViewModel> Get(int id)
         {
-            var result = _vehicleRepository.Get(id);
+            var result = _vehicleRepository.GetDetailed(id);
             VehicleDetailedViewModel mappedResult = Mapper.Map<Vehicle, VehicleDetailedViewModel>(result);
             return ServiceResult<VehicleDetailedViewModel>.Factory.Success(mappedResult);
         }
@@ -273,6 +274,28 @@ namespace Triven.Application.Services
             var results = _vehicleRepository.Search(parameters);
             IList<VehicleDetailedViewModel> mappedResult = Mapper.Map<IList<Vehicle>, IList<VehicleDetailedViewModel>> (results);
             return ServiceResult<IList<VehicleDetailedViewModel>>.Factory.Success(mappedResult);
+        }
+
+        public ServiceResult<bool> Publish(int vehicleId)
+        {
+            if (vehicleId <= 0)
+                throw new ArgumentException("Wrong id");
+
+            var vehicle = _vehicleRepository.Get(vehicleId);
+            vehicle.VehicleStatus = VehicleStatus.Published;
+            var result = _vehicleRepository.Update(vehicleId, vehicle);
+            return result.IsSuccess ? ServiceResult<bool>.Factory.Success() : ServiceResult<bool>.Factory.Fail(result.Message);
+        }
+
+        public ServiceResult<bool> Unpublish(int vehicleId)
+        {
+            if (vehicleId <= 0)
+                throw new ArgumentException("Wrong id");
+
+            var vehicle = _vehicleRepository.Get(vehicleId);
+            vehicle.VehicleStatus = VehicleStatus.Unpublished;
+            var result = _vehicleRepository.Update(vehicleId, vehicle);
+            return result.IsSuccess ? ServiceResult<bool>.Factory.Success() : ServiceResult<bool>.Factory.Fail(result.Message);
         }
     }
 }

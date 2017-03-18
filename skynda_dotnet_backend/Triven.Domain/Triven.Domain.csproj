@@ -93,6 +93,7 @@
     <Compile Include="Constants\CustomClaimTypes.cs" />
     <Compile Include="Constants\Enums.cs" />
     <Compile Include="Constants\MessageTemplate.cs" />
+    <Compile Include="Enums\VehicleStatus.cs" />
     <Compile Include="Helpers\ExpressionHelpers.cs" />
     <Compile Include="Helpers\ImageExtension.cs" />
     <Compile Include="Helpers\StringExtensions.cs" />

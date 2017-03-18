@@ -1,8 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Triven.Data.EntityFramework.Models.Base;
 using Triven.Data.EntityFramework.Models.User;
+using Triven.Domain.Enums;
+using Triven.Domain.Extensions;
 using Triven.Domain.Models;
 
 namespace Triven.Data.EntityFramework.Models
@@ -47,6 +50,16 @@ namespace Triven.Data.EntityFramework.Models
         public string SafetyUrl { get; set; }
 
         public string Additional { get; set; }
+
+        [Column("VehicleStatus")]
+        public string VehicleStatusString
+        {
+            get => VehicleStatus.ToString();
+            private set => VehicleStatus = value.ParseEnum<VehicleStatus>();
+        }
+
+        [NotMapped]
+        public VehicleStatus VehicleStatus { get; set; }
 
         /// <summary>
         /// Application user
