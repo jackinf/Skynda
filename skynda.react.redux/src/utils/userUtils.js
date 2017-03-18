@@ -3,10 +3,11 @@
  */
 import constants from "./constants";
 import _ from "underscore";
+import {LOCAL_STORAGE_PROFILE_KEY} from "./serviceHandler";
 
 export function getStoredUser() {
   try {
-    return JSON.parse(localStorage.getItem(constants.LOCAL_STORAGE_KEYS.SKYNDA_USER));
+    return JSON.parse(localStorage.getItem(LOCAL_STORAGE_PROFILE_KEY));
   } catch (ex) {
     return null;
   }
@@ -18,20 +19,20 @@ export function isLoggedIn() {
 }
 
 export function setUser(data) {
-  localStorage.setItem(constants.LOCAL_STORAGE_KEYS.SKYNDA_USER, JSON.stringify(data));
+  localStorage.setItem(LOCAL_STORAGE_PROFILE_KEY, JSON.stringify(data));
 }
 
 export function unsetUser() {
-  localStorage.removeItem(constants.LOCAL_STORAGE_KEYS.SKYNDA_USER);
+  localStorage.removeItem(LOCAL_STORAGE_PROFILE_KEY);
 }
 
 /**
- * @param roleNames - List<string>
+ * @param checkedRoles - List<string>
  * @returns {boolean} - success
  */
-export function isLoggedInAs(roleNames = []) {
-  if (!_.isArray(roleNames)) {
-    console.info("userUtil: No role names have been supplied");
+export function isLoggedInAs(checkedRoles = []) {
+  if (!_.isArray(checkedRoles)) {
+    console.info("userUtil: No role names has been supplied");
     return false;
   }
 
@@ -41,13 +42,12 @@ export function isLoggedInAs(roleNames = []) {
     return false;
   }
 
-  const authority = user.authority;
-  if (!authority || !_.isArray(authority)) {
+  const userRoles = user.roles;
+  if (!userRoles || !_.isArray(userRoles)) {
     console.info("userUtil: No authority roles exist");
     return false;
   }
 
-  const authorityRoleNames = authority.map(singleAuthority => singleAuthority.name);
-  const result = _.intersection(roleNames, authorityRoleNames);
+  const result = _.intersection(checkedRoles, userRoles);
   return result.length;
 }
