@@ -31,10 +31,10 @@ function logoutFailure() {
 }
 
 // Logs the user out
-export function actionLogoutUser() {
+export default function submitLogout() {
   return dispatch => {
     dispatch(logoutRequest());
-    // TODO: Fetch logout
+    // TODO: Fetch logout?
     localStorage.removeItem(LOCAL_STORAGE_TOKEN_KEY);
     localStorage.removeItem(LOCAL_STORAGE_PROFILE_KEY);
     dispatch(logoutSuccess())
