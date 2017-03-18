@@ -28,7 +28,7 @@ export const VehicleService = {
     }));
   },
   getDataAsync: function (id) {
-    return handle(fetch(`${remoteConfig.remote}/api/vehicle/${id}/detailed`, {
+    return handle(fetch(`${remoteConfig.remote}/api/vehicle/${id}`, {
       method: "GET",
       headers: getDefaultHeaders()
     }));
