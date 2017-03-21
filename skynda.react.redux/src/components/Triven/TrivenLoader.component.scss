@@ -3,16 +3,15 @@
 }
 
 .triven-loader {
-  border: 8px solid #f3f3f3;
   border-radius: 50%;
-  border-top: 8px solid #7cd2ff;
-  border-right: 8px solid green;
-  border-bottom: 8px solid #ff5e52;
-  border-left: 8px solid #fff466;
+  border: 8px solid #7cd2ff;
+  border-right-color: green;
+  border-bottom-color: #ff5e52;
+  border-left-color: #fff466;
   width: 45px;
   height: 45px;
-  -webkit-animation: spin 2s linear infinite;
-  animation: spin 2s linear infinite;
+  -webkit-animation: triven-loader-spin 2s linear infinite;
+  animation: triven-loader-spin 2s linear infinite;
   margin-left: 9px;
   margin-bottom: 5px;
 
