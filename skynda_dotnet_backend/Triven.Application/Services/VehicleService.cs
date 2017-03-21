@@ -80,6 +80,11 @@ namespace Triven.Application.Services
         {
             try
             {
+                if (viewModel == null)
+                {
+                    viewModel = new VehicleAdminViewModel();
+                }
+
                 VehicleValidator validator = new VehicleValidator();
                 ValidationResult results = validator.Validate(viewModel);
 
