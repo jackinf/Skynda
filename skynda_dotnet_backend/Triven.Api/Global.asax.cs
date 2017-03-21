@@ -15,11 +15,9 @@ namespace Triven.API
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
 
-#if !DEBUG
             var configuration = new Configuration();
             var migrator = new DbMigrator(configuration);
             migrator.Update();
-#endif
         }
     }
 }
