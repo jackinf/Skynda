@@ -15,7 +15,8 @@ const styleDeleteIcon = {
 };
 const ReactIconDeleteWrapped = (props) => (<ReactIconDelete {...props} width="32" height="32" style={styleDeleteIcon}/>);
 
-export const ImagesCardField = (props) => (<Card className="vehicle-component--card-background">
+export const ImagesCardField = (props) => (
+  <Card className="vehicle-component--card-background" style={props.isLoading ? {backgroundColor: 'rgba(0, 0, 0, 0.1)'} : {}}>
   <CardHeader title={<h2>Images</h2>} />
   <CardText>
     <Row>

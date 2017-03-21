@@ -29,7 +29,12 @@ export const ErrorBlockRenderer = ({errors}) => {
             <div className="panel-heading">Server Errors</div>
             <ul className="list-group">
               {listOfErrors.map((error, i) => (
-                <li key={i} className="list-group-item"><b>{error.key}</b>: {error.message}</li>
+                <li key={i} className="list-group-item">
+                  <strong style={{color: 'darkred'}}>{error.key}</strong>:
+                  {error.message.map((comment, key) => {
+                    return (<span key={key}><br/>{comment}</span>)
+                  })}
+                </li>
               ))}
             </ul>
           </div>

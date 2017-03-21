@@ -38,6 +38,9 @@ namespace Triven.Application.Services
         {
             try
             {
+                if(viewModel == null)
+                    viewModel = new VehicleModelViewModel();
+
                 VehicleModelValidator validator = new VehicleModelValidator();
                 var validation = validator.Validate(viewModel);
 

@@ -10,7 +10,8 @@ import {Row, Col, Button} from "react-bootstrap";
 
 import {ROUTE_PARAMS} from "../../../constants/VehicleModel.constant";
 import {rowWrapper, selectRenderer} from "./VehicleModel.redux-form.renderers";
-import {TrivenLoader} from "components/Triven";
+import {TrivenLoader} from "../../../../../../../components/Triven";
+import {ErrorBlockRenderer} from "../../../../../components/FormRenderers";
 
 class VehicleModel extends React.Component {
   static propTypes = {
@@ -29,7 +30,7 @@ class VehicleModel extends React.Component {
     if(this.props.params[ROUTE_PARAMS.VEHICLE_MODEL_TITLE]){
       this.props.dispatch(change("vehicleModelForm", "title", this.props.params[ROUTE_PARAMS.VEHICLE_MODEL_TITLE]))
     }
-    // TODO: load this shit with 1 query :D
+    // TODO: load this shit with 1 query :D good idea.
     this.props.getDrivetrains();
     this.props.getFuels();
     this.props.getTransmissions();
@@ -65,11 +66,10 @@ class VehicleModel extends React.Component {
     const loadingIcon = (<div><RefreshIndicator size={100} left={20} top={0} status="loading"/></div>);
     // let modelStateErrors = this.props.errors && this.props.errors.modelState ? this.props.errors.modelState : [];
     const isFetching = this.props.formInfo.isFetching;
-
+    // Validation errors
+    const errors = this.props.errors;
     return (<div>
-      {/*<div className="container">*/}
-        {/*{JSON.stringify(modelStateErrors, null, 2)}*/}
-      {/*</div>*/}
+      <ErrorBlockRenderer errors={errors}/>
 
       <TrivenLoader isLoading={isFetching}>
         <form>

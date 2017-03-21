@@ -126,19 +126,21 @@ class Vehicle extends React.Component {
         </Row>
 
         <Row>
+          <TrivenLoader isLoading={isFetching}>
             <Col md={6} xs={12}>
               <CropToolCard
                 name="mainImage"
                 reduxFormName={VEHICLE_FORM_KEY}
                 title="Main image"
                 errors={errors}
+                isLoading={isFetching}
               >
               </CropToolCard>
               <br/>
 
               {/* TODO: See panna Vehicle.main-card.component.js */}
-              <TrivenLoader isLoading={isFetching}>
-                <Card>
+
+                <Card style={isFetching ? {backgroundColor: 'rgba(0, 0, 0, 0.1)'} : {}}>
                   <CardText>
                     <Field name="isSold" label="Is Sold" component={renderCheckbox} errors={errors}/>
 
@@ -186,7 +188,6 @@ class Vehicle extends React.Component {
                   </CardText>
                   {submitCardActions}
                 </Card>
-              </TrivenLoader>
 
               <br/>
 
@@ -194,12 +195,14 @@ class Vehicle extends React.Component {
                 {submitCardActions}
               </VehicleFeaturesAndDescriptionsCard>
             </Col>
+          </TrivenLoader>
 
           {isUpdating && !isNaN(this.state.id) ?
             (<Col md={6} xs={12}>
               <ImagesCard
                 onImageFileUpload={this.props.onImageFileUpload}
-                onImageFileRemove={this.props.onImageFileRemove}>
+                onImageFileRemove={this.props.onImageFileRemove}
+                isLoading={isFetching}>
                 {submitCardActions}
               </ImagesCard>
             </Col>) :

@@ -36,6 +36,7 @@ function addError(errors) {
   return {
     type: ADD_FAILURE,
     isFetching: false,
+    formMode: FORM_MODE.ADDING_MODEL,
     errors
   }
 }
@@ -78,8 +79,8 @@ function submitCreate(item, onSubmitCustom) {
         browserHistory.replace("/admin/vehicle-model/" + resp.id);
         toastr.success("Success", "Create successful");
       }
-    } catch (err) {
-      dispatch(addError(err));
+    } catch (error) {
+      dispatch(addError(error.modelState));
       toastr.error("Oh no!", "Create failed");
     }
   }

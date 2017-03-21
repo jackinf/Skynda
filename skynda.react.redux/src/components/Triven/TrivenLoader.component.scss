@@ -1,5 +1,5 @@
 .triven-loader-wrapper {
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.1) !important;
 }
 
 .triven-loader {
@@ -14,7 +14,7 @@
   animation: triven-loader-spin 2s linear infinite;
   margin-left: 9px;
   margin-bottom: 5px;
-
+  z-index: 999;
   position: absolute;
   left: 50%;
   top: 60%;
