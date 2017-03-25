@@ -6,9 +6,9 @@ import {Row, Col} from "react-bootstrap";
 import {Translate} from "react-redux-i18n";
 
 // Images
-import imageGoogle from "./../assets/Google Maps@2x.png.png";
-import imageTelia from "./../assets/image-mask-6@2x.png.png";
-import imageVunk from "./../assets/group@2x.png.png";
+import imageTelia from "../assets/image-mask-6@2x.png.png";
+import imageVunk from "../assets/group@2x.png.png";
+import iconFacebook from "../assets/fb-icon-min.png";
 
 // Components
 import AboutSkblock from "./AboutSkblock";
@@ -76,6 +76,13 @@ export class About extends React.Component {
 
             <Row>
               +372 5884 1553
+            </Row>
+
+            <Row>
+              <br/>
+              <a href={"https://www.facebook.com/triven.eu"} target="_blank">
+                <img src={iconFacebook} alt="Facebook" width={32} height={32}/>
+              </a>
             </Row>
 
             <h4 className='about__our-contacts-header'>Partnerid</h4>
