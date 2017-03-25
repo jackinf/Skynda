@@ -1,11 +1,10 @@
 import React from "react";
 import RaisedButton from "material-ui/RaisedButton";
 import {browserHistory} from "react-router"
-import {BootstrapTable} from "react-bootstrap-table";
-import {TrivenLoader} from "components/Triven";
+import {BootstrapTable, TableHeaderColumn} from "react-bootstrap-table";
+import {TrivenLoader} from "../../../../../components/Triven";
 
 const tableOptions = {
-  // onRowClick: (item) => {browserHistory.push(`/admin/vehicle/${item.id}`)},
   handleConfirmDeleteRow: (next, dropRowKeys) => {
     dropRowKeys.forEach((id) => {this.props.deleteItem(id);});
     next();
@@ -52,10 +51,10 @@ export default class VehicleList extends React.Component {
           <TrivenLoader isLoading={this.props.isFetching}>
             <RaisedButton secondary={true} label="Add" onClick={e => browserHistory.push(`/admin/vehicle/new`)}/>
             <BootstrapTable data={rows} options={tableOptions} selectRow={selectRow} deleteRow hover={true} search={true}>
-              <TableHeaderColumn dataField="id" isKey={true} dataAlign="center" dataSort={true}>Vehicle Model ID</TableHeaderColumn>
-              <TableHeaderColumn dataField="model.modelCode" dataSort={true}>Code</TableHeaderColumn>
-              <TableHeaderColumn dataField="vehicleStatusString" dataSort={true}>Status</TableHeaderColumn>
-              <TableHeaderColumn dataFormat={this.actionFormatter} >Actions</TableHeaderColumn>
+              <TableHeaderColumn row="0" dataField="id" isKey={true} dataAlign="center" dataSort={true}>Vehicle ID</TableHeaderColumn>
+              <TableHeaderColumn row="0" dataField="model.modelCode" dataSort={true}>Code</TableHeaderColumn>
+              <TableHeaderColumn row="0" dataField="vehicleStatusString" dataSort={true}>Status</TableHeaderColumn>
+              <TableHeaderColumn row="0" dataFormat={this.actionFormatter} width="350px" >Actions</TableHeaderColumn>
             </BootstrapTable>
           </TrivenLoader>
       </div>)}

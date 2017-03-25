@@ -1,3 +1,18 @@
+.triven-loader-semantic {
+  .ui.segment{
+    border: none;
+    box-shadow: none;
+  }
+
+  .ui.dimmer .ui.loader:before {
+    border-color: hsla(0, 89%, 36%, 0.45) !important;
+  }
+
+  .ui.dimmer {
+    background-color: rgba(0, 0, 0, 0.2) !important;
+  }
+}
+
 .triven-loader-wrapper {
   background-color: rgba(0, 0, 0, 0.1) !important;
 }
@@ -25,11 +40,19 @@
 }
 
 @-webkit-keyframes triven-loader-spin {
-  0% { -webkit-transform: rotate(0deg); }
-  100% { -webkit-transform: rotate(360deg); }
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
 }
 
 @keyframes triven-loader-spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

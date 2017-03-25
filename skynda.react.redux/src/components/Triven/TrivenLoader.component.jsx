@@ -1,8 +1,6 @@
-/**
- * Created by zekar on 2/24/2017.
- */
-
 import React from "react";
+import {Dimmer, Loader, Segment} from 'semantic-ui-react';
+import '../../../node_modules/semantic-ui-css/semantic.css';
 import "./TrivenLoader.component.scss";
 
 export default class TrivenLoader extends React.Component {
@@ -13,11 +11,15 @@ export default class TrivenLoader extends React.Component {
   render() {
     const isLoading = this.props.isLoading;
 
-    return (<div className={isLoading ? "triven-loader-wrapper": ""}>
-      {isLoading ?  <div className="triven-loader"></div> : ""}
-      <span className={isLoading ? "triven-loader-disabler" : ""}>
-        {this.props.children}
-      </span>
-    </div>);
+    return (
+      <div className="triven-loader-semantic">
+        <Segment >
+          <Dimmer active={isLoading} inline="centered">
+            <Loader size="massive"/>
+          </Dimmer>
+          {this.props.children}
+        </Segment>
+      </div>
+    );
   }
 }
