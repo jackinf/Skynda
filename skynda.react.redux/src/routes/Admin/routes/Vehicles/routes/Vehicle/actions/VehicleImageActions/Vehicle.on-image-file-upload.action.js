@@ -4,6 +4,7 @@
 import {VEHICLE_FORM_KEY} from "../../../../constants/Vehicles.constant";
 import {arrayUnshift} from 'redux-form';
 import {imageUtil} from "utils/allUtils";
+import _ from "underscore";
 
 // Ideas to crop image in client
 // 1. https://gist.github.com/DominicTobias/b1fb501349893922ec7f
@@ -11,10 +12,18 @@ import {imageUtil} from "utils/allUtils";
 
 export default function onImageFileUpload(acceptedFiles) {
   return (dispatch, getState) => {
+    let error = {};
     acceptedFiles.forEach(file => {
-      imageUtil.imageFileToBase64(file, (base64File) => {
+      error = imageUtil.imageFileToBase64(file, (base64File) => {
         dispatch(arrayUnshift(VEHICLE_FORM_KEY, `images`, {image: {base64File}}));
       });
+
+      if(!_.isEmpty(error)){
+        return error;
+      }
+
     });
+
+    return error;
   }
 }

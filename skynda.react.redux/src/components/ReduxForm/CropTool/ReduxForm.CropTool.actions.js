@@ -21,7 +21,7 @@ function resizeCrop(image, cb) {
 }
 
 export const onImageUpload = (e, name, reduxFormName) => (dispatch) => {
-  imageUtil.imageFileToBase64(e.target.files[0], (base64File) => {
+  return imageUtil.imageFileToBase64(e.target.files[0], (base64File) => {
     console.info("onImageUpload", reduxFormName, `${name}.${BASE64FILE}`);
     dispatch(change(reduxFormName, `${name}.${BASE64FILE}`, base64File));
   });
