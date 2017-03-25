@@ -1,0 +1,11 @@
+@import '../../../../../styles/variables';
+
+.primary-button,
+.primary-button:hover,
+.primary-button:active,
+.primary-button:focus,
+.primary-button:visited,
+.read_more {
+  color: whitesmoke !important;
+  background: $color-primary !important;
+}

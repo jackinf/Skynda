@@ -3,11 +3,12 @@
  */
 
 import {connect} from "react-redux";
-import Component from "./Details.checkout.component";
-import {submitAsync} from "./Details.checkout.reducer";
+import Component from "../components/Details.checkout.component";
+import {submitAsync} from "../actions";
+import {REDUCER_KEY__DETAILS_CHECKOUT_INFO} from "../constants/Details.checkout.constants";
 
 const mapStateToProps = (state) => {
-  const checkoutInfo = state.checkoutInfo;
+  const checkoutInfo = state[REDUCER_KEY__DETAILS_CHECKOUT_INFO];
   return {
     isSubmitting: checkoutInfo ? checkoutInfo.isSubmitting : false,
     isSuccessfullySent: checkoutInfo ? checkoutInfo.isSuccessfullySent : false,

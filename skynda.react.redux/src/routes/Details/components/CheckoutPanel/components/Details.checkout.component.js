@@ -1,10 +1,9 @@
 import React from "react";
 import "./Details.checkout.component.scss";
-import Dialog from "material-ui/Dialog";
 import {Tabs, Tab} from "material-ui/Tabs";
 import {Row, Col} from "react-bootstrap";
 import {Translate} from 'react-redux-i18n';
-import PersonInfoTab from "./Details.checkout.PersonInfoTab.component";
+import PersonInfoTab from "./Details.checkout.person-info-tab.component";
 
 const styles = {
   backgroundInkBar: {
@@ -17,8 +16,6 @@ class Checkout extends React.Component {
   constructor(props) {
     super(props);
 
-    // console.info("Checkout, vehicle id", props.id);
-
     // TODO: Redux
     this.state = {
       tab: 1,
@@ -29,17 +26,13 @@ class Checkout extends React.Component {
         email: "",
         phone: "",
         comment: "",
-        carPk: props.id
+        vehiclePk: props.id
       }
     };
   }
 
-  handleClose = () => {
-    this.setState({openSentMsg: false});
-  };
-
-  displaySuccessPopup = async() => {
-    await this.props.submitAsync(this.state.personDetails);
+  submitAsync = () => {
+    this.props.submitAsync(this.state.personDetails);
   };
 
   render() {
@@ -58,7 +51,8 @@ class Checkout extends React.Component {
                   </Col>
                 </Row>
               ) : (
-            <PersonInfoTab displaySuccessPopup={this.displaySuccessPopup}
+            <PersonInfoTab submitAsync={this.submitAsync}
+                           isSubmitting={this.props.isSubmitting}
                            person={this.state.personDetails}
                            errors={this.props.errors}
             />)}
