@@ -9,7 +9,6 @@ import {ClassificationService} from "./ClassificationServices"
 import {ImageService} from "./ImageServices"
 import {BlobService} from "./BlobServices"
 import {EmailService} from "./EmailServices"
-import {SubscriptionService} from "./SubscriptionServices"
 
 export {
   AuthService,
@@ -22,6 +21,5 @@ export {
   ClassificationService,
   ImageService,
   BlobService,
-  EmailService,
-  SubscriptionService
+  EmailService
 }

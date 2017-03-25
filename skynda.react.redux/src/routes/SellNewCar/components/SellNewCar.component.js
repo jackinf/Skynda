@@ -112,7 +112,7 @@ export default class extends React.Component {
                     data-spinner-color="#ddd"
                     data-spinner-lines={12}
                   >
-                    Click Here!
+                    Submit
                   </LaddaButton>)}
                 </CardText>
             </Card>

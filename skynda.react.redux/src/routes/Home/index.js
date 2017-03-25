@@ -5,11 +5,10 @@ export default (store) => ({
   getComponent(nextState, cb) {
     NProgress.start();
     require.ensure([], (require) => {
-      const Home = require("./containers/HomeContainer").default;
       require("../../components/skynda.Search/reducers").defaultInject(store, injectReducer);
-      require("../../components/skynda.Subscribe/reducers").defaultInject(store, injectReducer);
+      injectReducer(store, {key: "subscribeInfo", reducer: require("./components/Subscribe/reducers/Subscribe.reducer").default});
       NProgress.done();
-      cb(null, Home);
+      cb(null, require("./containers/HomeContainer").default);
     }, "");
   }
 });
