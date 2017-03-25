@@ -23,7 +23,6 @@ const statesToProps = (state) => {
 
   return {
     isSubmitting: sellNewCarInfo ? sellNewCarInfo.isSubmitting : false,
-    isSuccessfullySent: sellNewCarInfo ? sellNewCarInfo.isSuccessfullySent : false,
     errors: sellNewCarInfo.errors,
 
     // Classifiers

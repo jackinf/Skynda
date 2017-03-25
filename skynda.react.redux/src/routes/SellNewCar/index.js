@@ -4,6 +4,7 @@
 import {reducer as formReducer} from "redux-form";
 import {injectReducer} from "../../store/reducers";
 import NProgress from "react-nprogress";
+import ThanksRoute from "./routes/Thanks";
 
 export default (store) => ({
   path: "/sell-new-car",
@@ -18,5 +19,6 @@ export default (store) => ({
       NProgress.done();
       cb(null, require("./containers/SellNewCar.container.js").default);
     }, "sell-new-car");
-  }
+  },
+  childRoutes: [ThanksRoute(store)]
 })

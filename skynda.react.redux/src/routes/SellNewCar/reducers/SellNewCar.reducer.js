@@ -9,8 +9,7 @@ export default function reducer(state = initialState, action) {
     case SET_INFO:
       return {
         ...state,
-        isSubmitting: action.isSubmitting,
-        isSuccessfullySent: action.isSuccessfullySent
+        isSubmitting: action.isSubmitting
       };
     case SET_ERRORS:
       return {

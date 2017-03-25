@@ -19,8 +19,7 @@ import heroImageUrl from "../assets/heroimage.jpg";
 export default class extends React.Component {
   static propTypes = {
     isSubmitting: React.PropTypes.bool,
-    errors: React.PropTypes.object,
-    isSuccessfullySent: React.PropTypes.bool
+    errors: React.PropTypes.object
   };
 
   componentDidMount() {
@@ -49,10 +48,10 @@ export default class extends React.Component {
   } ;
 
   render() {
-    const {errors, isSuccessfullySent} = this.props;
+    const {errors} = this.props;
 
     return (<div className="sell-your-car">
-      {isSuccessfullySent ? null : (
+      {this.props.children ? null : (
         <Parallax bgImage={heroImageUrl} strength={250} >
           <div className="sell-your-car__centered sell-your-car__main-image-background2">
             <Row>
@@ -73,13 +72,7 @@ export default class extends React.Component {
       )}
 
       <div className="container">
-        {isSuccessfullySent ? (
-          <Row>
-            <Col sm={12}>
-              <h4 style={{marginTop: "25px"}}>Täname! Saime andmed kätte! Võtame Sinuga ühendust ühe tööpäeva jooksul.</h4>
-            </Col>
-          </Row>
-          ) : (
+        {this.props.children ? this.props.children : (
         <Row>
           <Col sm={12}>
 
