@@ -81,7 +81,7 @@ namespace Triven.Data.EntityFramework.Migrations
             int fuelTypeId = DatabaseConstants.ClassificationTypeId.FuelTypeId;
             int vehicleBodyTypeId = DatabaseConstants.ClassificationTypeId.VehicleBodyTypeId;
 
-
+            #region initial classificationType
             var classificationTypePaymentType = new ClassificationType
             {
                 Id = paymentTypeId,
@@ -188,7 +188,7 @@ namespace Triven.Data.EntityFramework.Migrations
                     Factory.CreateClassification(classificationId++, manufacturerTypeId, "Land Rover", "LAND_ROVER", admin, weight: 320),
                     Factory.CreateClassification(classificationId++, manufacturerTypeId, "Lexus", "LEXUS", admin, weight: 330),
                     Factory.CreateClassification(classificationId++, manufacturerTypeId, "Lincoln", "LINCOLN", admin, weight: 340),
-                    Factory.CreateClassification(classificationId++, manufacturerTypeId, "Lotus", "LOTUS", admin, weight: 350),                    
+                    Factory.CreateClassification(classificationId++, manufacturerTypeId, "Lotus", "LOTUS", admin, weight: 350),
                     Factory.CreateClassification(classificationId++, manufacturerTypeId, "Maserati", "MASERATI", admin, weight: 360),
                     Factory.CreateClassification(classificationId++, manufacturerTypeId, "Mazda", "MAZDA", admin, weight: 370),
                     Factory.CreateClassification(classificationId++, manufacturerTypeId, "McLaren", "MCLAREN", admin, weight: 380),
@@ -218,8 +218,7 @@ namespace Triven.Data.EntityFramework.Migrations
                     Factory.CreateClassification(classificationId++, manufacturerTypeId, "Toyota", "TOYOTA", admin, weight: 620),
                     Factory.CreateClassification(classificationId++, manufacturerTypeId, "TVR", "TVR", admin, weight: 630),
                     Factory.CreateClassification(classificationId++, manufacturerTypeId, "Volkswagen", "VOLKSWAGEN", admin, weight: 640),
-                    Factory.CreateClassification(classificationId++, manufacturerTypeId, "Volvo", "VOLVO", admin, weight: 650),
-                    Factory.CreateClassification(classificationId++, manufacturerTypeId, "ardi", "ardi", admin, weight: 660)
+                    Factory.CreateClassification(classificationId++, manufacturerTypeId, "Volvo", "VOLVO", admin, weight: 650)
                 }
             };
             var classificationTypeFuel = new ClassificationType
@@ -290,9 +289,11 @@ namespace Triven.Data.EntityFramework.Migrations
                     Factory.CreateClassification(classificationId++, vehicleBodyTypeId, "Semi-Trailer", "SEMI", admin,  2,"trailer type", "TRAILER"),
                     Factory.CreateClassification(classificationId++, vehicleBodyTypeId, "Trailer", "TRAILER", admin,  3,"trailer type", "TRAILER"),
                     Factory.CreateClassification(classificationId++, vehicleBodyTypeId, "Caravan", "CARAVAN", admin,  1,"caravan type", "TRAILER"),
-                    Factory.CreateClassification(classificationId, vehicleBodyTypeId, "Trailer Tent", "TRAILERTENT", admin,  2, "caravan type","TRAILER")
+                    Factory.CreateClassification(classificationId++, vehicleBodyTypeId, "Trailer Tent", "TRAILERTENT", admin,  2, "caravan type","TRAILER")
                 }
             };
+            #endregion
+
             context.ClassificationTypes.AddOrUpdate(x => x.Id,
                 classificationTypePaymentType,
                 classificationTypeDrivetrain,
@@ -302,6 +303,10 @@ namespace Triven.Data.EntityFramework.Migrations
                 classificationTypeFuel,
                 classificationTypeBody
                 );
+            
+            /// ADD ALL NEW CLASSIFICATIONS HERE
+            
+            /// --------------------------------
 
             foreach (var classification in classificationTypePaymentType.Classifications)
             {
