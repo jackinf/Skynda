@@ -17,13 +17,13 @@ namespace Triven.Data.EntityFramework.Models
 
         public string Name { get; set; }
 
-        [ForeignKey("ClassificationType")]
+        [ForeignKey(nameof(ClassificationType))]
         public int ClassificationTypeId { get; set; }
 
         /// <summary>
         /// many-to-one relation of ClassificationType
         /// </summary>
-        public ClassificationType ClassificationType { get; set; }
+        public virtual ClassificationType ClassificationType { get; set; }
 
         public bool IsActive { get; set; }
 

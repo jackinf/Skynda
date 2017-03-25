@@ -12,6 +12,7 @@ namespace Triven.Data.EntityFramework.Migrations
 {
     public class Configuration : DbMigrationsConfiguration<ApplicationDbContext>
     {
+        private static ApplicationUser _admin;
         private const string ModifierUserIp = "127.0.0.1";
 
         public Configuration()
@@ -33,11 +34,11 @@ namespace Triven.Data.EntityFramework.Migrations
             //
             var adminEmail = CreateAdmin(context);
             CreateVehicleManager(context);
-            var admin = context.Users.Single(x => x.Email == adminEmail) as ApplicationUser;
+            _admin = context.Users.Single(x => x.Email == adminEmail) as ApplicationUser;
             //
             // Seed classifications
             //
-            CreateClassificationTypes(context, admin);
+            CreateClassificationTypes(context, _admin);
 
             // Seed initial features
             CreateInitialFeatures(context);
@@ -304,9 +305,8 @@ namespace Triven.Data.EntityFramework.Migrations
                 classificationTypeBody
                 );
             
-            /// ADD ALL NEW CLASSIFICATIONS HERE
-            
-            /// --------------------------------
+            // ADD ALL NEW CLASSIFICATIONS HERE
+            // --------------------------------
 
             foreach (var classification in classificationTypePaymentType.Classifications)
             {
@@ -456,7 +456,7 @@ namespace Triven.Data.EntityFramework.Migrations
                     IsImported = true,
                     Weight = weight,
                     Value = value,
-                    Creator = user,
+                    CreatorId = user.Id,
                     CreatedOn = DateTime.Now,
                     ModifierUserIp = ModifierUserIp,
                     Value2 = value2
@@ -478,6 +478,7 @@ namespace Triven.Data.EntityFramework.Migrations
                     Description = description,
                     IsImported = true,
                     Value = value,
+                    CreatorId = _admin.Id,
                     IsActive = isActive,
                     Weight = weight,
                     ModifierUserIp = ModifierUserIp

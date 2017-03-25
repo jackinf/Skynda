@@ -16,17 +16,20 @@ namespace Triven.Data.EntityFramework.Models.Base
         /// <summary>
         /// User ID who created
         /// </summary>
-        public ApplicationUser Creator { get; set; }
+        public int? CreatorId { get; set; }
+        public virtual ApplicationUser Creator { get; set; }
 
         /// <summary>
         /// User ID who updated
         /// </summary>
-        public ApplicationUser Modifier { get; set; }
+        public int? ModifierId { get; set; }
+        public virtual ApplicationUser Modifier { get; set; }
 
         /// <summary>
         /// User ID who archived
         /// </summary>
-        public ApplicationUser Remover { get; set; }
+        public int? RemoverId { get; set; }
+        public virtual ApplicationUser Remover { get; set; }
 
 
         public string ModifierUserIp { get; set; }

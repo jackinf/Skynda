@@ -13,6 +13,7 @@ namespace Triven.Data.EntityFramework.Models
         /// <summary>
         /// Vehicle 
         /// </summary>        
+        public int VehicleId { get; set; }
         public Vehicle Vehicle { get; set; } = new Vehicle();
     }
 }

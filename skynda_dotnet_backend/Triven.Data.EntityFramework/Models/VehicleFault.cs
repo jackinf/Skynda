@@ -8,7 +8,11 @@ namespace Triven.Data.EntityFramework.Models
     public class VehicleFault : AuditableModel, IVehicleFault
     {
         public string Text { get; set; }
-        public Image Image { get; set; }        
-        public VehicleReport VehicleReport { get; set; }
+
+        public int? ImageId { get; set; }        
+        public virtual Image Image { get; set; }        
+
+        public int VehicleReportId { get; set; }
+        public virtual VehicleReport VehicleReport { get; set; }
     }
 }

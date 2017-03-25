@@ -9,12 +9,13 @@ namespace Triven.Data.EntityFramework.Models
     public class VehicleReport : AuditableModel, IVehicleReport
     {
         public string Title { get; set; }
+
         public string Description { get; set; }
+
+        public string Inspector { get; set; }
 
         public int VehicleId { get; set; }
         public virtual Vehicle Vehicle { get; set; }
-
-        public string Inspector { get; set; }
 
         [InverseProperty(nameof(VehicleReportItem.Parent))]
         public List<VehicleReportItem> VehicleReportItems { get; set; } = new List<VehicleReportItem>();
