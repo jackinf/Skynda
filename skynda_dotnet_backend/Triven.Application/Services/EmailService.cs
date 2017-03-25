@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Mail;
+using Triven.Application.Validators.Email;
 using Triven.Domain.Results;
 using Triven.Domain.Services;
 using Triven.Domain.ViewModels.Email;
@@ -11,13 +12,46 @@ namespace Triven.Application.Services
     /// </summary>
     public class EmailService : IEmailService
     {
-        public ServiceResult<bool> SendEmailAboutSubscription(EmailSubscribeViewModel viewModel) => Send(viewModel);
-        public ServiceResult<bool> SendEmailAboutBuyingVehicle(EmailBuyVehicleViewModel viewModel) => Send(viewModel);
-        public ServiceResult<bool> SendEmailAboutSellingVehicle(EmailSellVehicleViewModel viewModel) => Send(viewModel);
+        public ServiceResult<bool> SendEmailAboutSubscription(EmailSubscribeViewModel viewModel)
+        {
+            var validator = new EmailSubscriptionValidator();
+            var validationResult = validator.Validate(viewModel);
+            if (!validationResult.IsValid)
+                return ServiceResult<bool>.Factory.Fail(validationResult);
+
+            return Send(viewModel);
+        }
+
+        public ServiceResult<bool> SendEmailAboutBuyingVehicle(EmailBuyVehicleViewModel viewModel)
+        {
+            var validator = new EmailBuyVehicleValidator();
+            var validationResult = validator.Validate(viewModel);
+            if (!validationResult.IsValid)
+                return ServiceResult<bool>.Factory.Fail(validationResult);
+
+            return Send(viewModel);
+        }
+
+        public ServiceResult<bool> SendEmailAboutSellingVehicle(EmailSellVehicleViewModel viewModel)
+        {
+            var validator = new EmailSellVehicleValidator();
+            var validationResult = validator.Validate(viewModel);
+            if (!validationResult.IsValid)
+                return ServiceResult<bool>.Factory.Fail(validationResult);
+
+            return Send(viewModel);
+        }
+
+        [Obsolete("Is this used?")]
         public ServiceResult<bool> SendEmailAboutQuestion(EmailQuestionViewModel viewModel) => Send(viewModel);
 
         private ServiceResult<bool> Send(EmailBaseViewModel viewModel)
         {
+            var validator = new EmailBaseValidator();
+            var validationResult = validator.Validate(viewModel);
+            if (!validationResult.IsValid)
+                return ServiceResult<bool>.Factory.Fail(validationResult);
+
             var subject = viewModel.GetSubject();
             var body = viewModel.GetContent();
 

@@ -200,6 +200,10 @@
     <Compile Include="Services\VehicleService.cs" />
     <Compile Include="Services\Messages\MessageSmtpSenderCommand.cs" />
     <Compile Include="Services\Messages\NoticeSenderBaseCommand.cs" />
+    <Compile Include="Validators\Email\EmailBaseValidator.cs" />
+    <Compile Include="Validators\Email\EmailBuyVehicleValidator.cs" />
+    <Compile Include="Validators\Email\EmailSellVehicleValidator.cs" />
+    <Compile Include="Validators\Email\EmailSubscriptionValidator.cs" />
     <Compile Include="Validators\Feature\FeatureValidator.cs" />
     <Compile Include="Validators\Helper\CompositeValidatorRule.cs" />
     <Compile Include="Validators\IValidator.cs" />
