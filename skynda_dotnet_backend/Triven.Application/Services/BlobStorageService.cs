@@ -203,7 +203,7 @@ namespace Triven.Application.Services
                             mediaViewModel.BlobName, 
                             mediaViewModel.ContainerName);
 
-                        var thumbnailBytes = TryCreateThumbnail2(bytes, out bool thumbnailCreatedSuccessfully);
+                        var thumbnailBytes = TryCreateThumbnail(bytes, out bool thumbnailCreatedSuccessfully);
                         if (thumbnailCreatedSuccessfully)
                         {
                             string thumbnailBlobName = $"{imageBlobName}_THUMBNAIL";
@@ -221,9 +221,7 @@ namespace Triven.Application.Services
                         var mappedImageEntity = Mapper.Map<ImageViewModel, Image>(viewModel);
 
                         if (existingMedia == null || existingMedia.Id == 0)
-                        {
                             return _imageRepository.Add(mappedImageEntity).ContextObject;
-                        }
 
                         mappedImageEntity.Id = existingMedia.Id;
 
@@ -314,51 +312,20 @@ namespace Triven.Application.Services
             }
         }
 
-        private byte[] TryCreateThumbnail2(byte[] originalImageBytes, out bool success)
+        private byte[] TryCreateThumbnail(byte[] originalImageBytes, out bool success)
         {
+            // 320 x 180 = aspect ratio 16/9. These dimensions are used when cropping and displaying images in search results.
+            const int thumbnailWidth = 320;
+            const int thumbnailHeight = 180;
+
             MemoryStream ms = new MemoryStream(originalImageBytes);
             var originalImage = System.Drawing.Image.FromStream(ms);
-            System.Drawing.Image thumb = originalImage.GetThumbnailImage(320, 180, () => false, IntPtr.Zero);
+            System.Drawing.Image thumb = originalImage.GetThumbnailImage(thumbnailWidth, thumbnailHeight, () => false, IntPtr.Zero);
 
             ImageConverter converter = new ImageConverter();
             var thumbnailBytes = (byte[])converter.ConvertTo(thumb, typeof(byte[]));
             success = thumbnailBytes?.Length > 0;
             return thumbnailBytes;
-        }
-
-        private byte[] TryCreateThumbnail(byte[] originalImageBytes, out bool success)
-        {
-            using (MemoryStream ms = new MemoryStream(originalImageBytes))
-            {
-                Bitmap thumb = new Bitmap(320, 180);
-                try
-                {
-                    using (System.Drawing.Image bmp = System.Drawing.Image.FromStream(ms))
-                    {
-                        using (Graphics g = Graphics.FromImage(thumb))
-                        {
-                            g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                            g.CompositingQuality = CompositingQuality.HighQuality;
-                            g.SmoothingMode = SmoothingMode.HighQuality;
-                            g.DrawImage(bmp, 0, 0, 100, 100);
-                        }
-                    }
-
-                    ImageConverter converter = new ImageConverter();
-                    var thumbnailBytes = (byte[])converter.ConvertTo(thumb, typeof(byte[]));
-                    success = thumbnailBytes?.Length > 0;
-                    return thumbnailBytes;
-                }
-                catch
-                {
-                    success = false;
-                    return null;
-                }
-                finally
-                {
-                    thumb.Dispose();
-                }
-            }
         }
 
     }

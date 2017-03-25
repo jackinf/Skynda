@@ -11,7 +11,7 @@ namespace Triven.Domain.Services
         /// Gets all data from the database
         /// </summary>
         /// <returns></returns>
-        ServiceResult<IEnumerable<VehicleDetailedViewModel>> GetAll();
+        ServiceResult<IEnumerable<VehicleCompactViewModel>> GetAll();
 
         /// <summary>
         ///  Gets a single vehicle. Used for udpating a vehicle.
@@ -55,7 +55,7 @@ namespace Triven.Domain.Services
         /// </summary>
         /// <param name="parameters"></param>
         /// <returns></returns>
-        ServiceResult<IList<VehicleDetailedViewModel>> Search(SearchRequestViewModel parameters);
+        ServiceResult<IList<VehicleCompactViewModel>> Search(SearchRequestViewModel parameters);
 
         ServiceResult<bool> Publish(int vehicleId);
         ServiceResult<bool> Unpublish(int vehicleId);

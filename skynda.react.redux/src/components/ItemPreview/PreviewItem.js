@@ -6,36 +6,61 @@ import {Link} from "react-router";
 
 class CarPreview extends React.Component {
   render() {
-    const {id, mainImage, model, price, mileage, comment, vehicleManufacturerName} = this.props.vehicle;
+    const {id, thumbnailUrl, price, mileage, comment, vehicleManufacturerName} = this.props.vehicle;
+    let mainImage = this.props.vehicle.mainImage;
+    let model = this.props.vehicle.model;
+
     const localizedMileage = <Localize value={mileage}/>;
     const doorsText = <Translate value="components.car_preview.doors"/>;
     const seatsText = <Translate value="components.car_preview.seats"/>;
     return (<div className='car-preview'>
       <Link to={"/details/" + id}>
-        <img src={mainImage ? mainImage.url : ""} className='car-preview__image'/>
+        <img src={thumbnailUrl ? thumbnailUrl : mainImage ? mainImage.url : ""} className='car-preview__image'/>
       </Link>
 
       <div className='car-preview__info-panel-bg'/>
 
-      <div className='car-preview__info-panel'>
-        <Row className='car-preview__info-panel-primary-row'>
-          <Col sm={7}>{model.year} {vehicleManufacturerName}</Col>
-          <Col sm={5} className="align-right">{price} EUR</Col>
-        </Row>
-        <Row>
-          <Col sm={7}><span >{"2.0"} ({model.horsePower} kW)</span></Col>
-          <Col sm={5} className="align-right">{localizedMileage} km</Col>
-        </Row>
-        <Row>
-          <Col sm={7}> {model.doors} {doorsText}</Col>
-          <Col sm={5} className="align-right">{model.seats} {seatsText}</Col>
-        </Row>
+      {model ? (
+          <div className='car-preview__info-panel'>
+            <Row className='car-preview__info-panel-primary-row'>
+              <Col sm={7}>{model.year} {vehicleManufacturerName}</Col>
+              <Col sm={5} className="align-right">{price} EUR</Col>
+            </Row>
+            <Row>
+              <Col sm={7}><span >{"2.0"} ({model.horsePower} kW)</span></Col>
+              <Col sm={5} className="align-right">{localizedMileage} km</Col>
+            </Row>
+            <Row>
+              <Col sm={7}> {model.doors} {doorsText}</Col>
+              <Col sm={5} className="align-right">{model.seats} {seatsText}</Col>
+            </Row>
 
-        <Row>
-          <Col sm={12}>{comment}</Col>
-        </Row>
+            <Row>
+              <Col sm={12}>{comment}</Col>
+            </Row>
 
-      </div>
+          </div>
+        ): (
+          <div className='car-preview__info-panel'>
+            <Row className='car-preview__info-panel-primary-row'>
+              <Col sm={7}>{this.props.vehicle.modelYear} {vehicleManufacturerName}</Col>
+              <Col sm={5} className="align-right">{price} EUR</Col>
+            </Row>
+            <Row>
+              <Col sm={7}><span >{"2.0"} ({this.props.vehicle.modelHorsePower} kW)</span></Col>
+              <Col sm={5} className="align-right">{localizedMileage} km</Col>
+            </Row>
+            <Row>
+              <Col sm={7}> {this.props.vehicle.modelDoors} {doorsText}</Col>
+              <Col sm={5} className="align-right">{this.props.vehicle.modelSeats} {seatsText}</Col>
+            </Row>
+
+            <Row>
+              <Col sm={12}>{comment}</Col>
+            </Row>
+
+          </div>
+        )}
     </div>);
   }
 }
@@ -43,18 +68,12 @@ class CarPreview extends React.Component {
 CarPreview.propTypes = {
   vehicle: React.PropTypes.shape({
     id: React.PropTypes.number.isRequired,
-    mainImage: React.PropTypes.shape({
-      url: React.PropTypes.string.isRequired
-    }),
-    model: React.PropTypes.shape({
-      year: React.PropTypes.number.isRequired,
-      seats: React.PropTypes.number,
-      doors: React.PropTypes.number,
-      vehicleManufacturer: React.PropTypes.shape({
-        name: React.PropTypes.string
-      }),
-      horsePower: React.PropTypes.number
-    }),
+    thumbnailUrl: React.PropTypes.string.isRequired,
+    modelYear: React.PropTypes.number.isRequired,
+    modelSeats: React.PropTypes.number,
+    modelDoors: React.PropTypes.number,
+    modelHorsePower: React.PropTypes.number,
+    vehicleManufacturerName: React.PropTypes.string,
     price: React.PropTypes.number.isRequired,
     mileage: React.PropTypes.number.isRequired,
     // engine: React.PropTypes.string,

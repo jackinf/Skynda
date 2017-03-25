@@ -34,18 +34,21 @@ namespace Triven.Application.Services
             _vehicleImageRepository = IoC.Get<IVehicleImageRepository<VehicleImage>>();
         }
 
-        public ServiceResult<IEnumerable<VehicleDetailedViewModel>> GetAll()
+        public ServiceResult<IEnumerable<VehicleCompactViewModel>> GetAll()
         {
             var results = _vehicleRepository.GetAll();
-            IEnumerable<VehicleDetailedViewModel> mappedResults = Mapper.Map<IEnumerable<Vehicle>, IEnumerable<VehicleDetailedViewModel>>(results);
-            return ServiceResult<IEnumerable<VehicleDetailedViewModel>>.Factory.Success(mappedResults);
+            IEnumerable<VehicleCompactViewModel> mappedResults = Mapper.Map<IEnumerable<Vehicle>, IEnumerable<VehicleCompactViewModel>>(results);
+            return ServiceResult<IEnumerable<VehicleCompactViewModel>>.Factory.Success(mappedResults);
         }
 
-        public ServiceResult<VehicleAdminViewModel> GetDetailed(int id)
+        public ServiceResult<VehicleAdminViewModel> GetDetailed(int vehicleId)
         {
+            if (vehicleId <= 0)
+                throw new ArgumentException("Wrong id");
+
             try
             {
-                var result = _vehicleRepository.GetDetailed(id);
+                var result = _vehicleRepository.GetDetailed(vehicleId);
                 VehicleAdminViewModel mappedResult = Mapper.Map<Vehicle, VehicleAdminViewModel>(result);
 
                 if (result.Features.Any())
@@ -69,9 +72,12 @@ namespace Triven.Application.Services
             
         }
 
-        public ServiceResult<VehicleDetailedViewModel> Get(int id)
+        public ServiceResult<VehicleDetailedViewModel> Get(int vehicleId)
         {
-            var result = _vehicleRepository.GetDetailed(id);
+            if (vehicleId <= 0)
+                throw new ArgumentException("Wrong id");
+
+            var result = _vehicleRepository.GetDetailed(vehicleId);
             VehicleDetailedViewModel mappedResult = Mapper.Map<Vehicle, VehicleDetailedViewModel>(result);
             return ServiceResult<VehicleDetailedViewModel>.Factory.Success(mappedResult);
         }
@@ -133,9 +139,12 @@ namespace Triven.Application.Services
            
         }
 
-        private void UpdateDescriptions(int id, List<VehicleDescriptionViewModel> descriptions)
+        private void UpdateDescriptions(int vehicleId, List<VehicleDescriptionViewModel> descriptions)
         {
-            var existingDescriptions = _vehicleDescriptionRepository.GetAllVehicleDescriptions(id);
+            if (vehicleId <= 0)
+                throw new ArgumentException("Wrong id");
+
+            var existingDescriptions = _vehicleDescriptionRepository.GetAllVehicleDescriptions(vehicleId);
 
             if (existingDescriptions.Any())
             {
@@ -156,7 +165,7 @@ namespace Triven.Application.Services
             {
                 VehicleDescription description = new VehicleDescription
                 {
-                    Vehicle = new Vehicle { Id = id }
+                    Vehicle = new Vehicle { Id = vehicleId }
                 };
 
                 Mapper.Map(vehicleDescriptionViewModel, description);
@@ -175,6 +184,9 @@ namespace Triven.Application.Services
 
         private void UpdateFeatures(int vehicleId, List<FeatureAdminSelectViewModel> features)
         {
+            if (vehicleId <= 0)
+                throw new ArgumentException("Wrong id");
+
             var existingFeatures = _vehicleFeatureRepository.GetAllBy(vehicleId);
 
             if (existingFeatures.Any())
@@ -214,8 +226,11 @@ namespace Triven.Application.Services
             }
         }
 
-        public ServiceResult<VehicleAdminViewModel> Update(int id, VehicleAdminViewModel viewModel)
+        public ServiceResult<VehicleAdminViewModel> Update(int vehicleId, VehicleAdminViewModel viewModel)
         {
+            if (vehicleId <= 0)
+                throw new ArgumentException("Wrong id");
+
             VehicleValidator validator = new VehicleValidator();
             ValidationResult results = validator.Validate(viewModel);
 
@@ -235,7 +250,7 @@ namespace Triven.Application.Services
             var mainImage = _blobStorageService.HandleMedia(viewModel.MainImage, entity.MainImage);
             entity.MainImage = mainImage as Image;         
 
-            var result = _vehicleRepository.Update(id, entity);
+            var result = _vehicleRepository.Update(vehicleId, entity);
 
             /*
              * Update Images
@@ -268,17 +283,20 @@ namespace Triven.Application.Services
             return ServiceResult<VehicleAdminViewModel>.Factory.Success(mappedResult, result.Message);
         }
 
-        public ServiceResult<bool> Delete(int id)
+        public ServiceResult<bool> Delete(int vehicleId)
         {
-            bool result = _vehicleRepository.Delete(id);
+            if (vehicleId <= 0)
+                throw new ArgumentException("Wrong id");
+
+            bool result = _vehicleRepository.Delete(vehicleId);
             return ServiceResult<bool>.Factory.Success(result);
         }
 
-        public ServiceResult<IList<VehicleDetailedViewModel>> Search(SearchRequestViewModel parameters)
+        public ServiceResult<IList<VehicleCompactViewModel>> Search(SearchRequestViewModel parameters)
         {
             var results = _vehicleRepository.Search(parameters);
-            IList<VehicleDetailedViewModel> mappedResult = Mapper.Map<IList<Vehicle>, IList<VehicleDetailedViewModel>> (results);
-            return ServiceResult<IList<VehicleDetailedViewModel>>.Factory.Success(mappedResult);
+            IList<VehicleCompactViewModel> mappedResult = Mapper.Map<IList<Vehicle>, IList<VehicleCompactViewModel>> (results);
+            return ServiceResult<IList<VehicleCompactViewModel>>.Factory.Success(mappedResult);
         }
 
         public ServiceResult<bool> Publish(int vehicleId)

@@ -212,6 +212,7 @@
     <Compile Include="ViewModels\Vehicle\Requests\SearchRequestViewModel.cs" />
     <Compile Include="ViewModels\Vehicle\Requests\VehicleModelSearchRequestViewModel.cs" />
     <Compile Include="ViewModels\Vehicle\ReviewViewModel.cs" />
+    <Compile Include="ViewModels\Vehicle\VehicleCompactViewModel.cs" />
     <Compile Include="ViewModels\Vehicle\VehicleDetailedViewModel.cs" />
     <Compile Include="ViewModels\Vehicle\VehicleAdminViewModel.cs" />
     <Compile Include="ViewModels\Vehicle\VehicleDescriptionViewModel.cs" />

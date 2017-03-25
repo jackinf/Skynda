@@ -10,5 +10,8 @@ namespace Triven.Data.EntityFramework.Models
         public string Url { get; set; }
         public string BlobName { get; set; }
         public string ContainerName { get; set; }
+
+        public string ThumbnailUrl { get; set; }
+        public string ThumbnailBlobName { get; set; }
     }
 }
