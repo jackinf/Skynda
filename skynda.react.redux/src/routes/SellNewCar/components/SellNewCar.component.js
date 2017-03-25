@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Created by jevgenir on 11/26/2016.
  */
 import React from "react";
@@ -101,8 +101,6 @@ export default class extends React.Component {
                   {rowWrapper(<Field name="email" component={TextField} hintText="Sinu e-posti aadress *" type="email" errorText={errors && errors["email"]}/>)}
                   {rowWrapper(<Field name="phone" component={TextField} hintText="Sinu telefoninumber *" errorText={errors && errors["phone"]}/>)}
                   {rowWrapper(<Field name="vehicleRegistrationMark" component={TextField} hintText="Auto registreerimismärk" errorText={errors && errors["vehicleRegistrationMark"]}/>)}
-
-                  {/*{rowWrapper(<input type="submit" className="btn sell-your-car__button-submit" value={"Saadan"} />)}*/}
 
                   {rowWrapper(<LaddaButton
                     loading={this.props.isSubmitting}

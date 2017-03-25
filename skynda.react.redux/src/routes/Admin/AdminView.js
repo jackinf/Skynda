@@ -8,50 +8,52 @@ import {canEnter as canEnterClassifier} from "./routes/Classifiers";
 import {canEnter as canEnterImages} from "./routes/Images";
 import {canEnter as canEnterFeatures} from "./routes/Features";
 
-class AdminView extends React.Component {
-  goTo(path) {
-    browserHistory.push(path)
-  }
+function goTo(path) {
+  browserHistory.push(path);
+}
 
+const breadcrumbs = (<Breadcrumb>
+  <Breadcrumb.Item onClick={e => goTo("/admin")}>
+    Home
+  </Breadcrumb.Item>
+
+  {canEnterVehicles()
+    ? (<Breadcrumb.Item onClick={e => goTo("/admin/vehicle")}>
+      Vehicles
+    </Breadcrumb.Item>)
+    : null}
+
+  {canEnterVehicleModels()
+    ? (<Breadcrumb.Item onClick={e => goTo("/admin/vehicle-model")}>
+      Vehicle Models
+    </Breadcrumb.Item>)
+    : null}
+
+  {canEnterClassifier()
+    ? (<Breadcrumb.Item onClick={e => goTo("/admin/classifier")}>
+      Classifications
+    </Breadcrumb.Item>)
+    : null}
+
+  {canEnterImages()
+    ? (<Breadcrumb.Item onClick={e => goTo("/admin/images")}>
+      Images
+    </Breadcrumb.Item>)
+    : null}
+
+  {canEnterFeatures()
+    ? (<Breadcrumb.Item onClick={e => goTo("/admin/feature")}>
+      Features
+    </Breadcrumb.Item>)
+    : null}
+</Breadcrumb>);
+
+class AdminView extends React.Component {
   render() {
     return <div className="container">
       <h2>Administration</h2>
 
-      <Breadcrumb>
-        <Breadcrumb.Item onClick={e => this.goTo("/admin")}>
-          Home
-        </Breadcrumb.Item>
-
-        {canEnterVehicles()
-          ? (<Breadcrumb.Item onClick={e => this.goTo("/admin/vehicle")}>
-              Vehicles
-            </Breadcrumb.Item>)
-          : null}
-
-        {canEnterVehicleModels()
-          ? (<Breadcrumb.Item onClick={e => this.goTo("/admin/vehicle-model")}>
-            Vehicle Models
-          </Breadcrumb.Item>)
-          : null}
-
-        {canEnterClassifier()
-          ? (<Breadcrumb.Item onClick={e => this.goTo("/admin/classifier")}>
-              Classifications
-            </Breadcrumb.Item>)
-          : null}
-
-        {canEnterImages()
-          ? (<Breadcrumb.Item onClick={e => this.goTo("/admin/images")}>
-              Images
-            </Breadcrumb.Item>)
-          : null}
-
-        {canEnterFeatures()
-          ? (<Breadcrumb.Item onClick={e => this.goTo("/admin/feature")}>
-              Features
-            </Breadcrumb.Item>)
-          : null}
-      </Breadcrumb>
+      {breadcrumbs}
 
       <Row>
         <Col sm={12}>
