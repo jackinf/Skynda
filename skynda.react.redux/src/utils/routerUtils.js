@@ -8,9 +8,28 @@ export function onEnter() {
   toastr.clean();
 }
 
+export function redirectToLogin(nextState = null, replace = null) {
+  replace({ nextPathname: nextState.location.pathname, pathname: '/login' });
+}
+
 export function onEnterAdmin(nextState, replace) {
   onEnter();
   if (!isLoggedInAs(["admin"])) {
-    replace({ nextPathname: nextState.location.pathname, pathname: '/login' });
+    if (nextState && replace) {
+      redirectToLogin(nextState, replace);
+    }
+    return false;
   }
+  return true;
+}
+
+export function onEnterAdminOrVehicleManager(nextState = null, replace = null) {
+  onEnter();
+  if (!isLoggedInAs(["admin", "vehiclemanager"])) {
+    if (nextState && replace) {
+      redirectToLogin(nextState, replace);
+    }
+    return false;
+  }
+  return true;
 }

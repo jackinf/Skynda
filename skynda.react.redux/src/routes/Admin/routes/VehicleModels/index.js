@@ -18,6 +18,8 @@ export default (store) => ({
     VehicleModelRoute(store)
   ],
   onEnter(nextState, replace) {
-    onEnterAdmin(nextState, replace);
+    canEnter(nextState, replace);
   }
 })
+
+export const canEnter = onEnterAdmin;

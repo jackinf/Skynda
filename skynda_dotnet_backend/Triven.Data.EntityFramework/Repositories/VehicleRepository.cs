@@ -1,8 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Linq.Expressions;
 using Triven.Data.EntityFramework.Models;
 using Triven.Data.EntityFramework.Repositories.Base;
+using Triven.Domain.Enums;
 using Triven.Domain.Helpers;
 using Triven.Domain.Repositories;
 using Triven.Domain.ViewModels.Vehicle.Requests;
@@ -11,6 +14,17 @@ namespace Triven.Data.EntityFramework.Repositories
 {
     public class VehicleRepository : BaseCrudRepository<Vehicle>, IVehicleRepository<Vehicle>
     {
+        private readonly Expression<Func<Vehicle, bool>> _isPublishedExpression = x => x.VehicleStatusString == VehicleStatus.Published.ToString();
+
+        public virtual IEnumerable<Vehicle> GetAllWithModels() => HandleWithContext(dbContext =>
+            {
+                return BaseQuery(dbContext)
+                    .Include(x => x.VehicleModel)
+                    .Include(x => x.VehicleModel.VehicleManufacturer)
+                    .OrderBy(x => x.Id)
+                    .ToList();
+            });
+
         public Vehicle GetIncluding(int id, bool descriptions = false, bool images = false)
         {
             return HandleWithContext(dbContext => BaseQuery(dbContext)
@@ -18,6 +32,14 @@ namespace Triven.Data.EntityFramework.Repositories
                 .Include(x => x.Descriptions)
                 .FirstOrDefault());
         }
+
+        public virtual IEnumerable<Vehicle> GetAllPublished() => HandleWithContext(dbContext =>
+            {
+                return BaseQuery(dbContext)
+                    .Where(_isPublishedExpression)
+                    .OrderBy(x => x.Id)
+                    .ToList();
+            });
 
         public IList<Vehicle> Search(SearchRequestViewModel dto)
         {
@@ -27,6 +49,8 @@ namespace Triven.Data.EntityFramework.Repositories
                     .Include(x => x.VehicleModel)
                     .Include(x => x.VehicleModel.VehicleManufacturer)
                     .Include(x => x.MainImage);
+
+                query = query.Where(_isPublishedExpression);
 
                 if (dto.Models?.Any() ?? false)
                     query = query.Where(ExpressionHelpers.BuildContainsExpression<Vehicle, int>(

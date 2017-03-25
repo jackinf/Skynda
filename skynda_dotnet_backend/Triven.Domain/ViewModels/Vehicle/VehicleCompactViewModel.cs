@@ -1,4 +1,5 @@
-﻿using Triven.Domain.ViewModels.Common;
+﻿using Triven.Domain.Enums;
+using Triven.Domain.ViewModels.Common;
 
 namespace Triven.Domain.ViewModels.Vehicle
 {
@@ -9,9 +10,13 @@ namespace Triven.Domain.ViewModels.Vehicle
         public decimal Mileage { get; set; }
         public string Comment { get; set; }
         public string VehicleManufacturerName { get; set; }
+        public string ModelCode { get; set; }
         public int ModelHorsePower { get; set; }
         public int ModelDoors { get; set; }
         public int ModelSeats { get; set; }
         public int ModelYear { get; set; }
+
+        public VehicleStatus VehicleStatus { get; set; }
+        public string VehicleStatusString => VehicleStatus.ToString();
     }
 }

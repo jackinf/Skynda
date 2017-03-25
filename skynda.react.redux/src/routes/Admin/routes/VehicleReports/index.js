@@ -15,10 +15,12 @@ export default (store) => ({
     })
   },
   onEnter(nextState, replace) {
-    onEnterAdmin(nextState, replace);
+    canEnter(nextState, replace);
   },
   childRoutes: [
     VehicleReportRoute(store)
   ]
 
 })
+
+export const canEnter = onEnterAdmin;

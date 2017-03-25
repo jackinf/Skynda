@@ -52,7 +52,7 @@ export default class VehicleList extends React.Component {
             <RaisedButton secondary={true} label="Add" onClick={e => browserHistory.push(`/admin/vehicle/new`)}/>
             <BootstrapTable data={rows} options={tableOptions} selectRow={selectRow} deleteRow hover={true} search={true}>
               <TableHeaderColumn row="0" dataField="id" isKey={true} dataAlign="center" dataSort={true}>Vehicle ID</TableHeaderColumn>
-              <TableHeaderColumn row="0" dataField="model.modelCode" dataSort={true}>Code</TableHeaderColumn>
+              <TableHeaderColumn row="0" dataField="modelCode" dataSort={true}>Code</TableHeaderColumn>
               <TableHeaderColumn row="0" dataField="vehicleStatusString" dataSort={true}>Status</TableHeaderColumn>
               <TableHeaderColumn row="0" dataFormat={this.actionFormatter} width="350px" >Actions</TableHeaderColumn>
             </BootstrapTable>

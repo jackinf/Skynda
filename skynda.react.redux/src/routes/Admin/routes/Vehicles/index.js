@@ -2,7 +2,7 @@ import {injectReducer} from '../../../../store/reducers';
 import {REDUCER_KEYS} from "./constants/Vehicles.constant";
 import NProgress from "react-nprogress";
 import VehicleRoute from "./routes/Vehicle";
-import {onEnterAdmin} from "utils/routerUtils";
+import {onEnterAdminOrVehicleManager} from "utils/routerUtils";
 
 export default (store) => ({
   path: `vehicle`,
@@ -18,7 +18,9 @@ export default (store) => ({
     VehicleRoute(store)
   ],
   onEnter(nextState, replace) {
-    onEnterAdmin(nextState, replace);
+    canEnter(nextState, replace);
   }
 
 })
+
+export const canEnter = onEnterAdminOrVehicleManager;
