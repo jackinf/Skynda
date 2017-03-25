@@ -21,6 +21,9 @@ namespace Triven.Domain.ViewModels.Image
         public string ContentType { get; set; }
         public ImageCropInfoViewModel CropInfo { get; set; }
 
+        public string ThumbnailBlobName { get; set; }
+        public string ThumbnailUrl { get; set; }
+
         public static class Factory
         {
             public static ImageViewModel Create(string url, string blobName, string containerName)
