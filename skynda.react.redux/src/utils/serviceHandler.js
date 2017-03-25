@@ -19,7 +19,6 @@ const handle = (promise) => {
         console.info("Web Service handle. FAILURE.", data);
         throw data;
       } else {
-        console.info("Web Service handle. SUCCESS.", data);
         return data.payload ? data.payload : data;
       }
 

@@ -21,8 +21,7 @@ import VehicleFeaturesAndDescriptionsCard from "./Vehicle.features-and-descripti
 import VehicleReviewsCardComponent from "./Vehicle.reviews-card.component";
 import VehicleReportsCardComponent from "./Vehicle.reports-card.component";
 import {SubmitCardActionsComponent as SubmitCardActions} from "./FormRenderers";
-import {TrivenLoader} from "components/Triven";
-
+import {TrivenLoader} from "../../../../../../../components/Triven";
 class Vehicle extends React.Component {
   constructor(props) {
     super(props);
@@ -124,9 +123,9 @@ class Vehicle extends React.Component {
               : <h3><span className="label label-success">{this.props.formModeVehicle}</span></h3>}
           </Col>
         </Row>
+        <TrivenLoader isLoading={isFetching}>
 
         <Row>
-          <TrivenLoader isLoading={isFetching}>
             <Col md={6} xs={12}>
               <CropToolCard
                 name="mainImage"
@@ -195,7 +194,6 @@ class Vehicle extends React.Component {
                 {submitCardActions}
               </VehicleFeaturesAndDescriptionsCard>
             </Col>
-          </TrivenLoader>
 
           {isUpdating && !isNaN(this.state.id) ?
             (<Col md={6} xs={12}>
@@ -208,6 +206,8 @@ class Vehicle extends React.Component {
             </Col>) :
             ""}
         </Row>
+        </TrivenLoader>
+
       </form>
 
         <br/>
