@@ -4,9 +4,9 @@
 
 import React from "react";
 import {Row, Col} from "react-bootstrap";
-import image_icon1 from "../../../static/images/standard/happy@2x.png";
-import image_icon2 from "../../../static/images/standard/ok@2x.png";
-import image_icon3 from "../../../static/images/standard/clock@2x.png";
+import image_icon1_buy from "../assets/mugav_sinine-min.png";
+import image_icon2_buy from "../assets/turvaline_sinine-min.png";
+import image_icon3_buy from "../assets/lihtne_sinine-min.png";
 import image_icon1_sell from "../assets/mugav_roh-min.png";
 import image_icon2_sell from "../assets/turvaline_roh-min.png";
 import image_icon3_sell from "../assets/lihtne_roh-min.png";
@@ -31,7 +31,7 @@ export default class extends React.Component {
       <Scroll.Element name="how-it-works-icon-features" />
       <Row className="how-it-works__icon-features how-it-works__centered">
         <Col sm={4}>
-          <img className="how-it-works__feature-icon" src={isSell ? image_icon1_sell : image_icon1} alt="Comfortable"/>
+          <img className="how-it-works__feature-icon" src={isSell ? image_icon1_sell : image_icon1_buy} alt="Comfortable"/>
           <h3 className={titleClass}>
             <Translate value="how_it_works.why_bubble_1" />
           </h3>
@@ -47,7 +47,7 @@ export default class extends React.Component {
           </div>
         </Col>
         <Col sm={4}>
-          <img className="how-it-works__feature-icon" src={isSell ? image_icon2_sell : image_icon2} alt="Secure"/>
+          <img className="how-it-works__feature-icon" src={isSell ? image_icon2_sell : image_icon2_buy} alt="Secure"/>
           <h3 className={titleClass}>
             <Translate value="how_it_works.why_bubble_2" />
           </h3>
@@ -66,7 +66,7 @@ export default class extends React.Component {
           </div>
         </Col>
         <Col sm={4}>
-          <img className="how-it-works__feature-icon" src={isSell ? image_icon3_sell : image_icon3} alt="Faster"/>
+          <img className="how-it-works__feature-icon" src={isSell ? image_icon3_sell : image_icon3_buy} alt="Faster"/>
           <h3 className={titleClass}>
             <Translate value="how_it_works.why_bubble_3" />
           </h3>

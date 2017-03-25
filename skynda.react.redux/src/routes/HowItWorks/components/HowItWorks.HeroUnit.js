@@ -5,7 +5,7 @@
 import React from "react";
 import {Button, Row, Col} from "react-bootstrap";
 import {Parallax} from 'react-parallax';
-import heroImageUrl from "../assets/heroimage2.jpg";
+import heroImageUrl from "../assets/kuidas_toimib_banner-min.jpg";
 import {Translate} from "react-redux-i18n";
 import {DISPLAY_MODE} from "../HowItWorks.constants";
 import Scroll from "react-scroll";
@@ -23,7 +23,6 @@ export default class extends React.Component {
 
   render() {
     const {onWantToBuyClick, onWantToSellClick, displayMode} = this.props;
-
 
     return (<div>
       <Parallax bgImage={heroImageUrl} strength={300}>
