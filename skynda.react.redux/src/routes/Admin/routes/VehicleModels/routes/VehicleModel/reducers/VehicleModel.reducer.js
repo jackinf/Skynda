@@ -25,10 +25,10 @@ const ACTION_HANDLERS = {
   [LOAD_EDIT_FAILURE]: (state, action) => ({...state, type: action.type, isFetching: action.isFetching, formMode: action.formMode, errors: action.errors}),
 
   [ADD_REQUEST]: (state, action) => ({...state, type: action.type, isFetching: action.isFetching, errors: action.errors}),
-  [ADD_SUCCESS]: (state, action) => ({...state, type: action.type, isFetching: action.isFetching, formMode: action.formMode, errors: action.errors}),
+  [ADD_SUCCESS]: (state, action) => ({...state, type: action.type, isFetching: action.isFetching, formMode: action.formMode, errors: []}),
   [ADD_FAILURE]: (state, action) => ({...state, type: action.type, isFetching: action.isFetching, errors: action.errors}),
   [EDIT_REQUEST]: (state, action) => ({...state, type: action.type, isFetching: action.isFetching, formMode: action.formMode, errors: action.errors}),
-  [EDIT_SUCCESS]: (state, action) => ({...state, type: action.type, isFetching: action.isFetching, formMode: action.formMode, errors: action.errors}),
+  [EDIT_SUCCESS]: (state, action) => ({...state, type: action.type, isFetching: action.isFetching, formMode: action.formMode, errors: []}),
   [EDIT_FAILURE]: (state, action) => ({...state, type: action.type, isFetching: action.isFetching, formMode: action.formMode, errors: action.errors}),
 
   [SET_RANDOM_ITEM]: (state, action) => ({...state, type: action.type, item: action.item, errors: action.errors})
