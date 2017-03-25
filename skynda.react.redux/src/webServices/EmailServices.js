@@ -16,5 +16,12 @@ export const EmailService = {
       headers: getDefaultHeaders(),
       body: JSON.stringify(info)
     }));
+  },
+  submitSubscribe: function (item) {
+    return handle(fetch(`${remoteConfig.remote}/api/email/subscribe`, {
+      method: "POST",
+      headers: getDefaultHeaders(),
+      body: JSON.stringify(item)
+    }))
   }
 };

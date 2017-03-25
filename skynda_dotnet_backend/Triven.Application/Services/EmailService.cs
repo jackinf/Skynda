@@ -15,7 +15,7 @@ namespace Triven.Application.Services
         public ServiceResult<bool> SendEmailAboutSubscription(EmailSubscribeViewModel viewModel)
         {
             var validator = new EmailSubscriptionValidator();
-            var validationResult = validator.Validate(viewModel);
+            var validationResult = validator.Validate(viewModel ?? new EmailSubscribeViewModel());
             if (!validationResult.IsValid)
                 return ServiceResult<bool>.Factory.Fail(validationResult);
 
@@ -25,7 +25,7 @@ namespace Triven.Application.Services
         public ServiceResult<bool> SendEmailAboutBuyingVehicle(EmailBuyVehicleViewModel viewModel)
         {
             var validator = new EmailBuyVehicleValidator();
-            var validationResult = validator.Validate(viewModel);
+            var validationResult = validator.Validate(viewModel ?? new EmailBuyVehicleViewModel());
             if (!validationResult.IsValid)
                 return ServiceResult<bool>.Factory.Fail(validationResult);
 
@@ -35,7 +35,7 @@ namespace Triven.Application.Services
         public ServiceResult<bool> SendEmailAboutSellingVehicle(EmailSellVehicleViewModel viewModel)
         {
             var validator = new EmailSellVehicleValidator();
-            var validationResult = validator.Validate(viewModel);
+            var validationResult = validator.Validate(viewModel ?? new EmailSellVehicleViewModel());
             if (!validationResult.IsValid)
                 return ServiceResult<bool>.Factory.Fail(validationResult);
 

@@ -8,6 +8,7 @@ import TextField from "material-ui/TextField";
 import {Row, Col} from "react-bootstrap";
 import {Translate} from 'react-redux-i18n';
 import {orange500} from "material-ui/styles/colors";
+import LaddaButton, { S, SLIDE_UP } from 'react-ladda';
 
 const styles = {
   backgroundDefault: "#019bff",
@@ -87,13 +88,32 @@ const PersonInfoTab = (props) => (<li className='tab-pane fade active in' id='ht
       </Row>
       <Row className='dialog-btn-footer'>
         <Col md={12}>
-          <RaisedButton
-            label={<Translate value="details.components.checkout_panel.btn_send"/>}
-            className='tab_action_button pull-right'
-            backgroundColor={styles.backgroundDefault}
-            labelStyle={{color: "white", weight: 600}}
-            onTouchTap={props.displaySuccessPopup}
-          />
+
+          <LaddaButton
+            loading={props.isSubmitting}
+            className={"tab_action_button pull-right primary-button btn btn-default"}
+            data-color="#eee"
+            onClick={e => {
+              e.preventDefault();
+              props.submitAsync();
+            }}
+            data-size={S}
+            data-style={SLIDE_UP}
+            data-spinner-size={30}
+            data-spinner-color="#ddd"
+            data-spinner-lines={12}
+          >
+            <Translate value="details.components.checkout_panel.btn_send"/>
+          </LaddaButton>
+
+          {/*<RaisedButton*/}
+            {/*label={<Translate value="details.components.checkout_panel.btn_send"/>}*/}
+            {/*className='tab_action_button pull-right'*/}
+            {/*backgroundColor={styles.backgroundDefault}*/}
+            {/*labelStyle={{color: "white", weight: 600}}*/}
+            {/*onTouchTap={props.submitAsync}*/}
+            {/*disabled={props.isSubmitting}*/}
+          {/*/>*/}
         </Col>
       </Row>
     </Col>
@@ -107,7 +127,7 @@ PersonInfoTab.propTypes = {
     phone: React.PropTypes.string.isRequired,
     comment: React.PropTypes.string
   }),
-  displaySuccessPopup: React.PropTypes.func.isRequired
+  submitAsync: React.PropTypes.func.isRequired
 };
 
 export default PersonInfoTab;
