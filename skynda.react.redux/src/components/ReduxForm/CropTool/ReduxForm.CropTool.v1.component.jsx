@@ -1,7 +1,3 @@
-/**
- * Created by jevgenir on 1/14/2017.
- */
-
 import React from "react";
 import {Card, CardMedia, CardTitle, CardHeader, CardText} from 'material-ui/Card';
 import ReactIconDelete from 'react-icons/lib/md/delete';
@@ -12,6 +8,7 @@ import TextField from 'material-ui/TextField';
 import {Row, Col} from "react-bootstrap";
 import "./ReduxForm.CropTool.component.scss";
 import {URL, BASE64FILE} from "./ReduxForm.CropTool.constants";
+import _ from "underscore";
 
 const ReactIconDeleteWrapped = (props) => (
   <ReactIconDelete {...props} width="32" height="32" className="crop-tool__delete-icon"/>);
@@ -28,7 +25,7 @@ export const renderTextField = ({input, label, errors, meta: {touched, error}, .
 export default class ReduxFormCropToolComponent extends React.Component {
   constructor() {
     super();
-    this.state = {showCrop: false, crop: null};
+    this.state = {showCrop: false, crop: null, uploadError: null};
   }
 
   static propTypes = {
@@ -44,7 +41,12 @@ export default class ReduxFormCropToolComponent extends React.Component {
 
   onImageUpload = (e, name, reduxFormName) => {
     this.setState({showCrop: true});
-    this.props.onImageUpload(e, name, reduxFormName);
+
+    const errors = this.props.onImageUpload(e, name, reduxFormName);
+
+    if(!_.isEmpty(errors)){
+      this.setState({uploadError: errors.file});
+    }
   };
 
   onCropChange = (crop, pixelCrop, name, reduxFormName) => {
@@ -75,6 +77,20 @@ export default class ReduxFormCropToolComponent extends React.Component {
           <br/>
 
           <span>b) ...or upload using image uploader:</span>
+
+          {this.state.uploadError ?
+            (
+              <div className="panel panel-danger">
+                <ul className="list-group">
+                    <li className="list-group-item">
+                      <strong style={{color: 'darkred'}}>{this.state.uploadError}</strong>
+                    </li>
+                </ul>
+              </div>
+            ) : ""
+          }
+
+
           <Field name={`${name}.${BASE64FILE}`} component={({input, i}) => (<div>
             {input.value
               ? (this.state.showCrop ? (<span>

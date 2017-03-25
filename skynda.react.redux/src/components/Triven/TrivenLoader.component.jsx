@@ -14,7 +14,7 @@ export default class TrivenLoader extends React.Component {
     return (
       <div className="triven-loader-semantic">
         <Segment >
-          <Dimmer active={isLoading} inline="centered">
+          <Dimmer active={isLoading}>
             <Loader size="massive"/>
           </Dimmer>
           {this.props.children}
