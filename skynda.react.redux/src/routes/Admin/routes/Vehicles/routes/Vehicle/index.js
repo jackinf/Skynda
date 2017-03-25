@@ -4,7 +4,7 @@ import {REDUCER_KEYS as REPORT_REDUCER_KEYS} from "../../../VehicleReports/const
 import {REDUCER_KEYS as REVIEW_REDUCER_KEYS} from "../../../VehicleReviews/constants/VehicleReview.constant";
 import {VEHICLE_MODEL_REDUCER_KEY} from "../../../VehicleModels/constants/VehicleModel.constant";
 import NProgress from "react-nprogress";
-import {onEnterAdmin} from "utils/routerUtils";
+import {onEnterAdminOrVehicleManager} from "utils/routerUtils";
 
 export default (store) => ({
   path: `:${ROUTE_PARAMS.VEHICLE_ID}`,
@@ -33,7 +33,7 @@ export default (store) => ({
     })
   },
   onEnter(nextState, replace) {
-    onEnterAdmin(nextState, replace);
+    onEnterAdminOrVehicleManager(nextState, replace);
   }
 
 })

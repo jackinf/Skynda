@@ -26,6 +26,22 @@ export function unsetUser() {
   localStorage.removeItem(LOCAL_STORAGE_PROFILE_KEY);
 }
 
+export function getCurrentUserRoles() {
+  const user = getStoredUser();
+  if (!user || !_.isObject(user)) {
+    console.info("userUtil: No user exists");
+    return [];
+  }
+
+  const userRoles = user.roles;
+  if (!userRoles || !_.isArray(userRoles)) {
+    console.info("userUtil: No authority roles exist");
+    return [];
+  }
+
+  return userRoles;
+}
+
 /**
  * @param checkedRoles - List<string>
  * @returns {boolean} - success
@@ -36,18 +52,6 @@ export function isLoggedInAs(checkedRoles = []) {
     return false;
   }
 
-  const user = getStoredUser();
-  if (!user || !_.isObject(user)) {
-    console.info("userUtil: No user exists");
-    return false;
-  }
-
-  const userRoles = user.roles;
-  if (!userRoles || !_.isArray(userRoles)) {
-    console.info("userUtil: No authority roles exist");
-    return false;
-  }
-
-  const result = _.intersection(checkedRoles, userRoles);
+  const result = _.intersection(checkedRoles, getCurrentUserRoles());
   return result.length;
 }

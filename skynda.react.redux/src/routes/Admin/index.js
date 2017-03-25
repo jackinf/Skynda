@@ -8,7 +8,7 @@ import ImagesRoute from "./routes/Images";
 import VehicleReportsRoute from "./routes/VehicleReports";
 import VehicleReviewsRoute from "./routes/VehicleReviews";
 import Features from "./routes/Features";
-import {onEnterAdmin} from "utils/routerUtils";
+import {onEnterAdminOrVehicleManager} from "utils/routerUtils";
 
 export default (store) => ({
   path: "admin",
@@ -33,6 +33,6 @@ export default (store) => ({
    * @param replace
    */
   onEnter: (nextState, replace) => {
-    onEnterAdmin(nextState, replace);
+    onEnterAdminOrVehicleManager(nextState, replace);
   }
 })

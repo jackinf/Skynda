@@ -19,6 +19,8 @@ export default (store) => ({
     FeatureRoute(store)
   ],
   onEnter(nextState, replace) {
-    onEnterAdmin(nextState, replace);
+    canEnter(nextState, replace);
   }
 })
+
+export const canEnter = onEnterAdmin;

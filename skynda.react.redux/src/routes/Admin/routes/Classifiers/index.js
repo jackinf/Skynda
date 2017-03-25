@@ -17,3 +17,5 @@ export default (store) => ({
     onEnterAdmin(nextState, replace);
   }
 })
+
+export const canEnter = onEnterAdmin;
