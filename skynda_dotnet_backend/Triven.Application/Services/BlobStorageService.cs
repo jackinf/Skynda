@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.IO;
 using System.Linq;
 using AutoMapper;
@@ -15,6 +17,7 @@ using Triven.Domain.Services;
 using Triven.Domain.ViewModels.BlobStorage;
 using Triven.Domain.ViewModels.Image;
 using Triven.Domain.ViewModels.Vehicle;
+using Image = Triven.Data.EntityFramework.Models.Image;
 
 namespace Triven.Application.Services
 {
@@ -172,8 +175,7 @@ namespace Triven.Application.Services
 
                 //Remove data: and read content type
                 var indexOfTypeEnd = mediaViewModel.Base64File.IndexOf(";", StringComparison.Ordinal);
-                var contentType = mediaViewModel.Base64File.Substring(5, 
-                    mediaViewModel.Base64File.Length - (mediaViewModel.Base64File.Length - indexOfTypeEnd) - 5 );
+                var contentType = mediaViewModel.Base64File.Substring(5, mediaViewModel.Base64File.Length - (mediaViewModel.Base64File.Length - indexOfTypeEnd) - 5 );
 
                 //substring for base64 string
                 var indexOfComma = mediaViewModel.Base64File.IndexOf(",", StringComparison.Ordinal) + 1;
@@ -182,19 +184,39 @@ namespace Triven.Application.Services
                 if (!string.IsNullOrWhiteSpace(base64String))
                 {
                     byte[] bytes = Convert.FromBase64String(base64String);
-
-                    var result = Upload(new UploadBlobViewModel
+                    
+                    var imageContainerName = mediaViewModel.ContainerName.ToLower();
+                    var imageBlobName = mediaViewModel.BlobName;
+                    var imageConvertType = contentType;
+                    var imageUploadResult = Upload(new UploadBlobViewModel
                     {
-                        ContainerName = mediaViewModel.ContainerName.ToLower(),
-                        BlobName = mediaViewModel.BlobName,
+                        ContainerName = imageContainerName,
+                        BlobName = imageBlobName,
                         ByteArray = bytes,
-                        ContentType = contentType
+                        ContentType = imageConvertType
                     });
 
-                    if (result.IsSuccessful)
+                    if (imageUploadResult.IsSuccessful)
                     {
-                        ImageViewModel viewModel = ImageViewModel.Factory
-                            .Create(result.Payload.ToString(), mediaViewModel.BlobName, mediaViewModel.ContainerName);
+                        ImageViewModel viewModel = ImageViewModel.Factory.Create(
+                            imageUploadResult.Payload.ToString(), 
+                            mediaViewModel.BlobName, 
+                            mediaViewModel.ContainerName);
+
+                        var thumbnailBytes = TryCreateThumbnail2(bytes, out bool thumbnailCreatedSuccessfully);
+                        if (thumbnailCreatedSuccessfully)
+                        {
+                            string thumbnailBlobName = $"{imageBlobName}_THUMBNAIL";
+                            var thumbnailUploadResult = Upload(new UploadBlobViewModel
+                            {
+                                ContainerName = imageContainerName,
+                                BlobName = thumbnailBlobName,
+                                ByteArray = thumbnailBytes,
+                                ContentType = imageConvertType
+                            });
+                            viewModel.ThumbnailBlobName = thumbnailBlobName;
+                            viewModel.ThumbnailUrl = thumbnailUploadResult.Payload.ToString();
+                        }
 
                         var mappedImageEntity = Mapper.Map<ImageViewModel, Image>(viewModel);
 
@@ -289,6 +311,53 @@ namespace Triven.Application.Services
                     BlobName = existingMedia.BlobName,
                     ContainerName = existingMedia.ContainerName
                 });
+            }
+        }
+
+        private byte[] TryCreateThumbnail2(byte[] originalImageBytes, out bool success)
+        {
+            MemoryStream ms = new MemoryStream(originalImageBytes);
+            var originalImage = System.Drawing.Image.FromStream(ms);
+            System.Drawing.Image thumb = originalImage.GetThumbnailImage(320, 180, () => false, IntPtr.Zero);
+
+            ImageConverter converter = new ImageConverter();
+            var thumbnailBytes = (byte[])converter.ConvertTo(thumb, typeof(byte[]));
+            success = thumbnailBytes?.Length > 0;
+            return thumbnailBytes;
+        }
+
+        private byte[] TryCreateThumbnail(byte[] originalImageBytes, out bool success)
+        {
+            using (MemoryStream ms = new MemoryStream(originalImageBytes))
+            {
+                Bitmap thumb = new Bitmap(320, 180);
+                try
+                {
+                    using (System.Drawing.Image bmp = System.Drawing.Image.FromStream(ms))
+                    {
+                        using (Graphics g = Graphics.FromImage(thumb))
+                        {
+                            g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                            g.CompositingQuality = CompositingQuality.HighQuality;
+                            g.SmoothingMode = SmoothingMode.HighQuality;
+                            g.DrawImage(bmp, 0, 0, 100, 100);
+                        }
+                    }
+
+                    ImageConverter converter = new ImageConverter();
+                    var thumbnailBytes = (byte[])converter.ConvertTo(thumb, typeof(byte[]));
+                    success = thumbnailBytes?.Length > 0;
+                    return thumbnailBytes;
+                }
+                catch
+                {
+                    success = false;
+                    return null;
+                }
+                finally
+                {
+                    thumb.Dispose();
+                }
             }
         }
 
