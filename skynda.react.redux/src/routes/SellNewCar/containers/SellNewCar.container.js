@@ -5,7 +5,7 @@ import {connect} from "react-redux";
 import SellNewCarComponent from "../components/SellNewCar.component";
 import {reduxForm} from "redux-form";
 import {SELL_CAR_FORM} from "../SellNewCar.constants";
-import {submitAsync} from "../reducers/SellNewCar.reducer";
+import {submitAsync} from "../actions";
 import {
   getManufacturers,
   getColors,

@@ -1,39 +1,7 @@
-const SET_INFO = "SELL_YOUR_CAR/SET_INFO";
-const SET_ERRORS = "SELL_YOUR_CAR/SET_ERRORS";
-import {toastr} from 'react-redux-toastr';
-import {EmailService} from "../../../webServices"
-
-export const submitAsync = (info) => (dispatch) => {
-  dispatch(setSubmittingStatus(true, false));
-  dispatch(setErrors(null));
-  const promise = EmailService.submitAsyncSellVehicle(info);
-  promise.then(data => {
-    if (data.success === false) {
-      dispatch(setErrors(data.friendlyErrors));
-    } else {
-      toastr.success("Täname!", "Võtame sinuga 2 tööpäeva jooksul ühendust.");
-    }
-    dispatch(setSubmittingStatus(false, true));
-  }).catch((error) => {
-    dispatch(setSubmittingStatus(false, false));
-    throw error;
-  });
-};
-
-function setSubmittingStatus(value, isSuccessfullySent) {
-  return {
-    type: SET_INFO,
-    isSubmitting: !!value,
-    isSuccessfullySent
-  }
-}
-
-function setErrors(errors) {
-  return {
-    type: SET_ERRORS,
-    errors: errors
-  }
-}
+import {
+  SET_INFO,
+  SET_ERRORS
+} from "../actions/SellNewCar.submit-form.action";
 
 const initialState = {isSubmitting: false, errors: null, isSuccessfullySent: false};
 export default function reducer(state = initialState, action) {

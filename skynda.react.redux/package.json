@@ -143,6 +143,7 @@
     "react-icons": "^2.2.1",
     "react-image-crop": "^1.0.4",
     "react-image-gallery": "^0.7.1",
+    "react-ladda": "^5.0.6",
     "react-mixin": "^2.0.2",
     "react-notification-system": "^0.2.10",
     "react-nprogress": "^0.1.6",
