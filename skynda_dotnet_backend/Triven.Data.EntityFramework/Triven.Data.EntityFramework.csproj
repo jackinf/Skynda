@@ -151,6 +151,10 @@
     <Compile Include="Migrations\201703251230303_Image_ThumbnailImages.Designer.cs">
       <DependentUpon>201703251230303_Image_ThumbnailImages.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201703251633303_add ForeignKey to Classification.cs" />
+    <Compile Include="Migrations\201703251633303_add ForeignKey to Classification.Designer.cs">
+      <DependentUpon>201703251633303_add ForeignKey to Classification.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\Classification.cs" />
@@ -237,6 +241,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201703251230303_Image_ThumbnailImages.resx">
       <DependentUpon>201703251230303_Image_ThumbnailImages.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703251633303_add ForeignKey to Classification.resx">
+      <DependentUpon>201703251633303_add ForeignKey to Classification.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

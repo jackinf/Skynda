@@ -70,9 +70,21 @@ namespace Triven.Data.EntityFramework.Migrations
 
         private static void CreateClassificationTypes(ApplicationDbContext context, ApplicationUser admin)
         {
+            int classificationId = 1;
+            
+
+            int paymentTypeId = DatabaseConstants.ClassificationTypeId.PaymentTypeId;
+            int drivetrainTypeId = DatabaseConstants.ClassificationTypeId.DrivetrainTypeId;
+            int transmissionTypeId = DatabaseConstants.ClassificationTypeId.TransmissionTypeId;
+            int paymentStatusTypeId = DatabaseConstants.ClassificationTypeId.PaymentStatusTypeId;
+            int manufacturerTypeId = DatabaseConstants.ClassificationTypeId.ManufacturerTypeId;
+            int fuelTypeId = DatabaseConstants.ClassificationTypeId.FuelTypeId;
+            int vehicleBodyTypeId = DatabaseConstants.ClassificationTypeId.VehicleBodyTypeId;
+
+
             var classificationTypePaymentType = new ClassificationType
             {
-                Id = 1,
+                Id = paymentTypeId,
                 Name = DatabaseConstants.ClassificationTypeName.PaymentType,
                 Description = "single or recurring payment",
                 Creator = admin,
@@ -80,13 +92,13 @@ namespace Triven.Data.EntityFramework.Migrations
                 ModifierUserIp = ModifierUserIp,
                 Classifications = new List<Classification>
                 {
-                    Factory.CreateClassification("Single payment", "FULL", admin, 1),
-                    Factory.CreateClassification("Recurring payment", "RECURRING", admin, 2)
+                    Factory.CreateClassification(classificationId++,paymentTypeId, "Single payment", "FULL", admin, 1),
+                    Factory.CreateClassification(classificationId++,paymentTypeId, "Recurring payment", "RECURRING", admin, 2)
                 }
             };
             var classificationTypeDrivetrain = new ClassificationType
             {
-                Id = 2,
+                Id = drivetrainTypeId,
                 Name = DatabaseConstants.ClassificationTypeName.Drivetrain,
                 Description = "vehicle drivetrain",
                 Creator = admin,
@@ -94,14 +106,14 @@ namespace Triven.Data.EntityFramework.Migrations
                 ModifierUserIp = ModifierUserIp,
                 Classifications = new List<Classification>
                 {
-                    Factory.CreateClassification("Front-Wheel Drive", "FRONT", admin, 1),
-                    Factory.CreateClassification("Rear-Wheel Drive", "REAR", admin, 2),
-                    Factory.CreateClassification("Four-Wheel Drive", "ALL", admin, 3)
+                    Factory.CreateClassification(classificationId++, drivetrainTypeId, "Front-Wheel Drive", "FRONT", admin, 1),
+                    Factory.CreateClassification(classificationId++, drivetrainTypeId, "Rear-Wheel Drive", "REAR", admin, 2),
+                    Factory.CreateClassification(classificationId++, drivetrainTypeId, "Four-Wheel Drive", "ALL", admin, 3)
                 }
             };
             var classificationTypeTransmission = new ClassificationType
             {
-                Id = 3,
+                Id = transmissionTypeId,
                 Name = DatabaseConstants.ClassificationTypeName.Transmission,
                 Description = "transmission type",
                 Creator = admin,
@@ -109,14 +121,15 @@ namespace Triven.Data.EntityFramework.Migrations
                 ModifierUserIp = ModifierUserIp,
                 Classifications = new List<Classification>
                 {
-                    Factory.CreateClassification("Manual", "MANUAL", admin,1 ),
-                    Factory.CreateClassification("Automatic", "AUTOMATIC", admin, 2),
-                    Factory.CreateClassification("Semi-Automatic", "SEMIAUTOMATIC", admin,3)
+                    Factory.CreateClassification(classificationId++, transmissionTypeId, "Manual", "MANUAL", admin,1 ),
+                    Factory.CreateClassification(classificationId++, transmissionTypeId, "Automatic", "AUTOMATIC", admin, 2),
+                    Factory.CreateClassification(classificationId++, transmissionTypeId, "Semi-Automatic", "SEMIAUTOMATIC", admin,3)
                 }
             };
+
             var classificationTypePaymentStatus = new ClassificationType
             {
-                Id = 4,
+                Id = paymentStatusTypeId,
                 Name = DatabaseConstants.ClassificationTypeName.PaymentStatus,
                 Description = "payment status",
                 Creator = admin,
@@ -124,15 +137,16 @@ namespace Triven.Data.EntityFramework.Migrations
                 ModifierUserIp = ModifierUserIp,
                 Classifications = new List<Classification>
                 {
-                    Factory.CreateClassification("Completed", "COMPLETED", admin, 1, "payment has successfully completed"),
-                    Factory.CreateClassification("Failed", "FAILED", admin, 2, "payment has failed"),
-                    Factory.CreateClassification("Rejected", "REJECTED", admin, 3, "payment was rejected"),
-                    Factory.CreateClassification("Pending", "PENDING", admin, 4, "status is being processed")
+                    Factory.CreateClassification(classificationId++, paymentStatusTypeId, "Completed", "COMPLETED", admin, 1, "payment has successfully completed"),
+                    Factory.CreateClassification(classificationId++, paymentStatusTypeId, "Failed", "FAILED", admin, 2, "payment has failed"),
+                    Factory.CreateClassification(classificationId++, paymentStatusTypeId, "Rejected", "REJECTED", admin, 3, "payment was rejected"),
+                    Factory.CreateClassification(classificationId++, paymentStatusTypeId, "Pending", "PENDING", admin, 4, "status is being processed")
                 }
             };
+
             var classificationTypeManufacturer = new ClassificationType
             {
-                Id = 5,
+                Id = manufacturerTypeId,
                 Name = DatabaseConstants.ClassificationTypeName.Manufacturer,
                 Description = "vehicles manufacturer",
                 Creator = admin,
@@ -140,76 +154,77 @@ namespace Triven.Data.EntityFramework.Migrations
                 ModifierUserIp = ModifierUserIp,
                 Classifications = new List<Classification>
                 {
-                    Factory.CreateClassification("Acura", "ACURA".ToUpper(), admin, weight: 10),
-                    Factory.CreateClassification("Alfa Romeo", "ALFA_ROMEO".ToUpper(), admin, weight: 20),
-                    Factory.CreateClassification("Aston Martin", "ASTON_MARTIN".ToUpper(), admin, weight: 30),
-                    Factory.CreateClassification("Audi", "Audi".ToUpper(), admin, weight: 40),
-                    Factory.CreateClassification("Bentley", "BENTLEY".ToUpper(), admin, weight: 50),
-                    Factory.CreateClassification("BMW", "BMW", admin, weight: 60),
-                    Factory.CreateClassification("Bugatti", "BUGATTI".ToUpper(), admin, weight: 70),
-                    Factory.CreateClassification("Buick", "BUICK".ToUpper(), admin, weight: 80),
-                    Factory.CreateClassification("Cadillac", "CADILLAC", admin, weight: 90),
-                    Factory.CreateClassification("Chevrolet", "Chevrolet".ToUpper(), admin, weight: 100),
-                    Factory.CreateClassification("Chrysler", "CHRYSLER", admin, weight: 110),
-                    Factory.CreateClassification("Citroen", "CITROEN", admin, weight: 120),
-                    Factory.CreateClassification("Corvette", "CORVETTE", admin, weight: 130),
-                    Factory.CreateClassification("Dacia", "DACIA", admin, weight: 140),
-                    Factory.CreateClassification("Daewoo", "DAEWOO", admin, weight: 150),
-                    Factory.CreateClassification("Daihatsu", "DAIHATSU", admin, weight: 160),
-                    Factory.CreateClassification("Dodge", "DODGE", admin, weight: 170),
-                    Factory.CreateClassification("Ferrari", "FERRARI", admin, weight: 180),
-                    Factory.CreateClassification("Fiat", "FIAT", admin, weight: 190),
-                    Factory.CreateClassification("Ford", "FORD", admin, weight: 200),
-                    Factory.CreateClassification("Honda", "HONDA", admin, weight: 210),
-                    Factory.CreateClassification("Hummer", "HUMMER", admin, weight: 220),
-                    Factory.CreateClassification("Hyundai", "HYUNDAI", admin, weight: 230),
-                    Factory.CreateClassification("Infiniti", "INFINITI", admin, weight: 240),
-                    Factory.CreateClassification("Isuzu", "ISUZU", admin, weight: 250),
-                    Factory.CreateClassification("Jaguar", "JAGUAR", admin, weight: 260),
-                    Factory.CreateClassification("Jeep", "JEEP", admin, weight: 270),
-                    Factory.CreateClassification("Kia", "KIA", admin, weight: 280),
-                    Factory.CreateClassification("Koenigsegg", "KOENIGSEGG", admin, weight: 290),
-                    Factory.CreateClassification("Lada", "LADA", admin, weight: 300),
-                    Factory.CreateClassification("Lamborghini", "LAMBORGHINI", admin, weight: 310),
-                    Factory.CreateClassification("Land Rover", "LAND_ROVER", admin, weight: 320),
-                    Factory.CreateClassification("Lexus", "LEXUS", admin, weight: 330),
-                    Factory.CreateClassification("Lincoln", "LINCOLN", admin, weight: 340),
-                    Factory.CreateClassification("Lotus", "LOTUS", admin, weight: 350),                    
-                    Factory.CreateClassification("Maserati", "MASERATI", admin, weight: 360),
-                    Factory.CreateClassification("Mazda", "MAZDA", admin, weight: 370),
-                    Factory.CreateClassification("McLaren", "MCLAREN", admin, weight: 380),
-                    Factory.CreateClassification("Mercedes", "MERCEDES", admin, weight: 390),
-                    Factory.CreateClassification("Mini", "MINI", admin, weight: 400),
-                    Factory.CreateClassification("Mitsubishi", "MITSUBISHI", admin, weight: 410),
-                    Factory.CreateClassification("Nissan", "NISSAN", admin, weight: 420),
-                    Factory.CreateClassification("Opel", "OPEL", admin, weight: 430),
-                    Factory.CreateClassification("Pagani", "PAGANI", admin, weight: 440),
-                    Factory.CreateClassification("Peugeot", "PEUGEOT", admin, weight: 450),
-                    Factory.CreateClassification("Porsche", "PORSCHE", admin, weight: 460),
-                    Factory.CreateClassification("Range Rover", "RANGE ROVER", admin, weight: 470),
-                    Factory.CreateClassification("Ram", "RAM", admin, weight: 480),
-                    Factory.CreateClassification("Renault", "RENAULT", admin, weight: 490),
-                    Factory.CreateClassification("Rolls Royce", "ROLLS_ROYCE", admin, weight: 500),
-                    Factory.CreateClassification("Saab", "SAAB", admin, weight: 510),
-                    Factory.CreateClassification("Scania", "SCANIA", admin, weight: 520),
-                    Factory.CreateClassification("Scion", "SCION", admin, weight: 530),
-                    Factory.CreateClassification("Seat", "SEAT", admin, weight: 540),
-                    Factory.CreateClassification("Shelby", "SHELBY", admin, weight: 550),
-                    Factory.CreateClassification("Skoda", "SKODA", admin, weight: 560),
-                    Factory.CreateClassification("Smart", "SMART", admin, weight: 570),
-                    Factory.CreateClassification("Spyker", "SPYKER", admin, weight: 580),
-                    Factory.CreateClassification("Subaru", "SUBARU", admin, weight: 590),
-                    Factory.CreateClassification("Suzuki", "SUZUKI", admin, weight: 600),
-                    Factory.CreateClassification("Tesla", "TESLA", admin, weight: 610),
-                    Factory.CreateClassification("Toyota", "TOYOTA", admin, weight: 620),
-                    Factory.CreateClassification("TVR", "TVR", admin, weight: 630),
-                    Factory.CreateClassification("Volkswagen", "VOLKSWAGEN", admin, weight: 640),
-                    Factory.CreateClassification("Volvo", "VOLVO", admin, weight: 650)
+                    Factory.CreateClassification(classificationId++, manufacturerTypeId, "Acura", "ACURA".ToUpper(), admin, weight: 10),
+                    Factory.CreateClassification(classificationId++, manufacturerTypeId, "Alfa Romeo", "ALFA_ROMEO".ToUpper(), admin, weight: 20),
+                    Factory.CreateClassification(classificationId++, manufacturerTypeId, "Aston Martin", "ASTON_MARTIN".ToUpper(), admin, weight: 30),
+                    Factory.CreateClassification(classificationId++, manufacturerTypeId, "Audi", "Audi".ToUpper(), admin, weight: 40),
+                    Factory.CreateClassification(classificationId++, manufacturerTypeId, "Bentley", "BENTLEY".ToUpper(), admin, weight: 50),
+                    Factory.CreateClassification(classificationId++, manufacturerTypeId, "BMW", "BMW", admin, weight: 60),
+                    Factory.CreateClassification(classificationId++, manufacturerTypeId, "Bugatti", "BUGATTI".ToUpper(), admin, weight: 70),
+                    Factory.CreateClassification(classificationId++, manufacturerTypeId, "Buick", "BUICK".ToUpper(), admin, weight: 80),
+                    Factory.CreateClassification(classificationId++, manufacturerTypeId, "Cadillac", "CADILLAC", admin, weight: 90),
+                    Factory.CreateClassification(classificationId++, manufacturerTypeId, "Chevrolet", "Chevrolet".ToUpper(), admin, weight: 100),
+                    Factory.CreateClassification(classificationId++, manufacturerTypeId, "Chrysler", "CHRYSLER", admin, weight: 110),
+                    Factory.CreateClassification(classificationId++, manufacturerTypeId, "Citroen", "CITROEN", admin, weight: 120),
+                    Factory.CreateClassification(classificationId++, manufacturerTypeId, "Corvette", "CORVETTE", admin, weight: 130),
+                    Factory.CreateClassification(classificationId++, manufacturerTypeId, "Dacia", "DACIA", admin, weight: 140),
+                    Factory.CreateClassification(classificationId++, manufacturerTypeId, "Daewoo", "DAEWOO", admin, weight: 150),
+                    Factory.CreateClassification(classificationId++, manufacturerTypeId, "Daihatsu", "DAIHATSU", admin, weight: 160),
+                    Factory.CreateClassification(classificationId++, manufacturerTypeId, "Dodge", "DODGE", admin, weight: 170),
+                    Factory.CreateClassification(classificationId++, manufacturerTypeId, "Ferrari", "FERRARI", admin, weight: 180),
+                    Factory.CreateClassification(classificationId++, manufacturerTypeId, "Fiat", "FIAT", admin, weight: 190),
+                    Factory.CreateClassification(classificationId++, manufacturerTypeId, "Ford", "FORD", admin, weight: 200),
+                    Factory.CreateClassification(classificationId++, manufacturerTypeId, "Honda", "HONDA", admin, weight: 210),
+                    Factory.CreateClassification(classificationId++, manufacturerTypeId, "Hummer", "HUMMER", admin, weight: 220),
+                    Factory.CreateClassification(classificationId++, manufacturerTypeId, "Hyundai", "HYUNDAI", admin, weight: 230),
+                    Factory.CreateClassification(classificationId++, manufacturerTypeId, "Infiniti", "INFINITI", admin, weight: 240),
+                    Factory.CreateClassification(classificationId++, manufacturerTypeId, "Isuzu", "ISUZU", admin, weight: 250),
+                    Factory.CreateClassification(classificationId++, manufacturerTypeId, "Jaguar", "JAGUAR", admin, weight: 260),
+                    Factory.CreateClassification(classificationId++, manufacturerTypeId, "Jeep", "JEEP", admin, weight: 270),
+                    Factory.CreateClassification(classificationId++, manufacturerTypeId, "Kia", "KIA", admin, weight: 280),
+                    Factory.CreateClassification(classificationId++, manufacturerTypeId, "Koenigsegg", "KOENIGSEGG", admin, weight: 290),
+                    Factory.CreateClassification(classificationId++, manufacturerTypeId, "Lada", "LADA", admin, weight: 300),
+                    Factory.CreateClassification(classificationId++, manufacturerTypeId, "Lamborghini", "LAMBORGHINI", admin, weight: 310),
+                    Factory.CreateClassification(classificationId++, manufacturerTypeId, "Land Rover", "LAND_ROVER", admin, weight: 320),
+                    Factory.CreateClassification(classificationId++, manufacturerTypeId, "Lexus", "LEXUS", admin, weight: 330),
+                    Factory.CreateClassification(classificationId++, manufacturerTypeId, "Lincoln", "LINCOLN", admin, weight: 340),
+                    Factory.CreateClassification(classificationId++, manufacturerTypeId, "Lotus", "LOTUS", admin, weight: 350),                    
+                    Factory.CreateClassification(classificationId++, manufacturerTypeId, "Maserati", "MASERATI", admin, weight: 360),
+                    Factory.CreateClassification(classificationId++, manufacturerTypeId, "Mazda", "MAZDA", admin, weight: 370),
+                    Factory.CreateClassification(classificationId++, manufacturerTypeId, "McLaren", "MCLAREN", admin, weight: 380),
+                    Factory.CreateClassification(classificationId++, manufacturerTypeId, "Mercedes", "MERCEDES", admin, weight: 390),
+                    Factory.CreateClassification(classificationId++, manufacturerTypeId, "Mini", "MINI", admin, weight: 400),
+                    Factory.CreateClassification(classificationId++, manufacturerTypeId, "Mitsubishi", "MITSUBISHI", admin, weight: 410),
+                    Factory.CreateClassification(classificationId++, manufacturerTypeId, "Nissan", "NISSAN", admin, weight: 420),
+                    Factory.CreateClassification(classificationId++, manufacturerTypeId, "Opel", "OPEL", admin, weight: 430),
+                    Factory.CreateClassification(classificationId++, manufacturerTypeId, "Pagani", "PAGANI", admin, weight: 440),
+                    Factory.CreateClassification(classificationId++, manufacturerTypeId, "Peugeot", "PEUGEOT", admin, weight: 450),
+                    Factory.CreateClassification(classificationId++, manufacturerTypeId, "Porsche", "PORSCHE", admin, weight: 460),
+                    Factory.CreateClassification(classificationId++, manufacturerTypeId, "Range Rover", "RANGE ROVER", admin, weight: 470),
+                    Factory.CreateClassification(classificationId++, manufacturerTypeId, "Ram", "RAM", admin, weight: 480),
+                    Factory.CreateClassification(classificationId++, manufacturerTypeId, "Renault", "RENAULT", admin, weight: 490),
+                    Factory.CreateClassification(classificationId++, manufacturerTypeId, "Rolls Royce", "ROLLS_ROYCE", admin, weight: 500),
+                    Factory.CreateClassification(classificationId++, manufacturerTypeId, "Saab", "SAAB", admin, weight: 510),
+                    Factory.CreateClassification(classificationId++, manufacturerTypeId, "Scania", "SCANIA", admin, weight: 520),
+                    Factory.CreateClassification(classificationId++, manufacturerTypeId, "Scion", "SCION", admin, weight: 530),
+                    Factory.CreateClassification(classificationId++, manufacturerTypeId, "Seat", "SEAT", admin, weight: 540),
+                    Factory.CreateClassification(classificationId++, manufacturerTypeId, "Shelby", "SHELBY", admin, weight: 550),
+                    Factory.CreateClassification(classificationId++, manufacturerTypeId, "Skoda", "SKODA", admin, weight: 560),
+                    Factory.CreateClassification(classificationId++, manufacturerTypeId, "Smart", "SMART", admin, weight: 570),
+                    Factory.CreateClassification(classificationId++, manufacturerTypeId, "Spyker", "SPYKER", admin, weight: 580),
+                    Factory.CreateClassification(classificationId++, manufacturerTypeId, "Subaru", "SUBARU", admin, weight: 590),
+                    Factory.CreateClassification(classificationId++, manufacturerTypeId, "Suzuki", "SUZUKI", admin, weight: 600),
+                    Factory.CreateClassification(classificationId++, manufacturerTypeId, "Tesla", "TESLA", admin, weight: 610),
+                    Factory.CreateClassification(classificationId++, manufacturerTypeId, "Toyota", "TOYOTA", admin, weight: 620),
+                    Factory.CreateClassification(classificationId++, manufacturerTypeId, "TVR", "TVR", admin, weight: 630),
+                    Factory.CreateClassification(classificationId++, manufacturerTypeId, "Volkswagen", "VOLKSWAGEN", admin, weight: 640),
+                    Factory.CreateClassification(classificationId++, manufacturerTypeId, "Volvo", "VOLVO", admin, weight: 650),
+                    Factory.CreateClassification(classificationId++, manufacturerTypeId, "ardi", "ardi", admin, weight: 660)
                 }
             };
             var classificationTypeFuel = new ClassificationType
             {
-                Id = 6,
+                Id = fuelTypeId,
                 Name = DatabaseConstants.ClassificationTypeName.Fuel,
                 Description = "fuel type",
                 Creator = admin,
@@ -217,20 +232,20 @@ namespace Triven.Data.EntityFramework.Migrations
                 ModifierUserIp = ModifierUserIp,
                 Classifications = new List<Classification>
                 {
-                    Factory.CreateClassification("Diesel", "DIESEL", admin, weight: 1),
-                    Factory.CreateClassification("Petrol", "PETROL", admin, weight: 2),
-                    Factory.CreateClassification("Electric", "ELECTRIC", admin, weight: 3),
-                    Factory.CreateClassification("Petrol + gas (LPG)", "PLPG", admin, weight: 4),
-                    Factory.CreateClassification("Petrol + gas (CNG)", "PCNG", admin, weight: 5),
-                    Factory.CreateClassification("Gas (LPG)", "LPG", admin, weight: 6),
-                    Factory.CreateClassification("Gas (CNG)", "CNG", admin, weight: 7),
-                    Factory.CreateClassification("Hybrid", "HYBRID", admin, weight: 8),
-                    Factory.CreateClassification("Ethanol", "ETHANOL", admin, weight: 9)
+                    Factory.CreateClassification(classificationId++, fuelTypeId, "Diesel", "DIESEL", admin, weight: 1),
+                    Factory.CreateClassification(classificationId++, fuelTypeId, "Petrol", "PETROL", admin, weight: 2),
+                    Factory.CreateClassification(classificationId++, fuelTypeId, "Electric", "ELECTRIC", admin, weight: 3),
+                    Factory.CreateClassification(classificationId++, fuelTypeId, "Petrol + gas (LPG)", "PLPG", admin, weight: 4),
+                    Factory.CreateClassification(classificationId++, fuelTypeId, "Petrol + gas (CNG)", "PCNG", admin, weight: 5),
+                    Factory.CreateClassification(classificationId++, fuelTypeId, "Gas (LPG)", "LPG", admin, weight: 6),
+                    Factory.CreateClassification(classificationId++, fuelTypeId, "Gas (CNG)", "CNG", admin, weight: 7),
+                    Factory.CreateClassification(classificationId++, fuelTypeId, "Hybrid", "HYBRID", admin, weight: 8),
+                    Factory.CreateClassification(classificationId++, fuelTypeId, "Ethanol", "ETHANOL", admin, weight: 9)
                 }
             };
             var classificationTypeBody = new ClassificationType
             {
-                Id = 7,
+                Id = vehicleBodyTypeId,
                 Name = DatabaseConstants.ClassificationTypeName.VehicleBody,
                 Description = "vehicle body",
                 Creator = admin,
@@ -239,46 +254,46 @@ namespace Triven.Data.EntityFramework.Migrations
                 Classifications = new List<Classification>
                 {
                     // TODO: I forgot value2 :/ no need for it ATM
-                    Factory.CreateClassification("Sedan", "SEDAN", admin,  1, "vehicle", "PASSANGER_CAR"),
-                    Factory.CreateClassification("Hatchback", "HATCHBACK", admin,  2,"vehicle", "PASSANGER_CAR"),
-                    Factory.CreateClassification("Touring", "TOURING", admin,  3,"vehicle", "PASSANGER_CAR"),
-                    Factory.CreateClassification("Minivan", "MINIVAN", admin,  4,"vehicle", "PASSANGER_CAR"),
-                    Factory.CreateClassification("Coupe", "COUPE", admin,  5,"vehicle", "PASSANGER_CAR"),
-                    Factory.CreateClassification("Cabriolet", "CABRIOLET", admin,  6,"vehicle", "PASSANGER_CAR"),
-                    Factory.CreateClassification("Limousine", "LIMOUSINE", admin,  7,"vehicle", "PASSANGER_CAR"),
-                    Factory.CreateClassification("Limousine", "TOURING", admin,  1,"SUV", "SUV"),
-                    Factory.CreateClassification("Pickup", "PICKUP", admin,  2,"SUV", "SUV"),
-                    Factory.CreateClassification("Small Commercial", "SMALL_COMMERCIAL_VEHICLE", admin, 1, "commercial vehicle", "COMMERCIAL_VEHICLE" ),
-                    Factory.CreateClassification("Commercial Vehicle", "COMMERCIAL_VEHICLE", admin,  2, "commercial vehicle","COMMERCIAL_VEHICLE"),
-                    Factory.CreateClassification("Rigid", "RIGID", admin,3, "commercial vehicle",  "COMMERCIAL_VEHICLE"),
-                    Factory.CreateClassification("Saddle", "SADDLE", admin,  1,"truck", "TRUCK"),
-                    Factory.CreateClassification("Rigid", "RIGID", admin,  2, "truck","TRUCK"),
-                    Factory.CreateClassification("Chassis", "CHASSIS", admin, 3,"truck",  "TRUCK"),
-                    Factory.CreateClassification("Classical motorcycle", "CLASSICAL", admin, 1,"motorcycle",  "MOTO"),
-                    Factory.CreateClassification("Scooter", "SCOOTER", admin,  2, "motorcycle","MOTO"),
-                    Factory.CreateClassification("Moped", "MOPED", admin,  3, "motorcycle","MOTO"),
-                    Factory.CreateClassification("Bike", "BIKE", admin,  4,"motorcycle", "MOTO"),
-                    Factory.CreateClassification("Cruiser/Chopper", "CRUISERCHOPPER", admin,  5, "motorcycle","MOTO"),
-                    Factory.CreateClassification("Touring", "TOURING", admin,  6, "motorcycle","MOTO"),
-                    Factory.CreateClassification("Motocross Bike", "MOTOCROSS", admin,  7,"motorcycle", "MOTO"),
-                    Factory.CreateClassification("Enduro/Supermoto", "ENDURO", admin,  8,"motorcycle", "MOTO"),
-                    Factory.CreateClassification("Trial", "TRIAL", admin, 9, "motorcycle", "MOTO"),
-                    Factory.CreateClassification("ATV", "ATV", admin,  10, "motorcycle","MOTO"),
-                    Factory.CreateClassification("Buggy", "BUGGY", admin,  11,"motorcycle", "MOTO"),
-                    Factory.CreateClassification("Moped Car", "MOPEDCAR", admin,  12,"motorcycle", "MOTO"),
-                    Factory.CreateClassification("Other", "OTHER", admin,  13, "motorcycle","MOTO"),
-                    Factory.CreateClassification("Launch/Motorboat", "MOTORBOAT", admin,  1,"water type", "WATER_VEHICLE"),
-                    Factory.CreateClassification("Yacht", "YACHT", admin,  2,"water type", "WATER_VEHICLE"),
-                    Factory.CreateClassification("Waterscooter", "WATERSCOOTER", admin,  3,"water type", "WATER_VEHICLE"),
-                    Factory.CreateClassification("Other", "OTHER", admin,  4,"water type", "WATER_VEHICLE"),
-                    Factory.CreateClassification("Light Trailer", "LIGHT", admin,  1, "trailer type","TRAILER"),
-                    Factory.CreateClassification("Semi-Trailer", "SEMI", admin,  2,"trailer type", "TRAILER"),
-                    Factory.CreateClassification("Trailer", "TRAILER", admin,  3,"trailer type", "TRAILER"),
-                    Factory.CreateClassification("Caravan", "CARAVAN", admin,  1,"caravan type", "TRAILER"),
-                    Factory.CreateClassification("Trailer Tent", "TRAILERTENT", admin,  2, "caravan type","TRAILER")
+                    Factory.CreateClassification(classificationId++, vehicleBodyTypeId, "Sedan", "SEDAN", admin,  1, "vehicle", "PASSANGER_CAR"),
+                    Factory.CreateClassification(classificationId++, vehicleBodyTypeId, "Hatchback", "HATCHBACK", admin,  2,"vehicle", "PASSANGER_CAR"),
+                    Factory.CreateClassification(classificationId++, vehicleBodyTypeId, "Touring", "TOURING", admin,  3,"vehicle", "PASSANGER_CAR"),
+                    Factory.CreateClassification(classificationId++, vehicleBodyTypeId, "Minivan", "MINIVAN", admin,  4,"vehicle", "PASSANGER_CAR"),
+                    Factory.CreateClassification(classificationId++, vehicleBodyTypeId, "Coupe", "COUPE", admin,  5,"vehicle", "PASSANGER_CAR"),
+                    Factory.CreateClassification(classificationId++, vehicleBodyTypeId, "Cabriolet", "CABRIOLET", admin,  6,"vehicle", "PASSANGER_CAR"),
+                    Factory.CreateClassification(classificationId++, vehicleBodyTypeId, "Limousine", "LIMOUSINE", admin,  7,"vehicle", "PASSANGER_CAR"),
+                    Factory.CreateClassification(classificationId++, vehicleBodyTypeId, "Limousine", "TOURING", admin,  1,"SUV", "SUV"),
+                    Factory.CreateClassification(classificationId++, vehicleBodyTypeId, "Pickup", "PICKUP", admin,  2,"SUV", "SUV"),
+                    Factory.CreateClassification(classificationId++, vehicleBodyTypeId, "Small Commercial", "SMALL_COMMERCIAL_VEHICLE", admin, 1, "commercial vehicle", "COMMERCIAL_VEHICLE" ),
+                    Factory.CreateClassification(classificationId++, vehicleBodyTypeId, "Commercial Vehicle", "COMMERCIAL_VEHICLE", admin,  2, "commercial vehicle","COMMERCIAL_VEHICLE"),
+                    Factory.CreateClassification(classificationId++, vehicleBodyTypeId, "Rigid", "RIGID", admin,3, "commercial vehicle",  "COMMERCIAL_VEHICLE"),
+                    Factory.CreateClassification(classificationId++, vehicleBodyTypeId, "Saddle", "SADDLE", admin,  1,"truck", "TRUCK"),
+                    Factory.CreateClassification(classificationId++, vehicleBodyTypeId, "Rigid", "RIGID", admin,  2, "truck","TRUCK"),
+                    Factory.CreateClassification(classificationId++, vehicleBodyTypeId, "Chassis", "CHASSIS", admin, 3,"truck",  "TRUCK"),
+                    Factory.CreateClassification(classificationId++, vehicleBodyTypeId, "Classical motorcycle", "CLASSICAL", admin, 1,"motorcycle",  "MOTO"),
+                    Factory.CreateClassification(classificationId++, vehicleBodyTypeId, "Scooter", "SCOOTER", admin,  2, "motorcycle","MOTO"),
+                    Factory.CreateClassification(classificationId++, vehicleBodyTypeId, "Moped", "MOPED", admin,  3, "motorcycle","MOTO"),
+                    Factory.CreateClassification(classificationId++, vehicleBodyTypeId, "Bike", "BIKE", admin,  4,"motorcycle", "MOTO"),
+                    Factory.CreateClassification(classificationId++, vehicleBodyTypeId, "Cruiser/Chopper", "CRUISERCHOPPER", admin,  5, "motorcycle","MOTO"),
+                    Factory.CreateClassification(classificationId++, vehicleBodyTypeId, "Touring", "TOURING", admin,  6, "motorcycle","MOTO"),
+                    Factory.CreateClassification(classificationId++, vehicleBodyTypeId, "Motocross Bike", "MOTOCROSS", admin,  7,"motorcycle", "MOTO"),
+                    Factory.CreateClassification(classificationId++, vehicleBodyTypeId, "Enduro/Supermoto", "ENDURO", admin,  8,"motorcycle", "MOTO"),
+                    Factory.CreateClassification(classificationId++, vehicleBodyTypeId, "Trial", "TRIAL", admin, 9, "motorcycle", "MOTO"),
+                    Factory.CreateClassification(classificationId++, vehicleBodyTypeId, "ATV", "ATV", admin,  10, "motorcycle","MOTO"),
+                    Factory.CreateClassification(classificationId++, vehicleBodyTypeId, "Buggy", "BUGGY", admin,  11,"motorcycle", "MOTO"),
+                    Factory.CreateClassification(classificationId++, vehicleBodyTypeId, "Moped Car", "MOPEDCAR", admin,  12,"motorcycle", "MOTO"),
+                    Factory.CreateClassification(classificationId++, vehicleBodyTypeId, "Other", "OTHER", admin,  13, "motorcycle","MOTO"),
+                    Factory.CreateClassification(classificationId++, vehicleBodyTypeId, "Launch/Motorboat", "MOTORBOAT", admin,  1,"water type", "WATER_VEHICLE"),
+                    Factory.CreateClassification(classificationId++, vehicleBodyTypeId, "Yacht", "YACHT", admin,  2,"water type", "WATER_VEHICLE"),
+                    Factory.CreateClassification(classificationId++, vehicleBodyTypeId, "Waterscooter", "WATERSCOOTER", admin,  3,"water type", "WATER_VEHICLE"),
+                    Factory.CreateClassification(classificationId++, vehicleBodyTypeId, "Other", "OTHER", admin,  4,"water type", "WATER_VEHICLE"),
+                    Factory.CreateClassification(classificationId++, vehicleBodyTypeId, "Light Trailer", "LIGHT", admin,  1, "trailer type","TRAILER"),
+                    Factory.CreateClassification(classificationId++, vehicleBodyTypeId, "Semi-Trailer", "SEMI", admin,  2,"trailer type", "TRAILER"),
+                    Factory.CreateClassification(classificationId++, vehicleBodyTypeId, "Trailer", "TRAILER", admin,  3,"trailer type", "TRAILER"),
+                    Factory.CreateClassification(classificationId++, vehicleBodyTypeId, "Caravan", "CARAVAN", admin,  1,"caravan type", "TRAILER"),
+                    Factory.CreateClassification(classificationId, vehicleBodyTypeId, "Trailer Tent", "TRAILERTENT", admin,  2, "caravan type","TRAILER")
                 }
             };
-            context.ClassificationTypes.AddOrUpdate(x => x.Name,
+            context.ClassificationTypes.AddOrUpdate(x => x.Id,
                 classificationTypePaymentType,
                 classificationTypeDrivetrain,
                 classificationTypeTransmission,
@@ -287,6 +302,41 @@ namespace Triven.Data.EntityFramework.Migrations
                 classificationTypeFuel,
                 classificationTypeBody
                 );
+
+            foreach (var classification in classificationTypePaymentType.Classifications)
+            {
+                context.Classifications.AddOrUpdate(x => x.Id, classification);
+            }
+
+            foreach (var classification in classificationTypeDrivetrain.Classifications)
+            {
+                context.Classifications.AddOrUpdate(x => x.Id, classification);
+            }
+
+            foreach (var classification in classificationTypeTransmission.Classifications)
+            {
+                context.Classifications.AddOrUpdate(x => x.Id, classification);
+            }
+
+            foreach (var classification in classificationTypePaymentStatus.Classifications)
+            {
+                context.Classifications.AddOrUpdate(x => x.Id, classification);
+            }
+
+            foreach (var classification in classificationTypeManufacturer.Classifications)
+            {
+                context.Classifications.AddOrUpdate(x => x.Id, classification);
+            }
+
+            foreach (var classification in classificationTypeFuel.Classifications)
+            {
+                context.Classifications.AddOrUpdate(x => x.Id, classification);
+            }
+
+            foreach (var classification in classificationTypeBody.Classifications)
+            {
+                context.Classifications.AddOrUpdate(x => x.Id, classification);
+            }
         }
 
         private static void CreateNewRoles(ApplicationDbContext context)
@@ -383,6 +433,8 @@ namespace Triven.Data.EntityFramework.Migrations
         static class Factory
         {
             public static Classification CreateClassification(
+                int id,
+                int typeId,
                 string name,
                 string value,
                 ApplicationUser user,
@@ -392,6 +444,8 @@ namespace Triven.Data.EntityFramework.Migrations
             {
                 return new Classification
                 {
+                    Id = id,
+                    ClassificationTypeId = typeId,
                     Name = name,
                     Description = description,
                     IsImported = true,

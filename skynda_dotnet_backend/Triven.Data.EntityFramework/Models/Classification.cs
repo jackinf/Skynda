@@ -17,6 +17,9 @@ namespace Triven.Data.EntityFramework.Models
 
         public string Name { get; set; }
 
+        [ForeignKey("ClassificationType")]
+        public int ClassificationTypeId { get; set; }
+
         /// <summary>
         /// many-to-one relation of ClassificationType
         /// </summary>

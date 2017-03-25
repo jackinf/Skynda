@@ -33,6 +33,17 @@
             public const string Fuel = "FUEL";
             public const string VehicleBody = "VEHICLE_BODY";
         }
+
+        public static class ClassificationTypeId
+        {
+            public const int PaymentTypeId = 1;
+            public const int DrivetrainTypeId = 2;
+            public const int TransmissionTypeId = 3;
+            public const int PaymentStatusTypeId = 4;
+            public const int ManufacturerTypeId = 5;
+            public const int FuelTypeId = 6;
+            public const int VehicleBodyTypeId = 7;
+        }
     }
 
     public static class AppSettings
