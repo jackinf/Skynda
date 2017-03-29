@@ -52,7 +52,7 @@ namespace Triven.Data.EntityFramework.Repositories
                                 classification => classification.Id,
                                 (vehicle, classification) => classification);
 
-                        return query.ToList();
+                        return query.Distinct().ToList();
                     }
                     case DatabaseConstants.ClassificationTypeName.Transmission:
                     {
@@ -63,7 +63,7 @@ namespace Triven.Data.EntityFramework.Repositories
                                 classification => classification.Id,
                                 (vehicle, classification) => classification);
 
-                        return query.ToList();
+                        return query.Distinct().ToList();
                     }
                     case DatabaseConstants.ClassificationTypeName.PaymentStatus:
                         return GetByType(type);
@@ -76,7 +76,7 @@ namespace Triven.Data.EntityFramework.Repositories
                                 classification => classification.Id,
                                 (vehicle, classification) => classification);
 
-                        return query.ToList();
+                        return query.Distinct().ToList();
                     }
                     case DatabaseConstants.ClassificationTypeName.Fuel:
                     {
@@ -87,7 +87,7 @@ namespace Triven.Data.EntityFramework.Repositories
                                 classification => classification.Id,
                                 (vehicle, classification) => classification);
 
-                        return query.ToList();
+                        return query.Distinct().ToList();
                     }
                     case DatabaseConstants.ClassificationTypeName.VehicleBody:
                     {
@@ -98,7 +98,7 @@ namespace Triven.Data.EntityFramework.Repositories
                                 classification => classification.Id,
                                 (vehicle, classification) => classification);
 
-                        return query.ToList();
+                        return query.Distinct().ToList();
                     }
                 }
 

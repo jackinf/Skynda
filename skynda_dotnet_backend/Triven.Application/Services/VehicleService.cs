@@ -37,17 +37,8 @@ namespace Triven.Application.Services
         public ServiceResult<IEnumerable<VehicleCompactViewModel>> GetAll()
         {
             var results = _vehicleRepository.GetAllWithModels();
-            try
-            {
-                IEnumerable<VehicleCompactViewModel> mappedResults = Mapper.Map<IEnumerable<Vehicle>, IEnumerable<VehicleCompactViewModel>>(results);
-                return ServiceResult<IEnumerable<VehicleCompactViewModel>>.Factory.Success(mappedResults);
-
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
+            IEnumerable<VehicleCompactViewModel> mappedResults = Mapper.Map<IEnumerable<Vehicle>, IEnumerable<VehicleCompactViewModel>>(results);
+            return ServiceResult<IEnumerable<VehicleCompactViewModel>>.Factory.Success(mappedResults);
         }
 
         public ServiceResult<VehicleAdminViewModel> GetDetailed(int vehicleId)

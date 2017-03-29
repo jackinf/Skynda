@@ -225,6 +225,8 @@ namespace Triven.Application.Services
 
                         mappedImageEntity.Id = existingMedia.Id;
 
+                        _imageRepository.Update(existingMedia.Id, mappedImageEntity);
+
                         return mappedImageEntity;
                     }
 

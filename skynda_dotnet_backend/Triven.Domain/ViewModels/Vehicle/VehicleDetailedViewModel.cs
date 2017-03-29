@@ -35,9 +35,9 @@ namespace Triven.Domain.ViewModels.Vehicle
         public List<VehicleFeatureViewModel> Features { get; set; }
         public List<FaultBaseViewModel> Faults { get; set; }
         public List<CategoriesViewModel> ReportCategories { get; set; }
-        public List<ReviewViewModel> Reviews { get; set; }
+        public List<VehicleReviewViewModel> Reviews { get; set; }
         public string Inspector { get; set; }
-        public List<ImageContainerViewModel> Images { get; set; }
+        public List<VehicleImageViewModel> Images { get; set; }
         public List<VehicleDescriptionViewModel> Descriptions { get; set; }
 
         public string VehicleManufacturerName { get; set; }

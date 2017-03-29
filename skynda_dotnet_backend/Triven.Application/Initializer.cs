@@ -68,7 +68,8 @@ namespace Triven.Application
                     .ForMember(x => x.ModelDoors, opt => opt.MapFrom(xx => xx.VehicleModel.Doors))
                     .ForMember(x => x.ModelSeats, opt => opt.MapFrom(xx => xx.VehicleModel.Seats))
                     .ForMember(x => x.ModelYear, opt => opt.MapFrom(xx => xx.VehicleModel.Year))
-                    .ForMember(x => x.VehicleManufacturerName, opt => opt.MapFrom(xx => xx.VehicleModel.VehicleManufacturer.Name));
+                    .ForMember(x => x.VehicleManufacturerName, opt => opt.MapFrom(xx => xx.VehicleModel.VehicleManufacturer.Name))
+                    .ForMember(x => x.ModelTitle, opt => opt.MapFrom(xx => xx.VehicleModel.Title));
                 configuration.CreateMap<VehicleAdminViewModel, Vehicle>()
                     .ForMember(x => x.Id, opt => opt.Ignore())
                     .ForMember(x => x.Features, conf => conf.Ignore())

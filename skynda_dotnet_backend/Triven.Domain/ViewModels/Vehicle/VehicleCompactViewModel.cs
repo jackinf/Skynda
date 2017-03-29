@@ -11,6 +11,7 @@ namespace Triven.Domain.ViewModels.Vehicle
         public string Comment { get; set; }
         public string VehicleManufacturerName { get; set; }
         public string ModelCode { get; set; }
+        public string ModelTitle { get; set; }
         public int ModelHorsePower { get; set; }
         public int ModelDoors { get; set; }
         public int ModelSeats { get; set; }

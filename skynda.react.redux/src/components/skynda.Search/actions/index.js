@@ -70,7 +70,7 @@ export function getModelsList(manufacturerIds = []) {
   const idsStr = manufacturerIds.length > 0 ? "?ManufacturerIds=" + manufacturerIds.join(",") : "";
   const promise = VehicleModelService.getModelsList(idsStr);
   return promise.then(resp => {
-    const items = resp.map(item => ({id: item.id, name: item.title, value: item.id}));
+    const items = resp.map(item => ({id: item.id, name: item.modelCode, value: item.id}));
     return {success: true, items};
   }).catch(err => {
     return {success: false, items: [], error: err};

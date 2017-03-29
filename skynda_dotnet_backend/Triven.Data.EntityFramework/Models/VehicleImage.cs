@@ -11,6 +11,6 @@ namespace Triven.Data.EntityFramework.Models
         public virtual Vehicle Vehicle { get; set; }
 
         public int ImageId { get; set; }
-        public virtual Image Image { get; set; }
+        public Image Image { get; set; }
     }
 }

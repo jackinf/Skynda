@@ -1,6 +1,3 @@
-/**
- * Created by ardi-pc on 09/24/16.
- */
 import React from "react";
 
 import "./Details.mainimage.scss";
@@ -8,7 +5,7 @@ import "./Details.mainimage.modal.scss";
 
 import {Row, Col} from "react-bootstrap";
 import {Parallax} from 'react-parallax';
-
+import _ from "underscore";
 // Local components
 import ModalBtnCarousel from "./components/ModalBtnCarousel";
 import ModalBtn360 from "./components/ModalBtn360";
@@ -58,15 +55,18 @@ class VehicleDetailsMainImage extends React.Component {
             <Row className='image-buttons'>
               <Col sm={12}>
                 <span style={{margin: "0 25px 0 0"}}>
-                  <ModalBtnCarousel images={imageUrls}
-                                    isShowModal={this.state.isShowModal}
-                                    onShowModal={this.onShowModal}
-                                    onHideModal={this.onHideModal}
-                  />
+                  {!_.isEmpty(imageUrls) ?
+                    <ModalBtnCarousel images={imageUrls}
+                                      isShowModal={this.state.isShowModal}
+                                      onShowModal={this.onShowModal}
+                                      onHideModal={this.onHideModal}
+                    />
+                    : ""
+                  }
                 </span>
-                <span style={{margin: "0 25px 0 0"}}>
-                  <ModalBtn360 src={source360}/>
-                </span>
+                {/*<span style={{margin: "0 25px 0 0"}}>*/}
+                  {/*<ModalBtn360 src={source360}/>*/}
+                {/*</span>*/}
               </Col>
             </Row>
           </div>

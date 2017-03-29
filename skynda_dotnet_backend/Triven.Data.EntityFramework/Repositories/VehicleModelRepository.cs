@@ -21,7 +21,8 @@ namespace Triven.Data.EntityFramework.Repositories
         {
             using (var context = new ApplicationDbContext())
             {
-                var query = BaseQuery(context).Include(x => x.VehicleManufacturer);
+                var query = BaseQuery(context)
+                    .Include(x => x.VehicleManufacturer);
                 query = parameters?.ManufacturerIds.Any() == true 
                     ? query.Where(x => parameters.ManufacturerIds.Any(id => id == x.VehicleManufacturer.Id)) 
                     : query.Where(x => false);
