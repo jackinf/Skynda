@@ -63,48 +63,48 @@ namespace Triven.Data.EntityFramework.Models
         /// Application user
         /// </summary>
         public int? ApplicationUserId { get; set; }
-        public virtual ApplicationUser ApplicationUser { get; set; }
+        public ApplicationUser ApplicationUser { get; set; }
 
         /// <summary>
         /// Main image
         /// </summary>
         public int MainImageId { get; set; }
-        public virtual Image MainImage { get; set; }
+        public Image MainImage { get; set; }
 
         /// <summary>
         /// Vehicle VehicleModel
         /// </summary>
         public int VehicleModelId { get; set; }
-        public virtual VehicleModel VehicleModel { get; set; }
+        public VehicleModel VehicleModel { get; set; }
 
         /// <summary>
         /// Vehicle images
         /// </summary>
         [InverseProperty(nameof(VehicleImage.Vehicle))]
-        public virtual IList<VehicleImage> Images { get; set; } = new List<VehicleImage>();
+        public IList<VehicleImage> Images { get; set; } = new List<VehicleImage>();
 
         /// <summary>
         /// Vehicle descriptions
         /// </summary>
         [InverseProperty(nameof(VehicleDescription.Vehicle))]
-        public virtual IList<VehicleDescription> Descriptions { get; set; } = new List<VehicleDescription>();
+        public IList<VehicleDescription> Descriptions { get; set; } = new List<VehicleDescription>();
 
         /// <summary>
         /// Vehicle features
         /// </summary>
         [InverseProperty(nameof(VehicleFeature.Vehicle))]
-        public virtual IList<VehicleFeature> Features { get; set; } = new List<VehicleFeature>();
+        public IList<VehicleFeature> Features { get; set; } = new List<VehicleFeature>();
 
         /// <summary>
         /// Vehicle features
         /// </summary>
         [InverseProperty(nameof(VehicleReport.Vehicle))]
-        public virtual IList<VehicleReport> Reports { get; set; } = new List<VehicleReport>();
+        public IList<VehicleReport> Reports { get; set; } = new List<VehicleReport>();
 
         /// <summary>
         /// Vehicle features
         /// </summary>
         [InverseProperty(nameof(VehicleReview.Vehicle))]
-        public virtual IList<VehicleReview> Reviews { get; set; } = new List<VehicleReview>();
+        public IList<VehicleReview> Reviews { get; set; } = new List<VehicleReview>();
     }
 }
