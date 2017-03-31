@@ -28,9 +28,7 @@ namespace Triven.FunctionalTests.IntegrationTests
             //
 
             var vehicleModel1 = VehicleModelUtils.Create();
-            var image1 = ImageUtils.Create();
-            var vehicle1 = VehicleUtils.Create(vehicleModel1.Id, image1.Id);
-            var vehicle2 = VehicleUtils.Create(vehicleModel1.Id, image1.Id);
+            var vehicleModel2 = VehicleModelUtils.Create();
             
             //
             // ACT
@@ -44,8 +42,8 @@ namespace Triven.FunctionalTests.IntegrationTests
 
             Assert.AreEqual(2, results.Count);
 
-            var firstItem = results.Single(x => x.Id == vehicle1.Id);
-            var secondItem = results.Single(x => x.Id == vehicle2.Id);
+            var firstItem = results.Single(x => x.Id == vehicleModel1.Id);
+            var secondItem = results.Single(x => x.Id == vehicleModel2.Id);
 
             // TODO: Assert
         }
@@ -57,19 +55,19 @@ namespace Triven.FunctionalTests.IntegrationTests
             // ARRANGE
             //
 
-            var vehicle1 = VehicleUtils.CreateWithVehicleModelAndImage();
+            var vehicleModel1 = VehicleModelUtils.Create();
 
             //
             // ACT
             //
 
-            var result = NewController().Get(vehicle1.Id).GetOkPayload<VehicleModelViewModel>();
+            var result = NewController().Get(vehicleModel1.Id).GetOkPayload<VehicleModelViewModel>();
 
             //
             // ASSERT
             //
 
-            Assert.AreEqual(vehicle1.Id, result.Id);
+            Assert.AreEqual(vehicleModel1.Id, result.Id);
 
             // TODO: Assert
         }
@@ -91,8 +89,8 @@ namespace Triven.FunctionalTests.IntegrationTests
             // ACT
             //
 
-            var controller = NewController();
-            var result = controller.Add(new VehicleModelViewModel()).GetOkPayload<VehicleModelViewModel>();
+            var requestParams = new VehicleModelViewModel();
+            var result = NewController().Add(requestParams).GetOkPayload<VehicleModelViewModel>();
 
             //
             // ASSERT
