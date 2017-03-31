@@ -1,4 +1,4 @@
-﻿namespace Triven.Tests.Utils.ModelHelpers
+﻿namespace Triven.FunctionalTests.Utils.ModelHelpers
 {
     internal static class ImageUtils
     {

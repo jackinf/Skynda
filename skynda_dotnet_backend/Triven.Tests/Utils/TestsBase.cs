@@ -6,9 +6,9 @@ using Triven.Application;
 using Triven.Data.EntityFramework;
 using Triven.Data.EntityFramework.Migrations;
 
-namespace Triven.Tests.Utils
+namespace Triven.FunctionalTests.Utils
 {
-    public abstract class IntegrationTestBase
+    public abstract class TestsBase
     {
         protected Container Container { get; private set; }
         protected ApplicationDbContext Context { get; private set; }

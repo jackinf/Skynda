@@ -1,6 +1,8 @@
-﻿namespace Triven.Tests.IntegrationTests
+﻿using Triven.FunctionalTests.Utils;
+
+namespace Triven.FunctionalTests.IntegrationTests
 {
-    public class BlobStorageIntegrationTests
+    public class BlobStorageIntegrationTests : TestsBase
     {
         
     }

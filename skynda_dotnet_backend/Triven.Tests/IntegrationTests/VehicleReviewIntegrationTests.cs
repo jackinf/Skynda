@@ -6,11 +6,11 @@ using Triven.API.Controllers;
 using Triven.Data.EntityFramework.Models;
 using Triven.Domain.Results;
 using Triven.Domain.ViewModels.Vehicle;
-using Triven.Tests.Utils;
+using Triven.FunctionalTests.Utils;
 
-namespace Triven.Tests.IntegrationTests
+namespace Triven.FunctionalTests.IntegrationTests
 {
-    public class VehicleReviewIntegrationTests : IntegrationTestBase
+    public class VehicleReviewIntegrationTests : TestsBase
     {
         private VehicleReviewController NewController() => new VehicleReviewController();
 

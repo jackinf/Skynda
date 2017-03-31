@@ -4,11 +4,11 @@ using System.Web.Http.Results;
 using NUnit.Framework;
 using Triven.API.Controllers;
 using Triven.Domain.ViewModels.Feature;
-using Triven.Tests.Utils;
+using Triven.FunctionalTests.Utils;
 
-namespace Triven.Tests.IntegrationTests
+namespace Triven.FunctionalTests.IntegrationTests
 {
-    public class FeatureIntegrationTest : IntegrationTestBase
+    public class FeatureIntegrationTest : TestsBase
     {
         [Test]
         public void Simple()

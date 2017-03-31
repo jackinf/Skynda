@@ -7,7 +7,7 @@
     <ProjectGuid>{789B5845-C393-43C5-AF32-A88FAF528338}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Triven.Tests</RootNamespace>
+    <RootNamespace>Triven.FunctionalTests</RootNamespace>
     <AssemblyName>Triven.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -91,7 +91,7 @@
     <Compile Include="IntegrationTests\VehicleReportIntegrationTests.cs" />
     <Compile Include="IntegrationTests\VehicleReviewIntegrationTests.cs" />
     <Compile Include="SimpleTests\EmailTest.cs" />
-    <Compile Include="Utils\IntegrationTestBase.cs" />
+    <Compile Include="Utils\TestsBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\ModelHelpers\BlobStorageUtils.cs" />
     <Compile Include="Utils\ModelHelpers\FeatureUtils.cs" />

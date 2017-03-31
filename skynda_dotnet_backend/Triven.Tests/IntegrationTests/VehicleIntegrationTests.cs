@@ -1,4 +1,4 @@
-﻿namespace Triven.Tests.IntegrationTests
+﻿namespace Triven.FunctionalTests.IntegrationTests
 {
     public class VehicleIntegrationTests
     {

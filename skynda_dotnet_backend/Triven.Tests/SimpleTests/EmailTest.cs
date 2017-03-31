@@ -1,7 +1,6 @@
 ﻿using System.Net.Mail;
-using NUnit.Framework;
 
-namespace Triven.Tests.SimpleTests
+namespace Triven.FunctionalTests.SimpleTests
 {
     public class EmailTest
     {

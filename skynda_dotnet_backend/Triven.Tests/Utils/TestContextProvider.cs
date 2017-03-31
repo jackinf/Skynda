@@ -1,10 +1,8 @@
 ﻿using System.Data.Entity;
-using System.Data.Entity.Core.EntityClient;
-using System.Data.SqlClient;
 using System.Diagnostics;
 using Triven.Data.EntityFramework;
 
-namespace Triven.Tests.Utils
+namespace Triven.FunctionalTests.Utils
 {
     public class TestContextProvider
     {

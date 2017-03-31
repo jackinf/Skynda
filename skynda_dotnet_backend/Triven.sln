@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Triven.API", "Triven.Api\Triven.API.csproj", "{E1AEA7B0-C190-4FD0-818A-A77150D05B3C}"
 EndProject
@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Triven.Data.EntityFramework
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Triven.Application", "Triven.Application\Triven.Application.csproj", "{53213F43-32AE-4255-943A-0400825101AD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Triven.Tests", "Triven.Tests\Triven.Tests.csproj", "{789B5845-C393-43C5-AF32-A88FAF528338}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Triven.FunctionalTests", "Triven.Tests\Triven.FunctionalTests.csproj", "{789B5845-C393-43C5-AF32-A88FAF528338}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
