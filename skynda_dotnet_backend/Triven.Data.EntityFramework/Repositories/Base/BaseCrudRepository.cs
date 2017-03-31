@@ -80,8 +80,8 @@ namespace Triven.Data.EntityFramework.Repositories.Base
                 {
                     BeforeAdd(model);
                     dbContext.Set<TModel>().Add(model);
-
-                    int save = SaveModelWithComplexTypes(model, dbContext);
+                    dbContext.SaveChanges();
+                    //int save = SaveModelWithComplexTypes(model, dbContext);
 
                     return OnCreateOrUpdateResult<TModel>.Factory.Success(model);
                 }
@@ -114,10 +114,11 @@ namespace Triven.Data.EntityFramework.Repositories.Base
             {
                 try
                 {
+                    dbContext.Entry(model).State = EntityState.Modified;
                     model.UpdatedOn = DateTime.Now;
                     model.ModifierUserIp = HttpContextManager.Current?.Request?.UserHostAddress;
-
-                    int save = SaveModelWithComplexTypes(model, dbContext);
+                    dbContext.SaveChanges();
+                    //int save = SaveModelWithComplexTypes(model, dbContext);
 
                     return OnCreateOrUpdateResult<TModel>.Factory.Success(model);
                 }
@@ -127,7 +128,10 @@ namespace Triven.Data.EntityFramework.Repositories.Base
                         return OnCreateOrUpdateResult<TModel>.Factory.Fail(ex);
                     throw;
                 }
+#pragma warning disable 168
+                // ReSharper disable once RedundantCatchClause
                 catch (Exception ex)
+#pragma warning restore 168
                 {
                     throw;
                 }

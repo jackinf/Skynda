@@ -1,4 +1,4 @@
-﻿namespace Triven.FunctionalTests.Utils.ModelHelpers
+﻿namespace Triven.FunctionalTests.Utils.EntityHelpers
 {
     internal static class FeatureUtils
     {

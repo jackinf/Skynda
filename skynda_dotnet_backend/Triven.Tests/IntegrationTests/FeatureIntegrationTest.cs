@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Web.Http.Results;
 using NUnit.Framework;
 using Triven.API.Controllers;
+using Triven.Data.EntityFramework.Models;
 using Triven.Domain.ViewModels.Feature;
 using Triven.FunctionalTests.Utils;
 
@@ -10,17 +12,12 @@ namespace Triven.FunctionalTests.IntegrationTests
 {
     public class FeatureIntegrationTest : TestsBase
     {
-        [Test]
-        public void Simple()
-        {
-            Assert.IsTrue(true);
-        }
+        [SetUp]
+        public void SetUp() => ClearAllTablesAndApply();
 
         [Test]
         public void should_create_read_update_delete_feature()
         {
-            ClearTable(Context.Features);
-
             const string const_name = "name123";
             const string const_name_updated = "name123_updated";
             const string const_description = "desc123";
@@ -103,7 +100,8 @@ namespace Triven.FunctionalTests.IntegrationTests
                 //
                 var deleteResult = featureController.Delete(featureId) as OkNegotiatedContentResult<object>;
                 Assert.IsNotNull(deleteResult, "Delete. Response was not ok or invalid type was supplied");
-                Assert.AreEqual(0, Context.Features.Count(x => x.IsActive));
+                var fromDb = GetFromDb<Feature>(featureId);
+                Assert.IsFalse(fromDb.IsActive);
             }
         }
     }

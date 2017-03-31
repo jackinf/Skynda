@@ -36,9 +36,9 @@ namespace Triven.API.Controllers
         public IHttpActionResult List(ListBlobsViewModel viewModel) => HandleResult(_service.List(viewModel));
 
         [HttpPost, Route("download")]
-        public IHttpActionResult Download(DownloadBlobViewModel viewModel) => HandleResult(_service.Download(viewModel));
+        public IHttpActionResult Delete(DownloadBlobViewModel viewModel) => HandleResult(_service.Download(viewModel));
 
         [HttpPost, Route("delete")]
-        public IHttpActionResult Download(DeleteBlobViewModel viewModel) => HandleResult(_service.Delete(viewModel));
+        public IHttpActionResult Delete(DeleteBlobViewModel viewModel) => HandleResult(_service.Delete(viewModel));
     }
 }
