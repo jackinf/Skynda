@@ -14,6 +14,9 @@ namespace Triven.Tests.IntegrationTests
     {
         private VehicleReportController NewController() => new VehicleReportController();
 
+        [SetUp]
+        public void SetUp() => ClearAllTablesAndApply();
+
         [Test]
         public void should_get_all()
         {
