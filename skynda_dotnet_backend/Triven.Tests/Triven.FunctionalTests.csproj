@@ -118,12 +118,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IntegrationTests\BlobStorageTests.cs" />
-    <Compile Include="IntegrationTests\ClassificationIntegrationTests.cs" />
+    <Compile Include="IntegrationTests\ClassificationTests.cs" />
     <Compile Include="IntegrationTests\FeatureIntegrationTest.cs" />
-    <Compile Include="IntegrationTests\ImageIntegrationTests.cs" />
-    <Compile Include="IntegrationTests\SubscriptionIntegrationTests.cs" />
-    <Compile Include="IntegrationTests\VehicleIntegrationTests.cs" />
-    <Compile Include="IntegrationTests\VehicleModelIntegrationTests.cs" />
+    <Compile Include="IntegrationTests\ImageTests.cs" />
+    <Compile Include="IntegrationTests\SubscriptionTests.cs" />
+    <Compile Include="IntegrationTests\VehicleTests.cs" />
+    <Compile Include="IntegrationTests\VehicleModelTests.cs" />
     <Compile Include="IntegrationTests\VehicleReportTests.cs" />
     <Compile Include="IntegrationTests\VehicleReviewTests.cs" />
     <Compile Include="SimpleTests\EmailTest.cs" />
