@@ -124,7 +124,7 @@
     <Compile Include="IntegrationTests\SubscriptionIntegrationTests.cs" />
     <Compile Include="IntegrationTests\VehicleIntegrationTests.cs" />
     <Compile Include="IntegrationTests\VehicleModelIntegrationTests.cs" />
-    <Compile Include="IntegrationTests\VehicleReportIntegrationTests.cs" />
+    <Compile Include="IntegrationTests\VehicleReportTests.cs" />
     <Compile Include="IntegrationTests\VehicleReviewTests.cs" />
     <Compile Include="SimpleTests\EmailTest.cs" />
     <Compile Include="Utils\ControllerHelpers.cs" />
