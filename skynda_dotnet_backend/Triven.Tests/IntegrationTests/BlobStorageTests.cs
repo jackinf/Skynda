@@ -1,4 +1,6 @@
-﻿using NUnit.Framework;
+﻿using System;
+using System.Diagnostics;
+using NUnit.Framework;
 using Triven.API.Controllers;
 using Triven.Domain.ViewModels.BlobStorage;
 using Triven.FunctionalTests.Utils;
@@ -7,7 +9,10 @@ namespace Triven.FunctionalTests.IntegrationTests
 {
     public class BlobStorageTests : TestsBase
     {
+        [DebuggerStepThrough]
         BlobStorageController NewController() => new BlobStorageController();
+
+        private const string TestContainer = "Test123123";
 
         [Test]
         public void should_create_container()
@@ -20,7 +25,7 @@ namespace Triven.FunctionalTests.IntegrationTests
             // ACT
             //
 
-            var requestParams = new CreateContainerViewModel();
+            var requestParams = new CreateContainerViewModel { ContainerName = TestContainer };
             NewController().CreateContainer(requestParams);
 
             //

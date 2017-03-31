@@ -117,6 +117,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IntegrationTests\AccountTests.cs" />
     <Compile Include="IntegrationTests\BlobStorageTests.cs" />
     <Compile Include="IntegrationTests\ClassificationTests.cs" />
     <Compile Include="IntegrationTests\FeatureIntegrationTest.cs" />
