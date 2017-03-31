@@ -1,10 +1,12 @@
-﻿using System.Web.Http;
+﻿using System;
+using System.Web.Http;
 using Triven.Application;
 using Triven.Domain.Services;
 using Triven.Domain.ViewModels.Email;
 
 namespace Triven.API.Controllers
 {
+    [Obsolete("Remove controller")]
     [RoutePrefix("api/subscribe")]
     public class SubscriptionController : BaseController
     {

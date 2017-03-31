@@ -22,7 +22,7 @@ namespace Triven.API.Controllers
 
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer), RequireApiAccess(Auth.Roles.Admin, Auth.Roles.VehicleManager)]
         [HttpGet, Route("~/api/vehicles")]
-        public IHttpActionResult GetAll([FromBody] SearchRequestViewModel viewModel) => HandleResult(_service.GetAll());
+        public IHttpActionResult GetAll([FromUri] SearchRequestViewModel viewModel) => HandleResult(_service.GetAll());
 
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer), RequireApiAccess(Auth.Roles.Admin, Auth.Roles.VehicleManager)]
         [HttpGet, Route("{id:int}/detailed")]

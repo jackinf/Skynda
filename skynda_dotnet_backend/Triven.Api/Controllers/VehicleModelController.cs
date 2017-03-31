@@ -21,7 +21,7 @@ namespace Triven.API.Controllers
 
         // TODO: Use vehicle model search params
         [HttpGet, Route("~/api/vehicle-models")]
-        public IHttpActionResult GetAll([FromBody] VehicleModelViewModel viewModel) => HandleResult(_service.GetAll());
+        public IHttpActionResult GetAll() => HandleResult(_service.GetAll());
 
         [HttpGet, Route("{id:int}")]
         public IHttpActionResult Get([FromUri] int id) => HandleResult(_service.Get(id));
