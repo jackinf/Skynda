@@ -13,7 +13,7 @@ namespace Triven.FunctionalTests.Utils.EntityHelpers
                 {
                     Url = Guid.NewGuid().ToString(),
                     BlobName = Guid.NewGuid().ToString(),
-                    ContainerName = Guid.NewGuid().ToString(),
+                    ContainerName = "image",
                     ThumbnailUrl = Guid.NewGuid().ToString(),
                     ThumbnailBlobName = Guid.NewGuid().ToString()
                 });

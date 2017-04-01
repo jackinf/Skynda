@@ -4,6 +4,7 @@ using NUnit.Framework;
 using Triven.API.Controllers;
 using Triven.Domain.ViewModels.Image;
 using Triven.FunctionalTests.Utils;
+using Triven.FunctionalTests.Utils.EntityHelpers;
 
 namespace Triven.FunctionalTests.IntegrationTests
 {
@@ -22,19 +23,20 @@ namespace Triven.FunctionalTests.IntegrationTests
             // ARRANGE
             //
 
+            ImageUtils.Create();
+            ImageUtils.Create();
+
             //
             // ACT
             //
 
-            var result = NewController()
-                .List("")
-                .GetOkPayload<IList<ImageViewModel>>();
+            var result = NewController().List("image").GetOkPayload<IList<ImageViewModel>>();
 
             //
             // ASSERT
             //
 
-            Assert.Fail("Not implemented");
+            Assert.AreEqual(2, result.Count);
         }
     }
 }
