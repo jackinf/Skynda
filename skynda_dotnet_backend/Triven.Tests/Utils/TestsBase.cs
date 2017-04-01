@@ -54,7 +54,7 @@ namespace Triven.FunctionalTests.Utils
         {
             using (var context = CreateContext())
             {
-                context.Database.Log = s => Debug.WriteLine(s);
+                //context.Database.Log = s => Debug.WriteLine(s);
 
                 //context.Classifications.RemoveRange(context.Classifications);
                 //context.ClassificationTypes.RemoveRange(context.ClassificationTypes);

@@ -146,6 +146,10 @@ namespace Triven.Application.Services
 
         public ServiceResult<VehicleAdminViewModel> Update(int vehicleId, VehicleAdminViewModel viewModel)
         {
+            if (viewModel == null)
+                viewModel = new VehicleAdminViewModel();
+            viewModel.Id = vehicleId;
+
             using (var unitOfWork = new UnitOfWorkEntityBase())
             {
                 unitOfWork.BeginTransaction();
@@ -164,16 +168,19 @@ namespace Triven.Application.Services
 
                     Vehicle entity = _vehicleRepository.GetDetailed(viewModel.Id);
                     Mapper.Map(viewModel, entity);
-                    VehicleModel vehicleModel = _vehicleModelRepository.Get(viewModel.VehicleModel.Id);
-                    entity.VehicleModel = vehicleModel;
+                    //VehicleModel vehicleModel = _vehicleModelRepository.Get(viewModel.VehicleModel.Id);
+                    //entity.VehicleModel = vehicleModel;
 
                     if(viewModel.MainImage == null)
                         throw new NullReferenceException("Main image is required");
 
                     var mainImage = _blobStorageService.HandleMedia(viewModel.MainImage, entity.MainImage, unitOfWork.Context);
-                    entity.MainImage = mainImage as Image;         
+                    entity.MainImage = mainImage as Image;
+                    entity.MainImageId = mainImage.Id; // TODO: think of a way to change reference in a more clean way.
 
-                    var result = _vehicleRepository.Update(vehicleId, entity);
+                    entity.VehicleModelId = viewModel.VehicleModel.Id;  // TODO: Do not use a fucking ViewModel if we only want to change reference!
+
+                    var result = _vehicleRepository.Update(vehicleId, entity, unitOfWork.Context);
 
                     /*
                  * Update Images
@@ -188,17 +195,16 @@ namespace Triven.Application.Services
                     }
 
                     /*
-                 * Update Descriptions
-                 */
+                     * Update Descriptions
+                     */
                     UpdateDescriptions(result.ContextObject.Id, viewModel.Descriptions, unitOfWork);
 
                     /*
-                 * Update Features
-                 */
+                     * Update Features
+                     */
                     UpdateFeatures(result.ContextObject.Id, viewModel.FeaturesAdminSelect, unitOfWork);
 
-                    var images = _vehicleImageRepository.GetAllVehicleImages(result.ContextObject.Id);
-
+                    var images = _vehicleImageRepository.GetAllVehicleImages(result.ContextObject.Id, unitOfWork.Context);
                     result.ContextObject.Images = images;
 
                     VehicleAdminViewModel mappedResult = Mapper.Map<VehicleAdminViewModel>(result.ContextObject);

@@ -74,7 +74,13 @@ namespace Triven.Application
                     .ForMember(x => x.Id, opt => opt.Ignore())
                     .ForMember(x => x.Features, conf => conf.Ignore())
                     .ForMember(x => x.VehicleStatus, conf => conf.Ignore())
-                    .ForMember(x => x.Descriptions, conf => conf.Ignore());
+                    .ForMember(x => x.Images, conf => conf.Ignore())
+                    .ForMember(x => x.Descriptions, conf => conf.Ignore())
+                    .ForMember(x => x.ApplicationUser, conf => conf.Ignore())
+                    .ForMember(x => x.VehicleModel, conf => conf.Ignore())
+                    //.ForMember(x => x.VehicleModelId, conf => conf.Ignore())
+                    .ForMember(x => x.MainImage, conf => conf.Ignore());
+                    //.ForMember(x => x.MainImageId, conf => conf.Ignore())
 
                 configuration.CreateMap<VehicleDescription, VehicleDescriptionViewModel>().PreserveReferences()
                     .ForMember(x => x.Vehicle, conf => conf.Ignore());
