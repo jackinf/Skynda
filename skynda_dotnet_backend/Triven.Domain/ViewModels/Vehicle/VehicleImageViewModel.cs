@@ -6,7 +6,7 @@ namespace Triven.Domain.ViewModels.Vehicle
 {
     public class VehicleImageViewModel : BaseViewModel
     {
-        public VehicleAdminViewModel Vehicle { get; set; }
+        public VehicleAdminViewModel Vehicle { get; set; }  // TODO: What is this for?
         public ImageViewModel Image { get; set; }
     }
 }

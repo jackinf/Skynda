@@ -7,7 +7,8 @@ namespace Triven.Data.EntityFramework.UnitOfWorks
     {
         private DbContextTransaction _transaction;
 
-        public void BeginTransaction() => _transaction = _context.Database.BeginTransaction();
+        public void BeginTransaction() => _transaction = Context.Database.BeginTransaction();
         public void Commit() => _transaction.Commit();
+        public void Rollback() => _transaction.Rollback();
     }
 }

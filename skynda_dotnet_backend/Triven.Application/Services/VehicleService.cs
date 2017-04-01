@@ -5,6 +5,7 @@ using AutoMapper;
 using FluentValidation.Results;
 using Triven.Application.Validators.Vehicle;
 using Triven.Data.EntityFramework.Models;
+using Triven.Data.EntityFramework.UnitOfWorks;
 using Triven.Domain.Enums;
 using Triven.Domain.Repositories;
 using Triven.Domain.Results;
@@ -69,7 +70,6 @@ namespace Triven.Application.Services
             {
                 return ServiceResult<VehicleAdminViewModel>.Factory.Fail(e.Message);
             }
-            
         }
 
         public ServiceResult<VehicleDetailedViewModel> Get(int vehicleId)
@@ -84,203 +84,134 @@ namespace Triven.Application.Services
 
         public ServiceResult<VehicleAdminViewModel> Create(VehicleAdminViewModel viewModel)
         {
-            try
+            using (var unitOfWork = new UnitOfWorkEntityBase())
             {
-                if (viewModel == null)
+                unitOfWork.BeginTransaction();
+                try
                 {
-                    viewModel = new VehicleAdminViewModel();
-                }
-
-                VehicleValidator validator = new VehicleValidator();
-                ValidationResult results = validator.Validate(viewModel);
-
-              
-                if (!results.IsValid)
-                {
-                    return ServiceResult<VehicleAdminViewModel>.Factory.Fail(results.Errors);
-                }
-
-                Vehicle entity = Mapper.Map<Vehicle>(viewModel);
-
-                VehicleModel vehicleModel = _vehicleModelRepository.Get(viewModel.VehicleModel.Id);
-                entity.VehicleModel = vehicleModel;
-
-
-                if (viewModel.MainImage == null)
-                    throw new NullReferenceException("Main image is required");
-
-                var mainImage = _blobStorageService.HandleMedia(viewModel.MainImage, null);
-                entity.MainImage = mainImage as Image;
-
-                /*
-                 * No need to add images, reviews, reports in create
-                 */
-
-                var result = _vehicleRepository.Add(entity);
-                
-                /*
-                 * Update Descriptions
-                 */
-                UpdateDescriptions(result.ContextObject.Id, viewModel.Descriptions);
-
-                /*
-                 * Update Features
-                 */
-                UpdateFeatures(result.ContextObject.Id, viewModel.FeaturesAdminSelect);
-
-                VehicleAdminViewModel mappedResult = Mapper.Map<VehicleAdminViewModel>(result.ContextObject);
-
-                return ServiceResult<VehicleAdminViewModel>.Factory.Success(mappedResult, result.Message);
-            }
-            catch (Exception ex)
-            {
-                return ServiceResult<VehicleAdminViewModel>.Factory.Fail(ex.Message);
-            }
-           
-        }
-
-        private void UpdateDescriptions(int vehicleId, List<VehicleDescriptionViewModel> descriptions)
-        {
-            if (vehicleId <= 0)
-                throw new ArgumentException("Wrong id");
-
-            var existingDescriptions = _vehicleDescriptionRepository.GetAllVehicleDescriptions(vehicleId);
-
-            if (existingDescriptions.Any())
-            {
-                foreach (var existingDescription in existingDescriptions)
-                {
-                    bool exists = descriptions.Any() && descriptions.Any(x => x.Id == existingDescription.Id);
-
-                    if (!exists)
+                    if (viewModel == null)
                     {
-                        _vehicleDescriptionRepository.Delete(existingDescription.Id);
+                        viewModel = new VehicleAdminViewModel();
                     }
-                }
-            }
 
-            if (!descriptions.Any()) return;
+                    VehicleValidator validator = new VehicleValidator();
+                    ValidationResult results = validator.Validate(viewModel);
 
-            foreach (var vehicleDescriptionViewModel in descriptions)
-            {
-                VehicleDescription description = new VehicleDescription
-                {
-                    Vehicle = new Vehicle { Id = vehicleId }
-                };
 
-                Mapper.Map(vehicleDescriptionViewModel, description);
-
-                if (existingDescriptions.Any() &&
-                    existingDescriptions.Any(x => x.Id == vehicleDescriptionViewModel.Id))
-                {
-                    _vehicleDescriptionRepository.Update(description.Id, description);
-                }
-                else
-                {
-                    _vehicleDescriptionRepository.Add(description);
-                }
-            }
-        }
-
-        private void UpdateFeatures(int vehicleId, List<FeatureAdminSelectViewModel> features)
-        {
-            if (vehicleId <= 0)
-                throw new ArgumentException("Wrong id");
-
-            var existingFeatures = _vehicleFeatureRepository.GetAllBy(vehicleId);
-
-            if (existingFeatures.Any())
-            {
-                foreach (var existingFeature in existingFeatures)
-                {
-                    bool exists = features.Any() && features.Any(
-                        x => x.Value == existingFeature.Feature.Id.ToString() &&
-                        existingFeature.Vehicle.Id == vehicleId);
-
-                    if (!exists)
+                    if (!results.IsValid)
                     {
-                        _vehicleFeatureRepository.Delete(existingFeature.Id);
+                        return ServiceResult<VehicleAdminViewModel>.Factory.Fail(results.Errors);
                     }
+
+                    Vehicle entity = Mapper.Map<Vehicle>(viewModel);
+
+                    VehicleModel vehicleModel = _vehicleModelRepository.Get(viewModel.VehicleModel.Id, unitOfWork.Context);
+                    entity.VehicleModel = vehicleModel;
+
+
+                    if (viewModel.MainImage == null)
+                        throw new NullReferenceException("Main image is required");
+
+                    var mainImage = _blobStorageService.HandleMedia(viewModel.MainImage, null, unitOfWork.Context);
+                    entity.MainImage = mainImage as Image;
+
+                    /*
+                     * No need to add images, reviews, reports in create
+                     */
+
+                    var result = _vehicleRepository.Add(entity, unitOfWork.Context);
+
+                    /*
+                     * Update Descriptions
+                     */
+                    UpdateDescriptions(result.ContextObject.Id, viewModel.Descriptions, unitOfWork);
+
+                    /*
+                     * Update Features
+                     */
+                    UpdateFeatures(result.ContextObject.Id, viewModel.FeaturesAdminSelect, unitOfWork);
+
+                    VehicleAdminViewModel mappedResult = Mapper.Map<VehicleAdminViewModel>(result.ContextObject);
+                    unitOfWork.Commit();
+
+                    return ServiceResult<VehicleAdminViewModel>.Factory.Success(mappedResult, result.Message);
                 }
-            }
-
-            if (!features.Any()) return;
-
-            foreach (var vehicleFeature in features)
-            {
-                VehicleFeature newFeature = new VehicleFeature
+                catch (Exception ex)
                 {
-                    Vehicle = new Vehicle { Id = vehicleId},
-                    Feature = new Feature { Id = int.Parse(vehicleFeature.Value)}
-                };
-
-                bool exists = existingFeatures.Any() &&
-                    existingFeatures.Any(x => 
-                        x.Feature.Id == newFeature.Feature.Id && 
-                        x.Vehicle.Id == newFeature.Vehicle.Id);
-
-                if (!exists)
-                {
-                    _vehicleFeatureRepository.Add(newFeature);
+                    unitOfWork.Rollback();
+                    return ServiceResult<VehicleAdminViewModel>.Factory.Fail(ex.Message);
                 }
             }
         }
 
         public ServiceResult<VehicleAdminViewModel> Update(int vehicleId, VehicleAdminViewModel viewModel)
         {
-            if (vehicleId <= 0)
-                throw new ArgumentException("Wrong id");
-
-            VehicleValidator validator = new VehicleValidator();
-            ValidationResult results = validator.Validate(viewModel);
-
-            if (!results.IsValid)
+            using (var unitOfWork = new UnitOfWorkEntityBase())
             {
-                return ServiceResult<VehicleAdminViewModel>.Factory.Fail(results.Errors);
+                unitOfWork.BeginTransaction();
+                try
+                {
+                    if (vehicleId <= 0)
+                        throw new ArgumentException("Wrong id");
+
+                    VehicleValidator validator = new VehicleValidator();
+                    ValidationResult results = validator.Validate(viewModel);
+
+                    if (!results.IsValid)
+                    {
+                        return ServiceBaseResult<VehicleAdminViewModel>.Factory.Fail(results.Errors);
+                    }
+
+                    Vehicle entity = _vehicleRepository.GetDetailed(viewModel.Id);
+                    Mapper.Map(viewModel, entity);
+                    VehicleModel vehicleModel = _vehicleModelRepository.Get(viewModel.VehicleModel.Id);
+                    entity.VehicleModel = vehicleModel;
+
+                    if(viewModel.MainImage == null)
+                        throw new NullReferenceException("Main image is required");
+
+                    var mainImage = _blobStorageService.HandleMedia(viewModel.MainImage, entity.MainImage, unitOfWork.Context);
+                    entity.MainImage = mainImage as Image;         
+
+                    var result = _vehicleRepository.Update(vehicleId, entity);
+
+                    /*
+                 * Update Images
+                 */
+                    if (viewModel.Images != null && viewModel.Images.Any())
+                    {
+                        var existingVehicleImages = _vehicleImageRepository.GetAllVehicleImages(result.ContextObject.Id);
+
+                        List<VehicleImageViewModel> vehicleImages = new List<VehicleImageViewModel>();
+                        Mapper.Map(existingVehicleImages, vehicleImages);
+                        _blobStorageService.HandleMediaCollection(entity.Id, viewModel.Images, vehicleImages, unitOfWork.Context);
+                    }
+
+                    /*
+                 * Update Descriptions
+                 */
+                    UpdateDescriptions(result.ContextObject.Id, viewModel.Descriptions, unitOfWork);
+
+                    /*
+                 * Update Features
+                 */
+                    UpdateFeatures(result.ContextObject.Id, viewModel.FeaturesAdminSelect, unitOfWork);
+
+                    var images = _vehicleImageRepository.GetAllVehicleImages(result.ContextObject.Id);
+
+                    result.ContextObject.Images = images;
+
+                    VehicleAdminViewModel mappedResult = Mapper.Map<VehicleAdminViewModel>(result.ContextObject);
+
+                    unitOfWork.Commit();
+                    return ServiceBaseResult<VehicleAdminViewModel>.Factory.Success(mappedResult, result.Message);
+                }
+                catch (Exception ex)
+                {
+                    unitOfWork.Rollback();
+                    return ServiceResult<VehicleAdminViewModel>.Factory.Fail(ex.Message);
+                }
             }
-
-            Vehicle entity = _vehicleRepository.GetDetailed(viewModel.Id);
-            Mapper.Map(viewModel, entity);
-            VehicleModel vehicleModel = _vehicleModelRepository.Get(viewModel.VehicleModel.Id);
-            entity.VehicleModel = vehicleModel;
-
-            if(viewModel.MainImage == null)
-                throw new NullReferenceException("Main image is required");
-
-            var mainImage = _blobStorageService.HandleMedia(viewModel.MainImage, entity.MainImage);
-            entity.MainImage = mainImage as Image;         
-
-            var result = _vehicleRepository.Update(vehicleId, entity);
-
-            /*
-             * Update Images
-             */
-            if (viewModel.Images != null && viewModel.Images.Any())
-            {
-                var existingVehicleImages = _vehicleImageRepository.GetAllVehicleImages(result.ContextObject.Id);
-
-                List<VehicleImageViewModel> vehicleImages = new List<VehicleImageViewModel>();
-                Mapper.Map(existingVehicleImages, vehicleImages);
-                _blobStorageService.HandleMediaCollection(entity.Id, viewModel.Images, vehicleImages);
-            }
-
-            /*
-             * Update Descriptions
-             */
-            UpdateDescriptions(result.ContextObject.Id, viewModel.Descriptions);
-
-            /*
-             * Update Features
-             */
-            UpdateFeatures(result.ContextObject.Id, viewModel.FeaturesAdminSelect);
-
-            var images = _vehicleImageRepository.GetAllVehicleImages(result.ContextObject.Id);
-
-            result.ContextObject.Images = images;
-
-            VehicleAdminViewModel mappedResult = Mapper.Map<VehicleAdminViewModel>(result.ContextObject);
-
-            return ServiceResult<VehicleAdminViewModel>.Factory.Success(mappedResult, result.Message);
         }
 
         public ServiceResult<bool> Delete(int vehicleId)
@@ -307,7 +238,7 @@ namespace Triven.Application.Services
             var vehicle = _vehicleRepository.Get(vehicleId);
             vehicle.VehicleStatus = VehicleStatus.Published;
             var result = _vehicleRepository.Update(vehicleId, vehicle);
-            return result.IsSuccess ? ServiceResult<bool>.Factory.Success() : ServiceResult<bool>.Factory.Fail(result.Message);
+            return result.IsSuccess ? ServiceResult<bool>.Factory.Success(true) : ServiceResult<bool>.Factory.Fail(result.Message);
         }
 
         public ServiceResult<bool> Unpublish(int vehicleId)
@@ -318,7 +249,94 @@ namespace Triven.Application.Services
             var vehicle = _vehicleRepository.Get(vehicleId);
             vehicle.VehicleStatus = VehicleStatus.Unpublished;
             var result = _vehicleRepository.Update(vehicleId, vehicle);
-            return result.IsSuccess ? ServiceResult<bool>.Factory.Success() : ServiceResult<bool>.Factory.Fail(result.Message);
+            return result.IsSuccess ? ServiceResult<bool>.Factory.Success(true) : ServiceResult<bool>.Factory.Fail(result.Message);
+        }
+
+        //
+        // Private methods
+        //
+
+        private void UpdateDescriptions(int vehicleId, List<VehicleDescriptionViewModel> descriptions, UnitOfWorkEntityBase unitOfWork)
+        {
+            if (vehicleId <= 0)
+                throw new ArgumentException("Wrong id");
+
+            var existingDescriptions = _vehicleDescriptionRepository.GetAllVehicleDescriptions(vehicleId);
+
+            if (existingDescriptions.Any())
+            {
+                foreach (var existingDescription in existingDescriptions)
+                {
+                    bool exists = descriptions.Any() && descriptions.Any(x => x.Id == existingDescription.Id);
+
+                    if (!exists)
+                    {
+                        _vehicleDescriptionRepository.Delete(existingDescription.Id, unitOfWork.Context);
+                    }
+                }
+            }
+
+            if (!descriptions.Any()) return;
+
+            foreach (var vehicleDescriptionViewModel in descriptions)
+            {
+                var description = Mapper.Map<VehicleDescription>(vehicleDescriptionViewModel);
+                description.VehicleId = vehicleId;
+
+                if (existingDescriptions.Any() &&
+                    existingDescriptions.Any(x => x.Id == vehicleDescriptionViewModel.Id))
+                {
+                    _vehicleDescriptionRepository.Update(description.Id, description, unitOfWork.Context);
+                }
+                else
+                {
+                    _vehicleDescriptionRepository.Add(description, unitOfWork.Context);
+                }
+            }
+        }
+
+        private void UpdateFeatures(int vehicleId, List<FeatureAdminSelectViewModel> features, UnitOfWorkEntityBase unitOfWork)
+        {
+            if (vehicleId <= 0)
+                throw new ArgumentException("Wrong id");
+
+            var existingFeatures = _vehicleFeatureRepository.GetAllBy(vehicleId);
+
+            if (existingFeatures.Any())
+            {
+                foreach (var existingFeature in existingFeatures)
+                {
+                    bool exists = features.Any() && features.Any(
+                                      x => x.Value == existingFeature.FeatureId.ToString() &&
+                                           existingFeature.VehicleId == vehicleId);
+
+                    if (!exists)
+                    {
+                        _vehicleFeatureRepository.Delete(existingFeature.Id, unitOfWork.Context);
+                    }
+                }
+            }
+
+            if (!features.Any()) return;
+
+            foreach (var vehicleFeature in features)
+            {
+                VehicleFeature newFeature = new VehicleFeature
+                {
+                    VehicleId = vehicleId,
+                    FeatureId = vehicleFeature.Id
+                };
+
+                bool exists = existingFeatures.Any() &&
+                              existingFeatures.Any(x =>
+                                  x.FeatureId == newFeature.FeatureId &&
+                                  x.VehicleId == newFeature.VehicleId);
+
+                if (!exists)
+                {
+                    _vehicleFeatureRepository.Add(newFeature, unitOfWork.Context);
+                }
+            }
         }
     }
 }

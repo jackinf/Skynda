@@ -44,6 +44,45 @@
             public const int FuelTypeId = 6;
             public const int VehicleBodyTypeId = 7;
         }
+
+        public static class ClassificationIds
+        {
+            public static class PaymentType
+            {
+                // TODO
+            }
+
+            public static class Drivetrain
+            {
+                // TODO
+            }
+
+            public static class TransmissionType
+            {
+                // TODO
+            }
+
+            public static class PaymentStatusType
+            {
+                // TODO
+            }
+
+            public static class ManufacturerType
+            {
+                // TODO
+            }
+
+            public static class FuelType
+            {
+                // TODO
+            }
+
+            public static class VehicleBodyType
+            {
+                // TODO
+            }
+
+        }
     }
 
     public static class AppSettings

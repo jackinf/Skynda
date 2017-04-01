@@ -14,6 +14,6 @@ namespace Triven.Data.EntityFramework.Models
         /// Vehicle 
         /// </summary>        
         public int VehicleId { get; set; }
-        public Vehicle Vehicle { get; set; } = new Vehicle();
+        public virtual Vehicle Vehicle { get; set; }
     }
 }

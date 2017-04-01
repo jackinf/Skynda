@@ -89,7 +89,22 @@ namespace Triven.FunctionalTests.IntegrationTests
             // ACT
             //
 
-            var requestParams = new VehicleModelViewModel();
+            var requestParams = new VehicleModelViewModel
+            {
+                ModelCode = $"updated_{Guid.NewGuid()}",
+                Description = $"updated_{Guid.NewGuid()}",
+                Title = $"updated_{Guid.NewGuid()}",
+                Engine = $"updated_{Guid.NewGuid()}",
+                HorsePower = 100,
+                Doors = 5,
+                Seats = 5,
+                Year = 2012,
+                VehicleManufacturerId = vehicleManufacturer.Id,
+                TransmissionId = transmission.Id,
+                DrivetrainId = drivetrain.Id,
+                VehicleBodyId = vehicleBody.Id,
+                FuelTypeId = fuelType.Id
+            };
             var result = NewController().Add(requestParams).GetOkPayload<VehicleModelViewModel>();
 
             //
@@ -108,22 +123,53 @@ namespace Triven.FunctionalTests.IntegrationTests
             // ARRANGE
             //
 
-            var vehicleManufacturer = ClassificationUtils.GetRandomByType(DatabaseConstants.ClassificationTypeId.ManufacturerTypeId);
-            var transmission = ClassificationUtils.GetRandomByType(DatabaseConstants.ClassificationTypeId.TransmissionTypeId);
-            var drivetrain = ClassificationUtils.GetRandomByType(DatabaseConstants.ClassificationTypeId.DrivetrainTypeId);
-            var vehicleBody = ClassificationUtils.GetRandomByType(DatabaseConstants.ClassificationTypeId.VehicleBodyTypeId);
-            var fuelType = ClassificationUtils.GetRandomByType(DatabaseConstants.ClassificationTypeId.FuelTypeId);
+            var vehicleManufacturer = ClassificationUtils.GetByValue("BMW", DatabaseConstants.ClassificationTypeId.ManufacturerTypeId);
+            var transmission = ClassificationUtils.GetByValue("MANUAL", DatabaseConstants.ClassificationTypeId.TransmissionTypeId);
+            var drivetrain = ClassificationUtils.GetByValue("FRONT", DatabaseConstants.ClassificationTypeId.DrivetrainTypeId);
+            var vehicleBody = ClassificationUtils.GetByValue("SEDAN", DatabaseConstants.ClassificationTypeId.VehicleBodyTypeId);
+            var fuelType = ClassificationUtils.GetByValue("DIESEL", DatabaseConstants.ClassificationTypeId.FuelTypeId);
 
-            var vehicleModel1 = VehicleModelUtils.Create();
-            var image1 = ImageUtils.Create();
-            var vehicle1 = VehicleUtils.Create(vehicleModel1.Id, image1.Id);
+            var vehicleModel1 = VehicleModelUtils.Create(
+                vehicleManufacturer.Id, 
+                transmission.Id, 
+                drivetrain.Id, 
+                vehicleBody.Id, 
+                fuelType.Id,
+                modelCode: $"created_{Guid.NewGuid()}",
+                description: $"created_{Guid.NewGuid()}",
+                title: $"created_{Guid.NewGuid()}",
+                engine: $"created_{Guid.NewGuid()}",
+                horsePower: 200,
+                doors: 4,
+                seats: 3,
+                year: 2011);
 
             //
             // ACT
             //
 
-            var controller = NewController();
-            var result = controller.Update(vehicle1.Id, new VehicleModelViewModel()).GetOkPayload<VehicleModelViewModel>();
+            var vehicleManufacturerForUpdate = ClassificationUtils.GetByValue("BUGATTI", DatabaseConstants.ClassificationTypeId.ManufacturerTypeId);
+            var transmissionForUpdate = ClassificationUtils.GetByValue("AUTOMATIC", DatabaseConstants.ClassificationTypeId.TransmissionTypeId);
+            var drivetrainForUpdate = ClassificationUtils.GetByValue("REAR", DatabaseConstants.ClassificationTypeId.DrivetrainTypeId);
+            var vehicleBodyForUpdate = ClassificationUtils.GetByValue("HATCHBACK", DatabaseConstants.ClassificationTypeId.VehicleBodyTypeId);
+            var fuelTypeForUpdate = ClassificationUtils.GetByValue("PETROL", DatabaseConstants.ClassificationTypeId.FuelTypeId);
+            var requestParams = new VehicleModelViewModel
+            {
+                ModelCode = $"updated_{Guid.NewGuid()}",
+                Description = $"updated_{Guid.NewGuid()}",
+                Title = $"updated_{Guid.NewGuid()}",
+                Engine = $"updated_{Guid.NewGuid()}",
+                HorsePower = 100,
+                Doors = 5,
+                Seats = 5,
+                Year = 2012,
+                VehicleManufacturerId = vehicleManufacturerForUpdate.Id,
+                TransmissionId = transmissionForUpdate.Id,
+                DrivetrainId = drivetrainForUpdate.Id,
+                VehicleBodyId = vehicleBodyForUpdate.Id,
+                FuelTypeId = fuelTypeForUpdate.Id
+            };
+            var result = NewController().Update(vehicleModel1.Id, requestParams).GetOkPayload<VehicleModelViewModel>();
 
             //
             // ASSERT
@@ -154,6 +200,7 @@ namespace Triven.FunctionalTests.IntegrationTests
             Assert.IsTrue(isSuccess);
             var fromDb = GetFromDb<Vehicle>(vehicleModel1.Id);
             Assert.IsTrue(fromDb.DeletedOn.HasValue);
+            Assert.IsTrue(fromDb.IsArchived);
 
             // TODO: Assert
         }

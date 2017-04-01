@@ -14,6 +14,7 @@ using Triven.Domain.Models;
 using Triven.Domain.Repositories;
 using Triven.Domain.Results;
 using Triven.Domain.Services;
+using Triven.Domain.UnitOfWorks;
 using Triven.Domain.ViewModels.BlobStorage;
 using Triven.Domain.ViewModels.Image;
 using Triven.Domain.ViewModels.Vehicle;
@@ -159,7 +160,7 @@ namespace Triven.Application.Services
             
         }
 
-        public IImage HandleMedia(ImageViewModel mediaViewModel, IImage existingMedia)
+        public IImage HandleMedia(ImageViewModel mediaViewModel, IImage existingMedia, IDbContext context = null)
         {
             //TODO see if logic is how it's suppose to . It feels like checks can be simplified and there's too much...
 
@@ -221,11 +222,11 @@ namespace Triven.Application.Services
                         var mappedImageEntity = Mapper.Map<ImageViewModel, Image>(viewModel);
 
                         if (existingMedia == null || existingMedia.Id == 0)
-                            return _imageRepository.Add(mappedImageEntity).ContextObject;
+                            return _imageRepository.Add(mappedImageEntity, context).ContextObject;
 
                         mappedImageEntity.Id = existingMedia.Id;
 
-                        _imageRepository.Update(existingMedia.Id, mappedImageEntity);
+                        _imageRepository.Update(existingMedia.Id, mappedImageEntity, context);
 
                         return mappedImageEntity;
                     }
@@ -246,15 +247,18 @@ namespace Triven.Application.Services
                     .Create(mediaViewModel.Url, mediaViewModel.BlobName, mediaViewModel.ContainerName);
 
             var mappedNewImageEntity = Mapper.Map<ImageViewModel, Image>(newImage);
+            mappedNewImageEntity.ThumbnailUrl = !string.IsNullOrWhiteSpace(mappedNewImageEntity.ThumbnailUrl) 
+                ? newImage.Url 
+                : mappedNewImageEntity.ThumbnailUrl;
 
-            _imageRepository.Add(mappedNewImageEntity);
+            _imageRepository.Add(mappedNewImageEntity, context);
 
             DeleteBlobIfExists(existingMedia);
 
             return mappedNewImageEntity;
         }
 
-        public void HandleMediaCollection(int vehicleId, IList<VehicleImageViewModel> mediaViewModel, IList<VehicleImageViewModel> existingMedia)
+        public void HandleMediaCollection(int vehicleId, IList<VehicleImageViewModel> mediaViewModel, IList<VehicleImageViewModel> existingMedia, IDbContext context = null)
         {
             if (existingMedia.Any())
             {
@@ -265,7 +269,7 @@ namespace Triven.Application.Services
 
                     if (!exists)
                     {
-                        _vehicleImageRepository.Delete(existingVehicleImage.Id);
+                        _vehicleImageRepository.Delete(existingVehicleImage.Id, context);
                     }
                 }
             }
@@ -297,7 +301,7 @@ namespace Triven.Application.Services
 
                 if (!exists)
                 {
-                    _vehicleImageRepository.Add(entityVehicleImage);
+                    _vehicleImageRepository.Add(entityVehicleImage, context);
                 }
             }            
         }

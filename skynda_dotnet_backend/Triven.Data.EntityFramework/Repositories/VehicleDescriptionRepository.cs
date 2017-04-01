@@ -5,6 +5,7 @@ using Triven.Data.EntityFramework.Models;
 using Triven.Data.EntityFramework.Repositories.Base;
 using Triven.Domain.Repositories;
 using Triven.Domain.Results;
+using Triven.Domain.UnitOfWorks;
 
 namespace Triven.Data.EntityFramework.Repositories
 {
@@ -16,22 +17,22 @@ namespace Triven.Data.EntityFramework.Repositories
                 return BaseQuery(context).Where(x => x.Vehicle.Id == vehicleId).ToList();
         }
 
-        public IResult<VehicleDescription> Add(VehicleDescription model)
+        public override IResult<VehicleDescription> Add(VehicleDescription model, IDbContext context = null)
         {
-            using (var context = new ApplicationDbContext())
+            return HandleWithContext(context, dbContext =>
             {
-                context.Entry(model.Vehicle).State = EntityState.Unchanged;
-                return base.Add(model, context);
-            }
+                //dbContext.Entry(model.Vehicle).State = EntityState.Unchanged;
+                return base.Add(model, dbContext);
+            });
         }
 
-        public IResult<VehicleDescription> Update(int id, VehicleDescription model)
+        public override IResult<VehicleDescription> Update(int id, VehicleDescription model, IDbContext context = null)
         {
-            using (var context = new ApplicationDbContext())
+            return HandleWithContext(context, dbContext =>
             {
-                context.Entry(model.Vehicle).State = EntityState.Unchanged;
-                return base.Update(id, model, context);
-            }
+                //dbContext.Entry(model.Vehicle).State = EntityState.Unchanged;
+                return base.Update(id, model, dbContext);
+            });
         }
     }
 }
