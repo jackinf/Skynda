@@ -21,21 +21,29 @@ namespace Triven.FunctionalTests.Utils.EntityHelpers
             int transmissionId,
             int drivetrainId,
             int vehicleBodyId,
-            int fuelTypeId)
+            int fuelTypeId,
+            string modelCode = null,
+            string description = null,
+            string title = null,
+            string engine = null,
+            int? horsePower = null,
+            int? doors = null,
+            int? seats = null,
+            int? year = null)
         {
             using (var context = EntityFrameworkTestHelper.CreateContext())
             {
                 var random = new Random();
                 var newVehicleModel = context.VehicleModels.Add(new VehicleModel
                 {
-                    Description = Guid.NewGuid().ToString(),
-                    Title = Guid.NewGuid().ToString(),
-                    HorsePower = random.Next(200, 500),
-                    Doors = random.Next(2, 5),
-                    Seats = random.Next(2, 10),
-                    ModelCode = Guid.NewGuid().ToString(),
-                    Engine = Guid.NewGuid().ToString(),
-                    Year = random.Next(DateTime.Now.Year - 15, DateTime.Now.Year),
+                    Description = description ?? Guid.NewGuid().ToString(),
+                    Title = title ?? Guid.NewGuid().ToString(),
+                    HorsePower = horsePower ?? random.Next(200, 500),
+                    Doors = doors ?? random.Next(2, 5),
+                    Seats = seats ?? random.Next(2, 10),
+                    ModelCode = modelCode ?? Guid.NewGuid().ToString(),
+                    Engine = engine ?? Guid.NewGuid().ToString(),
+                    Year = year ?? random.Next(DateTime.Now.Year - 15, DateTime.Now.Year),
 
                     VehicleManufacturerId = vehicleManufacturerId,
                     TransmissionId = transmissionId,

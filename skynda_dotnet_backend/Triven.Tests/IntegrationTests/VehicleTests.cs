@@ -1,10 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using NUnit.Framework;
 using Triven.API.Controllers;
 using Triven.Data.EntityFramework.Models;
 using Triven.Domain.Enums;
+using Triven.Domain.ViewModels.Feature;
+using Triven.Domain.ViewModels.Image;
 using Triven.Domain.ViewModels.Vehicle;
 using Triven.Domain.ViewModels.Vehicle.Requests;
 using Triven.FunctionalTests.Utils;
@@ -115,9 +118,58 @@ namespace Triven.FunctionalTests.IntegrationTests
             // ACT
             //
 
+            var mainImage = new ImageViewModel
+            {
+                Url = "http://www.google.com"
+            };
+            var vehicleModel = new VehicleModelViewModel { Id = vehicleModel1.Id };
+            var selecedFeatures = new List<FeatureAdminSelectViewModel>
+            {
+                new FeatureAdminSelectViewModel {Id = FeatureUtils.GetByValue("PARKING_SENSORS").Id},
+                new FeatureAdminSelectViewModel {Id = FeatureUtils.GetByValue("BLUETOOTH").Id}
+            };
+            var images = new List<VehicleImageViewModel>
+            {
+                new VehicleImageViewModel
+                {
+                    Image = new ImageViewModel
+                    {
+                        Url = "test123",
+                        // TODO: Handle thumbnail url
+                    }
+                }
+            };
+            var descriptions = new List<VehicleDescriptionViewModel>
+            {
+                new VehicleDescriptionViewModel
+                {
+                    Title = Guid.NewGuid().ToString(),
+                    Content = Guid.NewGuid().ToString()
+                }
+            };
             var requestParam = new VehicleAdminViewModel
             {
-                
+                VinCode = $"created_{Guid.NewGuid()}",
+                Price = 10000,
+                RegistrationNumber = $"created_{Guid.NewGuid()}",
+                Mileage = 10001,
+                ColorOutsideHex = $"created_{Guid.NewGuid()}",
+                ColorInsideHex = $"created_{Guid.NewGuid()}",
+                FuelCity = 1002,
+                FuelHighway = 1003,
+                CompressionRatio = 1004,
+                CompressionType = $"created_{Guid.NewGuid()}",
+                Configuration = $"created_{Guid.NewGuid()}",
+                Cylinders = $"created_{Guid.NewGuid()}",
+                Displacement = $"created_{Guid.NewGuid()}",
+                Size = 8,
+                Torque = 6,
+                TotalValves = 7,
+                SafetyUrl = $"created_{Guid.NewGuid()}",
+                SafetyStars = 4,
+                Additional = $"created_{Guid.NewGuid()}",
+
+
             };
             var result = NewController().Add(requestParam).GetOkPayload<VehicleReportViewModel>();
 

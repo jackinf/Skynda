@@ -31,6 +31,8 @@ namespace Triven.FunctionalTests.IntegrationTests
             //
             // ASSERT
             //
+
+            Assert.Fail("Not implemented");
         }
 
         [Test]
@@ -47,6 +49,8 @@ namespace Triven.FunctionalTests.IntegrationTests
             //
             // ASSERT
             //
+
+            Assert.Fail("Not implemented");
         }
 
         [Test]
@@ -63,6 +67,8 @@ namespace Triven.FunctionalTests.IntegrationTests
             //
             // ASSERT
             //
+
+            Assert.Fail("Not implemented");
         }
 
         [Test]
@@ -79,6 +85,8 @@ namespace Triven.FunctionalTests.IntegrationTests
             //
             // ASSERT
             //
+
+            Assert.Fail("Not implemented");
         }
 
         [Test]
@@ -95,6 +103,8 @@ namespace Triven.FunctionalTests.IntegrationTests
             //
             // ASSERT
             //
+
+            Assert.Fail("Not implemented");
         }
     }
 }

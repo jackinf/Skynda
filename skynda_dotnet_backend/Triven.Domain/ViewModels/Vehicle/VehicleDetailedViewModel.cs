@@ -6,7 +6,7 @@ using Triven.Domain.ViewModels.Image;
 
 namespace Triven.Domain.ViewModels.Vehicle
 {
-    public class VehicleDetailedViewModel : BaseViewModel, ImageStorable<ImageViewModel>
+    public class VehicleDetailedViewModel : BaseViewModel //, ImageStorable<ImageViewModel>
     {
         public string VinCode { get; set; }
         public decimal Price { get; set; }
@@ -58,6 +58,6 @@ namespace Triven.Domain.ViewModels.Vehicle
 
         }
 
-        public ImageViewModel GetImage { get; set; }
+        //public ImageViewModel GetImage { get; set; }
     }
 }

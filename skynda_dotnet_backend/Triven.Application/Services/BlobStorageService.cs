@@ -246,6 +246,9 @@ namespace Triven.Application.Services
                     .Create(mediaViewModel.Url, mediaViewModel.BlobName, mediaViewModel.ContainerName);
 
             var mappedNewImageEntity = Mapper.Map<ImageViewModel, Image>(newImage);
+            mappedNewImageEntity.ThumbnailUrl = !string.IsNullOrWhiteSpace(mappedNewImageEntity.ThumbnailUrl) 
+                ? newImage.Url 
+                : mappedNewImageEntity.ThumbnailUrl;
 
             _imageRepository.Add(mappedNewImageEntity);
 
