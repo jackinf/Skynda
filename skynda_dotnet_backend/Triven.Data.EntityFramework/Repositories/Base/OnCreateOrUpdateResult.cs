@@ -11,17 +11,23 @@ namespace Triven.Data.EntityFramework.Repositories.Base
         {
             public static OnCreateOrUpdateResult<TModel> Success(TModel contextModel)
             {
-                var result = new OnCreateOrUpdateResult<TModel>();
-                result.IsSuccess = true;
-                result.ContextObject = contextModel;
+                var result = new OnCreateOrUpdateResult<TModel>
+                {
+                    IsSuccess = true,
+                    ContextObject = contextModel
+                };
+
                 return result;
             }
 
             public static OnCreateOrUpdateResult<TModel> Fail(Exception ex)
             {
-                var result = new OnCreateOrUpdateResult<TModel>();
-                result.IsSuccess = false;
-                result.ErrorMessage = ex.Message;
+                var result = new OnCreateOrUpdateResult<TModel>
+                {
+                    IsSuccess = false,
+                    ErrorMessage = ex.Message
+                };
+
                 return result;
             }
         }

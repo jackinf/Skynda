@@ -15,7 +15,9 @@ namespace Triven.Data.EntityFramework.Repositories
         public IList<VehicleReport> GetAllBy(int vehicleId)
         {
             using (var context = new ApplicationDbContext())
+            {
                 return BaseQuery(context).Where(x => x.Vehicle.Id == vehicleId).ToList();
+            }
         }
 
         public IResult<VehicleReport> Add(int vehicleId, VehicleReport entity)
@@ -26,8 +28,21 @@ namespace Triven.Data.EntityFramework.Repositories
 
         public IResult<VehicleReport> Update(int vehicleId, int id, VehicleReport entity)
         {
-            entity.VehicleId = vehicleId;
-            return base.Update(id, entity);
+            using (var context = new ApplicationDbContext())
+            {
+                entity.VehicleId = vehicleId;                
+                return base.Update(id, entity, context);
+            }
+            
+        }
+
+        public VehicleReport GetFull(int id)
+        {
+            return HandleWithContext(dbContext => BaseQuery(dbContext)
+                .Include(x => x.Faults.Select(i => i.Image))
+                .Include(x => x.Items)
+                .FirstOrDefault(x => x.Id == id)
+            );
         }
     }
 }

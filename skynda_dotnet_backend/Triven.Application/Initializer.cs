@@ -88,8 +88,7 @@ namespace Triven.Application
                     .ForMember(x => x.Id, opt => opt.Ignore())
                     .ForMember(x => x.Vehicle, conf => conf.Ignore());
 
-                //configuration.CreateMap<VehicleFault, VehicleFaultViewModel>();
-                //configuration.CreateMap<VehicleFaultViewModel, VehicleFault>();
+                configuration.CreateMap<VehicleFault, FaultBaseViewModel>().ReverseMap();
 
                 configuration.CreateMap<VehicleFeature, VehicleFeatureViewModel>().PreserveReferences()
                     .ForMember(x => x.Vehicle, conf => conf.Ignore());
