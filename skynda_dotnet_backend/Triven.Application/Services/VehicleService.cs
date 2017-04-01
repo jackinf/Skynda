@@ -204,8 +204,7 @@ namespace Triven.Application.Services
                      */
                     UpdateFeatures(result.ContextObject.Id, viewModel.FeaturesAdminSelect, unitOfWork);
 
-                    var images = _vehicleImageRepository.GetAllVehicleImages(result.ContextObject.Id);
-
+                    var images = _vehicleImageRepository.GetAllVehicleImages(result.ContextObject.Id, unitOfWork.Context);
                     result.ContextObject.Images = images;
 
                     VehicleAdminViewModel mappedResult = Mapper.Map<VehicleAdminViewModel>(result.ContextObject);

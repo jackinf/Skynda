@@ -287,7 +287,7 @@ namespace Triven.Application.Services
                     Mapper.Map(existingMediaSingle.Image, image);
                 }
                 
-                var imageResult = HandleMedia(imageViewModel.Image, image);
+                var imageResult = HandleMedia(imageViewModel.Image, image, context);
 
                 bool exists = existingMedia.Any() &&
                               existingMedia.Any(x =>
@@ -295,8 +295,8 @@ namespace Triven.Application.Services
 
                 var entityVehicleImage = new VehicleImage
                 {
-                    Vehicle = new Vehicle {Id = vehicleId},
-                    Image = imageResult as Image
+                    VehicleId = vehicleId,
+                    ImageId = imageResult.Id
                 };
 
                 if (!exists)
