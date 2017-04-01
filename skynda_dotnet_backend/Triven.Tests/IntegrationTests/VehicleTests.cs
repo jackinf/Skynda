@@ -198,7 +198,27 @@ namespace Triven.FunctionalTests.IntegrationTests
 
             var vehicleModel1 = VehicleModelUtils.Create();
             var image1 = ImageUtils.Create();
-            var vehicle1 = VehicleUtils.Create(vehicleModel1.Id, image1.Id);
+            var vehicle1 = VehicleUtils.Create(vehicleModel1.Id, image1.Id,
+                vinCode: $"created_{Guid.NewGuid()}",
+                price: 1000,
+                registrationNumber: $"created_{Guid.NewGuid()}",
+                mileage: 2000,
+                colorOutsideHex: $"created_{Guid.NewGuid()}",
+                colorInsideHex: $"created_{Guid.NewGuid()}",
+                fuelCity: 3000,
+                fuelHighway: 4000,
+                compressionRatio: 5000,
+                compressionType: $"created_{Guid.NewGuid()}",
+                configuration: $"created_{Guid.NewGuid()}",
+                cylinders: $"created_{Guid.NewGuid()}",
+                displacement: $"created_{Guid.NewGuid()}",
+                size: 6000,
+                torque: 7000,
+                totalValves: 8000,
+                safetystars: 5,
+                safetyUrl: $"created_{Guid.NewGuid()}",
+                additional: $"created_{Guid.NewGuid()}",
+                vehicleStatus: VehicleStatus.Unpublished);
             var feature1 = FeatureUtils.GetByValue("PARKING_SENSORS");
             var feature2 = FeatureUtils.GetByValue("BLUETOOTH");
 
