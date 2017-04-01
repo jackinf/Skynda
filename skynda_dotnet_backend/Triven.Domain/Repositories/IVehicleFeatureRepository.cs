@@ -10,6 +10,5 @@ namespace Triven.Domain.Repositories
     {
         IList<TVehicleFeatureEntity> GetAllBy(int vehicleId);
         IList<TVehicleFeatureEntity> GetAllBy(int vehicleId, bool isActive);
-        IResult<TVehicleFeatureEntity> Add(TVehicleFeatureEntity model);
     }
 }

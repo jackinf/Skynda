@@ -1,10 +1,15 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
+using System.Diagnostics;
+using System.Reflection;
+using System.Web.UI.WebControls;
 using NUnit.Framework;
 using Triven.Application;
 using Triven.Data.EntityFramework;
 using Triven.Data.EntityFramework.Migrations;
+using Triven.Data.EntityFramework.Models;
 using Triven.FunctionalTests.Utils.EntityHelpers;
 
 namespace Triven.FunctionalTests.Utils
@@ -49,21 +54,43 @@ namespace Triven.FunctionalTests.Utils
         {
             using (var context = CreateContext())
             {
+                context.Database.Log = s => Debug.WriteLine(s);
+
                 //context.Classifications.RemoveRange(context.Classifications);
                 //context.ClassificationTypes.RemoveRange(context.ClassificationTypes);
-                context.Features.RemoveRange(context.Features);
-                context.Images.RemoveRange(context.Images);
-                context.Subscriptions.RemoveRange(context.Subscriptions);
-                context.Vehicles.RemoveRange(context.Vehicles);
-                context.VehicleDescriptions.RemoveRange(context.VehicleDescriptions);
-                context.VehicleFaults.RemoveRange(context.VehicleFaults);
-                context.VehicleFeatures.RemoveRange(context.VehicleFeatures);
-                context.VehicleImages.RemoveRange(context.VehicleImages);
-                context.VehicleModels.RemoveRange(context.VehicleModels);
-                context.VehicleReports.RemoveRange(context.VehicleReports);
-                context.VehicleReportItems.RemoveRange(context.VehicleReportItems);
-                context.VehicleReviews.RemoveRange(context.VehicleReviews);
-                context.SaveChanges();
+                //context.Features.RemoveRange(context.Features);
+
+                List<string> listOfTableNames = new List<string>
+                {
+                    "VehicleImage",
+                    "VehicleDescription",
+                    "VehicleReportItem",
+                    "VehicleReport",
+                    "VehicleFeature",
+                    "VehicleFault",
+                    "Vehicle",
+                    "Image",
+                    "VehicleModel",
+                    "Subscription"
+                };
+                foreach (var tableName in listOfTableNames)
+                {
+                    context.Database.ExecuteSqlCommand("DELETE FROM [" + tableName + "]");
+                }
+
+                //context.VehicleImages.RemoveRange(context.VehicleImages);
+                //context.VehicleDescriptions.RemoveRange(context.VehicleDescriptions);
+                //context.Vehicles.RemoveRange(context.Vehicles);
+                //context.Images.RemoveRange(context.Images);
+                //context.VehicleReportItems.RemoveRange(context.VehicleReportItems);
+                //context.VehicleReports.RemoveRange(context.VehicleReports);
+                //context.VehicleReviews.RemoveRange(context.VehicleReviews);
+                //context.VehicleFeatures.RemoveRange(context.VehicleFeatures);
+                //context.VehicleFaults.RemoveRange(context.VehicleFaults);
+                //context.SaveChanges();
+                //context.VehicleModels.RemoveRange(context.VehicleModels);
+                //context.Subscriptions.RemoveRange(context.Subscriptions);
+                //context.SaveChanges();
             }
         }
 

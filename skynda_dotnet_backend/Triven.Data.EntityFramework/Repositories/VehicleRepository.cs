@@ -21,6 +21,7 @@ namespace Triven.Data.EntityFramework.Repositories
                 return BaseQuery(dbContext)
                     .Include(x => x.VehicleModel)
                     .Include(x => x.VehicleModel.VehicleManufacturer)
+                    .Include(x => x.MainImage)
                     .OrderBy(x => x.Id)
                     .ToList();
             });

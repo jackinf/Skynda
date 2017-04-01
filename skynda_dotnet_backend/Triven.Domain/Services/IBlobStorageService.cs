@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using Triven.Domain.Models;
 using Triven.Domain.Results;
+using Triven.Domain.UnitOfWorks;
 using Triven.Domain.ViewModels.BlobStorage;
 using Triven.Domain.ViewModels.Image;
 using Triven.Domain.ViewModels.Vehicle;
@@ -18,8 +19,8 @@ namespace Triven.Domain.Services
         ServiceResult<MemoryStream> Download(DownloadBlobViewModel viewModel);
         ServiceResult<bool> Delete(DeleteBlobViewModel viewModel);
 
-        IImage HandleMedia(ImageViewModel mediaViewModel, IImage existingMedia);
+        IImage HandleMedia(ImageViewModel mediaViewModel, IImage existingMedia, IDbContext context = null);
 
-        void HandleMediaCollection(int vehicleId, IList<VehicleImageViewModel> mediaViewModel, IList<VehicleImageViewModel> existingMedia);
+        void HandleMediaCollection(int vehicleId, IList<VehicleImageViewModel> mediaViewModel, IList<VehicleImageViewModel> existingMedia, IDbContext context = null);
     }
 }

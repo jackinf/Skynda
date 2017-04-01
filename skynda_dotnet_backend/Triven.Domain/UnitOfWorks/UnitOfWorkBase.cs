@@ -5,19 +5,19 @@ namespace Triven.Domain.UnitOfWorks
     public abstract class UnitOfWorkBase<TDbContext> : IDisposable
         where TDbContext : class, IDbContext
     {
-        public TDbContext _context;
+        public TDbContext Context;
 
         protected UnitOfWorkBase()
         {
-            _context = Activator.CreateInstance(typeof(TDbContext)) as TDbContext;
+            Context = Activator.CreateInstance(typeof(TDbContext)) as TDbContext;
         }
 
-        public void SaveChanges() => _context.SaveChanges();
+        public void SaveChanges() => Context.SaveChanges();
         private bool _isDisposed;
         protected virtual void Dispose(bool isDisposing)
         {
             if (!_isDisposed && isDisposing)
-                _context.Dispose();
+                Context.Dispose();
             _isDisposed = true;
         }
 

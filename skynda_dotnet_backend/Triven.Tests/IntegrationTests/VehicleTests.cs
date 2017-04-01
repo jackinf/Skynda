@@ -42,7 +42,7 @@ namespace Triven.FunctionalTests.IntegrationTests
 
             var results = NewController()
                 .GetAll(new SearchRequestViewModel())
-                .GetOkPayload<IEnumerable<VehicleModelViewModel>>().ToList();
+                .GetOkPayload<IEnumerable<VehicleCompactViewModel>>().ToList();
 
             //
             // ASSERT
@@ -69,7 +69,7 @@ namespace Triven.FunctionalTests.IntegrationTests
             // ACT
             //
 
-            var result = NewController().Get(vehicle1.Id).GetOkPayload<VehicleReportViewModel>();
+            var result = NewController().Get(vehicle1.Id).GetOkPayload<VehicleDetailedViewModel>();
 
             //
             // ASSERT
@@ -93,7 +93,7 @@ namespace Triven.FunctionalTests.IntegrationTests
             // ACT
             //
 
-            var result = NewController().GetDetailed(vehicle1.Id).GetOkPayload<VehicleReportViewModel>();
+            var result = NewController().GetDetailed(vehicle1.Id).GetOkPayload<VehicleAdminViewModel>();
 
             //
             // ASSERT
@@ -113,6 +113,8 @@ namespace Triven.FunctionalTests.IntegrationTests
 
             var vehicleModel1 = VehicleModelUtils.Create();
             var image1 = ImageUtils.Create();
+            var feature1 = FeatureUtils.GetByValue("PARKING_SENSORS");
+            var feature2 = FeatureUtils.GetByValue("BLUETOOTH");
 
             //
             // ACT
@@ -125,8 +127,8 @@ namespace Triven.FunctionalTests.IntegrationTests
             var vehicleModel = new VehicleModelViewModel { Id = vehicleModel1.Id };
             var selecedFeatures = new List<FeatureAdminSelectViewModel>
             {
-                new FeatureAdminSelectViewModel {Id = FeatureUtils.GetByValue("PARKING_SENSORS").Id},
-                new FeatureAdminSelectViewModel {Id = FeatureUtils.GetByValue("BLUETOOTH").Id}
+                new FeatureAdminSelectViewModel {Id = feature1.Id},
+                new FeatureAdminSelectViewModel {Id = feature2.Id}
             };
             var images = new List<VehicleImageViewModel>
             {
@@ -134,7 +136,8 @@ namespace Triven.FunctionalTests.IntegrationTests
                 {
                     Image = new ImageViewModel
                     {
-                        Url = "test123",
+                        Id = image1.Id,
+                        Url = image1.Url,
                         // TODO: Handle thumbnail url
                     }
                 }
@@ -169,9 +172,13 @@ namespace Triven.FunctionalTests.IntegrationTests
                 SafetyStars = 4,
                 Additional = $"created_{Guid.NewGuid()}",
 
-
+                MainImage = mainImage,
+                VehicleModel = vehicleModel,
+                FeaturesAdminSelect = selecedFeatures,
+                Images = images,
+                Descriptions = descriptions,
             };
-            var result = NewController().Add(requestParam).GetOkPayload<VehicleReportViewModel>();
+            var result = NewController().Add(requestParam).GetOkPayload<VehicleAdminViewModel>();
 
             //
             // ASSERT
@@ -192,13 +199,72 @@ namespace Triven.FunctionalTests.IntegrationTests
             var vehicleModel1 = VehicleModelUtils.Create();
             var image1 = ImageUtils.Create();
             var vehicle1 = VehicleUtils.Create(vehicleModel1.Id, image1.Id);
+            var feature1 = FeatureUtils.GetByValue("PARKING_SENSORS");
+            var feature2 = FeatureUtils.GetByValue("BLUETOOTH");
 
             //
             // ACT
             //
 
-            var requestParam = new VehicleAdminViewModel();
-            var result = NewController().Update(vehicle1.Id, requestParam).GetOkPayload<VehicleReportViewModel>();
+            var mainImage = new ImageViewModel
+            {
+                Url = "http://www.google.com"
+            };
+            var vehicleModel = new VehicleModelViewModel { Id = vehicleModel1.Id };
+            var selecedFeatures = new List<FeatureAdminSelectViewModel>
+            {
+                new FeatureAdminSelectViewModel {Id = feature1.Id},
+                new FeatureAdminSelectViewModel {Id = feature2.Id}
+            };
+            var images = new List<VehicleImageViewModel>
+            {
+                new VehicleImageViewModel
+                {
+                    Image = new ImageViewModel
+                    {
+                        Id = image1.Id,
+                        Url = image1.Url,
+                        // TODO: Handle thumbnail url
+                    }
+                }
+            };
+            var descriptions = new List<VehicleDescriptionViewModel>
+            {
+                new VehicleDescriptionViewModel
+                {
+                    Title = Guid.NewGuid().ToString(),
+                    Content = Guid.NewGuid().ToString()
+                }
+            };
+            var requestParam = new VehicleAdminViewModel
+            {
+                VinCode = $"updated_{Guid.NewGuid()}",
+                Price = 10000,
+                RegistrationNumber = $"updated_{Guid.NewGuid()}",
+                Mileage = 10001,
+                ColorOutsideHex = $"updated_{Guid.NewGuid()}",
+                ColorInsideHex = $"updated_{Guid.NewGuid()}",
+                FuelCity = 1002,
+                FuelHighway = 1003,
+                CompressionRatio = 1004,
+                CompressionType = $"updated_{Guid.NewGuid()}",
+                Configuration = $"updated_{Guid.NewGuid()}",
+                Cylinders = $"updated_{Guid.NewGuid()}",
+                Displacement = $"updated_{Guid.NewGuid()}",
+                Size = 8,
+                Torque = 6,
+                TotalValves = 7,
+                SafetyUrl = $"updated_{Guid.NewGuid()}",
+                SafetyStars = 4,
+                Additional = $"updated_{Guid.NewGuid()}",
+
+                MainImage = mainImage,
+                VehicleModel = vehicleModel,
+                FeaturesAdminSelect = selecedFeatures,
+                Images = images,
+                Descriptions = descriptions
+            };
+            var result = NewController().Update(vehicle1.Id, requestParam).GetOkPayload<VehicleAdminViewModel>();
 
             //
             // ASSERT
@@ -241,20 +307,20 @@ namespace Triven.FunctionalTests.IntegrationTests
             //
 
             var vehicle1 = VehicleUtils.CreateWithVehicleModelAndImage();
+            var vehicle2 = VehicleUtils.CreateWithVehicleModelAndImage();
 
             //
             // ACT
             //
 
             var requestParam = new SearchRequestViewModel();
-            var isSuccess = NewController().Search(requestParam).GetOkPayload<bool>();
+            var items = NewController().Search(requestParam).GetOkPayload<IList<VehicleCompactViewModel>>();
 
             //
             // ASSERT
             //
 
-            Assert.IsTrue(isSuccess);
-            var fromDb = GetFromDb<Vehicle>(vehicle1.Id);
+            Assert.AreEqual(2, items.Count);
 
             // TODO: Assert
         }

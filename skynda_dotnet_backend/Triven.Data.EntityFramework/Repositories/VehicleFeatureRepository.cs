@@ -5,6 +5,7 @@ using Triven.Data.EntityFramework.Models;
 using Triven.Data.EntityFramework.Repositories.Base;
 using Triven.Domain.Repositories;
 using Triven.Domain.Results;
+using Triven.Domain.UnitOfWorks;
 
 namespace Triven.Data.EntityFramework.Repositories
 {
@@ -29,15 +30,17 @@ namespace Triven.Data.EntityFramework.Repositories
             }
         }
 
-        public IResult<VehicleFeature> Add(VehicleFeature model)
+        public override IResult<VehicleFeature> Add(VehicleFeature model, IDbContext context = null)
         {
-            using (var context = new ApplicationDbContext())
+            return HandleWithContext(context, dbContext =>
             {
-                context.Entry(model.Feature).State = EntityState.Unchanged;
-                context.Entry(model.Vehicle).State = EntityState.Unchanged;
-                return base.Add(model, context);
-            }
-            
+                //if (model.Feature != null)
+                //    dbContext.Entry(model.Feature).State = EntityState.Unchanged;
+                //if (model.Vehicle != null)
+                //    dbContext.Entry(model.Vehicle).State = EntityState.Unchanged;
+                return base.Add(model, dbContext);
+            });
+
         }
     }
 }
