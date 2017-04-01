@@ -66,6 +66,7 @@ namespace Triven.FunctionalTests.Utils
                     "VehicleDescription",
                     "VehicleReportItem",
                     "VehicleReport",
+                    "VehicleReview",
                     "VehicleFeature",
                     "VehicleFault",
                     "Vehicle",
