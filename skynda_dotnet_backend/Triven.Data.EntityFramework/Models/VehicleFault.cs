@@ -10,7 +10,7 @@ namespace Triven.Data.EntityFramework.Models
         public string Text { get; set; }
 
         public int? ImageId { get; set; }        
-        public virtual Image Image { get; set; }        
+        public Image Image { get; set; }        
 
         public int VehicleReportId { get; set; }
         public virtual VehicleReport VehicleReport { get; set; }

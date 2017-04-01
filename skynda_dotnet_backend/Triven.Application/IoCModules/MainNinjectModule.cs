@@ -46,6 +46,7 @@ namespace Triven.Application.IoCModules
             Kernel.Bind<IVehicleReviewRepository<VehicleReview>>().To<VehicleReviewRepository>().InTransientScope();
             Kernel.Bind<IVehicleRepository<Vehicle>>().To<VehicleRepository>().InTransientScope();
             Kernel.Bind<IVehicleImageRepository<VehicleImage>>().To<VehicleImageRepository>().InTransientScope();
+            Kernel.Bind<IVehicleFaultRepository<VehicleFault>>().To<VehicleFaultRepository>().InTransientScope();
             
         }
     }

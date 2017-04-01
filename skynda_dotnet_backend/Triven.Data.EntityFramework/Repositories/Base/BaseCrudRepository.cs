@@ -4,8 +4,6 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using Triven.Data.EntityFramework.Exceptions;
-using System.Reflection;
-using Triven.Data.EntityFramework.Models.Base;
 using Triven.Domain.Models.Base;
 using Triven.Domain.Repositories.Base;
 using Triven.Domain.Results;
@@ -81,18 +79,12 @@ namespace Triven.Data.EntityFramework.Repositories.Base
                     BeforeAdd(model);
                     dbContext.Set<TModel>().Add(model);
                     dbContext.SaveChanges();
-                    //int save = SaveModelWithComplexTypes(model, dbContext);
-
                     return OnCreateOrUpdateResult<TModel>.Factory.Success(model);
                 }
                 catch (DbUpdateException ex)
                 {
                     if (ItemExists(model.Id))
                         return OnCreateOrUpdateResult<TModel>.Factory.Fail(ex);
-                    throw;
-                }
-                catch (Exception ex)
-                {
                     throw;
                 }
             });
@@ -118,8 +110,6 @@ namespace Triven.Data.EntityFramework.Repositories.Base
                     model.UpdatedOn = DateTime.Now;
                     model.ModifierUserIp = HttpContextManager.Current?.Request?.UserHostAddress;
                     dbContext.SaveChanges();
-                    //int save = SaveModelWithComplexTypes(model, dbContext);
-
                     return OnCreateOrUpdateResult<TModel>.Factory.Success(model);
                 }
                 catch (DbUpdateConcurrencyException ex)
@@ -130,7 +120,7 @@ namespace Triven.Data.EntityFramework.Repositories.Base
                 }
 #pragma warning disable 168
                 // ReSharper disable once RedundantCatchClause
-                catch (Exception ex)
+                catch (Exception)
 #pragma warning restore 168
                 {
                     throw;
@@ -261,76 +251,6 @@ namespace Triven.Data.EntityFramework.Repositories.Base
             }
 
             return (dbContext, isDisposable);
-        }
-
-        private static int SaveModelWithComplexTypes(TModel model, ApplicationDbContext dbContext)
-        {
-            IEnumerable<PropertyInfo> complexProps = model.GetType()
-                .GetProperties()
-                .Where(p => p.PropertyType.BaseType == typeof(AuditableModel) && !p.GetMethod.IsVirtual);
-
-            var complexPropertyInfos = complexProps as IList<PropertyInfo> ?? complexProps.ToList();
-
-            if (model.Id <= 0)
-            {
-                // Insert
-
-                //set fk reference props to unchanged state
-                foreach (PropertyInfo prop in complexPropertyInfos)
-                {
-                    Object val = prop.GetValue(model);
-                    if (val != null)
-                    {
-                        dbContext.Entry(val).State = EntityState.Unchanged;
-                    }
-                }
-                return dbContext.SaveChanges();
-            }
-            else
-            {
-                // Update
-
-                Dictionary<string, int?> updateFkValues = new Dictionary<string, int?>();
-                foreach (PropertyInfo prop in complexPropertyInfos)
-                {
-                    var val = (AuditableModel)prop.GetValue(model);
-                    if (val == null)
-                    {
-                        updateFkValues.Add(prop.Name, null);
-                    }
-                    else
-                    {
-                        updateFkValues.Add(prop.Name, val.Id);
-                    }
-
-                    prop.SetValue(model, null);
-                }
-
-                // dbContext creation may need to move to here as per below working example
-                var dbObj = dbContext.Set(typeof(TModel)).Find(new object[] { model.Id }); //this also differs from example
-
-                // update the simple values
-                dbContext.Entry(dbObj).CurrentValues.SetValues(model);
-
-                // update complex values
-                foreach (PropertyInfo prop in complexPropertyInfos)
-                {
-                    Object propValue = null;
-                    if (updateFkValues[prop.Name].HasValue)
-                    {
-                        propValue = dbContext.Set(prop.PropertyType).Find(new object[] { updateFkValues[prop.Name] });
-                    }
-
-                    prop.SetValue(dbObj, propValue);
-
-                    if (propValue != null)
-                    {
-                        dbContext.Entry(propValue).State = EntityState.Unchanged;
-                    }
-                }
-            }
-
-            return dbContext.SaveChanges();
-        }
+        }       
     }
 }

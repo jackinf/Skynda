@@ -18,7 +18,7 @@ namespace Triven.Data.EntityFramework.Models
         public virtual Vehicle Vehicle { get; set; }
 
         [InverseProperty(nameof(VehicleReportItem.Parent))]
-        public List<VehicleReportItem> VehicleReportItems { get; set; } = new List<VehicleReportItem>();
+        public List<VehicleReportItem> Items { get; set; } = new List<VehicleReportItem>();
 
         [InverseProperty(nameof(VehicleFault.VehicleReport))]
         public List<VehicleFault> Faults { get; set; } = new List<VehicleFault>();

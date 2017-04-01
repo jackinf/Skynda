@@ -11,5 +11,7 @@ namespace Triven.Domain.Repositories
         IList<TVehicleReport> GetAllBy(int vehicleId);
         IResult<TVehicleReport> Add(int vehicleId, TVehicleReport context);
         IResult<TVehicleReport> Update(int vehicleId, int id, TVehicleReport entity);
+
+        TVehicleReport GetFull(int id);
     }
 }
