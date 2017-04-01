@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using Triven.Data.EntityFramework.Models;
 using Triven.Data.EntityFramework.Repositories.Base;
@@ -12,7 +13,9 @@ namespace Triven.Data.EntityFramework.Repositories
         {
             using (var context = new ApplicationDbContext())
             {
-                return BaseQuery(context).Where(x => x.VehicleReport.Id == reportId).ToList();
+                return BaseQuery(context)
+                    .Include(x => x.Image)
+                    .Where(x => x.VehicleReport.Id == reportId).ToList();
             }
         }
     }
