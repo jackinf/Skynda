@@ -138,7 +138,7 @@ namespace Triven.Data.EntityFramework.Repositories.Base
         public virtual bool Delete(int id, IDbContext context = null)
         {
 
-            var (dbContext, isDisposable) = DbContextHelper(context);
+             var (dbContext, isDisposable) = DbContextHelper(context);
 
             try
             {

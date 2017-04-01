@@ -198,7 +198,7 @@ namespace Triven.FunctionalTests.IntegrationTests
             //
 
             Assert.IsTrue(isSuccess);
-            var fromDb = GetFromDb<Vehicle>(vehicleModel1.Id);
+            var fromDb = GetFromDb<VehicleModel>(vehicleModel1.Id);
             Assert.IsTrue(fromDb.DeletedOn.HasValue);
             Assert.IsTrue(fromDb.IsArchived);
 
