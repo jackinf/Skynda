@@ -75,8 +75,10 @@ function submitCreate(item, onSubmitCustom) {
       } else {
         dispatch(change(VEHICLE_FORM_KEY, "id", resp.id));
         browserHistory.replace("/admin/vehicle/" + resp.id);
-        window.location = `/admin/vehicle/${resp.id}`;
+
         toastr.success("Success", "Create successful");
+        ga('send', 'event', 'Admin', 'vehicle', 'Added ' + resp.id);
+        window.location = `/admin/vehicle/${resp.id}`;
       }
     } catch (error) {
       dispatch(addFailure(error.modelState));
@@ -94,8 +96,9 @@ function submitEdit(item, onSubmitCustom) {
       if (_.isFunction(onSubmitCustom)) {
         onSubmitCustom(null, resp.id);
       } else {
-        window.location.reload();
         toastr.success("Success", "Update successful");
+        ga('send', 'event', 'Admin', 'vehicle', 'Updated ' + resp.id);
+        window.location.reload();
       }
     } catch (error) {
       dispatch(editFailure(error.modelState));
