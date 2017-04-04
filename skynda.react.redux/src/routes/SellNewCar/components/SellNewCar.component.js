@@ -11,10 +11,12 @@ import {Parallax} from 'react-parallax';
 import LaddaButton, { S, SLIDE_UP } from 'react-ladda';
 import {toastr, actions as toastrActions} from 'react-redux-toastr';
 import Scroll from "react-scroll";
+import {Link} from "react-router";
 
 import "./SellNewCar.component.scss";
 import {rowWrapper} from "./SellNewCar.redux-form.renderers";
 import heroImageUrl from "../assets/heroimage.jpg";
+import okImageUrl from "../assets/ok-roheline-min.png";
 
 export default class extends React.Component {
   static propTypes = {
@@ -74,11 +76,29 @@ export default class extends React.Component {
 
       <div className="container">
         {isSuccessfullySent ? (
-          <Row>
-            <Col sm={12}>
-              <h4 style={{marginTop: "25px"}}>Täname! Saime andmed kätte! Võtame Sinuga ühendust ühe tööpäeva jooksul.</h4>
-            </Col>
-          </Row>
+          <div className="sell-new-car__success-block" style={{marginTop: "25px"}}>
+            <Row>
+              <Col sm={12}>
+                <img src={okImageUrl} alt="ok"/>
+              </Col>
+            </Row>
+            <Row>
+              <Col sm={12}>
+                <h4 className="sell-new-car__success-block__row_1">Aitäh, andmed on saadetud</h4>
+              </Col>
+            </Row>
+            <Row>
+              <Col sm={12}>
+                <h4 className="sell-new-car__success-block__row_2">Helistame sulle 1 tööpäeva jooksul</h4>
+              </Col>
+            </Row>
+            <Row>
+              <Col sm={12}>
+                <h4 className="sell-new-car__success-block__row_3">Seni vali oma järgmine auto
+                  &nbsp;<Link className="sell-new-car__success-block__row_3__link" to="/search">siin</Link></h4>
+              </Col>
+            </Row>
+          </div>
           ) : (
         <Row>
           <Col sm={12}>

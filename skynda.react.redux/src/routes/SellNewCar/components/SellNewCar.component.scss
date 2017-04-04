@@ -134,3 +134,26 @@
   font-weight: 500 !important;
   font-size: 22px !important;
 }
+
+.sell-new-car__success-block {
+  margin-top: 25px;
+  text-align: center;
+}
+
+.sell-new-car__success-block__row_1 {
+  color: $color-secondary;
+  font-weight: bold;
+}
+
+.sell-new-car__success-block__row_2 {
+  font-weight: bold;
+}
+
+.sell-new-car__success-block__row_3 {
+  margin-top: 50px;
+  font-weight: bold;
+}
+
+.sell-new-car__success-block__row_3__link {
+  color: $color-secondary !important;
+}

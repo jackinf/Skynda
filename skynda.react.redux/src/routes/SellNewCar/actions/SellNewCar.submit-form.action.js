@@ -32,6 +32,7 @@ export default function submitAsync(info) {
       const data = await EmailService.submitAsyncSellVehicle(info);
       dispatch(setSubmittingStatus(false, true));
       toastr.success("Täname!", "Võtame sinuga 2 tööpäeva jooksul ühendust.");
+      ga('send', 'event', 'button', 'click', 'sell-your-car-submitted');
     } catch (error) {
       dispatch(setSubmittingStatus(false, false));
       dispatch(setErrors(error.modelState));

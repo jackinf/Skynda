@@ -41,6 +41,7 @@ export default class extends React.Component {
     if (history.pushState) {
       const newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?mode=' + mode;
       window.history.pushState({path:newurl},'',newurl);
+      ga('send', 'event', 'HowItWorks', 'mode', mode);
     }
   }
 
