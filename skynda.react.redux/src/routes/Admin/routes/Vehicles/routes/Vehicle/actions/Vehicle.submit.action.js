@@ -75,6 +75,7 @@ function submitCreate(item, onSubmitCustom) {
       } else {
         dispatch(change(VEHICLE_FORM_KEY, "id", resp.id));
         browserHistory.replace("/admin/vehicle/" + resp.id);
+        window.location = `/admin/vehicle/${resp.id}`;
         toastr.success("Success", "Create successful");
       }
     } catch (error) {
