@@ -109,7 +109,7 @@ class Vehicle extends React.Component {
     const errors = this.props.errors;  // TODO: LOL, spring, LOL. there is only one spring - time of the year... so fuck you, java. XD IMMA FIRIN MY LAAZO00oRRSS!!!
 
     const isUpdating = this.props.formModeVehicle === FORM_MODE.UPDATING;
-    const submitCardActions = <SubmitCardActions disabled={this.props.submitting} onSubmit={this.props.onHandleSubmit} />;
+    const submitCardActions = <SubmitCardActions disabled={this.props.isFetching} onSubmit={this.props.onHandleSubmit} />;
     const isFetching = this.props.isFetching;
 
     return (<div>

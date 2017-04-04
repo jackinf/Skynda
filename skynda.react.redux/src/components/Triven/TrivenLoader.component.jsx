@@ -1,6 +1,8 @@
 import React from "react";
 import {Dimmer, Loader, Segment} from 'semantic-ui-react';
-import 'semantic-ui-css/semantic.css';
+// import 'semantic-ui-css/semantic.css'; // TODO: Do not import this because it will break all the styles.
+import 'semantic-ui-css/components/loader.css';
+import 'semantic-ui-css/components/dimmer.css';
 import "./TrivenLoader.component.scss";
 
 export default class TrivenLoader extends React.Component {

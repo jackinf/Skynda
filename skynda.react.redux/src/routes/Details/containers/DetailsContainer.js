@@ -7,6 +7,7 @@ import { toggleLoading, setCarData, getDataAsync, sendEmailAsync, sendQuestionBy
 
 
 import About from "../components/Details";
+import {REDUCER_KEY__DETAILS_CHECKOUT_INFO} from "../components/CheckoutPanel/constants/Details.checkout.constants";
 
 /*  Object of action creators (can also be function that returns object).
  Keys will be passed as props to presentational components. Here we are
@@ -22,7 +23,9 @@ const mapDispatchToProps = {
 
 const mapStateToProps = (state) => ({
   isLoading : state.isLoading,
-  car_data: state.carData
+  car_data: state.carData,
+  isCheckoutSubmitted: state[REDUCER_KEY__DETAILS_CHECKOUT_INFO].isSuccessfullySent === true,
+  isShowThanksToVehicleId: state[REDUCER_KEY__DETAILS_CHECKOUT_INFO].isSuccessfullySentVehicleId,
 });
 
 /*  Note: mapStateToProps is where you should use `reselect` to create selectors, ie:

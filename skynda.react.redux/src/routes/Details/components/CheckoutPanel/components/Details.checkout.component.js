@@ -44,18 +44,12 @@ class Checkout extends React.Component {
         <Tab label={contactUsText}
              className='sk_details__checkout_tab'>
           <div className='sk_details__checkout_tab_inner'>
-            {this.props.isSuccessfullySent ? (
-                <Row>
-                  <Col sm={12}>
-                    <h5>Täname! Võtame sinuga 2 tööpäeva jooksul ühendust.</h5>
-                  </Col>
-                </Row>
-              ) : (
-            <PersonInfoTab submitAsync={this.submitAsync}
-                           isSubmitting={this.props.isSubmitting}
-                           person={this.state.personDetails}
-                           errors={this.props.errors}
-            />)}
+            <PersonInfoTab
+              submitAsync={this.submitAsync}
+              isSubmitting={this.props.isSubmitting}
+              person={this.state.personDetails}
+              errors={this.props.errors}
+            />
           </div>
         </Tab>
       </Tabs>

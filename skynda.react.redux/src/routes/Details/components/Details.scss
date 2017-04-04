@@ -121,3 +121,38 @@
   }
 
 }
+
+.car-details__thanks {
+  text-align: center;
+}
+
+.car-details__thanks__row1 {
+  background: $color-primary;
+  color: whitesmoke;
+  margin: 10px 0;
+  padding: 10px;
+  font-size: 20px;
+}
+
+.car-details__thanks__row2 {
+  font-weight: bold;
+}
+
+.car-details__thanks__row3 {
+  color: $color-primary;
+  font-weight: bolder;
+}
+
+.car-details__thanks__row4 {
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+.car-details__thanks__row5 {
+  font-weight: bold;
+}
+
+.car-details__thanks__row6 {
+  margin-top: 50px;
+  font-weight: bold;
+}
