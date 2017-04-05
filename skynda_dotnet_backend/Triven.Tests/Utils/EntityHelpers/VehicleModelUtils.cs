@@ -1,5 +1,5 @@
 ﻿using System;
-using Triven.Data.EntityFramework.Models;
+using Triven.Data.EntityFramework.Entities;
 using Triven.Domain.Constants;
 
 namespace Triven.FunctionalTests.Utils.EntityHelpers
@@ -37,19 +37,12 @@ namespace Triven.FunctionalTests.Utils.EntityHelpers
                 var newVehicleModel = context.VehicleModels.Add(new VehicleModel
                 {
                     Description = description ?? Guid.NewGuid().ToString(),
-                    Title = title ?? Guid.NewGuid().ToString(),
-                    HorsePower = horsePower ?? random.Next(200, 500),
                     Doors = doors ?? random.Next(2, 5),
                     Seats = seats ?? random.Next(2, 10),
                     ModelCode = modelCode ?? Guid.NewGuid().ToString(),
-                    Engine = engine ?? Guid.NewGuid().ToString(),
-                    Year = year ?? random.Next(DateTime.Now.Year - 15, DateTime.Now.Year),
-
                     VehicleManufacturerId = vehicleManufacturerId,
-                    TransmissionId = transmissionId,
                     DrivetrainId = drivetrainId,
                     VehicleBodyId = vehicleBodyId,
-                    FuelTypeId = fuelTypeId
                 });
                 context.SaveChanges();
                 return newVehicleModel;

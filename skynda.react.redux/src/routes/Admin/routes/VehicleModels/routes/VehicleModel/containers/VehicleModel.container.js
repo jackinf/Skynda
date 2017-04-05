@@ -11,8 +11,6 @@ import {
 } from "../actions";
 import {
   getManufacturers,
-  getFuels,
-  getTransmissions,
   getDrivetrains,
   getVehicleBodies
 } from "../../../../Classifiers/Classifiers.module";
@@ -22,25 +20,21 @@ import {VEHICLE_MODEL_FORM, VEHICLE_MODEL_REDUCER_KEY} from "../../../constants/
 const VehicleModelForm = reduxForm({form: VEHICLE_MODEL_FORM})(VehicleModel);
 
 const stateToProps = (state) => {
-  const classificators = state.classificators;
+  const classifications = state.classificators;
   return {
     formInfo: state[VEHICLE_MODEL_REDUCER_KEY],
     initialValues: state[VEHICLE_MODEL_REDUCER_KEY].item,
     errors: state[VEHICLE_MODEL_REDUCER_KEY].errors,
 
-    // Classifiers
-    manufacturer: classificators ? classificators.manufacturer : null,
-    fuel: classificators ? classificators.fuel : null,
-    transmission: classificators ? classificators.transmission : null,
-    drivetrain: classificators ? classificators.drivetrain : null,
-    vehicleBody: classificators ? classificators.vehicleBody : null
+    // classifications
+    manufacturer: classifications ? classifications.manufacturer : null,
+    drivetrain: classifications ? classifications.drivetrain : null,
+    vehicleBody: classifications ? classifications.vehicleBody : null
   }
 };
 
 const dispatchToProps = {
   getManufacturers,
-  getFuels,
-  getTransmissions,
   getDrivetrains,
   getVehicleBodies,
 

@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using Triven.Data.EntityFramework.Models.Base;
-using Triven.Data.EntityFramework.Models.User;
+using Triven.Data.EntityFramework.Entities.Base;
+using Triven.Data.EntityFramework.Entities.User;
 using Triven.Domain.Models;
 
-namespace Triven.Data.EntityFramework.Models
+namespace Triven.Data.EntityFramework.Entities
 {
     [Table("Subscription")]
     public class Subscription : AuditableModel, ISubscription

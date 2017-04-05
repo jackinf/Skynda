@@ -2,7 +2,7 @@
 
 //using Newtonsoft.Json;
 
-namespace Triven.Data.EntityFramework.Models
+namespace Triven.Data.EntityFramework.Entities
 {
     // Models used as parameters to AccountController actions.
 

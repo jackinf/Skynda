@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
-using Triven.Data.EntityFramework.Models;
+using Triven.Data.EntityFramework.Entities;
 using Triven.Data.EntityFramework.Repositories.Base;
 using Triven.Domain.Enums;
 using Triven.Domain.Helpers;
@@ -22,6 +22,8 @@ namespace Triven.Data.EntityFramework.Repositories
                     .Include(x => x.VehicleModel)
                     .Include(x => x.VehicleModel.VehicleManufacturer)
                     .Include(x => x.MainImage)
+                    .Include(x => x.FuelType)
+                    .Include(x => x.Transmission)
                     .OrderBy(x => x.Id)
                     .ToList();
             });
@@ -79,11 +81,11 @@ namespace Triven.Data.EntityFramework.Repositories
 
                 if (dto.Transmission?.Any() ?? false)
                     query = query.Where(ExpressionHelpers.BuildContainsExpression<Vehicle, int>(
-                        vehicle => vehicle.VehicleModel.Transmission.Id, dto.Transmission.Select(t => t.Value)));
+                        vehicle => vehicle.Transmission.Id, dto.Transmission.Select(t => t.Value)));
 
                 if (dto.FuelType?.Any() ?? false)
                     query = query.Where(ExpressionHelpers.BuildContainsExpression<Vehicle, int>(
-                        vehicle => vehicle.VehicleModel.FuelType.Id, dto.FuelType.Select(t => t.Value)));
+                        vehicle => vehicle.FuelType.Id, dto.FuelType.Select(t => t.Value)));
 
                 if (dto.Mileage != null)
                     query = query.Where(x => x.Mileage >= dto.Mileage.Min && x.Mileage <= dto.Mileage.Max);
@@ -92,10 +94,10 @@ namespace Triven.Data.EntityFramework.Repositories
                     query = query.Where(x => x.Price >= dto.Price.Min && x.Price <= dto.Price.Max);
 
                 if (dto.Year != null)
-                    query = query.Where(x => x.VehicleModel.Year >= dto.Year.Min && x.VehicleModel.Year <= dto.Year.Max);
+                    query = query.Where(x => x.Year >= dto.Year.Min && x.Year <= dto.Year.Max);
 
                 if (dto.Power != null)
-                    query = query.Where(x => x.VehicleModel.HorsePower >= dto.Power.Min && x.VehicleModel.HorsePower <= dto.Power.Max);
+                    query = query.Where(x => x.HorsePower >= dto.Power.Min && x.HorsePower <= dto.Power.Max);
 
                 if (dto.PetrolConsumption != null)
                     query = query.Where(x =>
@@ -120,6 +122,8 @@ namespace Triven.Data.EntityFramework.Repositories
                     .Include(x => x.Descriptions)
                     .Include(x => x.Reviews)
                     .Include(x => x.Reports)
+                    .Include(x => x.FuelType)
+                    .Include(x => x.Transmission)
                     .Include(x => x.Images.Select(vehicleImage => vehicleImage.Image))
                     .FirstOrDefault(x => x.Id == id);
 

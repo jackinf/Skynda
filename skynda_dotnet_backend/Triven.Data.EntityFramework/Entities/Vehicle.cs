@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using Triven.Data.EntityFramework.Models.Base;
-using Triven.Data.EntityFramework.Models.User;
+using Triven.Data.EntityFramework.Entities.Base;
+using Triven.Data.EntityFramework.Entities.User;
 using Triven.Domain.Enums;
 using Triven.Domain.Helpers;
 using Triven.Domain.Models;
 
-namespace Triven.Data.EntityFramework.Models
+namespace Triven.Data.EntityFramework.Entities
 {
     [Table("Vehicle")]
     public class Vehicle : AuditableModel, IVehicle
@@ -49,6 +49,12 @@ namespace Triven.Data.EntityFramework.Models
 
         public string Additional { get; set; }
 
+        public int HorsePower { get; set; }
+
+        public string Engine { get; set; }
+
+        public int Year { get; set; }
+
         [Column("VehicleStatus")]
         public string VehicleStatusString
         {
@@ -76,6 +82,19 @@ namespace Triven.Data.EntityFramework.Models
         /// </summary>
         public int VehicleModelId { get; set; }
         public virtual VehicleModel VehicleModel { get; set; }
+
+        /// <summary>
+        /// Transmission
+        /// </summary>
+        public int TransmissionId { get; set; }
+        public virtual Classification Transmission { get; set; }
+
+        /// <summary>
+        /// Fuel
+        /// </summary>
+        public int FuelTypeId { get; set; }
+        public virtual Classification FuelType { get; set; }
+
 
         /// <summary>
         /// Vehicle images

@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using Triven.Domain.Models.Base;
 
-namespace Triven.Data.EntityFramework.Models.Base
+namespace Triven.Data.EntityFramework.Entities.Base
 {
     public abstract class BaseModel : IBaseModel
     {

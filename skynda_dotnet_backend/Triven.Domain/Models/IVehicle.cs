@@ -22,6 +22,10 @@ namespace Triven.Domain.Models
         int TotalValves { get; set; }
         int Safetystars { get; set; }
         string SafetyUrl { get; set; }
-        string Additional { get; set; }        
+        string Additional { get; set; }
+        string Engine { get; set; }
+        int HorsePower { get; set; }
+        int Year { get; set; }
+
     }
 }

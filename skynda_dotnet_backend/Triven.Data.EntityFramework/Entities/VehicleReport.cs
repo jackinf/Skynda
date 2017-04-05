@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using Triven.Data.EntityFramework.Models.Base;
+using Triven.Data.EntityFramework.Entities.Base;
 using Triven.Domain.Models;
 
-namespace Triven.Data.EntityFramework.Models
+namespace Triven.Data.EntityFramework.Entities
 {
     [Table("VehicleReport")]
     public class VehicleReport : AuditableModel, IVehicleReport

@@ -9,7 +9,6 @@ using NUnit.Framework;
 using Triven.Application;
 using Triven.Data.EntityFramework;
 using Triven.Data.EntityFramework.Migrations;
-using Triven.Data.EntityFramework.Models;
 using Triven.FunctionalTests.Utils.EntityHelpers;
 
 namespace Triven.FunctionalTests.Utils

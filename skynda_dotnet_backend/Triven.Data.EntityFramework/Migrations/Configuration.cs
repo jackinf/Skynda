@@ -4,8 +4,8 @@ using System.Data.Entity.Migrations;
 using System.Linq;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using Triven.Data.EntityFramework.Models;
-using Triven.Data.EntityFramework.Models.User;
+using Triven.Data.EntityFramework.Entities;
+using Triven.Data.EntityFramework.Entities.User;
 using Triven.Domain.Constants;
 
 namespace Triven.Data.EntityFramework.Migrations

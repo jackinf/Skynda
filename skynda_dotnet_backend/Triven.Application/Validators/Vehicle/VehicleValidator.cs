@@ -21,6 +21,16 @@ namespace Triven.Application.Validators.Vehicle
 
             RuleFor(x => x.ColorOutsideHex).NotEmpty().WithMessage("ColorOutsideHex is required");
 
+            RuleFor(x => x.Engine).NotEmpty();
+
+            RuleFor(x => x.HorsePower).NotNull().GreaterThan(0);
+
+            RuleFor(x => x.Year).NotNull().GreaterThan(0);
+
+            RuleFor(x => x.FuelTypeId).NotNull().GreaterThan(0);
+
+            RuleFor(x => x.TransmissionId).NotNull().GreaterThan(0);
+
         }
     }
 }

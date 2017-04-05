@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Drawing.Drawing2D;
 using System.IO;
 using System.Linq;
 using AutoMapper;
 using Microsoft.Azure;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
-using Triven.Data.EntityFramework.Models;
+using Triven.Data.EntityFramework.Entities;
 using Triven.Domain.Constants;
 using Triven.Domain.Models;
 using Triven.Domain.Repositories;
@@ -18,7 +17,7 @@ using Triven.Domain.UnitOfWorks;
 using Triven.Domain.ViewModels.BlobStorage;
 using Triven.Domain.ViewModels.Image;
 using Triven.Domain.ViewModels.Vehicle;
-using Image = Triven.Data.EntityFramework.Models.Image;
+using Image = Triven.Data.EntityFramework.Entities.Image;
 
 namespace Triven.Application.Services
 {

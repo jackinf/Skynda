@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Web;
 using Microsoft.AspNet.Identity;
 using Triven.Application.Services;
-using Triven.Data.EntityFramework.Models.User;
+using Triven.Data.EntityFramework.Entities.User;
 using Triven.Domain.Constants;
 using Triven.Domain.Util;
 

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using Triven.Data.EntityFramework.Models;
+using Triven.Data.EntityFramework.Entities;
 using Triven.Data.EntityFramework.Repositories.Base;
 using Triven.Domain.Repositories;
 using Triven.Domain.Results;
@@ -35,9 +35,7 @@ namespace Triven.Data.EntityFramework.Repositories
             using (var context = new ApplicationDbContext())
             {
                 return BaseQuery(context)
-                    .Include(x => x.Drivetrain)
-                    .Include(x => x.FuelType)
-                    .Include(x => x.Transmission)
+                    .Include(x => x.Drivetrain)                    
                     .Include(x => x.VehicleBody)
                     .Include(x => x.VehicleManufacturer)
                     .FirstOrDefault(x => x.Id == id);
@@ -54,6 +52,11 @@ namespace Triven.Data.EntityFramework.Repositories
         {
             using (var context = new ApplicationDbContext())
                 return base.Update(id, model, context);
+        }
+
+        public IList<VehicleModel> GetAllWithManufacturer()
+        {
+           return HandleWithContext(dbContext => BaseQuery(dbContext).Include(x => x.VehicleManufacturer).OrderBy(x => x.Id).ToList());
         }
     }
 }

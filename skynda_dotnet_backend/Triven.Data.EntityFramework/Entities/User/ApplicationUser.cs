@@ -8,12 +8,10 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Triven.Domain.Constants;
-using Triven.Domain.Extensions;
 using Triven.Domain.Helpers;
 using Triven.Domain.Models;
-using Triven.Domain.Models.Base;
 
-namespace Triven.Data.EntityFramework.Models.User
+namespace Triven.Data.EntityFramework.Entities.User
 {
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : AppUser, IApplicationUser

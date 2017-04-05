@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using Triven.Application.Validators.Feature;
-using Triven.Data.EntityFramework.Models;
+using Triven.Data.EntityFramework.Entities;
 using Triven.Domain.Repositories;
 using Triven.Domain.Results;
 using Triven.Domain.Services;

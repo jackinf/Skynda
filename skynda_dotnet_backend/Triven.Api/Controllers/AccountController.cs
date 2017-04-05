@@ -16,8 +16,8 @@ using Triven.Application;
 using Triven.Application.Services;
 using Triven.API.Providers;
 using Triven.API.Results;
-using Triven.Data.EntityFramework.Models;
-using Triven.Data.EntityFramework.Models.User;
+using Triven.Data.EntityFramework.Entities;
+using Triven.Data.EntityFramework.Entities.User;
 using Triven.Domain.ViewModels;
 using Triven.Domain.ViewModels.Account;
 

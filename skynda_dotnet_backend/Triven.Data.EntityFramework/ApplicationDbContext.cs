@@ -1,8 +1,8 @@
 ﻿using System.Data.Entity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Triven.Data.EntityFramework.Entities;
+using Triven.Data.EntityFramework.Entities.User;
 using Triven.Data.EntityFramework.Migrations;
-using Triven.Data.EntityFramework.Models;
-using Triven.Data.EntityFramework.Models.User;
 using Triven.Domain.UnitOfWorks;
 
 //using Microsoft.AspNet.Identity.Owin;

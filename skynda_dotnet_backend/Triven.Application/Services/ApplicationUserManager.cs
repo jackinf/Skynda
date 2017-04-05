@@ -2,7 +2,7 @@
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Triven.Data.EntityFramework;
-using Triven.Data.EntityFramework.Models.User;
+using Triven.Data.EntityFramework.Entities.User;
 
 namespace Triven.Application.Services
 {

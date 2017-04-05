@@ -1,9 +1,9 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
-using Triven.Data.EntityFramework.Models.User;
+using Triven.Data.EntityFramework.Entities.User;
 using Triven.Domain.Models.Base;
 
-namespace Triven.Data.EntityFramework.Models.Base
+namespace Triven.Data.EntityFramework.Entities.Base
 {
     public abstract class AuditableModel : IAuditableBaseModel
     {

@@ -1,5 +1,5 @@
 ﻿using System;
-using Triven.Data.EntityFramework.Models;
+using Triven.Data.EntityFramework.Entities;
 using Triven.Domain.Enums;
 
 namespace Triven.FunctionalTests.Utils.EntityHelpers

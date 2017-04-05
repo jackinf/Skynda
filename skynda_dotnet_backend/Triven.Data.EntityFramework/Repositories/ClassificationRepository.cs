@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using Triven.Data.EntityFramework.Models;
+using Triven.Data.EntityFramework.Entities;
 using Triven.Data.EntityFramework.Repositories.Base;
 using Triven.Domain.Constants;
 using Triven.Domain.Repositories;
@@ -57,9 +57,9 @@ namespace Triven.Data.EntityFramework.Repositories
                     case DatabaseConstants.ClassificationTypeName.Transmission:
                     {
                         var query = context.Vehicles.Include(x => x.VehicleModel)
-                            .Where(x => x.VehicleModel != null && x.VehicleModel.Transmission.Id > 0)
+                            .Where(x => x.VehicleModel != null && x.Transmission.Id > 0)
                             .Join(context.Classifications,
-                                vehicle => vehicle.VehicleModel.Transmission.Id,
+                                vehicle => vehicle.Transmission.Id,
                                 classification => classification.Id,
                                 (vehicle, classification) => classification);
 
@@ -81,9 +81,9 @@ namespace Triven.Data.EntityFramework.Repositories
                     case DatabaseConstants.ClassificationTypeName.Fuel:
                     {
                         var query = context.Vehicles.Include(x => x.VehicleModel)
-                            .Where(x => x.VehicleModel != null && x.VehicleModel.FuelType.Id > 0)
+                            .Where(x => x.VehicleModel != null && x.FuelType.Id > 0)
                             .Join(context.Classifications,
-                                vehicle => vehicle.VehicleModel.FuelType.Id,
+                                vehicle => vehicle.FuelType.Id,
                                 classification => classification.Id,
                                 (vehicle, classification) => classification);
 

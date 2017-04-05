@@ -18,5 +18,7 @@ namespace Triven.Domain.Repositories
         IResult<TVehicleModel> Add(TVehicleModel model);
 
         IResult<TVehicleModel> Update(int id, TVehicleModel model);
+
+        IList<TVehicleModel> GetAllWithManufacturer();
     }
 }

@@ -4,7 +4,7 @@ using System.Web.Http;
 using System.Web.Http.Controllers;
 using Microsoft.AspNet.Identity;
 using Triven.Application.Services;
-using Triven.Data.EntityFramework.Models.User;
+using Triven.Data.EntityFramework.Entities.User;
 using Triven.Domain.Constants;
 
 namespace Triven.Application.Attributes
@@ -34,7 +34,10 @@ namespace Triven.Application.Attributes
             var manager = new ApplicationUserManager(new AppUserStore());
 
             var identity = actionContext.RequestContext.Principal.Identity;
-            var userInfo = manager.FindByEmail(identity.GetUserId()) as ApplicationUser;
+            var userId = identity.GetUserId();
+            if (userId == null)
+                return false;
+            var userInfo = manager.FindByEmail(userId) as ApplicationUser;
             if (userInfo == null)
                 return false;
             return actionContext.RequestContext.Principal.Identity.IsAuthenticated &&

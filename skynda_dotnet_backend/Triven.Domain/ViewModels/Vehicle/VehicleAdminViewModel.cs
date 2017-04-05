@@ -26,7 +26,11 @@ namespace Triven.Domain.ViewModels.Vehicle
         public string SafetyUrl { get; set; }
         public int SafetyStars { get; set; }
         public string Additional { get; set; }
-
+        public int FuelTypeId { get; set; }
+        public int TransmissionId { get; set; }
+        public string Engine { get; set; }
+        public int Year { get; set; }
+        public int HorsePower { get; set; }
         public ImageViewModel MainImage { get; set; }
         public VehicleModelViewModel VehicleModel { get; set; } // TODO: use only id (int)
         public List<FeatureAdminSelectViewModel> FeaturesAdminSelect { get; set; } = new List<FeatureAdminSelectViewModel>();  // TODO: use only ids (list of ints)

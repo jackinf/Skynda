@@ -7,7 +7,7 @@ using Microsoft.Owin.Security.DataProtection;
 using NUnit.Framework;
 using Triven.Application.Services;
 using Triven.Data.EntityFramework;
-using Triven.Data.EntityFramework.Models.User;
+using Triven.Data.EntityFramework.Entities.User;
 using Triven.Domain.Results;
 
 namespace Triven.FunctionalTests.Utils

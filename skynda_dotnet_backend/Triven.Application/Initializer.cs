@@ -2,8 +2,8 @@
 using AutoMapper;
 using Ninject;
 using Triven.Application.IoCModules;
-using Triven.Data.EntityFramework.Models;
-using Triven.Data.EntityFramework.Models.User;
+using Triven.Data.EntityFramework.Entities;
+using Triven.Data.EntityFramework.Entities.User;
 using Triven.Domain.ViewModels.Account;
 using Triven.Domain.ViewModels.Classification;
 using Triven.Domain.ViewModels.Feature;
@@ -61,15 +61,16 @@ namespace Triven.Application
                 configuration.CreateMap<Vehicle, VehicleDetailedViewModel>().PreserveReferences()
                     .ForMember(x => x.Model, opt => opt.MapFrom(xx => xx.VehicleModel))
                     .ForMember(x => x.VehicleManufacturerName, opt => opt.MapFrom(xx => xx.VehicleModel.VehicleManufacturer.Name));
-                configuration.CreateMap<Vehicle, VehicleCompactViewModel>().PreserveReferences()
+                configuration.CreateMap<Vehicle, VehicleCompactViewModel>()
+                    .PreserveReferences()
                     .ForMember(x => x.ThumbnailUrl, opt => opt.MapFrom(xx => xx.MainImage.ThumbnailUrl))
                     .ForMember(x => x.ModelCode, opt => opt.MapFrom(xx => xx.VehicleModel.ModelCode))
-                    .ForMember(x => x.ModelHorsePower, opt => opt.MapFrom(xx => xx.VehicleModel.HorsePower))
+                    .ForMember(x => x.ModelHorsePower, opt => opt.MapFrom(xx => xx.HorsePower))
                     .ForMember(x => x.ModelDoors, opt => opt.MapFrom(xx => xx.VehicleModel.Doors))
                     .ForMember(x => x.ModelSeats, opt => opt.MapFrom(xx => xx.VehicleModel.Seats))
-                    .ForMember(x => x.ModelYear, opt => opt.MapFrom(xx => xx.VehicleModel.Year))
-                    .ForMember(x => x.VehicleManufacturerName, opt => opt.MapFrom(xx => xx.VehicleModel.VehicleManufacturer.Name))
-                    .ForMember(x => x.ModelTitle, opt => opt.MapFrom(xx => xx.VehicleModel.Title));
+                    .ForMember(x => x.ModelYear, opt => opt.MapFrom(xx => xx.Year))
+                    .ForMember(x => x.VehicleManufacturerName,
+                        opt => opt.MapFrom(xx => xx.VehicleModel.VehicleManufacturer.Name));
                 configuration.CreateMap<VehicleAdminViewModel, Vehicle>()
                     .ForMember(x => x.Id, opt => opt.Ignore())
                     .ForMember(x => x.Features, conf => conf.Ignore())
@@ -98,7 +99,8 @@ namespace Triven.Application
                 //configuration.CreateMap<VehicleImage, VehicleImageViewModel>();
                 //configuration.CreateMap<VehicleImageViewModel, VehicleImage>();
 
-                configuration.CreateMap<VehicleModel, VehicleModelViewModel>().PreserveReferences();
+                configuration.CreateMap<VehicleModel, VehicleModelViewModel>().PreserveReferences()
+                    .ForMember(x => x.DisplayName, opt => opt.MapFrom(xx => xx.VehicleManufacturer.Name + " " + xx.ModelCode));
                 configuration.CreateMap<VehicleModelViewModel, VehicleModel>()
                     .ForMember(x => x.Id, opt => opt.Ignore());
 

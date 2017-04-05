@@ -4,7 +4,7 @@ using System.Linq;
 using AutoMapper;
 using FluentValidation.Results;
 using Triven.Application.Validators.Vehicle;
-using Triven.Data.EntityFramework.Models;
+using Triven.Data.EntityFramework.Entities;
 using Triven.Data.EntityFramework.UnitOfWorks;
 using Triven.Domain.Enums;
 using Triven.Domain.Repositories;
@@ -330,7 +330,7 @@ namespace Triven.Application.Services
                 VehicleFeature newFeature = new VehicleFeature
                 {
                     VehicleId = vehicleId,
-                    FeatureId = vehicleFeature.Id
+                    FeatureId = int.Parse(vehicleFeature.Value)
                 };
 
                 bool exists = existingFeatures.Any() &&

@@ -49,7 +49,7 @@ class VehicleDetailsMainImage extends React.Component {
                 <span style={{margin: "0 15px 0 0"}}>{model}</span>
                 <span style={{margin: "0 15px 0 0"}}>{engine}</span>
                 <span style={{margin: "0 15px 0 0"}}>({horsepower} kW)</span>
-                <span style={{float: "right"}}>{parseInt(price).toLocaleString()} €</span>
+                <span style={{float: "right"}}>{parseInt(price).toLocaleString("et")} €</span>
               </Col>
             </Row>
             <Row className='image-buttons'>

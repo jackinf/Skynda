@@ -18,6 +18,11 @@ import {
   deleteItem as deleteReview
 } from "../../../../VehicleReviews/actions";
 
+import {
+  getFuels,
+  getTransmissions,
+} from "../../../../Classifiers/Classifiers.module";
+
 import {getList as getVehicleModelsList} from "../../../../VehicleModels/actions";
 import {getList as getVehicles} from "../../../actions"
 import {REDUCER_KEYS, VEHICLE_FORM_KEY} from "../../../constants/Vehicles.constant";
@@ -38,12 +43,14 @@ const mapDispatchToProps = {
   onImageFileRemove: onImageFileRemove,
   getVehicles,
   onHandleLoad: load,
-  onHandleSubmit: submit
+  onHandleSubmit: submit,
+  getFuels,
+  getTransmissions
 };
 
 const mapStateToProps = (state) => {
   let formInfo = state[REDUCER_KEYS.VEHICLE_DATA];
-  let classificators = state.classificators;  // TODO: reducer key
+  let classifications = state.classificators;  // TODO: reducer key
 
   return {
     id: formInfo.item ? formInfo.item.id : "new",
@@ -55,7 +62,11 @@ const mapStateToProps = (state) => {
     vehicleReports: state[REDUCER_KEYS.VEHICLE_REPORTS_DATA_LIST],
     vehicleReviews: state[REDUCER_KEYS.VEHICLE_REVIEWS_DATA_LIST],
     featuresList: state[REDUCER_KEYS.FEATURES_DATA_LIST],
-    colors: classificators ? classificators.color : {}
+
+    //Classifications
+    colors: classifications ? classifications.color : {},
+    fuel: classifications ? classifications.fuel : null,
+    transmission: classifications ? classifications.transmission : null,
   };
 };
 

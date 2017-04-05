@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using NUnit.Framework;
 using Triven.API.Controllers;
-using Triven.Data.EntityFramework.Models;
+using Triven.Data.EntityFramework.Entities;
 using Triven.Domain.Constants;
 using Triven.Domain.ViewModels.Vehicle;
 using Triven.FunctionalTests.Utils;

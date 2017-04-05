@@ -5,7 +5,7 @@ using AutoMapper;
 using FluentValidation.Results;
 using Microsoft.AspNet.Identity;
 using Triven.Application.Validators.Users;
-using Triven.Data.EntityFramework.Models.User;
+using Triven.Data.EntityFramework.Entities.User;
 using Triven.Domain.Constants;
 using Triven.Domain.Repositories;
 using Triven.Domain.Results;

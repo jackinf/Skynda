@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using Triven.Data.EntityFramework.Models;
+using Triven.Data.EntityFramework.Entities;
 
 namespace Triven.FunctionalTests.Utils.EntityHelpers
 {

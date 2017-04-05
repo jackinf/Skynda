@@ -159,27 +159,31 @@
     <Compile Include="Migrations\201703251747599_ForeignKeyMadness01.Designer.cs">
       <DependentUpon>201703251747599_ForeignKeyMadness01.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201704051629385_More_generic_vehicle_model.cs" />
+    <Compile Include="Migrations\201704051629385_More_generic_vehicle_model.Designer.cs">
+      <DependentUpon>201704051629385_More_generic_vehicle_model.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\AccountBindingModels.cs" />
-    <Compile Include="Models\Classification.cs" />
-    <Compile Include="Models\ClassificationType.cs" />
-    <Compile Include="Models\Feature.cs" />
-    <Compile Include="Models\Image.cs" />
-    <Compile Include="Models\Subscription.cs" />
-    <Compile Include="Models\Vehicle.cs" />
-    <Compile Include="Models\VehicleImage.cs" />
-    <Compile Include="Models\VehicleModel.cs" />
-    <Compile Include="Models\VehicleReport.cs" />
-    <Compile Include="Models\VehicleReportItem.cs" />
-    <Compile Include="Models\VehicleReview.cs" />
-    <Compile Include="Models\Base\AuditableModel.cs" />
-    <Compile Include="Models\Base\BaseModel.cs" />
+    <Compile Include="Entities\AccountBindingModels.cs" />
+    <Compile Include="Entities\Classification.cs" />
+    <Compile Include="Entities\ClassificationType.cs" />
+    <Compile Include="Entities\Feature.cs" />
+    <Compile Include="Entities\Image.cs" />
+    <Compile Include="Entities\Subscription.cs" />
+    <Compile Include="Entities\Vehicle.cs" />
+    <Compile Include="Entities\VehicleImage.cs" />
+    <Compile Include="Entities\VehicleModel.cs" />
+    <Compile Include="Entities\VehicleReport.cs" />
+    <Compile Include="Entities\VehicleReportItem.cs" />
+    <Compile Include="Entities\VehicleReview.cs" />
+    <Compile Include="Entities\Base\AuditableModel.cs" />
+    <Compile Include="Entities\Base\BaseModel.cs" />
     <Compile Include="ApplicationDbContext.cs" />
-    <Compile Include="Models\User\ApplicationUser.cs" />
-    <Compile Include="Models\User\UserContactInfo.cs" />
-    <Compile Include="Models\VehicleDescription.cs" />
-    <Compile Include="Models\VehicleFault.cs" />
-    <Compile Include="Models\VehicleFeature.cs" />
+    <Compile Include="Entities\User\ApplicationUser.cs" />
+    <Compile Include="Entities\User\UserContactInfo.cs" />
+    <Compile Include="Entities\VehicleDescription.cs" />
+    <Compile Include="Entities\VehicleFault.cs" />
+    <Compile Include="Entities\VehicleFeature.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AccountRepository.cs" />
     <Compile Include="Repositories\FeatureRepository.cs" />
@@ -251,6 +255,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201703251747599_ForeignKeyMadness01.resx">
       <DependentUpon>201703251747599_ForeignKeyMadness01.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704051629385_More_generic_vehicle_model.resx">
+      <DependentUpon>201704051629385_More_generic_vehicle_model.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

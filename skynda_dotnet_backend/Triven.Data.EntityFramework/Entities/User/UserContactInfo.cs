@@ -3,7 +3,7 @@ using Triven.Domain.Constants;
 using Triven.Domain.Models;
 using Triven.Domain.Models.User;
 
-namespace Triven.Data.EntityFramework.Models.User
+namespace Triven.Data.EntityFramework.Entities.User
 {
     [Obsolete]
     public class UserContactInfo : IApplicationUserContactInfo

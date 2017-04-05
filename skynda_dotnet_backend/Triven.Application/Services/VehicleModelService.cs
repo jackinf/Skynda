@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using AutoMapper;
 using Triven.Application.Validators.VehicleModel;
-using Triven.Data.EntityFramework.Models;
+using Triven.Data.EntityFramework.Entities;
 using Triven.Domain.Repositories;
 using Triven.Domain.Results;
 using Triven.Domain.Services;
@@ -22,7 +22,7 @@ namespace Triven.Application.Services
 
         public ServiceResult<IEnumerable<VehicleModelViewModel>> GetAll()
         {
-            var results = _vehicleModelRepository.GetAll();
+            var results = _vehicleModelRepository.GetAllWithManufacturer();
             IEnumerable<VehicleModelViewModel> mappedResults = Mapper.Map<IEnumerable<VehicleModel>, IEnumerable<VehicleModelViewModel>>(results);
             return ServiceResult<IEnumerable<VehicleModelViewModel>>.Factory.Success(mappedResults);
         }
