@@ -11,11 +11,11 @@ namespace Triven.Data.EntityFramework.Repositories
 {
     public class VehicleDescriptionRepository : BaseCrudRepository<VehicleDescription>, IVehicleDescriptionRepository<VehicleDescription>
     {
-        public IList<VehicleDescription> GetAllVehicleDescriptions(int vehicleId)
-        {
-            using (var context = new ApplicationDbContext())
-                return BaseQuery(context).Where(x => x.Vehicle.Id == vehicleId).ToList();
-        }
+        public IList<VehicleDescription> GetAllVehicleDescriptions(int vehicleId, IDbContext context = null) 
+            => HandleWithContext(context, dbContext =>
+            {
+                return BaseQuery(dbContext).Where(x => x.Vehicle.Id == vehicleId).ToList();
+            });
 
         public override IResult<VehicleDescription> Add(VehicleDescription model, IDbContext context = null)
         {

@@ -11,15 +11,15 @@ namespace Triven.Data.EntityFramework.Repositories
 {
     public class VehicleFeatureRepository : BaseCrudRepository<VehicleFeature>, IVehicleFeatureRepository<VehicleFeature>
     {
-        public IList<VehicleFeature> GetAllBy(int vehicleId)
+        public IList<VehicleFeature> GetAllBy(int vehicleId, IDbContext context = null)
         {
-            using (var context = new ApplicationDbContext())
+            return HandleWithContext(context, dbContext => 
             {
-                return BaseQuery(context)
+                return BaseQuery(dbContext)
                     .Include(x => x.Vehicle)
                     .Include(x => x.Feature)
                     .Where(x => x.Vehicle.Id == vehicleId).ToList();
-            }
+            });
         }
 
         public IList<VehicleFeature> GetAllBy(int vehicleId, bool isActive)
