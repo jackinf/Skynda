@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Triven.Data.EntityFramework</RootNamespace>
-    <AssemblyName>X3Project.Data.EntityFramework</AssemblyName>
+    <AssemblyName>Triven.Data.EntityFramework</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

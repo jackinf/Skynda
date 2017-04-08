@@ -5,7 +5,7 @@ using Triven.Domain.ViewModels.Image;
 
 namespace Triven.Domain.ViewModels.Vehicle
 {
-    public class VehicleAdminViewModel : BaseViewModel //, ImageStorable<ImageViewModel>
+    public class VehicleAdminViewModel : BaseViewModel
     {
         public string VinCode { get; set; }
         public decimal Price { get; set; }
@@ -33,11 +33,8 @@ namespace Triven.Domain.ViewModels.Vehicle
         public int HorsePower { get; set; }
         public ImageViewModel MainImage { get; set; }
         public VehicleModelViewModel VehicleModel { get; set; } // TODO: use only id (int)
-        public List<FeatureAdminSelectViewModel> FeaturesAdminSelect { get; set; } = new List<FeatureAdminSelectViewModel>();  // TODO: use only ids (list of ints)
-        public List<VehicleFeatureViewModel> Features { get; set; } = new List<VehicleFeatureViewModel>();  // TODO: Is this used?? What is the difference between FeaturesAdminSelect?
-        //public List<FaultBaseViewModel> Faults { get; set; } = new List<FaultBaseViewModel>();  // TODO: Is this used? Why 0 usages?
+        public List<FeatureAdminSelectViewModel> FeaturesAdminSelect { get; set; } = new List<FeatureAdminSelectViewModel>();  // TODO: use only ids (list of ints)---- It uses id-s, but it's required in Value name for displaying in select
         public List<VehicleImageViewModel> Images { get; set; } = new List<VehicleImageViewModel>();
         public List<VehicleDescriptionViewModel> Descriptions { get; set; } = new List<VehicleDescriptionViewModel>();
-        //public ImageViewModel GetImage { get; set; } // TODO: Not used, right?
     }
 }

@@ -1,12 +1,8 @@
-/**
- * Created by jevgenir on 10/1/2016.
- */
-
 import { connect } from "react-redux";
 import { toggleLoading, setCarData, getDataAsync, sendEmailAsync, sendQuestionByEmailAsync } from "../reducers";
 
 
-import About from "../components/Details";
+import Details from "../components/Details";
 import {REDUCER_KEY__DETAILS_CHECKOUT_INFO} from "../components/CheckoutPanel/constants/Details.checkout.constants";
 
 /*  Object of action creators (can also be function that returns object).
@@ -42,4 +38,4 @@ const mapStateToProps = (state) => ({
  Selectors are composable. They can be used as input to other selectors.
  https://github.com/reactjs/reselect    */
 
-export default connect(mapStateToProps, mapDispatchToProps)(About);
+export default connect(mapStateToProps, mapDispatchToProps)(Details);

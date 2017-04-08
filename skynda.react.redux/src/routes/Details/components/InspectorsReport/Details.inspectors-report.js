@@ -14,7 +14,7 @@ import {Image} from "react-bootstrap";
  */
 class InspectorsReport extends React.Component {
   render() {
-    const {reportCategories, faults, inspector} = this.props.report;
+    const {reportCategories, inspector} = this.props.report;
 
     return (
       <Skblock header={<Translate value="details.components.inspector_report.header"/>}>
@@ -45,7 +45,7 @@ class InspectorsReport extends React.Component {
 
           <Row>
             <Col xs={12}>
-              <SimpleCarousel images={faults} title={<Translate value="details.components.inspector_report.pic_dents_txt"/>} />
+              <SimpleCarousel images={reportCategories.faults} title={<Translate value="details.components.inspector_report.pic_dents_txt"/>} />
             </Col>
           </Row>
         </div>
@@ -55,19 +55,20 @@ class InspectorsReport extends React.Component {
 export default InspectorsReport;
 
 InspectorsReport.propTypes = {
-  report: React.PropTypes.shape({
-    reportCategories: React.PropTypes.arrayOf(React.PropTypes.shape({
+  reportCategories: React.PropTypes.shape({
+    reports: React.PropTypes.arrayOf(React.PropTypes.shape({
       title: React.PropTypes.string.isRequired,
+      inspector: React.PropTypes.string.isRequired,
       description: React.PropTypes.string,
       items: React.PropTypes.arrayOf(React.PropTypes.shape({
         title: React.PropTypes.string,
         text: React.PropTypes.string,
         pass: React.PropTypes.bool
+      })),
+      faults: React.PropTypes.arrayOf(React.PropTypes.shape({
+        text: React.PropTypes.string,
+        img: React.PropTypes.string
       }))
-    })),
-    faults: React.PropTypes.arrayOf(React.PropTypes.shape({
-      text: React.PropTypes.string,
-      img: React.PropTypes.string
     }))
   }),
   sendQuestionByEmailAsync: React.PropTypes.func.isRequired

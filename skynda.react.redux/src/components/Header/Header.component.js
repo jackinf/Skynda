@@ -47,7 +47,7 @@ class Header extends React.Component {
     const activeStyle = {borderBottom: '3px solid black'};
     const activeStyleContainer = {[activePathname]: activeStyle};
 
-    console.log(activePathname);
+    // console.log(activePathname);
 
     let i = 0;
     const items = [(<li key={++i} className='sk_menu__buy'>

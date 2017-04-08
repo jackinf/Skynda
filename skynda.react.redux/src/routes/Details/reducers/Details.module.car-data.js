@@ -47,26 +47,26 @@ function map(vehicleData) {
   const safetyUrl = vehicleData.safetyUrl;
   const additional = vehicleData.additional;
   const vehicleDetailsMainImage = {
-    src: vehicleData.mainImage.url,
-    year: parseInt(vehicleData.model.year),
+    src: vehicleData.mainImageUrl,
+    year: parseInt(vehicleData.year),
     brand: vehicleData.vehicleManufacturerName,
-    model: vehicleData.model.modelCode,
-    engine: vehicleData.model.engine,
-    horsepower: parseInt(vehicleData.model.horsePower),
+    model: vehicleData.modelCode,
+    engine: vehicleData.engine,
+    horsepower: parseInt(vehicleData.horsePower),
     images: vehicleData.images,
     price: vehicleData.price
   };
   const overview = {
     manufacturer: vehicleData.vehicleManufacturerName,
-    engine: vehicleData.model.engine,
-    horsePower: parseInt(vehicleData.model.horsePower),
+    engine: vehicleData.engine,
+    horsePower: parseInt(vehicleData.horsePower),
     mileage: vehicleData.mileage,
-    transmission: vehicleData.model.transmission ? vehicleData.model.transmission.name : "",
-    drive: vehicleData.model.drivetrain ? vehicleData.model.drivetrain.name : "",
+    transmission: vehicleData.transmissionName,
+    drive: vehicleData.vehicleDrivetrain,
     colorOutsideHex: vehicleData.colorOutsideHex,
     colorInsideHex: vehicleData.colorInsideHex,
-    doors: parseInt(vehicleData.model.doors),
-    seats: vehicleData.model.seats
+    doors: parseInt(vehicleData.doors),
+    seats: vehicleData.seats
   };
   const descriptions = vehicleData.descriptions
     ? vehicleData.descriptions.map(description => (
@@ -87,23 +87,18 @@ function map(vehicleData) {
     city: vehicleData.fuelCity,
     highway: vehicleData.fuelHighway,  // isRequired
     average: vehicleData.fuelAverage,   // isRequired
-    fuelType: vehicleData.model.fuelType ? vehicleData.model.fuelType.name : ""
+    fuelType: vehicleData.fuelName
   };
   const report = {
-    reportCategories: vehicleData.reportCategories instanceof Array ? vehicleData.reportCategories : [],
-    faults: vehicleData.faults instanceof Array ? vehicleData.faults.map(fault => ({
-        text: fault.text,
-        img: fault.image ? fault.image.url : ""
-      })) : [],
+    reportCategories: vehicleData.reports instanceof Array ? vehicleData.reports : [],
     inspector: vehicleData.inspector
   };
-
   const reviews = vehicleData.reviews.map(review => {
     return {
       text: review.text,
       rating: review.rating,
-      logoUrl: review.logo != null ? review.logo.url : "",
-      videoUrl: review.video != null ? review.video.url : ""
+      logoUrl: review.logoUrl,
+      videoUrl: review.videoUrl
     }
   });
 

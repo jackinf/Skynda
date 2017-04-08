@@ -56,10 +56,17 @@ namespace Triven.Application
                 configuration.CreateMap<SubscriptionViewModel, Subscription>()
                     .ForMember(x => x.Id, opt => opt.Ignore());
 
-                configuration.CreateMap<Vehicle, VehicleAdminViewModel>().PreserveReferences()
-                    .ForMember(x => x.Features, conf => conf.Ignore());
-                configuration.CreateMap<Vehicle, VehicleDetailedViewModel>().PreserveReferences()
-                    .ForMember(x => x.Model, opt => opt.MapFrom(xx => xx.VehicleModel))
+                configuration.CreateMap<Vehicle, VehicleAdminViewModel>().PreserveReferences();
+                    //.ForMember(x => x.Features, conf => conf.Ignore());
+                configuration.CreateMap<Vehicle, VehicleDetailedViewModel>()
+                    .PreserveReferences()
+                    .ForMember(x => x.VehicleDrivetrain, opt => opt.MapFrom(xx => xx.VehicleModel.Drivetrain.Name))
+                    .ForMember(x => x.TransmissionName, opt => opt.MapFrom(xx => xx.Transmission.Name))
+                    .ForMember(x => x.FuelName, opt => opt.MapFrom(xx => xx.FuelType.Name))
+                    .ForMember(x => x.Doors, opt => opt.MapFrom(xx => xx.VehicleModel.Doors))
+                    .ForMember(x => x.Seats, opt => opt.MapFrom(xx => xx.VehicleModel.Seats))
+                    .ForMember(x => x.ModelCode, opt => opt.MapFrom(xx => xx.VehicleModel.ModelCode))
+                    .ForMember(x => x.MainImageUrl, opt => opt.MapFrom(xx => xx.MainImage.Url))
                     .ForMember(x => x.VehicleManufacturerName, opt => opt.MapFrom(xx => xx.VehicleModel.VehicleManufacturer.Name));
                 configuration.CreateMap<Vehicle, VehicleCompactViewModel>()
                     .PreserveReferences()
@@ -69,8 +76,7 @@ namespace Triven.Application
                     .ForMember(x => x.ModelDoors, opt => opt.MapFrom(xx => xx.VehicleModel.Doors))
                     .ForMember(x => x.ModelSeats, opt => opt.MapFrom(xx => xx.VehicleModel.Seats))
                     .ForMember(x => x.ModelYear, opt => opt.MapFrom(xx => xx.Year))
-                    .ForMember(x => x.VehicleManufacturerName,
-                        opt => opt.MapFrom(xx => xx.VehicleModel.VehicleManufacturer.Name));
+                    .ForMember(x => x.VehicleManufacturerName, opt => opt.MapFrom(xx => xx.VehicleModel.VehicleManufacturer.Name));
                 configuration.CreateMap<VehicleAdminViewModel, Vehicle>()
                     .ForMember(x => x.Id, opt => opt.Ignore())
                     .ForMember(x => x.Features, conf => conf.Ignore())

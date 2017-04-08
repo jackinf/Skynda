@@ -117,11 +117,13 @@ namespace Triven.Data.EntityFramework.Repositories
                 var result = BaseQuery(context)
                     .Include(x => x.VehicleModel)
                     .Include(x => x.VehicleModel.VehicleManufacturer)
+                    .Include(x => x.VehicleModel.Drivetrain)
                     .Include(x => x.MainImage)
                     .Include(x => x.Features.Select(vehicleFeature => vehicleFeature.Feature))
                     .Include(x => x.Descriptions)
                     .Include(x => x.Reviews)
-                    .Include(x => x.Reports)
+                    .Include(x => x.Reports.Select(report => report.Faults.Select(fault => fault.Image)))
+                    .Include(x => x.Reports.Select(report => report.Items))
                     .Include(x => x.FuelType)
                     .Include(x => x.Transmission)
                     .Include(x => x.Images.Select(vehicleImage => vehicleImage.Image))
@@ -133,6 +135,32 @@ namespace Triven.Data.EntityFramework.Repositories
 
                 if (result != null && result.Images.Any())
                     result.Images = result.Images.Where(x => x.DeletedOn == null).ToList();
+
+                if (result != null && result.Reviews.Any())
+                    result.Reviews = result.Reviews.Where(x => x.DeletedOn == null).ToList();
+
+                if (result != null && result.Descriptions.Any())
+                    result.Descriptions = result.Descriptions.Where(x => x.DeletedOn == null).ToList();
+
+                if (result != null && result.Reports.Any())
+                {
+                    result.Reports = result.Reports.Where(x => x.DeletedOn == null).ToList();
+
+                    if (result.Reports.Any())
+                    {
+                        foreach (var vehicleReport in result.Reports)
+                        {
+                            if (vehicleReport.Items.Any())
+                            {
+                                vehicleReport.Items = vehicleReport.Items.Where(x => x.DeletedOn == null).ToList();
+                            }
+                            if (vehicleReport.Faults.Any())
+                            {
+                                vehicleReport.Faults = vehicleReport.Faults.Where(x => x.DeletedOn == null).ToList();
+                            }
+                        }
+                    }
+                }
 
                 return result;
             }

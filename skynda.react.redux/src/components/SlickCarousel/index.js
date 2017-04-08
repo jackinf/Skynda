@@ -18,7 +18,7 @@ export class SimpleCarousel extends React.Component{
       return <button onClick={onClick} className="slick-arrow slick-custom glyphicon glyphicon-chevron-left"/>;
     }
 
-    const initialSlide = this.props.images.length > 0 ?
+    const initialSlide = this.props.images && this.props.images.length > 0 ?
       this.props.images.length > 1 ? 1 : 0 : 0;
     let settings = {
       dots: true,
@@ -35,7 +35,7 @@ export class SimpleCarousel extends React.Component{
       draggable: true
     };
     let content = [];
-    if(this.props.images.length > 0 ){
+    if(this.props.images && this.props.images.length > 0 ){
       content  = this.props.images.map(function(row, i) {
         return (
           <div key={i}>
