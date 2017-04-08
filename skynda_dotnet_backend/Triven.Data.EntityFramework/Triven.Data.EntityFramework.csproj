@@ -111,65 +111,9 @@
   <ItemGroup>
     <Compile Include="Exceptions\CannotUpdateException.cs" />
     <Compile Include="Exceptions\ContextIsNullException.cs" />
-    <Compile Include="Migrations\201703031222121_Initial.cs" />
-    <Compile Include="Migrations\201703031222121_Initial.Designer.cs">
-      <DependentUpon>201703031222121_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703041023455_SomeChanges.cs" />
-    <Compile Include="Migrations\201703041023455_SomeChanges.Designer.cs">
-      <DependentUpon>201703041023455_SomeChanges.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703041042226_VehicleMigrationReq.cs" />
-    <Compile Include="Migrations\201703041042226_VehicleMigrationReq.Designer.cs">
-      <DependentUpon>201703041042226_VehicleMigrationReq.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703061839077_VehicleMigra.cs" />
-    <Compile Include="Migrations\201703061839077_VehicleMigra.Designer.cs">
-      <DependentUpon>201703061839077_VehicleMigra.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703101521079_removeVehFeatureReq.cs" />
-    <Compile Include="Migrations\201703101521079_removeVehFeatureReq.Designer.cs">
-      <DependentUpon>201703101521079_removeVehFeatureReq.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703111924393_RequiredVehicleImgREMOVE.cs" />
-    <Compile Include="Migrations\201703111924393_RequiredVehicleImgREMOVE.Designer.cs">
-      <DependentUpon>201703111924393_RequiredVehicleImgREMOVE.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703120954183_VehicleReport_VehicleReview_VehicleId.cs" />
-    <Compile Include="Migrations\201703120954183_VehicleReport_VehicleReview_VehicleId.Designer.cs">
-      <DependentUpon>201703120954183_VehicleReport_VehicleReview_VehicleId.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703121058193_VehicleModel_ClassifierIds.cs" />
-    <Compile Include="Migrations\201703121058193_VehicleModel_ClassifierIds.Designer.cs">
-      <DependentUpon>201703121058193_VehicleModel_ClassifierIds.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703181536023_Vehicle_VehicleStatus.cs" />
-    <Compile Include="Migrations\201703181536023_Vehicle_VehicleStatus.Designer.cs">
-      <DependentUpon>201703181536023_Vehicle_VehicleStatus.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703251230303_Image_ThumbnailImages.cs" />
-    <Compile Include="Migrations\201703251230303_Image_ThumbnailImages.Designer.cs">
-      <DependentUpon>201703251230303_Image_ThumbnailImages.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703251633303_add ForeignKey to Classification.cs" />
-    <Compile Include="Migrations\201703251633303_add ForeignKey to Classification.Designer.cs">
-      <DependentUpon>201703251633303_add ForeignKey to Classification.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703251747599_ForeignKeyMadness01.cs" />
-    <Compile Include="Migrations\201703251747599_ForeignKeyMadness01.Designer.cs">
-      <DependentUpon>201703251747599_ForeignKeyMadness01.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201704051629385_More_generic_vehicle_model.cs" />
-    <Compile Include="Migrations\201704051629385_More_generic_vehicle_model.Designer.cs">
-      <DependentUpon>201704051629385_More_generic_vehicle_model.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201704081031254_temp_url_fields_for_reviews.cs" />
-    <Compile Include="Migrations\201704081031254_temp_url_fields_for_reviews.Designer.cs">
-      <DependentUpon>201704081031254_temp_url_fields_for_reviews.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201704081149552_Feature_TempSolution.cs" />
-    <Compile Include="Migrations\201704081149552_Feature_TempSolution.Designer.cs">
-      <DependentUpon>201704081149552_Feature_TempSolution.cs</DependentUpon>
+    <Compile Include="Migrations\201704081215291_Initial.cs" />
+    <Compile Include="Migrations\201704081215291_Initial.Designer.cs">
+      <DependentUpon>201704081215291_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Entities\AccountBindingModels.cs" />
@@ -228,50 +172,8 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201703031222121_Initial.resx">
-      <DependentUpon>201703031222121_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703041023455_SomeChanges.resx">
-      <DependentUpon>201703041023455_SomeChanges.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703041042226_VehicleMigrationReq.resx">
-      <DependentUpon>201703041042226_VehicleMigrationReq.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703061839077_VehicleMigra.resx">
-      <DependentUpon>201703061839077_VehicleMigra.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703101521079_removeVehFeatureReq.resx">
-      <DependentUpon>201703101521079_removeVehFeatureReq.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703111924393_RequiredVehicleImgREMOVE.resx">
-      <DependentUpon>201703111924393_RequiredVehicleImgREMOVE.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703120954183_VehicleReport_VehicleReview_VehicleId.resx">
-      <DependentUpon>201703120954183_VehicleReport_VehicleReview_VehicleId.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703121058193_VehicleModel_ClassifierIds.resx">
-      <DependentUpon>201703121058193_VehicleModel_ClassifierIds.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703181536023_Vehicle_VehicleStatus.resx">
-      <DependentUpon>201703181536023_Vehicle_VehicleStatus.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703251230303_Image_ThumbnailImages.resx">
-      <DependentUpon>201703251230303_Image_ThumbnailImages.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703251633303_add ForeignKey to Classification.resx">
-      <DependentUpon>201703251633303_add ForeignKey to Classification.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703251747599_ForeignKeyMadness01.resx">
-      <DependentUpon>201703251747599_ForeignKeyMadness01.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201704051629385_More_generic_vehicle_model.resx">
-      <DependentUpon>201704051629385_More_generic_vehicle_model.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201704081031254_temp_url_fields_for_reviews.resx">
-      <DependentUpon>201704081031254_temp_url_fields_for_reviews.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201704081149552_Feature_TempSolution.resx">
-      <DependentUpon>201704081149552_Feature_TempSolution.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201704081215291_Initial.resx">
+      <DependentUpon>201704081215291_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
