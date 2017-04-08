@@ -50,6 +50,7 @@ export default class ReduxFormCropToolComponent extends React.Component {
         ? (this.state.showCrop ? (<span>
               <ReactCrop src={input.value}
                          crop={{width: 90, aspect: 16/9}}
+                         onImageLoaded={(crop, image, pixelCrop) => this.onCropChange(crop, pixelCrop, name, reduxFormName)}
                          onComplete={(crop, pixelCrop) => this.onCropChange(crop, pixelCrop, name, reduxFormName)} />
               <button className="btn btn-success" onClick={e => this.onCropDone(name, reduxFormName)}>Accept</button>
               <ReactIconDeleteWrapped onClick={e => onImageRemove(e, name, reduxFormName)}/>

@@ -267,7 +267,7 @@ namespace Triven.Application.Services
             if (vehicleId <= 0)
                 throw new ArgumentException("Wrong id");
 
-            var existingDescriptions = _vehicleDescriptionRepository.GetAllVehicleDescriptions(vehicleId);
+            var existingDescriptions = _vehicleDescriptionRepository.GetAllVehicleDescriptions(vehicleId, unitOfWork.Context);
 
             if (existingDescriptions.Any())
             {
@@ -306,7 +306,7 @@ namespace Triven.Application.Services
             if (vehicleId <= 0)
                 throw new ArgumentException("Wrong id");
 
-            var existingFeatures = _vehicleFeatureRepository.GetAllBy(vehicleId);
+            var existingFeatures = _vehicleFeatureRepository.GetAllBy(vehicleId, unitOfWork.Context);
 
             if (existingFeatures.Any())
             {
