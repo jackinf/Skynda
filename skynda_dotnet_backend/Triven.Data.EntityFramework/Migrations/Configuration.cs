@@ -51,22 +51,84 @@ namespace Triven.Data.EntityFramework.Migrations
 
         private static void CreateInitialFeatures(ApplicationDbContext context)
         {
-            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(1, "Parking Sensors", "feature", "PARKING_SENSORS", true, 1));
-            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(2, "Bluetooth", "feature", "BLUETOOTH", true, 2));
-            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(3,"Sunroof", "feature", "SUNROOF", true, 3));
-            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(4,"Navigation", "feature", "NAVIGATION", true, 4));
-            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(5,"Keyless-Go", "feature", "KEYLESS_GO", true, 5));
-            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(6,"Immobilizer", "feature", "IMMOBILIZER", true, 6));
-            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(7,"Xenon Lights", "feature", "XENON_LIGHTS", true, 7));
-            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(8,"Alloy Wheels", "feature", "ALLOY_WHEELS", true, 8));
-            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(9,"Leather Upholstery", "feature", "Leather_Upholstery".ToUpper(), true, 9));
-            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(10,"Racing Seats", "feature", "Racing_Seats".ToUpper(), true, 10));
-            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(11,"Ventilated Seats", "feature", "Ventilated_Seats".ToUpper(), true, 11));
-            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(12,"Seat_Heating", "feature", "Seat_Heating".ToUpper(), true, 12));
-            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(13,"Mirror Heating", "feature", "Mirror_Heating".ToUpper(), true, 13));
-            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(14,"Rain Sensors", "feature", "Rain_Sensors".ToUpper(), true, 14));
-            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(15,"Power Steering", "feature", "Power_Steering".ToUpper(), true, 15));
-            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(16, "Cruise Control", "feature", "Cruise_Control".ToUpper(), true, 16));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(1, "Kesklukustus", "Power steering", "feature", "POWER_STEERING", "SAFETY_AND_SECURITY_EQUIPMENT", true, 1));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(2, "Abs pidurid", "Abs brakes", "feature", "ABS_BRAKES", "SAFETY_AND_SECURITY_EQUIPMENT", true, 2));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(3, "Turvapadi", "Airbag", "feature", "AIRBAG", "SAFETY_AND_SECURITY_EQUIPMENT", true, 3));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(4, "Signalisatsioon", "Anti-theft alarm system", "feature", "ANTI-THEFT_ALARM_SYSTEM", "SAFETY_AND_SECURITY_EQUIPMENT", true, 4));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(5, "Immobilisaator", "Immobilizer", "feature", "IMMOBILIZER", "SAFETY_AND_SECURITY_EQUIPMENT", true, 5));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(6, "Stabiilsuskontroll", "Stability control", "feature", "STABILITY_CONTROL", "SAFETY_AND_SECURITY_EQUIPMENT", true, 6));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(7, "Pidurdusjõukontroll", "Braking force regulator", "feature", "BRAKING_FORCE_REGULATOR", "SAFETY_AND_SECURITY_EQUIPMENT", true, 7));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(8, "Veojõukontroll", "Traction control", "feature", "TRACTION_CONTROL", "SAFETY_AND_SECURITY_EQUIPMENT", true, 8));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(9, "Lisapidurituli", "Third brake light", "feature", "THIRD_BRAKE_LIGHT", "SAFETY_AND_SECURITY_EQUIPMENT", true, 9));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(10, "Vihmasensor", "Rain sensor", "feature", "RAIN_SENSOR", "SAFETY_AND_SECURITY_EQUIPMENT", true, 10));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(11, "Turvavööde eelpingutid esiistmetel", "Seatbelt pre-tighteners on front seats", "feature", "SEATBELT_PRE-TIGHTENERS_ON_FRONT_SEATS", "SAFETY_AND_SECURITY_EQUIPMENT", true, 11));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(12, "Xenon", "Xenon headlight", "feature", "XENON_HEADLIGHT", "LIGHTS", true, 12));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(13, "Esitulede pesurid", "Headlight washers", "feature", "HEADLIGHT_WASHERS", "LIGHTS", true, 13));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(14, "Udutuled", "Fog lights", "feature", "FOG_LIGHTS", "LIGHTS", true, 14));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(15, "Tulede korrektor", "Headlight range adjustment", "feature", "HEADLIGHT_RANGE_ADJUSTMENT", "LIGHTS", true, 15));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(16, "Lisatuled", "Extra lights", "feature", "EXTRA_LIGHTS", "LIGHTS", true, 16));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(17, "Valgustuspakett", "Lighting pack", "feature", "LIGHTING_PACK", "LIGHTS", true, 17));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(18, "Suverehvid", "Summer tires", "feature", "SUMMER_TIRES", "TIRES_AND_WHEELS", true, 18));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(19, "Talverehvid", "Winter tires", "feature", "WINTER_TIRES", "TIRES_AND_WHEELS", true, 19));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(20, "Valuveljed", "Light alloy wheels", "feature", "LIGHT_ALLOY_WHEELS", "TIRES_AND_WHEELS", true, 20));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(21, "Ilukilbid", "Dust shields", "feature", "DUST_SHIELDS", "TIRES_AND_WHEELS", true, 21));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(22, "Reguleeritav roolisammas", "Steering wheel adjustment", "feature", "STEERING_WHEEL_ADJUSTMENT", "STEERING_WHEEL", true, 22));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(23, "Multifunktsionaalne rool", "Multifunctional steering wheel", "feature", "MULTIFUNCTIONAL_STEERING_WHEEL", "STEERING_WHEEL", true, 23));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(24, "Nahkkattega rool", "Leather steering wheel", "feature", "LEATHER_STEERING_WHEEL", "STEERING_WHEEL", true, 24));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(25, "Sportrool", "Racing steering wheel", "feature", "RACING_STEERING_WHEEL", "STEERING_WHEEL", true, 25));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(26, "Stereo", "Car stereo", "feature", "CAR_STEREO", "AUDIO_VIDEO_COMMUNICATION", true, 26));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(27, "Helivõimendi", "Stereo amplifier", "feature", "STEREO_AMPLIFIER", "AUDIO_VIDEO_COMMUNICATION", true, 27));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(28, "Kõlarid", "Speakers", "feature", "SPEAKERS", "AUDIO_VIDEO_COMMUNICATION", true, 28));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(29, "Subwoofer", "Subwoofer", "feature", "SUBWOOFER", "AUDIO_VIDEO_COMMUNICATION", true, 29));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(30, "Cd box", "Cd changer", "feature", "CD_CHANGER", "AUDIO_VIDEO_COMMUNICATION", true, 30));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(31, "Elektriline antenn", "Electric antenna", "feature", "ELECTRIC_ANTENNA", "AUDIO_VIDEO_COMMUNICATION", true, 31));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(32, "Ekraan", "Screen", "feature", "SCREEN", "AUDIO_VIDEO_COMMUNICATION", true, 32));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(33, "Navigatsiooniseade", "Navigation system", "feature", "NAVIGATION_SYSTEM", "AUDIO_VIDEO_COMMUNICATION", true, 33));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(34, "Autokompuuter", "Onboard computer", "feature", "ONBOARD_COMPUTER", "AUDIO_VIDEO_COMMUNICATION", true, 34));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(35, "Autotelefon", "Car phone", "feature", "CAR_PHONE", "AUDIO_VIDEO_COMMUNICATION", true, 35));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(36, "Käed vabad süsteem", "Hands free", "feature", "HANDS_FREE", "AUDIO_VIDEO_COMMUNICATION", true, 36));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(37, "Gsm antenn", "Gsm antenna", "feature", "GSM_ANTENNA", "AUDIO_VIDEO_COMMUNICATION", true, 37));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(38, "Iluliistud salongis", "Fine laths inside saloon", "feature", "FINE_LATHS_INSIDE_SALOON", "INTERIOR", true, 38));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(39, "Jalamatid", "Mats", "feature", "MATS", "INTERIOR", true, 39));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(40, "Nahkkattega käigukanginupp", "Leather shift lever", "feature", "LEATHER_SHIFT_LEVER", "INTERIOR", true, 40));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(41, "Nahkkattega käsipidurikang", "Leather-coated hand brake handle", "feature", "LEATHER-COATED_HAND_BRAKE_HANDLE", "INTERIOR", true, 41));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(42, "Poolnahkpolster", "Half-leather padding", "feature", "HALF-LEATHER_PADDING", "SEATS", true, 42));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(43, "Tekstiilpolster", "Textile upholstery", "feature", "TEXTILE_UPHOLSTERY", "SEATS", true, 43));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(44, "Veluurpolster", "Velour padding", "feature", "VELOUR_PADDING", "SEATS", true, 44));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(45, "Nahkpolster", "Leather interior", "feature", "LEATHER_INTERIOR", "SEATS", true, 45));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(46, "Elektriliselt reguleeritavad istmed", "Electrically adjustable seats", "feature", "ELECTRICALLY_ADJUSTABLE_SEATS", "SEATS", true, 46));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(47, "Istmesoojendused", "Seat heating", "feature", "SEAT_HEATING", "SEATS", true, 47));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(48, "Käetugi ees", "Front armrest", "feature", "FRONT_ARMREST", "SEATS", true, 48));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(49, "Käetugi taga", "Rear armrest", "feature", "REAR_ARMREST", "SEATS", true, 49));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(50, "Tagaistme seljatugi allaklapitav", "Down folding back rest", "feature", "DOWN_FOLDING_BACK_REST", "SEATS", true, 50));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(51, "Sportistmed", "Racing seats", "feature", "RACING_SEATS", "SEATS", true, 51));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(52, "Automaatkliimaseade", "Automatic Climate Control", "feature", "AUTOMATIC_CLIMATE_CONTROL", "COMFORT_EQUIPMENT", true, 52));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(53, "Elektrilised välispeeglid", "Electrically adjustable mirrors", "feature", "ELECTRICALLY_ADJUSTABLE_MIRRORS", "COMFORT_EQUIPMENT", true, 53));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(54, "Elektrilised akende tõstukid", "Power windows", "feature", "POWER_WINDOWS", "COMFORT_EQUIPMENT", true, 54));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(55, "Toonitud klaasid", "Tinted windows", "feature", "TINTED_WINDOWS", "COMFORT_EQUIPMENT", true, 55));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(56, "Katuseluuk", "Sunroof", "feature", "SUNROOF", "COMFORT_EQUIPMENT", true, 56));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(57, "Püsikiiruse hoidja", "Cruise control", "feature", "CRUISE_CONTROL", "COMFORT_EQUIPMENT", true, 57));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(58, "Peeglid päikesesirmides", "Mirrors in sunshields", "feature", "MIRRORS_IN_SUNSHIELDS", "COMFORT_EQUIPMENT", true, 58));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(59, "Rulookardin tagaaknal", "Rear window blind", "feature", "REAR_WINDOW_BLIND", "COMFORT_EQUIPMENT", true, 59));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(60, "Mootori eelsoojendus", "Engine pre-heating", "feature", "ENGINE_PRE-HEATING", "COMFORT_EQUIPMENT", true, 60));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(61, "Kohtvalgustid", "Spot lights", "feature", "SPOT_LIGHTS", "COMFORT_EQUIPMENT", true, 61));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(62, "Parkimisandurid", "Parking aid", "feature", "PARKING_SENSORS", "COMFORT_EQUIPMENT", true, 62));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(63, "Bluetooth", "Bluetooth", "feature", "BLUETOOTH", "COMFORT_EQUIPMENT", true, 63));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(64, "Tagaspoiler", "Rear spoiler", "feature", "REAR_SPOILER", "SPORT_EQUIPMENT", true, 64));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(65, "Esispoiler", "Front spoiler", "feature", "FRONT_SPOILER", "SPORT_EQUIPMENT", true, 65));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(66, "Spoileriring", "Spoilers on all sides", "feature", "SPOILERS_ON_ALL_SIDES", "SPORT_EQUIPMENT", true, 66));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(67, "Sportvedrustus", "Racing suspension", "feature", "RACING_SUSPENSION", "SPORT_EQUIPMENT", true, 67));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(68, "Sportsummuti", "Racing exhaust pipes", "feature", "RACING_EXHAUST_PIPES", "SPORT_EQUIPMENT", true, 68));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(66, "Katusereelingud", "Roof railings", "feature", "ROOF_RAILINGS", "OTHER_EQUIPMENT", true, 66));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(67, "Suusakott", "Ski bag", "feature", "SKI_BAG", "OTHER_EQUIPMENT", true, 67));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(68, "Välistemperatuuri näidik", "Outside temperature display", "feature", "OUTSIDE_TEMPERATURE_DISPLAY", "OTHER_EQUIPMENT", true, 68));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(69, "Elektrilise soojendusega esiklaas", "Electrically heated windshield", "feature", "ELECTRICALLY_HEATED_WINDSHIELD", "OTHER_EQUIPMENT", true, 69));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(70, "Tagaklaasi soojendus", "Rear window heating", "feature", "REAR_WINDOW_HEATING", "OTHER_EQUIPMENT", true, 70));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(71, "Pagasikate", "Luggage cover", "feature", "LUGGAGE_COVER", "OTHER_EQUIPMENT", true, 71));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(72, "Pagasi võrk pakiruumis", "Luggage net", "feature", "LUGGAGE_NET", "OTHER_EQUIPMENT", true, 72));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(73, "Salongi ja pakiruumi eraldusvõrk", "Saloon and luggage department isolation net", "feature", "SALOON_AND_LUGGAGE_DEPARTMENT_ISOLATION_NET", "OTHER_EQUIPMENT", true, 73));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(74, "Tagaklaasi puhasti", "Rear window cleaner", "feature", "REAR_WINDOW_CLEANER", "OTHER_EQUIPMENT", true, 74));
+            context.Features.AddOrUpdate(x => x.Value, Factory.CreateFeature(75, "Veokonks", "Tow hitch", "feature", "TOW_HITCH", "OTHER_EQUIPMENT", true, 75));
         }
 
         private static void CreateClassificationTypes(ApplicationDbContext context, ApplicationUser admin)
@@ -463,8 +525,10 @@ namespace Triven.Data.EntityFramework.Migrations
             public static Feature CreateFeature(
                 int id,
                 string name,
+                string nameEng,
                 string description,
                 string value,
+                string valueCategory,
                 bool isActive,
                 int weight)
             {
@@ -472,9 +536,11 @@ namespace Triven.Data.EntityFramework.Migrations
                 {
                     Id = id,
                     Name = name,
+                    NameEng = nameEng,
                     Description = description,
                     IsImported = true,
                     Value = value,
+                    CategoryName = valueCategory,
                     CreatorId = _admin.Id,
                     IsActive = isActive,
                     Weight = weight,

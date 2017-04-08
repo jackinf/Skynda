@@ -12,6 +12,8 @@ namespace Triven.Data.EntityFramework.Entities
         public int Weight { get; set; }
         public string Value { get; set; }
         public string Name { get; set; }
+        public string NameEng { get; set; } // ajutine lahendus
         public bool IsActive { get; set; }
+        public string CategoryName { get; set; } // ajutine lahendus
     }
 }

@@ -30,6 +30,8 @@ function addSuccess() {
 }
 
 function addFailure(errors) {
+  if (errors)
+    window.scrollTo(0, 0);
   return {
     type: ADD_FAILURE,
     isFetching: false,
@@ -56,6 +58,8 @@ function editSuccess(item) {
 }
 
 function editFailure(errors) {
+  if (errors)
+    window.scrollTo(0, 0);
   return {
     type: EDIT_FAILURE,
     isFetching: false,

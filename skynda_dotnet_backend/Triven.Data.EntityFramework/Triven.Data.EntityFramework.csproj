@@ -163,6 +163,10 @@
     <Compile Include="Migrations\201704051629385_More_generic_vehicle_model.Designer.cs">
       <DependentUpon>201704051629385_More_generic_vehicle_model.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201704081149552_Feature_TempSolution.cs" />
+    <Compile Include="Migrations\201704081149552_Feature_TempSolution.Designer.cs">
+      <DependentUpon>201704081149552_Feature_TempSolution.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Entities\AccountBindingModels.cs" />
     <Compile Include="Entities\Classification.cs" />
@@ -258,6 +262,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201704051629385_More_generic_vehicle_model.resx">
       <DependentUpon>201704051629385_More_generic_vehicle_model.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704081149552_Feature_TempSolution.resx">
+      <DependentUpon>201704081149552_Feature_TempSolution.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
