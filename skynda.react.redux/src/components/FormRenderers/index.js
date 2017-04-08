@@ -1,3 +1,5 @@
-/**
- * Created by ardi-pc on 2017-04-08.
- */
+import renderTextField from "./form.text-field.renderer";
+
+export {
+  renderTextField,
+}

@@ -52,6 +52,8 @@ namespace Triven.Domain.ViewModels.Vehicle
         /// </summary>
         public List<VehicleDescriptionViewModel> Descriptions { get; set; }
 
+        public List<FaultBaseViewModel> Faults { get; set; }
+
         public VehicleStatus VehicleStatus { get; set; }
         public string VehicleStatusString => VehicleStatus.ToString();
 
@@ -62,13 +64,13 @@ namespace Triven.Domain.ViewModels.Vehicle
         public int Doors { get; set; }
         public int Seats { get; set; }
         public string FuelName { get; set; }
-
+        public string FoundHistory { get; set; }
 
         public void CalculateFuelAverage()
         {
             try
             {
-                double result = (double)FuelCity + (double)FuelHighway / 2;
+                double result = (double)(FuelCity + FuelHighway) / 2;
                 FuelAverage = result;
             }
             catch (Exception e)
@@ -77,7 +79,5 @@ namespace Triven.Domain.ViewModels.Vehicle
             }
 
         }
-
-        //public ImageViewModel GetImage { get; set; }
     }
 }

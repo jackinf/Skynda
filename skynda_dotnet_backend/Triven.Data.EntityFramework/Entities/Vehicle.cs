@@ -55,6 +55,8 @@ namespace Triven.Data.EntityFramework.Entities
 
         public int Year { get; set; }
 
+        public string FoundHistory { get; set; }
+
         [Column("VehicleStatus")]
         public string VehicleStatusString
         {

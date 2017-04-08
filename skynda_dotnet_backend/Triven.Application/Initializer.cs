@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Linq;
 using AutoMapper;
 using Ninject;
 using Triven.Application.IoCModules;
 using Triven.Data.EntityFramework.Entities;
 using Triven.Data.EntityFramework.Entities.User;
+using Triven.Domain.Constants;
 using Triven.Domain.ViewModels.Account;
 using Triven.Domain.ViewModels.Classification;
 using Triven.Domain.ViewModels.Feature;
@@ -60,14 +62,24 @@ namespace Triven.Application
                     //.ForMember(x => x.Features, conf => conf.Ignore());
                 configuration.CreateMap<Vehicle, VehicleDetailedViewModel>()
                     .PreserveReferences()
-                    .ForMember(x => x.VehicleDrivetrain, opt => opt.MapFrom(xx => xx.VehicleModel.Drivetrain.Name))
-                    .ForMember(x => x.TransmissionName, opt => opt.MapFrom(xx => xx.Transmission.Name))
-                    .ForMember(x => x.FuelName, opt => opt.MapFrom(xx => xx.FuelType.Name))
+                    .ForMember(x => x.TransmissionName, opt => opt.MapFrom(xx => 
+                        xx.Transmission.Value == DatabaseConstants.Values.AutomaticTransmission
+                            ? "Automaat" : xx.Transmission.Value == DatabaseConstants.Values.ManualTransmission
+                            ? "Manuaal" : "Poolautomaat"))
+                    .ForMember(x => x.VehicleDrivetrain, opt => opt.MapFrom(xx => 
+                        xx.VehicleModel.Drivetrain.Value == DatabaseConstants.Values.FrontWheel
+                        ? "Esivedu" : xx.VehicleModel.Drivetrain.Value == DatabaseConstants.Values.RearWheel
+                        ? "Tagavedu" : "Nelikvedu"))
+                    .ForMember(x => x.FuelName, opt => opt.MapFrom(xx => 
+                        xx.FuelType.Value == DatabaseConstants.Values.Petrol 
+                        ? "Bensiin" : xx.FuelType.Value == DatabaseConstants.Values.Diesel
+                        ? "Diisel" : xx.FuelType.Name))
                     .ForMember(x => x.Doors, opt => opt.MapFrom(xx => xx.VehicleModel.Doors))
                     .ForMember(x => x.Seats, opt => opt.MapFrom(xx => xx.VehicleModel.Seats))
                     .ForMember(x => x.ModelCode, opt => opt.MapFrom(xx => xx.VehicleModel.ModelCode))
                     .ForMember(x => x.MainImageUrl, opt => opt.MapFrom(xx => xx.MainImage.Url))
-                    .ForMember(x => x.VehicleManufacturerName, opt => opt.MapFrom(xx => xx.VehicleModel.VehicleManufacturer.Name));
+                    .ForMember(x => x.VehicleManufacturerName, opt => opt.MapFrom(xx => xx.VehicleModel.VehicleManufacturer.Name))
+                    .ForMember(x => x.Faults, opt => opt.MapFrom(xx => xx.Reports.SelectMany(yy => yy.Faults)));
                 configuration.CreateMap<Vehicle, VehicleCompactViewModel>()
                     .PreserveReferences()
                     .ForMember(x => x.ThumbnailUrl, opt => opt.MapFrom(xx => xx.MainImage.ThumbnailUrl))

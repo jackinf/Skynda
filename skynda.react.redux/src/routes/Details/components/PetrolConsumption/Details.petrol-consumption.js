@@ -15,7 +15,7 @@ import Skblock from "../BlockContainer";
 
 class PetrolConsumption extends React.Component {
   render() {
-    const {city, highway, average, fuelType} = this.props.petrolConsumption;
+    const {city, highway, average} = this.props.petrolConsumption;
 
     return (<Skblock header={<Translate value="details.components.petrol.header"/>}>
       <Col md={2}>
@@ -34,10 +34,6 @@ class PetrolConsumption extends React.Component {
         <Row>
           <Col md={4}><label className="sk_details__label"><Translate value="details.components.petrol.average"/>: </label></Col>
           <Col md={8}>{average}</Col>
-        </Row>
-        <Row>
-          <Col md={4}><label className="sk_details__label"><Translate value="details.components.petrol.fuel_type"/>: </label></Col>
-          <Col md={8}>{fuelType}</Col>
         </Row>
       </Col>
     </Skblock>);

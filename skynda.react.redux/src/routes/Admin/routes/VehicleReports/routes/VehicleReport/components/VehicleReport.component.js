@@ -11,6 +11,7 @@ import {
 } from "./FormRenderers";
 import "./VehicleReport.component.scss";
 import {Button} from "react-bootstrap";
+import {ErrorBlockRenderer} from "../../../../../components/FormRenderers";
 
 class VehicleReportCategory extends React.Component {
   static propTypes = {
@@ -50,11 +51,12 @@ class VehicleReportCategory extends React.Component {
 
   render() {
     const vehicleId = this.props.params[ROUTE_PARAMS.VEHICLE_ID];
-
+    const errors = this.props.errors;
     return (
       <div>
         {this.props.isFetching || this.props.submitting ? "Loading..." : (
           <form className="vehicle-report">
+            <ErrorBlockRenderer errors={errors}/>
             {vehicleId ?
               <div>VehicleId: {vehicleId}</div>
                 : <VehiclesSelectField name="vehicleId" label="Vehicle *" vehicles={this.props.vehicles}/>

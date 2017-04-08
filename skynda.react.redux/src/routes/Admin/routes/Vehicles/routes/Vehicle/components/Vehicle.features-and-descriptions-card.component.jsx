@@ -37,7 +37,7 @@ export default class VehicleReportsCardComponent extends React.Component {
         <CardText>
           <FieldArray name="descriptions" label="Descriptions" component={descriptionRenderer}
           />
-          <Field name="additional" label="Additional info" component={renderTextField}/>
+          <Field name="additional" label="Additional info" component={renderTextField} multiLine={true} rows={4}/>
         </CardText>
         {this.props.children}
       </Card>

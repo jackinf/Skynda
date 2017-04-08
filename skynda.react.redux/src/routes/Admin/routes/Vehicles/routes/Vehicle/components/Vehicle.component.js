@@ -201,10 +201,11 @@ class Vehicle extends React.Component {
                     <label>History:</label><br/>
                     <Field name="vinCode" label="Vin Code *" component={renderTextField}/>
                     <Field name="registrationNumber" label="Registration Number *" component={renderTextField}/>
+                    <Field name="foundHistory" label="Found history *" component={renderTextField} multiLine={true} rows={4}/>
                     <br/>
 
                     <label>Safety:</label><br/>
-                    <Field name="safetyStars" label="Safety Stars" component={renderTextField} type="number"/>
+                    <Field name="safetyStars" label="Safety Stars" component={renderTextField} type="number" max="5" min="0"/>
                     <Field name="safetyUrl" label="Safety Url" component={renderTextField}/>
 
                     <Field name="colorInsideHex"

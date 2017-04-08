@@ -6,8 +6,8 @@ namespace Triven.Application.Validators.VehicleReport
     {
         public VehicleReportValidator()
         {
-            RuleFor(x => x.Title).NotNull().NotEmpty();
-            RuleFor(x => x.Description).NotNull().NotEmpty();
+            RuleFor(x => x.Title).NotEmpty();
+            RuleFor(x => x.Description).NotEmpty();
         }
     }
 }

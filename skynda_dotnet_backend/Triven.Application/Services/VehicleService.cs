@@ -79,6 +79,7 @@ namespace Triven.Application.Services
 
             var result = _vehicleRepository.GetDetailed(vehicleId);
             VehicleDetailedViewModel mappedResult = Mapper.Map<Vehicle, VehicleDetailedViewModel>(result);
+            mappedResult.CalculateFuelAverage();
             return ServiceResult<VehicleDetailedViewModel>.Factory.Success(mappedResult);
         }
 
@@ -149,6 +150,8 @@ namespace Triven.Application.Services
             if (viewModel == null)
                 viewModel = new VehicleAdminViewModel();
             viewModel.Id = vehicleId;
+            VehicleAdminViewModel mappedResult;
+            IResult<Vehicle> result;
 
             using (var unitOfWork = new UnitOfWorkEntityBase())
             {
@@ -180,7 +183,7 @@ namespace Triven.Application.Services
 
                     entity.VehicleModelId = viewModel.VehicleModel.Id;  // TODO: Do not use a fucking ViewModel if we only want to change reference!
 
-                    var result = _vehicleRepository.Update(vehicleId, entity, unitOfWork.Context);
+                    result = _vehicleRepository.Update(vehicleId, entity, unitOfWork.Context);
 
                     /*
                  * Update Images
@@ -192,25 +195,21 @@ namespace Triven.Application.Services
                         List<VehicleImageViewModel> vehicleImages = new List<VehicleImageViewModel>();
                         Mapper.Map(existingVehicleImages, vehicleImages);
                         _blobStorageService.HandleMediaCollection(entity.Id, viewModel.Images, vehicleImages, unitOfWork.Context);
-                    }
+                    }                   
 
-                    /*
-                     * Update Descriptions
-                     */
-                    UpdateDescriptions(result.ContextObject.Id, viewModel.Descriptions, unitOfWork);
+                    var images = _vehicleImageRepository.GetAllVehicleImages(result.ContextObject.Id, unitOfWork.Context);
+                    result.ContextObject.Images = images;
 
+                    mappedResult = Mapper.Map<VehicleAdminViewModel>(result.ContextObject);
+                   
+                    
+                   
                     /*
                      * Update Features
                      */
                     UpdateFeatures(result.ContextObject.Id, viewModel.FeaturesAdminSelect, unitOfWork);
 
-                    var images = _vehicleImageRepository.GetAllVehicleImages(result.ContextObject.Id, unitOfWork.Context);
-                    result.ContextObject.Images = images;
-
-                    VehicleAdminViewModel mappedResult = Mapper.Map<VehicleAdminViewModel>(result.ContextObject);
-
                     unitOfWork.Commit();
-                    return ServiceBaseResult<VehicleAdminViewModel>.Factory.Success(mappedResult, result.Message);
                 }
                 catch (Exception ex)
                 {
@@ -218,6 +217,23 @@ namespace Triven.Application.Services
                     return ServiceResult<VehicleAdminViewModel>.Factory.Fail(ex.Message);
                 }
             }
+
+            try
+            {
+                /*
+                 * Update Descriptions
+                 */
+                UpdateDescriptions(result.ContextObject.Id, viewModel.Descriptions);
+            }
+            catch (Exception ex)
+            {
+                return ServiceResult<VehicleAdminViewModel>.Factory.Fail(ex.Message);
+            }
+            
+
+
+            return ServiceBaseResult<VehicleAdminViewModel>.Factory.Success(mappedResult, result.Message);
+
         }
 
         public ServiceResult<bool> Delete(int vehicleId)
@@ -262,12 +278,12 @@ namespace Triven.Application.Services
         // Private methods
         //
 
-        private void UpdateDescriptions(int vehicleId, List<VehicleDescriptionViewModel> descriptions, UnitOfWorkEntityBase unitOfWork)
+        private void UpdateDescriptions(int vehicleId, List<VehicleDescriptionViewModel> descriptions, UnitOfWorkEntityBase unitOfWork = null)
         {
             if (vehicleId <= 0)
                 throw new ArgumentException("Wrong id");
 
-            var existingDescriptions = _vehicleDescriptionRepository.GetAllVehicleDescriptions(vehicleId, unitOfWork.Context);
+            var existingDescriptions = _vehicleDescriptionRepository.GetAllVehicleDescriptions(vehicleId, unitOfWork?.Context);
 
             if (existingDescriptions.Any())
             {
@@ -277,7 +293,7 @@ namespace Triven.Application.Services
 
                     if (!exists)
                     {
-                        _vehicleDescriptionRepository.Delete(existingDescription.Id, unitOfWork.Context);
+                        _vehicleDescriptionRepository.Delete(existingDescription.Id, unitOfWork?.Context);
                     }
                 }
             }
@@ -287,16 +303,17 @@ namespace Triven.Application.Services
             foreach (var vehicleDescriptionViewModel in descriptions)
             {
                 var description = Mapper.Map<VehicleDescription>(vehicleDescriptionViewModel);
+                description.Id = vehicleDescriptionViewModel.Id;
                 description.VehicleId = vehicleId;
 
                 if (existingDescriptions.Any() &&
-                    existingDescriptions.Any(x => x.Id == vehicleDescriptionViewModel.Id))
+                    existingDescriptions.Any(x => x.Id == description.Id))
                 {
-                    _vehicleDescriptionRepository.Update(description.Id, description, unitOfWork.Context);
+                    _vehicleDescriptionRepository.Update(description.Id, description);
                 }
                 else
                 {
-                    _vehicleDescriptionRepository.Add(description, unitOfWork.Context);
+                    _vehicleDescriptionRepository.Add(description, unitOfWork?.Context);
                 }
             }
         }

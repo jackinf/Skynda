@@ -45,6 +45,18 @@
             public const int VehicleBodyTypeId = 7;
         }
 
+        public static class Values
+        {
+            public const string Petrol = "PETROL";
+            public const string Diesel = "DIESEL";
+            public const string FrontWheel = "FRONT";
+            public const string RearWheel = "REAR";
+            public const string AllWheel = "ALL";
+            public const string ManualTransmission = "MANUAL";
+            public const string AutomaticTransmission = "AUTOMATIC";
+            public const string SemiAutomatic = "SEMIAUTOMATIC";
+        }
+
         public static class ClassificationIds
         {
             public static class PaymentType

@@ -34,9 +34,10 @@ namespace Triven.Application.Validators.Vehicle
             RuleFor(x => x.TransmissionId).NotNull().GreaterThan(0);
 
             RuleFor(x => x.SafetyStars).GreaterThanOrEqualTo(0).LessThanOrEqualTo(5);
-            RuleFor(x => x.HorsePower).GreaterThanOrEqualTo(0).LessThanOrEqualTo(500);
+            RuleFor(x => x.HorsePower).GreaterThanOrEqualTo(0).LessThanOrEqualTo(1000);
             RuleFor(x => x.FuelCity).GreaterThanOrEqualTo(0).LessThanOrEqualTo(25);
-            RuleFor(x => x.Price).GreaterThanOrEqualTo(0).LessThanOrEqualTo(1000000);
+            RuleFor(x => x.Price).GreaterThan(0).LessThanOrEqualTo(2000000);
+            RuleFor(x => x.FoundHistory).NotEmpty();
         }
     }
 }

@@ -66,7 +66,8 @@ function map(vehicleData) {
     colorOutsideHex: vehicleData.colorOutsideHex,
     colorInsideHex: vehicleData.colorInsideHex,
     doors: parseInt(vehicleData.doors),
-    seats: vehicleData.seats
+    seats: vehicleData.seats,
+    fuel: vehicleData.fuelName
   };
   const descriptions = vehicleData.descriptions
     ? vehicleData.descriptions.map(description => (
@@ -79,19 +80,21 @@ function map(vehicleData) {
     ? vehicleData.features.map(featureItem => featureItem.feature != null ? featureItem.feature.name : "")
     : [];
   const history = {
-    problems: [],
+    foundHistory: vehicleData.foundHistory,
     vinCode: vehicleData.vinCode,
     registrationNumber: vehicleData.registrationNumber
   };
   const petrolConsumption = {
     city: vehicleData.fuelCity,
     highway: vehicleData.fuelHighway,  // isRequired
-    average: vehicleData.fuelAverage,   // isRequired
-    fuelType: vehicleData.fuelName
+    average: vehicleData.fuelAverage
   };
   const report = {
     reportCategories: vehicleData.reports instanceof Array ? vehicleData.reports : [],
-    inspector: vehicleData.inspector
+    faults: vehicleData.faults instanceof Array ? vehicleData.faults.map(fault => ({
+      text: fault.text,
+      img: fault.image ? fault.image.thumbnailUrl : ""
+    })) : []
   };
   const reviews = vehicleData.reviews.map(review => {
     return {

@@ -12,16 +12,18 @@ import imageOverview4 from "static/images/standard/group-117@2x.png";
 import imageOverview5 from "static/images/standard/group-119@2x.png";
 import imageOverview6 from "static/images/standard/group-120@2x.png";
 import imageOverview7 from "static/images/standard/group-121@2x.png";
+import imageGasStation2x from "./../../../../static/images/standard/gas_station@2x.png";
 
 class Overview extends React.Component {
   render() {
-    let {mileage, drive, engine, horsePower, transmission, doors, seats, colorOutsideHex, colorInsideHex} = this.props.overview;
+    let {mileage, drive, engine, horsePower, transmission, doors, fuel, seats, colorOutsideHex, colorInsideHex} = this.props.overview;
     const overview = [
       {label: `${mileage} km`, iconUrl: imageOverview1},
-      {label: drive, iconUrl: imageOverview2},
+      {label: transmission, iconUrl: imageOverview2},
       {label: `${engine} (${horsePower} kW)`, iconUrl: imageOverview3},
-      {label: transmission, iconUrl: imageOverview4},
+      {label: drive, iconUrl: imageOverview4},
       {label: `${doors} ust ${seats} istekohta`, iconUrl: imageOverview5},
+      {label: `${fuel}`, iconUrl: imageGasStation2x},
     ];
     const colors = [
       {value: colorOutsideHex, iconUrl: imageOverview6},
@@ -61,7 +63,8 @@ Overview.propTypes = {
     colorOutsideHex: React.PropTypes.string,
     colorInsideHex: React.PropTypes.string,
     doors: React.PropTypes.number.isRequired,
-    seats: React.PropTypes.number.isRequired
+    seats: React.PropTypes.number.isRequired,
+    fuel: React.PropTypes.string.isRequired
   })
 };
 

@@ -4,6 +4,8 @@ import {Row, Col, Button} from "react-bootstrap";
 import {TextField} from 'redux-form-material-ui'
 import {ROUTE_PARAMS, FORMS} from "../../../constants/VehicleReview.constant";
 import {VehiclesSelectField} from "./FormRenderers";
+import {ErrorBlockRenderer} from "../../../../../components/FormRenderers";
+
 
 class VehicleReview extends React.Component {
   static propTypes = {
@@ -28,9 +30,7 @@ class VehicleReview extends React.Component {
   }
 
   componentDidMount() {
-    console.log("here1");
     this.props.load(this.props.params[ROUTE_PARAMS.VEHICLE_REVIEW_ID], () => {
-      console.log("here2");
       this.props.dispatch(change(FORMS.VEHICLE_FORM_REVIEW, "vehicleId", this.props.params[ROUTE_PARAMS.VEHICLE_ID]));
       this.props.dispatch(change(FORMS.VEHICLE_FORM_REVIEW, "isModal", true));
     });
@@ -42,10 +42,13 @@ class VehicleReview extends React.Component {
 
   render() {
     const vehicleId = this.props.params[ROUTE_PARAMS.VEHICLE_ID];
+    const errors = this.props.errors;
 
     return (<div>
         {this.props.isFetching || this.props.submitting ? "Loading..." : (
           <form>
+            <ErrorBlockRenderer errors={errors}/>
+
             {
               vehicleId?
                 <div>VehicleId: {vehicleId}</div>
@@ -54,25 +57,25 @@ class VehicleReview extends React.Component {
 
             <Row>
               <Col sm={12}>
-                <Field name="text" component={TextField} hintText="Text" />
+                <Field name="text" component={TextField} hintText="Text" style={{width: '100%'}} />
               </Col>
             </Row>
 
             <Row>
               <Col sm={12}>
-                <Field name="rating" component={TextField} hintText="Rating" />
+                <Field name="rating" component={TextField} hintText="Rating" type="number" max="5" min="0"/>
               </Col>
             </Row>
 
             <Row>
               <Col sm={12}>
-                <Field name="logoUrl" component={TextField} hintText="Logo URL" />
+                <Field name="logoUrl" component={TextField} hintText="Logo URL" style={{width: '100%'}} />
               </Col>
             </Row>
 
             <Row>
               <Col sm={12}>
-                <Field name="videoUrl" component={TextField} hintText="Video URL" />
+                <Field name="videoUrl" component={TextField} hintText="Video URL" style={{width: '100%'}} />
               </Col>
             </Row>
 

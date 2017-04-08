@@ -8,7 +8,8 @@ export default function renderTextField({label, meta: {touched, error}, children
         floatingLabelText={label}
         errorText={touched && error}
         children={children}
-        {...custom}/>
+        {...custom}
+      />
     </div>
   )
 }

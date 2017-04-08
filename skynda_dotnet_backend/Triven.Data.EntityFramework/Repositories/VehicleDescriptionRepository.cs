@@ -26,13 +26,13 @@ namespace Triven.Data.EntityFramework.Repositories
             });
         }
 
-        public override IResult<VehicleDescription> Update(int id, VehicleDescription model, IDbContext context = null)
-        {
-            return HandleWithContext(context, dbContext =>
-            {
-                //dbContext.Entry(model.Vehicle).State = EntityState.Unchanged;
-                return base.Update(id, model, dbContext);
-            });
-        }
+        //    public override IResult<VehicleDescription> Update(int id, VehicleDescription model, IDbContext context = null)
+        //    {
+        //        return HandleWithContext(context, dbContext =>
+        //        {
+        //            //dbContext.Entry(model.Vehicle).State = EntityState.Unchanged;
+        //            return base.Update(id, model, dbContext);
+        //        });
+        //    }
     }
 }

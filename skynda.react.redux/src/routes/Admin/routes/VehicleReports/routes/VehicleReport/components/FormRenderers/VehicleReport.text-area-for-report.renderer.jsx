@@ -7,7 +7,7 @@ export const TextAreaForReport = (props) => (<div>
   <Row>
     <Col sm={12}>
       <Field name={props.name} label={props.label} component={renderTextField} multiLine={true}
-             rows={2}/>
+             rows={5} style={{width: '100%'}}/>
     </Col>
   </Row>
 </div>);

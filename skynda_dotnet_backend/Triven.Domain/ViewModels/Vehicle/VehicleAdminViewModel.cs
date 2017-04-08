@@ -31,6 +31,7 @@ namespace Triven.Domain.ViewModels.Vehicle
         public string Engine { get; set; }
         public int Year { get; set; }
         public int HorsePower { get; set; }
+        public string FoundHistory { get; set; }
         public ImageViewModel MainImage { get; set; }
         public VehicleModelViewModel VehicleModel { get; set; } // TODO: use only id (int)
         public List<FeatureAdminSelectViewModel> FeaturesAdminSelect { get; set; } = new List<FeatureAdminSelectViewModel>();  // TODO: use only ids (list of ints)---- It uses id-s, but it's required in Value name for displaying in select

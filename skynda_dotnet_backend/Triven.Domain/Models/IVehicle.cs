@@ -26,6 +26,7 @@ namespace Triven.Domain.Models
         string Engine { get; set; }
         int HorsePower { get; set; }
         int Year { get; set; }
+        string FoundHistory { get; set; }
 
     }
 }

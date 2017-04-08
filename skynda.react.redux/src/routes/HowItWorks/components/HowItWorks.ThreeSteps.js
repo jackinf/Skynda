@@ -1,11 +1,8 @@
-/**
- * Created by jevgenir on 11/27/2016.
- */
-
 import React from "react";
 import {Row, Col} from "react-bootstrap";
 import {Translate} from "react-redux-i18n";
 import {DISPLAY_MODE} from "../HowItWorks.constants";
+import {Link} from "react-router";
 
 export default class extends React.Component {
   static propTypes = {
@@ -76,7 +73,9 @@ export default class extends React.Component {
           <div className="how-it-works__three-steps__step-circle-sell">1</div>
           <br/>
           <div className="how-it-works__three-steps__step-text">
-            <Translate value="how_it_works.sell_process_step_1"/>
+            <Link className='link' to='/sell-new-car'>
+              <Translate value="how_it_works.sell_process_step_1"/>
+            </Link>
           </div>
         </Col>
         <Col sm={2}>

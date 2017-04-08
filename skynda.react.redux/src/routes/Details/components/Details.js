@@ -16,6 +16,7 @@ import Checkout from "./CheckoutPanel";
 import {Translate} from 'react-redux-i18n';
 import {StickyContainer, Sticky} from "react-sticky";
 import okImageUrl from "../assets/ok-sinine-min.png";
+import MultilineText from "../../../components/MultilineText";
 
 class VehicleDetails extends React.Component {
 
@@ -63,7 +64,8 @@ class VehicleDetails extends React.Component {
         </Row>
         <Row className="car-details__thanks__row6">
           <Col sm={6} smOffset={3}>
-            Ootame Sind sõbraks Facebookis - <a href={"https://www.facebook.com/triven.eu"} target="_blank">triven.eu</a>,
+            Ootame Sind sõbraks Facebookis - <a href={"https://www.facebook.com/triven.eu"}
+                                                target="_blank">triven.eu</a>,
             &nbsp;kus jagame praktilist infot ja nippe autoomanikele.
           </Col>
         </Row>
@@ -82,24 +84,52 @@ class VehicleDetails extends React.Component {
               <div className='col col-md-8'>
                 <Overview overview={vehicleData.overview}/>
 
-                {vehicleData.descriptions.map((description, i) =>
-                  <Skblock key={i} header={description.title}>{description.content}</Skblock>)
-                }
+                <Row>
+                  <Col md={12}>
+                    <label className="sk_details__label">
+                      <Translate value="details.components.history.vin"/>:
+                    </label>
+                    <span>  {vehicleData.history.vinCode}</span>
+                  </Col>
+                </Row>
 
-                <Fetaures features={vehicleData.features}/>
-                <History history={vehicleData.history}/>
+                <Row>
+                  <Col md={12}>
+                    <label className="sk_details__label">
+                      <Translate value="details.components.history.registration_plate"/>:
+                    </label>
+                    <span>  {vehicleData.history.registrationNumber}</span>
+                  </Col>
+                </Row>
+
                 <PetrolConsumption petrolConsumption={vehicleData.petrolConsumption}/>
-
-                <Safety stars={vehicleData.safetyStars}
-                        safetyUrl={vehicleData.safetyUrl} />
 
                 <InspectorsReport
                   report={vehicleData.report}
                   sendQuestionByEmailAsync={this.props.sendQuestionByEmailAsync}/>
+
+                {vehicleData.descriptions.map((description, i) =>
+                  <Skblock key={i} header={description.title}>
+                    <MultilineText value={description.content}/>
+                  </Skblock>)
+                }
+
+                <Fetaures features={vehicleData.features}/>
+
+                <History history={vehicleData.history}/>
+
+                <Safety stars={vehicleData.safetyStars}
+                        safetyUrl={vehicleData.safetyUrl}/>
+
+                {vehicleData.additional
+                  ?
+                  <Skblock header={<Translate value="details.components.additional_info.header"/>}>
+                    <MultilineText value={vehicleData.additional}/>
+                  </Skblock> : ""
+                }
+
                 <Reviews reviews={vehicleData.reviews}/>
-                <Skblock header={<Translate value="details.components.additional_info.header"/>}>
-                  {vehicleData.additional}
-                </Skblock>
+
               </div>
               <div className='col col-md-4'>
                 <Sticky>
@@ -110,9 +140,9 @@ class VehicleDetails extends React.Component {
           </StickyContainer>
 
           {/*<div className='row'>*/}
-            {/*<Skblock header={<Translate value="details.other_txt"/>}>*/}
-              {/*<CarPreview.Grid vehicles={vehicles.other}/>*/}
-            {/*</Skblock>*/}
+          {/*<Skblock header={<Translate value="details.other_txt"/>}>*/}
+          {/*<CarPreview.Grid vehicles={vehicles.other}/>*/}
+          {/*</Skblock>*/}
           {/*</div>*/}
         </div>
       </div>

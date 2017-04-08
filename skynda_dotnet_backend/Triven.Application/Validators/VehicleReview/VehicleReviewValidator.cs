@@ -7,10 +7,10 @@ namespace Triven.Application.Validators.VehicleReview
     {
         public VehicleReviewValidator()
         {
-            RuleFor(x => x.Rating).NotNull().NotEmpty().GreaterThanOrEqualTo(0).LessThanOrEqualTo(5);
-            RuleFor(x => x.Text).NotNull().NotEmpty();            
-            RuleFor(x => x.VideoUrl).NotNull().NotEmpty();            
-            RuleFor(x => x.LogoUrl).NotNull().NotEmpty();            
+            RuleFor(x => x.Rating).NotEmpty().GreaterThanOrEqualTo(0).LessThanOrEqualTo(5);
+            RuleFor(x => x.Text).NotEmpty();                     
+            RuleFor(x => x.LogoUrl).NotEmpty();                     
+            RuleFor(x => x.VideoUrl).NotEmpty();                     
         }
     }
 }

@@ -24,11 +24,12 @@ const mapDispatchToProps = {
 };
 
 const mapStateToProps = (state, ownProps) => {
+  const formInfo = state[REDUCER_KEYS.VEHICLE_REPORT_DATA];
   return {
-    isFetching: state[REDUCER_KEYS.VEHICLE_REPORT_DATA].isFetching,
-    initialValues: state[REDUCER_KEYS.VEHICLE_REPORT_DATA].data,
+    isFetching: formInfo.isFetching,
+    initialValues: formInfo.data,
     vehicles: state[REDUCER_KEYS.VEHICLES],
-
+    errors: formInfo.errors || [],
     onSubmitCustom: ownProps.onSubmitCustom
   };
 };

@@ -115,6 +115,10 @@
     <Compile Include="Migrations\201704081215291_Initial.Designer.cs">
       <DependentUpon>201704081215291_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201704081454096_FoundHistory Vehicle.cs" />
+    <Compile Include="Migrations\201704081454096_FoundHistory Vehicle.Designer.cs">
+      <DependentUpon>201704081454096_FoundHistory Vehicle.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Entities\AccountBindingModels.cs" />
     <Compile Include="Entities\Classification.cs" />
@@ -174,6 +178,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201704081215291_Initial.resx">
       <DependentUpon>201704081215291_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704081454096_FoundHistory Vehicle.resx">
+      <DependentUpon>201704081454096_FoundHistory Vehicle.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

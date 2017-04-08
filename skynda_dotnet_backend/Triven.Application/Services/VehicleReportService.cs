@@ -80,23 +80,17 @@ namespace Triven.Application.Services
             Mapper.Map(viewModel, entity);
 
             VehicleReportValidator validator = new VehicleReportValidator();
+
             ValidationResult results = validator.Validate(entity);
+
             if (!results.IsValid)
             {
                 return ServiceResult<VehicleReportViewModel>.Factory.Fail(results.Errors);
             }
 
-            foreach (var vehicleFault in entity.Faults)
-            {
-                vehicleFault.Image = null;
-                vehicleFault.VehicleReportId = id;
-            }
+            entity.Items = null;
 
-            foreach (var reportItem in entity.Items)
-            {
-                reportItem.Parent = null;
-                reportItem.ParentId = id;
-            }
+            entity.Faults = null;
 
             var result = _vehicleReportRepository.Update(vehicleId, id, entity);
 
