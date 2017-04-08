@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
+using FluentValidation.Results;
+using Triven.Application.Validators.VehicleReport;
+using Triven.Application.Validators.VehicleReview;
 using Triven.Data.EntityFramework.Entities;
 using Triven.Domain.Repositories;
 using Triven.Domain.Results;
@@ -50,6 +53,13 @@ namespace Triven.Application.Services
         {
             var entity = Mapper.Map<VehicleReport>(viewModel);
 
+            VehicleReportValidator validator = new VehicleReportValidator();
+            ValidationResult results = validator.Validate(entity);
+            if (!results.IsValid)
+            {
+                return ServiceResult<VehicleReportViewModel>.Factory.Fail(results.Errors);
+            }
+
             var result = _vehicleReportRepository.Add(vehicleId, entity);
 
             UpdateReportItems(result.ContextObject.Id, viewModel.Items);
@@ -68,6 +78,13 @@ namespace Triven.Application.Services
             var entity = _vehicleReportRepository.Get(id);
 
             Mapper.Map(viewModel, entity);
+
+            VehicleReportValidator validator = new VehicleReportValidator();
+            ValidationResult results = validator.Validate(entity);
+            if (!results.IsValid)
+            {
+                return ServiceResult<VehicleReportViewModel>.Factory.Fail(results.Errors);
+            }
 
             foreach (var vehicleFault in entity.Faults)
             {

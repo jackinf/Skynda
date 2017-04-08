@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using System;
+using FluentValidation;
 using Triven.Domain.ViewModels.Vehicle;
 
 namespace Triven.Application.Validators.Vehicle
@@ -25,12 +26,17 @@ namespace Triven.Application.Validators.Vehicle
 
             RuleFor(x => x.HorsePower).NotNull().GreaterThan(0);
 
-            RuleFor(x => x.Year).NotNull().GreaterThan(0);
+            var yearNow = DateTime.Now.Year;
+            RuleFor(x => x.Year).NotNull().GreaterThanOrEqualTo(yearNow - 12).LessThanOrEqualTo(yearNow);
 
             RuleFor(x => x.FuelTypeId).NotNull().GreaterThan(0);
 
             RuleFor(x => x.TransmissionId).NotNull().GreaterThan(0);
 
+            RuleFor(x => x.SafetyStars).GreaterThanOrEqualTo(0).LessThanOrEqualTo(5);
+            RuleFor(x => x.HorsePower).GreaterThanOrEqualTo(0).LessThanOrEqualTo(500);
+            RuleFor(x => x.FuelCity).GreaterThanOrEqualTo(0).LessThanOrEqualTo(25);
+            RuleFor(x => x.Price).GreaterThanOrEqualTo(0).LessThanOrEqualTo(1000000);
         }
     }
 }
