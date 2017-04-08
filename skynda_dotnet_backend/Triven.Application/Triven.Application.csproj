@@ -215,6 +215,7 @@
     <Compile Include="Services\AccountService.cs" />
     <Compile Include="Validators\Users\UserUpdateAccountDataValidator.cs" />
     <Compile Include="Validators\VehicleModel\VehicleModelValidator.cs" />
+    <Compile Include="Validators\VehicleReview\VehicleReviewValidator.cs" />
     <Compile Include="Validators\Vehicle\VehicleValidator.cs" />
   </ItemGroup>
   <ItemGroup>

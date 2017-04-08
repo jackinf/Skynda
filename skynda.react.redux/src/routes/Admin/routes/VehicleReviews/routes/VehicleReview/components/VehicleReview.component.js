@@ -66,13 +66,13 @@ class VehicleReview extends React.Component {
 
             <Row>
               <Col sm={12}>
-                <Field name="logo.url" component={TextField} hintText="Logo URL" />
+                <Field name="logoUrl" component={TextField} hintText="Logo URL" />
               </Col>
             </Row>
 
             <Row>
               <Col sm={12}>
-                <Field name="video.url" component={TextField} hintText="Video URL" />
+                <Field name="videoUrl" component={TextField} hintText="Video URL" />
               </Col>
             </Row>
 

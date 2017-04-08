@@ -93,17 +93,11 @@ namespace Triven.FunctionalTests.IntegrationTests
             {
                 ModelCode = $"updated_{Guid.NewGuid()}",
                 Description = $"updated_{Guid.NewGuid()}",
-                Title = $"updated_{Guid.NewGuid()}",
-                Engine = $"updated_{Guid.NewGuid()}",
-                HorsePower = 100,
                 Doors = 5,
                 Seats = 5,
-                Year = 2012,
                 VehicleManufacturerId = vehicleManufacturer.Id,
-                TransmissionId = transmission.Id,
                 DrivetrainId = drivetrain.Id,
                 VehicleBodyId = vehicleBody.Id,
-                FuelTypeId = fuelType.Id
             };
             var result = NewController().Add(requestParams).GetOkPayload<VehicleModelViewModel>();
 
@@ -157,17 +151,11 @@ namespace Triven.FunctionalTests.IntegrationTests
             {
                 ModelCode = $"updated_{Guid.NewGuid()}",
                 Description = $"updated_{Guid.NewGuid()}",
-                Title = $"updated_{Guid.NewGuid()}",
-                Engine = $"updated_{Guid.NewGuid()}",
-                HorsePower = 100,
                 Doors = 5,
                 Seats = 5,
-                Year = 2012,
                 VehicleManufacturerId = vehicleManufacturerForUpdate.Id,
-                TransmissionId = transmissionForUpdate.Id,
                 DrivetrainId = drivetrainForUpdate.Id,
                 VehicleBodyId = vehicleBodyForUpdate.Id,
-                FuelTypeId = fuelTypeForUpdate.Id
             };
             var result = NewController().Update(vehicleModel1.Id, requestParams).GetOkPayload<VehicleModelViewModel>();
 

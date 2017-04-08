@@ -163,6 +163,10 @@
     <Compile Include="Migrations\201704051629385_More_generic_vehicle_model.Designer.cs">
       <DependentUpon>201704051629385_More_generic_vehicle_model.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201704081031254_temp_url_fields_for_reviews.cs" />
+    <Compile Include="Migrations\201704081031254_temp_url_fields_for_reviews.Designer.cs">
+      <DependentUpon>201704081031254_temp_url_fields_for_reviews.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\201704081149552_Feature_TempSolution.cs" />
     <Compile Include="Migrations\201704081149552_Feature_TempSolution.Designer.cs">
       <DependentUpon>201704081149552_Feature_TempSolution.cs</DependentUpon>
@@ -262,6 +266,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201704051629385_More_generic_vehicle_model.resx">
       <DependentUpon>201704051629385_More_generic_vehicle_model.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704081031254_temp_url_fields_for_reviews.resx">
+      <DependentUpon>201704081031254_temp_url_fields_for_reviews.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201704081149552_Feature_TempSolution.resx">
       <DependentUpon>201704081149552_Feature_TempSolution.cs</DependentUpon>

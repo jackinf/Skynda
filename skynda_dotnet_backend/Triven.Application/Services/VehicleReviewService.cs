@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using AutoMapper;
+using FluentValidation.Results;
+using Triven.Application.Validators.VehicleReview;
 using Triven.Data.EntityFramework.Entities;
 using Triven.Domain.Repositories;
 using Triven.Domain.Results;
@@ -33,6 +35,15 @@ namespace Triven.Application.Services
 
         public ServiceResult<VehicleReviewViewModel> Create(VehicleReviewViewModel viewModel)
         {
+            VehicleReviewValidator validator = new VehicleReviewValidator();
+
+            ValidationResult results = validator.Validate(viewModel);
+
+            if (!results.IsValid)
+            {
+                return ServiceResult<VehicleReviewViewModel>.Factory.Fail(results.Errors);
+            }
+
             var entity = Mapper.Map<VehicleReview>(viewModel);
             var result = _VehicleReviewRepository.Add(entity);
             VehicleReviewViewModel mappedResult = Mapper.Map<VehicleReviewViewModel>(result.ContextObject);
@@ -41,6 +52,16 @@ namespace Triven.Application.Services
 
         public ServiceResult<VehicleReviewViewModel> Update(int id, VehicleReviewViewModel viewModel)
         {
+
+            VehicleReviewValidator validator = new VehicleReviewValidator();
+
+            ValidationResult results = validator.Validate(viewModel);
+
+            if (!results.IsValid)
+            {
+                return ServiceResult<VehicleReviewViewModel>.Factory.Fail(results.Errors);
+            }
+
             var entity = _VehicleReviewRepository.Get(id);
             Mapper.Map(viewModel, entity);
             entity.Id = id; // don't trust mapper. We shouldn't lose our Id.
