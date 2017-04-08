@@ -50,11 +50,13 @@ export default class ReduxFormCropToolComponent extends React.Component {
   };
 
   onCropChange = (crop, pixelCrop, name, reduxFormName) => {
+    console.log(crop, pixelCrop, name, reduxFormName);
     this.props.onCropChange(crop, pixelCrop, name, reduxFormName);
   };
 
   onCropDone = (e, name, reduxFormName) => {
     e.preventDefault();
+
     this.props.onCropDone(name, reduxFormName, this.state.originalFile);
     this.setState({showCrop: false});
   };
@@ -93,15 +95,30 @@ export default class ReduxFormCropToolComponent extends React.Component {
 
           <Field name={`${name}.${BASE64FILE}`} component={({input, i}) => (<div>
             {input.value
-              ? (this.state.showCrop ? (<span>
-              <ReactCrop src={input.value}
-                         crop={{width: 90, aspect: 16 / 9}}
-                         onComplete={(crop, pixelCrop) => this.onCropChange(crop, pixelCrop, name, reduxFormName)}/>
-              <button className="btn btn-success" onClick={e => this.onCropDone(e, name, reduxFormName)}>Accept</button>
-              <ReactIconDeleteWrapped onClick={e => onImageRemove(e, name, reduxFormName)}/>
-            </span>) : (<img src={input.value} width="100%"/>))
-              : <input className="btn btn-default" type="file"
-                       onChange={e => this.onImageUpload(e, name, reduxFormName)}/>}
+              ? (this.state.showCrop
+                ? (
+                    <span>
+                      <ReactCrop
+                        src={input.value}
+                        crop={{width: 90, aspect: 16 / 9}}
+                        onImageLoaded={(crop, image, pixelCrop) => this.onCropChange(crop, pixelCrop, name, reduxFormName)}
+                        onComplete={(crop, pixelCrop) => this.onCropChange(crop, pixelCrop, name, reduxFormName)}
+                      />
+                      <button className="btn btn-success" onClick={e => this.onCropDone(e, name, reduxFormName)}>Accept</button>
+                      <ReactIconDeleteWrapped onClick={e => onImageRemove(e, name, reduxFormName)}/>
+                    </span>
+                  )
+                : (
+                    <img src={input.value} width="100%"/>
+                  )
+                )
+              : (
+                  <input
+                    className="btn btn-default"
+                    type="file"
+                    onChange={e => this.onImageUpload(e, name, reduxFormName)}/>
+                )
+            }
           </div>)}/>
         </CardText>
         {this.props.children}
