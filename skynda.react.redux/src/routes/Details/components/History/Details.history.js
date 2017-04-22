@@ -22,8 +22,11 @@ class History extends React.Component {
               <Row>
                 <Col md={12}>
                   <span><Translate value="details.components.history.check_history_from"/></span>
-                  <span> <a target='_blank' href="https://eteenindus.mnt.ee/public/soidukTaustakontroll.jsf">
-              <Translate value="details.components.history.original_registry"/></a>.</span>
+                  {/*<span> */}
+                    {/*<a target='_blank' href="https://eteenindus.mnt.ee/public/soidukTaustakontroll.jsf">*/}
+                      {/*<Translate value="details.components.history.original_registry"/>*/}
+                    {/*</a>.*/}
+                  {/*</span>*/}
                 </Col>
               </Row>
             </div>

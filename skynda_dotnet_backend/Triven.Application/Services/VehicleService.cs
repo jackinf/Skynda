@@ -7,6 +7,7 @@ using Triven.Application.Validators.Vehicle;
 using Triven.Data.EntityFramework.Entities;
 using Triven.Data.EntityFramework.UnitOfWorks;
 using Triven.Domain.Enums;
+using Triven.Domain.Exceptions;
 using Triven.Domain.Repositories;
 using Triven.Domain.Results;
 using Triven.Domain.Services;
@@ -78,6 +79,8 @@ namespace Triven.Application.Services
                 throw new ArgumentException("Wrong id");
 
             var result = _vehicleRepository.GetDetailed(vehicleId);
+            if (result == null)
+                throw new VehicleNotFoundException(vehicleId);
             VehicleDetailedViewModel mappedResult = Mapper.Map<Vehicle, VehicleDetailedViewModel>(result);
             mappedResult.CalculateFuelAverage();
             return ServiceResult<VehicleDetailedViewModel>.Factory.Success(mappedResult);
