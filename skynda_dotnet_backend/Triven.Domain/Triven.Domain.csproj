@@ -95,6 +95,7 @@
     <Compile Include="Constants\Enums.cs" />
     <Compile Include="Constants\MessageTemplate.cs" />
     <Compile Include="Enums\VehicleStatus.cs" />
+    <Compile Include="Exceptions\VehicleNotFoundException.cs" />
     <Compile Include="Helpers\ClassifierValue.cs" />
     <Compile Include="Helpers\ExpressionHelpers.cs" />
     <Compile Include="Helpers\ImageExtension.cs" />
