@@ -24,7 +24,10 @@
       "advanced_txt": "Täpsemad valikud",
       "btn_search": "Näita selliseid autosid",
       "automatic": "Automaatne",
-      "manual": "Manuaal"
+      "manual": "Manuaal",
+      "fuels": "Kütus",
+      "diesel": "Diisel",
+      "petrol": "Bensiin"
     },
     "car_preview": {
       "doors": "ust",
@@ -147,7 +150,9 @@
         "btn_txt_360": "360° Sisemusest"
       },
       "overview": {
-        "header": "Üldandmed"
+        "header": "Üldandmed",
+        "color_outside": "Välisvärv",
+        "color_inside": "Sisevärv"
       },
       "inspector_report": {
         "header": "Sertifitseeritud Inspektori Raport",

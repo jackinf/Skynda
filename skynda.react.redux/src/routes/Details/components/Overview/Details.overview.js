@@ -10,8 +10,6 @@ import imageOverview2 from "static/images/standard/group-115@2x.png";
 import imageOverview3 from "static/images/standard/group-116@2x.png";
 import imageOverview4 from "static/images/standard/group-117@2x.png";
 import imageOverview5 from "static/images/standard/group-119@2x.png";
-import imageOverview6 from "static/images/standard/group-120@2x.png";
-import imageOverview7 from "static/images/standard/group-121@2x.png";
 import imageGasStation2x from "./../../../../static/images/standard/gas_station@2x.png";
 
 class Overview extends React.Component {
@@ -26,9 +24,9 @@ class Overview extends React.Component {
       {label: `${fuel}`, iconUrl: imageGasStation2x},
     ];
     const colors = [
-      {value: colorOutsideHex, iconUrl: imageOverview6},
-      {value: colorInsideHex, iconUrl: imageOverview7}
-    ]
+      {value: colorOutsideHex, iconText: <Translate value="details.components.overview.color_outside"/>},
+      {value: colorInsideHex, iconText: <Translate value="details.components.overview.color_inside"/>}
+    ];
 
     return (<Skblock header={<Translate value="details.components.overview.header"/>}>
       <Row>
@@ -40,10 +38,12 @@ class Overview extends React.Component {
             </div>))}
           {colors.map((item, i) =>
             (<div key={i} className="sk_details__overview_flex-container-item">
-              <img src={item.iconUrl} alt='' className='overview__overview-icon' /><br />
+              {/*<img src={item.iconUrl} alt='' className='overview__overview-icon' /><br />*/}
+              <div className="overview__overview-color">
+                <div style={{background: item.value || "black"}} className="overview__overview-colorStyle">&nbsp;</div>
+              </div>
               <span className='overview__overview-label'>
-                <div style={{background: item.value || "black"}}
-                     className="">&nbsp;</div>
+                {item.iconText}
               </span>
             </div>))}
         </Col>

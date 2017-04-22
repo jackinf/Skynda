@@ -15,6 +15,20 @@
   margin-bottom: 20px;
 }
 
+.overview__overview-color {
+  margin-bottom: 20px;
+  height: 40px;
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  .overview__overview-colorStyle{
+    width: 40px;
+    height: 40px;
+    border-radius: 100px;
+  }
+}
+
 .overview__overview-label-row {
   margin-top: 5px;
   margin-bottom: 5px;
@@ -23,13 +37,16 @@
 .sk_details__overview_flex-container-item {
   padding: 10px 20px;
   text-align: center;
-  min-width: 130px;
+  min-width: 160px;
+  max-width: 160px;
 }
 
 .sk_details__overview_flex-container {
   display: -webkit-flex;
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
 }
 
 .overview__overview-label {

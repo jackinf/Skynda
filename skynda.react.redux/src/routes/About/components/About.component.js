@@ -37,7 +37,7 @@ export class About extends React.Component {
         </Row>
         <Row>
           <Col md={12}>
-            <span className='about__person-position'>{person.position}</span>
+            <span>{person.position}</span>
           </Col>
         </Row>
       </Col>
