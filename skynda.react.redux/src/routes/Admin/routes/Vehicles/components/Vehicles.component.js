@@ -4,14 +4,7 @@ import {browserHistory} from "react-router"
 import {BootstrapTable, TableHeaderColumn} from "react-bootstrap-table";
 import {TrivenLoader} from "../../../../../components/Triven";
 
-const tableOptions = {
-  handleConfirmDeleteRow: (next, dropRowKeys) => {
-    dropRowKeys.forEach((id) => {this.props.deleteItem(id);});
-    next();
-  },
-  defaultSortName: "id",
-  defaultSortOrder: 'asc'
-};
+
 const selectRow = {mode: 'checkbox', clickToSelect: true};
 
 export default class VehicleList extends React.Component {
@@ -41,9 +34,20 @@ export default class VehicleList extends React.Component {
     </span>;
   }
 
+
+
   render() {
     let rows = !this.props.isFetching ? this.props.items : [];
     const loading = this.props.isFetching ? "Fetching" : "Vehicles";
+
+    const tableOptions = {
+      handleConfirmDeleteRow: (next, dropRowKeys) => {
+        dropRowKeys.forEach((id) => {this.props.deleteItem(id);});
+        next();
+      },
+      defaultSortName: "id",
+      defaultSortOrder: 'asc'
+    };
 
     return (<span>
       {this.props.children ?  this.props.children : (<div className="container">
