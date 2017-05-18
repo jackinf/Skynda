@@ -5,6 +5,14 @@ import Search from "../../../components/skynda.Search"
 import Subscribe from "../components/Subscribe";
 
 class Home extends React.Component {
+  componentDidMount() {
+    try {
+      this.props.searchCarAsync();
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   render() {
     return (
       <div>
