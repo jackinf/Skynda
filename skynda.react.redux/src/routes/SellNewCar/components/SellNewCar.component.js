@@ -46,9 +46,20 @@ export default class extends React.Component {
     toastr.clean(); // hack. Clean toasts so that they would not reappear on next page.
   }
 
+  handleOutboundLinkClicks = () =>{
+    ga('send', 'event', {
+      eventCategory: 'Outbound Link',
+      eventAction: 'click',
+      eventLabel: "sell-new-car"
+    });
+  };
+
   onSubmit = (values) => {
     this.props.submitAsync(values);
+    this.handleOutboundLinkClicks();
   } ;
+
+
 
   render() {
     const {errors, isSuccessfullySent} = this.props;

@@ -10,6 +10,8 @@ import Admin from "./Admin";
 import {LoginRoute} from "./Auth";
 import SellNewCar from "./SellNewCar";
 import Privacy from "./Privacy";
+import HowItWorksImage from "./HowItWorksImage";
+
 import {reducer as formReducer} from 'redux-form';
 
 import {loadTranslations, setLocale, syncTranslationWithStore, i18nReducer} from 'react-redux-i18n';
@@ -60,7 +62,8 @@ export const createRoutes = (store) => {
       // RegisterRoute(store),
       Search(store),
       SellNewCar(store),
-      Privacy(store)
+      Privacy(store),
+      HowItWorksImage(store)
     ]
   };
 
