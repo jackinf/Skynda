@@ -13,3 +13,28 @@
   padding-left: 0 !important;
   margin-top: 10px;
 }
+
+.sk_details__feature_ul {
+  -webkit-column-count: 2;
+  -moz-column-count: 2;
+  column-count: 2;
+  list-style: none;
+}
+
+.sk_details__feature_ul {
+  -webkit-column-count: 2;
+  -moz-column-count: 2;
+  column-count: 2;
+  list-style: none;
+}
+
+@media only screen and (max-width: 500px) {
+
+  .sk_details__feature_ul {
+    -webkit-column-count: 1;
+    -moz-column-count: 1;
+    column-count: 1;
+  }
+}
+
+

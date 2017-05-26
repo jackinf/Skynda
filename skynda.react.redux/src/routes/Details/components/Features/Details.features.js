@@ -16,12 +16,18 @@ class Features extends React.Component {
   render() {
     const features = this.props.features;
 
-    return (<Skblock className="sk_details__feature" header={<Translate value="details.components.features.header"/>}>
-      {features.map((feature, i) => (<Col key={i} md={6} xs={2} className='sk_details__feature_block'>
-        <img src={imageOk} className='sk_details__feature__icon_list_image' />
-        <span className="sk_details__feature__icon_list_text">{feature}</span>
-      </Col>))}
-    </Skblock>);
+    return (
+      <Skblock
+        className="sk_details__feature"
+        header={<Translate value="details.components.features.header"/>}
+      >
+        <ul className="sk_details__feature_ul">
+          {features.map((feature, i) => (<li key={i}>
+            <img src={imageOk} className='sk_details__feature__icon_list_image' />
+            <span className="sk_details__feature__icon_list_text">{feature}</span>
+          </li>))}
+        </ul>
+      </Skblock>);
   }
 }
 
