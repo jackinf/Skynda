@@ -68,60 +68,57 @@ function editFailure(errors) {
   }
 }
 
-function submitCreate(item, onSubmitCustom) {
-  return async (dispatch) => {
-    dispatch(addRequest());
-    try {
-      const resp = await VehicleService.createItem(item);
-      dispatch(addSuccess());
-      if (_.isFunction(onSubmitCustom)) {
-        onSubmitCustom(null, resp.id);
-      } else {
-        dispatch(change(VEHICLE_FORM_KEY, "id", resp.id));
-        browserHistory.replace("/admin/vehicle/" + resp.id);
+async function submitCreate(dispatch, item, onSubmitCustom) {
+  dispatch(addRequest());
+  try {
+    const resp = await VehicleService.createItem(item);
+    dispatch(addSuccess());
+    if (_.isFunction(onSubmitCustom)) {
+      onSubmitCustom(null, resp.id);
+    } else {
+      dispatch(change(VEHICLE_FORM_KEY, "id", resp.id));
+      browserHistory.replace("/admin/vehicle/" + resp.id);
 
-        toastr.success("Success", "Create successful");
-        ga('send', 'event', 'Admin', 'vehicle', 'Added ' + resp.id);
-        window.location = `/admin/vehicle/${resp.id}`;
-      }
-    } catch (error) {
-      dispatch(addFailure(error.modelState));
-      toastr.error("Oh no!", "Create failed: " +  error.message);
+      toastr.success("Success", "Create successful");
+      ga('send', 'event', 'Admin', 'vehicle', 'Added ' + resp.id);
+      window.location = `/admin/vehicle/${resp.id}`;
     }
+  } catch (error) {
+    dispatch(addFailure(error.modelState));
+    toastr.error("Oh no!", "Create failed: " +  error.message);
   }
+
 }
 
-function submitEdit(item, onSubmitCustom) {
-  return async (dispatch) => {
-    dispatch(editRequest());
-    try {
-      const resp = await VehicleService.updateItem(item);
-      dispatch(editSuccess(resp));
-      if (_.isFunction(onSubmitCustom)) {
-        onSubmitCustom(null, resp.id);
-      } else {
-        toastr.success("Success", "Update successful");
-        ga('send', 'event', 'Admin', 'vehicle', 'Updated ' + resp.id);
-        window.location.reload();
-      }
-    } catch (error) {
-      dispatch(editFailure(error.modelState));
-      toastr.error("Oh no!", "Update failed " + error.message);
+async function submitEdit(dispatch, item, onSubmitCustom) {
+  dispatch(editRequest());
+  try {
+    const resp = await VehicleService.updateItem(item);
+    dispatch(editSuccess(resp));
+    if (_.isFunction(onSubmitCustom)) {
+      onSubmitCustom(null, resp.id);
+    } else {
+      toastr.success("Success", "Update successful");
+      ga('send', 'event', 'Admin', 'vehicle', 'Updated ' + resp.id);
+      window.location.reload();
     }
+  } catch (error) {
+    dispatch(editFailure(error.modelState));
+    toastr.error("Oh no!", "Update failed " + error.message);
   }
 }
 
 export default function submit(onSubmitCustom) {
-  return (dispatch, getState) => {
+  return async (dispatch, getState) => {
     try {
       const state = getState();
       const formValues = state.form[VEHICLE_FORM_KEY].values;
       const formMode = state[REDUCER_KEYS.VEHICLE_DATA].formMode;
       if (formMode === FORM_MODE.ADDING) {
-        dispatch(submitCreate(formValues, onSubmitCustom))
+        await submitCreate(dispatch, formValues, onSubmitCustom);
       }
       else if (formMode === FORM_MODE.UPDATING) {
-        dispatch(submitEdit(formValues, onSubmitCustom));
+        await submitEdit(dispatch, formValues, onSubmitCustom);
       }
     }catch (error){
       toastr.error("Oh no!", "Create/update failed. Check form values or contact support.", error);
